@@ -24,7 +24,7 @@ The **DQ - Cluster** allows you to create a cluster match code using columns tha
 
 ## Usage
 
-![Using the DQ - Cluster Custom Step](img/dqcluster.gif)   
+![Using the DQ - Cluster Custom Step](img/demo_dqcluster.gif)   
 
 ## Download Step file  
 
