@@ -1,8 +1,8 @@
-# DQ - Cluster  
+# DQ - Clustering  
 
 ## Description  
 
-The **DQ - Cluster** allows you to create a cluster match code using columns that can be defined with 1 or 3 rules.  
+The **DQ - Clustering** allows you to create a cluster match code using columns that can be defined with 1 or 3 rules.  
 
 ## User Interface
 
@@ -10,13 +10,13 @@ The **DQ - Cluster** allows you to create a cluster match code using columns tha
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![](img/dqcluster-tabMatchStandAlone.png) | ![](img/dqcluster-tabMatchFlowMode.png) |
+   | ![](img/dqclustering-tabMatchStandAlone.png) | ![](img/dqclustering-tabMatchFlowMode.png) |
 
 1. **Cluster records based on following rule(s).** - Defines up to three rules for creating the cluster, several columns can be inserted in each rule.  
 
 * ### Options tab ###
 
-   ![](img/dqcluster-tabOptions.png)
+   ![](img/dqclustering-tabOptions.png)
 
 ## Requirements
 
@@ -24,11 +24,11 @@ The **DQ - Cluster** allows you to create a cluster match code using columns tha
 
 ## Usage
 
-![Using the DQ - Cluster Custom Step](img/demo_dqcluster.gif)   
+![Using the DQ - Clustering Custom Step](img/demo_dqclustering.gif)   
 
 ## Download Step file  
 
-[DQ - Cluster Custom Step](./dqcluster.step)
+[DQ - Clustering Custom Step](./DQClustering.step)
 
 ## Prompt UI  
 ```json  
