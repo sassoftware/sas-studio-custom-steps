@@ -24,9 +24,7 @@ The **DQ - Match Code** allows you to create a column match code base on locale 
 
 ## Usage
 
-![Using the DQ - Match Code Custom Step](img/dqmatch.mp4)
-<video src="LINK" controls="controls" style="max-width: 730px;">
-</video>  
+![Using the DQ - Match Code Custom Step](img/dqmatch.gif)  
 
 ## Change Log
 
