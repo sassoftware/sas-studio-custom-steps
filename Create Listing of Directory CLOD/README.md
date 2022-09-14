@@ -140,10 +140,6 @@ If you are happy with all the default settings, only adjust the parameters in th
 * One or more CAS engine libraries (SAS libraries pointing to CASLIBs) to allow the definition of the target table
 
 
-```sas
-
-```
-
 ## Usage
 
 ### **How to Run CLOD**
