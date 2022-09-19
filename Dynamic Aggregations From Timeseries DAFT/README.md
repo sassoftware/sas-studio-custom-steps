@@ -93,13 +93,7 @@ The complete options are spread over 2 screenshots:
 ## Requirements
 
 * A CAS session established (in an autoexec or something else)
-* The provided libname for the output table in the "Output Data" tab must exist.
 
-Example:
-
-```sas
-
-```
 
 ## Usage
 
@@ -111,6 +105,7 @@ Example:
 
 Copy/paste these next few lines of code into SAS Studio - SAS Program tab in order to create a test timeseries dataset for playing around:
 *******
+```sas
 data work.sample_aggregation_ds;
 	format 
 		current_date date9.;
@@ -150,6 +145,8 @@ data work.sample_aggregation_ds;
 		end;
 	end;
 run;
+
+```
 **************
 
 ## Change Log

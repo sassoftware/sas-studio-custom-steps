@@ -64,10 +64,6 @@ If you are happy with all the default settings, only adjust the parameters in th
 
 ## Requirements
 
-* A CAS session established (in an autoexec or something else)
-* The provided "Target Libname" under the "Essential" tab must exist.
-* One or more CAS engine libraries (SAS libraries pointing to CASLIBs) to allow the definition of the target table
-
 
 ## Usage
 
@@ -97,6 +93,7 @@ It has the following advantages over the fully automated mode:
 
 Here are the parameters:
 ### **root_directory (In Custom Step Version: "Select DIAP Execution Mode -> (1)")**
+
 suggested default value: if there is a default landing area, this could be provided here.
 
 provide the top level directory that DIAP should use to start looking for files. DIAP will then traverse through the whole directory structure and find all the files below this top level directory. 
@@ -106,6 +103,7 @@ If the root directory is in the SAS Server area, this has to start out with: sas
 If the root directory is in the SAS Content area, this has to start out with: sascontent: (e.g. example value for root_directory: sascontent:/Public/desired_path_for/files/in/SASContent/).
 
 ### **diap_traverse_directories (In Custom Step Version: "Traverse Subdirectories?")**
+
 suggested default value: 1
 
 If set to 1, DIAP traverses through all subdirectories recursively that can be found under root_directory.
@@ -113,6 +111,7 @@ If set to 1, DIAP traverses through all subdirectories recursively that can be f
 If set to 0, DIAP only checks for files in the provided root_directory.
 
 ### **extension (In Custom Step Version: "Extension")**
+
 suggested default value: \*
 
 This parameter determines which files are considered to be imported. Use the wildcard “*” (without quotes) for any files that can be ingested by DIAP, or any extension. The following extensions are supported as of now:
@@ -125,13 +124,16 @@ This parameter determines which files are considered to be imported. Use the wil
 •	NEF
 •	JSON
 •	Custom (Fixed Width/XML)
+
 ### **Target_libname (In Custom Step Version: "Target Libname")**
+
 suggested default value: any libname, that is used for testing, e.g. WORK.
 
 Provide the SAS or CAS libname, where the imported files are stored at. It needs to be preassigned or assigned within the session.
 
 
 ### **provide_default_log_path (In Custom Step Version: "Path for logfile creation")**
+
 suggested default value: empty/missing.
 
 This parameter is only relevant when the parameter “write_log_into_file” is set to 1. 
@@ -144,41 +146,13 @@ If the log directory is in the SAS Content area, this has to start out with: sas
 
 
 ### **write_log_into_file (In Custom Step Version: "Write Log into File")** 
+
 suggested default value: 1
 
 If set to 0, log is written into default SAS log location.
 
 If set to 1, log is written to location as provided under the parameter “provide_default_log_path”.
 
-### **profiling_execution_option (NOT AVAILABLE FOR THE CUSTOM STEP VERSION OF DIAP)**
-
-Suggested default value: No
-
-Select between the following 3 options:
-
-- NO: this is the default, in case the AUTOPROFILING component is not installed, or it is not desired to execute anything into the AUTOPROFILING section.
-
-- DICT_ONLY: in this mode, all the uploaded table are only loaded into the profiling dictionary, ready to be profiled, but no profiling is executed.
-
-- PROFILE: this option creates some default dictionary entries and creates the corresponding profiles.
-### **prfl_cd_lctn_in_content_area (NOT NEEDED FOR THE CUSTOM STEP VERSION OF DIAP)**
-Suggested default value: leave empty.
-
-This provides the location of the AUTOPROFILING component for the program files (e.g. “/Public/DM_Assets/SAS_DQ_AUTOPROFILE/Programs” (without the quotes))
-### **prfl_dict_lctn_in_content_area (NOT NEEDED FOR THE CUSTOM STEP VERSION OF DIAP)**
-Suggested default value: leave empty.
-
-IMPORTANT: if “Data Quality Monitoring (CDQM)” is not installed, leave empty. When empty, DIAP will ignore the “profiling_execution_option”.
-
-This provides the location of the AUTOPROFILING CDQM (Data Quality Monitoring solution) component for the dictionary files (e.g. “/Public/DM_Assets/SAS_DQ_AUTOPROFILE/Imports” (without the quotes))
-### **path_2_python_shape_script (NOT NEEDED FOR THE CUSTOM STEP VERSION OF DIAP)**
-suggested default value: leave empty/missing.
-
-If missing, the app uses the SAS way to read in SHAPE files, otherwise this is the full file path to the python script (which would also include setting up the python environment).
-
-Experience shows that certain shape file setups might cause an undesired output when using the SAS way. Using the python script allows to deal with a few more exceptions.
-
-For this to work, Python has to be set up on the system. One example location could be as follows: “/mnt/viyashare/tools/run_shapeshift.sh” (without the quotes).
 ### **max_table_name_length (In Custom Step Version: "Max Tablename Length")**
 
 suggested default value: 27
@@ -192,7 +166,9 @@ Also take into consideration that the concatenated name for multiple tables coul
 The system checks for that and adds a counter to the table name. 
 
 So, leave at least 2 characters for a counter.
+
 ### **check_txt_file_4_special_chrct (In Custom Step Version: "Check for special characters in text files and replace?")**
+
 suggested default value: 0
 
 If set to 0, the text file is read in as-is.
@@ -201,6 +177,7 @@ If set to 1, then text files is examined before reading for the characthers as o
 This might need to be required, especially if files have NOTES or DESCRIPTION columns, that could contain carriage returns. Those carriage returns would then cause the file to be read in with a few errors, wherever those carriage returns occur.
 
 ### **special_chrctr_seq_2_chck_in_hex (In Custom Step Version: "Provide list of characters in hex format to check in text files (sep by #)")**
+
 suggested default value: 0A#0D
 
 This parameter has to be set to one or a sequence of # separated hex formats of a character. 
@@ -210,6 +187,7 @@ This parameter has to be set to one or a sequence of # separated hex formats of 
 see asciitable.com for an overview of all characters in hex format.
 
 ### **spcl_chrctr_check_rplcmnt_in_hex (In Custom Step Version: "Provide characters in hex format to replace with")**
+
 suggested default value: 00
 
 Please provide the characters that should be used to replace the special characters as defined in special_chrctr_seq_2_chck_in_hex
@@ -218,6 +196,7 @@ The characters value is provided in hex format.
 see asciitable.com for an overview of all characters in hex format.
 
 ### **substitute_string_seq (In Custom Step Version: "Provide Characters to be Omitted in Target Names if too long!")**
+
 suggested default value: aeiouAEIOU
 
 If the target table name is too long, this string determines which characters are taken out from the target name to shorten the name further, before the truncation process kicks in.
@@ -226,6 +205,7 @@ E.g. when substitute_string_seq = aeAEoO, then a table name of "ThisIsAVeryLongT
 would be first changed to the following: "ThisIsVryLngTblNmThtIsTLng" which would be short enough without any further action needed by DIAP.
 
 ### **skip_files_starting_with_seq (In Custom Step Version: "Provide list of filename beginnings that should be excluded from ingesting (separated by #)")**
+
 default value: _DIAP_Special_File_Definition.csv
 If not missing, DIAP will skip all the files that start out with the sequence of string snippets separated by #.
 E.g. if set to:
@@ -234,6 +214,7 @@ All files that start out with either _DIAP_Special_File_Definition.csv filebegin
 _DIAP_Special_File_Definition.csv is the default value used by DIAP to describe fixed width or XML definitions and wouldn't be needed to be read into the target libname.
 
 ### **skip_files_ending_with_seq (In Custom Step Version: "Provide list of filename endings that should be excluded from ingesting (separated by #)")**
+
 default value: empty/missing
 If not missing, DIAP will skip all the files that end with the sequence of string snippets separated by #.
 E.g. if set to:
@@ -242,6 +223,7 @@ All files that end with either file_ending1 or file_ending2 or csv will NOT be i
 E.g. in this example all csv files would be skipped.
 
 ### **meta_centralized (In Custom Step Version: "Store Metadata Centralized?")**
+
 suggested default value: 1
 
 This value goes closely with the next parameter “libname_meta_centralized”. 
@@ -250,6 +232,7 @@ If set to 1, all meta information generated by DIAP (e.g. data around upload act
 
 If set to 0, all meta information generated by DIAP (e.g. data around upload activity, variable name, table names, etc) will be stored in predetermined tables (_UPLOAD_LOG, _VARIABLE_DICTIONARY) under the libname that is provided under “target_libname”.
 ### **libname_meta_centralized (In Custom Step Version: "Libname for Centralized DIAP Metadata")**
+
 Please provide a libname (SAS or CAS), that can be used as a central storage for the metainformation that is generated for all DIAP activities, when the “meta_centralized” parameter is set to 1.
 
 IMPORTANT:
@@ -257,6 +240,7 @@ IMPORTANT:
 If the Data Quality Monitoring Solution is installed as well and being used with DIAP, then please here the same libname as being used there for the dictionary location.
 
 ### **debug_mode (In Custom Step Version: "Debug Mode")**
+
 Suggested default value: 1
 
 If set to 1, DIAP writes out more information out to the log, that might be helpful for further investigations.
@@ -264,6 +248,7 @@ If set to 1, DIAP writes out more information out to the log, that might be help
 If set to 0, DIAP just writes out the default SAS log output, depending on the settings of the options mprint, source and notes.
 
 ### **csv_big_data_mode (In Custom Step Version: "Anticipate more than 2k vars for CSV?")**
+
 suggested default value: 0.
 
 If set to 0, csv files are read in with default mode (e.g. normal proc import stuff with guessing the format and such).
@@ -271,6 +256,7 @@ If set to 0, csv files are read in with default mode (e.g. normal proc import st
 If set to 1, csv files are read in with the “big data mode”. It can happen that files are provided that contain more than 2000 variables. So when the anticipated number of variables is over 2000, then it is suggested to set this to 1. This will allow to read in the file completely, but the formats might not be in the desired state. DIAP will try to identify numeric columns and change the format for those from character to numeric.
 
 ### **drop_missing_vars (In Custom Step Version: "Drop Missing Variables?")**
+
 suggested default value: 0
 
 The following values are possible:
@@ -286,6 +272,7 @@ If set to 3, the same as setting to (1), but no data is being uploaded. So, when
 If set to 4, the same as setting to (2), but no data is being uploaded. So, when it is set to 3, the already uploaded files are treated accordingly.
 
 ### **stringseq_2_cutout_from_fn (In Custom Step Version: "Target Filename: Provide String that Should be Cut Out (sep by #)")**
+
 suggested default value: empty/missing.
 
 Provide a sequence of characters strings that should be omitted in the target filename.This prevents the target table name of getting too long.
@@ -293,12 +280,15 @@ Provide a sequence of characters strings that should be omitted in the target fi
 The sequence is separated by #
 
 ### **stringseq_2_cutout_from_vn (In Custom Step Version: "Target Variablename: Provide String that Should be Cut Out (sep by #)")**
+
 suggested default value: empty/missing.
 
 Provide a sequence of characters strings that should be omitted in the target variable name. This  prevents the variable table name of getting too long.
 
-The sequence is separated by #
+The sequence is separated by #.
+
 ### **prefix_4_suspicious_src_fl (In Custom Step Version: "Provide Filename Prefix if source file is suspicious.")**
+
 suggested default value: empty/missing.
 
 A string can be provided (max of length LEN as provided in parameter “wof2l_max_lgth_of_suspicious_str”), that will be added and replace the first LEN characters of the table name, if the content seems suspicious.
@@ -309,42 +299,50 @@ Possible causes for suspicion:
 -	Missing variable names
 -	Duplicate variable names
 -	If variables are completely missing.
+
 ### **max_lgth_of_suspicious_str (In Custom Step Version: "Max allowed length for Prefix in Filename for suspicious filenames.")**
+
 suggested default value: 4
 
 This parameter determines the maximum length of an allowed prefix for suspicious files.
 
 ### **check_csv_4_num (In Custom Step Version: "Check character fields in CSV Files for numeric?")**
+
 suggested default value: 0
 
 0 (default): this means csv file is read in as-is 
 1: in cases when it is a "quoted" csv files (e.g. happens when come of the content contains the separator), then when this is turned on, the process will perform an additional check on the data that was read in to check of some of the variables that were read in as character actually should be numeric.
 
 ### **force_upload_of_all_files (In Custom Step Version: "Force upload of all files, even if already uploaded?")**
+
 suggested default value: 0
 
 0 (default): Files are only uploaded if they were updated since last upload
 1: All files are uploaded no matter if they were uploaded before or not. No date check happening with this option.
 
 ### **diap_fnl_tblname_from_sheetonly (In Custom Step Version: "For Multi Table Files (e.g. XLSX, XML, JSON), derive final dataset name from sheet only?")**
+
 suggested default value: 0
 
 0 (default): The final dataset name is determined using the filename AND the sheetname (same principles are applied for XLSX, JSON and XML files).
 1: The final dataset name is determined using ONLY the sheetname (same principles are applied for XLSX, JSON and XML files), ignoring the filename.
 
 ### **diap_create_unique_target_tblnm (In Custom Step Version: "Create unique final dataset name for different source files/sheets with the same name (in different locations)?")**
+
 suggested default value: 1
 
 0 : when creating the final dataset name, and the final dataset name ends up being the same for 2 or more source files, then DIAP will try to append all those different source files into one target dataset.
 1 (default): when creating the final dataset name, and the final dataset name ends up being the same for 2 or more source files, then DIAP will add a unique counter to the final dataset name, so that the content of each source file is written in its own final dataset.
 
 ### **chck_4_spcl_char_in_vars (In Custom Step Version: "Clean up variable name from weird characters?")**
+
 suggested default value: 1
 
 0 : variable names are only checked for minimal "weird" characters (like: &, ', ", %, #, ','). With this, option validvarname =any has to be set when wanting to work/see dataset from SAS Studio.
 1 (default): all weird characters are replace with underscore (_) to create a clean variable name.
 
 ### **fnl_ds_name_4_all_extfiles (In Custom Step Version: "If string provided, all external files will be read into ONE table with the name of this string.")**
+
 suggested default value: blank(keep empty)
 
 if this field is non blank, then the string provided with this macrovariables is used as the target table name and DIAP will try to combine all external files that are read in, into this one table. 
@@ -355,9 +353,7 @@ Maximum characters allowed are 32.
 
 If a string/tablename is set here, the setting of diap_create_unique_target_tblnm is ignored.
 
-
 ### **ONLY AVAILABLE IN CUSTOM STEP: "Select DIAP Execution Mode"**
-
 
 There are 4 execution modes available:
 - (1) Fully Automated
@@ -374,9 +370,7 @@ The provided content that is created in the template is merely an example and SH
 
 Then upload the customized CSV files to the server, so that DIAP can process them accordingly.
 
-
 ### **diap_guided_automation_fl_loc (In Custom Step Version: "Select DIAP Execution Mode -> (2)")**
-
 
 suggested default value: blank (keep empty)
 
@@ -392,6 +386,7 @@ The specific structure of the CSV file is described here (or select (3) as execu
 
 ## Control Files Overview
 ### **The Guided Execution: _DIAP_guided_execution.csv**
+
 This template file can be created by choosing the execution mode #3.
 It is a file that could be used to send ingesting instructions to DIAP on which files to read in how.
 
@@ -402,16 +397,19 @@ This mode also allows to read in external files that are located in the "SAS Con
 Please fill in the information for each column as follows:
 
 #### ***Column: full_file_name***
+
 Please provide the full pathname and filename here.
 Example:
 under SAS Server: /mnt/myuserid/excel_files/my_excel_file.xlsx
 under SAS Content: /Public/My_Project/csv_files/my_csv_file_in_SAS_Content.csv
 
 #### ***Column: sheet_xml_json_tablename***
+
 This only applies Excel, XML or JSON files. Provide the explicit sheet name to read in.
 E.g. in an Excel file, there could be many sheets to be available. Each sheet that needs to be ingested needs to be explicitly named, e.g. if there are 5 sheets to be read in from one Excel file, there needs to be one row for each sheet, e.g. a total of 5 rows with the same full_file_name.
 
 #### ***Column: is_in_SAS_Content_flag***
+
 This binary flag indicates if the path that is provided under the column full_file_name is located in the "SAS Server" area or the "SAS Content" area. 
 
 It is a binary indicator, hence 2 values are allowed: 1 or 0.
@@ -421,6 +419,7 @@ Set this column to:
 - 0: Setting this column to 0 means DIAP will look for the file provided in full_file_name in the "SAS Server" area of the VIYA installation. (This is also the default value assumed if missing)
 
 #### ***Column: column_names_in_first_row***
+
 This binary indicator tells DIAP if the first row of a text file provides the column names. 
 
 It is recommended to set this value to 1 for all the entries in this file, and only set it to 0 for those entries where the data provided in text files starts in the first row.
@@ -428,6 +427,7 @@ It is recommended to set this value to 1 for all the entries in this file, and o
 If missing, DIAP assumes a value of 1.
 
 #### ***Column: delimiter_for_text_files***
+
 This column can be left empty if DIAP should determine the delimiter of a text file automatically. 
 At this point DIAP determines one of the following delimiter automatically:
 - comma
@@ -446,12 +446,12 @@ The following values are used as follows:
 Any other entries than the 5 keywords above will be taken as the delimiter.
 
 #### ***Column: target_table_name***
+
 This column can be left empty. If empty, DIAP will automatically determine the table name according to the filename and sheetname if applicable.
 Other conditions set in the other parameters (e.g. maximum table name length and substitute_string_seq) will be applied also to table names provided in this column.
 
-
-
 ### **Control File to Read In Fixed Width Files:_DIAP_Special_File_Definition.csv**
+
 This is a specific file that is used and looked for by DIAP as the first course of action.
 If this file "_DIAP_Special_File_Definition.csv" is found anywhere under the selected root directory, all the files in there are processed first according to the specific instructions as outlined in that file.
 
@@ -471,46 +471,57 @@ Please provide the directory information according to your installation where th
 DIAP will choose the entries depending on the selected root directory.
 
 #### ***Column: filename***
+
 Provide the full filename, or part of the filename.
 If only part of the filename is provided (e.g. if the directory contains the files "fixed_file1.txt" and "fixed_file2.txt", and only "fixed" (without the quotes) is put into that field), then all files that start out with "fixed" would be read in accordingly, so in the provided example, both files are read in the same way. 
 
 #### ***Column: include_fn_in_table_output***
+
 If this is set to 1, there will be an additional variable created in the target table named "_diap_gen_source_file_name" that contains the original filename.
 If this is set to 0, no additional variable is created.
 
 #### ***Column: file_type***
+
 At this point there are 2 options:
 
 (1) fix: This tells DIAP that this entry is a fixed width file definition.
 (2) xml: This tells DIAP that this entry is a xml file definition.
 
 #### ***Column: variable_name***
+
 If the file_type is fix, this can be any variable name for that specific entry.
 If the file_type is xml, this needs to match one of the entries in the corresponding xml file. 
 
 #### ***Column: variable_label***
+
 Please provide any variable label for that entry.
 
 #### ***Column: variable_type***
+
 Please provide the variable type for that entry. 
 Allowed values are:
 (1) char
 (2) num 
 
 #### ***Column: variable_length***
+
 Please provide the variable length for that specific entry.
 
 #### ***Column: variable_format***
+
 Please provide the SAS Format that should be used for that specific entry.
 
 #### ***Column: variable_informat***
+
 Please provide the SAS Informat that should be used for that specific entry.
 
 #### ***Column: variable_start_position***
+
 (1) For the variable type "fix": This is the exact start position of that entry where DIAP will start reading in the value.
 (2) For the variable type "xml": This is the order in how the variable occurs in the file. Most important is that the last variable that is defined within each block MUST have the highest order number.  
 
 #### ***Column: variable_end_position***
+
 (1) For the variable type "fix": This is the exact end position of that entry where DIAP will start reading in the value.
 (2) For the variable type "xml": This is the order in how the variable occurs in the file. Most important is that the last variable that is defined within each block MUST have the highest order number. This matches the entry of the column "variable_start_position".
 

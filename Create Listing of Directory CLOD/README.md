@@ -135,10 +135,6 @@ If you are happy with all the default settings, only adjust the parameters in th
 
 ## Requirements
 
-* A CAS session established (in an autoexec or something else)
-* The provided "Target Libname" under the "Essential" tab must exist.
-* One or more CAS engine libraries (SAS libraries pointing to CASLIBs) to allow the definition of the target table
-
 
 ## Usage
 
