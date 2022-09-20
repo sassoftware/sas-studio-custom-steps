@@ -2,7 +2,7 @@
 
 ## Description  
 
-The **DQ - Clustering** allows you to create a cluster match code using columns that can be defined with 1 or 3 rules.  
+The **DQ - Clustering** step allows you to create a cluster match code based on defined rules; each rule can contain one or more columns. This version supports up to three rules.  
 
 ## User Interface
 
@@ -29,5 +29,5 @@ The **DQ - Clustering** allows you to create a cluster match code using columns 
 
 ## Change Log
 
-* Version 1 (14SEP2022)
+* Version 1.0 (14SEP2022)
     * Initial version
