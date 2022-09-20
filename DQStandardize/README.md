@@ -2,7 +2,7 @@
 
 ## Description
 
-The **DQ - Standardize** create a standardized column base on locale and rule definition. This version can manage 5 Locale (ITITA, ENUSA, FRFRA, DEDEU and ESESP) and 5 columns.  
+The **DQ - Standardize** step allow you to create a standardized column code based on locale and rule definition using a **dqStandardize** function in the SAS Compute Server. This version supports 5 Locales (ITITA, ENUSA, FRFRA, DEDEU and ESESP) and allows to standardize up to 5 columns.  
 
 ## User Interface  
 
@@ -13,13 +13,16 @@ The **DQ - Standardize** create a standardized column base on locale and rule de
    | ![](img/dqstandardize-tabstandardizeoptions-standalone.png) | ![](img/dqstandardize-tabstandardizeoptions-flowmode.png) |
 
 1. **Select Column** - Defines column to be standardized.  
-2. **Standardized column** - Define standardized column. If empty will be used input column with _STD suffix.  
+2. **Standardized column** - Specify name of output column to contain standardized value.If left empty, a new column will be created using name of input column suffixed with **_STD**.  
 3. **Locale**          - Define Locale to be used to compute standardized column.  
 4. **Definition**      - Define the rule to be used to compute standardized column.  
 
 ## Requirements  
 
-2021.1.1 or later
+2021.1.1 or later  
+
+* This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
+
 
 ## Usage  
 
@@ -27,5 +30,5 @@ The **DQ - Standardize** create a standardized column base on locale and rule de
 
 ## Change Log  
 
-* Version 1 (14SEP2022)
+* Version 1.0 (14SEP2022)
     * Initial version 
