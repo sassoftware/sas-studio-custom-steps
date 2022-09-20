@@ -12,7 +12,7 @@ The **DQ - Match Code** step allows you to create a column match code based on l
    | --- | --- |                  
    | ![](img/dqmatch-tabmatchcodeoptions-standalone.png) | ![](img/dqmatch-tabmatchcodeoptions-flowmode.png) |
    
-   - This applies to MatchCode1 … MatchCode5
+   * This applies to MatchCode1 … MatchCode5
 
 1. **Select Column**   - Defines the column to be used to compute match code.  
 2. **Match Column**    - Specify name of output column to contain generated match code. If left empty, a new column will be created using name of input column suffixed with **_MC**.      
