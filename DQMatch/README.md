@@ -24,7 +24,7 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 
 2021.1.1 or later  
 
-* This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available ![here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
+* This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
 
 ## Usage
 
