@@ -2,7 +2,8 @@
 
 ## Description
 
-The **DQ - Standardize** step allow you to create a standardized column code based on locale and rule definition using a **dqStandardize** function in the SAS Compute Server. This version supports 5 Locales (ITITA, ENUSA, FRFRA, DEDEU and ESESP) and allows to standardize up to 5 columns.  
+The **DQ - Standardize** step allow you to create a standardized column code based on locale and rule definition using a **dqStandardize** function in the SAS Compute Server. This version supports 5 Locales (ITITA, ENUSA, FRFRA, DEDEU and ESESP) and allows to standardize up to 5 columns. It's worthwhile to note that the DQ Standardize step also allows to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)       
+
 
 ## User Interface  
 
