@@ -4,22 +4,16 @@
 
 The "**Lookup**" Custom Step will add a column to a table by performing a lookup on another table using hash objects.
 
-
-
-
-Version: 1.0 (25AUG2022)
+Version: 1.0 (21SEP2022)
 
 ## User Interface
 
-* ### Rank Options tab ###
-
-   | Standalone mode | Flow mode |
-   | --- | --- |                  
-   | ![](img/RankColumns-tab-RankOptions-standalone-mode.png) | ![](img/RankColumns-tab-RankOptions-flow-mode.png) |
+* ### Lookup Settings tab ###
+   ![](img/Lookup-tab-LookupSettings-flow-mode.GIF)|
 
 * ### About tab ###
 
-   ![](img/RankColumns-tab-About.png)|
+   ![](img/Lookup-tab-About.GIF)|
 
 ## Requirements
 
@@ -44,11 +38,7 @@ Add a default value to use when no value is returned when doing the lookup. Do n
 ### Output Port
 - The result table containing the selected columns from the base table and the new column.
 
-
-
-
-
 ## Change Log
 
-* Version 1 (25AUG2022)
+* Version 1 (21SEP2022)
     * Initial version
