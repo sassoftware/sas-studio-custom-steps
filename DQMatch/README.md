@@ -33,5 +33,6 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 ## Change Log
 
 * Version 1.1 (22SEP2022)
-    * Initial version  
+    * 1.0 Initial version  
+	* 1.1 Bug Fixing
 	
