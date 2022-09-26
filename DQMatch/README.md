@@ -32,7 +32,12 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 
 ## Change Log
 
-* Version 1.1 (22SEP2022)
-    * 1.0 Initial version  
-	* 1.1 Bug Fixing
+Version 1.0 (14SEP2022)  
+
+  * Initial version  
+  
+Version 1.1 (22SEP2022)  
+
+  * Fixes execution errors when using a locale other than English -United States (ENUSA)  
+
 	
