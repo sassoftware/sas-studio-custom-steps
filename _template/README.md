@@ -42,3 +42,5 @@ The **_template** custom step enables SAS Studio users to ...
 
 * Version 1 (ddMMMyyyy)
     * Initial version
+
+> Note: Please list versions in descending date order, so the most recent version at the top of the change log.  - ***Remove this line***
