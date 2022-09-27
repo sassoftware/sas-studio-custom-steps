@@ -9,4 +9,5 @@
 | [DQ - Match](./DQMatch/README.md) | Create Match Codes based on locale, using SAS QKB and dqMatch function | [Lorenzo Toja](https://github.com/lorenzotoja) | 2021.1.1 or later | 14SEP2022 |
 | [DQ - Standardize](./DQStandardize/README.md) | Create standardized values based on locale, using SAS QKB and dqStandardize function (includes support for generating masked values) | [Lorenzo Toja](https://github.com/lorenzotoja) | 2021.1.1 or later | 14SEP2022 |
 | [Dynamic Aggregations From Timeseries DAFT](./Dynamic%20Aggregations%20From%20Timeseries%20DAFT/README.md) | Perform dynamic aggregations on timeseries data | [Stephan Weigandt](https://github.com/stephanweigandt) | Tested on 2022.1.2 (should work on earlier versions) | 14SEP2022 |
+| [Python Virtual Environments](./Python%20Virtual%20environments/README.md) | Install and use virtual Python packages | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2021.2.1 or later | 26SEP2022 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
