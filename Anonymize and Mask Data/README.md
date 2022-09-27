@@ -13,11 +13,9 @@ Note: This custom step is related to the [DQ - Standardize](https://github.com/s
    | Standalone mode | Flow mode |
    | --- | --- |
    | ![](img/Anonymize_and_Mask_Data_StandAlone.png) | ![](img/Anonymize_and_Mask_Data_Flow.png) |
-
 * ### **About** tab ###
 
    ![](img/Anonymize_and_Mask_Data_About.png)
-
 ## Requirements
 
 * SAS Viya 2020.1.5 or later
@@ -30,5 +28,7 @@ Note: This custom step is related to the [DQ - Standardize](https://github.com/s
 
 ## Change Log
 
-* Version 1 (15SEP2022)
+* Version 1.1 (27SEP2022)
+    * Made New Column control required
+* Version 1.0 (15SEP2022)
     * Initial version
