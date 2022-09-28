@@ -10,9 +10,8 @@ Version 1.0 (28SEP2022)
 
 
 * ### SCD Loader Settings tab ###
-   |   |   |
-   |---|---|
-   |![](img/SCD-tab-SCDSettings-flow-mode1.GIF)|![](img/SCD-tab-SCDSettings-flow-mode2.GIF)|
+   ![](img/SCD-tab-SCDSettings-flow-mode1.GIF)
+   ![](img/SCD-tab-SCDSettings-flow-mode2.GIF)
 
 * ### About tab ###
    ![](img/SCD-tab-About.GIF)
