@@ -22,7 +22,7 @@ Select the columns from the input table that constitute the business key.
 The name of the column in the result table containing the surrogate key.
 
 ### Input Port
-- **Port 1:** Table with new records to assign surrogate key to.
+- Table with new records to assign surrogate key to.
 
 ### Output Port
 - Table with new surrogate keys added.
