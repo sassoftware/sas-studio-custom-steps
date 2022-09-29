@@ -23,7 +23,6 @@ The name of the column in the result table containing the surrogate key.
 
 ### Input Port
 - **Port 1:** Table with new records to assign surrogate key to.
-- **Port 2:** Table with existing surrogate key records.
 
 ### Output Port
 - Table with new surrogate keys added.
