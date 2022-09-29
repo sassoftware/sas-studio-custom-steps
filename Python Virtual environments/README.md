@@ -47,21 +47,19 @@ This step helps users generate a relevant, more compact requirements.txt for a p
 
 ## Installation & Usage
 
-Upload the folder containing the custom steps given in this documentation directly into SAS Studio through the [upload button](https://go.documentation.sas.com/doc/en/webeditorcdc/v_011LTS/webeditorug/n0f4pkd9zy9z6zn17uar6bu55h7p.htm) within your SAS Folders view.
+Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
 
-When successfully imported, the following structure will be present in the Shared Section of your SAS Studio application - Custom Steps tab.
+When successfully uploaded, the following structure will be present in the Shared Section of your SAS Studio application - Custom Steps tab.
 
 ![SAS Studio view](./img/view-custom-steps.png)
 
-After this, usage is very simple! Just [pull in the Custom step](https://go.documentation.sas.com/doc/en/webeditorcdc/v_011LTS/webeditorug/p19s7ugdy0szmdn191y22muoosd6.htm) for the step you want to execute, directly into a SAS Studio Flow.
-
 
 ## Change Log
-Version 1 May 20 2022
-Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze" : Jun 15 2022
+Version 1.1 (12JUL2022)
+- Added new Custom Step - "Python - Obtain requirements from project directory"  : Ju1 12 2022
 
-Version 1.1 Jul 12 2022
-Added new Custom Step - "Python - Obtain requirements from project directory"  : Ju1 12 2022
+Version 1.0 (20MAY2022)
+- Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze" : Jun 15 2022
 
 
 ## The WHY :  Background information
@@ -74,13 +72,8 @@ Watch this example!
 
 ![Creating virtual Python environments within SAS Studio.](https://youtu.be/UIYZf2bKcWw)
 
-Note : The custom steps inside this example are also used with our [SAS Viya on Azure Marketplace offering](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/sas-institute-560503.sas-viya-on-azure?tab=Overview).
-
 This repository contains 5 custom steps which are offered as examples of how you could create, activate, switch between, and package virtual Python environments from within SAS Viya applications and tools, such as SAS Studio.  It makes use of [Custom Steps](https://go.documentation.sas.com/doc/en/webeditorcdc/v_006/webeditorug/n0b7ljqhka8lh5n12judc27x5gph.htm), a component within SAS Studio which help users package repeatable steps in an user-friendly manner.
 
-
-## Support
-We make use of GitHub issues for tracking any questions and support.  Please open an issue on this repository.
 
 
 
