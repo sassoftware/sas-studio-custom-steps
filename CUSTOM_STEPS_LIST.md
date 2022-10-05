@@ -14,3 +14,5 @@
 | [GeoDistance with Rounding](./GeoDistance%20with%20Rounding/README.md) | Calculate the distance between 2 supplied lat/long locations in either kilometers or miles | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2020.1.5 or later | 28SEP2022 |
 | [Lookup](./Lookup/README.md) | Add column by performing lookup on other table (using data step hash object) | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 21SEP2022 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
+| [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 28SEP2022 |
+| [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 29SEP2022 |
