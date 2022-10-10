@@ -54,11 +54,12 @@ There are multiple tools that can be used to do all of this. A list of tasks to 
 | 4. (Local directory) Create a dedicated folder for your contribution by simply copying the **_template** folder and name it appropriately, and replace the **.step** file with your **.step** file | [Link to recording](docs/contributing/3.%20Add%20custom%20step%20to%20local%20directory%20and%20push%20to%20forked%20repo%20-%20GitHub%20Desktop%20app.gif) |
 | 5. (Local directory) Update the **README.md** file in that dedicated folder to reflect your custom step and replace the screenshots in the **img** subdirectory with screenshots of the UI of your custom step | See recording for #4 |
 | 6. (GitHub Desktop) Commit the changed files and push them back to your **Forked** repository (aka. origin remote repository) | See recording for #4 |
-| 7. (GitHub Desktop/GitHub webUI) From the **Forked repository**, initiate a **Pull request** to make your contribution available for review by the maintainers of the parent repository | [Link to recording](docs/contributing/4.%20Create%20pull%20request%20and%20attach%20DCO%20-%20GitHub%20webUI.gif) |
-| 8. (GitHub webUI) As part of the **Pull request** you will be shown a message in the GitHub webUI that asks you to answer the questions outlined in "Checklist before contributing" shown above, and also **attach a signed version** of the [Contributor Agreement](ContributorAgreement.txt). | See recording for #7 |
-|9. (GitHub webUI) Respond to questions/requests from maintainers | [How to view your pull request?](docs/contributing/5.%20How%20to%20view%20your%20pull%20request%20-%20GitHub%20webUI.gif) |   
+| 7. (GitHub webUI) **Sync** your **Forked** repository **before** issuing a pull request ) | [Link to recording](docs/contributing/3c.%20Sync%20fork%20before%20issuing%20pull%20request.gif) |
+| 8. (GitHub Desktop/GitHub webUI) From the **Forked repository**, initiate a **Pull request** to make your contribution available for review by the maintainers of the parent repository | [Link to recording](docs/contributing/4.%20Create%20pull%20request%20and%20attach%20DCO%20-%20GitHub%20webUI.gif) |
+| 9. (GitHub webUI) As part of the **Pull request** you will be shown a message in the GitHub webUI that asks you to answer the questions outlined in "Checklist before contributing" shown above, and also **attach a signed version** of the [Contributor Agreement](ContributorAgreement.txt). | See recording for #7 |
+| 10. (GitHub webUI) Respond to questions/requests from maintainers | [How to view your pull request?](docs/contributing/5.%20How%20to%20view%20your%20pull%20request%20-%20GitHub%20webUI.gif) |   
 
-Note for task #7: This can be done directly from the **GitHub webUI** or initiated from the **GitHub Desktop application**. The latter will open a browser tab showing the Pull request page in the GitHub webUI.
+Note for task #8: This can be done directly from the **GitHub webUI** or initiated from the **GitHub Desktop application**. The latter will open a browser tab showing the Pull request page in the GitHub webUI.
 
 After you have submitted the pull request the following will happen:
   * GitHub will notify the **maintainers** of the parent repository of a contribution/update
