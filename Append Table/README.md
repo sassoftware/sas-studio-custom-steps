@@ -9,11 +9,11 @@ Version: 1.0 (26OCT2022)
 ## User Interface
 
 * ### Append Table tab ###
-   ![](img/Lookup-tab-LookupSettings-flow-mode.GIF)|
+   ![](img/AppendTable-tab-AppendTableSettings-flow-mode.GIF)|
 
 * ### About tab ###
 
-   ![](img/Lookup-tab-About.GIF)|
+   ![](img/AppendTable-tab-About.GIF)|
 
 ## Requirements
 
