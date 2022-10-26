@@ -33,7 +33,7 @@ The **DQ - Surviving Record** step allows you to extract the best record (Golden
 
 2021.1.5 or later
 
-* The Surviving Record must be used on tables that contain a numeric column representing the cluster made previously. Typically after a [match code]((https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DQ - Match Code/README.md)) and [cluster analysis](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DQClustering/README.md).  
+* The Surviving Record must be used on tables that contain a numeric column representing the cluster made previously. Typically after a [match code]((https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DQ%20-%20Match%20Code/README.md)) and [cluster analysis](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DQClustering/README.md).  
 
 ## Usage
 
