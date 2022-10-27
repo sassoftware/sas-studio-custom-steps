@@ -66,6 +66,15 @@ This step helps you assess the correlation among variables in your generated and
 
 Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
+If you want to use the Home Equity sample data (HMEQ) used in the screenshots above to get started with these custom steps, then you can make them available in your SAS Studio session. This sample data set is part of the SAS sample data library (sampsio) which should be available in a standard SAS Viya deployment. But the library is not visible by default in the Libraries panel in SAS Studio. Here is how to make this library available:
+
+* Open SAS Program using New -> SAS Program from the main menu
+* Run the following SAS code to get a listing of all the SAS datasets in the sampsio sample library that should be part of a default SAS deployment
+```sas
+proc datasets library=sampsio; run;
+```
+* This will display a list of tables in the Results window and will make the library sampsio available in the Libraries panel for your current SAS Studio session
+* TIP: Watch this [SAS Sample Data for Forecasting](https://www.youtube.com/watch?v=wX6mdBgYmXo&t=271s) recording on Youtube for more pointers to interesting sample data available from SAS
 
 ## Change Log
 
