@@ -18,3 +18,4 @@
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
 | [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 28SEP2022 |
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 29SEP2022 |
+| [Synthetic Data Generation](./Synthetic%20Data%20Generation/README.md) | A collection of 4 SAS Studio custom steps which help you which help you train, score and assess Synthetic Data models. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 or later | 06OCT2022 |
