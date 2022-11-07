@@ -35,7 +35,8 @@ When adding your contribution using a Pull Request, you will be asked the follow
 2. Store your contribution in its own subfolder and follow the same structure as in the **_template** folder
 3. Recommendations to use in the Program part (code generation) of a custom step can be found in 
   [SAS coding best practices](./docs/SASCodingBestPractices.md).
-4. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
+4. Recommendations to  use in the UI part of a custom step can be found in [UI Guidelines](./docs/UI-guidelines.md)
+5. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
    Consult [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more information on using pull requests in general.
    The next section will go through the detailed steps from start to finish.  
 
