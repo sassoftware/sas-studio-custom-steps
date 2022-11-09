@@ -15,7 +15,7 @@ This opens the Custom Step Designer
 | --- | --- | --- |
 | Tab labels | Title | Keep them short, preferably one or two words |
 | Field labels - includes the labels for any of the UI elements | Sentence | Put colons after labels. For example:  ***Select a column:*** |
-| Values in lists <br/> * Drop-down List <br/> * List <br/> * Radio Button Group | Sentence |
+| Values in lists <ul><li>Drop-down List</li><li>List</li><li>Radio Button Group</li></ul> | Sentence |
 
   * Title capitalization:
      * Each word starts with capital. Prepositions (such as of, for, with), articles (a, an, the) and conjunctions (and, or, but) should not be initial-capped
