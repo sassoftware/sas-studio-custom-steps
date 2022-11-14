@@ -23,9 +23,9 @@ DIAP will automatically handle the following automatically:
 
 DIAP also offers a "guided automation" mode. Here the user uploads a specific CSV file which contains a list of all files that need to be uploaded which instructions on where to find it and also how to ingest it where further instructions are provided. Please follow the instructions below on how to structure the CSV file. 
 
-And: DIAP can also deal with fixed width files.
+And: DIAP can deal with fixed width files.
 
-DIAP also creates reference tables to:
+DIAP creates reference tables to:
 - show which source files were loaded into which SAS tables at what date,
 - keep track of required variable name changes and to make sure that newly created variable names stay unique. 
 
@@ -65,7 +65,9 @@ If you are happy with all the default settings, only adjust the parameters in th
 ## Requirements
 
 
-## Usage
+## Usage 
+
+Please wait a few seconds for the video as a GIF to load. Every heading below has a little video to show the process flow.
 
 ### **How to Run DIAP with Default Settings**
 ![](img/diap_run_with_defaults.gif)
@@ -430,11 +432,13 @@ If missing, DIAP assumes a value of 1.
 
 This column can be left empty if DIAP should determine the delimiter of a text file automatically. 
 At this point DIAP determines one of the following delimiter automatically:
-- comma
-- semicolon
-- tab
-- pipe
-- blank
+- comma (,)
+- semicolon (;)
+- tab ("09"x)
+- pipe (|)
+- blank ( )
+- exclamation mark (!)
+- hash (#)
 
 If there are other delimiters it is recommended to provide the delimiter explicitly in this column.
 The following values are used as follows:
@@ -443,6 +447,9 @@ The following values are used as follows:
 - semicolon: This sets the delimiter to be a semicolon: ";"
 - tab: This sets the delimiter to be a tab: '09'x
 - pipe: This sets the delimiter to be a pipe: "|"
+- exclamation: This sets the delimiter to be an exclamation mark: "!"
+- hash: This sets the delimiter to be the hash symbol: "#"
+
 Any other entries than the 5 keywords above will be taken as the delimiter.
 
 #### ***Column: target_table_name***
@@ -526,6 +533,13 @@ Please provide the SAS Informat that should be used for that specific entry.
 (2) For the variable type "xml": This is the order in how the variable occurs in the file. Most important is that the last variable that is defined within each block MUST have the highest order number. This matches the entry of the column "variable_start_position".
 
 ## Change Log
+
+Version 4.1.0 (20OCT2022)
+- adding some intelligence to handle separator determination, especially blank vs other separators. Any other separator always wins against blank.
+- adding 2 more separators for detection:
+	- exclamation mark (!)
+	- hash symbol (#)
+- making some more cosmetic changes to code.
 
 Version 4.0.3 (15SEP2022)
 - update documentation and make traversing of directories more robust
