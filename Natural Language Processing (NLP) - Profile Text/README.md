@@ -21,7 +21,7 @@ The following **input arguments** are required:
 3. **Text column**: Select a column which contains the text to be profiled
 4. **Language**: Select a language (English is the default)
 
-The following **output tables** are created. Provide desired target table names (and location) for the output ports. Note that target table names are already suggested for these input tables.  If you choose to continue with the same, an advantage is that you would be able to easily visualize the results in a Visual Analytics report which can seamlessly updates based on these table names. Use of the Visual Analytics report is optional.
+The following **output tables** are created. Provide desired target table names (and location) for the output ports. Note that target table names are already suggested for these output tables.  If you choose to continue with the same, an advantage is that you would be able to easily visualize the results in a Visual Analytics report which can seamlessly updates based on these table names. Use of the Visual Analytics report is optional.
 
 1. **Text Profile Output table**: (Suggested: PUBLIC.TEXT_PROFILE_OUTPUT_TABLE) The main output containing a single observation with several profile statistics
 2. **Document Output**: (Suggested: PUBLIC.TEXT_PROFILE_DOCUMENT_OUT) Statistics provided for each observation as represented by the Document ID
