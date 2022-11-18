@@ -33,7 +33,7 @@ Refer the "About" tab on the step for further details.
 
 ### Visual Analytics Report 
 
-We acknowledge that analysis of multiple output tables is a cumbersome task.  As a convenience, this custom step also promotes the 5 output tables so that they can easily be visualized.  A transfer package containing a SAS Visual Analytics Report is also provided to serve as an example [in this subfolder](./reports/). Refer to this folder's [README](./reports/README.md) for more details.  Here's a screenshot of the report.
+We acknowledge that analysis of multiple output tables is a cumbersome task.  As a convenience, this custom step also promotes the 5 output tables so that they can easily be visualized.  A transfer package containing a SAS Visual Analytics Report is also provided to serve as an example [in this subfolder](./extras/). Refer to this folder's [README](./extras/README.md) for more details.  Here's a screenshot of the report.
 
 ![screenshot](./img/text-profile-report.png)
 
@@ -46,7 +46,7 @@ We acknowledge that analysis of multiple output tables is a cumbersome task.  As
 
 1. Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
-2. For installing the VA report (optional), refer to the steps listed [here](./reports/README.md)
+2. For installing the VA report (optional), refer to the steps listed [here](./extras/README.md)
 
 3. In case you wish to try this Custom Step using an example dataset, consider using the [NEWS dataset](https://support.sas.com/documentation/prod-p/visual-text-analytics/news-nov2019.zip) from the SAS Support Page. Following are some instructions on using this dataset.
 
