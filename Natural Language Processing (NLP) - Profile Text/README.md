@@ -27,6 +27,8 @@ The following **output tables** are created. Provide desired target table names 
 
 <mark>Ensure you have write access to the caslib you wish to save output tables to.  Also, when writing output tables to commonly used / shared caslibs (such as PUBLIC), be mindful that the output will change for all users of that caslib and table.</mark>
 
+Right click on the output ports (with a '5' marked inside the box) and select Expand.  Then proceed to add tables to each of the output ports.
+
 1. **Text Profile Output table**: (Suggested: PUBLIC.TEXT_PROFILE_OUTPUT_TABLE) The main output containing a single observation with several profile statistics
 2. **Document Output**: (Suggested: PUBLIC.TEXT_PROFILE_DOCUMENT_OUT) Statistics provided for each observation as represented by the Document ID
 3. **Intermediate-level Output**: (Suggested: PUBLIC.TEXT_PROFILE_INTERMEDIATE_OUT) Statistics provided for each sentence within the document corpus
