@@ -12,8 +12,7 @@ Tested in Viya 4, Stable 2022.10
 
 ## User Interface
 
-==**Note that this Custom Step is intended to work with Cloud Analytics Services (CAS) tables. All references to table names and locations below should be interpreted as referring to CAS Tables and caslibs. Ensure your input table is loaded to CAS before using the Custom Step.**==
-
+<mark>Note that this Custom Step is intended to work with Cloud Analytics Services (CAS) tables. All references to table names and locations below should be interpreted as referring to CAS Tables and caslibs. Ensure your input table is loaded to CAS before using the Custom Step.</mark>
 
 The following **input arguments** are required:
 1. **Input port**: assign an input **CAS table** to the input port of this node. This table should contain a text column (varchar or char) for analysis.
@@ -25,6 +24,8 @@ The following **input arguments** are required:
 4. **Language**: Select a language (English is the default)
 
 The following **output tables** are created. Provide desired target table names (and location) for the output ports. Note that target table names are already suggested for these output tables.  If you choose to continue with the same, an advantage is that you would be able to easily visualize the results in a Visual Analytics report which can seamlessly update based on these table names. Use of the Visual Analytics report is optional.
+
+<mark>Ensure you have write access to the caslib you wish to save output tables to.  Also, when writing output tables to commonly used / shared caslibs (such as PUBLIC), be mindful that the output will change for all users of that caslib and table.</mark>
 
 1. **Text Profile Output table**: (Suggested: PUBLIC.TEXT_PROFILE_OUTPUT_TABLE) The main output containing a single observation with several profile statistics
 2. **Document Output**: (Suggested: PUBLIC.TEXT_PROFILE_DOCUMENT_OUT) Statistics provided for each observation as represented by the Document ID
