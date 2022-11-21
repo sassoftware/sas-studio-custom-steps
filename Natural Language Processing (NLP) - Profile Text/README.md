@@ -12,6 +12,9 @@ Tested in Viya 4, Stable 2022.10
 
 ## User Interface
 
+==**Note that this Custom Step is intended to work with Cloud Analytics Services (CAS) tables. All references to table names and locations below should be interpreted as referring to CAS Tables and caslibs. Ensure your input table is loaded to CAS before using the Custom Step.**==
+
+
 The following **input arguments** are required:
 1. **Input port**: assign an input **CAS table** to the input port of this node. This table should contain a text column (varchar or char) for analysis.
 
