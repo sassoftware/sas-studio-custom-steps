@@ -32,7 +32,7 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 
 ## Change Log
 
-Version 1.2 (22SEP2022)  
+Version 1.2 (22NOV2022)  
 
   * Adds support for English - Canada (ENCAN) and French - Canada (FRCAN) locales
 
