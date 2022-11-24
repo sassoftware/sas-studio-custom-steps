@@ -2,7 +2,7 @@
 
 ## Description
 
-The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. This version supports 5 Locales (ITITA, ENUSA, FRFRA, DEDEU and ESESP) and allows to generate match code for up to 5 columns.  
+The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. This version supports 7 Locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows to generate match code for up to 5 columns.  
 
 ## User Interface  
 
@@ -32,12 +32,18 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 
 ## Change Log
 
+Version 1.2 (22NOV2022)  
+
+  * Adds support for English - Canada (ENCAN) and French - Canada (FRCAN) locales
+
+Version 1.1 (22SEP2022)  
+
+  * Fixes execution errors when using a locale other than English - United States (ENUSA) 
+
 Version 1.0 (14SEP2022)  
 
   * Initial version  
   
-Version 1.1 (22SEP2022)  
-
-  * Fixes execution errors when using a locale other than English -United States (ENUSA)  
+ 
 
 	
