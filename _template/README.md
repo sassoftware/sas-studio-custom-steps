@@ -36,7 +36,11 @@ The **_template** custom step enables SAS Studio users to ...
 ## Usage
 
 > Optional: Create an animated gif that quickly demos your custom step and its results using a dedicated flow and store it in the **img** folder
-![](img/Demo_template.gif) - ***Remove this line***
+![](img/Demo_template.gif) - ***Remove this line*** 
+
+> Recommended approach is to use data that is available in sashelp or sampsio. See [What sample data is available for use in SAS Studio in a SAS Viya deployment?](../docs/FAQ.md#what-sample-data-is-available-for-use-in-sas-studio-in-a-sas-viya-deployment) for more details. - ***Remove this line***
+
+> If there is no suitable data in those locations, then consider adding SAS code in your readme file to create data. One approach is to embed the data inside the data step code itself [example that has data in CSV format inside data step (GeoDistance with Rounding)](../GeoDistance%20with%20Rounding/README.md#usage), another approach could be to generate random data [example of generating random data using a data step (Dynamic Aggregations from Time Series)](Dynamic%20Aggregations%20From%20Timeseries%20DAFT/README.md#usage). The user can then copy that SAS code into a SAS Program tab in SAS Studio and run it to make the dataset available in the SAS Studio session.  - ***Remove this line***
 
 ## Change Log
 
