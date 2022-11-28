@@ -8,7 +8,7 @@ The **_template** custom step enables SAS Studio users to ...
 
 ## User Interface
 
->Create a screenshot for each of the tabs shown in your Custom Step UI and put them in the **img** folder and show them below.  - ***Remove this line***
+>Create a screenshot for each of the tabs shown in your Custom Step UI, preferably with a 1-pixel black border, and put them in the **img** folder and show them below.  - ***Remove this line***
 
 >Consider adding a screenshot when using your custom step in standalone-mode and one in flow-mode for each tab that contains input table and output table controls, as these controls are hidden when used in flow mode.  - ***Remove this line***
 
