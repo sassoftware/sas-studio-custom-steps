@@ -14,6 +14,7 @@ This opens the Custom Step Designer
 | UI Element | Capitalization | Remarks|
 | --- | --- | --- |
 | Tab labels | Title | Keep them short, preferably one or two words |
+| Section labels | Sentence | |
 | Field labels - includes the labels for any of the UI elements | Sentence | Put colons after labels. For example:  ***Select a column:*** |
 | Values in lists <ul><li>Drop-down List</li><li>List</li><li>Radio Button Group</li></ul> | Sentence |
 
