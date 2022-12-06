@@ -2,7 +2,11 @@
 
 ## Description
 
-The **DQ - Standardize** step allows you to create a column with standardized values based on a locale and standardization definition using the **dqStandardize** function.  Best practice is to write the output to a new column, but you can overwrite an existing column as well.  If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.  This version supports seven Locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows you to standardize up to five columns.  It's worthwhile to note that the DQ Standardize step also allows you to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)       
+The **DQ - Standardize** step allows you to create a column with standardized values based on a locale and standardization definition using the **dqStandardize** function.
+ * Best practice is to write the output to a new column, but you can overwrite an existing column as well.
+ * If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.
+ * This version supports seven Locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows you to standardize up to five columns.
+ * It's worthwhile to note that the DQ Standardize step also allows you to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)   
 
 
 ## User Interface  
@@ -33,8 +37,8 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 
 Version 1.1 (05DEC2022)
  * adds support for Canadian locales.  (ENCAN, FRCAN)
- * avoids warning by skipping length declaration for the output field if writing to an existing field.
- * documents in the About tab how to get the step to run in CAS
+ * avoids warning by skipping length declaration for the output field if over-writing the input field.
+ * adds documentation in the About tab how to get the step to run in CAS
  * conforms casing of text in the controls to coding standards
 
 Version 1.0 (14SEP2022)
