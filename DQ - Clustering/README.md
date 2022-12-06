@@ -2,7 +2,12 @@
 
 ## Description  
 
-The **DQ - Clustering** step allows you to create a Cluster ID based on defined clustering rules; each clustering rule can contain one or more columns. There is an implied "AND" between each column in a clustering rule.  There is an implied "OR" between each clustering rule.  This step will execute on the SAS Compute Server using proc dqmatch.  This version supports up to five clustering rules.    
+The **DQ - Clustering** step allows you to create a Cluster ID based on defined clustering rules.
+ * Each clustering rule can contain one or more columns.
+ * There is an implied "AND" between each column in a clustering rule.
+ * There is an implied "OR" between each clustering rule.
+ * This step will execute on the SAS Compute Server using proc dqmatch.
+ * This version supports up to five clustering rules.    
 
 ## User Interface
 
