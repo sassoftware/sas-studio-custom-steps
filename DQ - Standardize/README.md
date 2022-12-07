@@ -39,7 +39,7 @@ Version 1.1 (05DEC2022)
  * adds support for Canadian locales.  (ENCAN, FRCAN)
  * avoids warning by skipping length declaration for the output field if over-writing the input field.
  * adds documentation in the About tab how to get the step to run in CAS
- * conforms casing of text in the controls to coding standards
+ * improves text in the controls to meet UI standards
 
 Version 1.0 (14SEP2022)
  * Initial version 
