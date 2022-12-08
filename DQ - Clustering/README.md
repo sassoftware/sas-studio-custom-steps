@@ -2,7 +2,12 @@
 
 ## Description  
 
-The **DQ - Clustering** step allows you to create a cluster match code based on defined rules; each rule can contain one or more columns. This version supports up to three rules.  
+The **DQ - Clustering** step allows you to create a Cluster ID based on defined clustering rules.
+ * Each clustering rule can contain one or more columns.
+ * There is an implied "AND" between each column in a clustering rule.
+ * There is an implied "OR" between each clustering rule.
+ * This step will execute on the SAS Compute Server using proc dqmatch.
+ * This version supports up to five clustering rules.    
 
 ## User Interface
 
@@ -12,7 +17,7 @@ The **DQ - Clustering** step allows you to create a cluster match code based on 
    | --- | --- |                  
    | ![](img/dqclustering-tabMatchStandAlone.png) | ![](img/dqclustering-tabMatchFlowMode.png) |
 
-1. **Cluster records based on following rule(s).** - Defines up to three rules for creating the cluster, several columns can be inserted in each rule.  
+1. **Cluster records based on following rule(s).** - Defines up to five rules for creating the cluster, several columns can be inserted in each rule.  
 
 * ### Options tab ###
 
@@ -29,5 +34,9 @@ The **DQ - Clustering** step allows you to create a cluster match code based on 
 
 ## Change Log
 
-* Version 1.0 (14SEP2022)
-    * Initial version
+Version 1.1 (05DEC2022)
+ * expanded support from three clustering rules to five clustering rules
+ * expanded documentation in the About tab
+
+Version 1.0 (14SEP2022)
+ * Initial version
