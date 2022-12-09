@@ -1,0 +1,5 @@
+# Apply override to all files in the directory so these files are not used to generate language metrics
+docs/* linguist-documentation
+
+# Define files with .step extension as SAS and have them included in stats
+*.step linguistic-language=SAS linguist-detectable
