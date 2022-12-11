@@ -3,7 +3,7 @@
 ## Description
 The "Load CAS Tables from Filesystem" custom step loads all files (of a specified pattern) located within a filesystem folder, to in-memory Cloud Analytics Services (CAS) tables. Every file within the folder is loaded to a separate table with the same name (without the suffix).
 
-**This custom step is useful for applications where the user wishes to load multiple files to load to CAS in one go.**  
+**This custom step is useful for applications where the user wishes to load multiple files to CAS in one go.**  
 
 For example, suppose you use source code and data located within a Git repository.  After cloning the repo using [Git Integration]((https://go.documentation.sas.com/doc/en/webeditorcdc/default/webeditorug/p0puc7muifjjycn1uemlm9lj1jkt.htm)), you can then run this step to load all required data to CAS tables.
 
