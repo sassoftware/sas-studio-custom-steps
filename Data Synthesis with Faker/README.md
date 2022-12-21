@@ -2,7 +2,7 @@
 
 ## Description
 
-The **Python - faker** custom step enables SAS Studio users to generate synthetic data using the Python faker module.
+The **Python - faker** custom step enables SAS Studio users to generate synthetic data using the Python faker module (some internal changes in V1.1).
 
 The **Python - Load python module** custom step enables SAS Studio users to download or update the files for a Python module to a location on their filesystem so that it can be used with Python (see Step below).
 
@@ -61,5 +61,8 @@ The usage of these steps, and faker itself, is disccused at length in a series o
 
 ## Change Log
 
+* Version 1.1 (2022/12/21)
+  * Some internal code indention fixes, quality of life improvements and some refactoring of the code as well to improve readability.
+  
 * Version 1.0 (2022/12/06)
   * Initial version released to GitHub
