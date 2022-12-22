@@ -61,8 +61,8 @@ The usage of these steps, and faker itself, is disccused at length in a series o
 
 ## Change Log
 
-* Version 1.1.1 (2022/12/21)
+* Version 1.1.1 (22DEC2022)
   * Some internal code indention fixes, quality of life improvements and some refactoring of the code as well to improve readability.
   
-* Version 1.0 (2022/12/06)
+* Version 1.0 (06DEC2022)
   * Initial version released to GitHub
