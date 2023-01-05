@@ -18,6 +18,9 @@ Tested in Viya 4, Stable 2022.11
 
 <mark>Note that this Custom Step is intended to output Cloud Analytics Services (CAS) tables. Ensure you have a connection to CAS established before running this step. References to output table names and locations below should be interpreted as referring to CAS Tables and caslibs. </mark>
 
+### Parameters - screenshot
+![Parameters](./img/parameters-tab.gif)
+
 ### Input Arguments
 
 #### Source File Specifications:
@@ -42,9 +45,9 @@ Refer the "About" tab on the step for further details.
 
 ## Documentation
 Here's SAS documentation for the two main actions used within this Custom Step.
-1. [fileInfo action](https://documentation.sas.com/?cdcId=sasstudiocdc&cdcVersion=default&activeCdc=pgmsascdc&docsetId=caspg&docsetTarget=cas-table-fileinfo.htm)
-2. [loadTable action](https://documentation.sas.com/?cdcId=sasstudiocdc&cdcVersion=default&activeCdc=pgmsascdc&docsetId=caspg&docsetTarget=cas-table-loadtable.htm)
-3. [Wildcard patterns within the fileInfo action](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/caspg/p1xt9526uq5etwn1vmnk8koh0k6y.htm#n0y2zj2e81x5y5n1onqq4tibcn5h)
+1. [table.fileInfo action](https://documentation.sas.com/?cdcId=sasstudiocdc&cdcVersion=default&activeCdc=pgmsascdc&docsetId=caspg&docsetTarget=cas-table-fileinfo.htm)
+2. [table.loadTable action](https://documentation.sas.com/?cdcId=sasstudiocdc&cdcVersion=default&activeCdc=pgmsascdc&docsetId=caspg&docsetTarget=cas-table-loadtable.htm)
+3. [Wildcard patterns within the table.fileInfo action](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/caspg/p1xt9526uq5etwn1vmnk8koh0k6y.htm#n0y2zj2e81x5y5n1onqq4tibcn5h)
 
 ## Requirements
 
