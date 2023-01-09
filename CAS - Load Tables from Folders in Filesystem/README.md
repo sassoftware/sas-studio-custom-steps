@@ -1,7 +1,7 @@
 # CAS - Load Tables from Folders in Filesystem
 
 ## Description
-The "[CAS - Load Tables from Folders in Filesystem](./CAS%20-%20Load%20Tables%20from%20Folders%20in%20Filesystem.step)" custom step loads all files (of a specified pattern) located within a filesystem folder, to in-memory Cloud Analytics Services (CAS) tables. Every file within the folder is loaded to a separate table with the same name (without the suffix).
+The "[CAS - Load Tables from Folders in Filesystem](./CAS%20-%20Load%20Tables%20from%20Folders%20in%20Filesystem.step)" custom step loads all files (of a specified pattern) located within a filesystem folder, directly to in-memory Cloud Analytics Services (CAS) tables without pulling data through SAS Compute. Every file within the folder is loaded to a separate table with the same name (without the suffix).
 
 **This custom step is useful for applications where the user wishes to load multiple files to CAS in one go.**  
 
