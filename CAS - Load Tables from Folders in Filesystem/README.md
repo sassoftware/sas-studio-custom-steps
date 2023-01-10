@@ -19,7 +19,7 @@ Tested in Viya 4, Stable 2022.11
 <mark>Note that this Custom Step is intended to output Cloud Analytics Services (CAS) tables. Ensure you have a connection to CAS established before running this step. References to output table names and locations below should be interpreted as referring to CAS Tables and caslibs. </mark>
 
 ### Parameters - screenshot
-![Parameters](./img/parameters-tab.gif)
+![Parameters](./img/parameters-tab.png)
 
 ### Input Arguments
 
