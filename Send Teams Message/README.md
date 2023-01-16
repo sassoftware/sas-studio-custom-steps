@@ -26,6 +26,18 @@ Find a demonstration of this step in this YouTube video: [Send Teams Message | S
 
 The About tab includes a quick guide on how to retrieve the webhook of a channel.
 
+Linking the flow to a table serves the purpose of visually representing a dependency on for example a macro variable that is passed into this step - the actual table data is not used inside of this step. Example:
+
+![Send Teams Message Connect Example](img/Send-Teams-Message-Connect-Example.png)
+
+What is happening in this flow?
+
+1. Incoming data is checked and records that adhere to “rules” are rerouted to a central table, the other records are rerouted to an Exceptions table that requires further review.
+
+2. Send message to general channel (**Channel #1**) that new data is available with some metrics (like #records, processing date, ….)
+
+3. Send message to a special data owner/admin channel (**Channel #2**) that there’s data that needs to be reviewed before it can be processed further. 
+
 ## Change Log
 
 - Version 1.0 (12DEC2022)
