@@ -28,7 +28,7 @@ The **_template** custom step enables SAS Studio users to ...
 
 ## Requirements
 
-2020.1.5 or later
+Tested on Viya version Stable 2022.09
 > Does your custom step use specific UI controls that have only been released recently, and therefore perhaps require a more recent Viya version? - ***Remove this line***
 
 > Does you custom step require specific products to be installed, or has other dependencies the user should know about, then mention them here. - ***Remove this line*** 
