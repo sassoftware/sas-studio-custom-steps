@@ -33,6 +33,10 @@ The **_template** custom step enables SAS Studio users to ...
 
 > Does you custom step require specific products to be installed, or has other dependencies the user should know about, then mention them here. - ***Remove this line*** 
 
+> If your step does not have any specific Viya version pre-reqs then simply state "No specific Viya version requirements" - *** Remove this line ***
+
+> Note: This information should also be provided in the About box of your custom step UI. -  *** Remove this line ***
+
 ## Usage
 
 > Optional: Create an animated gif that quickly demos your custom step and its results using a dedicated flow and store it in the **img** folder
