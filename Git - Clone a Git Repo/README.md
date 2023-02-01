@@ -1,26 +1,12 @@
-# Git Functions
+# Git - Clone a Git Repo
 
-## Description
+This custom step helps you clone a repository from a Git platform (like GitHub, Gitlab etc.) to a folder in your Filesystem.
 
-This folder contains a set of custom steps to help you access Git (a popular source code management and repository service) functionality from within a SAS Studio Flow.
+Please refer this [page](./Overview%20of%20Git-related%20Custom%20Steps.md) which explains the motivation behind Custom Steps which surface Git integration functionality.
 
-Such capability already exists through [SAS functions](https://documentation.sas.com/?cdcId=pgmsascdc&cdcVersion=default&docsetId=lefunctionsref&docsetTarget=n10pxql65jtf4sn11m3d6jzcrgcz.htm) as well as [Git integration in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorug&docsetTarget=p0puc7muifjjycn1uemlm9lj1jkt.htm).
+**Here's a general idea of how this custom step works (the below is an animated GIF)**
 
-Providing similar functionality through these Custom Steps helps you access source code and assets from within a SAS Studio Flow (which is basically a SAS program provided through low-code components).  This enables portability and provides you Git version control, change tracking, and versatility in terms of choosing the analytics environment where you execute a set of SAS programs.   
-
-**Here's a general idea:**
-
-Click on the image below to watch an animated GIF.
-
-![Demonstrate Git Functions](./img/demonstrate-git-functions.gif)
-
-This README is focussed on the "Git - Clone a Git Repo" Custom Step. Other Custom Steps are described in detail in the hyperlinked READMEs below.
-
-## Table of Contents
-
-1. [Git - Clone a Git Repo](#git---clone-a-git-repo)
-2. [Git - Delete a Git Repo](./Git-Delete-a-Git-Repo.md)
-3. [Requirements for all steps](#requirements)
+![Git - Clone a Git Repo](./img/clone-a-git-repo.gif)
 
 ## SAS Viya Version Support
 Tested in Viya 4, Stable 2022.11
@@ -39,18 +25,10 @@ This Custom Step can connect to and pull code from public and restricted access 
 
 4. **Save SSH Keys in Filesystem**: Once you have your SSH keys generated, upload them to a folder within your filesystem. This is referred to within documentation [here](https://go.documentation.sas.com/doc/en/sasstudiocdc/v_035/webeditorcdc/webeditorug/p0urbfmbb9lkpdn15yzavxdk1lgk.htm).  To protect the integrity of your keys, ensure that only desired users have access to the folder where you are saving them to.
 
-
-## Git - Clone a Git Repo
-
-This custom step helps you clone a repository from a Git platform (like GitHub, Gitlab etc.) to a folder in your Filesystem.
-
-**Parameters:**
-
-![Parameters](./img/clone-a-git-repo-parameters.gif)
-
 ## User Interface
 
 ### Parameters
+![Parameters](./img/clone-a-git-repo-parameters.gif)
 
 #### Section - Git Repository Details
 

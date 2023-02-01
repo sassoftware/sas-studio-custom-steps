@@ -1,25 +1,23 @@
-# Git Functions
+# Git - Delete Local Repo
 
-## Git - Delete a Git Repo
-
-This custom step helps you delete a local copy of a Git repository in your filesystem, which you may have cloned earlier using a Git platform (like GitHub, Gitlab etc.).
+This custom step helps you delete a local copy of a Git repository in your filesystem, which you may have cloned earlier from a Git platform (like GitHub, Gitlab etc.).
 
 Note that this affects the LOCAL copy of the Git repository, and not the content on the repository hosting service itself.
 
-**Parameters:**
-
-![Parameters](./img/delete-a-git-repo.gif)
+Please refer this [page](../Git%20-%20Clone%20a%20Git%20Repo/Overview%20of%20Git-related%20Custom%20Steps.md) which explains the motivation behind Custom Steps which surface Git integration functionality.
 
 ## User Interface
 
 ### Parameters
+
+![Parameters](./img/delete-a-git-repo.gif)
 
 #### Git Repository Details
 
 1. Select the **Local Repository Folder** where your Git content is saved.
 
 #### Output Tables
-You can optionally specify a table to the status table output port. 
+You can optionally specify a table for the status table output port. 
 1. **Status Table:**  This is a simple status table which can be used to note the value of the return code after the GIT_DELETE_REPO function.  Return Codes are explained in the Doc Reference #4 below.
 
 
