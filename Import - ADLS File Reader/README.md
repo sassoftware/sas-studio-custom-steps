@@ -14,7 +14,7 @@ This custom step helps to work around some of the restrictions that currently ex
  - [Azure Data Lake Storage Data Source](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casref/n1ogaeli0qbctqn1e3fx8gz70lkq.htm) (SAS Cloud Analytic Services)
  - [Path-Based Data Source Types and Options](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casref/n0kizq68ojk7vzn1fh3c9eg3jl33.htm#n0cxk3edba75w8n1arx3n0dxtdrt) – which has a footnote for Parquet (SAS Cloud Analytic Services)
 
-Version 1.0 (JAN2023)
+Version 1.0 (FEB2023)
 
 ## User Interface
 
@@ -43,7 +43,7 @@ This customs step depends on having a python environment configured with the fol
 > - pyarrow
 > - pyarrowfs-adlgen2
 
-Tested on Viya version Stable 2022.12 with python environment version 3.8.13 and the libraries versions:
+Tested on Viya version Stable 2022.12 and 2023.01 with python environment version 3.8.13 and the libraries versions:
 > - pandas == 1.5.2
 > - saspy == 4.3.3
 > - azure-identity == 1.12.0
@@ -56,5 +56,5 @@ Tested on Viya version Stable 2022.12 with python environment version 3.8.13 and
 
 ## Change Log
 
-* Version 1.0 (JAN2023)
+* Version 1.0 (FEB2023)
     * Initial version
