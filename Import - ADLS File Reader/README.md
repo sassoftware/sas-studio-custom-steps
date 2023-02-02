@@ -52,7 +52,7 @@ Tested on Viya version Stable 2022.12 and 2023.01 with python environment versio
 
 ## Usage
 
-![](img/ADLS_File_Reader-Demo.GIF)
+![](img/ADLS_File_Reader-Demo.gif)
 
 ## Change Log
 
