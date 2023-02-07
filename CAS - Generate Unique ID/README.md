@@ -23,21 +23,21 @@ Tested in Viya 4, Stable 2022.11
 
 ### Parameters
 
-![Parameters](./img/generate-unique-id-parameters.gif)
+![Parameters](./img/generate-unique-id-parameters.png)
 
 1. Input port: connect an input CAS table to the input port.
 2. Name desired for the unique ID column.
-3. Optionally, select specific input table columns to copy to the output table.  If no columns are selected, note that all columns are copied.
-4. Output port: connect an output table (which needs to be a CAS table) to the output port.
+3. Output port: connect an output table (which needs to be a CAS table) to the output port.
+
+Note that all columns are copied over to the output table.
 
 ## Documentation
-1. The [textmanagement.generateIds](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/n0qdvvymlj69d7n18dfvh6ipjn2k.htm#p1rs825m6ue07wn1tusdtru2vrc5) CAS action.
-2. Even though it dates a while back, this [SGF 2009 paper](http://support.sas.com/resources/papers/proceedings09/022-2009.pdf) proved useful in drafting some string substitution code within the custom step.  It helps answer the question: which is the best way to check if a macro variable is blank? 
-3. This [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Creating-a-unique-ID-with-CAS-DATA-Step/ta-p/644592) provides the workaround mentioned earlier. 
+1. The [textmanagement.generateIds](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/n0qdvvymlj69d7n18dfvh6ipjn2k.htm#p1rs825m6ue07wn1tusdtru2vrc5) CAS action. 
+2. This [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Creating-a-unique-ID-with-CAS-DATA-Step/ta-p/644592) provides the workaround mentioned earlier. 
 
 ## Installation & Usage
 1. Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
 ## Change Log
-Version : 1.0.   (02FEB2023)
-
+Version : 1.1.   (07FEB2023)
+Version : 1.0.   (02FEB2023)   - Unpublished on GitHub; copyVars option
