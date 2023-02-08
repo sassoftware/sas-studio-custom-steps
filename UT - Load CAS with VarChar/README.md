@@ -18,7 +18,7 @@ Ver 1.0 (07Feb2023)
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![UT – Load CAS with VarChar](img/UT_Load_CAS_with_VarChar_tabOptions_standalone_mode.png) | ![UT – Load CAS with VarChar](img/UT_Load_CAS_with_VarChar_tabOptions_low_mode.png) |
+   | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_standalone_mode.png) | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_low_mode.png) |
 
 Compress - No to not compress the table, Yes otherwise
 Promote  - No to not promote the table, Yes otherwise
@@ -27,7 +27,7 @@ Index    - Provide the column(s) to create index (optional)
 
 * ### About tab ###
 
-   ![UT – Load CAS with VarChar](img/UT_Load_CAS_with_VarChar_tabAbout.png)
+   ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabAbout.png)
 
 ## Requirements
 
@@ -36,7 +36,7 @@ Tested on Viya version Stable 2023.01, No specific Viya version requirements
 
 ## Usage
 
-![UT – Load CAS with VarChar](img/UT_Load_CAS_with_VarChar_demo.gif)
+![UT – Load CAS with VarChar](img/Load_with_VarChar_demo.gif)
 
 ## Change Log
 
