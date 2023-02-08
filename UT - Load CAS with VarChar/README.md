@@ -18,7 +18,7 @@ Ver 1.0 (07Feb2023)
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_standalone_mode.png) | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_low_mode.png) |
+   | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_standalone_mode.png) | ![UT – Load CAS with VarChar](img/Load_with_VarChar_tabOptions_flow_mode.png) |
 
 Compress - No to not compress the table, Yes otherwise
 Promote  - No to not promote the table, Yes otherwise
