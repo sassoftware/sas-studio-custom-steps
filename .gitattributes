@@ -1,5 +1,13 @@
-# Apply override to all files in the directory so these files are not used to generate language metrics
+# Override default language statistics for this repository. 
+# See https://github.com/github/linguist/blob/master/docs/overrides.md
+
+# Use linguistic-documentation to specifiy paths that contain doc and are therefore exluced from lanugate statistics
 docs/* linguist-documentation
 
-# Define files with .step extension as SAS and have them included in stats
-*.step linguistic-language=SAS linguist-detectable
+# Define files with .step extension as SAS 
+#   - According to https://github.com/github/linguist/blob/master/docs/overrides.md, language names are case-insensitive
+#   - SAS is a known language, as it is listed in https://github.com/github/linguist/blob/master/lib/linguist/languages.yml 
+# Try 1:
+# *.step linguistic-language=SAS linguist-detectable
+# Try 2:
+*.step linguistic-language=SAS
