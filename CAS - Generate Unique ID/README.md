@@ -2,9 +2,9 @@
 
 This custom step generates a new column containing a unique identifier (ID) per observation for a given input CAS table.
 
-Since Cloud Analytics Services (CAS) processes across multiple threads, the conventional method of using the \_n\_  automatic variable (as used in SAS Compute) does not ensure uniqueness. 
+Since Cloud Analytics Services (CAS) processes across multiple threads, the conventional method of using the \_N\_  automatic variable (as used in SAS Compute) does not ensure uniqueness. 
 
-There exists both a [workaround](https://communities.sas.com/t5/SAS-Communities-Library/Creating-a-unique-ID-with-CAS-DATA-Step/ta-p/644592) (concatenating the thread id with the \_n\_ variable) and a CAS action (included in all Viya offerings) to create a unique ID column.  This custom step makes use of the CAS action ([textmanagement.generateIds](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/n0qdvvymlj69d7n18dfvh6ipjn2k.htm#p1rs825m6ue07wn1tusdtru2vrc5)) to generate a unique ID.
+There exists both a [workaround](https://communities.sas.com/t5/SAS-Communities-Library/Creating-a-unique-ID-with-CAS-DATA-Step/ta-p/644592) (concatenating the thread id with the \_N\_ variable) and a CAS action (included in all Viya offerings) to create a unique ID column.  This custom step makes use of the CAS action ([textmanagement.generateIds](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/n0qdvvymlj69d7n18dfvh6ipjn2k.htm#p1rs825m6ue07wn1tusdtru2vrc5)) to generate a unique ID.
 
 **Here's a general idea of how this custom step works (the below is an animated GIF)**
 
@@ -40,4 +40,5 @@ Note that all columns are copied over to the output table.
 
 ## Change Log
 Version : 1.1.   (07FEB2023)
+
 Version : 1.0.   (02FEB2023)   - Unpublished on GitHub; copyVars option
