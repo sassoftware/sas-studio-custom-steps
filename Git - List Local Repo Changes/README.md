@@ -21,7 +21,7 @@ Tested in Viya 4, Stable 2022.11
 
 1. A SAS Viya 4 environment (monthly release 2022.11 or later) with SAS Studio Flows.
 
-2. **Optional: a connection to CAS:** If you choose to use the "Promote to CAS" option, this custom step requires Cloud Analytics Services. Ensure you have access to a CAS server so that the custom step can run successfully.
+2. **Optional: a connection to CAS:** If you choose to use the "Promote to CAS" option, this custom step requires Cloud Analytics Services. Ensure you have access to a CAS server, and have permission to write to the shared Public caslib, so that the custom step can run successfully.
 
 ## User Interface
 
@@ -33,7 +33,7 @@ Tested in Viya 4, Stable 2022.11
 
 1. Local repository folder: This should be a folder on your filesystem.  Ensure that this is a Git folder, i.e., it was originally cloned from a Git repository.
 
-2. (Optional) Promote table to Cloud Analytics Services : if checked, this will lead to the output table getting loaded to a CAS (in-memory) table, therefore making it convenient to be viewed in Visual Analytics.  This means that you require the CAS server to be operational (and accessible) at the time of running this custom step.
+2. (Optional) Promote table to Cloud Analytics Services : if checked, this will lead to the output table getting loaded to a CAS (in-memory) table, therefore making it convenient to be viewed in Visual Analytics.  This means that you require the CAS server to be operational (and the Public caslib accessible) at the time of running this custom step.
 
 #### Output ports / tables
 
