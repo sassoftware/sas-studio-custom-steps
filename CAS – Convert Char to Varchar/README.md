@@ -26,7 +26,7 @@ This step creates a copy of a table, and if the table has char variables with a 
 * (Optional) Select columns to use for index - Provide the column(s) to create index
 
 
-* ### About tab ###
+## About tab 
 
    ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabAbout.png)
 
