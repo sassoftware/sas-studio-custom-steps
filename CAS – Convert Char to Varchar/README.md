@@ -23,7 +23,7 @@ Compress - No to not compress the table, Yes otherwise
 
 Promote  - No to not promote the table, Yes otherwise
 
-Index    - Provide the column(s) to create index (optional)
+(Optional) Select columns to use for index - Provide the column(s) to create index
 
 
 * ### About tab ###
