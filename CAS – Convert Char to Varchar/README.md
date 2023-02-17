@@ -13,7 +13,7 @@ This step creates a copy of a table, and if the table has char variables with a 
 
 <mark>Note that this Custom Step is intended to output Cloud Analytics Services (CAS) tables. Ensure you have a connection to CAS established before running this step. References to output table names and locations below should be interpreted as referring to CAS Tables and caslibs. </mark>
 
-### Options tab ###
+* ### Options tab ###
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
@@ -26,7 +26,7 @@ This step creates a copy of a table, and if the table has char variables with a 
 * (Optional) Select columns to use for index - Provide the column(s) to create index
 
 
-### About tab 
+* ### About tab 
 
    ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabAbout.png)
 
