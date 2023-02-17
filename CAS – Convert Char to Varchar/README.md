@@ -3,9 +3,9 @@
 ## Description
 
 This step creates a copy of a table, and if the table has char variables with a length greater than 16, those variables are converted to varchar.
-o	The user can specify that the output table should be compressed and/or promoted
-o	The user can specify which columns of the output table should be indexed 
-o	Existing output tables will be overwritten
+*	The user can specify that the output table should be compressed and/or promoted
+*	The user can specify which columns of the output table should be indexed 
+*	Existing output tables will be overwritten
    
 
 
@@ -19,11 +19,11 @@ o	Existing output tables will be overwritten
    | --- | --- |                  
    | ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_standalone_mode.png) | ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_flow_mode.png) |
 
-Compress - No to not compress the table, Yes otherwise
+* Compress - No to not compress the table, Yes otherwise
 
-Promote  - No to not promote the table, Yes otherwise
+* Promote  - No to not promote the table, Yes otherwise
 
-(Optional) Select columns to use for index - Provide the column(s) to create index
+* (Optional) Select columns to use for index - Provide the column(s) to create index
 
 
 * ### About tab ###
