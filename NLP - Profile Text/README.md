@@ -1,4 +1,4 @@
-# Profile Text
+# Natural Language Processing (NLP) - Profile Text
 
 ## Description
 Natural Language Processing (NLP) requires a thorough understanding of the underlying document corpus in order to be effective and aid downstream analysis.  This folder contains a SAS Studio Custom Step which helps you profile text within a document corpus and understand its linguistic structure.  This helps you identify outliers, determine data pre-processing and makes you more productive in your analysis.  
