@@ -20,8 +20,8 @@ Please go through this section to note the [Requirements for all steps](#require
 
 1. [Git - Clone Git Repo](./README.md)
 2. [Git - Delete Local Repo](../Git%20-%20Delete%20Local%20Repo/README.md)
-3. [Git - List Local Repo Changes](../https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Git%20-%20List%20Local%20Repo%20Changes)
-4. [Git - Stage, Commit, Pull and Push Changes](../https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Git%20-%20Stage%2C%20Commit%2C%20Pull%20and%20Push%20Changes)
+3. [Git - List Local Repo Changes](../Git%20-%20List%20Local%20Repo%20Changes)
+4. [Git - Stage, Commit, Pull and Push Changes](../Git%20-%20Stage%2C%20Commit%2C%20Pull%20and%20Push%20Changes)
 
 ## Which Git repositories are we talking about?
 
