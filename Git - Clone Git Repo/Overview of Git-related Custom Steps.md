@@ -43,5 +43,10 @@ These Custom Steps can connect to and pull code from public and restricted acces
 3. [Configuration Properties for Git Integration](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/webeditorcdc/webeditorag/p1a2vn20wzwkumn1freonkz81mx5.htm)
 
 ## Change Log
-Version : 1.0.   (25JAN2023)
+* Version 1.1 (07MAR2023)
+   - Changed doc URLs that were using .../v_xxx/... to using .../default/... so they resolve to the latest release of production documentation
+   - Enhanced the list of custom steps to contain links to newly added Git-related custom steps
+   
+* Version  1.0 (25JAN2023)
+    - Initial version
 
