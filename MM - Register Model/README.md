@@ -49,7 +49,7 @@ The **MM - Register Model** step allows user to register an analytic store model
 ---
 ## Requirements
 
-This custom step requires a project has been already existed in SAS Model Manager. More details can be found in the documentation that is available [here](https://go.documentation.sas.com/doc/en/mdlmgrcdc/v_028/mdlmgrug/n0fokwp1r4ubmkn1hge4zndlhgna.htm). 
+This custom step requires a project has been already existed in SAS Model Manager. More details can be found in the documentation that is available [here](https://go.documentation.sas.com/doc/en/mdlmgrcdc/default/mdlmgrug/n0fokwp1r4ubmkn1hge4zndlhgna.htm). 
 Tested on release 2023.02. 
 
 ---
