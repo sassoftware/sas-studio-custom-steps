@@ -55,7 +55,7 @@ Note that this custom step runs on data loaded in SAS Cloud Analytics Services (
 
 
 ## Installation & Usage
-1. Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
+- Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
 ## Created / contact : 
 
