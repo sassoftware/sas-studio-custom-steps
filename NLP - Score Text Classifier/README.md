@@ -2,11 +2,11 @@
 
 This custom step enables you to score a text corpus with a text classifier model trained using the deep learning (BERT-based) textClassifier.trainTextClassifier action. 
 
-It uses the recently introduced Visual Text Analytics (VTA) CAS action, textClassifier.scoreTextClassifier.  This augments SAS approaches for Natural Language Processing-based classification models (in addition to rules-based classification). More details in the documentation (link provided below).
+It uses the recently introduced SAS Visual Text Analytics (VTA) CAS action, textClassifier.scoreTextClassifier.  This augments SAS approaches for Natural Language Processing-based classification models (in addition to rules-based classification). More details in the documentation (link provided below).
 
 Use this to classify customer reviews as per a star rating, carry out sentiment analysis, prioritize customer complaints, identify serious adverse events, and many other classification use-cases.
 
-Use of this custom step requires a Visual Text Analytics (VTA) license.
+Use of this custom step requires a SAS Visual Text Analytics (VTA) license.
 
 ## Screenshot
 
@@ -19,7 +19,7 @@ Tested in Viya 4, Stable 2023.02, with a GPU.
 
 1. A SAS Viya 4 environment (monthly release 2023.02 or later) with SAS Studio Flows.
 
-2. **At runtime: an active connection to CAS:** This custom step requires Cloud Analytics Services. Ensure you have an active CAS connection available prior to running the same.
+2. **At runtime: an active connection to CAS:** This custom step requires SAS Cloud Analytics Services (CAS). Ensure you have an active CAS connection available prior to running the same.
 
 3. A SAS Visual Text Analytics (VTA) license.
 
@@ -29,7 +29,7 @@ Tested in Viya 4, Stable 2023.02, with a GPU.
 
 ### Parameters:
 
-Note that this custom step runs on data loaded in Cloud Analytics Services (CAS). Ensure you are connected to CAS before running this step.
+Note that this custom step runs on data loaded in SAS Cloud Analytics Services (CAS). Ensure you are connected to CAS before running this step.
 
 #### Input parameters:
 
@@ -51,11 +51,11 @@ Note that this custom step runs on data loaded in Cloud Analytics Services (CAS)
 
 #### Output table specifications:
 
-1. Output port: connect an output CAS table to contain the scored output.
+- Output port: connect an output CAS table to contain the scored output.
 
 ## Documentation:
 
-1. The [textClassifier.scoreTextClassifier CAS action](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/cas-textclassifier-scoretextclassifier.htm)
+- The [textClassifier.scoreTextClassifier CAS action](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casvtapg/cas-textclassifier-scoretextclassifier.htm)
 
 
 ## Installation & Usage
