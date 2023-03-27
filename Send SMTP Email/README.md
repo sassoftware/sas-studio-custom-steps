@@ -52,6 +52,6 @@ For more information, please refer to [this article](https://communities.sas.com
 
 ## Change Log
 
-* Version 1.0 (17OVC2022)
+* Version 1.0 (17OCT2022)
     * Initial version
 
