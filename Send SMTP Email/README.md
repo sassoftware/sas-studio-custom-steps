@@ -4,7 +4,7 @@
 
 The "**Send SMTP Email**" Custom Step enables SAS Studio users to send an email message.  It also allows for the setting of the message's importance, text color, and request a read receipt.
 
-For more information, please refer to [this article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Send-Email-Custom-Step-Featuring-the-Color-Picker/ta-p/839499?emcs_t=S2h8ZW1haWx8cG1fbm90aWZpY2F0aW9ufExGS1BBVE9LVVlMMDUxfC0xfFBSSVZBVEVfTUVTU0FHRVN8aEs).
+For more information, please refer to [this article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Send-Email-Custom-Step-Featuring-the-Color-Picker/ta-p/839499).
 
 ## User Interface
 
@@ -42,6 +42,8 @@ For more information, please refer to [this article](https://communities.sas.com
 * Email body
 * Email importance - default is *Normal*
 
+Refer to the SAS Viya documentation for more details about configuring an SMTP Email server: https://go.documentation.sas.com/doc/en/pgmsascdc/default/lepg/n1w4ntt16ty6gvn17e68ggvhspwm.htm
+
 <br>
 
 ## Usage
@@ -54,4 +56,3 @@ For more information, please refer to [this article](https://communities.sas.com
 
 * Version 1.0 (17OCT2022)
     * Initial version
-
