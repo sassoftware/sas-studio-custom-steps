@@ -14,6 +14,8 @@ Parse definitions are useful when you want to break data strings into substrings
   * This version supports the following locales: ENUSA, ENGBR, FRFRA, DEDEU, ITITA and ESESP
   * For information about parsing tokens search the QKB documentation for “Definitions by Locale/Parse Definitions”: [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/documentation/onlinedoc/qkb/32/QKBCI32/Help/qkb-help.html)
 
+<a href="https://www.markdownguide.org" target="_blank">Learn Markdown!</a>
+
 ## User Interface  
 
 * ### Parsing Options tab ###
