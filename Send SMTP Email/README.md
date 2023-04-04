@@ -54,5 +54,7 @@ Refer to the SAS Viya documentation for more details about configuring an SMTP E
 
 ## Change Log
 
+* Version 2.0 (03APR2023)
+    * Updated code to clear emailBody_count macro
 * Version 1.0 (17OCT2022)
     * Initial version
