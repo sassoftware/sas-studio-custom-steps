@@ -57,7 +57,7 @@ Note that this custom step runs on data loaded in SAS Cloud Analytics Services (
 - Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
 ### Sample Data
-In case you would like to test this step with some sample data, run this code prior to the custom step.  This example is adapted from the one provided in the documentation link above, with some additional columns to help you experience the full range of functionality provided by this step.
+In case you would like to test this step with some sample data, run this code prior to the custom step.  This example is adapted from the one provided in the documentation link above, with an additional column added to help you experience the full range of functionality provided by this step.
 
 ```sas
 
