@@ -56,6 +56,38 @@ Note that this custom step runs on data loaded in SAS Cloud Analytics Services (
 ## Installation & Usage
 - Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
+### Sample Data
+In case you would like to test this step with some sample data, run this code prior to the custom step.  This example is adapted from the one provided in the documentation link above, with some additional columns to help you experience the full range of functionality provided by this step.
+
+```sas
+
+/* Connect to CAS, if not done already */
+
+cas my_cas_session;
+
+/* 'PUBLIC' refers to the libref for the shared PUBLIC caslib, which is automatically assigned when the next line is run */
+
+caslib _ALL_ assign;
+
+/* This generates a small sample CAS table which you can use as the input table for the custom step */
+
+data PUBLIC.apply_sent_text;                           
+   length text $200  additional_field $100 ;
+   infile datalines delimiter='|' missover;
+   input docid text$ additional_field $;
+   datalines;     
+     1| Somewhere over the rainbow.| Carry me over.        
+     2| Perfectly good camera for the average user! | Not completely useless.
+     3| This is a great camera. | Carry me over.
+     4| Very bad experience with Nikon S200. | Useful for something.
+   ;
+run;
+
+```
+
+If you'd prefer more sample data, feel free to add additional lines, with | as the delimiter between fields.  A gentle (and not very serious) suggestion, in case you are looking for a way to generate additional data, would be to use an external tool called [ChatGPT](http://chat.openai.com) (use at your own discretion) to generate random sentences with positive sentiment :).  
+
+
 ## Created / contact : 
 
 - Sundaresh Sankaran (sundaresh.sankaran@sas.com)
