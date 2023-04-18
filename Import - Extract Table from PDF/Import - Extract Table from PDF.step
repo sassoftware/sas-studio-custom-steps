@@ -1,0 +1,85 @@
+{
+    "creationTimeStamp": "2023-04-10T20:04:56.746Z", 
+    "modifiedTimeStamp": "2023-04-11T14:43:25.805Z", 
+    "createdBy": "Sundaresh.Sankaran@sas.com", 
+    "modifiedBy": "Sundaresh.Sankaran@sas.com", 
+    "name": "Import - Extract Table from PDF.step", 
+    "displayName": "Import - Extract Table from PDF.step", 
+    "localDisplayName": "Import - Extract Table from PDF.step", 
+    "properties": {}, 
+    "links": [
+        {
+            "method": "GET"                                                  , 
+            "rel"   : "self"                                                 , 
+            "href"  : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri"   : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "type"  : "application/vnd.sas.data.flow.step"                     
+        }, 
+        {
+            "method": "GET"                                                  , 
+            "rel"   : "alternate"                                            , 
+            "href"  : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri"   : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "type"  : "application/vnd.sas.data.flow.step.summary"             
+        }, 
+        {
+            "method"  : "GET"                                       , 
+            "rel"     : "up"                                        , 
+            "href"    : "/dataFlows/steps"                          , 
+            "uri"     : "/dataFlows/steps"                          , 
+            "type"    : "application/vnd.sas.collection"            , 
+            "itemType": "application/vnd.sas.data.flow.step.summary"  
+        }, 
+        {
+            "method": "PUT", 
+            "rel": "update", 
+            "href": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "type": "application/vnd.sas.data.flow.step", 
+            "responseType": "application/vnd.sas.data.flow.step"
+        }, 
+        {
+            "method": "DELETE"                                               , 
+            "rel"   : "delete"                                               , 
+            "href"  : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri"   : "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4"  
+        }, 
+        {
+            "method": "GET", 
+            "rel": "transferExport", 
+            "href": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "responseType": "application/vnd.sas.transfer.object"
+        }, 
+        {
+            "method": "PUT", 
+            "rel": "transferImportUpdate", 
+            "href": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "uri": "/dataFlows/steps/b39b886f-4c29-438f-902d-11760b44cbf4", 
+            "type": "application/vnd.sas.transfer.object", 
+            "responseType": "application/vnd.sas.summary"
+        }
+    ], 
+    "metadataVersion": 0.0, 
+    "version": 2, 
+    "type": "code", 
+    "flowMetadata": {
+        "inputPorts": [], 
+        "outputPorts": [
+            {
+                "name": "outputtable1", 
+                "displayName": "outputtable1", 
+                "localDisplayName": "outputtable1", 
+                "minEntries": 1, 
+                "maxEntries": 1, 
+                "type": "table", 
+                "supportsView": false, 
+                "requiresStructure": false
+            }
+        ]
+    }, 
+    "ui": "{\n\t\"showPageContentOnly\": true,\n\t\"pages\": [\n\t\t{\n\t\t\t\"id\": \"param\",\n\t\t\t\"type\": \"page\",\n\t\t\t\"label\": \"Parameters\",\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"inputSpec\",\n\t\t\t\t\t\"type\": \"section\",\n\t\t\t\t\t\"label\": \"Input file specifications\",\n\t\t\t\t\t\"open\": true,\n\t\t\t\t\t\"visible\": \"\",\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"fileName\",\n\t\t\t\t\t\t\t\"type\": \"path\",\n\t\t\t\t\t\t\t\"label\": \"Select a PDF:\",\n\t\t\t\t\t\t\t\"pathtype\": \"file\",\n\t\t\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\t\t\"required\": false,\n\t\t\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"pageNumber\",\n\t\t\t\t\t\t\t\"type\": \"numberfield\",\n\t\t\t\t\t\t\t\"label\": \"Page number:\",\n\t\t\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\t\t\"required\": false,\n\t\t\t\t\t\t\t\"max\": null,\n\t\t\t\t\t\t\t\"min\": null,\n\t\t\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"tableNumber\",\n\t\t\t\t\t\t\t\"type\": \"numberfield\",\n\t\t\t\t\t\t\t\"label\": \"Table number:\",\n\t\t\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\t\t\"required\": false,\n\t\t\t\t\t\t\t\"max\": null,\n\t\t\t\t\t\t\t\"min\": null,\n\t\t\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"outputtable1\",\n\t\t\t\t\t\"type\": \"outputtable\",\n\t\t\t\t\t\"label\": \"Output table:\",\n\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"id\": \"about\",\n\t\t\t\"type\": \"page\",\n\t\t\t\"label\": \"About\",\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"aboutText\",\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": \"Import - Extract Table from PDF\\n\\nThis custom step enables you to extract tabular data from within a PDF document and load the same to a SAS dataset.\\n\\nA Python package, tabula-py, is a pre-requisite for running this step. In addition, use of this custom step requires that SAS Studio is configured to run Python code.\\n\\nThis custom step enables use-cases requiring Import from text (unstructured) sources into SAS for downstream analysis. For example, PDFs relating to scientific research often contain a mix of text and tabular information, and such tabular information needs to retain its structure in order to be useful.\\n\\n\\nPre-requisities:\\n\\n1. Configure SAS Studio to run Python. This is usually carried out by a SAS administrator.  Documentation link #1 (below) provides some information to get started.\\n\\n2. Install the tabula-py Python package.  Visit https://pypi.org/project/tabula-py/ for details.  The tabula-py package uses the tabula-java library (https://github.com/tabulapdf/tabula-java) under the covers, which requires a Java runtime to be installed and available to the environment.  This may not be an issue as SAS compute servers have Java installed.\\n\\nHint : You may like to use the Python -  Virtual Environments folder within the SAS Studio Custom Steps GitHub repository to create a virtual environment with tabula-py installed. Refer https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Python%20Virtual%20environments/README.md.\\n \\n\\nParameters:\\n\\nNote : In this initial version, we require that users specify the desired table and page number.  Future versions shall look to incorporate more features enabling automation and convenience.  Also note that the quality of output is dictated completely by the capabilties of tabula-py, the Python package used within this custom step.\\n\\nInput parameters:\\n\\n1. Input file (file selector required): select a PDF file which is location on the filesystem.\\n\\n2. Page number (numeric field): select a page on which your desired table is located.\\n\\n3. Table number (numeric field): provide a number (starting from 1) indicating the table you want to extract.  For example, 1 extracts the first table on the specified page, 2 extracts the second and so on.\\n\\nOutput table specifications:\\n\\n- Output table (output port, required): connect an output SAS dataset  to contain the extracted table. \\n\\n\\nDocumentation:\\n\\n1. Configuring SAS Viya for Python Integration: https://communities.sas.com/t5/SAS-Communities-Library/Configuring-SAS-Viya-for-Python-Integration/ta-p/847459\\n\\n2. PyPi page for tabula-py: https://pypi.org/project/tabula-py/\\n\\n3. Tabula-py documentation: https://tabula-py.readthedocs.io/en/latest/\\n\\n4. Tabula-py GitHub project: https://github.com/chezou/tabula-py\\n\\nCreated / contact : \\n\\n1. Sundaresh Sankaran (sundaresh.sankaran@sas.com)\\n\\n2. Dragos Coles (dragos.coles@sas.com)\\n\\nVersion : 1.0.   (10APR2023)\",\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"syntaxversion\": \"1.3.0\",\n\t\"values\": {\n\t\t\"fileName\": \"\",\n\t\t\"pageNumber\": 1,\n\t\t\"tableNumber\": 1,\n\t\t\"outputtable1\": {\n\t\t\t\"library\": \"\",\n\t\t\t\"table\": \"\"\n\t\t}\n\t}\n}", 
+    "templates": {
+        "SAS": "/* SAS templated code goes here */\n\n/*-----------------------------------------------------------------------------------------*\n   This block of code checks whether the user has selected a PDF from within the filesystem,\n   and not from SAS Content. The name of the file is obtained and stored inside a macro \n   variable.\n*------------------------------------------------------------------------------------------*/\n\n%let fileType=%scan(\"&fileName.\",1,\":\");\n\n%if \"&fileType.\"=\"sasserver\" %then %do;\n   data _null_;\n      call symput(\"fileNamePDF\",scan(\"&fileName.\",2,\":\",\"MO\"));\n   run;\n%end;\n%else %do;\n   %put ERROR:Select a PDF file from the filesystem.;\n   data _null_;\n      abort exit 4321;\n   run;\n%end;\n\n\n/*-----------------------------------------------------------------------------------------*\n   The following section contains Python code run within a proc python SAS procedure. For\n   ease of readability, comments are not provided within the proc python submit- endsubmit \n   block.  \n   \n   In this section, values are extracted from the UI and used to call the read_pdf function \n   of tabula_py.  Arguments provided to the function include the file name, the page number,\n   and the table number (counter).\n\n   Upon extraction, the result (which is a pandas dataframe) is written to a specified SAS \n   output dataset using the inbuilt SAS method.\n\n*------------------------------------------------------------------------------------------*/\n\nproc python;\nsubmit;\n\nfileNamePDF=SAS.symget(\"fileNamePDF\")\npageNumber=SAS.symget(\"pageNumber\")\ntableNumber=SAS.symget(\"tableNumber\")\noutputtable1=SAS.symget(\"outputtable1\")\n\n\nprint(\"Page number : {}\".format(pageNumber))\nprint(\"Table number : {}\".format(tableNumber))\nprint(\"Output table : {}\".format(outputtable1))\n\n\nimport tabula\n\ntable = tabula.read_pdf(fileNamePDF,pages=int(pageNumber))\n\nnew_df=table[int(tableNumber)-1]\n\nndf=SAS.df2sd(new_df,dataset=outputtable1)\n\nprint(\"PDF table {} from page {} has been extracted and saved in {}\".format(tableNumber,pageNumber,outputtable1))\n\nendsubmit;\nquit;\n\n"
+    }
+}
