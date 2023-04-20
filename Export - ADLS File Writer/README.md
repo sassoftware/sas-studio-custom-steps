@@ -43,7 +43,7 @@ This customs step depends on having a python environment configured with the fol
 > - saspy
 > - azure-identity
 > - pyarrow
-> - pyarrowfs-adlgen2
+> - adlfs
 
 Tested on Viya version Stable 2023.03 with python environment version 3.8.13 and the libraries versions:
 > - pandas == 1.5.2
