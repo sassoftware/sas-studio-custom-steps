@@ -50,7 +50,7 @@ Tested on Viya version Stable 2023.03 with python environment version 3.8.13 and
 > - saspy == 4.3.3
 > - azure-identity == 1.12.0
 > - pyarrow == 10.0.1
-> - pyarrowfs-adlgen2 == 0.2.3
+> - adlfs == 2023.1.0
 
 ## Usage
 
