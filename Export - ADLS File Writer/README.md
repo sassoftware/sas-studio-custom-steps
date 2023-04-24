@@ -17,8 +17,6 @@ This custom step helps to work around some of the restrictions that currently ex
  - [Azure Data Lake Storage Data Source](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casref/n1ogaeli0qbctqn1e3fx8gz70lkq.htm) (SAS Cloud Analytic Services)
  - [Path-Based Data Source Types and Options](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casref/n0kizq68ojk7vzn1fh3c9eg3jl33.htm#n0cxk3edba75w8n1arx3n0dxtdrt) – which has a footnote for Parquet (SAS Cloud Analytic Services)
 
-Version 1.0 (APR 20th 2023)
-
 ## User Interface
 
 * ### Connection settings tab ###
@@ -59,5 +57,5 @@ Tested on Viya version Stable 2023.03 with python environment version 3.8.13 and
 
 ## Change Log
 
-* Version 1.0 (APR2023)
+* Version 1.0 (20APR2023)
     * Initial version
