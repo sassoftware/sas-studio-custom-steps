@@ -51,6 +51,7 @@ Also note that quality of output is dictated completely by the capabilties of ta
 2. All identified tabular structures (output port, connecting a table is optional) : connect an output SAS dataset to this port in order to capture a list of all possible table structures that tabula-py was able to capture from the PDF.  You can use this as reference in case you were unsure about the table number, and rerun the custom step after identifying an appropriate table number.
 
 Important:  You might notice an error stating "Got stderr: Picked up _JAVA_OPTIONS: -Djava.awt.headless=true" in the log.  You can safely ignore the same, as this is due to a Java option which is not relevant to the environment under which this custom step is run.
+
 Important: Your mileage might vary with the tabula-py package, but we’ve successfully tested with various PDFs.
 
 
