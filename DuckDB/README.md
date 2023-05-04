@@ -11,4 +11,8 @@ In this version following data sources are supported:
 The step supports SQL as explained in the [DuckDB documentation](https://duckdb.org/docs/sql/introduction).
 
 ## User Interface
-### SQL Tab
+* ### SQL tab ###
+
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/DuckDB-SQL-SA.jpg) | ![](img/DuckDB-SQL-FL.jpg) |
