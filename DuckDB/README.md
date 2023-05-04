@@ -9,3 +9,6 @@ In this version following data sources are supported:
 -	Postgres
 
 The step supports SQL as explained in the [DuckDB documentation](https://duckdb.org/docs/sql/introduction).
+
+## User Interface
+### SQL Tab
