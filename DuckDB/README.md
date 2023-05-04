@@ -16,3 +16,4 @@ The step supports SQL as explained in the [DuckDB documentation](https://duckdb.
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/DuckDB-SQL-SA.jpg) | ![](img/DuckDB-SQL-FL.jpg) |
+   
