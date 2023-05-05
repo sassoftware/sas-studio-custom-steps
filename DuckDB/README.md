@@ -19,6 +19,8 @@ In this version the following data sources are supported:
 
 For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction).
 
+---
+
 ## User Interface
 There are 5 tab on the user interface for the custom step:
 1. [SQL tab](#sql-tab-)
