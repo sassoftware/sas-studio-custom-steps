@@ -10,11 +10,14 @@ In this version the following data sources are supported:
 
 ---
 
-- You can use the step either as a start step or in the middle of a flow. When use in the middle of a flow, you can reference the input table in a SQL statement as *_flow_table*.<br>For example: `SELECT * FROM _flow_table`
-- You can build SQL statement referencing tables from different data stores like Parquet, CSV, etc. <br>For example: `SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number`
+- You can use the step either as a start step or in the middle of a flow. When used in the middle of a flow, you can reference the input table in a SQL statement as *_flow_table*.<br>For example: `SELECT * FROM _flow_table`
+- You can build SQL statements referencing tables from different data stores like Parquet, CSV, etc. <br>For example: `SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number`
 
+<p align="center">
+   <img src="img/DuckDB-inflow.jpg" alt= “” width="464" height="372">
+</p>
 
-The step supports SQL as explained in the [DuckDB documentation](https://duckdb.org/docs/sql/introduction).
+For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction).
 
 ## User Interface
 There are 5 tab on the user interface for the custom step:
@@ -33,7 +36,7 @@ In the tab SQL you can submit one or more SQL statements.
    | UI Field | Comment |
    | --- | --- |
    | Ignore file options | When ticked:<br> - All options set in tab *Parquet* and *CSV* will be ignored.<br> - SQL will be sent *as is* to DuckDB.<br> - You can use SQL with DuckDB functions. E.g.:<br>```SELECT * FROM read_parquet('test.parq');``` |
-   | SQL statement | Field for SQL statement.<br>For allowed SQL syntax see [DuckDB documentation](https://duckdb.org/docs/sql/introduction)<br>You can submit several SQL statements in this field.<br>SQL statements need to delimited with a semicolon (;) when submitting more than one statement.<br>Example - Load table into DuckDB:<br>`CREATE SCHEMA IF NOT EXISTS asd;`<br>`CREATE TABLE taxi as (`<br>`SELECT * FROM mytaxidata.csv);`|
+   | SQL statement | Field for SQL statement.<br>For allowed SQL syntax see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction)<br>You can submit several SQL statements in this field.<br>SQL statements need to delimited with a semicolon (;) when submitting more than one statement.<br>Example - Load table into DuckDB:<br>`CREATE SCHEMA IF NOT EXISTS asd;`<br>`CREATE TABLE taxi as (`<br>`SELECT * FROM mytaxidata.csv);`|
    
 * ### DuckDb Optios tab <a name="duckdb-options-tab-"></a>
 This tab is to set general options for DuckDB.
