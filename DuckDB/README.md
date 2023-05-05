@@ -119,3 +119,15 @@ When connected with Postgres, DuckDb will create views for all tables in the Pos
 | Postgres database | The Postgres database name to connect to. |
 | Postgres schema | The Postgres database schema to connect to. |
 | DuckDB Schema | The database schema in DuckDB where the views for the Postgres tables are written to. If the schema name does not exist it will be created.
+
+## Requirements  
+2023.01 or later  
+* Python needs to be installed and configured to work with SAS Studio.
+* The Python package for DuckDB to be installed `pip install duckdb`
+
+## Usage  
+
+## Change Log  
+Version 1.0 (15MAR2023)
+ * Initial version 
+
