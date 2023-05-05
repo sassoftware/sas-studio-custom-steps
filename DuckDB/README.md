@@ -2,11 +2,17 @@
 
 ## Description
 
-The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database namagemenr system, to access data.
-In this version following data sources are supported:
--	Parquet
--	CSV files
--	Postgres
+The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data.
+In this version the following data sources are supported:
+-	[Parquet](#parquet-tab-)
+-	[CSV files](#csv-tab-)
+-	[Postgres](#postgres-tab-)
+
+---
+
+- You can use the step either as a start step or in the middle of a flow. When use in the middle of a flow, you can reference the input table in a SQL statement as *_flow_table*.<br>For example: `SELECT * FROM _flow_table`
+- You can build SQL statement referencing tables from different data stores like Parquet, CSV, etc. <br>For example: `SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number`
+
 
 The step supports SQL as explained in the [DuckDB documentation](https://duckdb.org/docs/sql/introduction).
 
