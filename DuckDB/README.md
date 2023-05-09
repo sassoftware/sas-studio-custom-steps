@@ -29,6 +29,8 @@ There are 5 tab on the user interface for the custom step:
 4. [CSV tab](#csv-tab-)
 5. [Postgres tab](#postgres-tab-)
 
+---
+
 * ### SQL tab <a name="sql-tab-"></a>
 In the tab SQL you can submit one or more SQL statements.
    | Standalone mode | Flow mode |
@@ -39,7 +41,9 @@ In the tab SQL you can submit one or more SQL statements.
    | --- | --- |
    | Ignore file options | When ticked:<br> - All options set in tab *Parquet* and *CSV* will be ignored.<br> - SQL will be sent *as is* to DuckDB.<br> - You can use SQL with DuckDB functions. E.g.:<br>```SELECT * FROM read_parquet('test.parq');``` |
    | SQL statement | Field for SQL statement.<br>For allowed SQL syntax see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction)<br>You can submit several SQL statements in this field.<br>SQL statements need to delimited with a semicolon (;) when submitting more than one statement.<br>Example - Load table into DuckDB:<br>`CREATE SCHEMA IF NOT EXISTS asd;`<br>`CREATE TABLE taxi as (`<br>`SELECT * FROM mytaxidata.csv);`|
-   
+
+---
+
 * ### DuckDb Optios tab <a name="duckdb-options-tab-"></a>
 This tab is to set general options for DuckDB.
    | DuckDB Options |
@@ -53,6 +57,8 @@ This tab is to set general options for DuckDB.
 |Set DuckDB folder and name | Set the folder and name for the database. The database has to reside on SAS Server. The database cannot reside in SAS Content. |
 | Configuration settings | Set DuckDB configuration settings. Each command must be delimited with a semicolon (;). For available parameters see [DuckDB documentation](https://duckdb.org/docs/sql/configuration)
 
+---
+
 * ### Parquet tab <a name="parquet-tab-"></a>
 This tab is to set parameters for reading Parquet files. The options in this tab will only take effect on selecting data from one Parquet file. The options will not take effect when joining tables.
 
@@ -65,6 +71,8 @@ This tab is to set parameters for reading Parquet files. The options in this tab
 | Add row number column | A column containing the row number will be added to the output table. | file_row_number |
 | Add file name column | A column containing the the Parquet file name will be added to the output table. | filename |
 | Union multiple files by column name instead of column position | You can read several files with the same file structure in one SQL statement. E.g.: SELECT * FROM yellow*.parquet. If this option is ticked DuckDB will union the files by column name. If the option is *not* ticked DuckDb will union the files by column position. | union_by_name |
+
+---
 
 * ### CSV tab <a name="parquet-tab-"></a>
 This tab is to set parameters for reading csv files. You can set *General settings* valid for all csv files or you can overwrite settings for  up to 5 names files.
