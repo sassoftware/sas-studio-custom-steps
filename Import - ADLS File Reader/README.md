@@ -53,7 +53,8 @@ Tested on Viya version Stable 2023.03 with python environment version 3.8.13 and
 ![](img/ADLS_File_Reader-Demo.gif)
 
 ## Change Log
-
+* Version 2.0.1 (25APR2023)
+    * Fixed issues related to reading non-partitioned parquet and deltalake files 
 * Version 2.0 (20APR2023) 
     * Added support for reading Delta Lake file format 
     * Removed pyarrowfs-adlgen2 python dependency 
