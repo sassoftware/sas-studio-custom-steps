@@ -21,4 +21,4 @@ In this example we join the flow input data PERSON with the Parquet data ADDRESS
 ## Example 3: Pass DuckDB data from one DuckDB step to the next.
 
 By default DuckDB will only write its data into memory and at the end of the custom step the data that was written into memory will get lost. However, you can write data to a DuckDB database file. For the custom step you have to do this if you want to pass DuckDB data (data that you have written to DuckDB) from one DuckDB custom step to the next.
-![Pass data from step to step](../img/DuckDB_join.gif)
+![Pass data from step to step](../img/DuckDB_persist.gif)
