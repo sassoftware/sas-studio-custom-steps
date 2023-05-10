@@ -136,6 +136,15 @@ When connected with Postgres, DuckDb will create views for all tables in the Pos
 * The Python package for DuckDB to be installed `pip install duckdb`
 
 ## Usage  
+When you have installed the custom step, test it to ensure it is working with your Python DuckDB.
+* Right mouse click on the step.
+* Choose "Open in a tab".
+* Set output table to WORK.duckout
+* Set SQL statement ```SELECT 42```.
+* Run step.
+<p align="center">
+   <img src="img/DuckDB-inflow.jpg" alt= “” width="464" height="372">
+</p>
 
 ## Change Log  
 Version 1.0 (15MAR2023)
