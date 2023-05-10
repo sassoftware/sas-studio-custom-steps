@@ -143,8 +143,14 @@ When you have installed the custom step, test it to ensure it is working with yo
 * Set SQL statement ```SELECT 42```.
 * Run step.
 <p align="center">
-   <img src="img/DuckDB-Test_success.jpg" alt= “” width="464" height="372">
+   <img src="img/DuckDB-Test_Success.jpg" alt= “” width="573" height="360">
 </p>
+
+If DuckDB is not installed or Python cannot find it you will receive an error: "Unhandled Python exception. No module named 'duckdb'" 
+<p align="center">
+   <img src="img/DuckDB-Test_Failed.jpg" alt= “” width="573" height="360">
+</p>
+
 
 ## Change Log  
 Version 1.0 (15MAR2023)
