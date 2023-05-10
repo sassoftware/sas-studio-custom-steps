@@ -143,7 +143,7 @@ When you have installed the custom step, test it to ensure it is working with yo
 * Set SQL statement ```SELECT 42```.
 * Run step.
 <p align="center">
-   <img src="img/DuckDB-inflow.jpg" alt= “” width="464" height="372">
+   <img src="img/DuckDB-Test_success.jpg" alt= “” width="464" height="372">
 </p>
 
 ## Change Log  
