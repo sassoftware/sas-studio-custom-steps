@@ -83,5 +83,8 @@ The rule configuration tables listed in the output are named as per a pattern : 
 
 ## Change Log
 
-Version : 1.0.   (02MAY2023) - Initial Step Creation
-Version : 1.1.   (12JUN2023) - Additional documentation, code cleanup; latest version
+Version : 1.0.   (02MAY2023) 
+* Initial Step Creation
+
+Version : 1.1.   (12JUN2023) 
+* Additional documentation, code cleanup; latest version
