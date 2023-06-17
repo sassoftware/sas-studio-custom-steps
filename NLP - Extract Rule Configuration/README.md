@@ -71,7 +71,7 @@ The rule configuration tables listed in the output are named as per a pattern : 
 
 ## Documentation:
 
-- The table.caslibInfo CAS action : https://go.documentation.sas.com/doc/en/pgmsascdc/v_038/caspg/cas-table-caslibinfo.htm is used for purposes of listing out the tables within a SAS Model Studio's project caslib.  Typical users may find it difficult to access information in the project caslib through the interface, therefore raising need for this custom step.
+- The table.caslibInfo CAS action : https://go.documentation.sas.com/doc/en/pgmsascdc/default/caspg/cas-table-caslibinfo.htm is used for purposes of listing out the tables within a SAS Model Studio's project caslib.  Typical users may find it difficult to access information in the project caslib through the interface, therefore raising need for this custom step.
 
 
 ## Installation & Usage
@@ -83,4 +83,5 @@ The rule configuration tables listed in the output are named as per a pattern : 
 
 ## Change Log
 
-Version : 1.0.   (02MAY2023)
+Version : 1.0.   (02MAY2023) - Initial Step Creation
+Version : 1.1.   (12JUN2023) - Additional documentation, code cleanup; latest version
