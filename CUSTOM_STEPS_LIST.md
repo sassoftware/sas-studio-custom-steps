@@ -41,7 +41,7 @@
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
 | [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 28SEP2022 |
 | [Send SMTP Email](./Send%20SMTP%20Email/README.md) | Send Email message  | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2022.1.4 or later | 03APR2023 |
-| [Send Teams Message](./Send%20Teams%20Message/README.md) | Send Microsoft Teams Messages to a Teams channel | [David Weik](https://github.com/Criptic) / [Tamara Fischer](https://github.com/ATFischer) | 2022.10 or later | 12DEC2022 |
+| [Send Teams Message](./Send%20Teams%20Message/README.md) | Send Microsoft Teams Messages to a Teams channel | [David Weik](https://github.com/Criptic) / [Tamara Fischer](https://github.com/ATFischer) | 2022.10 or later | 14JUN2023 |
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 29SEP2022 |
 | [Synthetic Data Generation](./Synthetic%20Data%20Generation/README.md) | A collection of 4 SAS Studio custom steps which help you which help you train, score and assess Synthetic Data models. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 or later | 06OCT2022 |
 | [Translate Text](./Translate%20Text/README.md) | Translates text stored in a column using DeepL API | [David Weik](https://github.com/Criptic) | 2023.04 or later | 10MAY2023 |
