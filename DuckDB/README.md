@@ -1,4 +1,6 @@
 # DuckDB
+### Contents
+- [User Interface](#user-interface-)
 
 ## Description
 
@@ -21,7 +23,7 @@ For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb
 
 ---
 
-## User Interface
+## User Interface <a name="user-interface-"></a>
 There are 5 tab on the user interface for the custom step:
 1. [SQL tab](#sql-tab-)
 2. [DuckDb Optios tab](#duckdb-options-tab-)
