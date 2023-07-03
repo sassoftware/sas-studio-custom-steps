@@ -160,5 +160,5 @@ If DuckDB is not installed or Python cannot find it you will receive an error: "
 For examples using the DuckDB step in SAS Flow see [here](extras/README.md)
 
 ## Change Log <a name="change-log-"></a>
-Version 1.0 (15MAR2023)
+Version 1.0 (05JUNY2023)
  * Initial version 
