@@ -139,7 +139,7 @@ When connected with Postgres, DuckDb will create views for all tables in the Pos
 ## Requirements <a name="requirements-"></a>
 2023.01 or later  
 * Python needs to be installed and configured to work with SAS Studio.
-* The Python package for DuckDB to be installed `pip install duckdb`
+* The Python package for DuckDB (version 0.8.1) to be installed `pip install duckdb`
 
 ## Usage <a name="usage-"></a>
 When you have installed the custom step, test it to ensure it is working with your Python DuckDB.
