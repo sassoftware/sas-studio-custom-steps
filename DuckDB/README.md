@@ -1,8 +1,11 @@
 # DuckDB
 ### Contents
-- [User Interface](#user-interface-)
+1. [Description](#description-)
+2. [User Interface](#user-interface-)
+3. [Requirements](#requirements-)
+4. [Usage](usage-)
 
-## Description
+## Description <a name="description-"></a>
 
 The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data.
 In this version the following data sources are supported:
@@ -132,12 +135,12 @@ When connected with Postgres, DuckDb will create views for all tables in the Pos
 | Postgres schema | The Postgres database schema to connect to. |
 | DuckDB Schema | The database schema in DuckDB where the views for the Postgres tables are written to. If the schema name does not exist it will be created.
 
-## Requirements  
+## Requirements <a name="requirements-"></a>
 2023.01 or later  
 * Python needs to be installed and configured to work with SAS Studio.
 * The Python package for DuckDB to be installed `pip install duckdb`
 
-## Usage  
+## Usage <a name="usage-"></a>
 When you have installed the custom step, test it to ensure it is working with your Python DuckDB.
 * Right mouse click on the step.
 * Choose "Open in a tab".
