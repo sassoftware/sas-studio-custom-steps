@@ -3,7 +3,7 @@
 1. [Description](#description-)
 2. [User Interface](#user-interface-)
 3. [Requirements](#requirements-)
-4. [Usage](usage-)
+4. [Usage](#usage-)
 
 ## Description <a name="description-"></a>
 
