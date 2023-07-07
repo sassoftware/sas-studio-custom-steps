@@ -49,7 +49,7 @@ In the tab SQL you can submit one or more SQL statements.
    
    | UI Field | Comment |
    | --- | --- |
-   | Ignore file options | When ticked:<br> - All options set in tab *Parquet* and *CSV* will be ignored.<br> - SQL will be sent *as is* to DuckDB (SQL Pass Through).<br> - You can use SQL with DuckDB functions. E.g.:<br>```SELECT * FROM read_parquet('test.parq');``` |
+   | SQL Pass Through<br>(Ignore file options) | When ticked:<br> - All options set in tab *Parquet* and *CSV* will be ignored.<br> - SQL will be sent *as is* to DuckDB (SQL Pass Through).<br> - You can use SQL with DuckDB functions. E.g.:<br>```SELECT * FROM read_parquet('test.parq');``` |
    | SQL statement | Field for SQL statement.<br>For allowed SQL syntax see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction)<br>You can submit several SQL statements in this field.<br>SQL statements need to delimited with a semicolon (;) when submitting more than one statement.<br>Example - Load table into DuckDB:<br>`CREATE SCHEMA IF NOT EXISTS asd;`<br>`--create taxt tabke based on mytaxidata;`<br>`CREATE TABLE taxi as (`<br>`SELECT * FROM mytaxidata.csv);`<br>**Note:** When using a single line comment in the SQL statement (starting with double hyphen ( -- )) you need to end the comment with a semicolon (;).|
 
 ---
