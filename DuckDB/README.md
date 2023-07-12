@@ -10,6 +10,8 @@
 
 The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data. It is designed with a focus on high-performance analytics. DuckDB’s architecture is optimized for vectorized query execution, which allows it to process large amounts of data efficiently, providing impressive query performance. It has particular strength working with Parquet files and csv files. Depending on the use case running analytical SQL queries (using SQL aggregate functions) can be very efficient when using DuckDB.
 
+The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/READMD.md). 
+
 DuckDB is very simple to install. For this Custom Step all it needs is to install its Python libraries via “pip“.
 
 In this version the following data sources are supported:
@@ -34,8 +36,8 @@ For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb
 ## User Interface <a name="user-interface-"></a>
 There are 5 tab on the user interface for the custom step:
 1. [SQL tab](#sql-tab-)
-2. [DuckDb Optios tab](#duckdb-options-tab-)
-3. [Parquet Optios tab](#parquet-tab-)
+2. [DuckDb Options tab](#duckdb-options-tab-)
+3. [Parquet Options tab](#parquet-tab-)
 4. [CSV tab](#csv-tab-)
 5. [Postgres tab](#postgres-tab-)
 
@@ -54,7 +56,7 @@ In the tab SQL you can submit one or more SQL statements.
 
 ---
 
-* ### DuckDb Optios tab <a name="duckdb-options-tab-"></a>
+* ### DuckDb Options tab <a name="duckdb-options-tab-"></a>
 This tab is to set general options for DuckDB.
    | DuckDB Options |
    | --- |
@@ -161,8 +163,8 @@ If DuckDB is not installed or Python cannot find it you will receive an error: "
    <img src="img/DuckDB-Test_Failed.jpg" alt= “” width="573" height="360">
 </p>
 
-For examples using the DuckDB step in SAS Flow see [here](extras/README.md)
+For examples using the DuckDB step in a flow in SAS Studio see [here](extras/README.md)
 
 ## Change Log <a name="change-log-"></a>
-Version 1.0 (05JUNY2023)
+Version 1.0 (12JUL2023)
  * Initial version 
