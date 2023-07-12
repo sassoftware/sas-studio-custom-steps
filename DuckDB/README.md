@@ -10,7 +10,7 @@
 
 The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data. It is designed with a focus on high-performance analytics. DuckDB’s architecture is optimized for vectorized query execution, which allows it to process large amounts of data efficiently, providing impressive query performance. It has particular strength working with Parquet files and csv files. Depending on the use case running analytical SQL queries (using SQL aggregate functions) can be very efficient when using DuckDB.
 
-The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/READMD.md). 
+The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/README.md). 
 
 DuckDB is very simple to install. For this Custom Step all it needs is to install its Python libraries via “pip“.
 
