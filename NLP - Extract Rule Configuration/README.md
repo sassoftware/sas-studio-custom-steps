@@ -68,14 +68,15 @@ There are **three tasks** you can carry out with this custom step, as offered in
 
 The rule configuration tables listed in the output are named as per a pattern : <astore_name>_<project_type>_RULESCONFIG.sashdat.  The <astore_name> is usually a long alphanumeric string which is also the same name as the model binary generated.  The <project_type> could refer to either CATEGORY or CONCEPT based on the model in question.
 
+
 #### Trigger tab: run-time activation of this custom step
 
 Note the instructions in the "Trigger" tab of the custom step.  In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following trigger variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
 
 ```sas
-/* Default value */;
+/* To demonstrate the default value of the trigger variable */;
 
-nlpExtractRuleConfiguration=1;
+&nlpExtractRuleConfiguration.=1;
 ```
 
 If you wish to control execution of this custom step programmatically (within a session, including execution of a SAS Studio Flow), make sure that an upstream SAS program sets the trigger variable to 0.  Setting the value to 0 "disables" the execution of this custom step.
