@@ -16,7 +16,7 @@ The **Send Teams Message** custom step enables SAS Studio users to send Microsof
 
 ## Requirements
 
-2022.10 or later
+2023.05 or later
 
 You need to be able to create a Webhook for the target Teams channel or receive it from somebody that is allowed to create one (see About tab). If you have already created one but forgot the link, check the About tab to learn how to retrieve it.
 
@@ -42,3 +42,8 @@ What is happening in this flow?
 
 - Version 1.0 (12DEC2022)
   - Initial version
+- Version 1.1 (14JUN2023)
+  - Added naming convention for macros
+  - Removed temporary work table
+  - Added Content-Type to REST call to comply with best practices of the Microsoft Teams API
+  - Raised requirement to SAS Viya 2023.05
