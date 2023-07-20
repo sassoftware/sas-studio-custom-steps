@@ -6,7 +6,6 @@ The **DQ - Standardize** step allows you to create a column with standardized va
  * Best practice is to write the output to a new column, but you can overwrite an existing column as well.
  * If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.
  * This version uses SASDQREF tables and it is possible to standardize up to 10 columns. 
- * Since the SASDQREF is used it is not possible to use this custom step for masking, for this activity use the appropriate custom step. 
  * Prompts take advantage of dynamic prompt lists (SASDQREF) and hierarchies 
  * It's worthwhile to note that the DQ Standardize step also allows you to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)   
 
