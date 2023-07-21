@@ -27,8 +27,8 @@ Note: This custom step is related to the [DQ - Standardize](https://github.com/s
 
 ## Change Log
 
-* Version 2.0 (19JUL2023)
-    * Updated step to use **DM_MKDEF** table from the **SASDQREF** library to populate drop-down lists for QKB locale and definition
+* Version 2.0 (27JUL2023)
+    * Updated step to use **DM_MKDEF** table from the **SASDQREF** library to populate drop-down lists for QKB locale and definition (SASDQREF library containing QKB metadata is available since SAS Viya 2023.06)
     * Drops the column that is being masked
 * Version 1.1 (27SEP2022)
     * Made New Column control required
