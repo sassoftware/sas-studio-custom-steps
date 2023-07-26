@@ -5,7 +5,8 @@
 The **DQ - Standardize** step allows you to create a column with standardized values based on a locale and standardization definition using the **dqStandardize** function.
  * Best practice is to write the output to a new column, but you can overwrite an existing column as well.
  * If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.
- * This version supports seven Locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows you to standardize up to five columns.
+ * This version uses SASDQREF tables and it is possible to standardize up to 10 columns. 
+ * Prompts take advantage of dynamic prompt lists (SASDQREF) and hierarchies 
  * It's worthwhile to note that the DQ Standardize step also allows you to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)   
 
 
@@ -24,7 +25,7 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 
 ## Requirements  
 
-2021.1.1 or later  
+2023.06 or later  
 
 * This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
 
@@ -34,7 +35,11 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 ![Using the DQ - Standardize Custom Step](img/dqstandardize.gif)
 
 ## Change Log  
-
+  
+Version 2.0 (20JUL2023)
+ * use of the SASDQREF library to extend support to all locales defined in the QKB.
+ * use of hierarchical prompts and dynamic lists.
+  
 Version 1.1 (05DEC2022)
  * adds support for Canadian locales.  (ENCAN, FRCAN)
  * avoids warning by skipping length declaration for the output field if over-writing the input field.
