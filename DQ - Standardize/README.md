@@ -36,6 +36,10 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 
 ## Change Log  
   
+Version 2.1 (27JUL2023)
+ * assign SASDQREF if it has not been assigned 
+    * Note: Only needed when generated SAS code contains references to this libref, so libref exists during background submit and scheduled jobs. Not needed otherwise. So not needed by this step per se, but added anyway.  
+  
 Version 2.0 (20JUL2023)
  * use of the SASDQREF library to extend support to all locales defined in the QKB.
  * use of hierarchical prompts and dynamic lists.
