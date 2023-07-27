@@ -3,7 +3,7 @@
 | Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
 | --- | --- | :-: | --- | ---|
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
-| [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2020.1.5 or later | 27SEP2022 |
+| [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 or later | 27JUL2023 |
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 26OCT2022 |
 | [CAS - Convert Char to Varchar](./CAS%20–%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 or later | 08FEB2023 |
 | [CAS - Generate unique ID](./CAS%20-%20Generate%20Unique%20ID/README.md) | Generates a new column containing a unique identifier (ID) per observation for a given input CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 07FEB2023 |
@@ -16,7 +16,7 @@
 | [DQ - Identify](./DQ%20-%20Identify/README.md) | Obtain the Identity Type for of data values using the dqIdentify function | [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2021.1.1 or later | 29NOV2022 |
 | [DQ - Match Code](./DQ%20-%20Match%20Code/README.md) | Create Match Codes based on locale, using SAS QKB and dqMatch function | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2021.1.1 or later | 22NOV2022 |
 | [DQ - Parsing](./DQ%20-%20Parsing/README.md) | Parse a string into a set of tokens using QKB locale specific rules | [Clemens Knobloch](https://github.com/sukckn) | 2023.01 or later | 15MAR2023 |
-| [DQ - Standardize](./DQ%20-%20Standardize/README.md) | Create standardized values based on locale, using SAS QKB and dqStandardize function (includes support for generating masked values) | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2021.1.1 or later | 05DEC2022 |
+| [DQ - Standardize](./DQ%20-%20Standardize/README.md) | Create standardized values based on locale, using SAS QKB and dqStandardize function (includes support for generating masked values) | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2023.06 or later | 20JUL2023 |
 | [DQ - Surviving Record](./DQ%20-%20Surviving%20Record/README.md) | Extract the best record (aka. Golden Record) from clusters of records, with support for standard deduplication rou tines and user-defined rules | [Lorenzo Toja](https://github.com/lorenzotoja) | 2021.1.5 or later | 19MAY2022 |
 | [DuckDB](./DuckDB/README.md) | Uses [DuckDB](https://duckdb.org/) to read and write data in various DBMS and file types| [Clemens Knobloch](https://github.com/sukckn) | 2023.01 or later | 12JUL2023 |
 | [Dynamic Aggregations From Timeseries DAFT](./Dynamic%20Aggregations%20From%20Timeseries%20DAFT/README.md) | Perform dynamic aggregations on timeseries data | [Stephan Weigandt](https://github.com/stephanweigandt) | Tested on 2022.1.2 (should work on earlier versions) | 08MAY2023 |
