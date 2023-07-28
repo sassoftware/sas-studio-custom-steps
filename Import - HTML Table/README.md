@@ -2,7 +2,7 @@
 
 ## Description
 
-The **Import - HTML Table** custom step enables SAS Studio users to import HTML tables from other websites as SAS tables.
+The **Import - HTML Table** custom step enables SAS Studio users to import HTML tables from other websites as SAS tables. This step requires that Proc Python is enabled on your system and that the Python packages *pandas* & *lxml* are installed.
 
 ## User Interface
 
@@ -24,13 +24,15 @@ You can choose to extract tables from website in three modes:
 
 ## Requirements
 
-SAS Viya 2023.06 or later
+SAS Viya 2023.07 or later
 
 Python 3.8 or later
 
 **Python packages:**
 
-pandas
+- pandas
+
+- lxml
 
 ## Usage
 
@@ -38,5 +40,8 @@ Find a demonstration of this step in this YouTube video: [Import - HTML Table | 
 
 ## Change Log
 
+* Version 1.1 (28JUL2023)
+    * Document lxml dependency
+    * Add explicit error if pandas & lxml are not installed
 * Version 1.0 (19JUL2023)
     * Initial version
