@@ -545,9 +545,10 @@ Please provide the SAS Informat that should be used for that specific entry.
 
 ## Change Log
 
-Version 4.1.2 (20JUL2023)
+Version 4.1.2 (28JUL2023)
 
 - adjusted code so it can handle spaces in extensions.
+- adjusted labels in UI controls to adhere to UI guidelines
 
 Version 4.1.1 (08FEB2023)
 
