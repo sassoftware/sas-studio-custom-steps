@@ -69,29 +69,31 @@ There are **three tasks** you can carry out with this custom step, as offered in
 The rule configuration tables listed in the output are named as per a pattern : <astore_name>_<project_type>_RULESCONFIG.sashdat.  The <astore_name> is usually a long alphanumeric string which is also the same name as the model binary generated.  The <project_type> could refer to either CATEGORY or CONCEPT based on the model in question.
 
 
-#### Trigger tab: run-time activation of this custom step
+#### Run-time control
 
-Note the instructions in the "Trigger" tab of the custom step.  In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following trigger variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
+**Note that this is optional.**  In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following macro variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
+
+Refer this [blog](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.
 
 ```sas
-/* To demonstrate the default value of the trigger variable */;
+/* To demonstrate the default value of the trigger macro variable */;
 
-&nlpExtractRuleConfiguration.=1;
+&_erc_run_trigger.=1;
 ```
 
-If you wish to control execution of this custom step programmatically (within a session, including execution of a SAS Studio Flow), make sure that an upstream SAS program sets the trigger variable to 0.  Setting the value to 0 "disables" the execution of this custom step.
+If you wish to control execution of this custom step programmatically (within a session, including execution of a SAS Studio Flow), make sure that an upstream SAS program sets the macro variable to 0.  Setting the value to 0 "disables" the execution of this custom step.
 
 For example, to "disable" this step, run the following code upstream:
 
 ```sas
-%global nlpExtractRuleConfiguration;
-%let nlpExtractRuleConfiguration=0;
+%global _erc_run_trigger;
+%let _erc_run_trigger=0;
 ```
 
-To "enable" this step back again, run the following (it's assumed that this has already been set as a global variable):
+To "enable" this step again, run the following (it's assumed that this has already been set as a global variable):
 
 ```sas
-%let nlpExtractRuleConfiguration=1;
+%let _erc_run_trigger=1;
 ```
 
 **Important:** Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.
@@ -99,7 +101,8 @@ To "enable" this step back again, run the following (it's assumed that this has 
 
 ## Documentation:
 
-- The table.caslibInfo CAS action : https://go.documentation.sas.com/doc/en/pgmsascdc/default/caspg/cas-table-caslibinfo.htm is used for purposes of listing out the tables within a SAS Model Studio's project caslib.  Typical users may find it difficult to access information in the project caslib through the interface, therefore raising need for this custom step.
+1. The [table.caslibInfo CAS action ](https://go.documentation.sas.com/doc/en/pgmsascdc/default/caspg/cas-table-caslibinfo.htm) is used for purposes of listing out the tables within a SAS Model Studio's project caslib.  Typical users may find it difficult to access information in the project caslib through the interface, therefore raising need for this custom step.
+2. This [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) referred to earlier suggests an approach through which execution of this custom step is controlled during run time.
 
 
 ## Installation & Usage
@@ -111,11 +114,11 @@ To "enable" this step back again, run the following (it's assumed that this has 
 
 ## Change Log
 
-Version 1.0 (02MAY2023) 
-* Initial Step Creation
+Version 1.2 (01AUG2023) 
+* A trigger variable added to control run-time execution of the step
 
 Version 1.1 (12JUN2023) 
 * Additional documentation, code cleanup; latest version
 
-Version 1.2 (19JUL2023) 
-* A trigger variable added to control run-time execution of the step
+Version 1.0 (02MAY2023) 
+* Initial Step Creation
