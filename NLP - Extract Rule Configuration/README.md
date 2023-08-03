@@ -115,7 +115,7 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 ## Change Log
 
 Version 1.2 (01AUG2023) 
-* A trigger variable added to control run-time execution of the step
+* A trigger variable added to control run-time execution of the step, plus additional feedback.
 
 Version 1.1 (12JUN2023) 
 * Additional documentation, code cleanup; latest version
