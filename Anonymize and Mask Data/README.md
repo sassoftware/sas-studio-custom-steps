@@ -30,6 +30,7 @@ Note: This custom step is related to the [DQ - Standardize](https://github.com/s
 
 * Version 2.1 (26JUL2023)
     * Updated Program code to create SASDQREF library if needed
+    * As this step uses new functionality that is only available in SAS Studio 2023.06 or later, the old version of the step is still available (Anonymize and Mask Data.pre-2023.07.step)
 * Version 2.0 (17JUL2023)
     * Updated step to use **DM_MKDEF** table from the **SASDQREF** library to populate drop-down lists for QKB locale and definition (SASDQREF library containing QKB metadata is available since SAS Viya 2023.06)
     * Drops the column that is being masked
