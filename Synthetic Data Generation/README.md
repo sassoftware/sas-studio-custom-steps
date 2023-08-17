@@ -75,6 +75,40 @@ This step helps you generate new data using the trained astore. Parameters requi
 
 ![Generate Synthetic Data](./img/generate-synthetic-data.png)
 
+#### Run-time control
+
+**Note that this is optional.**  
+
+*Generating synthetic data may not be required for all scenarios (based on initial balance levels of data).  Therefore, you may find it useful to employ the following control in some situations, as dictated by logic.*
+
+In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following macro variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
+
+Refer this [blog](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.
+
+```sas
+/* To demonstrate the default value of the trigger macro variable */;
+
+&_gsd_run_trigger.=1;
+```
+
+If you wish to control execution of this custom step programmatically (within a session, including execution of a SAS Studio Flow), make sure that an upstream SAS program sets the macro variable to 0.  Setting the value to 0 "disables" the execution of this custom step.
+
+For example, to "disable" this step, run the following code upstream:
+
+```sas
+%global _gsd_run_trigger;
+%let _gsd_run_trigger=0;
+```
+
+To "enable" this step again, run the following (it's assumed that this has already been set as a global variable):
+
+```sas
+%let _gsd_run_trigger=1;
+```
+
+**Important:** Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.
+
+
 ### Generate Distribution Comparison
 This step helps you assess the distributions of your generated data with original data. Parameters required:
 1. Select columns you wish to assess
@@ -113,6 +147,7 @@ proc datasets library=sampsio; run;
 ## Change Log
 
 - Version 1.1 (16AUG2023):
+    **Train a Synthetic Data Generator**
    	1. UI: variable selectors added
 	2. UI: nominal input variables added
 	3. UI: minibatch size option added
@@ -120,6 +155,10 @@ proc datasets library=sampsio; run;
 	5. Refactored Program 
     6. Runtime control added
     7. Refactored About tab
+	**Generate Synthetic Data**
+	1. Refactored Program
+	2. Runtime control added
+	3. Refactored About tab
 
 - Version 1.0 (06OCT2022):
    - Step published.
