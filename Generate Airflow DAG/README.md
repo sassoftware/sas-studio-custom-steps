@@ -26,10 +26,10 @@ The creation of a proper DAG from these 3 custom steps relies on the following p
 * There is only ONE "**Airflow - Finalize DAG**" step per flow
 * "**Airflow - Initialize DAG**" must be the first step, doesn't accept any input, accepts one or more outputs
 * "**Airflow - Add Task**" must have at least one input and one output even if it is the first task of a DAG or the last (if first or last then they have to be linked to "Initialize" or "Finalize")
-* "**Airflow - Add Task**" allows a user to choose a Studio Flow or a Job Definition
+* "**Airflow - Add Task**" allows a user to choose a Studio flow, a SAS program, a job definition or to write his own code
 * "**Airflow - Add Task**" can have multiple inputs and multiple outputs
 * "**Airflow - Finalize DAG**" must be the last step, accepts one or more inputs, doesn't accept any output
-* The sequence of tasks (Studio Flows and/or Job Definitions) will be reflected in the Airflow DAG
+* The sequence of tasks (Studio flows, SAS programs, embedded code and/or job definitions) will be reflected in the Airflow DAG
 * All steps in the flow are linked together
 
 SAS Studio Flow creating an Airflow DAG Example:
@@ -46,19 +46,19 @@ Corresponding DAG in Airflow:
 
 Main properties of the DAG:
 
-![](img/franir_2023-03-28-16-04-37.png)
+![](img/franir_2023-08-10-13-48-43.png)
 
 #### Global Options tab
 
 Global options for all tasks in the DAG:
 
-![](img/franir_2023-03-28-17-38-05.png)
+![](img/franir_2023-08-10-13-52-25.png)
 
 #### Global Parameters tab
 
 Global parameters for all tasks in the DAG:
 
-![](img/franir_2023-03-28-17-40-50.png)
+![](img/franir_2023-08-10-13-53-49.png)
 
 ### "Airflow - Add Task" Step
 
@@ -66,50 +66,47 @@ Global parameters for all tasks in the DAG:
 
 Main properties of the task:
 
-![](img/franir_2023-03-28-17-44-57.png)
+![](img/franir_2023-08-10-14-00-25.png)
+
+![](img/franir_2023-08-10-14-03-20.png)
 
 #### Options tab
 
 Local options for this task:
 
-![](img/franir_2023-03-28-17-51-09.png)
+![](img/franir_2023-08-10-14-13-43.png)
 
 #### Parameters tab
 
 Local parameters for this task:
 
-![](img/franir_2023-03-28-17-55-02.png)
+![](img/franir_2023-08-10-14-37-21.png)
 
 ### "Airflow - Finalize DAG" Step
 
 There is nothing to set in the "Airflow - Finalize DAG" step.
 
-## Requirements
-
-Built and tested on SAS Viya Stable Release 2023.03.
-
 ## Usage
 
 ![](img/airflow_dag_generation_usage.gif)
 
-## Change Log
+## Change Log and Requirements
 
-Version: 1.2 (26JUL2023)
-
-* Page rearrangement
-
-Version: 1.1 (05APR2023)
-
-* UI standardization
-* DAG and task name validation
-
-Version: 1.0 (31MAR2023)
-
-* Initial version
+| Version | Date      | Updates                                                          | Built on SAS Viya | SAS Airflow Provider Release |
+| ------- | --------- | ---------------------------------------------------------------- | ----------------- | ---------------------------- |
+| 1.3     | 10AUG2023 | New features provided by latest SAS Airflow Provider Release     | Stable 2023.07    | 0.0.7                        |
+|         |           | Run SAS programs, embed SAS code, reuse SAS compute sessions,    |                   |                              |
+|         |           | provide macro-variables, provide Airflow context variables, etc. |                   |                              |
+| 1.2     | 26JUL2023 | Page rearrangement                                               | Stable 2023.07    | 0.0.5                        |
+| 1.1     | 05APR2023 | UI standardization                                               | Stable 2023.03    | 0.0.1                        |
+|         |           | DAG and task name validation                                     |                   |                              |
+| 1.0     | 31MAR2023 | Initial version                                                  | Stable 2023.03    | 0.0.1                        |
 
 ## Installation
 
-Download the [Three Generate Airflow DAG custom steps](./Generate_Airflow_DAG.zip). Unzip it and upload them in a SAS Content Folder.
+Download the latest [Three Generate Airflow DAG custom steps](./Generate_Airflow_DAG_v1.3.zip). Unzip it and upload them in a SAS Content Folder.
+
+See [older versions](/Generate%20Airflow%20DAG).
 
 ## Sample Airflow DAG
 
