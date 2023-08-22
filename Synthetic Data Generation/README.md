@@ -150,13 +150,13 @@ proc datasets library=sampsio; run;
 
     **Train a Synthetic Data Generator**
 
-   	a. UI: variable selectors added
-    b. UI: nominal input variables added
-    c. UI: minibatch size option added
-    d. UI: GPU option added
-    e. Refactored Program 
-    f. Runtime control added
-    g. Refactored About tab
+   	1. UI: variable selectors added
+    2. UI: nominal input variables added
+    3. UI: minibatch size option added
+    4. UI: GPU option added
+    5. Refactored Program 
+    6. Runtime control added
+    7. Refactored About tab
 
     **Generate Synthetic Data**
 
