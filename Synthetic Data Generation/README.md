@@ -147,7 +147,9 @@ proc datasets library=sampsio; run;
 ## Change Log
 
 - Version 1.1 (16AUG2023):
+
     **Train a Synthetic Data Generator**
+
    	a. UI: variable selectors added
     b. UI: nominal input variables added
     c. UI: minibatch size option added
@@ -155,7 +157,9 @@ proc datasets library=sampsio; run;
     e. Refactored Program 
     f. Runtime control added
     g. Refactored About tab
+
     **Generate Synthetic Data**
+
     a. Refactored Program
     b. Runtime control added
     c. Refactored About tab
