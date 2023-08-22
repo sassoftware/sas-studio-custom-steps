@@ -158,16 +158,20 @@ proc datasets library=sampsio; run;
     6. Runtime control added
     7. Refactored About tab
 
+
     **Generate Synthetic Data**
 
-    a. Refactored Program
-    b. Runtime control added
-    c. Refactored About tab
+    1. Refactored Program
+    2. Runtime control added
+    3. Refactored About tab
+
 
 - Version 1.0 (06OCT2022):
+
     - Step published.
 
-Created/contact: 
+
+## Created/contact: 
 
 - Sundaresh Sankaran (sundaresh.sankaran@sas.com)
 - Brett Wujek (brett.wujek@sas.com)
