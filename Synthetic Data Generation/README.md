@@ -77,7 +77,7 @@ This step helps you generate new data using the trained astore. Parameters requi
 
 #### Run-time control
 
-**Note that this is optional.**  
+> **Note that this is optional.**  
 
 *Generating synthetic data may not be required for all scenarios (based on initial balance levels of data).  Therefore, you may find it useful to employ the following control in some situations, as dictated by logic.*
 
