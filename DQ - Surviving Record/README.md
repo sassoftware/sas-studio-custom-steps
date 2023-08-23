@@ -51,7 +51,7 @@ Specifies the row-level rule that identifies which row in the cluster should be 
 
 ## Change Log
 
-* Version 2.0 (25JUL2023)
+* Version 2.0 (24JUL2023)
     * Using the standard macro %DQSURVR  
   	
 * Version 1.0 (19MAY2022)
