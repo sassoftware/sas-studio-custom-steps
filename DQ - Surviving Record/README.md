@@ -11,7 +11,7 @@ This new version uses the standard macro [%DQSURVR](https://go.documentation.sas
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![](img/dqsurviving-tabsurvivingrecord-standalone.png) | ![](img/dqsurviving-tabsurvivingrecord-flowmode.png) |
+   | ![](img/dqsurviving-tabrowrules-standalone.png) | ![](img/dqsurviving-tabrowrules-flowmode.png) |
   
 * ### Row Rules tab ###  
 Specifies the row-level rule that identifies which row in the cluster should be chosen as the surviving record.  
