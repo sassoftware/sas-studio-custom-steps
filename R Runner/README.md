@@ -5,7 +5,7 @@ SAS Studio needs a quick and easy interface to R. This repository provides a cus
 
 ## A general idea (click on image below to watch video)
 
-[![Beep Beep](/img/r_runner_snapshot.png)](https://youtu.be/qB6GlElZF_w)
+[![Beep Beep](./img/r_runner_snapshot.png)](https://youtu.be/qB6GlElZF_w)
 
 R Runner enables you to submit R scripts from within SAS Studio and develop integrated analytics pipelines. You can submit either:
 
