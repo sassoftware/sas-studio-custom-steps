@@ -3,7 +3,7 @@
 ## Description
 
 The **DQ - Surviving Record** step allows you to extract the best record (Golden Record) from the clustered data by selecting the rules of interest. You can use standard deduplication techniques or create a rule to choose which data should survive.  
-This new version uses the standard macro [%DQSURVR](https://go.documentation.sas.com/doc/en/dqcdc/default/dqclref/p1i32jjeybfcb7n19tzfasbzdcb9.htm) instead of the custom code.  
+This new version uses the SAS-supplied Autocall macro [%DQSURVR](https://go.documentation.sas.com/doc/en/dqcdc/default/dqclref/p1i32jjeybfcb7n19tzfasbzdcb9.htm) instead of the custom code.  
   
 ## User Interface  
 
@@ -52,7 +52,7 @@ Specifies the row-level rule that identifies which row in the cluster should be 
 ## Change Log
 
 * Version 2.0 (24JUL2023)
-    * Using the standard macro %DQSURVR  
+    * Using the SAS-supplied Autocall macro %DQSURVR    
   	
 * Version 1.0 (19MAY2022)
     * Initial version  
