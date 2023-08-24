@@ -61,7 +61,7 @@ These rules enable you to substitute values into specific fields of the chosen s
 
 ## Change Log
 
-* Version 2.0 (24JUL2023)
+* Version 2.0 (24AUG2023)
     * Using the SAS-supplied Autocall macro %DQSURVR    
   	
 * Version 1.0 (19MAY2022)
