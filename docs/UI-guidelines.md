@@ -14,7 +14,7 @@ This opens the Custom Step Designer
 | UI Element | Capitalization | Remarks|
 | --- | --- | --- |
 | Tab labels | Title | Keep them short, preferably one or two words |
-| Section labels | Sentence | |
+| Section labels | Sentence | Note: These labels should not end with a colon |
 | Field labels - Labels for any of the UI elements (checkboxes excluded) | Sentence | Put colons after labels. For example:  ***Select a column:*** <br>Labels of checkboxes should not end with a colon|
 | Values in lists <ul><li>Drop-down List</li><li>List</li><li>Radio Button Group</li></ul> | Sentence |
 
