@@ -2,7 +2,7 @@
 
 ## Description
 
-The "**Generate Airflow DAG**" tool is a set of three Custom Steps that enables SAS Studio Flow users to create an **Airflow DAG** (Directed Acyclic Graph) directly from a SAS Studio Flow, by including and orchestrating **SAS Studio Flows** and **SAS Job Definitions**.
+The "**Airflow - Generate DAG**" tool is a set of three Custom Steps that enables SAS Studio Flow users to create an **Airflow DAG** (Directed Acyclic Graph) directly from a SAS Studio Flow, by including and orchestrating **SAS Studio Flows** and **SAS Job Definitions**.
 
 "***In Airflow, a DAG is a collection of all the tasks you want to run, organized in a way that reflects their relationships and dependencies.***
 
@@ -94,7 +94,7 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 | Version | Date      | Updates                                                          | Built on SAS Viya | SAS Airflow Provider Release |
 | ------- | --------- | ---------------------------------------------------------------- | ----------------- | ---------------------------- |
-| 1.3     | 10AUG2023 | New features provided by latest SAS Airflow Provider Release     | Stable 2023.07    | 0.0.7                        |
+| 1.3     | 30AUG2023 | New features provided by latest SAS Airflow Provider Release     | Stable 2023.07    | 0.0.7                        |
 |         |           | Run SAS programs, embed SAS code, reuse SAS compute sessions,    |                   |                              |
 |         |           | provide macro-variables, provide Airflow context variables, etc. |                   |                              |
 | 1.2     | 26JUL2023 | Page rearrangement                                               | Stable 2023.07    | 0.0.5                        |
@@ -104,9 +104,9 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 ## Installation
 
-Download the latest [Three Generate Airflow DAG custom steps](./Generate_Airflow_DAG_v1.3.zip). Unzip it and upload them in a SAS Content Folder.
+Download the latest three [Airflow - Generate DAG](./extras/Airflow_Generate_DAG_v1.3.zip) custom steps. Unzip it and upload them in a SAS Content Folder.
 
-See [older versions](/Generate%20Airflow%20DAG).
+See [older versions](./extras/).
 
 ## Sample Airflow DAG
 
