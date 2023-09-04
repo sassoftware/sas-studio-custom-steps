@@ -49,7 +49,7 @@ Tested on Viya version Stable 2022.09
 ## Change Log
 
 * Version 1.2 (04SEP2023) 
-    * Moved text for Prereqs/Documentation/Changelog into expandable secions for readability
+    * About tab: Moved text for Prereqs/Documentation/Changelog into expandable sections for readability
     * Added **extras** sub-folder to store older version of step in zip file when latest update of step requires very recent version of SAS Studio
 * Version 1.1 (23OCT2022) 
     * Added pre-reqs area in About tab
