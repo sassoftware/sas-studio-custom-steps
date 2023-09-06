@@ -2,11 +2,11 @@
 
 | Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
 | --- | --- | :-: | --- | ---|
-| [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 26AUG2022 |
+| [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 04SEP2023 |
 | [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.07 or later | 30AUG2023 |
 | [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 or later | 27JUL2023 |
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 26OCT2022 |
-| [CAS - Convert Char to Varchar](./CAS%20–%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 or later | 08FEB2023 |
+| [CAS - Convert Char to Varchar](./CAS%20-%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 or later | 05SEP2023 |
 | [CAS - Generate unique ID](./CAS%20-%20Generate%20Unique%20ID/README.md) | Generates a new column containing a unique identifier (ID) per observation for a given input CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 07FEB2023 |
 | [CAS - Load Tables from Folders in Filesystem](./CAS%20-%20Load%20Tables%20from%20Folders%20in%20Filesystem/README.md) | Load all files in a directory to CAS tables | [Sundaresh Sankaran](https://github.com/SundareshSankaran) / [Wilbram Hazejager](https://github.com/snlwih) | 2022.11 or later | 21DEC2022 |
 | [CAS - Validate unique ID](./CAS%20-%20Validate%20Unique%20ID/README.md) | Validates if column contains unique values for a given input CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.06 or later | 11JUL2023 |
@@ -25,6 +25,7 @@
 | [Extract Job Definition Metadata](./Extract%20Job%20Definition%20Metadata/README.md) |  extract all content (SAS Code, HTML forms, XML Prompts and Parameters) from a SAS Job Definition and store it in files | [David Weik](https://github.com/Criptic) | 2023.04 or later | 04MAY2023 |
 | [Extract Text Features](./Extract%20Text%20Features/README.md) | Supports extracting many different features from text fields | [David Weik](https://github.com/Criptic) / [Ulrich Reincke](https://github.com/SnowTiger13) / [Rens Feenstra](https://github.com/snlref) | 2022.10 or later | 27NOV2022 |
 | [GeoDistance with Rounding](./GeoDistance%20with%20Rounding/README.md) | Calculate the distance between 2 supplied lat/long locations in either kilometers or miles | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2020.1.5 or later | 28SEP2022 |
+| [Get Exchange Rates](./Get%20Exchange%20Rates/README.md) | Get Exchange Rates from Service Provider | [David Weik](https://github.com/Criptic) | 2023.08 or later | 04SEP2023 |
 | [Git - Clone Git Repo](./Git%20-%20Clone%20Git%20Repo/README.md) | Clone Git Repo as part of running a flow |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 25JAN2023 |
 | [Git - Delete Local Repo](./Git%20-%20Delete%20Local%20Repo/README.md) | Delete LOCAL Repo as part of running a flow |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 25JAN2023 |
 | [Git - List Local Repo Changes](./Git%20-%20List%20Local%20Repo%20Changes/README.md) | List changed files inside local Git repository folder into a dataset as part of running a flow for easy reporting |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 07FEB2023 |

@@ -1,11 +1,11 @@
-# CAS – Convert Char to Varchar	 
+# CAS - Convert Char to Varchar
 
 ## Description
 
 This step creates a copy of a table, and if the table has char variables with a length greater than 16, those variables are converted to varchar.
-*	The user can specify that the output table should be compressed and/or promoted
-*	The user can specify which columns of the output table should be indexed 
-*	Existing output tables will be overwritten
+* The user can specify that the output table should be compressed and/or promoted
+* The user can specify which columns of the output table should be indexed 
+* Existing output tables will be overwritten
    
 
 
@@ -17,7 +17,7 @@ This step creates a copy of a table, and if the table has char variables with a 
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_standalone_mode.png) | ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_flow_mode.png) |
+   | ![CAS - Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_standalone_mode.png) | ![CAS - Convert Char to Varchar](img/Convert_Char_to_Varchar_tabOptions_flow_mode.png) |
 
 * Compress - No to not compress the table, Yes otherwise
 
@@ -28,7 +28,7 @@ This step creates a copy of a table, and if the table has char variables with a 
 
 ### About tab 
 
-   ![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_tabAbout.png)
+   ![CAS - Convert Char to Varchar](img/Convert_Char_to_Varchar_tabAbout.png)
 
 ## Requirements
 
@@ -37,10 +37,12 @@ Tested on Viya version Stable 2023.01, No specific Viya version requirements
 
 ## Usage
 
-![CAS – Convert Char to Varchar](img/Convert_Char_to_Varchar_demo.gif)
+![CAS - Convert Char to Varchar](img/Convert_Char_to_Varchar_demo.gif)
 
 ## Change Log
 
+* Version 1.1 (05SEP2023)
+     * Renamed slightly - removed en-dash character (UTF8: 0xE2 0x80 0x94) with normal dash character (0x2D) in name of folder/step, so all CAS-related steps show up in alphabetical order in Steps panel
 * Version 1.0 (08FEB2023)
     * Initial version
 
