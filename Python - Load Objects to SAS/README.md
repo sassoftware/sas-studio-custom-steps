@@ -91,7 +91,7 @@ Note that where available, an existing CAS session will be used as the local sco
 
 ## Documentation:
 
-1. [Here's](https://sassoftware.github.io/python-swat/) documentation on the swat package: 
+1. [Here's](https://sassoftware.github.io/python-swat/) documentation on the swat package. 
 
 2. [Here's](https://go.documentation.sas.com/doc/da/pgmsascdc/default/proc/p0z7ahqmabxu6kn193kdojjhc477.htm) documentation on the SAS callback object and methods.  
 
@@ -103,7 +103,7 @@ Note that where available, an existing CAS session will be used as the local sco
 
 6. This [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Hotwire-your-SWAT-inside-SAS-Studio/ta-p/835956) provides details on the environment variables which facilitate connecting to CAS using the swat package within SAS Studio. 
 
-7. Peter Styliadis provided this [helpful post ](https://communities.sas.com/t5/SAS-Viya/Programmatically-detect-an-active-CAS-session/m-p/890914#M1985) (SAS documentation link contained therein) on how to identify a current active CAS session: 
+7. Peter Styliadis provided this [helpful post ](https://communities.sas.com/t5/SAS-Viya/Programmatically-detect-an-active-CAS-session/m-p/890914#M1985) (SAS documentation link contained therein) on how to identify a current active CAS session. 
 
 
 ## Installation & Usage
