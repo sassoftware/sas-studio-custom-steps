@@ -4,14 +4,14 @@ The Python - Load Objects to SAS custom step enables you to load different Pytho
 
 The following are some examples of the major object types handled:
 
-1.  Pandas dataframes                                        ==>     CAS tables / SAS datasets 
-2.  Standard Python objects (int, str etc.)        ==>.    SAS macro variables
-3.  Lists                                                                  ==>     CAS tables / SAS datasets
-4.  Dicts                                                                 ==>.    CAS tables / SAS datasets
+1.  Pandas dataframes ==> CAS tables / SAS datasets 
+2.  Standard Python objects (int, str etc.) ==> SAS macro variables
+3.  Lists ==> CAS tables / SAS datasets
+4.  Dicts ==> CAS tables / SAS datasets
 
 **Why go to this trouble?**  
 
-In a unified, integrated pipeline, once your Python program has done its job,  you can transfer desired data objects to a SAS Viya in-memory environment for more performant compute.  At the same time, you can easily free up memory taken up by these objects within Python.**
+In a unified, integrated pipeline, once your Python program has done its job,  you can transfer desired data objects to a SAS Viya in-memory environment for more performant compute.  At the same time, you can easily free up memory taken up by these objects within Python.
 
 
 ## A general idea (the below is an animated gif)
