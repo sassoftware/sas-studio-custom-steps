@@ -8,7 +8,12 @@ The "**Airflow - Generate DAG**" tool is a set of three Custom Steps that enable
 
 ***A DAG is defined in a Python script, which represents the DAGs structure (tasks and their dependencies) as code.***"
 
-The three steps used together allow the creation of the Python script that represents a DAG. The Python script needs to be copied in Airflow's DAG folder.
+The three steps used together allow the creation of the Python script that represents a DAG. The Python script needs to be copied in Airflow's DAG folder. 
+
+ 
+> You could describe it as an example of a no-code/low-code alternative to manually writing those Python scripts, when you only want to use SAS Airflow providers in your DAG. 
+
+> :warning: It shows that the combination of SAS Studio flows and Custom Steps can also be used to generate Apache Airflow DAGs instead of generating data transformation flows.
 
 See below for an example of a Python script that defines a DAG.
 
