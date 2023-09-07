@@ -13,7 +13,6 @@ The three steps used together allow the creation of the Python script that repre
  
 > You could describe it as an example of a no-code/low-code alternative to manually writing those Python scripts, when you only want to use SAS Airflow providers in your DAG. 
 
-:warning: Alternative 2
 > :warning: It shows that the combination of SAS Studio flows and Custom Steps can also be used to generate Apache Airflow DAGs instead of generating data transformation flows.
 
 See below for an example of a Python script that defines a DAG.
