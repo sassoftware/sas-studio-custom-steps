@@ -23,13 +23,13 @@ After running this custom step, you may want to consider adding the created SAS 
 * ### About tab ###
 ![](img/AboutTab.png)
 
-
 ## Requirements
 
 * SAS Viya 2023.06 or later
-* Specified path for output tables must exist on the SAS Server
 * Customized QKB is set as default in SAS Compute.  Refer to [this article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Add-a-Customized-Quality-Knowledge-Base-QKB-to-CAS-and/ta-p/891719) for more information.
 * Custom Data Masking standardization definitions must start with either "Mask", "Anonymize", or "Truncate" to be included on the output data masking definition (DM_MKDEF) table.
+* Specified path for output tables must exist on the SAS Server
+* Custom step must be executed by a user that has write access to the output path on the SAS Server
 
 
 ## Usage
