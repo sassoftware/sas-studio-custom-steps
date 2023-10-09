@@ -4,10 +4,11 @@
 
 The **Create QKB Reference Tables** custom step enables SAS Studio users to analyze the default Quality Knowledge Base (QKB) in SAS Compute and creates QKB Reference Tables for each of the definition types in the specified SAS Server location and creates a SAS Library.
 
+You would want to run this custom step, if you have customized your QKB and would like to have the reference tables with the definition names and information for each definition type in your customized QKB.
+
 For information on how to set a customized QKB as the default for SAS Compute, refer to this [SAS Community article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Add-a-Customized-Quality-Knowledge-Base-QKB-to-CAS-and/ta-p/891719).
 
-Also, any custom data masking definition must start with one of these three words: "Mask", "Anonymize", or "Truncate" to be included on the data masking definition (DM_MKDEF) table.
-
+Any custom data masking definition must start with one of these three words: "Mask", "Anonymize", or "Truncate" to be included on the data masking definition (DM_MKDEF) table.
 
 *Note:*  This custom step has no input and output tables; therefore, it is intended to be executed in Standalone mode.
 
@@ -35,9 +36,10 @@ After running this custom step, you may want to consider adding the created SAS 
 ## Usage
 ![Create QKB Reference Tables](img/CreateQKBREferenceTables.gif)
 
+Note:  The "error" in the Program log is warning messages about deprecated definitions in the QKB.
 
 ## Change Log
 
-* Version 1.0 (22SEP2023)
+* Version 1.0 (09OCT2023)
     * Initial version
 
