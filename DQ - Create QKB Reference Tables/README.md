@@ -12,7 +12,7 @@ Any custom data masking definition must start with one of these three words: "Ma
 
 *Note:*  This custom step has no input and output tables; therefore, it is intended to be executed in Standalone mode.
 
-After running this custom step, you may want to consider adding the created SAS library to your **autoexec** in *SAS Studio* or *SAS Environment Manager*.
+After running this custom step, you may want to consider adding the created SAS library to your **autoexec** in *SAS Studio* or *SAS Environment Manager*.  If you add **libname SASDQREF <output_path>**, then the delivered steps that reference the QKB will use your newly created tables.
 
 
 ## User Interface
