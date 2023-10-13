@@ -78,5 +78,5 @@ run;
 
 ## Change Log
 
-* Version 1.2 (12OCT2023)
+* Version 1.0 (12OCT2023)
     * Initial version
