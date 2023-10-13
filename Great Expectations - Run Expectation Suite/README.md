@@ -78,9 +78,5 @@ run;
 
 ## Change Log
 
-* Version 1.0 (21MAR2023)
-    * Initial version
-* Version 1.1 (08SEP2023)
-    * Updated node to include About tab
 * Version 1.2 (12OCT2023)
-    * Switching to use of SASPy library for input table
+    * Initial version
