@@ -18,12 +18,12 @@ The **GE - Run Expectation Suite** custom step enables SAS Studio Flow users to 
 
 ## Requirements
 
-Tested on Viya version Stable 2022.04.
-Python's great_expectatons library version v0.16.8 or after.
-The output .json expectation suite file from running **GE - Generate Expectation Suite**
-The output great_expectations.yml file from running **GE - Generate Expectation Suite**
-This Custom Step requires that Python be deployed and available in your SAS environment. The easiest way to achieve this is to enable and configure sas-pyconfig job which also brings along the GE package, following the steps indicated in this [article](https://communities.sas.com/t5/SAS-Communities-Library/Using-the-SAS-Configurator-for-Open-Source-to-Build-Python-and-R/ta-p/842310).
-Alternatively, one can run this custom step by first pip installing Python and GE. Follow the steps below to get GE into your environment:
+- Tested on Viya version Stable 2023.04.
+- Python's great_expectatons library version v0.16.8 or after.
+- The output .json expectation suite file from running **GE - Generate Expectation Suite**
+- The output great_expectations.yml file from running **GE - Generate Expectation Suite**
+- This Custom Step requires that Python be deployed and available in your SAS environment. The easiest way to achieve this is to enable and configure sas-pyconfig job which also brings along the GE package, following the steps indicated in this [article](https://communities.sas.com/t5/SAS-Communities-Library/Using-the-SAS-Configurator-for-Open-Source-to-Build-Python-and-R/ta-p/842310).
+- Alternatively, one can run this custom step by first pip installing Python and GE. Follow the steps below to get GE into your environment:
 ```
 import pip
 import os
