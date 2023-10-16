@@ -2,8 +2,6 @@
 
 # Great Expectations (GE) - Execute Business Rules
 
-[[_TOC_]]
-
 ## Description
 
 The "GE - Execute Business Rules" Custom Step enables SAS Studio Flow users to run business rules on data based on the Python [Great Expectations](https://greatexpectations.io/) package. This Custom Step is employed to measure the quality of data in terms of data accuracy, validity, completeness, uniqueness, and timelines. Generally, business rules produce a single result, whether the rule "fired" successfully (True) or not (False), indicating if the data meets the expectations of the rule.
@@ -69,7 +67,7 @@ Main outputs for running a rule on data:
 * Rules report - parsing out the GE's .json output as an output table 
 
 #### About Tab
-![](img/about_tab.png)
+![](img/about_tab.PNG)
 
 
 ## Requirements
