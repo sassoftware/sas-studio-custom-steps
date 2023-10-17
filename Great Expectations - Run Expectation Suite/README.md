@@ -80,3 +80,5 @@ run;
 
 * Version 1.0 (12OCT2023)
     * Initial version
+* Version 1.1 (17OCT2023)
+    * Removed unsupported sd2df parameters
