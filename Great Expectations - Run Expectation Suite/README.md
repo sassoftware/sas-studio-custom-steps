@@ -20,6 +20,11 @@ The **GE - Run Expectation Suite** custom step enables SAS Studio Flow users to 
 
 - Tested on Viya version Stable 2023.04.
 - Python's great_expectatons library version v0.16.8 or after.
+- Python's pandas library version 1.5.3.
+- Python's json library.
+- Python's os library.
+- Python's numpy library version 1.23.5.
+- Python's datetime library.
 - The output .json expectation suite file from running **GE - Generate Expectation Suite**
 - The output great_expectations.yml file from running **GE - Generate Expectation Suite**
 - This Custom Step requires that Python be deployed and available in your SAS environment. The easiest way to achieve this is to enable and configure sas-pyconfig job which also brings along the GE package, following the steps indicated in this [article](https://communities.sas.com/t5/SAS-Communities-Library/Using-the-SAS-Configurator-for-Open-Source-to-Build-Python-and-R/ta-p/842310).
@@ -77,8 +82,7 @@ run;
 
 
 ## Change Log
-
+* Version 1.1 (18OCT2023)
+    * Removed unsupported sd2df parameters
 * Version 1.0 (12OCT2023)
     * Initial version
-* Version 1.1 (17OCT2023)
-    * Removed unsupported sd2df parameters
