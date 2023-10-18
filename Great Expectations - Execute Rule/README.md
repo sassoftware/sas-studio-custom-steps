@@ -65,7 +65,7 @@ Main outputs for running a rule on data:
 * Rules report - parsing out the GE's .json output as an output table 
 
 #### About Tab
-![](img/about_tab.png)
+![](img/about_tab.PNG)
 
 
 ## Requirements
