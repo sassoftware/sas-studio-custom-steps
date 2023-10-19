@@ -4,7 +4,7 @@
 
 The "GE - Execute Business Rules" Custom Step enables SAS Studio Flow users to run business rules on data based on the Python [Great Expectations](https://greatexpectations.io/) package. This Custom Step is employed to measure the quality of data in terms of data accuracy, validity, completeness, uniqueness, and timelines. Generally, business rules produce a single result, whether the rule "fired" successfully (True) or not (False), indicating if the data meets the expectations of the rule.
 
-Sample data you can use for testing purposes is available in the `sample_dataset` folder.
+Publicly available sample csv file with 10000 rows of the Yellow Taxi Trip from the [NYC taxi data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) you can use for testing purposes is provided in the `sample_dataset` folder.
 
 In this Custom Step version, the following great expectations rules have been included:
 
