@@ -82,7 +82,7 @@ run;
 
 
 ## Change Log
-* Version 1.1 (18OCT2023)
-    * Removed unsupported sd2df parameters
+* Version 1.1 (19OCT2023)
+    * Removed unsupported sd2df parameters, added in clear statements to keep user directory clean
 * Version 1.0 (12OCT2023)
     * Initial version
