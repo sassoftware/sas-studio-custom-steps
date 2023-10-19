@@ -77,7 +77,7 @@ Python's great_expectations library version v0.15.0 or after
 ## Usage
 
 ### Installation
-Download the [GE - Execute Business Rules](./GE - Execute Business Rules.step) file, upload it into your environment and start using it.
+Download the GE - Execute Business Rules.step file, upload it into your environment and start using it.
 
 This Custom step requires that Python be deployed and available in your SAS environment. The easiest way to achieve this is to enable and configure sas-pyconfig job, which also brings along the GE package, following the steps indicated in this [article](https://communities.sas.com/t5/SAS-Communities-Library/Using-the-SAS-Configurator-for-Open-Source-to-Build-Python-and-R/ta-p/842310).
 
@@ -96,9 +96,6 @@ Alternatively, one can run this Custom step by first pip installing Python and G
 `sys.path`
 
 `import great_expectations as ge`
-
-
-
 
 
 A demo is provided in the example below:
