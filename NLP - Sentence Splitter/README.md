@@ -27,10 +27,12 @@ Tested in Viya 4, Stable 2023.08
 
 This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib).  Ensure you are connected to CAS before running this step.
 
+Also, this step requires that you have assigned the Public caslib to map to the PUBLIC SAS library.   This is used to create an intermediate CAS table during the process. Assign the caslib once you have established a connection to CAS.
+
 This custom step also requires a SAS Visual Text Analytics (VTA) license in order to run a sentence extraction model.
 
 ### Parameters:
-1. Input table containing a text column (input port, required)
+1. Input table containing a text column (input port, required): attach a CAS table to this port. 
 
 2. Language (drop-down list, default English): choose from the 33 languages supported by VTA.
 
@@ -41,7 +43,7 @@ This custom step also requires a SAS Visual Text Analytics (VTA) license in orde
 
 #### Output specifications:
 
-- Output table (output port, required): attach a table which will capture results at a sentence level.  
+- Output table (output port, required): specify a CAS table to capture results at a sentence level
    - In addition to each sentence, the output table also contains a new observation ID (Obs_ID) which combines the original document ID with the sentence ID
    - The sentence ID is also recalculated to be in sync with its position in the original document.
 
@@ -98,3 +100,6 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 
 Version 1.0 (15SEP2023) 
 * Initial Step Creation
+
+Version 1.1 (03NOV2023) 
+* Better error messages & documentation - identified during review
