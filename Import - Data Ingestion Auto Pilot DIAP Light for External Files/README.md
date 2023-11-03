@@ -545,10 +545,17 @@ Please provide the SAS Informat that should be used for that specific entry.
 
 ## Change Log
 
+Version 4.1.2 (28JUL2023)
+
+- adjusted code so it can handle spaces in extensions.
+- adjusted labels in UI controls to adhere to UI guidelines
+
 Version 4.1.1 (08FEB2023)
 
 - changing the name of the custom node to include the category "Import - " in the beginning of the name.
-  Version 4.1.0 (20OCT2022)
+
+Version 4.1.0 (20OCT2022)
+
 - adding some intelligence to handle separator determination, especially blank vs other separators. Any other separator always wins against blank.
 - adding 2 more separators for detection:
   - exclamation mark (!)
