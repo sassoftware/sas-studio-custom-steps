@@ -98,8 +98,9 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 
 ## Change Log
 
-* Version 1.1 (03NOV2023) 
-   * Better error messages & documentation - identified during review
+Version 1.1 (03NOV2023) 
+* Better error messages & documentation - identified during review
 
-* Version 1.0 (15SEP2023) 
-   * Initial Step Creation
+Version 1.0 (15SEP2023) 
+* Initial Step Creation
+
