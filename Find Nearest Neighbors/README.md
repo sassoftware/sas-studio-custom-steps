@@ -9,7 +9,7 @@ This custom step makes use of the fastknn.fastknn SAS Cloud Analytics Services (
 
 ## A general idea
 
-![A general idea](/img/Find%20Nearest%20Neighbors.png)
+![A general idea](./img/Find%20Nearest%20Neighbors.png)
 
 
 ## SAS Viya Version Support
