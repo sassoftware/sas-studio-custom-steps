@@ -1,4 +1,4 @@
-# Find Nearest Neighbours
+# Find Nearest Neighbors
 
 The Find Nearest Neighbors Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula.
 
