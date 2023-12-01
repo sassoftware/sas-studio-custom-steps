@@ -97,7 +97,7 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 3. [Details on the optional run-time trigger control](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526)
 
 ## SAS Program
-Refer [here](./Find%20Nearest%20Neighbours.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through other non-SAS Studio interfaces such as the Visual Studio Code Extension for SAS, with minor modifications.
+Refer [here](./extras/Find%20Nearest%20Neighbours.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
 
 
 ## Installation & Usage
