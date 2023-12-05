@@ -28,7 +28,7 @@ The step also allows you to optionally pull out the "nlpNounGroup"s found.
 
 ## Requirements
 * SAS Viya version 2022.12+
-* A license that supports the tpParse CAS action (such as a SAS Visual Text Analytics (VTA) license or a SAS Visual Data Mining and Machine Learning (VDMML) license.)
+* A license that supports the textParse.tpParse CAS action (such as a SAS Visual Text Analytics (VTA) license or a SAS Visual Data Mining and Machine Learning (VDMML) license.)
 * **At runtime: an active connection to CAS:** This custom step requires Cloud Analytics Services. Ensure you have an active CAS connection available prior to running the step.
 * input table must be in a caslib
 * input table must contain a column containing a Document ID
@@ -52,5 +52,3 @@ The **extras** folder contains a file with sample data of resumes from which you
 
 * Version 1.0 (12DEC2022)  
   * Initial version   
-
-```
