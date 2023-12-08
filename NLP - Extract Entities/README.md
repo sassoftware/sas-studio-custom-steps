@@ -47,7 +47,7 @@ The **extras** folder contains a file with sample data of resumes from which you
 
 ## Change Log
 
-* Version 1.1 (01DEC2023)
+* Version 1.1 (08DEC2023)
   * expanded support to include the nine out-of-the-box defined entities.
 
 * Version 1.0 (12DEC2022)  
