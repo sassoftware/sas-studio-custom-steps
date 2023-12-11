@@ -1,6 +1,6 @@
 # SAS Content - Obtain Folder URI
 
-This is a utility custom step which obtains the URI of a desired SAS Content folder and saves it in a global macro variable if the folder exists.  It also populates another global macro variable with a flag of 1 or 0 to indicate if the folder exists or not, which may be used in downstream code.
+This is a utility custom step which obtains the URI of a selected SAS Content folder and saves it in a global macro variable if the folder exists.  It also populates another global macro variable with a flag of 1 or 0 to indicate if the folder exists or not, which may be used in downstream code.
 
 Some SAS programs require operations to be performed on folders located inside the SAS Infrastructure Data Server (also known as SAS Content), and such operations typically require the folder URI. 
 
@@ -12,7 +12,7 @@ Some SAS programs require operations to be performed on folders located inside t
 This custom step wraps proc http calls to a SAS Viya endpoint in order to check for a folder.  While it's likely that your environment's administrator has already ensured the same, please verify that north-south communication among pods is enabled / whitelisted in your environment.  A quick check for this would be to run a simple proc http call (e.g. a get request) to your SAS Viya endpoint and note if you are able to get a response code of 200 (OK).
 
 ### Input Parameters
-* SAS Content Folder (folder selector, required): provide the full path of a desired SAS Content folder you wish to obtain the URI for.
+* SAS Content Folder (folder selector, required): provide the full path of a SAS Content folder you wish to obtain the URI for.
 
 ### Output Specifications
 

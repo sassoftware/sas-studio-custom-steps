@@ -1,8 +1,8 @@
 # SAS Content - Create Folder
 
-This is a utility custom step which creates a desired SAS Content folder.
+This is a utility custom step which allows you to create a new folder inside a SAS Content folder programmatically.
 
-Some SAS programs require operations to be performed on folders located inside the SAS Infrastructure Data Server (also known as SAS Content). This custom step facilitates such operations. 
+Some SAS programs require operations to be performed on folders inside SAS Content, which is a file service and not a mounted file system on SAS Compute. Therefore you cannot use the dcreate() DATA step function and have to use the Viya folders service (REST API).  
 
 ## General Idea
 ![SAS Content - Create Folder](./img/SAS_Content_Create_Folder.png)
@@ -13,9 +13,9 @@ This custom step wraps proc http calls to a SAS Viya endpoint in order to check 
 
 
 ### Input Parameters
-1. A parent folder within SAS Content (folder selector, required): provide the full path of a desired folder under which you wish to create the new folder.
+1. A parent folder within SAS Content (folder selector, required): provide the full path of a folder under which you wish to create the new folder.
 
-2. Desired name for new folder (folder selector, required): provide a name for the new folder.  Adhere to the naming conventions for SAS Content folders.
+2. Name for new folder (folder selector, required): provide a name for the new folder.  Adhere to the naming conventions for SAS Content folders.
 
 ### Output Specifications
 
