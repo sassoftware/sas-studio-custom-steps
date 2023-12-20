@@ -6,17 +6,28 @@ The "**CAS - Submit Python and R Code**" provides a wrapping for the CAS action 
 
 Use this custom step to execute open-source programs, taking advantage of parallelization, multiple threads and fast data exchange mechanisms (backed by the Apache Arrow in-memory data format).
 
-In the connect Python/R script you can access the input tables 1-10 like this:
+The step supports up to 10 input tables and up to 10 output tables. You can access those tables in Python/R script as follows
 
-**Python example:**  df = gateway.read_table(gateway.args['inputtable1'])
-**R example:** tbl <- read_table(gw$args[['inputtable1']])
+**Python example:** 
+```python
+# Read from input table 1
+df = gateway.read_table(gateway.args['inputtable1'])
+ 
+# Write to output table1
+gateway.write_table(df, (gateway.args['outputtable1'])
+ ```
+ 
+**R example:**
+```r
+# Read from input table 1
+tbl <- read_table(gw$args[['inputtable1']])
 
-Here is an example for the output tables 1-10:
+# Write to output table1
+tbl <- write_table(gw$args[['outputtable1']])
+```
 
-**Python example:** gateway.write_table(df, (gateway.args['outputtable1'])
-**R example:** tbl <- write_table(gw$args[['outputtable1']])
 
-In addition there are two variables available *inputTableCounter* and *outputTableCounter* which contain how many tables are connected to the step.
+Additionally, there are two variables, named *inputTableCounter* and *outputTableCounter*, representing how many input and output tables are connected to the step. 
 
 ## User Interface
 
