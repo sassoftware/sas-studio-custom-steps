@@ -18,12 +18,12 @@ This custom step wraps proc http calls to a SAS Viya endpoint in order to check 
 
 The simple output provided by this initial version of this custom step is in the form of 2 global macro variables.
 
-1.  targetFolderURI:  this contains the URI of the folder in case it exists, and a direction to the HTTP status code error variable in case of other reasons.  Other reasons could include the specified folder  not existing on the target environment, or an inability to make an HTTP request (as mentioned above).
-
-2. contentFolderExists: this is populated with the following values. 
-  i. In case the folder exists, this is populated with a value of 1.  
-  ii. In case the folder does not exist, the value is set to 0.
-  iii. In case the request was unsuccessful (resulting in a status code other than 200 or 404), then the value is set to 99.
+ 1. targetFolderURI: this contains the URI of the folder in case it exists, and a direction to the HTTP status code error variable in case of other reasons.  Other reasons could include the specified folder  not existing on the target environment, or an inability to make an HTTP request (as mentioned above).
+ 
+ 2. contentFolderExists: this is populated with the following values. 
+    1. In case the folder exists, this is populated with a value of 1.  
+    2. In case the folder does not exist, the value is set to 0.
+    3. In case the request was unsuccessful (resulting in a status code other than 200 or 404), then the value is set to 99.
 
 The value of SYS_PROCHTTP_STATUS_CODE, a system variable, is also surfaced within the log for better debugging.
 
@@ -85,5 +85,5 @@ Refer [here](./extras/SAS%20Content%20-%20Obtain%20Folder%20URI.sas) for the SAS
 
 ## Change Log
 
-* Version: 1.0  (03DEC2023)
+* Version: 1.0  (18DEC2023)
   * Initial version
