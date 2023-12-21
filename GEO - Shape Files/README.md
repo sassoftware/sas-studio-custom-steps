@@ -78,10 +78,13 @@ The parameters needed are:
 	*User can use name or label freely.*
 
 3. The Type of GEO Provider 
+
 	*The only choice for now is casTableRederence.*
 	
 4. The Geometry Type, based on the shape file 
+
 	*Is possible to select polygons or polylines.*
+
 5. The ID Column 
 6. The SEQUENCE Column
 7. The X Column
