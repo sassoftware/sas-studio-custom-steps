@@ -75,7 +75,7 @@ The parameters needed are:
 1. Name for the GEO Provider
 2. Label for the GEO Provider
 
-	*User can use name or label freely.*
+	***User can use name or label freely.***
 
 3. The Type of GEO Provider 
 
@@ -99,7 +99,7 @@ The parameters needed are:
 	*This file is one of the files that make up a Shape File.*
 
 
-![Create Geo Provider](./img/CreateGeoProvider.png)
+![Create Geo Provider](./img/CreateGEOProvider.png.png)
 
 ## Requirements
 
