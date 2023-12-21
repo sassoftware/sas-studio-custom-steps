@@ -42,7 +42,7 @@ The parameter required are:
 
 ![Shape Import 4](./img/ShapeImport_4.png)
 
-### ShapeInfo
+### ApplyShapeReduce
 
 To use this step is mandatory to run before it the ShapeImport custom step.
 Based on the results of the preious step is possible to decide how many point to include in the final table.
