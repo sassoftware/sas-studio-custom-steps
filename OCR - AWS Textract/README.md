@@ -48,7 +48,7 @@ To use this step an aws key & secret are required as credentials as well as an A
 - .png
 
 ## Usage
-[![YOUTUBE THUMBNAIL](img/thumbnail aws ocr custom step.jpg)](https://youtu.be/RP0CHuIbVGE)
+[![YOUTUBE THUMBNAIL](img/thumbnail_aws_ocr_custom_step.jpg)](https://youtu.be/RP0CHuIbVGE)
 
 
 
