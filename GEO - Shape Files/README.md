@@ -49,7 +49,7 @@ Based on the results of the preious step is possible to decide how many point to
 
 ![Apply Shape Reduce](./img/ApplyShapeReduce.png)
 
-**IMPORTANT: 
+**IMPORTANT:**
 Remember that by default, SAS Visual Analytics can retrieve up to 250,000 polygon vertices at a time.
 So its usefull to select a density with less than 250.000 N_Points_Cumulative. This can be view in the output of th ShapeImport step:
 
