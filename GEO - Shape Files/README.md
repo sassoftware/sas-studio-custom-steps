@@ -75,22 +75,25 @@ The parameters needed are:
 1. Name for the GEO Provider
 2. Label for the GEO Provider
 
-	User can use name or label freely.
+	*User can use name or label freely.*
 
-3. The Type of GEO Provider (only choice for now is casTableRederence)
-4. The Geometry Type, based on the shape file is possible to select polygons or polylines.
+3. The Type of GEO Provider 
+	*The only choice for now is casTableRederence.*
+	
+4. The Geometry Type, based on the shape file 
+	*Is possible to select polygons or polylines.*
 5. The ID Column 
 6. The SEQUENCE Column
 7. The X Column
 8. The Y Column
 9. The SEGMENT Column
 
-	For all this columns user can use the prompts to select one of the variables contained in the promoted table.
-	For some of this prompts values are already passed, because in most cases the variables have those names, but user is free to change them.
+	*For all this columns user can use the prompts to select one of the variables contained in the promoted table.*
+	*For some of this prompts values are already passed, because in most cases the variables have those names, but user is free to change them.*
 	
 10. The .prj file containing the coordinate Space to assign to the GEO Provider
 
-	This file is one of the files that make up a Shape File.
+	*This file is one of the files that make up a Shape File.*
 
 
 ![Create Geo Provider](./img/CreateGeoProvider.png)
