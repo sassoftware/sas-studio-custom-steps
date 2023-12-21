@@ -48,6 +48,10 @@ To use this step an aws key & secret are required as credentials as well as an A
 - .png
 
 ## Usage
+[![YOUTUBE THUMBNAIL](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
+
+
 > **Note:** This step works well with the following custom step [Create Listings of Directory - CLOD](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Create%20Listing%20of%20Directory%20CLOD) to create the input file-list based on a folder of documents. 
 
 ### Testdata
