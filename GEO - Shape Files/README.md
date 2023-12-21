@@ -4,7 +4,7 @@
 
 A shapefile refers to a file format used in geographic information systems (GIS) to store geospatial data and consists of several files that work together to store this information. 
 In Visual Analytics, shapefiles can be used to enhance geographical visualizations by providing additional geographic information and enabling the representation of data on maps.
-This folder contains five SAS Studio custom steps which help you having information, importing, reducing, promoting Shape Files, and also creating GEO PROVIDERS.
+This folder contains five SAS Studio custom steps which help you having information, importing, reducing, promoting Shape Files, and creating GEO PROVIDERS.
 
 ![Flow](./img/ShapeFile-Example_Flow.png)
 
@@ -24,7 +24,7 @@ The only parameter required is location of the .shp file.
 
 ### ShapeImport
 
-This step will import data contained in the .shp file, and can also analyze it for reduction.
+This step will import data contained in the .shp file and can also analyze it for reduction.
 The output of this step will contain a map based on the ID selected al if requested a table with the analysis for reduction.
 The parameter required are:
 
@@ -38,24 +38,24 @@ The parameter required are:
 
 ![Shape Import 3](./img/ShapeImport_3.png)
 
-3. If 'Yes' is selected for the question "Do you want to analize the shape to reduce its dimension?", the custom step will analyze the table and print a table with the analysis for reduction:
+3. If 'Yes' is selected for the question "Do you want to analyze the shape to reduce its dimension?", the custom step will analyze the table and print a table with the analysis for reduction:
 
 ![Shape Import 4](./img/ShapeImport_4.png)
 
 ### ApplyShapeReduce
 
 To use this step is mandatory to run before it the ShapeImport custom step.
-Based on the results of the preious step is possible to decide how many point to include in the final table.
+Based on the results of the previous step is possible to decide how many points to include in the final table.
 
 ![Apply Shape Reduce](./img/ApplyShapeReduce.png)
 
 **IMPORTANT:**
 Remember that by default, SAS Visual Analytics can retrieve up to 250,000 polygon vertices at a time.
-So its usefull to select a density with less than 250.000 N_Points_Cumulative. This can be view in the output of th ShapeImport step:
+So, it’s useful to select a density with less than 250.000 N_Points_Cumulative. This can be view in the output of the ShapeImport step:
 
 ![Shape Import 4](./img/ShapeImport_4.png)
 
-The only parameter required is the level of density, that can be selected in the prompt of the step:
+The only parameter required is the level of density, which can be selected in the prompt of the step:
 
 ![Apply Shape Reduce 2](./img/ApplyShapeReduce_2.png)
 
@@ -69,7 +69,7 @@ The second One must be a CAS table.
 
 ### CreateGeoProvider
 
-This will use the cas table promoted by the ShapePromote step t create a custom GEO Provider for SAS Visual Analytics.
+This will use the CAS table promoted by the ShapePromote step to create a custom GEO Provider for SAS Visual Analytics.
 The parameters needed are:
 
 1. Name for the GEO Provider
@@ -92,7 +92,7 @@ The parameters needed are:
 9. The SEGMENT Column
 
 	***For all this columns user can use the prompts to select one of the variables contained in the promoted table.***
-	***For some of this prompts values are already passed, because in most cases the variables have those names, but user is free to change them.***
+	***For some of this prompts the values are already entered, because in most cases the variables have those names, but user is free to change them.***
 	
 10. The .prj file containing the coordinate Space to assign to the GEO Provider
 
