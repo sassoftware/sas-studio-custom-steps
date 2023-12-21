@@ -48,7 +48,7 @@ To use this step an aws key & secret are required as credentials as well as an A
 - .png
 
 ## Usage
-[![YOUTUBE THUMBNAIL](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![YOUTUBE THUMBNAIL](img/flow_mode.PNG)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
 
 
