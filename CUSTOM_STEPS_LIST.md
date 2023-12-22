@@ -63,4 +63,5 @@
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 29SEP2022 |
 | [Synthetic Data Generation](./Synthetic%20Data%20Generation/README.md) | A collection of 4 SAS Studio custom steps which help you which help you train, score and assess Synthetic Data models. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 or later | 06OCT2022 |
 | [Translate Text](./Translate%20Text/README.md) | Translates text stored in a column using DeepL API | [David Weik](https://github.com/Criptic) | 2023.04 or later | 10MAY2023 |
+| [Update column labels](./Update%20column%20labels/README.md) | Update column labels from a (metadata) table, delimited file, or interactively | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 or later | 21DEC2023 |
 
