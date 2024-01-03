@@ -1,16 +1,16 @@
-# Azure - Extract Tables via OCR
-================================
+# Optical Character Recognition(OCR) - Azure AI Document Intelligence Table Extraction
+======================================================================================
 
-This custom step extracts tables contained in PDFs and images using [Microsoft Azure's Document Intelligence cloud AI services](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-3.1.0) (formerly known as Form Recognizer).
+This custom step extracts tables contained in PDFs and images using [Microsoft Azure's Document Intelligence cloud AI services](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-3.1.0). Azure AI Document Intelligence was formerly known as Form Recognizer.
 
 Organizations require seamless extraction and analysis of structured tabular information embedded in documents. Use this step to help tackle challenges that occur when dealing with data in document formats.
 
-Note that the Azure Document Intelligence service is capable of extracting other elements via OCR, all of which shall be gradually surfaced in this custom step.  You can access the SAS program (provided separately) and modify the same even now, if required (refer [here](#sas-program)).
+Note that the Azure AI Document Intelligence service is capable of extracting other elements via OCR, all of which shall be gradually surfaced in this custom step.  You can access the SAS program (provided separately) and modify the same even now, if required (refer [here](#sas-program)).
  
  
 ## A general idea (below picture's an animated gif)
 
-![Azure - Extract Tables via OCR](./img/Azure%20-%20Extract%20Tables%20via%20OCR.gif)
+![OCR - Azure AI Document Intelligence Table Extraction](./img/OCR%20-%20Azure%20AI%20Document%20Intelligence%20Table%20Extraction.gif)
 
 ## SAS Viya Version Support
 Tested in Viya 4, Stable 2023.09
@@ -29,7 +29,7 @@ Tested in Viya 4, Stable 2023.09
 
 4. Preferable / recommended:  Make use of the SAS Configurator for Open Source (also commonly known as sas-pyconfig) to install and configure Python access from SAS Viya.  Refer SAS Viya Deployment Guide (monthly stable 2023.08 onwards) for instructions on the same. Documentation provided below.
 
-5. An Azure subscription and an active Azure AI Services or Document Intelligence  resource.  You can create the same through an Azure portal or CLI.
+5. An Azure subscription and an active Azure AI Services or Document Intelligence resource.  You can create the same through an Azure portal or CLI.
 
 6. Once your resource is ready, retrieve your Azure endpoint and access key for use within the UI.
 
@@ -56,7 +56,7 @@ Note that ALL table elements identified in the document will be extracted as a s
 ### Configuration (tab)
 1. Path to a file containing your Document Intelligence key (file selector, required): save your key in a secure location (i.e. accessible only to designated users) and provide this path 
 
-2. Azure Document Intelligence endpoint (text field, required): refer to the Microsoft Azure resource you had created to obtain this value
+2. Azure AI Document Intelligence endpoint (text field, required): refer to the Microsoft Azure resource you had created to obtain this value
 
 ## Run-time control
 
@@ -92,7 +92,7 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 
 1. [Azure example for accessing the Document Intelligence via Python](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/quickstarts/get-started-sdks-rest-api?view=doc-intel-3.1.0&tabs=ga%2Cv2-0&pivots=programming-language-python)
 
-2. [A general article / blog on Azure Document Intelligence (previously known as Form Recognizer)](https://techcommunity.microsoft.com/t5/azure-ai-services-blog/enhanced-table-extraction-from-documents-with-form-recognizer/ba-p/2058011
+2. [A general article / blog on Azure AI Document Intelligence (previously known as Form Recognizer)](https://techcommunity.microsoft.com/t5/azure-ai-services-blog/enhanced-table-extraction-from-documents-with-form-recognizer/ba-p/2058011
 )
 3. [Scott McCauley's article on configuring Viya for Python integration](https://communities.sas.com/t5/SAS-Communities-Library/Configuring-SAS-Viya-for-Python-Integration/ta-p/847459)
 
@@ -101,7 +101,7 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 
 ## SAS Program
 
-Refer [here](./extras/Azure%20-%20Extract%20Tables%20via%20OCR.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
+Refer [here](./extras/OCR%20-%20Azure%20AI%20Document%20Intelligence%20Table%20Extraction.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
 
 
 ## Installation & Usage
