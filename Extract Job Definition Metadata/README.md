@@ -17,12 +17,16 @@ This step makes use of the SAS Viya Job Definitions REST API endpoint - see the 
 
 ## Requirements
 
-SAS Viya 2023.04 or later.
+SAS Viya 2023.11 or later.
 
 ## Usage
 
 Find a demonstration of this step in this YouTube video: [Extract Job Metadata |Custom Step](https://youtu.be/8c-LAu8zArM).
 
 ## Change Log
-Version : 1.0.   (04MAY2023)
+Version: 1.1.   (23NOV2023)
+  - Support for JSON prompts added
+
+Version: 1.0.   (04MAY2023)
+  - Initial Version
 
