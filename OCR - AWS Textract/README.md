@@ -2,12 +2,13 @@
 
 ## Description
 
-The OCR - AWS Textract custom step enables SAS Studio users to easily perform [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) using [AWS Textract](https://aws.amazon.com/textract/).
+This custom step uses the AWS Textract](https://aws.amazon.com/textract/) service to perform different types of [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on files that can be stored in S3 buckets or on the SAS Compute file system.
+
 
 ### Features
 - Text Extraction (Words / Lines / Paragraphs / Pages)
 - Form Extraction (Key-Value)
-- Supports: Local Files (Viya) & Files in S3 Bucket
+- Supports: Local Files (SAS Viya) & Files in S3 Bucket
 
 ## User Interface
 * ### Options tab ###
@@ -30,7 +31,7 @@ The OCR - AWS Textract custom step enables SAS Studio users to easily perform [O
 
 ## Requirements
 
-Tested on Viya version Stable 2022.09
+Tested on SAS Viya version Stable 2022.09
 
 ### Python Packages
 - [boto3](https://pypi.org/project/boto3/)
@@ -65,8 +66,8 @@ X = Always Required | O = Required (for certain settings) |  = No user input req
 | Extraction Type     | X        | Option  | Specifies the AWS Textract action that is called. For text: DetectDocumentText, for forms: AnalyzeDocument |
 | Extraction Level    | X        | Option  | The level of aggregation of the detected text. Possible values: Word, Line, Paragraph, Text       |
 | File Location       | X        | Option  | Specifies whether the files are stored locally or in a S3 bucket                                   |
-| Input Type          | X        | Option  | Specifies which documents should be processed. For local files (Viya): Single file, list of files (table), For S3 Bucket: list of files (table), or a whole bucket |
-| File Path           |O          | Path    | File to be processed. Only when "Viya" and "just one file" is selected                             |
+| Input Type          | X        | Option  | Specifies which documents should be processed. For local files (SAS Viya): Single file, list of files (table), For S3 Bucket: list of files (table), or a whole bucket |
+| File Path           |O          | Path    | File to be processed. Only when "SAS Viya" and "just one file" is selected                             |
 | File List           |O          | Table   | Table containing list of files. Only when a "list of files" is selected                            |
 | Document Path Column|O          | Column  | Column that contains the file paths. Only when "list of files" is selected                         |
 | S3 Bucket Name      | O        | String  | Name of the S3 bucket containing the files. Only when "S3 Bucket" is selected                      |
