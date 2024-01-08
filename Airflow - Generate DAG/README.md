@@ -54,7 +54,7 @@ Corresponding DAG in Airflow:
 
 Main properties of the DAG:
 
-![](img/franir_2024-01-05-16-11-52.png)
+![](img/franir_2024-01-08-17-05-43.png)
 
 #### Global Options tab
 
@@ -111,16 +111,18 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 | Version | Date      | Updates                                                                            | Built on SAS Viya | SAS Airflow Provider Release |
 | ------- | --------- | ---------------------------------------------------------------------------------- | ----------------- | ---------------------------- |
 | 1.4     | 08JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
-|         |           | &nbsp;&nbsp;&nbsp;(contribution from Lorenzo Toja)                                 |                   |                              |
+|         |           | &nbsp;(contribution from Lorenzo Toja)                                             |                   |                              |
 |         |           | Support of Airflow Datasets for scheduling                                         |                   |                              |
-|         |           | &nbsp;&nbsp;&nbsp;- ability to define logical Datasets on tasks                    |                   |                              |
-|         |           | &nbsp;&nbsp;&nbsp;- ability to schedule a DAG upon the update of Datasets          |                   |                              |
+|         |           | &nbsp;- ability to define logical Datasets on tasks                                |                   |                              |
+|         |           | &nbsp;- ability to schedule a DAG upon the update of Datasets                      |                   |                              |
+|         |           | Support of cron presets for scheduling                                             |                   |                              |
+|         |           | Support of timedelta expressions for scheduling                                    |                   |                              |
 |         |           | Support "Unpause on creation" to create an active DAG                              |                   |                              |
 |         |           | Proper deletion of the Compute session when reusing a session                      |                   |                              |
-|         |           | &nbsp;&nbsp;&nbsp;(SERIAL mode)                                                    |                   |                              |
+|         |           | &nbsp;(SERIAL mode)                                                                |                   |                              |
 | 1.3     | 30AUG2023 | New features provided by latest SAS Airflow Provider Release                       | Stable 2023.07    | 0.0.7                        |
 |         |           | Run SAS programs, embed SAS code, reuse SAS compute sessions,                      |                   |                              |
-|         |           | &nbsp;&nbsp;&nbsp;provide macro-variables, provide Airflow context variables, etc. |                   |                              |
+|         |           | &nbsp;provide macro-variables, provide Airflow context variables, etc.             |                   |                              |
 | 1.2     | 26JUL2023 | Page rearrangement                                                                 | Stable 2023.07    | 0.0.5                        |
 | 1.1     | 05APR2023 | UI standardization                                                                 | Stable 2023.03    | 0.0.1                        |
 |         |           | DAG and task name validation                                                       |                   |                              |
