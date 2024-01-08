@@ -2,7 +2,7 @@
 
 ## Description
 
-This custom step uses the AWS Textract](https://aws.amazon.com/textract/) service to perform different types of [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on files that can be stored in S3 buckets or on the SAS Compute file system.
+This custom step uses the [AWS Textract](https://aws.amazon.com/textract/) service to perform different types of [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on files that can be stored in S3 buckets or on the SAS Compute file system.
 
 
 ### Features
