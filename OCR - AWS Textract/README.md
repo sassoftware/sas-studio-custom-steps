@@ -49,6 +49,11 @@ To use this step an aws key & secret are required as credentials as well as an A
 - .png
 
 ## Usage
+### 📺 Tutorial (Click Thumbnail)
+[![YOUTUBE THUMBNAIL](img/thumbnail_aws_ocr_custom_step.jpg)](https://youtu.be/RP0CHuIbVGE)
+
+
+
 > **Note:** This step works well with the following custom step [Create Listings of Directory - CLOD](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Create%20Listing%20of%20Directory%20CLOD) to create the input file-list based on a folder of documents. 
 
 ### Testdata
