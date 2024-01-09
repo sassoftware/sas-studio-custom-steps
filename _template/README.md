@@ -48,6 +48,8 @@ Tested on Viya version Stable 2022.09
 
 ## Change Log
 
+* Version 1.3 (22DEC2023) 
+    * Added sample code snippets to remove intermediate tables, macros and macro variables that are created by the step
 * Version 1.2 (04SEP2023) 
     * About tab: Moved text for Prereqs/Documentation/Changelog into expandable sections for readability
     * Added **extras** sub-folder to store older version of step in zip file when latest update of step requires very recent version of SAS Studio
