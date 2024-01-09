@@ -1,5 +1,4 @@
 # Optical Character Recognition(OCR) - Azure AI Document Intelligence Table Extraction
-======================================================================================
 
 This custom step extracts tables contained in PDFs and images using [Microsoft Azure's Document Intelligence cloud AI services](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-3.1.0). Azure AI Document Intelligence was formerly known as Form Recognizer.
 
