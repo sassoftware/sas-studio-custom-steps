@@ -92,5 +92,5 @@ X = Always Required | O = Required (for certain settings) |  = No user input req
 |Pragraph Detection Threshold|| AWS Textract doesn't provide the OCR results on a paragraph level. Hence, paragraphs are detected after the fact by looking for text lines that are close / overlapping|
 
 ## Change Log
-* Version 1.0 (13SEP2022) 
+* Version 1.0 (08JAN2024) 
     * Initial version
