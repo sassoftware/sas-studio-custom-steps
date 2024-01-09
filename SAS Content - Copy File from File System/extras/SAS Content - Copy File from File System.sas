@@ -29,7 +29,7 @@
 /* -----------------------------------------------------------------------------------------* 
    Macro to identify whether a given folder location provided from a 
    SAS Studio Custom Step folder selector happens to be a SAS Content folder
-   or a folder on the filesystem (SAS Server).
+   or a folder on the File System (SAS Server).
 
    Inputs:
    1. pathReference: A path reference provided by the file or folder selector control in 
@@ -218,11 +218,11 @@
    %if &_cff_error_flag.=0 %then %do;
       %_identify_content_or_server(&sourceFile.);
       %if "&_path_identifier."="sasserver" %then %do;
-         %put NOTE: The source file is provided from the filesystem and prefixed with &_path_identifier..;
+         %put NOTE: The source file is provided from the File System and prefixed with &_path_identifier..;
       %end;
       %else %do;
          %let _cff_error_flag=1;
-         %put ERROR: Path provided does not seem to be in the filesystem. Check your path. ;
+         %put ERROR: Path provided does not seem to be in the File System. Check your path. ;
       %end;
    %end;
 

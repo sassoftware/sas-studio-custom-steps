@@ -1,23 +1,23 @@
-# SAS Content - Copy File from Filesystem
+# SAS Content - Copy File from File System
 ==========================================
 
-This custom step copies a file from the filesystem (also referred to as "shared storage" or the SAS server) to a target SAS Content (also known as SAS Infrastructure Data Server) folder.
+This custom step copies a file from the file system connected to SAS Viya Compute (also referred to as "shared storage" or the SAS server) to a target SAS Content folder location. SAS Content is implemented using the [SAS Viya Platform Files service](https://go.documentation.sas.com/doc/en/pgmsascdc/default/pgmgs/p1xx7ixqx0y1ldn1f7rkexhbol71.htm), and the files are maintained in the SAS Infrastructure Data Server database.
 
-This facilitates operations where code and supporting files are sourced from a filesystem but are better suited for execution within SAS Content.  For example, users may access source code from GitHub or GitLab repositories.  
+This facilitates operations where code and supporting files are sourced from the file system but are better suited for execution within SAS Content.  For example, users may access source code from GitHub or GitLab repositories.  
 
 ## General Idea
-![SAS Content - Copy File from Filesystem](./img/SAS_Content_Copy_Files_from_Filesystem.gif)
+![SAS Content - Copy File from File System](./img/SAS_Content_Copy_Files_from_File_System.gif)
 
 ## Parameters
 
-Note that this step only makes a copy of the file, and does not perform a cut (or move) operation. Source files continue to remain on the filesystem unless explicitly deleted.
+Note that this step only makes a copy of the file, and does not perform a cut (or move) operation. Source files continue to remain on the file system unless explicitly deleted.
 
 This custom step also wraps proc http calls to a SAS Viya endpoint.  While it's likely that your environment's administrator has ensured the same, verify that north-south communication among pods is enabled / whitelisted in your environment.  Proc http won't work for Viya endpoints (though they may for other endpoints) in such a case.  Viya may consider the SAS Studio session pod IP (which is making the call) as not recognizable and therefore timeout the request.  A quick check for this would be to run a simple proc http call (e.g. a get request) to your SAS Viya endpoint and note if you are able to get a response code of 200 (OK).
 
 
 ### Input Parameters
 
-1. **Source file from the filesystem** (file selector, required): specify the full path of a file to be transferred to SAS Content.  Note this custom step makes use of the same file name when saving to SAS Content.
+1. **Source file from file system** (file selector, required): specify the full path of a file to be transferred to SAS Content.  Note this custom step makes use of the same file name when saving to SAS Content.
 
 2. **Target folder in SAS Content** (folder selector, required): select a folder inside SAS Content.  
 
@@ -68,22 +68,24 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 
 1. [SAS Documentation on the fcopy() function used for copying files](https://go.documentation.sas.com/doc/en/pgmsascdc/default/lefunctionsref/n10dz22b5ixohin1vwzilweetek0.htm)
 
-2. [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Making-SAS-programs-stored-on-the-file-system-available-to-SAS/ta-p/525688) by Gerry Nelson which provides an example based on the fcopy() function which is used in this step. 
+2. Documentation for the [SAS Viya Platform Files service](https://go.documentation.sas.com/doc/en/pgmsascdc/default/pgmgs/p1xx7ixqx0y1ldn1f7rkexhbol71.htm).
 
-3. [Reference macro from Bruno Mueller](https://blogs.sas.com/content/sasdummy/files/2013/09/binaryfilecopy.sas_.txt) which provides another approach for transferring binary files.
+3. [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Making-SAS-programs-stored-on-the-file-system-available-to-SAS/ta-p/525688) by Gerry Nelson which provides an example based on the fcopy() function which is used in this step. 
 
-4. Note this [section within the documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/default/lestmtsglobal/p0qapul7pyz9hmn0zfoefj0c278a.htm#p0nscb67k9xhr5n1fqx4pvnoed4f) on the filesrvc filename reference method.  Note that the filesrvc filename reference results in an automatically generated macro variable containing the URI, which is in fact used within this custom step.  However, the direct use of the filesrvc reference on a non-existent folder results in an error, which is handled by this custom step.  
+4. [Reference macro from Bruno Mueller](https://blogs.sas.com/content/sasdummy/files/2013/09/binaryfilecopy.sas_.txt) which provides another approach for transferring binary files.
 
-5. The 'proc http' sections of this steps inspired by similar code by David Weik for the purpose of transferring custom steps.  His full code is located [here](https://github.com/Criptic/sas_snippets/blob/master/Upload-and-Register-all-Custom-Steps.sas)
+5. Note this [section within the documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/default/lestmtsglobal/p0qapul7pyz9hmn0zfoefj0c278a.htm#p0nscb67k9xhr5n1fqx4pvnoed4f) on the filesrvc filename reference method.  Note that the filesrvc filename reference results in an automatically generated macro variable containing the URI, which is in fact used within this custom step.  However, the direct use of the filesrvc reference on a non-existent folder results in an error, which is handled by this custom step.  
 
-6. [Identify whether a fileref exists](https://go.documentation.sas.com/doc/en/pgmsascdc/default/lefunctionsref/p0b6qacxrmnzc4n145t9jps0yzdc.htm) 
+6. The 'proc http' sections of this steps inspired by similar code by David Weik for the purpose of transferring custom steps.  His full code is located [here](https://github.com/Criptic/sas_snippets/blob/master/Upload-and-Register-all-Custom-Steps.sas)
 
-7. [Details on the optional run-time trigger control](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526)
+7. [Identify whether a fileref exists](https://go.documentation.sas.com/doc/en/pgmsascdc/default/lefunctionsref/p0b6qacxrmnzc4n145t9jps0yzdc.htm) 
+
+8. [Details on the optional run-time trigger control](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526)
 
 
 ## SAS Program
 
-Refer [here](./extras/SAS%20Content%20-%20Copy%20File%20from%20Filesystem.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
+Refer [here](./extras/SAS%20Content%20-%20Copy%20File%20from%20File System.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
 
 ## Installation & Usage
 
@@ -103,6 +105,9 @@ Also, thanks to the following (SAS) colleagues whose earlier work helped in the 
 
 
 ## Change Log
+
+* Version: 1.01  (09JAN2024)
+  * README and About tab edits including references to the file system
 
 * Version: 1.0  (02JAN2024)
   * Version submitted to GitHub
