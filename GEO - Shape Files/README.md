@@ -5,7 +5,7 @@
 A shapefile refers to a file format used in geographic information systems (GIS) to store geospatial data and consists of several files 
 that work together to store this information.
  
-In Visual Analytics, shapefiles can be used to enhance geographical visualizations by providing additional geographic information and 
+In SAS Visual Analytics, shapefiles can be used to enhance geographical visualizations by providing additional geographic information and 
 enabling the representation of data on maps.
 This folder contains five SAS Studio custom steps which help you having information, importing, reducing, promoting Shape Files, and 
 creating GEO PROVIDERS.
