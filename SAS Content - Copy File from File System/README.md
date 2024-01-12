@@ -85,7 +85,7 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 
 ## SAS Program
 
-Refer [here](./extras/SAS%20Content%20-%20Copy%20File%20from%20File System.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
+Refer [here](./extras/SAS%20Content%20-%20Copy%20File%20from%20File%20System.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
 
 ## Installation & Usage
 
