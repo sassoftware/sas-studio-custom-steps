@@ -133,5 +133,8 @@ Refer [here](./extras/NLP%20-%20Categories%20Testing%20Framework.sas) for the SA
 
 ## Change Log
 
+* Version: 1.01  (10JAN2024)
+  * Improved error messages
+
 * Version: 1.0  (03JAN2024)
   * Submitted to GitHub

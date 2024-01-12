@@ -254,7 +254,7 @@ caslib _ALL_ assign;
          %let _usr_nameCaslib=;
 
          %if "&inputCaslib." = "" %then %do;
-            %put ERROR: Input table caslib is blank. Check if Base table is a valid CAS table. ;
+            %put ERROR: Library selected for input table needs to point to a caslib. ;
             %let _nctf_error_flag=1;
          %end;
 
@@ -274,7 +274,7 @@ caslib _ALL_ assign;
          %let _usr_nameCaslib=;
 
          %if "&outputCaslib." = "" %then %do;
-            %put ERROR: Output table caslib is blank. Check if Output table is a valid CAS table. ;
+            %put ERROR: Library selected for output table needs to point to a caslib. ;
             %let _nctf_error_flag=1;
          %end;
 
