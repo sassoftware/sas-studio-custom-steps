@@ -32,5 +32,8 @@ This custom step has been tested on SAS Viya version Stable 2023.11.
 
 ## Change Log
 
+* Version 1.01 (15JAN2024) 
+    * Added section: Known issues
+    
 * Version 1.0 (21DEC2023) 
     * Initial version
