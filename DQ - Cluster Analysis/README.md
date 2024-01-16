@@ -6,6 +6,9 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 * You can either run rules and set an individual score for each rule condition or
 * You can use the rules to determine if a cluster rule was triggered for a record to match a cluster.
 
+## User interface ##
+
+* # Cluster Analysis tab #
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
