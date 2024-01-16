@@ -6,9 +6,23 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 * You can either run rules and set an individual score for each rule condition or
 * You can use the rules to determine if a cluster rule was triggered for a record to match a cluster.
 
+**Note:** The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.
+
 ## User interface ##
 
 * # Cluster Analysis tab #
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
+1. **Cluster ID column** - Set the cluster id for the cluster to analyse.
+2. **Number of rules** - Set to the number of rules for the cluster analysis. Max number of rules is 5.
+3. **Number of rule conditions** - Set to the number of condition for the rule. Max number of conditions is 8.
+4. **Record 1 Field** - Set the column of the first record.
+5. **Record 2 Field** - Set the column of the second record.
+6. **Camparison** - Chose from the drop down list how to compare the two record fields.
+7. **Score** - Set the score to be assigned if the condition is true. Default score is 10.
+
+* # Options tab #
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
