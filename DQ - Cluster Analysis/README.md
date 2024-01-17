@@ -37,6 +37,6 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
      
    | Use rules for cluster analysis - output columns |
    | --- |                  
-   | ![](img/CA-output-01.jpg) |
+   | ![](img/CA-output-00.jpg) |
 
    Columns **row1 & row2** indicate the table row number for the records that were compared.
