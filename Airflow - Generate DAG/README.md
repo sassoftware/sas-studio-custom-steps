@@ -110,7 +110,7 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 | Version | Date      | Updates                                                                            | Built on SAS Viya | SAS Airflow Provider Release |
 | ------- | --------- | ---------------------------------------------------------------------------------- | ----------------- | ---------------------------- |
-| 1.4     | 08JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
+| 1.4     | 09JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
 |         |           | &nbsp;(contribution from Lorenzo Toja)                                             |                   |                              |
 |         |           | Support of Airflow Datasets for scheduling                                         |                   |                              |
 |         |           | &nbsp;- ability to define logical Datasets on tasks                                |                   |                              |
