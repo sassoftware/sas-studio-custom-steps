@@ -25,12 +25,18 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    | --- |                  
    | ![](img/CA-Options.jpg) |
   
-When using **Use rules for cluster analysis** the rules are used to analyse the clusters. Each record in a cluster will be compared with each other based on the rules.
-A sore will be set for each rule condition that is true.
-1. **Show condition score** - A score column for each rule condition will be added to the output table.
-2. **Show rule score** - A score column for each rule will be added to the output table. The rule sore is the aggregated condition score for rule.
-3. **Show total score** - A total score column will be added to the output table. The total score is the the aggregated rule score.
+   When using **Use rules for cluster analysis** the rules are used to analyse the clusters. Each record in a cluster will be compared with each other based on the rules.
+   A sore will be set for each rule condition that is true.
+   - **Show condition score** - A score column for each rule condition will be added to the output table.
+   - **Show rule score** - A score column for each rule will be added to the output table. The rule sore is the aggregated condition score for rule.
+   - **Show total score** - A total score column will be added to the output table. The total score is the the aggregated rule score.
+   
+   **Note:** The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.  
+---
+   **Analysis output**
+     
+   | Use rules for cluster analysis - output columns |
+   | --- |                  
+   | ![](img/CA-output-01.jpg) |
 
-**Note:** The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.  
-
-Use rules as cluster rules
+   Columns **row1 & row2** indicate the table row number for the records that were compared.
