@@ -51,5 +51,8 @@ Find a demonstration of this step in this YouTube video: [CAS - Submit Python an
 
 ## Change Log
 
+* Version 1.01 (11JAN2024)
+    * Updated readme
+      
 * Version 1.0 (19NOV2023)
     * Initial version
