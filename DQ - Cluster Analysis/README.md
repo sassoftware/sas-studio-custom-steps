@@ -31,14 +31,22 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    - **Show condition score** - A score column for each rule condition will be added to the output table.
    - **Show rule score** - A score column for each rule will be added to the output table. The rule sore is the aggregated condition score for rule.
    - **Show total score** - A total score column will be added to the output table. The total score is the the aggregated rule score.
-   
-   **Note:** The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.  
+
+> [!NOTE]
+> The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.  
 ---
-   **Analysis output**
+  <details>
+  <summary>Cluster Analysis step output</summary>
      
    | Use rules for cluster analysis - output columns |
    | --- |                  
    | ![](img/CA-output-00.jpg) |
 
-   Columns **row1 & row2** indicate the record id for the records that were compared.
-   Column **R1Score** shows the score for rule 1. The is the aggregated score for the rule 1 conditions
+   - Columns **row1 & row2** indicate the record id for the records that were compared.
+   - Column **R1Score** shows the score for rule 1. The is the aggregated score for the rule 1 conditions.
+   - Columns **R1C1 & R1C2** show the score for the two conditions of rule 1.
+   - Column **total_score** show the aggregated score for rule 1 and rule 2.
+
+   + Row 4 shows for columns row1 & row2 the same record id and for all score columns the value -1. The value -1 indicates that this record was already compared with all other records in the cluster. For the completeness of the cluster this record has still to be shown.
+   </details>
+
