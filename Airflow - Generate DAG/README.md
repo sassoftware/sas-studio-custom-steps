@@ -20,6 +20,12 @@ See below for an example of a Python script that defines a DAG.
 
 See [Change Log and Requirements](#change-log-and-requirements).
 
+## Requirements
+
+* SAS Viya: 2023.12 or later
+* SAS Airflow Provider: 0.0.12 or later
+* Airflow: "minimum-release-goes-here"
+
 ## User Interface
 
 These three custom steps must be used in "Flow" mode. They are not designed to work in "Standalone" mode.
