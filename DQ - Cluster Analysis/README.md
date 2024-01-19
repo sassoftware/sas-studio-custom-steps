@@ -34,9 +34,9 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 
 > [!NOTE]
 > The step is going to build a cartesian product for each cluster. All records in a cluster will be compared with each other. If clusters are big the cartesian product will be big and may result in a long run time.  
----
   <details>
-  <summary>Cluster Analysis step output</summary>
+
+  <summary><b>Use rules for cluster analysis</b> - output</summary>
      
    | Use rules for cluster analysis - output columns |
    | --- |                  
@@ -50,3 +50,9 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    + Row 4 shows for columns row1 & row2 the same record id and for all score columns the value -1. The value -1 indicates that this record was already compared with all other records in the cluster. For the completeness of the cluster this record has still to be shown.
    </details>
 
+---   
+   | Use rules as cluster rules |
+   | --- |                  
+   | ![](img/CA-Options-02.jpg) |
+
+   When using **Use rules as cluster rules** the rules are assumed to be the rules used to cluster the data when running the cluster step. The rules should be the same rules, with the same condition and in the same order. This way the output result can be better associated with the cluster step rules.
