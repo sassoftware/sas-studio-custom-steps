@@ -56,3 +56,4 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    | ![](img/CA-Options-02.jpg) |
 
    When using **Use rules as cluster rules** the rules are assumed to be the rules used to cluster the data when running the cluster step. The rules should be the same rules, with the same condition and in the same order. This way the output result can be better associated with the cluster step rules.
+   
