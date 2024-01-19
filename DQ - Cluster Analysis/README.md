@@ -57,3 +57,14 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 
    When using **Use rules as cluster rules** the rules are assumed to be the rules used to cluster the data when running the cluster step. The rules should be the same rules, with the same condition and in the same order. This way the output result can be better associated with the cluster step rules.
    
+  <details>
+
+  <summary><b>Use rules as cluster rules</b> - output</summary>
+     
+   | Use rules as cluster rules - output columns |
+   | --- |                  
+   | ![](img/CA-output-02.jpg) |
+
+   There is a column for each rule added to the output. E.g. if you have three rule you will see columns R1, R2, R3 for the three rules respectively. The columns indicate for each record if a cluster rule was triggered (1) or not (0). In the screenshot above for record 1 (ID 4) all cluster rules were triggered for the record to join the cluster 1. For record 4 (ID 8074) only rule three got triggered to join cluster 2. 
+   When analysing the clusters, one can assmue the more rule were triggered for a record to join a cluster the more confident one can be in the match.
+   </details>
