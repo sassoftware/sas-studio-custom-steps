@@ -18,7 +18,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 4. **Record 1 Field** - Set the column of the first record.
 5. **Record 2 Field** - Set the column of the second record.
 6. **Camparison** - Chose from the drop down list how to compare the two record fields.
-7. **Score** - Set the score to be assigned if the condition is true. Default score is 10.
+7. **Score** - Set the score to be assigned if the condition is true. Default score is 10. (*The score field is olny available for option "Use rules for cluster analysis"*)
 
 ### Options tab - Use rules for cluster analysis ###
    | Use rules for cluster analysis |
