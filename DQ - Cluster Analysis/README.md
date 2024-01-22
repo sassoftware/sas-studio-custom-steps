@@ -8,7 +8,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 
 ## User interface ##
 
-* # Cluster Analysis tab #
+# Cluster Analysis tab #
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
@@ -20,7 +20,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 6. **Camparison** - Chose from the drop down list how to compare the two record fields.
 7. **Score** - Set the score to be assigned if the condition is true. Default score is 10.
 
-* # Options tab #
+# Options tab - Use rules for cluster analysis #
    | Use rules for cluster analysis |
    | --- |                  
    | ![](img/CA-Options.jpg) |
@@ -51,6 +51,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    </details>
 
 ---   
+# Options tab - Use rules as cluster rules #
    | Use rules as cluster rules |
    | --- |                  
    | ![](img/CA-Options-02.jpg) |
@@ -65,6 +66,10 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    | --- |                  
    | ![](img/CA-output-02.jpg) |
 
-   There is a column for each rule added to the output. E.g. if you have three rule you will see columns R1, R2, R3 for the three rules respectively. The columns indicate for each record if a cluster rule was triggered (1) or not (0). In the screenshot above for record 1 (ID 4) all cluster rules were triggered for the record to join the cluster 1. For record 4 (ID 8074) only rule three got triggered to join cluster 2. 
-   When analysing the clusters, one can assmue the more rule were triggered for a record to join a cluster the more confident one can be in the match.
+   There is a column for each rule added to the output. ,br>
+   E.g. if you have three rules you will see columns **R1, R2, R3** for the three rules respectively. <br>
+   The columns indicate for each record if a cluster rule was triggered **(1)** or not **(0)**. <br>
+   In the screenshot above for record 1 (ID 4) all cluster rules were triggered for the record to join cluster 1 (CID 1). For record 4 (ID 8074) only rule three got triggered to join cluster 2 (CID 2).<br> 
+   When analysing clusters, one can assmue the more rules were triggered for a record to join a cluster the more confident one can be in the match result.
    </details>
+
