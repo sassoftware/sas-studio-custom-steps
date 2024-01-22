@@ -74,7 +74,16 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    </details>
    
 ---
+## Requirements ##
+2023.10 or later
 
 ## Usage ##
+### Use rules for cluster analysis
+   ![](img/UseRulesForClusterAnalysis.gif)
 
+### Use rules as cluster rules
    ![](img/UseRulesAsClusterRules.gif)
+
+## Change Log  
+Version 1.0 (02FEB2024)
+ * Initial version 
