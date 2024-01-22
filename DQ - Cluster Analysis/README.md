@@ -15,8 +15,8 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 1. **Cluster ID column** - Set the cluster id for the cluster to analyse.
 2. **Number of rules** - Set to the number of rules for the cluster analysis. Max number of rules is 5.
 3. **Number of rule conditions** - Set to the number of condition for the rule. Max number of conditions is 8.
-4. **Record 1 Field** - Set the column of the first record.
-5. **Record 2 Field** - Set the column of the second record.
+4. **Record 1 Field** - Set the column of the first record to compare.
+5. **Record 2 Field** - Set the column of the second record to compare.
 6. **Camparison** - Chose from the drop down list how to compare the two record fields.
 7. **Score** - Set the score to be assigned if the condition is true. Default score is 10. (*The score field is olny available for option "Use rules for cluster analysis"*)
 
