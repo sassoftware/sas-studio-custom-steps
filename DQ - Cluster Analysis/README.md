@@ -8,7 +8,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 
 ## User interface ##
 
-# Cluster Analysis tab #
+### Cluster Analysis tab ###
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
@@ -20,7 +20,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 6. **Camparison** - Chose from the drop down list how to compare the two record fields.
 7. **Score** - Set the score to be assigned if the condition is true. Default score is 10.
 
-# Options tab - Use rules for cluster analysis #
+### Options tab - Use rules for cluster analysis ###
    | Use rules for cluster analysis |
    | --- |                  
    | ![](img/CA-Options.jpg) |
@@ -51,7 +51,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    </details>
 
 ---   
-# Options tab - Use rules as cluster rules #
+### Options tab - Use rules as cluster rules ###
    | Use rules as cluster rules |
    | --- |                  
    | ![](img/CA-Options-02.jpg) |
