@@ -6,7 +6,7 @@ The "**CAS - Submit Python and R Code**" provides a wrapping for the CAS action 
 
 Use this custom step to execute open-source programs, taking advantage of parallelization, multiple threads and fast data exchange mechanisms (backed by the Apache Arrow in-memory data format).
 
-The step supports up to 10 input tables and up to 10 output tables. You can access those tables in Python/R script as follows
+The step supports up to 10 input tables and up to 10 output tables (It's a limitation of the custom step definition, not a limitation of the CAS action). You can access those tables in Python/R script as follows
 
 **Python example:** 
 ```python
@@ -51,5 +51,8 @@ Find a demonstration of this step in this YouTube video: [CAS - Submit Python an
 
 ## Change Log
 
+* Version 1.01 (11JAN2024)
+    * Updated readme
+      
 * Version 1.0 (19NOV2023)
     * Initial version

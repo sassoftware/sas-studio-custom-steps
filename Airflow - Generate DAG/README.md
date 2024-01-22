@@ -2,20 +2,29 @@
 
 ## Description
 
-The "**Airflow - Generate DAG**" tool is a set of three Custom Steps that enables SAS Studio Flow users to create an **Airflow DAG** (Directed Acyclic Graph) directly from a SAS Studio Flow, by including and orchestrating **SAS Studio Flows** and **SAS Job Definitions**. The generated Airflow DAG contains references to Airflow providers that are part of the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider).
+The "**Airflow - Generate DAG**" tool is a set of three Custom Steps that enables SAS Studio Flow users to create an **Airflow DAG** (Directed Acyclic Graph) directly from a SAS Studio Flow, by including and orchestrating **SAS Studio Flows**, **SAS Programs** and **SAS Job Definitions**. You can also defined **File Sensors** from these tools to trigger a task based on the presence of a file. The generated Airflow DAG contains references to Airflow providers that are part of the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider).
 
 "***In Airflow, a DAG is a collection of all the tasks you want to run, organized in a way that reflects their relationships and dependencies.***
 
 ***A DAG is defined in a Python script, which represents the DAGs structure (tasks and their dependencies) as code.***"
 
-The three steps used together allow the creation of the Python script that represents a DAG. The Python script needs to be copied in Airflow's DAG folder. 
+The three steps used together allow the creation of the Python script that represents a DAG. The Python script needs to be copied in Airflow's DAG folder.
 
- 
-> You could describe it as an example of a no-code/low-code alternative to manually writing those Python scripts, when you only want to use SAS Airflow providers in your DAG. 
+> You could describe it as an example of a no-code/low-code alternative to manually writing those Python scripts, when you only want to use SAS Airflow providers in your DAG.
 
 > :warning: It shows that the combination of SAS Studio flows and Custom Steps can also be used to generate Apache Airflow DAGs instead of generating data transformation flows.
 
 See below for an example of a Python script that defines a DAG.
+
+## What's New?
+
+See [Change Log and Requirements](#change-log-and-requirements).
+
+## Requirements
+
+* SAS Viya: 2023.12 or later
+* SAS Airflow Provider: 0.0.12 or later
+* Airflow: "minimum-release-goes-here"
 
 ## User Interface
 
@@ -31,7 +40,7 @@ The creation of a proper DAG from these 3 custom steps relies on the following p
 * There is only ONE "**Airflow - Finalize DAG**" step per flow
 * "**Airflow - Initialize DAG**" must be the first step, doesn't accept any input, accepts one or more outputs
 * "**Airflow - Add Task**" must have at least one input and one output even if it is the first task of a DAG or the last (if first or last then they have to be linked to "Initialize" or "Finalize")
-* "**Airflow - Add Task**" allows a user to choose a Studio flow, a SAS program, a job definition or to write his own code
+* "**Airflow - Add Task**" allows a user to choose a Studio flow, a SAS program, a job definition, to write his own code or to define a File Sensor
 * "**Airflow - Add Task**" can have multiple inputs and multiple outputs
 * "**Airflow - Finalize DAG**" must be the last step, accepts one or more inputs, doesn't accept any output
 * The sequence of tasks (Studio flows, SAS programs, embedded code and/or job definitions) will be reflected in the Airflow DAG
@@ -51,7 +60,7 @@ Corresponding DAG in Airflow:
 
 Main properties of the DAG:
 
-![](img/franir_2023-08-10-13-48-43.png)
+![](img/franir_2024-01-08-17-05-43.png)
 
 #### Global Options tab
 
@@ -71,9 +80,11 @@ Global parameters for all tasks in the DAG:
 
 Main properties of the task:
 
-![](img/franir_2023-08-10-14-00-25.png)
+![](img/franir_2024-01-05-16-17-34.png)
 
-![](img/franir_2023-08-10-14-03-20.png)
+![](img/franir_2024-01-05-16-19-36.png)
+
+![](img/franir_2024-01-05-16-24-05.png)
 
 #### Options tab
 
@@ -87,6 +98,12 @@ Local parameters for this task:
 
 ![](img/franir_2023-08-10-14-37-21.png)
 
+#### Datasets tab
+
+Datasets updated/produced by this task (helpful to define DAGs inter-dependencies):
+
+![](img/franir_2024-01-05-16-29-46.png)
+
 ### "Airflow - Finalize DAG" Step
 
 There is nothing to set in the "Airflow - Finalize DAG" step.
@@ -97,19 +114,29 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 ## Change Log and Requirements
 
-| Version | Date      | Updates                                                          | Built on SAS Viya | SAS Airflow Provider Release |
-| ------- | --------- | ---------------------------------------------------------------- | ----------------- | ---------------------------- |
-| 1.3     | 30AUG2023 | New features provided by latest SAS Airflow Provider Release     | Stable 2023.07    | 0.0.7                        |
-|         |           | Run SAS programs, embed SAS code, reuse SAS compute sessions,    |                   |                              |
-|         |           | provide macro-variables, provide Airflow context variables, etc. |                   |                              |
-| 1.2     | 26JUL2023 | Page rearrangement                                               | Stable 2023.07    | 0.0.5                        |
-| 1.1     | 05APR2023 | UI standardization                                               | Stable 2023.03    | 0.0.1                        |
-|         |           | DAG and task name validation                                     |                   |                              |
-| 1.0     | 31MAR2023 | Initial version                                                  | Stable 2023.03    | 0.0.1                        |
+| Version | Date      | Updates                                                                            | Built on SAS Viya | SAS Airflow Provider Release |
+| ------- | --------- | ---------------------------------------------------------------------------------- | ----------------- | ---------------------------- |
+| 1.4     | 09JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
+|         |           | &nbsp;(contribution from Lorenzo Toja)                                             |                   |                              |
+|         |           | Support of Airflow Datasets for scheduling                                         |                   |                              |
+|         |           | &nbsp;- ability to define logical Datasets on tasks                                |                   |                              |
+|         |           | &nbsp;- ability to schedule a DAG upon the update of Datasets                      |                   |                              |
+|         |           | Support of cron presets for scheduling                                             |                   |                              |
+|         |           | Support of timedelta expressions for scheduling                                    |                   |                              |
+|         |           | Support "Unpause on creation" to create an active DAG                              |                   |                              |
+|         |           | Proper deletion of the Compute session when reusing a session                      |                   |                              |
+|         |           | &nbsp;(SERIAL mode)                                                                |                   |                              |
+| 1.3     | 30AUG2023 | New features provided by latest SAS Airflow Provider Release                       | Stable 2023.07    | 0.0.7                        |
+|         |           | Run SAS programs, embed SAS code, reuse SAS compute sessions,                      |                   |                              |
+|         |           | &nbsp;provide macro-variables, provide Airflow context variables, etc.             |                   |                              |
+| 1.2     | 26JUL2023 | Page rearrangement                                                                 | Stable 2023.07    | 0.0.5                        |
+| 1.1     | 05APR2023 | UI standardization                                                                 | Stable 2023.03    | 0.0.1                        |
+|         |           | DAG and task name validation                                                       |                   |                              |
+| 1.0     | 31MAR2023 | Initial version                                                                    | Stable 2023.03    | 0.0.1                        |
 
 ## Installation
 
-Download the latest three [Airflow - Generate DAG](./extras/Airflow_Generate_DAG_v1.3.zip) custom steps. Unzip it and upload them in a SAS Content Folder.
+Download the latest three [Airflow - Generate DAG](./extras/Airflow_Generate_DAG_v1.4.zip) custom steps. Unzip it and upload them in a SAS Content Folder.
 
 See [older versions](./extras/).
 

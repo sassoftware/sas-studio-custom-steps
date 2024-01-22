@@ -24,7 +24,16 @@ This custom step has been tested on SAS Viya version Stable 2023.11.
 
 ![](img/Import_csv_labels-Demo.gif)
 
+## Known issues
+
+* When the input file has long column names where the the first 32 characters are not unique, then the generated output table will have columns that are named VARx (x being the column number) for those columns.
+* The label of those VARx columns will include the name of the original variable.
+* This behaviour is caused by the use of proc import in this custom step. It might be possible to read the file using a data step, but that is something to consider for a future version of this step.
+
 ## Change Log
 
+* Version 1.01 (15JAN2024) 
+    * Added section: Known issues
+    
 * Version 1.0 (21DEC2023) 
     * Initial version
