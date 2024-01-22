@@ -72,4 +72,9 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
    In the screenshot above for record 1 (ID 4) all cluster rules were triggered for the record to join cluster 1 (CID 1). For record 4 (ID 8074) only rule three got triggered to join cluster 2 (CID 2).<br> 
    When analysing clusters, one can assmue the more rules were triggered for a record to join a cluster the more confident one can be in the match result.
    </details>
+   
+---
 
+## Usage ##
+
+   ![](img/UseRulesAsClusterRules.gif)
