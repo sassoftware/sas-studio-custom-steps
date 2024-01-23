@@ -1,4 +1,4 @@
-# Usage Examples #
+# Example Data #
 Copy/paste and run the following SAS code into SAS Studio for sample input data.<br> 
 The code will crerate a dataset with clustered data. All clusters in the dataset are multi clsuters with more than one records per cluster.<br>
 When clustering the the data the following cluster rules were used:
