@@ -98,5 +98,5 @@ When using option *Use rules as cluster rules* the Cluster Analysis tab input fi
 
 You can find some test data for this step [here](extras/README.md).
 ## Change Log  
-Version 1.0 (02FEB2024)
+Version 1.0 (23JAN2024)
  * Initial version 
