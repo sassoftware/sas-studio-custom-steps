@@ -10,6 +10,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 
 ### Cluster Analysis tab ###
 #### Use rules for cluster analysis ####
+When using option *Use rules for cluster analysis* the Cluster Analysis tab input fields look like this:
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
@@ -20,6 +21,16 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 5. **Record 2 Field** - Set the column of the second record to compare.
 6. **Camparison** - Chose from the drop down list how to compare the two record fields.
 7. **Score** - Set the score to be assigned if the condition is true. Default score is 10. (*The score field is olny available for option "Use rules for cluster analysis"*)
+
+#### Use rules as cluster rules ####
+When using option *Use rules as cluster rules* the Cluster Analysis tab input fields look like this:
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/CA-ClusterAnalisis-CR.jpg) | ![](img/CA-ClusterAnalisis-CR-FL.jpg) |
+1. **Cluster ID column** - Set the cluster id for the cluster to analyse.
+2. **Number of rules** - Set to the number of rules for the cluster analysis. Max number of rules is 5.
+3. **Select cluster rule columns** - Set the same columns that were using in the Clustering step when clustering the data.
+
 ---
 ### Options tab - *Use rules for cluster analysis* ###
    | Use rules for cluster analysis |
