@@ -13,8 +13,9 @@ When clustering the the data the following cluster rules were used:
   * Family_Name_MC95
   * CITY_MC95
  
-You can use these rules when testing option *Use rules as cluster rules*
-    
+You can use these rules when testing option: *Use rules as cluster rules*<br>
+![](../img/CA-Options-03.jpg)    
+
 
 
 
