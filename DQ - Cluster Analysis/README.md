@@ -9,6 +9,7 @@ The Cluster Analysis step enables you can compare pairs of rows within a single 
 ## User interface ##
 
 ### Cluster Analysis tab ###
+#### Use rules for cluster analysis ####
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/CA-ClusterAnalisis.jpg) | ![](img/CA-ClusterAnalisis-FL.jpg) |
