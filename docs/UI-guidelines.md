@@ -15,9 +15,10 @@ This opens the Custom Step Designer
 | --- | --- | --- |
 | Tab labels | Title | Keep them short, preferably one or two words |
 | Section labels | Sentence | Note: These labels should not end with a colon |
-| Field labels - Labels for any of the UI elements (checkboxes excluded) | Sentence | Put colons after labels. For example:  ***Select a column:*** <br>Labels of checkboxes should not end with a colon|
+| Field labels - Labels for any of the UI elements (checkboxes excluded) | Sentence | Put colons after labels. For example:  ***Select a column:***     <br><br>**Exceptions**<br><ul><li>Labels of checkboxes should not end with a colon</li><li>Labels of radio button groups when they represent a question and end with a question mark (?)</li></ul>|
 | Values in lists <ul><li>Drop-down List</li><li>List</li><li>Radio Button Group</li></ul> | Sentence |
-
+---
+## Explanation of capitalization rules
   * Title capitalization:
      * Each word starts with capital. Prepositions (such as of, for, with), articles (a, an, the) and conjunctions (and, or, but) should not be initial-capped
   * Sentence capitalization:
