@@ -28,17 +28,17 @@ The only parameter required is location of the .shp file.
 
 ### Import Shape
 
-This custom step will import data contained in the .shp file and can also analyze it for reduction.
+This custom step will import data contained in the .shp file and can also analyze it for reduction and can promote the table to a CASLIB.
 The output of this step will contain a map based on the ID selected al if requested a table with the analysis for reduction.
 The parameter required are:
 
 ![Shape Import](./img/ShapeImport.png)
 
-1. The ID column if the List Shape Info custom step has been used:
+1. The ID column <ins>**if the List Shape Info custom step has been used**</ins>:
 
 ![Shape Import 2](./img/ShapeImport_2.png)
 
-2. The location of the .shp file and the ID column if the List Shape Info custom step has not been used:
+2. The location of the .shp file and the ID column <ins>**if the List Shape Info custom step has not been used**</ins>:
 
 ![Shape Import 3](./img/ShapeImport_3.png)
 
@@ -47,6 +47,12 @@ table and print a table with the analysis for
 reduction:
 
 ![Shape Import 4](./img/ShapeImport_4.png)
+
+4. Promoting: Using this option is possible to promote the resulting table to a CASLIB.
+
+**IMPORTANT**: always select a valid CASLIB as output if you want to promote the output table.
+
+**NOTE**: if has been chosen to analyse the table for reduction, it is advisable to promote the table after performing the reduction.
 
 ### Apply Shape Reduce
 
@@ -65,13 +71,9 @@ The only parameter required is the level of density, which can be selected in th
 
 ![Apply Shape Reduce 2](./img/ApplyShapeReduce_2.png)
 
-### Promote Shape
+Promoting: Using this option is possible to promote the resulting table to a CASLIB.
 
-This step reads the results of both Import Shape and Apply Shape Reduce and loads them in memory.
-The step needs only to be connected to an input and an output table.
-The second One must be a CAS table.
-
-![Shape Promote](./img/ShapePromote.png)
+IMPORTANT: always select a valid CASLIB as output if you want to promote the output table.
 
 ### Create Geo Provider
 
@@ -98,8 +100,7 @@ The parameters needed are:
 9. The SEGMENT Column
 
 	***For all this columns user can use the prompts to select one of the variables contained in the promoted table.***
-	***For some of this prompts the values are already entered, because in most cases the variables have those names, but user is free to 
-change them.***
+	***For some of this prompts the values are already entered, because in most cases the variables have those names, but user is free to change them.***
 	
 10. The .prj file containing the coordinate Space to assign to the GEO Provider
 
