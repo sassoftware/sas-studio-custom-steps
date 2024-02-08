@@ -1,4 +1,39 @@
-/* templated code goes here*/;
+
+/* -----------------------------------------------------------------------------------------* 
+   Vector Search - Fast KNN
+
+   Version: 1.1 (08FEB2024)
+   Created: Sundaresh Sankaran(sundaresh.sankaran@sas.com)
+    
+*------------------------------------------------------------------------------------------ */
+
+
+cas ss;
+caslib _ALL_ assign;
+
+
+/*-----------------------------------------------------------------------------------------*
+   Values provided are for illustrative purposes only.
+   Provide your own values in the section below.  
+*------------------------------------------------------------------------------------------*/
+%let baseTable_lib             =PUBLIC;
+%let baseTable_name_base       =BASETABLE;
+%let queryTable_lib            =PUBLIC;
+%let queryTable_name_base      =QUERYTABLE;
+%let outputTable_lib           =PUBLIC;
+%let outputTable_name_base     =OUTPUTTABLE;
+%let outputDistTable_lib       =PUBLIC;
+%let outputDistTable_name_base =OUTPUTDIST;
+
+%let idCol                     =Doc_ID;
+%let parallelMethod            =QUERY;
+%let numMatches                =10;
+%let thresholdDistance         =100;
+%let searchMethod              =APPROXIMATE;
+%let mTrees                    =10;
+%let maxPoints                 =100;
+
+
 /*-----------------------------------------------------------------------------------------*
    START MACRO DEFINITIONS.
 *------------------------------------------------------------------------------------------*/
@@ -329,3 +364,5 @@
 %sysmacdelete _usr_getNameCaslib;
 %sysmacdelete _fnn_main_execution_code;
 %sysmacdelete _gac_generate_additional_code;
+
+cas ss terminate;
