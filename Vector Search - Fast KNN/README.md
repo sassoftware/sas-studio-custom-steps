@@ -111,7 +111,7 @@ Refer [here](./extras/Vector%20Search%20-%20Fast%20KNN.sas) for the SAS program 
 
 ## Change Log
 
-* Version 1.1 (08FEB2024)
+* Version 1.1 (09FEB2024)
   * Renamed step (earlier name: Find Nearest Neighbors) to align with market view of capabilities
   * Surfaced the parallelization method option (earlier frozen at Query) to allow users to choose between Input and Query tables for parallelization.
   * Code maintenance: updated macro to check for a CAS session and refactored execution code macro accordingly.
