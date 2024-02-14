@@ -13,7 +13,7 @@ creating GEO PROVIDERS.
 ![Flow](./img/ShapeFile-Example_Flow.png)
 
 ## SAS Viya Version Support
-Tested in SAS Viya 4, Stable 2022.10
+Tested in SAS Viya 4, Stable 2023.10
 
 ## User Interface
 
