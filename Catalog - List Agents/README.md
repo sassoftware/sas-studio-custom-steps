@@ -17,7 +17,8 @@ This steps output can be used as an input for the step Catalog - Run Agent.
 
 SAS Viya 2023.12 or later
 
-You need to part of the SAS Administrator group or a Custom Group that can maintain the Information Catalog agents, see this documentation page for more details: https://go.documentation.sas.com/doc/en/infocatcdc/default/infocatag/n1xniiffqq05c9n1n31o997vvdwu.htm?requestorId=1c9d26e9-68e7-4041-bb09-d33447b2d3ca#n0kvrjp9o1ntfen1hqeaec4cwidz
+You need to part of the SAS Administrator group or a Custom Group that can maintain the SAS Information Catalog agents, 
+see this documentation page for more details: [SAS Information Catalog: Administrator's Guide -  Control Access to Features](https://go.documentation.sas.com/doc/en/infocatcdc/default/infocatag/n1xniiffqq05c9n1n31o997vvdwu.htm?requestorId=1c9d26e9-68e7-4041-bb09-d33447b2d3ca#n0kvrjp9o1ntfen1hqeaec4cwidz)
 
 ## Usage
 
