@@ -1,15 +1,13 @@
-# Find Nearest Neighbors
+# Vector Search - Fast KNN
 
-The Find Nearest Neighbors Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula.
+The Vector Search - Fast KNN (K-Nearest Neighbors) Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula. It uses an implementation of the Fast KNN algorithm inside SAS Cloud Analytics Services (CAS), surfaced through the fastknn.fastknn CAS action.
 
-This step facilitates  applications in recommendation engines, similarity analysis, search and others.  With an increased focus on generative AI, this step can be used to match embeddings to find similar documents and augment semantic search and large language models.
-
-This custom step makes use of the fastknn.fastknn SAS Cloud Analytics Services (CAS) action.
+Vector Search enhances and augments the accuracy and relevance of Generative AI applications.  They help identify and corral accurate contextual information prior to interacting downstream applications, such as a Large Language Model (LLM). This step also facilitates  applications in recommendation engines, similarity analysis, search and others.  
 
 
 ## A general idea
 
-![A general idea](./img/Find%20Nearest%20Neighbors.png)
+![A general idea](./img/Vector%20Search%20-%20Fast%20KNN.png)
 
 
 ## SAS Viya Version Support
@@ -47,7 +45,7 @@ Tested in Viya 4, Stable 2023.11
 
 4. Maximum number of points (stepper, upon selection of Approximate search method, default 100):  select maximum number of points to evaluate in a leaf node.
 
-5. Parallelization method (set to current default of Query, not modifiable in this version):  this setting specifies whether the query table or the base table will be parallelized while conducting the search.  We have set this to the default value of Query for this initial version of the step and will explore providing the Input (base table) option in a future version.
+5. Parallelization method (set to current default of Query):  this setting specifies whether the query table or the base (input) table will be parallelized while conducting the search.  
 
 ### Output Specifications
 
@@ -63,6 +61,8 @@ Tested in Viya 4, Stable 2023.11
 This is optional.  In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following macro variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
 
 Refer this [blog](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.
+
+The _fnn prefix used here refers to the operation that the step performs, viz. finding nearest neighbors. 
 
 ```sas
 /* To demonstrate the default value of the trigger macro variable */;
@@ -97,7 +97,7 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 3. [Details on the optional run-time trigger control](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526)
 
 ## SAS Program
-Refer [here](./extras/Find%20Nearest%20Neighbours.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
+Refer [here](./extras/Vector%20Search%20-%20Fast%20KNN.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. 
 
 
 ## Installation & Usage
@@ -110,6 +110,11 @@ Refer [here](./extras/Find%20Nearest%20Neighbours.sas) for the SAS program used 
 
 
 ## Change Log
+
+* Version 1.1 (09FEB2024)
+  * Renamed step (earlier name: Find Nearest Neighbors) to align with market view of capabilities
+  * Surfaced the parallelization method option (earlier frozen at Query) to allow users to choose between Input and Query tables for parallelization.
+  * Code maintenance: updated macro to check for a CAS session and refactored execution code macro accordingly.
 
 * Version 1.0 (29NOV2023)
   * Initial Version
