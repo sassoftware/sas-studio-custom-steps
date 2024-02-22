@@ -115,7 +115,7 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 | Version | Date      | Updates                                                                            | Built on SAS Viya | SAS Airflow Provider Release |
 | ------- | --------- | ---------------------------------------------------------------------------------- | ----------------- | ---------------------------- |
-| 1.5     | 26JAN2024 | Support for Airflow Trigger Rules as part of the task definition                   | Stable 2023.12    | 0.0.12                       |
+| 1.5     | 21FEB2024 | Support for Airflow Trigger Rules as part of the task definition                   | Stable 2023.12    | 0.0.12                       |
 |         |           | &nbsp;(idea from Charalampos Kamvysis)                                             |                   |                              |
 | 1.4     | 09JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
 |         |           | &nbsp;(contribution from Lorenzo Toja)                                             |                   |                              |
