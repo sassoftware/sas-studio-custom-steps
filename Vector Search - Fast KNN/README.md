@@ -1,13 +1,13 @@
 # Vector Search - Fast KNN
 
-The Vector Search - Fast KNN (K-Nearest Neighbors) Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula. It uses an implementation of the Fast KNN algorithm inside SAS Cloud Analytics Services (CAS), surfaced through the fastknn.fastknn.
+The Vector Search - Fast KNN (K-Nearest Neighbors) Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula. It uses an implementation of the Fast KNN algorithm inside SAS Cloud Analytics Services (CAS), surfaced through the fastknn.fastknn CAS action.
 
 Vector Search enhances and augments the accuracy and relevance of Generative AI applications.  They help identify and corral accurate contextual information prior to interacting downstream applications, such as a Large Language Model (LLM). This step also facilitates  applications in recommendation engines, similarity analysis, search and others.  
 
 
 ## A general idea
 
-![A general idea](./img/Find%20Nearest%20Neighbors.png)
+![A general idea](./img/Vector%20Search%20-%20Fast%20KNN.png)
 
 
 ## SAS Viya Version Support
