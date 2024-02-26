@@ -2,7 +2,7 @@
 
 ## Description
 
-This custom step is able to execute one job definition, for one macro variable with multiple macro variable values in parallel.
+This custom step is able to execute one **deployed** flow, for multiple macro variables in parallel.
 
 ## SAS Viya Version Support
 
@@ -10,17 +10,15 @@ Initially created and tested on Viya 4, Stable 2023.01
 
 ## Typical usage
 
-To be used in case you want to run one "**deployed**" flow for multiple macro variable values in parallel.
+To be used in case you want to run one **deployed** flow for multiple macro variable values in parallel.
 
 ## User Interface
 
-### Tab: Data properties
+### Tab: Job properties
 
-![Properties](img/UI_data_properties.PNG)
+![Properties](img/UI_job_properties.PNG)
 
-Here you need to select the following:
-- **Macro variable column**: The column, from the table connected to the input port, that contains the macro variable.
-- **Macro variable column values**: The column, from the table connected to the input port, that contains the macro variable values.
+Here you need to specify the following:
 - **Specify the job definition name (Case sensitive!)**: NEW in version 1.4. Here you need to specify the name of the deployed flow. Note that the name is **case sensitive**!.
 
 ### Tab: Scheduling properties
@@ -43,17 +41,19 @@ Download the .step file, upload it into your environment and start using it, for
 
 ![Usage](img/Usage.PNG)
 
-You can use the macro variable, in this example "**AGE**", directly within the "**deployed**" flow:
+You can use the macro variable(s), in this example "**AGE**" and "**HEIGTH**", directly within the **deployed** flow:
 
 ![Usage](img/Usage_inner_flow.PNG)
 
 ## Input port
 
-The input table provides information on the macro variable and its values. The data needs to be provided in the following layout:
+The input table provides information on the macro variable names and their values. 
+
+The data needs to be provided, for example, in the following layout:
 
 ![Input 01](img/Input_01.PNG)
 
-Note that the column names can be whatever you like. You can specify the mapping within the step.
+**Please make sure that the column names following the guidelines for SAS macro variable names!**
 
 ## Output port
 
@@ -65,19 +65,19 @@ New in version 1.3 is the **name** column.
 
 ## Progress
 
-You can follow the progress of each indivudual instance of the "**deployed**" flow using the environment manager:
+You can follow the progress of each indivudual instance of the **deployed** flow using the environment manager:
 
 ![Properties](img/Runtime.PNG)
 
 Note that: 
-- The name of the macro variable and its instance value are in the name of the process.
-- Here you can download the log file for each instance of the deployed "**deployed**" flow or you can use the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step to download the log file from within the flow.
+- Here you can download the log file for each instance of the deployed **deployed** flow or you can use the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step to download the log file from within the flow.
 
 ## Custom step messages
 | Step message                                                     | Reason    |
 |------------------------------------------------------------------|-----------|
 | ERROR: The items table in the response file does not exist. Aborting process.  | The HTTP response file, for the **/jobExecution/jobRequests** endpoint, doesn't contain the 'items' table. This prevents the custom step from retrieving the deployed flow URI.|
 | ERROR: The response file does not exist. Aborting process.  | The HTTP response file for the **/jobExecution/jobs**- and/or **/jobExecution/jobRequests** endpoint doesn't exist.  |
+| ERROR: Input table could not be opened.  | The custom step input table could not be opened for reading. |
 | ERROR: 0 of more then 1 job encountered with name &_jobname. Aborting process.  | The number of, based on the job defintion name, isn't 1. This could mean that the job definition name is not unique enough or there's no job for the given job defintion name.|
 |ERROR: job_uri table does not exist. Aborting process. | The work table where the job uri should be stored is not available. |
 | ERROR: Not enough parameters to run the loop step. Aborting process. | The source table for this custom step is empty. |
@@ -100,3 +100,5 @@ Version 1.2 (20JUN2023) : Under certain circumstances you can be faced with a ra
 Version 1.3 (21JUN2023) : Added the process name to the output table and the ability to set the number of seconds for the delayed execution.
 
 Version 1.4 (15JAN2024) : Added the ability to specify the number of concurrent running jobs and the ability to specify the "**deployed**" flow within this custom step.
+
+Version 1.5 (26FEB2024) : Added the ability to have as much macro variables passed on to the looped job as you need.
