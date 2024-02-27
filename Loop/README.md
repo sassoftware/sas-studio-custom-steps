@@ -10,7 +10,7 @@ Initially created and tested on Viya 4, Stable 2023.01
 
 ## Typical usage
 
-To be used in case you want to run one **deployed** flow for multiple macro variable values in parallel.
+To be used in case you want to run one **deployed** flow for multiple macro variables and their values in parallel.
 
 ## User Interface
 
@@ -33,6 +33,7 @@ Here you need to specify the following:
 ### Tab: Description
 
 ![Description](img/UI_description.PNG)
+
 General information on what the custom step does and what is needs to function.
 
 ## Usage
@@ -41,7 +42,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 ![Usage](img/Usage.PNG)
 
-You can use the macro variable(s), in this example "**AGE**" and "**HEIGTH**", directly within the **deployed** flow:
+You can use the macro variable(s), in this example "**AGE**" and "**HEIGTH**", directly within the **deployed** flow, in this example 'Inner_deploy':
 
 ![Usage](img/Usage_inner_flow.PNG)
 
@@ -52,6 +53,9 @@ The input table provides information on the macro variable names and their value
 The data needs to be provided, for example, in the following layout:
 
 ![Input 01](img/Input_01.PNG)
+
+The column names of the input dataset are used as macro variables and the rows as their values.
+Note that ALL columns in this dataset are passed on to the deployed flow!
 
 **Please make sure that the column names following the guidelines for SAS macro variable names!**
 
@@ -101,4 +105,4 @@ Version 1.3 (21JUN2023) : Added the process name to the output table and the abi
 
 Version 1.4 (15JAN2024) : Added the ability to specify the number of concurrent running jobs and the ability to specify the "**deployed**" flow within this custom step.
 
-Version 1.5 (26FEB2024) : Added the ability to have as much macro variables passed on to the looped job as you need.
+Version 1.5 (26FEB2024) : Added the ability to have as much macro variables passed on to the looped job as you need and added support for UTF8.
