@@ -51,7 +51,7 @@ There are multiple tools that can be used to do all of this. A list of tasks to 
 | --- | --- |
 | 1. (GitHub webUI) [Login to GitHub](https://github.com/) using your own account (a personal GitHub account should work just fine) |  no recording |
 | 2. (GitHub webUI) Issue a **Fork** request on the [public SAS Studio Custom Steps repository](https://github.com/sassoftware/sas-studio-custom-steps) | [Link to recording](docs/contributing/1.%20Fork%20repository%20-%20GitHub%20webUI.gif) |
-| 3. (GitHub Desktop) **Clone** your **Fork** to a local repository (on your local harddisk) | [Link to recording](docs/contributing/2.%20Clone%20forked%20to%20local%20disk%20-%20GitHub%20Desktop%20app.gif) |
+| 3. (GitHub Desktop) **Clone** your **Fork** to a local repository (on your local harddisk) | [Link to recording](docs/contributing/2.%20Clone%20forked%20repo%20to%20local%20disk%20-%20GitHub%20Desktop%20app.gif) |
 | 4. (Local directory) Create a dedicated folder for your contribution by simply copying the **_template** folder and name it appropriately, and replace the **.step** file with your **.step** file | [Link to recording](docs/contributing/3.%20Add%20custom%20step%20to%20local%20directory%20and%20push%20to%20forked%20repo%20-%20GitHub%20Desktop%20app.gif) |
 | 5. (Local directory) Update the **README.md** file in that dedicated folder to reflect your custom step and replace the screenshots in the **img** subdirectory with screenshots of the UI of your custom step | See recording for #4 |
 | 6. (GitHub Desktop) Commit the changed files and push them back to your **Forked** repository (aka. origin remote repository) | See recording for #4 |
