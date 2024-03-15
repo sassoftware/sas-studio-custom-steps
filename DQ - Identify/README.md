@@ -19,6 +19,9 @@ The **DQ - Identify** step allows you to obtain the Identity Type for each indiv
 3. **Locale**                         - Pick the Locale to be used for Identification Analysis.  If left empty, the **English - USA** Locale will be used. 
 4. **Definition**                     - Pick the Definition to be used for Identification Analysis. If left empty, the **Field Content (Global)** Definition will be used.  
 
+>**Note**: The **Cleanse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2023.08, provides similar functionality, 
+and it is highly recommended to use that step going forward when possible.
+
 ## Requirements
 
 2021.1.1 or later  
