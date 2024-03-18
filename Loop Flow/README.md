@@ -54,7 +54,7 @@ Specify a directory where you want to store the Output and SAS-log for each iter
 Specifies an exact number of concurrent processes to use for running iterations. Default is 3 processes. If you specify 1, the loop will be executed in sequential mode. All iterations will execute in its own SAS Connect Session. Each iteration can utilize the automatically created libname *SWORK* that references SAS Work of the parent flow.
 
 - **Overwrite specified number of sub-processes and use environment maximum (PARALL_LOOP_LOCAL_NUMSUBPROCS):**
-Instructs the Loop Flow Step to look for a global macro variable PARALL_LOOP_LOCAL_NUMSUBPROCS. If this is specified, e.g. in the autoexec, the value given to this macro variable will override the value specified in *Maximum number of sub-processes*. This option will only have effect if **SAS Connect Server Context to use:** is left blank. 
+Instructs the Loop Flow Step to look for a global macro variable PARALL_LOOP_LOCAL_NUMSUBPROCS. If this is specified, e.g. in the autoexec, the value given to this macro variable will override the value specified in *Maximum number of sub-processes*. This option will only have effect if **SAS Connect Server Context to use** is left blank. 
 
 - **Prefix for handle names on iterations:**
 Specifies a prefix for handle names on loop iterations. Technically, the handle name identifies a distinct iteration and is also used to name Output- and Log-files if a value is specified in **Location on host for log and output files**. The shorter the prefix, the more loop iterations are permitted. Minimum length is one character, which permits 9,999,999 iterations of the Loop Flow Step. The maximum length of the prefix is seven characters, which permits nine iterations.
