@@ -3,7 +3,7 @@
 | Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
 | --- | --- | :-: | --- | ---|
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 22DEC2023 |
-| [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 or later | 09JAN2024 |
+| [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 or later | 21FEB2024 |
 | [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 or later | 19FEB2024 |
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 26OCT2022 |
 | [CAS - Convert Char to Varchar](./CAS%20-%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 or later | 05SEP2023 |
@@ -50,6 +50,7 @@
 | [Import - HTML Table](./Import%20-%20HTML%20Table/README.md) | Import HTML table(s) from web page as SAS data set(s) using Python Pandas | [David Weik](https://github.com/Criptic)  | 2023.07 or later | 28JUL2023 |
 | [LLM - Prompt Catalog](./LLM%20-%20Prompt%20Catalog/README.md) | Submit queries to a Large Language Model, test prompts (prompt engineering) and save prompt history| [Xin Ru Lee](https://github.com/sspxrl) | 2023.12 or later | 02FEB2024 |
 | [Lookup](./Lookup/README.md) | Add column by performing lookup on other table (using data step hash object) | [Torben Juul Johansson](https://github.com/torbenjuul) | 2021.2.1 or later | 21SEP2022 |
+| [Loop Flow](./Loop%20Flow/README.md) | Iteratively execute another Studio Flow, much like Loop/Loop End in SAS Data Integration Studio | [Torben Juul Johansson](https://github.com/torbenjuul) | 2023.09 or later | 08MAR2024 |
 | [NLP - Categories Testing Framework](./NLP%20-%20Categories%20Testing%20Framework/README.md) | Test and assess SAS Visual Text Analytics categorization model | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.12 or later | 10JAN2024 |
 | [NLP - Extract Identities](./NLP%20-%20Extract%20Entities/README.md) | Pull entities out of documents or freeform text | [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2022.12 or later | 13DEC2023 |
 | [NLP - Extract Rule Configuration](./NLP%20-%20Extract%20Rule%20Configuration/README.md) | Extracts the rule configuration within rules-based Visual Text Analytics Concepts or Categories model definitions for use in downstream applications. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.04 or later | 01AUG2023 |

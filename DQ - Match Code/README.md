@@ -20,6 +20,9 @@ The **DQ - Match Code** step allows you to create a column match code based on l
 4. **Definition**      - Define the rule to be used to compute match code.  
 5. **Sensitivity**     - Define the Sensitivity used to compute match code.  
 
+>**Note**: The **Match Codes** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2023.08, provides similar functionality, 
+and it is highly recommended to use that step going forward when possible.
+
 ## Requirements
 
 2021.1.1 or later  
