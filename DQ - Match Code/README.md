@@ -2,7 +2,9 @@
 
 ## Description
 
-The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. This version supports 7 Locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows to generate match code for up to 5 columns.  
+The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. 
+ * This version uses SASDQREF tables, supports all Locales defined in the QKB and allows to generate match code for up to 10 columns. 
+ * Prompts take advantage of dynamic prompt lists (SASDQREF) and hierarchies 
 
 ## User Interface  
 
@@ -25,7 +27,7 @@ and it is highly recommended to use that step going forward when possible.
 
 ## Requirements
 
-2021.1.1 or later  
+2023.06 or later  
 
 * This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
 
@@ -34,6 +36,14 @@ and it is highly recommended to use that step going forward when possible.
 ![Using the DQ - Match Code Custom Step](img/dqmatch.gif)  
 
 ## Change Log
+  
+Version 2.1 (19MAR2024)  
+
+  * New match columns made mandatory
+
+Version 2.0 (25JUL2023)  
+ * use of the SASDQREF library to extend support to all locales defined in the QKB.
+ * use of hierarchical prompts and dynamic lists.
 
 Version 1.2 (22NOV2022)  
 
