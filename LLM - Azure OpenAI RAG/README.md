@@ -6,6 +6,7 @@ LLMs require context to provide relevant answers, especially for questions based
 
 A RAG approach, explained in simple terms, retrieves relevant data from a knowledge base and provides the same to an LLM to use as context.  Results based on RAG are expected to reduce LLM hallucinations (i.e. an LLM provides irrelevant or false answers).  This custom step queries a Chromadb vector store and passes retrieved documents to an Azure OpenAI service.   
 
+**IMPORTANT:** Be aware that this custom step uses an Azure OpenAI service that results in data being sent over to the service.  Ensure you use this only in accordance with your organization's policies on calling external LLMs.
 
 ## A general idea
 
