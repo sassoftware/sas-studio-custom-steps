@@ -2,7 +2,7 @@
 
 ## Description
 
-This custom step is able to execute one **deployed** flow or **deployed** sas program, stored on a file system or sas content for multiple macro variables in parallel.
+This custom step is able to execute one **deployed** flow or **deployed** sas program, stored on a file system or SAS Content for multiple macro variables in parallel.
 
 This step is build from the ground up to make use of all the current capabilities provided by SAS Viya.
 
