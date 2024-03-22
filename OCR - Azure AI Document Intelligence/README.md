@@ -1,6 +1,6 @@
 # OCR - Azure AI Document Intelligence
 
-> **Replaces the  "OCR - Azure AI Document Intelligence Table Extraction" custom step**
+> Replaces the  "OCR - Azure AI Document Intelligence **Table Extraction**" custom step
 
 This custom step uses the [Azure AI Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence) service to perform different types of [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on files that are stored on the SAS file system. [What is Azure AI Document Intelligence?](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0)
 
