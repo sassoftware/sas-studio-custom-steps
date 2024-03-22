@@ -1,6 +1,6 @@
 # OCR - Azure AI Document Intelligence
 
-> Replaces the  "OCR - Azure AI Document Intelligence **Table Extraction**" custom step
+> This custom step was previously known as 'OCR - Azure AI Document Intelligence **Table Extraction**'
 
 This custom step uses the [Azure AI Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence) service to perform different types of [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) on files that are stored on the SAS file system. [What is Azure AI Document Intelligence?](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0)
 
@@ -43,11 +43,10 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
 
 ## 👩‍💻 Usage
 
-> **Note:** This step works great with the [Create Listings of Directory - CLOD](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Create%20Listing%20of%20Directory%20CLOD) custom step  to create the input file-list based on a folder of documents. 
-
 ### 📺 Tutorial (👇Click Thumbnail👇)
-[IN PROGRESS]
 [![YOUTUBE THUMBNAIL](<img/thumbnail azure ocr custom step.jpg>)](https://youtu.be/RP0CHuIbVGE)
+
+> **Note:** This step works great with the [Create Listings of Directory - CLOD](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Create%20Listing%20of%20Directory%20CLOD) custom step  to create the input file-list based on a folder of documents. 
 
 ### Feature Matrix
 
