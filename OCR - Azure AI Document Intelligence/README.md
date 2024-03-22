@@ -226,7 +226,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 <a name="change-log"/>
 
 ## 📝 Change Log
-**Version 1.0 (22MAR2024)** 
+**Version 2.0 (22MAR2024)** 
 * Renamed step to "OCR - Azure AI Document Intelligence" 
 * Added support for text, form and query extraction
 * Added support for extracting multiple tables at once
