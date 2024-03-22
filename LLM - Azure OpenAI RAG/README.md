@@ -93,9 +93,11 @@ Current assumptions for this initial versions (future versions may improve upon 
 
 Results (the answer from the LLM) are printed by default to the output window.
 
-1. **Context size** (numeric stepper, default 10): select how many similar results from the vector store should be retrieved and provided as context to the LLM.  Note that a higher number results in more tokens provided as part of the prompt.
+1. **Temperature** (numeric stepper, default 0, max 1): temperature for an LLM affects its abiity to predict the next word while generating responses.  A rule of thumb is that a temperature closer to 0 indicates the model uses the predicted next word with the highest probability and provides stable responses, whereas a temperature of 1 increases the randomness with which the model predicts the next word which may lead to more creative responses.
 
- 2. **Output table** (output port, option): attach either a CAS table or sas7bdat to the output port of this node to hold results.  These results contain the LLM's answer, the original question and supporting retrieved results. 
+2. **Context size** (numeric stepper, default 10): select how many similar results from the vector store should be retrieved and provided as context to the LLM.  Note that a higher number results in more tokens provided as part of the prompt.
+
+3. **Output table** (output port, option): attach either a CAS table or sas7bdat to the output port of this node to hold results.  These results contain the LLM's answer, the original question and supporting retrieved results. 
 
 ----
 ## Run-time Control
