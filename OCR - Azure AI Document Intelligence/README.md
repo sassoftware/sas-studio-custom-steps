@@ -115,7 +115,7 @@ $^4$ Only supports `General Document` Model / Container
 
 ## 📋 Requirements
 
-Tested on SAS Viya version Stable 2024.01
+Tested on SAS Viya version Stable 2024.02
 
 ### 🐍 Python
 - [Python 3](https://www.python.org/downloads/)
@@ -226,7 +226,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 
 ## 📝 Change Log
 **Version 2.0 (22MAR2024)** 
-* Renamed step to "OCR - Azure AI Document Intelligence" 
+* Renamed to "OCR - Azure AI Document Intelligence" 
 * Added support for text, form and query extraction
 * Added support for extracting multiple tables at once
 * Added support for processing multiple files at once
