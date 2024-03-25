@@ -27,7 +27,7 @@ and it is highly recommended to use that step going forward when possible.
 
 ## Requirements  
 
-2023.06 or later  
+2024.01 or later  
 
 * This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
 
@@ -37,6 +37,9 @@ and it is highly recommended to use that step going forward when possible.
 ![Using the DQ - Standardize Custom Step](img/dqstandardize.gif)
 
 ## Change Log  
+
+Version 2.2 (21MAR2024) 
+ * New standardized columns made mandatory  
   
 Version 2.1 (27JUL2023)
  * assign SASDQREF if it has not been assigned 
