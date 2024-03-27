@@ -111,7 +111,7 @@ The parameters needed are:
 
 ## Requirements
 
-1. Tested on SAS Viya version Stable 2022.10.
+1. Tested on SAS Viya version Stable 2023.10.
 2. A SAS Viya 4 environment with SAS Studio Flows.
 3. The Import Shape custom step require SAS/GRAPH.
 4. To run Create Geo Provider user must have rights to create a GEO Provider in SAS Visual Analytics.
