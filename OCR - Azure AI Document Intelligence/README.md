@@ -39,6 +39,8 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
 * ### About tab ###
   ![](img/flow-about.PNG)
 
+> Note: if there are no links shown under `Documentation`, then ask your SAS administrator to go into SAS Environment manager and use the Configuration panel to configure the `allowedStepLinks` option of the Data Flow service to allow https connections. You can learn more in [this SAS community article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Link-Control-for-Custom-Steps/ta-p/919005).
+
 <a name="usage"/>
 
 ## 👩‍💻 Usage
