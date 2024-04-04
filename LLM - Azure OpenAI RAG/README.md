@@ -33,15 +33,15 @@ This animated gif provides a basic idea:
 
 Current assumptions for this initial versions (future versions may improve upon the same):
 
-1. Users  choose either an existing Chroma DB vector database collection or load PDF files to an existing or new Chroma DB collection.
+1. Users  choose either an existing Chroma DB vector database collection or load PDF or CSV files to an existing or new Chroma DB collection.
 
-2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF of their choice.
+2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF / CSV of their choice.
 
 3. The code assumes use of a Chroma DB vector store.  Users may choose to replace this with other vector stores supported by the langchain framework by modifying the underlying code.
 
 4. The step uses the langchain LLM framework.
 
-5. PDFs (containing text) are currently the only loadable file format in this step.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the ["Vector Databases - Hydrate Chroma DB collection"](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection) SAS Studio Custom Step (refer documentation)
+5. PDFs (containing text) and single CSV files are currently the only loadable file format in this step.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the ["Vector Databases - Hydrate Chroma DB collection"](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection) SAS Studio Custom Step (refer documentation)
 
 6. User has already configured Azure OpenAI to deploy both an embedding function and LLM service, or knows the deployment names. 
 
@@ -73,7 +73,9 @@ Current assumptions for this initial versions (future versions may improve upon 
 
 1. **Source file location** (optional, default is Context already loaded): In case you wish to present new source files to use as context,  choose either selecting a folder or file. Otherwise, provide the name of an existing vector store collection in Configuration.
 
-2. **Question** (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
+2. **Source column** (required if CSV selected): In case a CSV file's selected, users must specify a column within the CSV file to act as the main "document" source.  The other fields will be considered metadata.
+
+3. **Question** (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
 
 ----
 ### Configuration 
@@ -169,5 +171,5 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 ----
 ## Change Log
 
-* Version 1.0 (17MAR2024) 
+* Version 1.0 (03APR2024) 
     * Initial version
