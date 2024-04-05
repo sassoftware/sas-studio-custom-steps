@@ -48,6 +48,8 @@ Tested on Viya version Stable 2022.09
 
 ## Change Log
 
+* Version 1.4 (05APR2024) 
+    * Added explanation for purpose of extras sub folder and removed .zip file
 * Version 1.3 (22DEC2023) 
     * Added sample code snippets to remove intermediate tables, macros and macro variables that are created by the step
 * Version 1.2 (04SEP2023) 
@@ -59,3 +61,16 @@ Tested on Viya version Stable 2022.09
     * Initial version
 
 > Note: Please list versions in descending date order, so the most recent version at the top of the change log.  - ***Remove this line***
+
+
+> You can use the ***extras*** subfolder to store optional/special items related to your custom step.  - ***Remove this line***
+
+> Please do not store ***.step*** files, ***.zip*** files, or sample data in this folder.  - ***Remove this line***
+
+> If there is a need to highlight a previous version, then consider using a link in your README.md that points to the commit that contributed that version.  - ***Remove this line***
+
+> Examples of files that could be included in this extras subfolder:  - ***Remove this line***
+
+> * A SAS Export Package for your custom step, please use a ***.package.json*** extension for such a file.  - ***Remove this line***
+
+> * A .sas file containing a slighly modified/simplified version of the SAS code generator (macro) of your step for use in other SAS applications.  - ***Remove this line***
