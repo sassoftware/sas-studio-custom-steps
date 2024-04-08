@@ -2,7 +2,7 @@
 
 ## Description
 
-This custom step extracts lineage information for a SAS Visual Analytics report. The mentioned lineage starts with the CAS librar(y)(ies) and follows the CAS table(s), the CAS table columns, the report columns, the calculated columns and the use of the report/calculated columns in the different report objects.
+This custom step extracts lineage information from a SAS Visual Analytics report. The mentioned lineage starts with the CAS librar(y)(ies) and follows the CAS table(s), the CAS table columns, the report columns, the calculated columns and the use of the report/calculated columns in the different report objects.
 
 ## SAS Viya Support
 
@@ -52,8 +52,8 @@ The custom step has one output table with the following information:
 
 ## Change Log
 
-Version 1.2 (27DEB2024) : Added UTF8 support.
+Version 1.2 (08APR2024) : Added UTF8 support and first public release.
 
-Version 1.1 (08AUG2023) : Code with additional functionality, added by Michael Herrmann, has been merged and tested. (**set columnName = columnLabel if empty; tranwrd columnId -> columnName in expression to make it more readable.; For that also include parameters from prompts which were not analyzed before.**)
+Version 1.1 (08AUG2023) : Code with additional functionality, added by Michael Herrmann, has been merged and tested.
 
 Version 1 (18JUL2023)   : Initial version.
