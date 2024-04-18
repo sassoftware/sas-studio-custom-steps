@@ -118,7 +118,7 @@ The parameters needed are:
 
 ## Change Log
 
-* Version 1.0 (18APR2024)
+* Version 1.1 (18APR2024)
 	* Fixed bug around macro variables in List Shape Info step.
 * Version 1.0 (06FEB2024) 
     * Initial version.
