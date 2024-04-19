@@ -120,5 +120,8 @@ The parameters needed are:
 
 * Version 1.1 (18APR2024)
 	* Fixed bug around macro variables in List Shape Info step.
+   * Retrieve name of caslib associated with libref, instead of assuming that caslib has same name as libref.
+   * Added check for input/output ports that require a CAS table, and put node in error when selected table was not a CAS table.
+   * Added version number and release date in About tab of all steps.
 * Version 1.0 (06FEB2024) 
     * Initial version.
