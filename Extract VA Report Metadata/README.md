@@ -52,10 +52,12 @@ The custom step has one output table with the following information:
 
 ## Change Log
 
-Version 1.3 (16APR2024) : Small GUI changes. Removed a small issue and did a name change.
-
-Version 1.2 (08APR2024) : Added UTF8 support and first public release.
-
-Version 1.1 (08AUG2023) : Code with additional functionality, added by Michael Herrmann, has been merged and tested.
-
-Version 1 (18JUL2023)   : Initial version.
+* Version 1.3 (16APR2024)
+    * Small GUI changes.
+    * Removed a small issue and did a name change.
+* Version 1.2 (08APR2024)
+    * Added UTF8 support and first public release.
+* Version 1.1 (08AUG2023)
+    * Code with additional functionality, added by Michael Herrmann, has been merged and tested.
+* Version 1 (18JUL2023)
+    * Initial version.
