@@ -13,7 +13,6 @@ Please do not store .step files, .zip files or sample data in this folder.
    * The panel showing the content of the file has a "..." menu at the top right, from that menu select "View file" 
    * This opens a new panel showing the "Code" in the file. At the top right of this panel there is a "Download raw file" button. 
 
-
 Examples of files that could be included in this extras subfolder: 
 * A SAS Export Package for your custom step, please use a ".package.json" extension for such a file.
 * A .sas file containing a slighly modified/simplified version of the SAS code generator (macro) of your step for use in other SAS applications.
