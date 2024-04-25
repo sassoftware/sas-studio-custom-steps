@@ -2,7 +2,7 @@
 
 | Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
 | --- | --- | :-: | --- | ---|
-| [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 22DEC2023 |
+| [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 or later | 05APR2024 |
 | [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 or later | 21FEB2024 |
 | [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 or later | 19FEB2024 |
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 or later | 26OCT2022 |
@@ -29,9 +29,10 @@
 | [Export - ADLS File Writer](./Export%20-%20ADLS%20File%20Writer/README.md) | Write SAS tables to Parquet files on Azure Data Lake Storage (ADLS)| [Alfredo Lorie](https://github.com/AlfredoLorie)  | 2023.02 or later | 20APR2023 |
 | [Export - GCSFS File Writer](./Export%20-%20GCSFS%20File%20Writer/README.md) | Write SAS and CAS datasets to Google Cloud Storage (GCS) in Parquet and Delta Lake format using Python | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 or later | 21DEC2023 |
 | [Export - Parquet](./Export%20-%20Parquet/README.md) | Export SAS tables to Parquet files using SAS Libname engine | [Neil Griffin](https://github.com/suknag)  | 2023.10 or later | 15DEC2023 |
-| [Extract Job Definition Metadata](./Extract%20Job%20Definition%20Metadata/README.md) |  extract all content (SAS Code, HTML forms, XML Prompts and Parameters) from a SAS Job Definition and store it in files | [David Weik](https://github.com/Criptic) | 2023.11 or later | 23NOV2023 |
+| [Extract Job Definition Metadata](./Extract%20Job%20Definition%20Metadata/README.md) | Extract all content (SAS Code, HTML forms, XML Prompts and Parameters) from a SAS Job Definition and store it in files | [David Weik](https://github.com/Criptic) | 2023.11 or later | 23NOV2023 |
 | [Extract Text Features](./Extract%20Text%20Features/README.md) | Supports extracting many different features from text fields | [David Weik](https://github.com/Criptic) / [Ulrich Reincke](https://github.com/SnowTiger13) / [Rens Feenstra](https://github.com/snlref) | 2022.10 or later | 27NOV2022 |
-| [GEO - Shape Files](./GEO%20-%20Shape%20Files/README.md) | Manage Shape Files used in GIS systems for use in SAS Visual Analytics | [Stephano Tucciarone](https://github.com/Stefano86T) | 2023.10 or later | 06FEB2024 |
+| [Extract VS Report Metadata](./Extract%20VA%20Report%20Metadata/README.md) | Extract info about CAS tables and columns used, calculated column definitions and their usage, across objects in VA report | [Remco Gooijer](https://github.com/snlrgo) | 2023.05 or later | 16APR2024 |
+| [GEO - Shape Files](./GEO%20-%20Shape%20Files/README.md) | Manage Shape Files used in GIS systems for use in SAS Visual Analytics | [Stefano Tucciarone](https://github.com/Stefano86T) | 2023.10 or later | 18APR2024 |
 | [GeoDistance with Rounding](./GeoDistance%20with%20Rounding/README.md) | Calculate the distance between 2 supplied lat/long locations in either kilometers or miles | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2020.1.5 or later | 28SEP2022 |
 | [Get Exchange Rates](./Get%20Exchange%20Rates/README.md) | Get Exchange Rates from Service Provider | [David Weik](https://github.com/Criptic) | 2023.08 or later | 04SEP2023 |
 | [Git - Clone Git Repo](./Git%20-%20Clone%20Git%20Repo/README.md) | Clone Git Repo as part of running a flow |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 or later | 25JAN2023 |

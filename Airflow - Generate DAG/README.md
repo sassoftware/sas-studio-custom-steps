@@ -137,9 +137,12 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 ## Installation
 
-Download the latest three [Airflow - Generate DAG](./extras/Airflow_Generate_DAG_v1.5.zip) custom steps. Unzip it and upload them in a SAS Content Folder.
+Download the latest three custom steps and upload them in a SAS Content Folder.
 
-See [older versions](./extras/).
+**Notes**: 
+ * ZIP files have been removed. A zip file cannot be tracked by Git and is considered a dangerous file by some organizations. 
+ * GitHub webUI these days has a download button, so it easy to download a few .step files. 
+ * If there is a need to use an older version, then use the GitHub webUI and look at the closed pull requests in the repo, find the request that contributed the version of interest, and download it from there. 
 
 ## Sample Airflow DAG
 

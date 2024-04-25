@@ -111,12 +111,17 @@ The parameters needed are:
 
 ## Requirements
 
-1. Tested on SAS Viya version Stable 2022.10.
+1. Tested on SAS Viya version Stable 2023.10.
 2. A SAS Viya 4 environment with SAS Studio Flows.
 3. The Import Shape custom step require SAS/GRAPH.
 4. To run Create Geo Provider user must have rights to create a GEO Provider in SAS Visual Analytics.
 
 ## Change Log
 
+* Version 1.1 (18APR2024)
+	* Fixed bug around macro variables in List Shape Info step.
+   * Retrieve name of caslib associated with libref, instead of assuming that caslib has same name as libref.
+   * Added check for input/output ports that require a CAS table, and put node in error when selected table was not a CAS table.
+   * Added version number and release date in About tab of all steps.
 * Version 1.0 (06FEB2024) 
-    * Initial version
+    * Initial version.
