@@ -75,7 +75,9 @@ Current assumptions for this initial versions (future versions may improve upon 
 
 2. **Source column** (required if CSV selected): In case a CSV file's selected, users must specify a column within the CSV file to act as the main "document" source.  The other fields will be considered metadata.
 
-3. **Question** (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
+3. **System prompt** (text area, default provided, required): a default system prompt which instructs the LLM on how to handle the question is provided.  Note it makes use of template variables {context} and {question} referring to the context and question respectively.  Edit this system prompt if you'd like to change the style of the response.
+
+4. **Question** (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
 
 ----
 ### Configuration 
@@ -171,5 +173,5 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 ----
 ## Change Log
 
-* Version 1.0 (03APR2024) 
+* Version 1.0 (24APR2024) 
     * Initial version
