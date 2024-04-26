@@ -1,7 +1,7 @@
 # CV - Create Object Detection Table
 
 ## Description
-Object Detection models require labeled datasets for training, in order to provide accurate predictions of object locations. This custom step leverages SAS DLPy to create the training dataset in a very easy manner.
+In Computer Vision(CV) applications, Object Detection models require labeled datasets for training, in order to provide accurate predictions of object locations. This custom step leverages SAS DLPy to create the training dataset in a very easy manner.
 
 ## Features
 - Create training dataset with object locations and labels.
