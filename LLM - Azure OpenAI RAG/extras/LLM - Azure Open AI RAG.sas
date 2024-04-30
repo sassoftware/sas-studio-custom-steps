@@ -26,7 +26,27 @@ data _null_;
    put @1 _infile_;
    datalines4;
 
+#############################################################################################
+#
+#   Obtain values from UI
+#
+#############################################################################################
 
+_aor_error_flag = int(SAS.symget('_aor_error_flag'))
+_aor_error_desc = SAS.symget('_aor_error_desc')
+data_path = SAS.symget('_data_location')
+chroma_path = SAS.symget('_persistent_path')
+collection_name =  SAS.symget("collectionName")
+system_prompt = SAS.symget("varSystemPrompt")
+query_text=SAS.symget('questionText')
+embedding_model_deployment = SAS.symget("embeddingModelDeployment")
+gen_model_deployment = SAS.symget("genModelDeployment")
+folder_file_selector = SAS.symget('folder_or_file_selector')
+num_k = int(SAS.symget('numK'))
+temperature = float(SAS.symget('temperature'))
+output_table = SAS.symget('outputTable')
+
+   
 #############################################################################################
 #
 #  The pysqlite3 import allows for the code to also run in (some) older Python (or sqlite) versions.
@@ -43,20 +63,26 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 #
 #############################################################################################
 
-from langchain.document_loaders import DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema import Document
-# from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores.chroma import Chroma
-from langchain.prompts import ChatPromptTemplate
-#from langchain_community.chat_models import ChatOpenAI
-from langchain_openai import AzureOpenAIEmbeddings
-from langchain_openai import AzureOpenAI
-from langchain_community.document_loaders import PyPDFLoader
-import os
-import shutil
-import chromadb
-import json
+try:
+   from langchain.document_loaders import DirectoryLoader
+   from langchain.text_splitter import RecursiveCharacterTextSplitter
+   from langchain.schema import Document
+   from langchain.vectorstores.chroma import Chroma
+   from langchain.prompts import ChatPromptTemplate
+   from langchain_openai import AzureChatOpenAI
+   from langchain_openai import AzureOpenAIEmbeddings
+   
+   import os
+   import shutil
+   import chromadb
+   import pandas 
+
+except ImportError as e:
+   _aor_error_flag = 1
+   _aor_error_desc = str(e)
+   SAS.logMessage(_aor_error_desc,"error")
+   SAS.symput("_aor_error_flag",_aor_error_flag)
+   SAS.symput("_aor_error_desc",_aor_error_desc)
 
 #############################################################################################
 #
@@ -66,22 +92,6 @@ import json
 #############################################################################################
 
 os.environ['ANONYMIZED_TELEMETRY'] = "False"
-
-#############################################################################################
-#
-#   Obtain values from UI
-#
-#############################################################################################
-
-_aor_error_flag = int(SAS.symget('_aor_error_flag'))
-_aor_error_desc = SAS.symget('_aor_error_desc')
-data_path = SAS.symget('_data_location')
-chroma_path = SAS.symget('persistentPath')
-collection_name =  SAS.symget("collectionName")
-query_text=SAS.symget('questionText')
-embedding_model_deployment = SAS.symget("embeddingModelDeployment")
-gen_model_deployment = SAS.symget("genModelDeployment")
-folder_file_selector = SAS.symget('folder_or_file_selector')
 
 #############################################################################################
 #
@@ -106,10 +116,17 @@ def load_documents(isFolder):
 
    if isFolder=="folder":
       loader = DirectoryLoader(data_path,glob="*.pdf",loader_cls=PyPDFLoader)
-
-   else:
+   elif isFolder=="pdf":
+      from langchain_community.document_loaders import PyPDFLoader
       loader=PyPDFLoader(data_path)
-
+   elif isFolder=="csv":
+      text_source = SAS.symget('textSource')
+      from langchain_community.document_loaders.csv_loader import CSVLoader
+      loader=CSVLoader(file_path = data_path, source_column = text_source)
+   else:
+      _aor_error_flag = 1
+      _aor_error_desc = "Provided file should be either PDF or CSV"
+      
    documents=loader.load_and_split()
    return documents
 
@@ -133,6 +150,11 @@ SAS.logMessage(chroma_path)
 chroma_client = chromadb.PersistentClient(path=chroma_path)
 
 collections = [item.name for item in [name for name in chroma_client.list_collections()]]
+
+SAS.logMessage("Collections listed at this path:")
+
+for collection in collections:
+   SAS.logMessage(collection)
 
 if folder_file_selector == "existing":
 
@@ -166,6 +188,7 @@ if _aor_error_flag == 0 and not(folder_file_selector=="existing"):
 
    try: 
       doc = load_documents(folder_file_selector)
+      print(doc)
 
    except Exception as e:
       _aor_error_flag = 1
@@ -236,7 +259,7 @@ if _aor_error_flag == 0:
 if _aor_error_flag == 0:
 
    try:
-      db = Chroma(persist_directory=chroma_path, embedding_function=embedding_function,collection_name=collection_name)
+      db = Chroma(persist_directory=chroma_path, embedding_function=embedding_function,collection_name=collection_name, collection_metadata={"hnsw:space": "cosine"})
       SAS.logMessage("Answers loaded to Chroma")
 
    except Exception as e:
@@ -249,26 +272,12 @@ if _aor_error_flag == 0:
 
 #############################################################################################
 #
-#   Design Prompt template
-#
-#############################################################################################
-
-if _aor_error_flag == 0:
-   PROMPT_TEMPLATE = """
-Answer the question based only on provided context. If you don't know the answer, state that you don't know. 
-Context:{context}
----
-Question: {question}
-"""
-
-#############################################################################################
-#
 #   Retrieve results
 #
 #############################################################################################
 
    try:
-      results = db.similarity_search_with_relevance_scores(query_text, k=10)
+      results = db.similarity_search_with_relevance_scores(query_text, k=num_k)
 
    except Exception as e:
       _aor_error_flag = 1
@@ -277,13 +286,22 @@ Question: {question}
       SAS.symput("_aor_error_flag",_aor_error_flag)
       SAS.symput("_aor_error_desc",_aor_error_desc)
 
+   if results:
+      context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+      results_final = []
+   
+      for doc,score in results:
+         _results_dict = {**doc.metadata, "page_content":doc.page_content, "score":score }
+         results_final.append(_results_dict)
 
-   context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+      if output_table:
+         pdf = pandas.DataFrame().from_dict(results_final)
+         SAS.df2sd(pdf,dataset=output_table)
    
 if _aor_error_flag == 0:
 
    try:
-      prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
+      prompt_template = ChatPromptTemplate.from_template(system_prompt)
       prompt = prompt_template.format(context=context_text, question=query_text)
 
    except Exception as e:
@@ -302,18 +320,8 @@ if _aor_error_flag == 0:
 if _aor_error_flag == 0:
 
    try:
-      from langchain_openai import AzureChatOpenAI
-
-   except ImportError as e:
-      _aor_error_flag = 1
-      _aor_error_desc = str(e)
-      SAS.logMessage(_aor_error_desc,"error")
-      SAS.symput("_aor_error_flag",_aor_error_flag)
-      SAS.symput("_aor_error_desc",_aor_error_desc)
-   
-   try:
-      model = model = AzureChatOpenAI(azure_deployment=gen_model_deployment,)
-      response_text = model.predict(prompt)
+      model = AzureChatOpenAI(azure_deployment=gen_model_deployment, temperature=temperature,)
+      response_text = model.invoke(prompt)
 
    except Exception as e:
       _aor_error_flag = 1
@@ -325,7 +333,7 @@ if _aor_error_flag == 0:
 
 #############################################################################################
 #
-#   Write results to ODS output
+#   Send results to write to ODS output
 #
 #############################################################################################
 
@@ -333,9 +341,9 @@ if _aor_error_flag == 0:
 
    try:
       sources = [doc.metadata.get("source", None) for doc, _score in results]
-      formatted_response = f"Response: {response_text}\nSources: {sources}"
+      formatted_response = f"Response: {response_text.content}\nSources: {sources}"
       print(formatted_response)
-      SAS.symput('responseVar',response_text)
+      SAS.symput('_response_value',response_text.content)
 
    except Exception as e:
       _aor_error_flag = 1
@@ -555,11 +563,11 @@ run;
    _aor prefix stands for Azure OpenAI RAG
 *------------------------------------------------------------------------------------------*/
 
-%macro _aor_pf_execution_code;
+%macro _aor_execution_code;
 
    %put NOTE: Starting main execution code;
 
-   %global responseVar;
+   %global _response_value;
 
 /*-----------------------------------------------------------------------------------------*
    Create an error flag. 
@@ -601,8 +609,10 @@ run;
          %end;
 
          %else %do;
+
             %let _aor_error_flag=1;
             %put ERROR: Please select a valid folder on the SAS Server (filesystem) for persisting the database. ;
+
          %end;
 
       %end;
@@ -612,18 +622,23 @@ run;
    %if &_aor_error_flag. = 0 %then %do;
 
       %_extract_sas_folder_path(&persistentPathName.);
+
       %if "&_sas_folder_path." = "" %then %do;
+
          %let _aor_error_flag=1;
          %let _aor_error_desc = The persistent path provided is empty, please select a valid path  ;
          %put ERROR: &_aor_error_desc. ;
+
       %end;
 
    %end;
 
    %if &_aor_error_flag. = 0 %then %do;
-      %global persistentPath;
-      %let persistentPath = &_sas_folder_path;
+
+      %global _persistent_path;
+      %let _persistent_path = &_sas_folder_path;
       %let _sas_folder_path=;
+
    %end;
 
 /*-----------------------------------------------------------------------------------------*
@@ -638,8 +653,10 @@ run;
       %end;
 
       %else %do;
+
          %let _aor_error_flag=1;
          %put ERROR: Please select a valid file on the SAS Server (filesystem) containing your Azure OpenAI key.  Key should be in a secure location within filesystem. ;
+
       %end;
 
    %end;
@@ -649,17 +666,21 @@ run;
       %_extract_sas_folder_path(&azureKeyLocation.);
 
       %if "&_sas_folder_path." = "" %then %do;
+
          %let _aor_error_flag=1;
          %let _aor_error_desc = The answer bank provided is empty, please select a valid path  ;
          %put ERROR: &_aor_error_desc. ;
+
       %end;
 
    %end;
 
    %if &_aor_error_flag. = 0 %then %do;
+
       %global _key_location;
       %let _key_location = &_sas_folder_path;
       %let _sas_folder_path=;
+
    %end;
 
    %if &_aor_error_flag. = 0 %then %do;
@@ -684,51 +705,59 @@ run;
 
       %if &_aor_error_flag. = 0 %then %do;
 
-         %global answerPath;
+         %global _answer_path;
 
-         %if "&folder_or_file_selector." = "file" %then %do;
-            %let answerPath = &answerBankFile.;
+         %if "&folder_or_file_selector." = "pdf" %then %do;
+            %let _answer_path = &answerBankFile.;
+         %end;
+
+         %else %if "&folder_or_file_selector." = "csv" %then %do;
+            %let _answer_path = &answerBankFile.;
          %end;
 
          %else %if "&folder_or_file_selector." = "folder" %then %do;
-            %let answerPath = &answerBankFolder.;
+            %let _answer_path = &answerBankFolder.;
          %end;
 
-         %_identify_content_or_server(&answerPath.);
+         %_identify_content_or_server(&_answer_path.);
 
          %if "&_path_identifier."="sasserver" %then %do;
             %put NOTE: Location prefixed with &_path_identifier. is on the SAS Server.;
          %end;
 
          %else %do;
+
             %let _aor_error_flag=1;
             %let _aor_error_desc = Please select a valid file or folder on the SAS Server (filesystem) containing your answer bank.  ;
             %put ERROR: &_aor_error_desc. ;
+
          %end;
 
       %end;
 
       %if &_aor_error_flag. = 0 %then %do;
 
-         %_extract_sas_folder_path(&answerPath.);
+         %_extract_sas_folder_path(&_answer_path.);
 
          %if "&_sas_folder_path." = "" %then %do;
+
             %let _aor_error_flag=1;
             %let _aor_error_desc = The answer bank provided is empty, please select a valid path  ;
             %put ERROR: &_aor_error_desc. ;
+
          %end;
 
       %end;
 
       %if &_aor_error_flag. = 0 %then %do;
+
          %global _data_location;
          %let _data_location = &_sas_folder_path;
          %let _sas_folder_path=;
+
       %end;
 
    %end;
-
- 
 
    %if &_aor_error_flag. = 0 %then %do;
 
@@ -741,6 +770,7 @@ run;
 /*-----------------------------------------------------------------------------------------*
    Run Python block (accepts inputs and loads documents along with embeddings)
 *------------------------------------------------------------------------------------------*/
+
    %if &_aor_error_flag. = 0 %then %do;
 
       proc python infile = aorcode;
@@ -753,23 +783,47 @@ run;
 /*-----------------------------------------------------------------------------------------*
    Print results to ODS html
 *------------------------------------------------------------------------------------------*/
-   filename rwiOut ".";
-   ods html close;
-   ods html path=rwiOut file="UnformatText.html";
-	
-   title "&questionText";
-	
-   data _null_;
-       
-      dcl odsout obj();
-	  obj.format_text(data: " %bquote(&responsevar) "); 
-	  
-   run;
-	
-   ods html close;
-   ods html; /* Not required in SAS Studio */
 
-%mend _aor_pf_execution_code;
+   %if &_aor_error_flag. = 0 %then %do;
+
+      filename rwiOut ".";
+      ods html close;
+      ods html path=rwiOut file="UnformatText.html";
+    
+      title "Question: &questionText.";
+   
+      data _null_;
+       
+         dcl odsout obj();
+         obj.format_text(data: " %bquote(&_response_value.) "); 
+     
+      run;
+   
+      ods html close;
+      ods html; 
+
+   %end;
+
+   %if &_aor_error_flag. = 0 %then %do;
+
+      %if "&outputTable."="" %then %do;
+         %put NOTE: No output table specified. ;
+      %end;
+
+      %else %do;
+
+         data &outputTable.;
+            length Question $32767. LLM_Answer $32767.;
+            set &outputTable.;
+            Question = "&questionText.";
+            LLM_Answer = "%bquote(&_response_value.)";
+         run;
+
+      %end;
+
+   %end;
+
+%mend _aor_execution_code;
 
 
 /*-----------------------------------------------------------------------------------------*
@@ -784,9 +838,13 @@ run;
 
 %_create_runtime_trigger(_aor_run_trigger);
 
+/*-----------------------------------------------------------------------------------------*
+   Execute 
+*------------------------------------------------------------------------------------------*/
+
 %if &_aor_run_trigger. = 1 %then %do;
 
-   %_aor_pf_execution_code;
+   %_aor_execution_code;
 
 %end;
 
@@ -805,8 +863,9 @@ run;
 /*-----------------------------------------------------------------------------------------*
    Clean up existing macro variables and macro definitions.
 *------------------------------------------------------------------------------------------*/
-%if %symexist(answerPath) %then %do;
-   %symdel answerPath;
+
+%if %symexist(_answer_path) %then %do;
+   %symdel _answer_path;
 %end;
 
 %if %symexist(_aor_run_trigger) %then %do;
@@ -821,24 +880,20 @@ run;
    %symdel _sas_folder_path;
 %end;
 
-%if %symexist(PROC_PYPATH) %then %do;
-   %symdel PROC_PYPATH;
+%if %symexist(_response_value) %then %do;
+   %symdel _response_value;
 %end;
 
-%if %symexist(responseVar) %then %do;
-   %symdel responseVar;
-%end;
-
-%if %symexist(persistentPath) %then %do;
-   %symdel persistentPath;
+%if %symexist(_persistent_path) %then %do;
+   %symdel _persistent_path;
 %end;
 
 %if %symexist(_key_location) %then %do;
    %symdel _key_location;
 %end;
 
-%if %symexist(answerPath) %then %do;
-   %symdel answerPath;
+%if %symexist(_answer_path) %then %do;
+   %symdel _answer_path;
 %end;
 
 %if %symexist(_data_location) %then %do;
@@ -851,4 +906,8 @@ run;
 
 %if %symexist(_aor_error_desc) %then %do;
    %symdel _aor_error_desc;
+%end;
+
+%if %symexist(PROC_PYPATH) %then %do;
+   %symdel PROC_PYPATH;
 %end;
