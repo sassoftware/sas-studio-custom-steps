@@ -25,8 +25,9 @@ Here you need to specify the following:
 
 ![properties](img/UI_scheduling_properties.PNG)
 
-- **Number of concurrent processes**: NEW in version 1.4. The number specified here is the maximum number of processes that can run concurrently at one time.
+- **Number of concurrent processes**: NEW in version 1.4. The number specified here is the maximum number of processes that can run concurrently at one time. The default value is 4.
 - **Wait for processes to finish**: This option, which is checked by default, lets the custom step wait for all processes to finish before continuing with the rest of the flow. The state in which this custom step **can** continue with the next step of the current flow is when the last job is set to run.
+- **Abort on exception**: NEW in version 1.8. When checked the custom step will stop further processing of the flow when one or more of the started processes caused an exception. The default value for this setting is **NOT** checked. Further explanation can be found in the *Usage* section. 
 - **Delayed execution**: NEW in version 1.2. When set, every process is started with a 'x' second delay, to avoid a race condition. 
 - **Delayed seconds**: NEW in version 1.3. When you specified to use the delayed execution option, you can specify the amount of seconds here. The default value is 1. This option it's availability depends on the checked status of the **Delayed execution** option.
 
@@ -46,6 +47,13 @@ You can use the macro variable(s), in this example "**AGE**" and "**HEIGTH**", d
 
 ![Usage](img/Usage_inner_flow.PNG)
 
+In case the option **Abort on exception** is checked and one or more processes failed, you will see that as follows:
+
+![Usage](img/Abort_on_exception.PNG)
+
+Where no further processing of the flow is done. In the log file you will see that as:
+
+![Usage](img/Error_message.PNG)
 ## Input port
 
 The input table provides information on the macro variable names and their values. 
@@ -92,6 +100,8 @@ Note that:
 | ERROR: The status table, &_output, does not exist. | The internal status table, which is exposed as the step output table, doesn't exist!. This will cause the step to abort. |
 
 ## Change Log
+
+Version 1.8 (16MAY2024) : Added the **Abort on exception** option.
 
 Version 1.7 (18MAR2024) : Name change from **Loop** to **Loop Deployed Object**
 
