@@ -37,9 +37,9 @@ Click on the picture below to watch a quick demo:
 
 1. **Redirection operation** (drop-down list, required): choose whether to redirect only the log, only the output, both log and output, or to reassign to default location.
 
-2. **Log file location** (file selector, enabled if log redirection is selected): provide a path to a log file on the file system.  The path should be writeable.
+2. **Log file location** (file selector, enabled if log redirection is selected): provide a path to a log file on the file system (i.e. sasserver **not** sascontent).  The path should be writeable.
 
-3. **Output file location** (file selector, enabled if output redirection is selected): provide a path on the file system.  The path should be writeable.
+3. **Output file location** (file selector, enabled if output redirection is selected): provide a path on the file system (i.e. sasserver **not** sascontent).  The path should be writeable.
 
 ----
 ### Output Specifications
