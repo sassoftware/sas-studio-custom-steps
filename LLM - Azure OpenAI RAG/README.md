@@ -173,7 +173,7 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 ----
 ## Change Log
 
-* Version 1.01 (06JUN2024) 
+* Version 1.0.1 (10JUN2024) 
     * Bug fix - missing import for folder upload
 
 * Version 1.0 (15MAY2024) 
