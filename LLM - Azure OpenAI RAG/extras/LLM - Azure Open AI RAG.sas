@@ -115,6 +115,7 @@ def load_documents(isFolder):
    SAS.logMessage(f"Answer bank located at {data_path}")
 
    if isFolder=="folder":
+      from langchain_community.document_loaders import PyPDFLoader
       loader = DirectoryLoader(data_path,glob="*.pdf",loader_cls=PyPDFLoader)
    elif isFolder=="pdf":
       from langchain_community.document_loaders import PyPDFLoader
