@@ -33,15 +33,15 @@ This animated gif provides a basic idea:
 
 Current assumptions for this initial versions (future versions may improve upon the same):
 
-1. Users  choose either an existing Chroma DB vector database collection or load PDF or CSV files to an existing or new Chroma DB collection.
+1. Users  choose either an existing Chroma DB vector database collection or load PDF, a pandas DataFrame or CSV files to an existing or new Chroma DB collection.
 
-2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF / CSV of their choice.
+2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF/DataFrame/CSV of their choice.
 
 3. The code assumes use of a Chroma DB vector store.  Users may choose to replace this with other vector stores supported by the langchain framework by modifying the underlying code.
 
 4. The step uses the langchain LLM framework.
 
-5. PDFs (containing text) and single CSV files are currently the only loadable file format in this step.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the ["Vector Databases - Hydrate Chroma DB collection"](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection) SAS Studio Custom Step (refer documentation)
+5. PDFs (containing text), CSV and pandas DataFrame are currently the only loadable file format in this step.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the ["Vector Databases - Hydrate Chroma DB collection"](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection) SAS Studio Custom Step (refer documentation)
 
 6. User has already configured Azure OpenAI to deploy both an embedding function and LLM service, or knows the deployment names. 
 
@@ -71,9 +71,9 @@ Current assumptions for this initial versions (future versions may improve upon 
 ----
 ### Input Parameters
 
-1. **Source file location** (optional, default is Context already loaded): In case you wish to present new source files to use as context,  choose either selecting a folder or file. Otherwise, provide the name of an existing vector store collection in Configuration.
+1. **Source file location** (optional, default is Context already loaded): in case you wish to present new source files to use as context,  choose either selecting a folder, file, pandas DataFrame or a CSV file. Otherwise, provide the name of an existing vector store collection in Configuration.
 
-2. **Source column** (required if CSV selected): In case a CSV file's selected, users must specify a column within the CSV file to act as the main "document" source.  The other fields will be considered metadata.
+2. **Source column** (required if DataFrame or CSV selected): In case a pandas DataFrame or CSV file's selected, users must specify a column within the DataFrame / CSV file to act as the main "document" source.  The other fields will be considered metadata.
 
 3. **System prompt** (text area, default provided, required): a default system prompt which instructs the LLM on how to handle the question is provided.  Note it makes use of template variables {context} and {question} referring to the context and question respectively.  Edit this system prompt if you'd like to change the style of the response.
 
@@ -90,7 +90,7 @@ Current assumptions for this initial versions (future versions may improve upon 
 
 4. **Text generation model** (text field, required): provide the name of an Azure OpenAI text generation deployment.  For convenience, you may choose to use the same name as the OpenAI LLM. Example, gpt-35-turbo to gpt-35-turbo.
 
-5. **Azure OpenAI service details** (file selector for key and text fields, required): provide a path to your Azure OpenAI access key.  Ensure this key is saved within a text file in a secure location on the filesystem.  Users are responsible for providing their keys to use this service.  In addition, also refer to your Azure OpenAI service to obtain the service endpoint and region.
+5. **Azure OpenAI service details** (file selector for key and text fields, required): provide a path to your Azure OpenAI access key.  Ensure this key is saved within a text file in a secure location on the filesystem.  Users are responsible for providing their keys to use this service.  In addition, also refer to your Azure OpenAI service to obtain the service endpoint and region. The Azure OpenAI version can also be changed if required.
 
 ----
 ### Output Specifications
@@ -154,6 +154,8 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 
 8. [Langchain Python documentation](https://python.langchain.com/docs/get_started/introduction)
 
+9. OpenAI API versions change periodically. Keep track of them [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation)
+
 ----
 ## SAS Program
 
@@ -172,6 +174,10 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 
 ----
 ## Change Log
+
+* Version 1.2.1 (25JUN2024) 
+    * Added option for load from pandas DataFrame
+    * Patched Azure OpenAI version - surfaced to UI
 
 * Version 1.0.1 (10JUN2024) 
     * Bug fix - missing import for folder upload
