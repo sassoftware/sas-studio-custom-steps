@@ -35,7 +35,7 @@ Tested on Viya 4, Stable 2024.01
 ### Python packages
 
 - swat (1.13.3)
-- python-DLPy (1.2.1-dev)
+- python-DLPy (1.2.1-dev - NOTE: This is a dev version and cannot be directly pip installed. Instead, to access this version, use the command "pip install git+https://github. com/sassoftware/python-dlpy.git")
 - pandas
 - matplotlib
 
@@ -76,5 +76,5 @@ https://github.com/sassoftware/python-dlpy
 - Neela Vengateshwaran (Neela.Vengateshwaran@sas.com)
 
 ## Change Log
-- Version 1.0 (31JAN2024)
+- Version 1.0 (11JULY2024)
     - Initial version
