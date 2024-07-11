@@ -1,10 +1,10 @@
 # LLM - Azure OpenAI-based Retrieval Augmented Generation (RAG)
 
-This custom step uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for purposes of answering a question.  
+This custom step uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for answering a question.  
 
-LLMs require context to provide relevant answers, especially for questions based on a local body of knowledge or document corpus.  
+LLMs require relevant context to provide useful answers, especially for questions based on a local corpus of knowledge.  
 
-A RAG approach, explained in simple terms, retrieves relevant data from a knowledge base and provides the same to an LLM to use as context.  Results based on RAG are expected to reduce LLM hallucinations (i.e. an LLM provides irrelevant or false answers).  This custom step queries a Chromadb vector store and passes retrieved documents to an Azure OpenAI service.   
+A RAG approach, explained in simple terms, retrieves relevant data from a knowledge base and provides the same to an LLM to use as context.  RAG-based are expected to reduce LLM hallucinations (i.e. an LLM provides irrelevant or false answers).  This custom step implements RAG with a Chroma DB vector store and passes retrieved documents to an Azure OpenAI service.   
 
 **IMPORTANT:** Be aware that this custom step uses an Azure OpenAI service that results in data being sent over to the service.  Ensure you use this only in accordance with your organization's policies on calling external LLMs.
 
@@ -33,15 +33,15 @@ This animated gif provides a basic idea:
 
 Current assumptions for this initial versions (future versions may improve upon the same):
 
-1. Users  choose either an existing Chroma DB vector database collection or load PDF, a pandas DataFrame or CSV files to an existing or new Chroma DB collection.
+1. Users  choose either an existing Chroma DB vector database collection or load PDF,  SAS dataset, pandas DataFrame or CSV files to an existing or new Chroma DB collection.
 
-2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF/DataFrame/CSV of their choice.
+2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF/sas7bdat/DataFrame/CSV of their choice.
 
-3. The code assumes use of a Chroma DB vector store.  Users may choose to replace this with other vector stores supported by the langchain framework by modifying the underlying code.
+3. The code assumes use of a Chroma DB vector store.  Users may choose to replace this with other supported vector stores.
 
-4. The step uses the langchain LLM framework.
+4. The code uses the langchain LLM framework.  
 
-5. PDFs (containing text), CSV and pandas DataFrame are currently the only loadable file format in this step.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the ["Vector Databases - Hydrate Chroma DB collection"](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection) SAS Studio Custom Step (refer documentation)
+5. PDFs (containing text), CSV, SAS datasets and pandas DataFrames are currently the only loadable file format allowed.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the "Vector Databases - Hydrate Chroma DB collection" SAS Studio Custom Step (refer documentation)
 
 6. User has already configured Azure OpenAI to deploy both an embedding function and LLM service, or knows the deployment names. 
 
@@ -71,13 +71,13 @@ Current assumptions for this initial versions (future versions may improve upon 
 ----
 ### Input Parameters
 
-1. **Source file location** (optional, default is Context already loaded): in case you wish to present new source files to use as context,  choose either selecting a folder, file, pandas DataFrame or a CSV file. Otherwise, provide the name of an existing vector store collection in Configuration.
+1. Source file location (optional, default is Context already loaded): in case you wish to present new source files to use as context,  choose either selecting a folder, file,SAS dataset. pandas DataFrame or a CSV file. Otherwise, provide the name of an existing vector store collection in Configuration. Note that if choosing a SAS dataset, you must open an input port and attach a table to the custom step.
 
-2. **Source column** (required if DataFrame or CSV selected): In case a pandas DataFrame or CSV file's selected, users must specify a column within the DataFrame / CSV file to act as the main "document" source.  The other fields will be considered metadata.
+2. Source column ( required if SAS dataset, DataFrame or CSV selected): in case a SAS dataset, pandas DataFrame or a CSV file's selected, users must specify a column within the data source as the main "document" source.  The other fields will be considered metadata.
 
-3. **System prompt** (text area, default provided, required): a default system prompt which instructs the LLM on how to handle the question is provided.  Note it makes use of template variables {context} and {question} referring to the context and question respectively.  Edit this system prompt if you'd like to change the style of the response.
+3. System prompt (text area, default provided, required): a default system prompt which instructs the LLM on how to handle the question is provided.  Note it makes use of template variables {context} and {question} referring to the context and question respectively.  Edit this system prompt if you'd like to change the style of the response.
 
-4. **Question** (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
+4. Question (text area, required): Provide your question to the LLM. Note that this will be added to additional system prompt, to create a prompt that will be passed to the LLM.
 
 ----
 ### Configuration 
@@ -174,6 +174,10 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 
 ----
 ## Change Log
+
+* Version 1.3.1 (10JUL2024) 
+    * Added option for load from SAS dataset
+    * README / About tab minor edits
 
 * Version 1.2.1 (25JUN2024) 
     * Added option for load from pandas DataFrame
