@@ -24,7 +24,6 @@ See [Change Log and Requirements](#change-log-and-requirements).
 
 * SAS Viya: 2023.12 or later
 * SAS Airflow Provider: 0.0.12 or later
-* Airflow: "minimum-release-goes-here"
 
 ## User Interface
 
@@ -116,6 +115,8 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 | Version | Date      | Updates                                                                            | Built on SAS Viya | SAS Airflow Provider Release |
 | ------- | --------- | ---------------------------------------------------------------------------------- | ----------------- | ---------------------------- |
+| 1.5     | 21FEB2024 | Support for Airflow Trigger Rules as part of the task definition                   | Stable 2023.12    | 0.0.12                       |
+|         |           | &nbsp;(idea from Charalampos Kamvysis)                                             |                   |                              |
 | 1.4     | 09JAN2024 | Support for Airflow File Sensors as part of the task definition                    | Stable 2023.12    | 0.0.12                       |
 |         |           | &nbsp;(contribution from Lorenzo Toja)                                             |                   |                              |
 |         |           | Support of Airflow Datasets for scheduling                                         |                   |                              |
@@ -136,9 +137,12 @@ There is nothing to set in the "Airflow - Finalize DAG" step.
 
 ## Installation
 
-Download the latest three [Airflow - Generate DAG](./extras/Airflow_Generate_DAG_v1.4.zip) custom steps. Unzip it and upload them in a SAS Content Folder.
+Download the latest three custom steps and upload them in a SAS Content Folder.
 
-See [older versions](./extras/).
+**Notes**: 
+ * ZIP files have been removed. A zip file cannot be tracked by Git and is considered a dangerous file by some organizations. 
+ * GitHub webUI these days has a download button, so it easy to download a few .step files. 
+ * If there is a need to use an older version, then use the GitHub webUI and look at the closed pull requests in the repo, find the request that contributed the version of interest, and download it from there. 
 
 ## Sample Airflow DAG
 

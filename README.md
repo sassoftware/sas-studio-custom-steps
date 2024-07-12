@@ -3,7 +3,7 @@
 ## Overview
 
 A custom step enables you to create a user interface for SAS Studio on SAS Viya users at your site to complete a specific task. Custom steps are saved to SAS Content, so they can be shared with others at your site. The Steps panel lists all SAS steps available to a user, including custom steps.
-See [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ) for a quick introduction. For more details see [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm). 
+Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://video.sas.com/detail/videos/sas-viya-quick-start/video/6347011003112/create-custom-steps-with-sas-studio?autoStart=true) for a quick introduction. For more details see [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm). 
 
 ## List of Contributions
 

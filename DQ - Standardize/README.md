@@ -9,6 +9,8 @@ The **DQ - Standardize** step allows you to create a column with standardized va
  * Prompts take advantage of dynamic prompt lists (SASDQREF) and hierarchies 
  * It's worthwhile to note that the DQ Standardize step also allows you to mask data when using the data masking standardization definitions that have become available since [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation)   
 
+>**Note**: The **Parse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2024.01, provides similar functionality, 
+and it is highly recommended to use that step going forward when possible.
 
 ## User Interface  
 
@@ -25,7 +27,7 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 
 ## Requirements  
 
-2023.06 or later  
+2024.01 or later  
 
 * This custom step requires a SAS Quality Knowledge Base (QKB) to be installed and configured. More details can be found in the documentation that is available [here](https://support.sas.com/en/software/quality-knowledge-base-support.html)  
 
@@ -35,6 +37,9 @@ The **DQ - Standardize** step allows you to create a column with standardized va
 ![Using the DQ - Standardize Custom Step](img/dqstandardize.gif)
 
 ## Change Log  
+
+Version 2.2 (21MAR2024) 
+ * New standardized columns made mandatory  
   
 Version 2.1 (27JUL2023)
  * assign SASDQREF if it has not been assigned 
