@@ -1,6 +1,5 @@
 /* SAS templated code goes here */
 
-
 /*-----------------------------------------------------------------------------------------*
    Python Block Definition
 *------------------------------------------------------------------------------------------*/
@@ -99,9 +98,9 @@ os.environ['ANONYMIZED_TELEMETRY'] = "False"
 #
 #############################################################################################
 
-os.environ["AZURE_OPENAI_API_KEY"]= SAS.symget('AZURE_OPENAI_KEY')
-os.environ["AZURE_OPENAI_ENDPOINT"]= SAS.symget('azureOpenAIEndpoint')
-os.environ["OPENAI_API_VERSION"] = "2023-12-01-preview"
+os.environ["AZURE_OPENAI_API_KEY"]= SAS.symget("AZURE_OPENAI_KEY")
+os.environ["AZURE_OPENAI_ENDPOINT"]= SAS.symget("azureOpenAIEndpoint")
+os.environ["OPENAI_API_VERSION"] = SAS.symget("OpenAIVersion")
 
 #############################################################################################
 #
@@ -113,6 +112,7 @@ def load_documents(isFolder):
    '''Reads in all documents or a single pdf doc using PyPDF or directory loader'''
 
    SAS.logMessage(f"Answer bank located at {data_path}")
+   SAS.logMessage(f"Data source is {isFolder}")
 
    if isFolder=="folder":
       from langchain_community.document_loaders import PyPDFLoader
@@ -120,6 +120,19 @@ def load_documents(isFolder):
    elif isFolder=="pdf":
       from langchain_community.document_loaders import PyPDFLoader
       loader=PyPDFLoader(data_path)
+   elif isFolder=="sas":
+      sas_dataset = SAS.symget("inputTable")
+      pdf_sas = SAS.sd2df(dataset=sas_dataset)
+      text_source = SAS.symget('textSource')
+      from langchain_community.document_loaders import DataFrameLoader
+      loader = DataFrameLoader(pdf_sas, page_content_column=text_source)
+      SAS.logMessage("SAS dataset loaded")
+   elif isFolder=="pandas":
+      pdf_name = SAS.symget('dataFrameName')
+      text_source = SAS.symget('textSource')
+      from langchain_community.document_loaders import DataFrameLoader
+      loader = DataFrameLoader(globals()[pdf_name], page_content_column=text_source)
+      SAS.logMessage("Pandas data frame loaded")
    elif isFolder=="csv":
       text_source = SAS.symget('textSource')
       from langchain_community.document_loaders.csv_loader import CSVLoader
@@ -129,12 +142,13 @@ def load_documents(isFolder):
       _aor_error_desc = "Provided file should be either PDF or CSV"
       
    documents=loader.load_and_split()
+   SAS.logMessage("Load and split complete")
    return documents
 
 def save_to_chroma(chunks: list[Document]):
    ''' Loads data to Chroma DB '''
 
-   embedding_method= AzureOpenAIEmbeddings( azure_deployment=embedding_model_deployment, openai_api_version="2023-05-15")
+   embedding_method= AzureOpenAIEmbeddings( azure_deployment=embedding_model_deployment, openai_api_version=os.environ["OPENAI_API_VERSION"])
    db = Chroma.from_documents( documents = chunks, embedding = embedding_method, client = chroma_client, collection_name = collection_name, persist_directory=chroma_path )
    db.persist()
    print(f"Saved {len(chunks)} chunks to {chroma_path}.")
@@ -719,6 +733,20 @@ run;
          %else %if "&folder_or_file_selector." = "folder" %then %do;
             %let _answer_path = &answerBankFolder.;
          %end;
+      
+      %end;
+
+/*-----------------------------------------------------------------------------------------*
+   Separate out pandas from other sources owing to its in-memory nature 
+*------------------------------------------------------------------------------------------*/
+
+      %if "&folder_or_file_selector." = "pandas" %then %do;
+             
+      %end;
+      %else %if "&folder_or_file_selector." = "sas" %then %do;
+             
+      %end;
+      %else %do;
 
          %_identify_content_or_server(&_answer_path.);
 
@@ -734,30 +762,30 @@ run;
 
          %end;
 
-      %end;
+         %if &_aor_error_flag. = 0 %then %do;
 
-      %if &_aor_error_flag. = 0 %then %do;
+            %_extract_sas_folder_path(&_answer_path.);
 
-         %_extract_sas_folder_path(&_answer_path.);
+            %if "&_sas_folder_path." = "" %then %do;
 
-         %if "&_sas_folder_path." = "" %then %do;
+               %let _aor_error_flag=1;
+               %let _aor_error_desc = The answer bank provided is empty, please select a valid path  ;
+               %put ERROR: &_aor_error_desc. ;
 
-            %let _aor_error_flag=1;
-            %let _aor_error_desc = The answer bank provided is empty, please select a valid path  ;
-            %put ERROR: &_aor_error_desc. ;
+            %end;
+
+         %end;
+
+         %if &_aor_error_flag. = 0 %then %do;
+
+            %global _data_location;
+            %let _data_location = &_sas_folder_path;
+            %let _sas_folder_path=;
 
          %end;
 
       %end;
-
-      %if &_aor_error_flag. = 0 %then %do;
-
-         %global _data_location;
-         %let _data_location = &_sas_folder_path;
-         %let _sas_folder_path=;
-
-      %end;
-
+   
    %end;
 
    %if &_aor_error_flag. = 0 %then %do;
