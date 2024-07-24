@@ -75,6 +75,9 @@ To understand more about Prompt Engineering, see this [Prompt Engineering Guide]
  
 ## Change Log
 	
+* Version: 2.0.1 (24JUL2024)
+    * Cosmetic changes (Labels in UI ending with colon, screenshots using 1-pixel black border
+
 * Version: 2.0 (16FEB2024)
     * Removed hardcoded references to SAS libraries and CASlibs, added UI options
     * Standardized code format
