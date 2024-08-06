@@ -34,6 +34,9 @@ The **DQ - Clustering** step allows you to create a Cluster ID based on defined 
 
 ## Change Log
 
+Version 1.2 (05AUG2024)
+ * fixed issue where disabled clustering rules still resulted in conditions being generated (GitHub Issue #154)
+
 Version 1.1 (05DEC2022)
  * expanded support from three clustering rules to five clustering rules
  * expanded documentation in the About tab
