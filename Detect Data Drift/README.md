@@ -2,7 +2,7 @@
 
 ## Description
 
-The "**Detect Data Drift**" custom steps performs a number of calculations and creates metrics for tracking changes that happen in a dataset. For this comparison a date variable and an interval is required to compare the data.
+The "**Detect Data Drift**" custom steps performs a number of calculations and creates metrics for tracking changes that happen in a dataset. For this comparison a date variable and an interval is required to compare the data. Detecting data drift is helpful when building ETL/ELT processes to check if the input data is still within expected ranges and is helpful when analytical models are scored or retrained as part of  a process to ensure that the models are not needlessly retrained and can still safely be used.
 
 As input table provide all of the data, then from the input data and the interval two datasets are created:
 
@@ -108,5 +108,8 @@ run;
 
 ## Change Log
 
+* Version 1.1 (12AUG2024)
+    * Improve UI
+    * Add full baseline parameter
 * Version 1.0 (29JUL2024)
     * Initial version
