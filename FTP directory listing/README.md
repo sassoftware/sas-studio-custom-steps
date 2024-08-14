@@ -1,8 +1,8 @@
-# FTP directory listing
+# FTP Directory Listing
 
 ## Description
 
-The "**FTP directory listing**" custom steps creates a table with the FTP directory contents, specified on the properties tab.
+The "**FTP Directory Listing**" custom steps creates a table with the FTP directory contents, specified on the properties tab.
 
 ## SAS Viya Version Support
 
@@ -43,4 +43,6 @@ The output tables contains, after running the custom step, two columns, the dire
 
 ## Change Log
 
-Version 1 (14APR2023): Initial version.
+Version 1.1 (14AUG2024): Published externally.
+
+Version 1.0 (14APR2023): Initial version. Published internally.

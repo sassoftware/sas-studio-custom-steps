@@ -1,8 +1,8 @@
-# FTP download files
+# FTP Download Files
 
 ## Description
 
-The "**FTP dowload files**" custom steps lets you download files from an FTP server, based on an input table containing the directory and filename.
+The "**FTP Dowload Files**" custom steps lets you download files from an FTP server, based on an input table containing the directory and filename.
 
 ## SAS Viya version Support
 
@@ -34,7 +34,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 ![Usage](img/Usage_01.PNG)
 
-Note that the [**FTP directory listing**](../FTP%20directory%20listing/README.md) custom step can be used to generate the input table for this custom step and that the FTP host-, user name- and password settings are defined as macro variables in the initialization step.
+Note that the [**FTP Directory Listing**](../FTP%20Directory%20Listing/README.md) custom step can be used to generate the input table for this custom step and that the FTP host-, user name- and password settings are defined as macro variables in the initialization step.
 
 ## Output port
 
@@ -51,4 +51,6 @@ Note that the table only contains rows for files that got downloaded successfull
 
 ## Change Log
 
-Version 1 (14APR2023): Initial version.
+Version 1.1 (14AUG2024): Published externally.
+
+Version 1.0 (14APR2023): Initial version. Published internally.
