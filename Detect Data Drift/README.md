@@ -75,7 +75,11 @@ The output table contains the following metrics - in brackets you will find for 
 
 * ### Definition tab ###
 
-   ![Definition](img/Detect-Data-Drift-Definition.png)
+   | Definition tab part 1                                        | Definition tab part 2                                        |
+   | ------------------------------------------------------------ | ------------------------------------------------------------ |
+   | ![Definition tab part 1](img/Detect-Data-Drift-Definition-Part-1.png) | ![Definition tab part 2](img/Detect-Data-Drift-Definition-Part-2.png) |
+   
+   
    
 * ### Output Options tab
 
@@ -84,6 +88,14 @@ The output table contains the following metrics - in brackets you will find for 
 ## Requirements
 
 SAS Viya 2024.07 or later
+
+## Potential Future Enhancements
+
+This section contains some additional ideas to enhance the step in a future release:
+
+1.   Display baseline and current graphs next to each other - see https://blogs.sas.com/content/iml/2016/03/09/comparative-panel-overlay-histograms-sas.html for inspiration
+2.   Add SAS Visual Analytics report example to visualize the results in an interactive way
+3.   Calculate metrics like PSI
 
 ## Usage
 
@@ -108,6 +120,8 @@ run;
 
 ## Change Log
 
+* Version 1.2 (15AUG2024)
+    * Update proc univariate output
 * Version 1.1 (12AUG2024)
     * Improve UI
     * Add full baseline parameter
