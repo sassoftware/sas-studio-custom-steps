@@ -7,7 +7,7 @@ Btw. also check out [sasjs/lint](https://github.com/sasjs/lint).
  3. Be consistent with indentation increments
  4. Indent conditional blocks and DO groups, and do it consistently, the logic will be easier to follow
  5. Avoid mixing symbol and mnemonic versions of comparison operators and use one style consistently
- 6. End DATA-steps and PROC-steps with a RUN statement. End interactive procedures such as proc sql and proc datasets with a QUIT statement.
+ 6. End DATA-steps and PROC-steps with a RUN statement. End interactive procedures, such as proc sql and proc datasets, with a QUIT statement.
  7. Group non-executable statements (length, attrib, retain, format, informat, etc.) at the top of a data step before executable statements
  8. Two level data set names should always be used, which includes specifying WORK library
  9. When available, use string functions that support UTF-8 data. For example, use kfind(...) rather than find(...).  
@@ -36,5 +36,15 @@ Btw. also check out [sasjs/lint](https://github.com/sasjs/lint).
     options &etls_syntaxcheck;
     ```
 11. Remove all items created after you are done with them
-    * Remove all datasets created in work and casuser after you are done with them and they are not part of the output
+    * Remove all temporary datasets (typically created in work and/or casuser) after you are done with them and they are not part of the output
     * Reset all titles, footnotes after you are done with them
+
+12. Use a naming prefix for temporary tables consider that is specific to your custom step
+    * It allows to more easily identify those tables in the Explorer panel. Even though these tables would automatically be deleted (see #11 above), when
+      the step runs into issues, it allows the user to more easily identy those steps and inspect their content for debugging purposes.
+    * A common approach is to start with an underscore, followed by the first character of each word of your custom step, followed by an underscore.
+      So if your step is named Great Data Transformation, then the prefix would be \_GDP\_
+    * For steps with very complex processing logic, consider providing a "Run in debug mode" option in the custom step UI that will skip deleting the
+      temporary tables at the end of the step.
+
+ 13. Use the macro name on the %mend statement. It makes the code easier to read, especially when you have many macros and/or nested macros.
