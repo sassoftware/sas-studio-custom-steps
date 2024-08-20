@@ -60,5 +60,5 @@ https://github.com/sassoftware/python-dlpy
 - Neela Vengateshwaran (Neela.Vengateshwaran@sas.com)
 
 ## Change Log
-- Version 1.0 (6AUG2024)
+- Version 1.0 (06AUG2024)
     - Initial version
