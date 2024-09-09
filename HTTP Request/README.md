@@ -57,7 +57,7 @@ If the output format is json you can specify fields from the json structure to l
 **Field Mapping: **
 Field mapping is only recommended for json structures where there is a straight mapping from field to column possible. Otherwsie you should go via the Output Library option.
 For Example, assuming you have a json result like this:
-'''
+```
 {
     "status": 200,
     "result": [
@@ -77,7 +77,7 @@ For Example, assuming you have a json result like this:
         }
     ]
 }
-'''
+```
 
 
    
