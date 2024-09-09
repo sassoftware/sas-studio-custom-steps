@@ -143,5 +143,10 @@ If you are happy with all the default settings, only adjust the parameters in th
 
 ## Change Log
 
-Version 3.1.1 (05SEP2024): - fixing an issue when folders are not shown when traversing is set to no and displaying directories is set to yes. - adding functionality to select between the 3 following output styles: Files Only/Folders Only/Folders + Files
-Version 3.1 (14SEP2022)
+ * Version 3.1.1 (05SEP2024):
+   - fixing an issue when folders are not shown when traversing is set to no and displaying directories is set to yes.
+   - adding functionality to select between the 3 following output styles: Files Only/Folders Only/Folders + Files
+   
+ * Version 3.1 (14SEP2022)
+   - published on GitHub
+   
