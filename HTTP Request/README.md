@@ -43,7 +43,7 @@ At the Output Options tab you specify how to receive the data comming back from 
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
+   | ![](img/HTTPRequest-OutputOptions-sa.jpg) | ![](img/HTTPRequest-OutputOptions-fl.jpg) |
 
 
    
