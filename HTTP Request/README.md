@@ -27,12 +27,14 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    | --- | --- |                  
    | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
 
-   || UI Field | Comment|
+   | Section | UI Field | Comment|
    | --- | --- | --- |
    | Headers | Header Lines | Set the number of header line you want to submit. You can submit up to 8 header lines |
    || Header Line | Each header line has the format *'header' = 'value'* e.g.:<br>```"Content-Type: application/json"```<br>The default value for header line 1 is set to "Content-Type: application/json". If not appropriate you need to change the value. | 
    | Authorization | Auth Type | Select how to authorize for the HTTP request. |
    ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
    ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
+   ||| **Bearer Token** - Specifies to sends an OAuth access token along with the HTTP call. The token value is supplied in field *token*. |
+   ||| **SAS Internal Viya API** - Specifies that the url will point to Viya API at current instance.<br>**Note:** In the URL field in the HTTP Request insert the url without server information (e.g.: /referenceData/domains) |
    
 
