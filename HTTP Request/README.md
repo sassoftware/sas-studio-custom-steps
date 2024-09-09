@@ -44,6 +44,9 @@ At the Output Options tab you specify how to receive the data comming back from 
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/HTTPRequest-OutputOptions-sa.jpg) | ![](img/HTTPRequest-OutputOptions-fl.jpg) |
+#### Output Body ####
+   | Section | UI Field | Comment|
+   | --- | --- | --- |
 
 
    
