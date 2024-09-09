@@ -18,7 +18,7 @@ At the HTTP Request tab you set general information for the http request.
    | --- | --- |
    | URL | Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br>
            If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be folowed by a dot (.).<br>
-           e.g.: ```https://myserver.com/search?name=Bob&.city=London``` |
+           e.g.: https://myserver.com/search?name=Bob&.city=London |
 
 
 
