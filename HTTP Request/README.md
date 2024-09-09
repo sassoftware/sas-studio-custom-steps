@@ -58,25 +58,27 @@ If the output format is json you can specify fields from the json structure to l
 Field mapping is only recommended for json structures where there is a straight mapping from field to column possible. Otherwsie you should go via the Output Library option.
 For Example, assuming you have a json result like this:
 ```
-{
-    "status": 200,
-    "result": [                          *** result ***    *** result ***
-        {
-            "query": "U3 4AB",
-            "result": null
-        },
-        {                                 *** 1 ***         *** 1 ***
-            "query": "AL3 8EE",
-            "result": {                   *** result ***    *** result ***
-            ==> "postcode": "AL3 8EE",    *** postcode ***   
-                "quality": 1,
-                "eastings": 507817,
-                "northings": 214437,
-                "country": "England"                         *** country ***
-            }
-        }
-    ]
-}
+                                           | zip              | country         |
+{                                          | ---------------- | --------------- |
+    "status": 200,                         |                  |                 |
+    "result": [                            | *** result ***   | *** result ***  |
+        {                                  |                  |                 |
+            "query": "U3 4AB",             |                  |                 |
+            "result": null                 |                  |                 |
+        },                                 |                  |                 |
+        {                                  | *** 1 ***        | *** 1 ***       |
+            "query": "AL3 8EE",            |                  |                 |
+            "result": {                    | *** result ***   | *** result ***  |
+            ==> "postcode": "AL3 8EE",     | *** postcode *** |                 |
+                "quality": 1,              |                  |                 |
+                "eastings": 507817,        |                  |                 |
+                "northings": 214437,       |                  |                 |
+            ==> "country": "England"       |                  | *** country *** |
+            }                              |                  |                 |
+        }                                  |                  |                 |
+    ]                                      |                  |                 |
+}                                          |                  |                 |
+
 ```
 You want to map the fields *postcode* and *country* from row 2 of array result to column *zip* and *country*. The mapping structure will look like this:
 ```
