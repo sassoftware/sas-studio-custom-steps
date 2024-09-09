@@ -11,5 +11,5 @@ There are various ways to receive data from the HTTP Request in order to use the
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![](img/HTTPRequest-HTTPRequest-sa.jpg") | ![](img/HTTPRequest-HTTPRequest-fl.jpg) |
+   | ![](img/HTTPRequest-HTTPRequest-sa.jpg) | ![](img/HTTPRequest-HTTPRequest-fl.jpg) |
 
