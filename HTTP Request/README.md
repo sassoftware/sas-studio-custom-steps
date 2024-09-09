@@ -21,14 +21,18 @@ At the HTTP Request tab you set general information for the http request.
    | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAs macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }``` |
 
 ### Input Options tab ###
-At the Input Options tab you specily input parameters for the HTTP request.
+At the Input Options tab you specify  input parameters for the HTTP request.
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
 
-   | UI Field | Comment|
-   | --- | --- |
-   | Headers - Header Lines | Set the number of header line you want to submit. You can submit up to 8 header lines |
-   |     | Each header line has the format 'header' = 'value' e.g.:<br>```"Content-Type: application/json"``` | 
+   || UI Field | Comment|
+   | --- | --- | --- |
+   | Headers | Header Lines | Set the number of header line you want to submit. You can submit up to 8 header lines |
+   || Header Line | Each header line has the format *'header' = 'value'* e.g.:<br>```"Content-Type: application/json"```<br>The default value for header line 1 is set to "Content-Type: application/json". If not appropriate you need to change the value. | 
+   | Authorization | Auth Type | Select how to authorize for the HTTP request. |
+   ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
+   ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
+   
 
