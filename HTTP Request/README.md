@@ -20,4 +20,12 @@ At the HTTP Request tab you set general information for the http request.
    | Method | Select a HTTP method from the drop down list. |
    | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAs macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }``` |
 
+### Input Options tab ###
+At the Input Options tab you specily input parameters for the HTTP request.
+
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/HTTPRequest-HTTPRequest-sa.jpg) | ![](img/HTTPRequest-HTTPRequest-fl.jpg) |
+
+
 
