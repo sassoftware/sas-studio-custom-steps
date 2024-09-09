@@ -54,31 +54,35 @@ If the output format is json you can specify fields from the json structure to l
    || Add input columns to HTTP output table | If an input table exists, the step will output both input columns and output columns in the output table. |
    || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same name like the mapped column names |
 
-**Field Mapping: **
+** Field Mapping: **<br>
 Field mapping is only recommended for json structures where there is a straight mapping from field to column possible. Otherwsie you should go via the Output Library option.
 For Example, assuming you have a json result like this:
 ```
 {
     "status": 200,
-    "result": [
+    "result": [                          *** result ***    *** result ***
         {
             "query": "U3 4AB",
             "result": null
         },
-        {
+        {                                 *** 1 ***         *** 1 ***
             "query": "AL3 8EE",
-            "result": {
-                "postcode": "AL3 8EE",
+            "result": {                   *** result ***    *** result ***
+            ==> "postcode": "AL3 8EE",    *** postcode ***   
                 "quality": 1,
                 "eastings": 507817,
                 "northings": 214437,
-                "country": "England"
+                "country": "England"                         *** country ***
             }
         }
     ]
 }
 ```
-
+You want to map the fields *postcode* and *country* from row 2 of array result to column *zip* and *country*. The mapping structure will look like this:
+```
+result/1/result/postcode | zip,
+result/1/result/country  | country
+```
 
    
    | Section | UI Field | Comment|
