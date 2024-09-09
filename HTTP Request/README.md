@@ -69,11 +69,11 @@ For Example, assuming you have a json result like this:
         {                                  | *** 1 ***        | *** 1 ***       |
             "query": "AL3 8EE",            |                  |                 |
             "result": {                    | *** result ***   | *** result ***  |
-            ==> "postcode": "AL3 8EE",     | *** postcode *** |                 |
+                "postcode": "AL3 8EE", --> | *** postcode *** |                 |
                 "quality": 1,              |                  |                 |
                 "eastings": 507817,        |                  |                 |
                 "northings": 214437,       |                  |                 |
-            ==> "country": "England"       |                  | *** country *** |
+                "country": "England"   ----+----------------> | *** country *** |
             }                              |                  |                 |
         }                                  |                  |                 |
     ]                                      |                  |                 |
