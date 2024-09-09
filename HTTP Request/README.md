@@ -30,5 +30,5 @@ At the Input Options tab you specily input parameters for the HTTP request.
    | UI Field | Comment|
    | --- | --- |
    | Headers - Header Lines | Set the number of header line you want to submit. You can submit up to 8 header lines |
-   |     | Each header has the format 'header' = 'value' e.g.:<br>"Content-Type: application/json" | 
+   |     | Each header line has the format 'header' = 'value' e.g.:<br>```"Content-Type: application/json"``` | 
 
