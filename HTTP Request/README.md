@@ -25,7 +25,7 @@ At the Input Options tab you specily input parameters for the HTTP request.
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
-   | ![](img/HTTPRequest-HTTPRequest-sa.jpg) | ![](img/HTTPRequest-HTTPRequest-fl.jpg) |
+   | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
 
 
 
