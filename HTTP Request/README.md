@@ -8,3 +8,8 @@ There are various ways to receive data from the HTTP Request in order to use the
 ## User Interface ##
 
 ### HTTP Request tab ###
+
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/HTTP Request - HTTP Request - sa.jpg) | ![](img/HTTP Request - HTTP Request - fl.jpg) |
+
