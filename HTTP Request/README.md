@@ -8,8 +8,12 @@ There are various ways to receive data from the HTTP Request in order to use the
 ## User Interface ##
 
 ### HTTP Request tab ###
+At the HTTP Request tab you set general information for the http request.
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
    | ![](img/HTTPRequest-HTTPRequest-sa.jpg) | ![](img/HTTPRequest-HTTPRequest-fl.jpg) |
-
+1. **URL** - Specify the fully qualified URL path that identifies the endpoint for the HTTP request.
+             aaaaaaaa
+             aaaaaaa
+2. 
