@@ -51,6 +51,9 @@ If the output format is json you can specify fields from the json structure to l
    | --- | --- | --- |
    | Output Table | Field Mapping | In the field mapping text box you point to the field in the json structure. |
    || If field could not get mapped | If the field to be mapped cannot be found the map-column will be set to null. This can happen either because the map field does not exist in the json structure in general (typo when mapped) or there was no value returned for the field and hence it is missing in the json structure. In both cases the map-column will be set to null. You can set one of the three option to react to it:<br>* **No Message** - No message pops up if a field is missing.<br>* **Show Warning** - The SAS job will throw a warning message.<br>* **Show Error** - The SAS job will throw an error message and aborts the job. |
+   || Add input columns to HTTP output table | If an input table exists, the step will output both input columns and output columns in the output table. |
+   || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same name like the mapped column names |
+   | Output Library | | The json result from the HTTP request will be put in a SAS library using the json engine. The datasets in the library represent the json structure. This enables you to access the HTTP result. |
 
    
    
