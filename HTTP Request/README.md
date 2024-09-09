@@ -56,6 +56,7 @@ If the output format is json you can specify fields from the json structure to l
 
 ** Field Mapping: **<br>
 Field mapping is only recommended for json structures where there is a straight mapping from field to column possible. Otherwsie you should go via the Output Library option.
+The mapping format is: *json structure path | map column name*
 For Example, assuming you have a json result like this:
 ```
                                            | zip              | country         |
@@ -80,11 +81,14 @@ For Example, assuming you have a json result like this:
 }                                          |                  |                 |
 
 ```
-You want to map the fields *postcode* and *country* from row 2 of array result to column *zip* and *country*. The mapping structure will look like this:
+You want to map the fields *postcode* and *country* from row 2 of array *result* to columns *zip* and *country*. The mapping structure will look like this:
 ```
 result/1/result/postcode | zip,
 result/1/result/country  | country
 ```
+This will produce an output table with columns zip and counrty with values from json fields postcode and country.
+
+**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you poit at ```result/0 | allinfo``` it will put the data into column allinfo ```{"query": "U3 4AB", "result": null}```
 
    
    | Section | UI Field | Comment|
