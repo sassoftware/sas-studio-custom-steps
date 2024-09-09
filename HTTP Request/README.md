@@ -88,7 +88,7 @@ result/1/result/country  | country
 ```
 This will produce an output table with columns zip and counrty with values from json fields postcode and country.
 
-**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you poit at ```result/0 | allinfo``` it will put the data into column allinfo ```{"query": "U3 4AB", "result": null}```
+**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you poit at ```result/0 | allinfo``` the value of column allinfo looks like this ```{"query": "U3 4AB", "result": null}```.
 
    
    | Section | UI Field | Comment|
