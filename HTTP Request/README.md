@@ -35,6 +35,16 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
    ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
    ||| **Bearer Token** - Specifies to sends an OAuth access token along with the HTTP call. The token value is supplied in field *token*. |
-   ||| **SAS Internal Viya API** - Specifies that the url will point to Viya API at current instance.<br>**Note:** In the URL field in the HTTP Request insert the url without server information (e.g.: /referenceData/domains) |
+   ||| **SAS Internal Viya API** - Specifies that the url will point to Viya API at current instance.<br><br>**Note:** In the URL field in the HTTP Request insert the url without server information (e.g.: /referenceData/domains) |
+   | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. The default is 0 which indecates that there is no timeout. |
+
+### Output Options tab ###
+At the Output Options tab you specify how to receive the data comming back from the HTTP request.
+
+   | Standalone mode | Flow mode |
+   | --- | --- |                  
+   | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
+
+
    
 
