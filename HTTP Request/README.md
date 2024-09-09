@@ -16,7 +16,7 @@ At the HTTP Request tab you set general information for the http request.
 
    | UI Field | Comment|
    | --- | --- |
-   | URL | Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br>If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be folowed by a dot (.).<br>e.g.: ```https://myserver.com/search?name=Bob**&.**city=London``` |
+   | URL | Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br>If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be folowed by a dot (.) e.g.:<br> ```https://myserver.com/search?name=Bob&.city=London```<br>You can also use SAs macros in the URL. In this case you must not mask the ampersand e.g.:<br>```https://&myserver/search?name=Bob&.city=London``` |
 
 
 
