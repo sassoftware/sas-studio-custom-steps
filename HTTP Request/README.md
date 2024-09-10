@@ -98,7 +98,11 @@ This will produce an output table with columns *zip* and *country* with values f
 | | Output Library | Set the name of the SAS output library. The lib name can be up to 8 characters long. The default name is *HTTPOUT*. |
 | Output Folder | | The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
 | | HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
-| | HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br> ```{"1": "--http result for rec 1--","2": "--http result for rec 2--","3": "--http result for rec 3--"}``` |
+| | HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{
+    "1": "--http result for rec 1--",
+    "2": "--http result for rec 2--",
+    "3": "--http result for rec 3--"
+}``` |
    
    
 
