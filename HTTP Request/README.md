@@ -55,8 +55,8 @@ If the output format is json you can specify fields from the json structure to l
    || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same name like the mapped column names |
 
 **Field Mapping:**<br>
-Field mapping offers you a convinient way to map fields from the result json structure to a column in the output table.
-The mapping format is: *json structure path | map column name*
+Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table.<br>
+The mapping format is: *json structure path | map column name*<br>
 For Example, assuming you have a json result like this:
 ```
                                            | zip              | country         |
@@ -86,9 +86,9 @@ You want to map the fields *postcode* and *country* from row 2 of array *result*
 result/1/result/postcode | zip,
 result/1/result/country  | country
 ```
-This will produce an output table with columns zip and counrty with values from json fields postcode and country.
+This will produce an output table with columns zip and country with values from json fields postcode and country.
 
-**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you poit at ```result/0 | allinfo``` the value of column allinfo looks like this ```{"query": "U3 4AB", "result": null}```.
+**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you point at ```result/0 | allinfo``` the value of column allinfo looks like this ```{"query": "U3 4AB", "result": null}```.
 
    
    | Section | UI Field | Comment|
