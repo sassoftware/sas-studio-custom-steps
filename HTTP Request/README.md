@@ -60,6 +60,22 @@ If the output format is json you can specify fields from the json structure to l
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
 
+#### Header Mapping ####
+In the Header Mapping section you can map tag from the HTTP header result to SAS macro variables.
+   
+   | UI Field | Comment|
+   | --- | --- |
+   | Header Mappings | Set the number of tags you want to map from the HTTP header result. |
+   | Edit Line | Set the to tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
+   | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is not case sensitive. |
+   
+#### Header Mapping ####
+Under Options you can set additional options.
+
+   | UI Field | Comment|
+   | --- | --- |
+   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
+
 #### Field Mapping <a name="fieldmapping-"></a>
 Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table.<br>
 The mapping format is: *json structure path | map column name*<br>
@@ -95,23 +111,6 @@ result/1/result/country  | country
 This will produce an output table with columns *zip* and *country* with values from json fields *postcode* and *country*.
 
 **Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you point at ```result/0 | allinfo``` the value of column *allinfo* looks like this ```{"query": "U3 4AB", "result": null}```.
-
-#### Header Mapping ####
-In the Header Mapping section you can map tag from the HTTP header result to SAS macro variables.
-   
-   | UI Field | Comment|
-   | --- | --- |
-   | Header Mappings | Set the number of tags you want to map from the HTTP header result. |
-   | Edit Line | Set the to tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
-   | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is not case sensitive. |
-   
-#### Header Mapping ####
-Under Options you can set additional options.
-
-   | UI Field | Comment|
-   | --- | --- |
-   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
-
 
    
 
