@@ -54,7 +54,7 @@ If the output format is json you can specify fields from the json structure to l
    || Add input columns to HTTP output table | If an input table exists, the step will output both input columns and output columns in the output table. |
    || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same names like the mapped column names. |
    | Output Library || The json result from the HTTP request will be put in a SAS library using the json engine. The datasets in the library represent the json structure. This enables you to access the HTTP result using other steps like *Query* for example. |
-   || Output to SAS library | Indecates wheather to output the HTTP result to a SAS library. Default is not to write to a SAS Library. |
+   || Output to SAS library | Indicates whether to output the HTTP result to a SAS library. Default is not to write to a SAS Library. |
    || Output Library | Set the name of the SAS output library. The lib name can be up to 8 characters long. The default name is *HTTPOUT*. |
    | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
@@ -96,7 +96,21 @@ This will produce an output table with columns *zip* and *country* with values f
 
 **Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you point at ```result/0 | allinfo``` the value of column *allinfo* looks like this ```{"query": "U3 4AB", "result": null}```.
 
+#### Header Mapping ####
+In the Header Mapping section you can map tag from the HTTP header result to SAS macro variables.
    
+   | UI Field | Comment|
+   | --- | --- |
+   | Header Mappings | Set the number of tags you want to map from the HTTP header result. |
+   | Edit Line | Set the to tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
+   | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is not case sensitive. |
+   
+#### Header Mapping ####
+Under Options you can set additional options.
+
+   | UI Field | Comment|
+   | --- | --- |
+   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
 
 
    
