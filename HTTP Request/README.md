@@ -55,7 +55,7 @@ If the output format is json you can specify fields from the json structure to l
    || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same name like the mapped column names |
 
 **Field Mapping:**<br>
-Field mapping is only recommended for json structures where there is a straight mapping from field to column possible. Otherwsie you should go via the Output Library option.
+Field mapping offers you a convinient way to map fields from the result json structure to a column in the output table.
 The mapping format is: *json structure path | map column name*
 For Example, assuming you have a json result like this:
 ```
