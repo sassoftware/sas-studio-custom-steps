@@ -49,7 +49,7 @@ If the output format is json you can specify fields from the json structure to l
 
    | Section | UI Field | Comment|
    | --- | --- | --- |
-   | Output Table | Field Mapping | In the field mapping text box point to the field in the json structure that you want to output to the step's output table.<br>For information to map the field see [Field Mapping](#FieldMapping-)|
+   | Output Table | Field Mapping | In the field mapping text box point to the field in the json structure that you want to output to the step's output table.<br>For information to map the fields see [Field Mapping](#fieldmapping-) |
    || If field could not get mapped | If the field to be mapped cannot be found the map-column will be set to null. This can happen either because the map field does not exist in the json structure in general (typo when mapped) or there was no value returned for the field and hence it is missing in the json structure. In both cases the map-column will be set to null. You can set one of the three option to react to it:<br>* **No Message** - No message pops up if a field is missing.<br>* **Show Warning** - The SAS job will throw a warning message.<br>* **Show Error** - The SAS job will throw an error message and aborts the job. |
    || Add input columns to HTTP output table | If an input table exists, the step will output both input columns and output columns in the output table. |
    || Create macro for output column | The step will create a macro for the mapped fields from the json structure. If the input table has more than one row only the values from the first result row will mapped to macros. The macros have the same names like the mapped column names. |
@@ -59,8 +59,8 @@ If the output format is json you can specify fields from the json structure to l
    | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
-   
-#### Field Mapping <a name="FieldMapping-"></a>
+
+#### Field Mapping <a name="fieldmapping-"></a>
 Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table.<br>
 The mapping format is: *json structure path | map column name*<br>
 For Example, assuming you have a json result like this:
