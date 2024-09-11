@@ -2,7 +2,7 @@
 # Enrich data flow
 We have a table with UK post codes. We call a REST service to get county, council and parish information for each post code.
 
-![](../img/HTTPRequest_ex1.gif)
+![](../../img/HTTPRequest_ex1.gif)
 
 Use the following settings and code to recreate the example in SAS Studio.
 
