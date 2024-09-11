@@ -118,7 +118,7 @@ Use the HTTP Request step to enrich data in a table. The table country has a col
 
 ![](img/HTTPRequest.gif)
 
-For more example using the HTTP Request Step see here.
+For more example using the HTTP Request Step see [here](extras/README.md)
 
 ## Change Log <
 Version 1.0 (15SEP2024)
