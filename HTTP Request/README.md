@@ -115,6 +115,11 @@ This will produce an output table with columns *zip* and *country* with values f
 ## Usage
 
 Use the HTTP Request step to enrich data in a table. The table country has a column country with different counties. Using the HTTP Request we enrich the country information with capital, language and continent information.<br>
+
 ![](img/HTTPRequest.gif)
 
 For more example using the HTTP Request Step see here.
+
+## Change Log <
+Version 1.0 (15SEP2024)
+ * Initial version 
