@@ -4,4 +4,37 @@ We have a table with contry names. We call a REST service to get capital, contin
 
 ![](../../img/HTTPRequest_ex2.gif)
 
+Use the following settings and code to recreate the example in SAS Studio.
 
+**URL**
+```
+https://restcountries.com/v3.1/name/@country@
+```
+**Headers**
+```
+"Content-Type"="application/json"
+```
+**Field Mapping**
+```
+0/capital/0 | capital
+0/continents | continents
+0/languages | languages
+```
+**Test Data**
+```
+data country;
+	length country $30;
+	infile cards;
+	input country $;
+	cards;
+USA
+United Kingdom
+Germany
+South Africa
+Canada
+France
+Italy
+Spain
+;
+run;
+```
