@@ -6,22 +6,35 @@ The address columns from the input table are also passed through to the output t
 
 ![](../../img/HTTPRequest_ex3.gif)
 
-Use the following settings and code to recreate the example in SAS Studio.
+To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create the input data.
 
+### HTTP Request - step
+#### HTTP Request - tab
 **URL**
 ```
 https://nominatim.openstreetmap.org/search?street=@address@&.city=@town@&.country=@country@&.format=json&.addressdetails=1&.limit=1
 ```
+**Method**<br>
+* Set method to ***GET***.
+
+#### Input Options - tab
 **Headers**
 ```
 "Content-Type"="application/json"
 ```
+
+#### Output Options - tab
 **Field Mapping**
 ```
 0/lat | lat,
 0/lon | lon
 ```
-**Test Data**
+**Pass through input data**
+* Select box ***Add input columns to HTTP output table*** in the UI.
+
+---
+
+#### Test Data
 ```
 data address;
 	length address town country $30;
