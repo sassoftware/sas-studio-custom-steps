@@ -8,4 +8,6 @@ In the sub-folders you find examples how to use the HTTP Request step in deffere
 2. [Enrich Data Flow using GET II](../extras/EnrichDataFlow_GET_II)
 3. [Enrich Data Flow using POST](../extras/EnrichDataFlow_POST)
 4. [Use HTTP result to macro and output data to SAS Library](../extras/OutputToSASLib)
+5. [Call internal Viya API - use result header macro](../extras/CallInternalViyaAPI)
+
 
