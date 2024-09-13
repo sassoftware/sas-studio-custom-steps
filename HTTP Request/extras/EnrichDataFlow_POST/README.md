@@ -8,18 +8,25 @@ The output columns are re-ordered in an final step.
 
 ![](../../img/HTTPRequest_ex1.gif)
 
-Use the following settings and code to recreate the example in SAS Studio.
+To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create the input data.
 
+### HTTP Request - step
+#### HTTP Request - tab
 **URL**
 ```
 http://api.postcodes.io/postcodes
 ```
+**Method**<br>
+* Set method to ***POST***.
+
 **Payload**
 ```
 {
 "postcodes" : ["@PO1@", "@PO2@", "@PO3@"]
 }
 ```
+
+#### Input Options - tab
 **Headers**
 ```
 "Content-Type"="application/json"
@@ -27,6 +34,8 @@ http://api.postcodes.io/postcodes
 ```
 "Accept"="application/json"
 ```
+
+#### Output Options - tab
 **Field Mapping**
 ```
 result/0/result/admin_county    | county_1,
@@ -39,7 +48,13 @@ result/2/result/admin_county    | county_3,
 result/2/result/admin_district  | council_3,
 result/2/result/parish          | parish_3
 ```
-**Test Data**
+
+### Manage Columns - step
+* Reorder the HTTP output columns to set the *postal code* columns before the appropriate *county*, *council* and *parish* columns.
+
+ ---
+ 
+### Test Data
 ```
 data postcodes;
 	length po1-po03 $10;
