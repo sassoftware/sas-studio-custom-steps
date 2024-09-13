@@ -22,7 +22,7 @@ Use the following settings to recreate the example in SAS Studio.
 https://<viya server>/SASLogon/oauth/token
 ```
 **Method**<br>
-* Set method to ***POST***
+* Set method to ***POST***.
   
 **Payload**<br>
 * Set your *userid* and *password*.
