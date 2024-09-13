@@ -13,11 +13,9 @@ Access the table in the SAS Lib that holds the information about the Data Qualit
 
 Use the following settings to recreate the example in SAS Studio.
 
-### Swimlane: *Get Data Quality Steps*
+## Swimlane: *Get Data Quality Steps*
 
----
-
-#### Get Token - step
+### Get Token - step
 #### HTTP Request - tab
 **URL**
 ```
@@ -52,7 +50,9 @@ access_token | token
 token
 ```
 
-#### Get folder info - step
+---
+
+### Get folder info - step
 #### HTTP Request - tab
 **URL**
 ```
@@ -76,7 +76,10 @@ https://<viya server>/folders/folders?filter=startsWith(name,'SAS Data Quality S
 ```
 items/0/id | folderid
 ```
-#### Get folder member info - step
+
+---
+
+### Get folder member info - step
 #### HTTP Request - tab
 **URL**
 ```
@@ -99,10 +102,15 @@ https://<viya server>/folders/folders/@folderid@/members
 **Output Library**
 * Select box ***Output to SAS library***.
 
-### Swimlane: *List Data Quality Steps*
-#### __ITEMS
+---
+
+## Swimlane: *List Data Quality Steps*
+### __ITEMS
 * Drag dataset __ITEMS from SAS Lib *HTTPOUT* on the canvas.
-#### Get folder info - step
+
+---
+
+### Get folder info - step
 * Use step *Manage Columns* to select *Data Quality Step* names from the dataset.
 * Select column name.
 * Rename column to *DQSteps*.
