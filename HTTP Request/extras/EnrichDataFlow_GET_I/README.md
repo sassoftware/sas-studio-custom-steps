@@ -22,8 +22,6 @@ https://restcountries.com/v3.1/name/@country@
 ```
 "Content-Type"="application/json"
 ```
-**Pass through input data**
-* Select box ***Add input columns to HTTP output table*** in the UI.
 
 #### Output Options - tab
 **Field Mapping**
@@ -32,6 +30,9 @@ https://restcountries.com/v3.1/name/@country@
 0/continents | continents
 0/languages | languages
 ```
+**Pass through input data**
+* Select box ***Add input columns to HTTP output table*** in the UI.
+
 ---
 
  ### Test Data
