@@ -6,23 +6,35 @@ The column from the input table is also passed through to the output table.
 
 ![](../../img/HTTPRequest_ex2.gif)
 
-Use the following settings and code to recreate the example in SAS Studio.
+To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create the input data.
 
+### HTTP Request - step
+#### HTTP Request - tab
 **URL**
 ```
 https://restcountries.com/v3.1/name/@country@
 ```
+**Method**<br>
+* Set method to ***GET***.
+
+#### Input Options - tab
 **Headers**
 ```
 "Content-Type"="application/json"
 ```
+**Pass through input data**
+* Select box ***Add input columns to HTTP output table*** in the UI.
+
+#### Output Options - tab
 **Field Mapping**
 ```
 0/capital/0 | capital
 0/continents | continents
 0/languages | languages
 ```
-**Test Data**
+---
+
+ ### Test Data
 ```
 data country;
 	length country $30;
