@@ -48,6 +48,8 @@ result/2/result/admin_county    | county_3,
 result/2/result/admin_district  | council_3,
 result/2/result/parish          | parish_3
 ```
+**Pass through input data**
+* Select box ***Add input columns to HTTP output table*** in the UI.
 
 ### Manage Columns - step
 * Reorder the HTTP output columns to set the *postal code* columns before the appropriate *county*, *council* and *parish* columns.
