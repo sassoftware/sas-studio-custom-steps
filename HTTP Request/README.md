@@ -63,15 +63,15 @@ If the output format is json you can specify fields from the json structure to l
 > **Note:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
 
 #### Header Mapping ####
-In the Header Mapping section you can map tag from the HTTP header result to SAS macro variables.
+In the Header Mapping section you can map tags from the HTTP header result to SAS macro variables.
    
    | UI Field | Comment|
    | --- | --- |
    | Header Mappings | Set the number of tags you want to map from the HTTP header result. |
-   | Edit Line | Set the to tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
-   | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is not case sensitive. |
+   | Edit Line | Set the tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
+   | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is *not case sensitive*. |
    
-#### Header Mapping ####
+#### Options ####
 Under Options you can set additional options.
 
    | UI Field | Comment|
