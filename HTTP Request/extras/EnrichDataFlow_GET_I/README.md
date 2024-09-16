@@ -6,7 +6,7 @@ The column from the input table is also passed through to the output table.
 
 ![](../../img/HTTPRequest_ex2.gif)
 
-To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create the input data.
+To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create input data.
 
 ### HTTP Request - step
 #### HTTP Request - tab
