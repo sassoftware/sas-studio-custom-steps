@@ -3,7 +3,7 @@
 ## Description 
 The HTTP Request step allows you to send HTTP/1.1 requests. The step is using PROC HTTP to execute the HTTP requests. 
 You can use this step to validate data, enrich data in your data flow, update data via a REST call and more. 
-There are various ways to receive data from the HTTP Request in order to use the HTTP result downstream.
+There are various ways to receive data from the HTTP Request in order to use the HTTP result downstream in Studio Flow.
 
 ## User Interface 
 
@@ -17,7 +17,7 @@ At the HTTP Request tab you set general information for the http request.
    | UI Field | Comment|
    | --- | --- |
    | URL |Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br><br>If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be followed by a dot (.) e.g.:<br> ```https://myserver.com/search?name=Bob&.city=London```<br><br>You can also use SAS macros in the URL. In this case you must not mask the ampersand e.g.:<br>```https://&myserver/search?name=Bob&.city=London```<br><br>If you have an input table the URL will be called for each row in the table. You can pass in the column values for each row into the URL using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the URL e.g.:<br>```https://myserver.com/search?name=@firstname@&.city=@city@```<br><br>**Note:** If an ampersand for a URL parameter is not masked you will get a warning that a macro name cannot be resolved! |
-   | Use SAS Internal Viya API | Check this box if you want to execute a SAS Internal API for the current instance. Insert the URL without server information (e.g.: /referenceData/domains).
+   | Use SAS Internal Viya API | Check this box if you want to execute a SAS Internal API for the Viya current instance. Insert the URL without server information (e.g.: /referenceData/domains).
    | Method | Select a HTTP method from the drop down list. |
    | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }``` |
 
@@ -31,12 +31,12 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    | Section | UI Field | Comment|
    | --- | --- | --- |
    | Headers | Header Lines | Set the number of header lines you want to submit. You can submit up to 8 header lines |
-   || Header Line | Each header line has the format *'header' = 'value'* e.g.:<br>```"Content-Type": "application/json"```<br>The default value for header line 1 is set to "Content-Type": "application/json". If not appropriate you can to change the value. | 
+   || Header Line | Each header line has the format *'header' = 'value'* e.g.:<br>```"Content-Type": "application/json"```<br>The default value for header line 1 is "Content-Type": "application/json". If not appropriate you can change the value. | 
    | Authorization | Auth Type | Select how to authorize for the HTTP request. |
    ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
    ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
-   ||| **Bearer Token** - Specifies to sends an OAuth access token along with the HTTP call. The token value is supplied in field *token*. |
-   | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. The default is 0 which indecates that there is no timeout. |
+   ||| **Bearer Token** - Specifies to sends an OAuth access token along with the HTTP call. The token value is supplied in field *Token*. |
+   | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
 
 ### Output Options tab 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
@@ -59,6 +59,9 @@ If the output format is json you can specify fields from the json structure to l
    | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
+
+> **Note:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
+> For information to output the HTTP result file see *Output Options tab/Output Body/Output Folder*
 
 #### Header Mapping ####
 In the Header Mapping section you can map tag from the HTTP header result to SAS macro variables.
@@ -110,7 +113,9 @@ result/1/result/country  | country
 ```
 This will produce an output table with columns *zip* and *country* with values from json fields *postcode* and *country*.
 
-**Note:** If you point at a json array the whole json array will be copied into the column. For the above structure if you point at ```result/0 | allinfo``` the value of column *allinfo* looks like this ```{"query": "U3 4AB", "result": null}```.
+> **Note:** If you point at a json array the whole json array will be copied into the column.<br>
+> For the above structure if you point at ```result/0 | allinfo``` the value of column *allinfo* will look like<br>
+> ```{"query": "U3 4AB", "result": null}```.
 
 ## Usage
 
