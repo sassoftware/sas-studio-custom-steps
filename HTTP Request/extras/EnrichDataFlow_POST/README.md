@@ -1,6 +1,6 @@
 
 # Enrich data flow using POST method
-The example is calling to a REST API using the POST method to enrich UK postal codes county, council and parish information.<br>
+The example is calling a REST API using the POST method to enrich UK postal codes with county, council and parish information.<br>
 Columns from the input table are used as parameters in the payload.<br>
 The required fields from the HTTP result are mapped to columns in the output table.<br>
 The columns from the input table are also passed through to the output table.<br>
