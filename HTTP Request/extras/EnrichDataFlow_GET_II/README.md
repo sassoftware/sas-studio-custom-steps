@@ -1,12 +1,12 @@
 # Enrich data flow using GET method
-The example is calling to a REST API using the GET method to enrich address data with longitude & latitude information.<br>
+The example is calling a REST API using the GET method to enrich address data with longitude & latitude information.<br>
 The columns from the input table are used as parameters in the URL to set the URL input parameters.<br>
 The longitude & latitude fields from the HTTP result are mapped to columns in the output table.<br>
 The address columns from the input table are also passed through to the output table.
 
 ![](../../img/HTTPRequest_ex3.gif)
 
-To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create the input data.
+To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create input data.
 
 ### HTTP Request - step
 #### HTTP Request - tab
