@@ -16,7 +16,7 @@ Use the following settings to recreate the example in SAS Studio.
 **URL**
 * Select ***Use SAS Internal Viya API***
 ```
-/referenceData/globalVariables?filter=startsWith(name,'httpRequest')
+/referenceData/globalVariables?filter=eq(name,'httpRequest')
 ```
 **Method**<br>
 * Set method to ***GET***.
