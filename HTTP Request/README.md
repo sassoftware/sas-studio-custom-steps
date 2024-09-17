@@ -5,10 +5,13 @@ The HTTP Request step allows you to send HTTP/1.1 requests. The step is using PR
 You can use this step to validate data, enrich data in your data flow, update data via a REST call and more. 
 There are various ways to receive data from the HTTP Request in order to use the HTTP result downstream in Studio Flow.
 
+---
+
 ## User Interface 
 
 ### HTTP Request tab 
 At the HTTP Request tab you set general information for the http request.
+
 
    | Standalone mode | Flow mode |
    | --- | --- |                  
@@ -24,9 +27,7 @@ At the HTTP Request tab you set general information for the http request.
 ### Input Options tab 
 At the Input Options tab you specify  input parameters for the HTTP request.
 
-   | Standalone mode | Flow mode |
-   | --- | --- |                  
-   | ![](img/HTTPRequest-InputOptions-sa.jpg) | ![](img/HTTPRequest-InputOptions-fl.jpg) |
+   <img src="img/HTTPRequest-InputOptions-fl.jpg" width="568" height="545">
 
    | Section | UI Field | Comment|
    | --- | --- | --- |
@@ -41,9 +42,8 @@ At the Input Options tab you specify  input parameters for the HTTP request.
 ### Output Options tab 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
-   | Standalone mode | Flow mode |
-   | --- | --- |                  
-   | ![](img/HTTPRequest-OutputOptions-sa.jpg) | ![](img/HTTPRequest-OutputOptions-fl.jpg) |
+   <img src="img/HTTPRequest-OutputOptions-fl.jpg" width="637" height="1185">
+
 #### Output Body 
 If the output format is json you can specify fields from the json structure to land in the output table.
 
@@ -60,7 +60,7 @@ If the output format is json you can specify fields from the json structure to l
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
 
-> **Note:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
+> :bulb: **Tip:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
 
 #### Header Mapping ####
 In the Header Mapping section you can map tags from the HTTP header result to SAS macro variables.
@@ -112,9 +112,11 @@ result/1/result/country  | country
 ```
 This will produce an output table with columns *zip* and *country* with values from json fields *postcode* and *country*.
 
-> **Note:** If you point at a json array the whole json array will be copied into the column.<br>
+> :memo: **Note:** If you point at a json array the whole json array will be copied into the column.<br>
 > For the above structure if you point at ```result/0 | allinfo``` the value of column *allinfo* will look like<br>
 > ```{"query": "U3 4AB", "result": null}```.
+
+---
 
 ## Usage
 
@@ -123,6 +125,8 @@ Use the HTTP Request step to enrich data in a table. The table country has a col
 ![](img/HTTPRequest.gif)
 
 For more example using the HTTP Request Step see [here](extras/README.md)
+
+---
 
 ## Change Log <
 Version 1.0 (15SEP2024)
