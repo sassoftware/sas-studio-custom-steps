@@ -13,28 +13,36 @@ Use the HTTP Request Step to call Viya REST API to update the global variable in
 ## Demo Recreate
 Use the following settings to recreate the above example in SAS Studio.
 1. Create new flow job in SAS Studio.
-2. Step ***Get Global Variable Id - step***
+2. Step ***Get Global Variable Id***
 	> * Drag ***HTTP Request step*** on canvas.
-	> * Go to ***HTTP Request*** - tab.
+	> * Go to tab ***HTTP Request***.
  	> 	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
  	>  	* Set ***SAS Viya Service*** using URL below. 
 	> 		```
 	> 		/referenceData/globalVariables?filter=eq(name,'httpRequest')
 	> 		```
  	>	* Set ***Method*** to *GET*.
- 	>  * Go to ***Input Options*** - tab.
- 	>  * Under ***Headers*** set *Header Lines* to 1
- 	>  	* Use the Header Line default value
-	> 		```
-	> 		"Content-Type"="application/json"
-	> 		```
-	> * Go to ***Output Options*** - tab
+ 	>  * Go to tab ***Input Options***.
+ 	>	* Under ***Headers*** set *Header Lines* to 1
+ 	>  		* Use the Header Line default value
+	> 			```
+	>	 		"Content-Type"="application/json"
+	> 			```
+	> * Go to tab ***Output Options***.
 	> 	* Under ***Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to macro 'globalVariableId'.
 	> 	```
 	> 	items/0/id | globalVariableId
 	> 	```
-
+ 	> * Go to tab ***Node***
+ 	> 	* Set ***Node name*** to:
+ 	>	```
+ 	>	Get Global Variable Id
+ 	>	```     
+ 	> * Add ***Output Port***
+ 	> 	* Use right mouse click to add output port to the step.
 ---
+2. Step ***Read ETag***
+	> 
 
 ### Read ETag - step
 #### HTTP Request - tab
