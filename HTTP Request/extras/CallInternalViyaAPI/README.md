@@ -16,94 +16,97 @@ Use the following settings to recreate the above example in SAS Studio.
 2. Step ***Get Global Variable Id***
 	> * Drag ***HTTP Request step*** on canvas.
 	> * Go to tab ***HTTP Request***.
- 	> 	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
- 	>  	* Set ***SAS Viya Service*** using URL below. 
-	> 		```
-	> 		/referenceData/globalVariables?filter=eq(name,'httpRequest')
-	> 		```
- 	>	* Set ***Method*** to *GET*.
- 	>  * Go to tab ***Input Options***.
- 	>	* Under ***Headers*** set *Header Lines* to 1
- 	>  		* Use the Header Line default value
-	> 			```
-	>	 		"Content-Type"="application/json"
-	> 			```
+	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
+	>	* Set ***SAS Viya Service*** using URL below. 
+	>		```
+	>		/referenceData/globalVariables?filter=eq(name,'httpRequest')
+	>		```
+	>	* Set ***Method*** to *GET*.
+	> * Go to tab ***Input Options***.
+	>	* Under ***Headers*** set *Header Lines* to 1
+	>	* Use the Header Line default value<br>
+	>		```
+	>		"Content-Type"="application/json"
+	>		```
 	> * Go to tab ***Output Options***.
-	> 	* Under ***Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to macro 'globalVariableId'.
-	> 	```
-	> 	items/0/id | globalVariableId
-	> 	```
- 	> * Go to tab ***Node***
- 	> 	* Set ***Node name*** to:
- 	>	```
- 	>	Get Global Variable Id
- 	>	```     
- 	> * Add ***Output Port***
- 	> 	* Use right mouse click to add output port to the step.
----
+	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to macro 'globalVariableId'.
+	>		```
+	>		items/0/id | globalVariableId
+	>		```
+	> * Go to tab ***Node***
+	>	* Set ***Node name*** to:
+	>		```
+	>		Get Global Variable Id
+	>		```
+	> * Add ***Output Port***
+	>	* Use right mouse click to add output port to the step.
+
 2. Step ***Read ETag***
-	> 
-
-### Read ETag - step
-#### HTTP Request - tab
-* Select ***Use SAS Internal Viya API***
-**URL**
-```
-/referenceData/globalVariables/@globalVariableId@
-```
-**Method**<br>
-* Set method to ***GET***.
-#### Input Options - tab
-**Headers**
-```
-"Content-Type"="application/json"
-```
-
-#### Output Options - tab
-**Field Mapping**
-```
-id | globalVariableId
-```
-**Header Mapping**
-```
-ETag : ETag
-```
-
----
-
-### Update Global Variable - step
-#### HTTP Request - tab
-**URL**
-```
-/referenceData/globalVariables/@globalVariableId@
-```
-**Method**<br>
-* Set method to ***PUT***.
-
-**Payload**<br>
-```
-{
-  "name": "httpRequest",
-  "dataType": "string",
-  "defaultValue": "HTTP Step"
-}
-```  
-  
-#### Input Options - tab
-**Headers**
-```
-"Content-Type"="application/json"
-```
-```
-"Accept"="application/json"
-```
-* We use %tslit() because the ETag has double quotes and we need to wrap it in single quotes.
-```
-"If-Match"= %tslit(&ETag)
-```
+	> * Drag ***HTTP Request step*** on canvas and connect with step *Get Global Variable Id*.
+	> * Go to tab ***HTTP Request***.
+	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
+	>	* Set ***SAS Viya Service*** using URL below. 
+	>		```
+	>		/referenceData/globalVariables/@globalVariableId@
+	>		```
+	>	* Set ***Method*** to *GET*.
+	> * Go to tab ***Input Options***.
+	>	* Under ***Headers*** set *Header Lines* to 1
+	>	* Use the Header Line default value<br>
+	>		```
+	>		"Content-Type"="application/json"
+	>		```
+	> * Go to tab ***Output Options***.
+	>	* Under ***Header Mapping*** set *Header Mappings* to 1 and use the below mapping to copy the return token ETag to macro ETag.
+	>		```
+	>		ETag : ETag
+	>		```
+	> * Go to tab ***Node***
+	>	* Set ***Node name*** to:
+	>		```
+	>		Read ETag
+	>		```
+	> * Add ***Output Port***
+	>	* Use right mouse click to add output port to the step.
+3. Step ***Update Global Variable***
+	> * Drag ***HTTP Request step*** on canvas and connect with step *Read ETag*.
+	> * Go to tab ***HTTP Request***.
+	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
+	>	* Set ***SAS Viya Service*** using URL below. 
+	>		```
+	>		/referenceData/globalVariables/@globalVariableId@
+	>		```
+	>	* Set ***Method*** to *PUT*.
+ 	>	* Fill ***Payload*** text box with below JSON structure to update the global variable in Intelligent Decisioning.
+	>		```
+	>		{
+	>		  "name": "httpRequest",
+	>		  "dataType": "string",
+	>		  "defaultValue": "HTTP Step"
+	>		}
+	>		```
+	> * Go to tab ***Input Options***.
+	>	* Under ***Headers*** set *Header Lines* to 3
+	>	* For the first Header Line use default value<br>
+	>		```
+	>		"Content-Type"="application/json"
+	>		```
+	>	* For the second Header Line use below setting<br>
+	>		```
+	>		"Accept"="application/json"
+	>		```
+	>	* For the third Header Line we use macro function %tslit() because the ETag value has double quotes and we need to wrap it in single quotes.
+	>		```
+	>		"If-Match"= %tslit(&ETag)
+	>		```
+	> * Go to tab ***Node***
+	>	* Set ***Node name*** to:
+	>		```
+	>		Update Global Variable
+	>		```
 
 ### Test Data
-* Run this code to create a Global Variable in Intelligent Decisioning.
+* Run this code before executing the flow to create a Global Variable in Intelligent Decisioning.
 ```
 %let viyaHost= %sysfunc(getoption(SERVICESBASEURL));
 
