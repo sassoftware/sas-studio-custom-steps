@@ -1,0 +1,5 @@
+allowRemediationCommits:
+  individual: true
+  thirdParty: false
+require:
+  members: false
