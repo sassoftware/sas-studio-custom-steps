@@ -112,7 +112,7 @@ Use the following settings to recreate the above example in SAS Studio.
 
 proc http
 	method= "POST"
-	url= "&server./referenceData/globalVariables"
+	url= "&viyaHost./referenceData/globalVariables"
 	in= '{"name": "httpRequest","dataType": "string", "defaultValue": "Step"}'
 	oauth_bearer= sas_services;
 	headers
