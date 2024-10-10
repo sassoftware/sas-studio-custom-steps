@@ -29,7 +29,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		"Content-Type"="application/json"
 	>		```
 	> * Go to tab ***Output Options***.
-	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to macro 'globalVariableId'.
+	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to the output table column 'globalVariableId'.
 	>		```
 	>		items/0/id | globalVariableId
 	>		```
@@ -45,7 +45,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Drag ***HTTP Request step*** on canvas and connect with step *Get Global Variable Id*.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
-	>	* Set ***SAS Viya Service*** using URL below. 
+	>	* Set ***SAS Viya Service***. In the URL we use the value from column 'globalVariableId' from the previous step's output table to build the required endpoint. 
 	>		```
 	>		/referenceData/globalVariables/@globalVariableId@
 	>		```
@@ -57,6 +57,10 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		"Content-Type"="application/json"
 	>		```
 	> * Go to tab ***Output Options***.
+	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to the output table column 'globalVariableId'.
+	>		```
+	>		id | globalVariableId
+	>		```
 	>	* Under ***Header Mapping*** set *Header Mappings* to 1 and use the below mapping to copy the return token ETag to macro ETag.
 	>		```
 	>		ETag : ETag
@@ -72,7 +76,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Drag ***HTTP Request step*** on canvas and connect with step *Read ETag*.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
-	>	* Set ***SAS Viya Service*** using URL below. 
+	>	* Set ***SAS Viya Service***. In the URL we use the value from column 'globalVariableId' from the previous step's output table to build the required endpoint. 
 	>		```
 	>		/referenceData/globalVariables/@globalVariableId@
 	>		```
