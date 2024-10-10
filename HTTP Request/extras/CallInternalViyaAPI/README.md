@@ -1,11 +1,11 @@
-# Update Global Variable in Intelligent Decisioning
+# Update Global Variable in SAS Intelligent Decisioning using SAS Viya Services
 The example demonstrates how to call [SAS Viya Services](https://developer.sas.com/rest-apis) and how to use tokens downstream returned in the HTTP header result.<br>
-#### Use HTTP Request Step to receive Id for Global Variable in Intelligent Decisioning
+#### Use HTTP Request Step to receive Id for Global Variable in SAS Intelligent Decisioning
 Use the HTTP Request Step to call Viya REST API. Set filter on REST call to receive information for a particular Global Variable.  
-#### Use HTTP Request Step to receive ETag for Global Variable in Intelligent Decisioning
+#### Use HTTP Request Step to receive ETag for Global Variable in SAS Intelligent Decisioning
 Use the HTTP Request Step to call Viya REST API. We use the variable Id received in the first step as parameter to build the URL endpoint. We copy the ETag from the header result, as it is required when updating the variable.
-#### Use HTTP Request Step to update Global Variable in Intelligent Decisioning
-Use the HTTP Request Step to call Viya REST API to update the global variable in Intelligent Decisioning. We use the variable Id received in the previous step as parameter to build the URL endpoint. We also use the ETag value from the previous step in the input header to update the global variable.
+#### Use HTTP Request Step to update Global Variable in SAS Intelligent Decisioning
+Use the HTTP Request Step to call Viya REST API to update the global variable in SAS Intelligent Decisioning. We use the variable Id received in the previous step as parameter to build the URL endpoint. We also use the ETag value from the previous step in the input header to update the global variable.
 
 ![](../../img/HTTPRequest_ex5.gif)
 
@@ -77,7 +77,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		/referenceData/globalVariables/@globalVariableId@
 	>		```
 	>	* Set ***Method*** to *PUT*.
- 	>	* Fill ***Payload*** text box with below JSON structure to update the global variable in Intelligent Decisioning.
+ 	>	* Fill ***Payload*** text box with below JSON structure to update the global variable in SAS Intelligent Decisioning.
 	>		```
 	>		{
 	>		  "name": "httpRequest",
@@ -106,7 +106,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 
 ### Test Data
-* Run this code before executing the flow to create a Global Variable in Intelligent Decisioning.
+* Run this code before executing the flow to create a Global Variable in SAS Intelligent Decisioning.
 ```
 %let viyaHost= %sysfunc(getoption(SERVICESBASEURL));
 
