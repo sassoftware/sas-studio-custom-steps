@@ -11,7 +11,7 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. See the section on  [Test Data](./#TestData).
+2. Drag table ['country'](#testtata-) on the canvas.
 3. 
 4. Step ***Get Global Variable Id***
 	> * Drag ***HTTP Request step*** on canvas.
@@ -69,7 +69,7 @@ https://restcountries.com/v3.1/name/@country@
 
 ---
 
- [Test Data](#TestData)
+#### Test Data <a name="testdata-"></a>
 ```
 data country;
 	length country $30;
