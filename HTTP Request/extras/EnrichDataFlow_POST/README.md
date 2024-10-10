@@ -60,20 +60,11 @@ Use the following settings to recreate the above example in SAS Studio.
 	* Run flow to generate output table as we need the columns for the next step.
 4. ***Reorder Columns***
 	> * Drag step ***Manage Columns*** on canvas and connect with the *HTTP Request* step.
-	> * Go to tab ***HTTP Request***.
-	>	* Set ***URL*** as below. 
+	> * Use the step to reorder the columns for each post code like postcode, county, council, parish.
 
  
 
 ### Test Data <a name="testdata-"></a>
-
-
-### Manage Columns - step
-* Reorder the HTTP output columns to set the *postal code* columns before the appropriate *county*, *council* and *parish* columns.
-
- ---
- 
-### Test Data
 ```
 data work.postcodes;
 	length po1-po03 $10;
