@@ -11,7 +11,7 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. Drag table 'country' on the canvas.
+2. Drag table 'country' on the canvas and connect with the input table step.
 	* See [here](#testdata-) to create table 'country'.
 3. ***HTTP Request***
 	> * Drag ***HTTP Request step*** on canvas.
