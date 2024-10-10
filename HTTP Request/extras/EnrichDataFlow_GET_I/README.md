@@ -11,9 +11,10 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. Drag table ['country'](#testtata-) on the canvas.
-3. 
-4. Step ***Get Global Variable Id***
+2. Drag table ['country'](#description-) on the canvas.
+
+4. 
+5. Step ***Get Global Variable Id***
 	> * Drag ***HTTP Request step*** on canvas.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
@@ -42,6 +43,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Add ***Output Port***
 	>	* Use right mouse click to add output port to the step.
 
+3. ## Description <a name="description-"></a>
 ### HTTP Request - step
 #### HTTP Request - tab
 **URL**
