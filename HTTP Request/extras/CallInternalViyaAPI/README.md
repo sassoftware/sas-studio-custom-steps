@@ -23,18 +23,18 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>	* Set ***Method*** to *GET*.
 	> * Go to tab ***Input Options***.
-	>	* Under ***Headers*** set *Header Lines* to 1
-	>	* Use the Header Line default value<br>
-	>		```
-	>		"Content-Type"="application/json"
-	>		```
+	>	* Under ***Headers*** set *Header Lines* to 1.
+	>		* Use the Header Line default value.<br>
+	>			```
+	>			"Content-Type"="application/json"
+	>			```
 	> * Go to tab ***Output Options***.
 	>	* Under ***Output Body - Output Table***<br>
  	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result to the output table column 'globalVariableId'.
 	>			```
 	>			items/0/id | globalVariableId
 	>			```
-	> * Go to tab ***Node***
+	> * Go to tab ***Node***.
 	>	* Set ***Node name*** to:
 	>		```
 	>		Get Global Variable Id
@@ -52,25 +52,25 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>	* Set ***Method*** to *GET*.
 	> * Go to tab ***Input Options***.
-	>	* Under ***Headers*** set *Header Lines* to 1
-	>	* Use the Header Line default value<br>
-	>		```
-	>		"Content-Type"="application/json"
-	>		```
+	>	* Under ***Headers*** set *Header Lines* to 1.
+	>		* Use the Header Line default value.<br>
+	>			```
+	>			"Content-Type"="application/json"
+	>			```
 	> * Go to tab ***Output Options***.
-	>	* Under ***Output Body - Output Table***<br>
+	>	* Under ***Output Body - Output Table***.<br>
  	> 		* Tick *Add input columns to output table* to pass trough input column 'globalVariableId' as we need it in the next step.
-	>	* Under ***Header Mapping***
+	>	* Under ***Header Mapping***.
  	> 		* Set *Header Mappings* to 1 and use the below mapping to copy the return token ETag to macro ETag.
 	>			```
 	>			ETag : ETag
 	>			```
-	> * Go to tab ***Node***
+	> * Go to tab ***Node***.
 	>	* Set ***Node name*** to:
 	>		```
 	>		Read ETag
 	>		```
-	> * Add ***Output Port***
+	> * Add ***Output Port***.
 	>	* Use right mouse click to add output port to the step.
 3. Step ***Update Global Variable***
 	> * Drag ***HTTP Request step*** on canvas and connect with step *Read ETag*.
@@ -90,20 +90,20 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		}
 	>		```
 	> * Go to tab ***Input Options***.
-	>	* Under ***Headers*** set *Header Lines* to 3
-	>	* For the first Header Line use default value<br>
-	>		```
-	>		"Content-Type"="application/json"
-	>		```
-	>	* For the second Header Line use below setting<br>
-	>		```
-	>		"Accept"="application/json"
-	>		```
-	>	* For the third Header Line we use macro function %tslit() because the ETag value has double quotes and we need to wrap it in single quotes.
-	>		```
-	>		"If-Match"= %tslit(&ETag)
-	>		```
-	> * Go to tab ***Node***
+	>	* Under ***Headers*** set *Header Lines* to 3.
+	>		* For the first Header Line use default value.<br>
+	>			```
+	>			"Content-Type"="application/json"
+	>			```
+	>		* For the second Header Line use below setting.<br>
+	>			```
+	>			"Accept"="application/json"
+	>			```
+	>		* For the third Header Line we use macro function %tslit() because the ETag value has double quotes and we need to wrap it in single quotes.
+	>			```
+	>			"If-Match"= %tslit(&ETag)
+	>			```
+	> * Go to tab ***Node***.
 	>	* Set ***Node name*** to:
 	>		```
 	>		Update Global Variable
