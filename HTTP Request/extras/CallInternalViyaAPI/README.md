@@ -12,8 +12,9 @@ Use the HTTP Request Step to call Viya REST API to update the global variable in
 ---
 ## Demo Recreate
 Use the following settings to recreate the above example in SAS Studio.
-1. Create new flow job in SAS Studio.
-2. Step ***Get Global Variable Id***
+1. Run code section [Test Data](#testdata-) to create a Global Variable in SAS Intelligent Decisioning.
+2. Create new flow job in SAS Studio.
+3. Step ***Get Global Variable Id***
 	> * Drag ***HTTP Request step*** on canvas.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
@@ -30,7 +31,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	> * Go to tab ***Output Options***.
 	>	* Under ***Output Body - Output Table***<br>
- 	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result to the output table column 'globalVariableId'.
+ 	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result structure to the output table column 'globalVariableId'.
 	>			```
 	>			items/0/id | globalVariableId
 	>			```
@@ -42,7 +43,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Add ***Output Port***
 	>	* Use right mouse click to add output port to the step.
 
-2. Step ***Read ETag***
+4. Step ***Read ETag***
 	> * Drag ***HTTP Request step*** on canvas and connect with step *Get Global Variable Id*.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
@@ -72,7 +73,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	> * Add ***Output Port***.
 	>	* Use right mouse click to add output port to the step.
-3. Step ***Update Global Variable***
+5. Step ***Update Global Variable***
 	> * Drag ***HTTP Request step*** on canvas and connect with step *Read ETag*.
 	> * Go to tab ***HTTP Request***.
 	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
@@ -109,7 +110,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		Update Global Variable
 	>		```
 
-### Test Data
+### Test Data <a name="testdata-"></a>
 * Run this code before executing the flow to create a Global Variable in SAS Intelligent Decisioning.
 ```
 %let viyaHost= %sysfunc(getoption(SERVICESBASEURL));
