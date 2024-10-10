@@ -11,12 +11,12 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. Drag table 'country' on the canvas and connect with the input table step.
+2. Drag table 'country' on the canvas.
 	* See [here](#testdata-) to create table 'country'.
 3. ***HTTP Request***
-	> * Drag ***HTTP Request step*** on canvas.
+	> * Drag ***HTTP Request step*** on canvas  and connect with the input table step.
 	> * Go to tab ***HTTP Request***.
-	>	* Set ***URL*** as below. 
+	>	* Set ***URL*** as below where we use the value from column 'country' to build the endpoint. 
 	>		```
 	>		https://restcountries.com/v3.1/name/@country@
 	>		```
@@ -41,7 +41,7 @@ Use the following settings to recreate the above example in SAS Studio.
 
 ### Test Data <a name="testdata-"></a>
 ```
-data country;
+data work.country;
 	length country $30;
 	infile cards;
 	input country $;
