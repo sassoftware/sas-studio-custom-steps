@@ -6,7 +6,41 @@ The column from the input table is also passed through to the output table.
 
 ![](../../img/HTTPRequest_ex2.gif)
 
-To recreate the example in SAS Studio use the following settings for HTTP Request step and use the code to create input data.
+---
+## Demo Recreate
+Use the following settings to recreate the above example in SAS Studio.
+
+1. Create new flow job in SAS Studio.
+2. See the section on  [Test Data](./#TestData).
+3. 
+4. Step ***Get Global Variable Id***
+	> * Drag ***HTTP Request step*** on canvas.
+	> * Go to tab ***HTTP Request***.
+	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
+	>	* Set ***SAS Viya Service*** using URL below. 
+	>		```
+	>		/referenceData/globalVariables?filter=eq(name,'httpRequest')
+	>		```
+	>	* Set ***Method*** to *GET*.
+	> * Go to tab ***Input Options***.
+	>	* Under ***Headers*** set *Header Lines* to 1.
+	>		* Use the Header Line default value.<br>
+	>			```
+	>			"Content-Type"="application/json"
+	>			```
+	> * Go to tab ***Output Options***.
+	>	* Under ***Output Body - Output Table***<br>
+ 	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result to the output table column 'globalVariableId'.
+	>			```
+	>			items/0/id | globalVariableId
+	>			```
+	> * Go to tab ***Node***.
+	>	* Set ***Node name*** to:
+	>		```
+	>		Get Global Variable Id
+	>		```
+	> * Add ***Output Port***
+	>	* Use right mouse click to add output port to the step.
 
 ### HTTP Request - step
 #### HTTP Request - tab
@@ -35,7 +69,7 @@ https://restcountries.com/v3.1/name/@country@
 
 ---
 
- ### Test Data
+ [Test Data](#TestData)
 ```
 data country;
 	length country $30;
