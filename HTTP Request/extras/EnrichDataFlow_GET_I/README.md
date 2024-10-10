@@ -11,16 +11,14 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. Drag table ['country'](#testdata-) on the canvas.
-
-4. 
-5. Step ***Get Global Variable Id***
+2. Drag table 'country' on the canvas.
+	* See [here](#testdata-) to create table 'country'.
+3. ***HTTP Request***
 	> * Drag ***HTTP Request step*** on canvas.
 	> * Go to tab ***HTTP Request***.
-	>	* Select ***Above specified URL is a relative-URL and points to a SAS Viya service***.
-	>	* Set ***SAS Viya Service*** using URL below. 
+	>	* Set ***URL*** as below. 
 	>		```
-	>		/referenceData/globalVariables?filter=eq(name,'httpRequest')
+	>		https://restcountries.com/v3.1/name/@country@
 	>		```
 	>	* Set ***Method*** to *GET*.
 	> * Go to tab ***Input Options***.
@@ -31,47 +29,17 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	> * Go to tab ***Output Options***.
 	>	* Under ***Output Body - Output Table***<br>
- 	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result to the output table column 'globalVariableId'.
+ 	> 		* Use the below mapping in field *Field Mapping* to copy fields from the URL JSON result structure to the output table.
 	>			```
-	>			items/0/id | globalVariableId
+	>			0/capital/0 | capital
+	>			0/continents | continents
+	>			0/languages | languages
 	>			```
-	> * Go to tab ***Node***.
-	>	* Set ***Node name*** to:
-	>		```
-	>		Get Global Variable Id
-	>		```
-	> * Add ***Output Port***
+ 	> 		* Tick *Add input columns to output table* to pass trough input columns the output table.
+	> * Add ***Output Port***.
 	>	* Use right mouse click to add output port to the step.
 
-3. ## Description <a name="description-"></a>
-### HTTP Request - step
-#### HTTP Request - tab
-**URL**
-```
-https://restcountries.com/v3.1/name/@country@
-```
-**Method**<br>
-* Set method to ***GET***.
-
-#### Input Options - tab
-**Headers**
-```
-"Content-Type"="application/json"
-```
-
-#### Output Options - tab
-**Field Mapping**
-```
-0/capital/0 | capital
-0/continents | continents
-0/languages | languages
-```
-**Pass through input data**
-* Select box ***Add input columns to HTTP output table*** in the UI.
-
----
-
-#### Test Data <a name="testdata-"></a>
+### Test Data <a name="testdata-"></a>
 ```
 data country;
 	length country $30;
