@@ -29,10 +29,11 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		"Content-Type"="application/json"
 	>		```
 	> * Go to tab ***Output Options***.
-	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to the output table column 'globalVariableId'.
-	>		```
-	>		items/0/id | globalVariableId
-	>		```
+	>	* Under ***Output Body - Output Table***<br>
+ 	> 		* Use the below mapping in field *Field Mapping* to copy the global variable 'id' from the URL JSON result to the output table column 'globalVariableId'.
+	>			```
+	>			items/0/id | globalVariableId
+	>			```
 	> * Go to tab ***Node***
 	>	* Set ***Node name*** to:
 	>		```
@@ -57,14 +58,13 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		"Content-Type"="application/json"
 	>		```
 	> * Go to tab ***Output Options***.
-	>	* Under ***Output Body -Output Table - Field Mapping*** use the below mapping to copy the global variable Id from the URL JSON result to the output table column 'globalVariableId'.
-	>		```
-	>		id | globalVariableId
-	>		```
-	>	* Under ***Header Mapping*** set *Header Mappings* to 1 and use the below mapping to copy the return token ETag to macro ETag.
-	>		```
-	>		ETag : ETag
-	>		```
+	>	* Under ***Output Body - Output Table***<br>
+ 	> 		* Tick *Add input columns to output table* to pass trough input column 'globalVariableId' as we need it in the next step.
+	>	* Under ***Header Mapping***
+ 	> 		* Set *Header Mappings* to 1 and use the below mapping to copy the return token ETag to macro ETag.
+	>			```
+	>			ETag : ETag
+	>			```
 	> * Go to tab ***Node***
 	>	* Set ***Node name*** to:
 	>		```
