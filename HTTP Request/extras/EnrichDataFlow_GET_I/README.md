@@ -11,7 +11,7 @@ The column from the input table is also passed through to the output table.
 Use the following settings to recreate the above example in SAS Studio.
 
 1. Create new flow job in SAS Studio.
-2. Drag table ['country'](#description-) on the canvas.
+2. Drag table ['country'](#testdata-) on the canvas.
 
 4. 
 5. Step ***Get Global Variable Id***
