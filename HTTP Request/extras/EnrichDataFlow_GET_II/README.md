@@ -17,7 +17,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Drag ***HTTP Request step*** on canvas  and connect with the input table step.
 	> * Go to tab ***HTTP Request***.
 	>	* Set ***URL*** as below where we use the comun values from the input table as URL parameters.<br>
- 	>         :grey_exclamation:**Note:** We need to escape the ampersand sign (&) with a dot (.) to prevent any macro resolution.
+ 	>         :exclamation:**Note:** We need to escape the ampersand sign (&) with a dot (.) to prevent any macro resolution.
 	>		```
 	>		https://nominatim.openstreetmap.org/search?street=@address@&.city=@town@&.country=@country@&.format=json&.addressdetails=1&.limit=1
 	>		```
