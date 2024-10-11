@@ -101,6 +101,8 @@ Note that:
 
 ## Change Log
 
+Version 1.9 (03OCT2024) : Removed a bug where the custom step would never finish.
+
 Version 1.8 (16MAY2024) : Added the **Abort on exception** option.
 
 Version 1.7 (18MAR2024) : Name change from **Loop** to **Loop Deployed Object**
