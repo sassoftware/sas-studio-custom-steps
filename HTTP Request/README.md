@@ -78,7 +78,17 @@ Under Options you can set additional options.
    | --- | --- |
    | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
 
-#### Field Mapping <a name="fieldmapping-"></a>
+### Settings tab 
+At the Settings tab can you switch on/off hyperlinks in the UI.
+
+   <img src="img/HTTPRequest-Settings-fl.jpg" width="645" height="264">
+
+In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links.
+For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm).
+
+---
+
+### Field Mapping <a name="fieldmapping-"></a>
 Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table.<br>
 The mapping format is: *json structure path | map column name*<br>
 For Example, assuming you have a json result like this:
