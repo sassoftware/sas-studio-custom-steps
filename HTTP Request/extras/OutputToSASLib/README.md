@@ -144,4 +144,4 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>		Data Quality Steps
 	>		```
-9. Run swimlane *List Data Quality Steps* and view the list of al Data Quality steps in SAS Studio.
+9. Run swimlane *List Data Quality Steps* and view the list of all Data Quality steps in SAS Studio.
