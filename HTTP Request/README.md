@@ -36,7 +36,7 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    | Authorization | Auth Type | Select how to authorize for the HTTP request. |
    ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
    ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
-   ||| **Bearer Token** - Specifies to sends an OAuth access token along with the HTTP call. The token value is supplied in field *Token*. |
+   ||| **Bearer Token** - Specifies to send an OAuth access token along with the HTTP call. The token value is supplied in field *Token*.<br> :exclamation:**Note:** When setting the token as string or as macro ensure there are no leading or trailing blanks the token field! |
    | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
 
 ### Output Options tab 
