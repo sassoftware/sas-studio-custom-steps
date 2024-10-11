@@ -14,17 +14,32 @@ Access the table in the SAS Lib that holds the information about the Data Qualit
 ## Demo Recreate
 Use the following settings to recreate the above example in SAS Studio.
 1. Create new flow job in SAS Studio.
-2. Add swimlane and name it *Get Data Quality Steps*.
-3. Step ***Get Token***.
+2. Add swimlane and name it *Set Viya Server*.
+3. Step ***Set Viya Server***.
+	> * Drag ***SAS Program step*** on swimlane *Set Viya Server*.
+ 	> * Set macro variable for SAS Viya server.
+ 	>	``` 
+ 	>	%let ViyaServer= <set your SAS Viya sever domain>;
+ 	>	``` 
+ 	> * Remove input and output port from the set.
+	> * Go to tab ***Node***.
+	>	* Set ***Node name*** to:
+	>		```
+	>		Set Viya Server
+	>		```
+4. Run swimlane *Set Viya Server*.
+5. Add another swimlane and name it *Get Data Quality Steps*.
+6. Step ***Get Token***.
 	> * Drag ***HTTP Request step*** on swimlane *Get Data Quality Steps*.
 	> * Go to tab ***HTTP Request***.
 	>	* Set ***URL*** as below. Point <'viya server'> to your SAS Viya sever domain.
 	>		```
-	>		https://<viya server>/SASLogon/oauth/token
+	>		https://&ViyaServer/SASLogon/oauth/token
 	>		```
 	>	* Set ***Method*** to *POST*.
  	>	* Fill ***Payload***.<br>
-  	>		* Set your SAS Viya *userid* and *password*.
+  	>		* Set your SAS Viya *userid* and *password*.<br>
+	>		:exclamation:**Note:** We need to escape the ampersand sign (&) with a dot (.) to prevent any macro resolution.
 	>		```
 	>		grant_type=password&.username=<userid>&.password=<password>
 	>		```
@@ -56,12 +71,12 @@ Use the following settings to recreate the above example in SAS Studio.
 	> * Add ***Output Port***
 	>	* Use right mouse click to add output port to the step.
 
-4. Step ***Get folder info***
+7. Step ***Get folder info***
 	> * Drag ***HTTP Request step*** on swimlane and connect with step *Get Token*.
 	> * Go to tab ***HTTP Request***.
 	>	* Set ***URL***. 
 	>		```
-	>		https://<viya server>/folders/folders?filter=startsWith(name,'SAS Data Quality Steps')
+	>		https://&ViyaServer/folders/folders?filter=startsWith(name,'SAS Data Quality Steps')
 	>		```
 	>	* Set ***Method*** to *GET*.
 	> * Go to tab ***Input Options***.
@@ -89,12 +104,12 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	> * Add ***Output Port***.
 	>	* Use right mouse click to add output port to the step.
-5. Step ***Get folder member info***
+8. Step ***Get folder member info***
 	> * Drag ***HTTP Request step*** on swimlane and connect with step *Get folder info*.
 	> * Go to tab ***HTTP Request***.
 	>	* Set ***URL***. In the URL we use the value from column 'folderid' from the previous step's output table to build the required endpoint. 
 	>		```
-	>		https://<viya server>/folders/folders/@folderid@/members
+	>		https://&ViyaServer/folders/folders/@folderid@/members
 	>		```
 	>	* Set ***Method*** to *GET*.
 	> * Go to tab ***Input Options***.
@@ -117,11 +132,11 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>		Get folder member info
 	>		```
-6. Run swimlane *Get Data Quality Steps*.
-7. Add swimlane and name it *List Data Quality Steps*.
-8. Step ***R1_ITEMS***.
+9. Run swimlane *Get Data Quality Steps*.
+10. Add another swimlane and name it *List Data Quality Steps*.
+11. Step ***R1_ITEMS***.
 	* From SAS Lib *HTTPOUT* drag dataset R1_ITEMS on the canvas.
-9. Step ***DQ Steps***.
+12. Step ***DQ Steps***.
 	> * Drag step ***Manage Columns*** on canvas and connect with the *R1_ITEMS*.
 	> * Use the step to select the column that contains the DQ Step names.
  	> 	* Select column *name* and give it the new name 'DQ Steps'.
@@ -129,3 +144,4 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>		Data Quality Steps
 	>		```
+9. Run swimlane *List Data Quality Steps* and view the list of al Data Quality steps in SAS Studio.
