@@ -1,6 +1,6 @@
 # Enrich data flow using GET method
 The example is calling a REST API using the GET method to enrich country names with capital, continent and languages information.<br>
-The column from the input table is used as parameter to complete URL endpoint.<br>
+The column from the input table is used as parameter to complete the URL endpoint.<br>
 Fields from the HTTP result are mapped to columns in the output table.<br>
 The column from the input table is also passed through to the output table.
 
