@@ -23,7 +23,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		http://api.postcodes.io/postcodes
 	>		```
 	>	* Set ***Method*** to *POST*.
- 	>	* Fill ***Payload*** text box with below JSON structure. In the JSON structure we use the column from the input table as parameters.
+ 	>	* Fill ***Payload*** text box with below JSON structure. In the JSON structure we use the columns from the input table as parameters.
 	>		```
 	>		{
 	>		  "postcodes" : ["@PO1@", "@PO2@", "@PO3@"]
@@ -61,10 +61,11 @@ Use the following settings to recreate the above example in SAS Studio.
 4. ***Reorder Columns***
 	> * Drag step ***Manage Columns*** on canvas and connect with the *HTTP Request* step.
 	> * Use the step to reorder the columns for each post code like postcode, county, council, parish.
-
- 
+5. ***Run Demo***
+	* Execute Demo Flow.
 
 ### Test Data <a name="testdata-"></a>
+Run this code in SAS Studio to create the input data from the demo.
 ```
 data work.postcodes;
 	length po1-po03 $10;

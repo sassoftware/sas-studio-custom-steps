@@ -109,9 +109,16 @@ Use the following settings to recreate the above example in SAS Studio.
 	>		```
 	>		Update Global Variable
 	>		```
+6. ***Check Global Variable***
+	* Go to SAS Intelligent Decisioning and check the value for global variable 'httpRequest'.
+6. ***Run Demo***
+	* Execute Demo Flow.
+6. ***Check Global Variable***
+	* Go to SAS Intelligent Decisioning and check the value for global variable 'httpRequest' again to see that it has changed to 'HTTP Step'.
+
 
 ### Test Data <a name="testdata-"></a>
-* Run this code before executing the flow to create a Global Variable in SAS Intelligent Decisioning.
+Run this code before executing the flow to create a Global Variable in SAS Intelligent Decisioning.
 ```
 %let viyaHost= %sysfunc(getoption(SERVICESBASEURL));
 

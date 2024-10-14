@@ -38,6 +38,8 @@ Use the following settings to recreate the above example in SAS Studio.
  	> 		* Tick *Add input columns to output table* to pass trough input columns the output table.
 	> * Add ***Output Port***.
 	>	* Use right mouse click to add output port to the step.
+4. ***Run Demo***
+	* Execute Demo Flow.
 
 ### Test Data <a name="testdata-"></a>
 Run this code in SAS Studio to create the input data from the demo.

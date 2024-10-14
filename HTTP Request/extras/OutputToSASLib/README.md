@@ -59,7 +59,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			access_token | token
 	>			```
  	>	* Tick box *Create macro for output column*.
- 	>		* Set the column from the output table that is copied to a macro with the same name as the column.
+ 	>		* Set the column from the output table that is copied to a macro with the same name as the column. 
  	> 			``` 
  	> 			token 
  	> 			``` 
@@ -87,7 +87,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	>	* Under ***Authorization*** select *Auth Type*.
  	> 		* Set *Auth Type* to 'Bearer Token'
- 	>		* Use SAS macro *token* from previous step.
+ 	>		* Use SAS macro *token* from previous step.<br>:exclamation:**Note:** Ensure there are no leading or trailing blanks when setting the macro in the edit line.
  	> 			``` 
  	> 			&token 
  	> 			``` 
@@ -120,7 +120,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	>	* Under ***Authorization*** select *Auth Type*.
  	> 		* Set *Auth Type* to 'Bearer Token'
- 	>		* Use SAS macro *token* from first step.
+ 	>		* Use SAS macro *token* from first step.<br>:exclamation:**Note:** Ensure there are no leading or trailing blanks when setting the macro in the edit line.
  	> 			``` 
  	> 			&token 
  	> 			``` 
