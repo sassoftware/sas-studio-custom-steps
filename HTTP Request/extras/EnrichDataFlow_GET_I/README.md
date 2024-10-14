@@ -40,6 +40,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>	* Use right mouse click to add output port to the step.
 
 ### Test Data <a name="testdata-"></a>
+Run this code in SAS Studio to create the input data from the demo.
 ```
 data work.country;
 	length country $30;
