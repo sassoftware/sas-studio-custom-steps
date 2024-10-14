@@ -83,7 +83,11 @@ At the Settings tab can you switch on/off hyperlinks in the UI.
 
    <img src="img/HTTPRequest-Settings-fl.jpg" width="645" height="264">
 
-In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links.
+In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links.<br>
+You can use the below validation rules for the links used in this step:
+   ```
+   ^https?:\/\/(?:.+\.)?github\.com(?::\d+)?(?:\/.*)?||^https?:\/\/(?:.+\.)?developer\.sas\.com(?::\d+)?(?:\/.*)?
+   ```
 For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm).
 
 ---
