@@ -87,7 +87,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	>	* Under ***Authorization*** select *Auth Type*.
  	> 		* Set *Auth Type* to 'Bearer Token'
- 	>		* Use SAS macro *token* from previous step.<br>:exclamation:**Note:** Ensure there are no leading or trailing blanks when setting the macro in the edit line.
+ 	>		* Use SAS macro *token* from previous step.
  	> 			``` 
  	> 			&token 
  	> 			``` 
@@ -120,7 +120,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	>			```
 	>	* Under ***Authorization*** select *Auth Type*.
  	> 		* Set *Auth Type* to 'Bearer Token'
- 	>		* Use SAS macro *token* from first step.<br>:exclamation:**Note:** Ensure there are no leading or trailing blanks when setting the macro in the edit line.
+ 	>		* Use SAS macro *token* from first step.
  	> 			``` 
  	> 			&token 
  	> 			``` 
