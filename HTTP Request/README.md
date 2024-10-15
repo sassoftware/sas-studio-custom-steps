@@ -1,15 +1,27 @@
 # HTTP Request
+## Content
+1. [Description](#description-)
+2. [User Interface](#userinterface-)<br>
+   2.1.   [HTTP Request tab](#httprequesttab-)<br>
+   2.2.   [Input Options tab](#inputoptionstab-)<br>
+   2.3.   [Output Options tab](#outputoptionstab-)<br>
+   2.4.  [Settings tab](#settingstab-)<br>
+3. [JSON structure field mapping for HTTP result](#fieldmapping-)
+4. [Requirements](#requirements-)
+5. [Usage](#usage-)<br>
+   5.1.  [Various usage examples](extras/README.md) 
+6. [Change Log](#changelog-)
 
-## Description 
+## Description<a name="description-"></a>
 The HTTP Request step allows you to send HTTP/1.1 requests. The step is using PROC HTTP to execute the HTTP requests. 
 You can use this step to validate data, enrich data in your data flow, update data via a REST call and more. 
 There are various ways to receive data from the HTTP Request in order to use the HTTP result downstream in Studio Flow.
 
 ---
 
-## User Interface 
+## User Interface<a name="userinterface-"></a>
 
-### HTTP Request tab 
+### HTTP Request tab<a name="httprequesttab-"></a> 
 At the HTTP Request tab you set general information for the http request.
 
 
@@ -24,7 +36,7 @@ At the HTTP Request tab you set general information for the http request.
    | Method | Select a HTTP method from the drop down list. |
    | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }```<br><br>:exclamation:**Note:** The maximum length of the payload is 65,534 characters, as this is the max length of the SAS Macro holding the payload content.|
 
-### Input Options tab 
+### Input Options tab<a name="inputoptionstab-"></a> 
 At the Input Options tab you specify  input parameters for the HTTP request.
 
    <img src="img/HTTPRequest-InputOptions-fl.jpg" width="568" height="545">
@@ -39,12 +51,12 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    ||| **Bearer Token** - Specifies to send an OAuth access token along with the HTTP call. The token value is supplied in field *Token*. This can be a direct token value or a macro carrying the token. |
    | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
 
-### Output Options tab 
+### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
    <img src="img/HTTPRequest-OutputOptions-fl.jpg" width="637" height="1185">
 
-#### Output Body 
+#### Output Body<a name="outputbody-"></a> 
 If the output format is json you can specify fields from the json structure to land in the output table.
 
    | Section | UI Field | Comment|
@@ -62,7 +74,7 @@ If the output format is json you can specify fields from the json structure to l
 
 > :bulb: **Tip:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
 
-#### Header Mapping ####
+#### Header Mapping<a name="headermapping-"></a> 
 In the Header Mapping section you can map tags from the HTTP header result to SAS macro variables.
    
    | UI Field | Comment|
@@ -71,7 +83,7 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
    | Edit Line | Set the tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
    | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is *not case sensitive*. |
    
-#### Options ####
+#### Options<a name="options-"></a> 
 Under Options you can set additional options.
 
    | UI Field | Comment|
@@ -88,7 +100,7 @@ You can use the below validation rules for the links used in this step:
    ```
    ^https?:\/\/(?:.+\.)?github\.com(?::\d+)?(?:\/.*)?||^https?:\/\/(?:.+\.)?developer\.sas\.com(?::\d+)?(?:\/.*)?
    ```
-For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm) and also blog [SAS Viya: Link Control for Custom Steps](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Link-Control-for-Custom-Steps/ta-p/919005) on how to set *Link Control* validation rules.
+For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm) on how to set *Link Control* validation rules.
 
 ---
 
@@ -140,7 +152,7 @@ This will produce an output table with columns *zip* and *country* with values f
 
 ---
 
-## Usage
+## Usage<a name="usage-"></a> 
 
 Use the HTTP Request step to enrich data in a table. The table country has a column country with different counties. Using the HTTP Request we enrich the country information with capital, language and continent information.<br>
 
@@ -150,6 +162,6 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 
 ---
 
-## Change Log
+## Change Log<a name="changelog-"></a> 
 Version 1.0 (15OCT2024)
  * Initial version 
