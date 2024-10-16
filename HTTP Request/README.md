@@ -34,7 +34,7 @@ At the HTTP Request tab you set general information for the http request.
    | URL |Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br><br>If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be followed by a dot (.) e.g.:<br> ```https://myserver.com/search?name=Bob&.city=London```<br><br>You can also use SAS macros in the URL. In this case you must not mask the ampersand e.g.:<br>```https://&myserver/search?name=Bob&.city=London```<br><br>If you have an input table the URL will be called for each row in the table. You can pass in the column values for each row into the URL using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the URL e.g.:<br>```https://myserver.com/search?name=@firstname@&.city=@city@```<br><br>**Note:** If an ampersand for a URL parameter is not masked you will get a warning that a macro name cannot be resolved! |
    | Above specified URL is a relative-URL and points to a SAS Viya service | Check this box if you want to execute a SAS Viya service for the current Viya instance. <a href="https://developer.sas.com/rest-apis" target="_blank">SAS Viya services</a> are REST APIs to create and access SAS resources.<br>Insert the URL without server domain information (e.g.: /referenceData/domains).<br>:exclamation:**Note:** The SAS Viya environment needs to be set up to allow calling SAS Viya services from within SAS Studio (*calling internal IPs*). If you cannot call SAS Viya services you will receive a time out error. In this case check with your SAS Viya administrator. |
    | Method | Select a HTTP method from the drop down list. |
-   | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }```<br><br>:exclamation:**Note:** The maximum length of the payload is 65,534 characters, as this is the max length of the SAS Macro holding the payload content.|
+   | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }```<br><br>:exclamation:**Note:** The maximum length of the payload is 32,767 characters. This is the max length of SAS character variable. |
 
 ### Input Options tab<a name="inputoptionstab-"></a> 
 At the Input Options tab you specify  input parameters for the HTTP request.
@@ -69,7 +69,7 @@ If the output format is json you can specify fields from the json structure to l
    || Output to SAS library | Indicates whether to output the HTTP result to a SAS library. Default is not to write to a SAS Library. |
    || Output Library | Set the name of the SAS output library. The lib name can be up to 8 characters long. The default name is *HTTPOUT*. |
    | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
-   || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
+   || HTTP Output Folder<a name="httpoutputfolder-"></a> | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
 
 > :bulb: **Tip:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
@@ -88,7 +88,7 @@ Under Options you can set additional options.
 
    | UI Field | Comment|
    | --- | --- |
-   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
+   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log.<br>If you have set the [*Output Folder*](#httpoutputfolder-) the step will wirte a http json result file for each row (each http request execution) to the output folder. |
 
 ### Settings tab<a name="settingstab-"></a>
 At the Settings tab can you switch on/off hyperlinks in the UI.
