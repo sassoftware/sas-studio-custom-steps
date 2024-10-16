@@ -163,5 +163,10 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 ---
 
 ## Change Log<a name="changelog-"></a> 
-Version 1.0 (15OCT2024)
- * Initial version 
+Version 1.0.1 (16OCT2024)<br>
+* Changed size of URL payload<br>
+
+Version 1.0 (15OCT2024)<br>
+   * Initial version 
+
+ 
