@@ -68,8 +68,8 @@ If the output format is json you can specify fields from the json structure to l
    | Output Library || The json result from the HTTP request will be put in a SAS library using the json engine. The datasets in the library represent the json structure. This enables you to access the HTTP result using other steps like *Query* for example. |
    || Output to SAS library | Indicates whether to output the HTTP result to a SAS library. Default is not to write to a SAS Library. |
    || Output Library | Set the name of the SAS output library. The lib name can be up to 8 characters long. The default name is *HTTPOUT*. |
-   | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
-   || HTTP Output Folder<a name="httpoutputfolder-"></a> | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
+   | Output Folder<a name="httpoutputfolder-"></a> || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
+   || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
 
 > :bulb: **Tip:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
@@ -88,7 +88,7 @@ Under Options you can set additional options.
 
    | UI Field | Comment|
    | --- | --- |
-   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log.<br>If you have set the [*Output Folder*](#httpoutputfolder-) the step will wirte a http json result file for each row (each http request execution) to the output folder. |
+   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log.<br>If you have set the [*Output Folder*](#httpoutputfolder-) the step will write a http json result file for each row (each http request execution) to the output folder. |
 
 ### Settings tab<a name="settingstab-"></a>
 At the Settings tab can you switch on/off hyperlinks in the UI.
