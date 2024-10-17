@@ -1,15 +1,27 @@
 # HTTP Request
+## Content
+1. [Description](#description-)
+2. [User Interface](#userinterface-)<br>
+   2.1.   [HTTP Request tab](#httprequesttab-)<br>
+   2.2.   [Input Options tab](#inputoptionstab-)<br>
+   2.3.   [Output Options tab](#outputoptionstab-)<br>
+   2.4.  [Settings tab](#settingstab-)<br>
+3. [JSON structure field mapping for HTTP result](#fieldmapping-)
+4. [Requirements](#requirements-)
+5. [Usage](#usage-)<br>
+   5.1.  [Various usage examples](extras/README.md) 
+6. [Change Log](#changelog-)
 
-## Description 
+## Description<a name="description-"></a>
 The HTTP Request step allows you to send HTTP/1.1 requests. The step is using PROC HTTP to execute the HTTP requests. 
 You can use this step to validate data, enrich data in your data flow, update data via a REST call and more. 
 There are various ways to receive data from the HTTP Request in order to use the HTTP result downstream in Studio Flow.
 
 ---
 
-## User Interface 
+## User Interface<a name="userinterface-"></a>
 
-### HTTP Request tab 
+### HTTP Request tab<a name="httprequesttab-"></a> 
 At the HTTP Request tab you set general information for the http request.
 
 
@@ -22,9 +34,9 @@ At the HTTP Request tab you set general information for the http request.
    | URL |Specify the fully qualified URL path that identifies the endpoint for the HTTP request.<br><br>If the URL has url parameters you need to mask the ampersand (&) sign. The & needs to be followed by a dot (.) e.g.:<br> ```https://myserver.com/search?name=Bob&.city=London```<br><br>You can also use SAS macros in the URL. In this case you must not mask the ampersand e.g.:<br>```https://&myserver/search?name=Bob&.city=London```<br><br>If you have an input table the URL will be called for each row in the table. You can pass in the column values for each row into the URL using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the URL e.g.:<br>```https://myserver.com/search?name=@firstname@&.city=@city@```<br><br>**Note:** If an ampersand for a URL parameter is not masked you will get a warning that a macro name cannot be resolved! |
    | Above specified URL is a relative-URL and points to a SAS Viya service | Check this box if you want to execute a SAS Viya service for the current Viya instance. <a href="https://developer.sas.com/rest-apis" target="_blank">SAS Viya services</a> are REST APIs to create and access SAS resources.<br>Insert the URL without server domain information (e.g.: /referenceData/domains).<br>:exclamation:**Note:** The SAS Viya environment needs to be set up to allow calling SAS Viya services from within SAS Studio (*calling internal IPs*). If you cannot call SAS Viya services you will receive a time out error. In this case check with your SAS Viya administrator. |
    | Method | Select a HTTP method from the drop down list. |
-   | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }```<br><br>:exclamation:**Note:** The maximum length of the payload is 65,534 characters, as this is the max length of the SAS Macro holding the payload content.|
+   | Payload | Specify the input data for the HTTP request.<br><br>If you have an input table you can pass in the column values for each row into the payload using the column names as parameters. The column name needs to be masked with a leading a tailing at-sign (@) in the payload e.g.:<br>```{ "name"="@firstname@", "city"="@city@" }```<br>You can also use SAS macros in the payload e.g.:<br>```{ "name"="@firstname@", "city"="&TOWN" }```<br><br>:exclamation:**Note:** The maximum length of the payload is 32,767 characters. This is the max length of SAS character variable. |
 
-### Input Options tab 
+### Input Options tab<a name="inputoptionstab-"></a> 
 At the Input Options tab you specify  input parameters for the HTTP request.
 
    <img src="img/HTTPRequest-InputOptions-fl.jpg" width="568" height="545">
@@ -39,12 +51,12 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    ||| **Bearer Token** - Specifies to send an OAuth access token along with the HTTP call. The token value is supplied in field *Token*. This can be a direct token value or a macro carrying the token. |
    | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
 
-### Output Options tab 
+### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
    <img src="img/HTTPRequest-OutputOptions-fl.jpg" width="637" height="1185">
 
-#### Output Body 
+#### Output Body<a name="outputbody-"></a> 
 If the output format is json you can specify fields from the json structure to land in the output table.
 
    | Section | UI Field | Comment|
@@ -56,13 +68,13 @@ If the output format is json you can specify fields from the json structure to l
    | Output Library || The json result from the HTTP request will be put in a SAS library using the json engine. The datasets in the library represent the json structure. This enables you to access the HTTP result using other steps like *Query* for example. |
    || Output to SAS library | Indicates whether to output the HTTP result to a SAS library. Default is not to write to a SAS Library. |
    || Output Library | Set the name of the SAS output library. The lib name can be up to 8 characters long. The default name is *HTTPOUT*. |
-   | Output Folder || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
+   | Output Folder<a name="httpoutputfolder-"></a> || The step can write the HTTP result to a file.<br>You can write the HTTP output to a file and then use the file in other steps, for example, opening the file in Python for further processing. |
    || HTTP Output Folder | Select the folder for the HTTP output file. The folder must be a folder on SAS Server. |
    || HTTP Output File Name | Set the name for the HTTP result file without file suffix. The default name is *httpoutAll*. This will create a file named *httpoutAll.json*.<br>The output file contains the output for all records passed through the step in json format. A key will indecate the record number. For example, if the step had three input records the format of the file will look like this:<br>```{"1":"-http result for rec 1-", "2":"-http result for rec 2-", "3": "-http result for rec 3-"}``` |
 
 > :bulb: **Tip:** When running the step and an error occurs due to problems executing the URL. You can output the returned HTTP result to a json file. The output file may contain additional information on the execution problem.
 
-#### Header Mapping ####
+#### Header Mapping<a name="headermapping-"></a> 
 In the Header Mapping section you can map tags from the HTTP header result to SAS macro variables.
    
    | UI Field | Comment|
@@ -71,12 +83,12 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
    | Edit Line | Set the tag and macro variable to map. The mapping format is: *Header Tag : Macro Variable Name* |
    | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is *not case sensitive*. |
    
-#### Options ####
+#### Options<a name="options-"></a> 
 Under Options you can set additional options.
 
    | UI Field | Comment|
    | --- | --- |
-   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. |
+   | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log.<br>If you have set the [*Output Folder*](#httpoutputfolder-) the step will write a http json result file for each row (each http request execution) to the output folder. |
 
 ### Settings tab<a name="settingstab-"></a>
 At the Settings tab can you switch on/off hyperlinks in the UI.
@@ -140,7 +152,7 @@ This will produce an output table with columns *zip* and *country* with values f
 
 ---
 
-## Usage
+## Usage<a name="usage-"></a> 
 
 Use the HTTP Request step to enrich data in a table. The table country has a column country with different counties. Using the HTTP Request we enrich the country information with capital, language and continent information.<br>
 
@@ -150,6 +162,12 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 
 ---
 
-## Change Log
-Version 1.0 (15OCT2024)
- * Initial version 
+## Change Log<a name="changelog-"></a> 
+Version 1.0.1 (17OCT2024)<br>
+* Increased size of variable containing URL payload
+* Changed UI labels from using term "macro" to "SAS macro variable"<br>
+
+Version 1.0 (15OCT2024)<br>
+   * Initial version 
+
+ 
