@@ -163,8 +163,9 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 ---
 
 ## Change Log<a name="changelog-"></a> 
-Version 1.0.1 (16OCT2024)<br>
-* Changed size of URL payload<br>
+Version 1.0.1 (17OCT2024)<br>
+* Increased size of variable containing URL payload
+* Changed UI labels from using term "macro" to "SAS macro variable"<br>
 
 Version 1.0 (15OCT2024)<br>
    * Initial version 
