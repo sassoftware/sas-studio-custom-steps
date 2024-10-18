@@ -65,8 +65,11 @@ The output table for this custom step contains the following three columns:
 
 ## Change Log
 
-Version 1.2 (17OCT2024) : Published externally.
+ * Version 1.2 (17OCT2024)
+   * Published externally.
 
-Version 1.1 (09MAY2023) : Taken the feedback messages from the JSON file, when available and/or applicable.
+ * Version 1.1 (09MAY2023)
+   * Taken the feedback messages from the JSON file, when available and/or applicable.
 
-Version 1 (08MAY2023)   : Initial version.
+ * Version 1 (08MAY2023)
+   * Initial version.
