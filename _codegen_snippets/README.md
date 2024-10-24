@@ -1,8 +1,8 @@
-# SAS Studio Custom Steps Utilities
+# SAS code snippets for common tasks in code generator of a SAS Studio Custom Step
 
 ## Background
 
-Collection of code snippets and other utilities to make it easy/easier for contributors of SAS Studio Custom Steps to implement common "tasks" in the code generator part of a custom step. This should not only make things easier for contributors but also allow for more standardized and more robust code generators.
+Collection of code snippets to make it easy/easier for contributors of SAS Studio Custom Steps to implement common "tasks" in the code generator part of a custom step. This should not only make things easier for contributors, but also allow for more standardized and more robust code generators.
 
 | Topic | Notes |
 | --- | --- |
