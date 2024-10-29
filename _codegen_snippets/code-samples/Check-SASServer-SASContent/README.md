@@ -1,10 +1,10 @@
-# Check SAS Server or SAS Content folder
+# Check SAS Server or SAS Content location
 
 ## Background
 
-If your SAS code only supports files stored in a folder on the SAS Server, or only supports files stored in a SAS Content folder, then you
-need to check what the user has selected at runtime. The ***File or Folder Selector*** control currently does not support an attribute
-for the step author specify this.
+If your SAS code only supports files/folders on the SAS Server, or only supports files/folders stored in SAS Content, then you
+need to check at runtime what the user has selected. The ***File or Folder Selector*** control currently does not support an attribute
+for the step author to restrict the location type.
 
 The SAS macro variable associated with the control has a value that starts with ***sasserver:*** or with ***sascontent:*** to indicate
 the location type. 
@@ -15,7 +15,7 @@ data _null_;
    locationType=scan("&fileorfolderselector",1,":");
    if lowcase(locationType) ne "sasserver" then do;
       putlog "ERROR: Please select location on the SAS Server";
-      *abort;
+      abort;
    end;
 run;
 ```
@@ -26,7 +26,7 @@ data _null_;
    locationType=scan("&fileorfolderselector",1,":");
    if lowcase(locationType) ne "sascontent" then do;
       putlog "ERROR: Please select a location in a SAS Content folder";
-      *abort;
+      abort;
    end;
 run;
 ```
