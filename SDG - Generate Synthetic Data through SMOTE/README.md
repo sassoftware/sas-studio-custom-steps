@@ -126,7 +126,7 @@ Refer [here](./extras/SDG_SMOTE_Synthetic_Data.sas) for the SAS program used by 
 - Refer to the [steps listed here](https://github.com/sassoftware/sas-studio-custom-steps#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio).
 
 ----
-## Created/contact: 
+## Created/contact:  
 
 - Sundaresh Sankaran (sundaresh.sankaran@sas.com)
 
