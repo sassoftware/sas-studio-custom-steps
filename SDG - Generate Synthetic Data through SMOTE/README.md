@@ -139,7 +139,7 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
+* Version 1.1 (02NOV2024) 
+    * Version for GitHub release
 * Version 1.0 (10APR2024) 
     * Initial version
-* Version 1.1 (28OCT2024) 
-    * Version for GitHub release

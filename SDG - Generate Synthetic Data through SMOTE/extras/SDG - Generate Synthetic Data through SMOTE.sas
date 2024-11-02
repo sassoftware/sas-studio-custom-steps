@@ -1,5 +1,18 @@
 /* SAS templated code goes here */
 
+/* -------------------------------------------------------------------------------------------* 
+   Synthetic Data Generation (SDG) - Generate Synthetic Data through SMOTE
+
+   v 1.1 (02NOV2024)
+
+   This program generates synthetic data using the Synthetic Minority Oversampling TEchnique
+   and is meant for use within a SAS Studio Custom Step. Please modify requisite macro variables
+   (hint: use the debug section as a reference) to run this through other interfaces, such as 
+   a SAS Program editor or the SAS extension for Visual Studio Code.
+
+   Sundaresh Sankaran (sundaresh.sankaran@sas.com|sundaresh.sankaran@gmail.com)
+*-------------------------------------------------------------------------------------------- */
+
 /*-----------------------------------------------------------------------------------------*
    DEBUG Section
    Code under the debug section SHOULD ALWAYS remain commented unless you are tinkering with  
