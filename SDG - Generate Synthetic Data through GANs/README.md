@@ -1,15 +1,11 @@
-# Synthetic Data Generation
+# Generate Synthetic Data through Generative Adversarial Networks (GANs)
 
 ## Description
-Make better data-informed decisions, even in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data!  This folder contains **four** SAS Studio custom steps which help you train, score and assess Synthetic Data models.  
+This custom step enables you to generate synthetic data using a trained GAN model.  Synthetic data helps you make better data-informed decisions, even in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data.  
+  
+Once you have generated synthetic data, you can carry out further downstream activities such as comparing distributions to see how close your synthetic data resembles the original.
 
 A general idea :
-
-### Training a Synthetic Data Model
-
-![Training Flow](./img/general-idea-training-flow.png)
-
-### Generating Synthetic Data
 
 ![Scoring Flow](./img/general-idea-scoring-flow.png)
 
@@ -18,6 +14,7 @@ Read this [blog](https://communities.sas.com/t5/SAS-Communities-Library/SAS-for-
 
 ## SAS Viya Version Support
 Tested in Viya 4, Stable 2022.09
+<mark> New test in Viya 4, Stable 2024.10 </mark>
 
 ## User Interface
 
