@@ -70,7 +70,7 @@ The output table for this custom step contains the following three columns:
 
 ## Change Log
 
- * Version 1.2 (17OCT2024)
+ * Version 1.2 (03NOV2024)
    * Published externally.
 
  * Version 1.1 (09MAY2023)
