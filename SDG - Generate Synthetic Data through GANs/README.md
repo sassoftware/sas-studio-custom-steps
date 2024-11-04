@@ -99,7 +99,7 @@ proc datasets library=sampsio; run;
 
 ## Change Log
 
-- Version 2.0 (03NOV2024)
+- Version 2.0 (04NOV2024)
 
   - Generate Synthetic Data through GANs now a separate folder with README and images.
   - Rebranded to distinguish from, and provide an alternative to SDG - Generate Synthetic Data through SMOTE.
