@@ -39,3 +39,6 @@
 %_usr_setDebugOptions(1);
 %_usr_setDebugOptions(0);
 
+/* At the end of your custom step codegen remove this SAS macro */
+/* using the following code                                     */
+%sysmacdelete _usr_setDebugOptions;

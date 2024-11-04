@@ -14,7 +14,6 @@
 ***/
  
 %macro _usr_setDebugOptions;
- 
    %global _usr_defaultSymbolgen _usr_defaultMprint;
    %let _usr_defaultSymbolgen = %sysfunc(getoption(symbolgen));
    %let _usr_defaultMprint = %sysfunc(getoption(mprint));
@@ -25,6 +24,9 @@
       /* by another macro, _usr_restoreOptionSettings, at the end of your step  */
       %let _usr_restoreDebugOptions = 1;
    %end;
- 
 %mend _usr_setDebugOptions;
 %_usr_setDebugOptions;
+
+/* At the end of your custom step codegen remove this SAS macro */
+/* using the following code                                     */
+%sysmacdelete _usr_setDebugOptions;

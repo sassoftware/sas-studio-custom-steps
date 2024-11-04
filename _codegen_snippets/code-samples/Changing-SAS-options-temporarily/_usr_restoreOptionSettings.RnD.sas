@@ -5,10 +5,12 @@
 ***/
  
 %macro _usr_restoreOptionSettings;
- 
    %if &_usr_restoreDebugOptions. eq 1 %then %do;
       options &_usr_defaultSymbolgen. &_usr_defaultMprint;
    %end;
- 
 %mend _usr_restoreOptionSettings;
 %_usr_restoreOptionSettings;
+
+/* At the end of your custom step codegen remove this SAS macro */
+/* using the following code                                     */
+%sysmacdelete _usr_restoreOptionSettings;
