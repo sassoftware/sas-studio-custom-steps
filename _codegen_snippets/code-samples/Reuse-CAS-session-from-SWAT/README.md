@@ -33,27 +33,31 @@ The code below was provided by [Sundaresh Sankaran](https://github.com/Sundaresh
 
 ```
 
-## Python code snippet to have SWAT connect to the existing CAS session
+## Proc Python code snippet to have SWAT connect to the existing CAS session
+
+This Proc Python code snippet uses user-defined SAS macro variables **cas_session_exists** and **\_current_uuid_**. These are created by running user-defined SAS macro **\_plos_checkSession** that is shown earlier on this page before running proc python with the code shown below.
+
 ```Python
-# Code snippet that can be used inside proc python ...
-cas_session_exists =  SAS.symget("casSessionExists")
-cas_host_path      =  SAS.symget("casHostPath")
-cas_host_port      =  SAS.symget("casHostPort")
-
-import swat
 import os
+import swat
 
-#     Add certificate location to operating system list of trusted certs detailed in About tab - Documentation    
-os.environ['CAS_CLIENT_SSL_CA_LIST']=os.environ['SSLCALISTLOC']
-#     Connect to CAS
-if cas_session_exists=='1':
-   sessuuid        =  SAS.symget("_current_uuid_")
-   SAS.logMessage("Connection exists. Session UUID is {}".format(sessuuid))   
-   conn            =  swat.CAS(hostname=cas_host_path,port=cas_host_port, password=os.environ['SAS_SERVICES_TOKEN'],session=sessuuid)
+cas_session_exists = SAS.symget('casSessionExists')
+cas_host_path = SAS.symget('casHostPath')
+cas_host_port = SAS.symget('casHostPort')
+
+#  Add certificate location to operating system list of trusted certs detailed in About tab - Documentation    
+os.environ['CAS_CLIENT_SSL_CA_LIST'] = os.environ['SSLCALISTLOC']
+                                                                                                                  
+                                                               
+#  Connect to CAS
+if cas_session_exists == '1':
+   sessuuid = SAS.symget('_current_uuid_')
+   SAS.logMessage(f"Connection exists. Session UUID is {sessuuid}")   
+   conn = swat.CAS(hostname = cas_host_path, port = cas_host_port, password = os.environ['SAS_SERVICES_TOKEN'], session = sessuuid)
 else:
-   SAS.logMessage("New Connection made to CAS through swat.")
-   conn            =  swat.CAS(hostname=cas_host_path,port=cas_host_port, password=os.environ['SAS_SERVICES_TOKEN'])
+   SAS.logMessage('New Connection made to CAS through SWAT.')
+   conn = swat.CAS(hostname = cas_host_path, port = cas_host_port, password = os.environ['SAS_SERVICES_TOKEN'])
 
 if conn:
-   SAS.logMessage("Connection established.")
+   SAS.logMessage('Connection established.')
 ```
