@@ -118,7 +118,7 @@ This step helps you assess the correlation among variables in your generated and
 
 ## SAS Program
 
-Refer [here](./extras/SDG - Train a Synthetic Data Generator through GANs.sas) for the SAS program used by the step. You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the SAS Extension for Visual Studio Code, with minor modifications.
+Refer [here](./extras/Train a Synthetic Data Generator through GANs.sas) for the SAS program used by the step. You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the SAS Extension for Visual Studio Code, with minor modifications.
 
 ## Documentation
 
