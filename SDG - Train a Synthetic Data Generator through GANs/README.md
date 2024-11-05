@@ -178,7 +178,6 @@ proc datasets library=sampsio; run;
 
     - Step published.
 
-
 ## Created/contact: 
 
 - Sundaresh Sankaran (sundaresh.sankaran@sas.com)
