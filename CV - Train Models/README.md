@@ -2,10 +2,10 @@
 
 ## Description
 This custom step helps users develop computer vision (CV) models to accomplish one of four prediction tasks:
-	1. Image classification
-	2. Image regression
-	3. Object detection
-	4. Multi-task
+  1. Image classification
+  2. Image regression
+  3. Object detection
+  4. Multi-task
 
 This step (tool) partitions the data, resizes the images, trains a convolutional neural network, and enables the user to perform a neural architecture and hyperparameter search using SAS autotune's Evolutional Algorithm Guiding Local Search (EAGLS). 
 
