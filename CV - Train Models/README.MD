@@ -281,5 +281,5 @@ See https://arxiv.org/abs/1807.11164 for more details regarding the different va
 - Robert Blanchard (robert.blanchard@sas.com)
 
 ## Change Log
-- Version 1.0 (16JULY2024)
+- Version 8.0 (19SEP2024)
     - Initial version
