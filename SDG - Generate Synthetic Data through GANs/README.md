@@ -1,15 +1,11 @@
-# Synthetic Data Generation
+# Generate Synthetic Data through Generative Adversarial Networks (GANs)
 
 ## Description
-Make better data-informed decisions, even in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data!  This folder contains **four** SAS Studio custom steps which help you train, score and assess Synthetic Data models.  
+This custom step enables you to generate synthetic data using a trained GAN model.  Synthetic data helps you make better data-informed decisions, even in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data.  
+  
+Once you have generated synthetic data, you can carry out further downstream activities such as comparing distributions to see how close your synthetic data resembles the original.
 
 A general idea :
-
-### Training a Synthetic Data Model
-
-![Training Flow](./img/general-idea-training-flow.png)
-
-### Generating Synthetic Data
 
 ![Scoring Flow](./img/general-idea-scoring-flow.png)
 
@@ -18,60 +14,33 @@ Read this [blog](https://communities.sas.com/t5/SAS-Communities-Library/SAS-for-
 
 ## SAS Viya Version Support
 Tested in Viya 4, Stable 2022.09
+<mark> New test in Viya 4, Stable 2024.10 </mark>
 
 ## User Interface
 
+This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib). Ensure you have access to a CAS engine before running this step.
+
+
 **Refer the "About" tab on each of the individual steps for more details on what they are used for.**
 
-### Train a Synthetic Data Generator
-This step helps you train a synthetic data generator model, using a Generative Adversarial Network. Parameters required :
-1. Variables you wish to generate a Synthetic Data Generator for
-2. Number of sample observations, for assessment purposes
-3. Optional - additional training parameters such as number of epochs, the minibatch size, and whether to use Graphical Processing Units (GPUs). (Advanced tab)
-4. Input port - attach a training dataset
-5. Output ports - attach tables for the sample observations and the desired model binary (astore).
+### Input Parameters
 
-![Train a Synthetic Data Generator](./img/train-a-synthetic-data-generator.png)
+- An input table containing the model binary (known as an astore) which has been trained earlier - attach this to the input port of this step.
 
-#### Run-time control
+### Configuration
 
-**Note that this is optional.**  
+1. Enable GPU (check box; default is disabled): check this box in case you wish to enables Graphical Processing Units (GPUs) for scoring.
 
-*For large training data, Synthetic Data Generation does tend to take up time and computational resources.  Therefore, you may find it useful to employ the following control in some situations, as dictated by logic.*
+  Note that currently the tabularGan procedure (which outputs the GAN model for synthetic data) is designed to take advantage of a maximum of 1 GPU device only, and the scoring procedure does the same.
 
-In some scenarios, you may wish to dynamically control whether this custom step runs or simply "passes through" without doing anything, in a SAS Studio session. The following macro variable is set to initialize with a value of 1 by default, indicating an "enabled" status and allowing the custom step to run.
+2. Provenance variable (text field; default value of  SYNTHETIC_DATA_FLAG): modify this field if you want to create a column of a different name, which indicates that the data is synthetic (value of 1).
 
-Refer this [blog](https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.
+### Output Specifications
 
-```sas
-/* To demonstrate the default value of the trigger macro variable */;
+1. Number of synthetic observations you wish to generate.
 
-&_tsdg_run_trigger.=1;
-```
+2. Set up the output for this process by attaching a table to the output port (called Generated Data) 
 
-If you wish to control execution of this custom step programmatically (within a session, including execution of a SAS Studio Flow), make sure that an upstream SAS program sets the macro variable to 0.  Setting the value to 0 "disables" the execution of this custom step.
-
-For example, to "disable" this step, run the following code upstream:
-
-```sas
-%global _tsdg_run_trigger;
-%let _tsdg_run_trigger=0;
-```
-
-To "enable" this step again, run the following (it's assumed that this has already been set as a global variable):
-
-```sas
-%let _tsdg_run_trigger=1;
-```
-
-**Important:** Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.
-
-
-### Generate Synthetic Data
-This step helps you generate new data using the trained astore. Parameters required:
-1. Number of observations desired
-2. Input Port - attach the astore referring the Generator you have trained
-3. Output Port - attach a table referring the desired output table.
 
 ![Generate Synthetic Data](./img/generate-synthetic-data.png)
 
@@ -108,27 +77,11 @@ To "enable" this step again, run the following (it's assumed that this has alrea
 
 **Important:** Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.
 
-
-### Generate Distribution Comparison
-This step helps you assess the distributions of your generated data with original data. Parameters required:
-1. Select columns you wish to assess
-2. Input Ports - attach the training (original) and the synthetic data tables
-
-
-![Generate Distribution Comparison](./img/generate-distribution-comparison.png)
-
-### Generate Correlation Comparison
-This step helps you assess the correlation among variables in your generated and original data. Parameters required:
-1. Select columns you wish to assess
-2. Input Ports - attach the training (original) and the synthetic data tables
-
-![Generate Correlation Comparison](./img/generate-correlation-comparison.png)
-
 ## Requirements
 
-1. A SAS Viya 4 environment (monthly release 2022.09 or later) with SAS Studio Flows.
+1. A SAS Viya 4 environment (latest test on monthly release 2024.10) with SAS Studio Flows.
 2. An active connection to SAS Cloud Analytics Services.
-3. In case you wish to use GPUs for training, check with your administrator on whether GPUs are available in your environment for SAS Cloud Analytics Services (CAS) to access.
+3. In case you wish to use GPUs, check with your administrator on whether GPUs are available in your environment for SAS Cloud Analytics Services (CAS) to access.
 
 ## Installation & Usage
 
@@ -145,6 +98,11 @@ proc datasets library=sampsio; run;
 * TIP: Watch this [SAS Sample Data for Forecasting](https://www.youtube.com/watch?v=wX6mdBgYmXo&t=271s) recording on Youtube for more pointers to interesting sample data available from SAS
 
 ## Change Log
+
+- Version 2.0 (04NOV2024)
+
+  - Generate Synthetic Data through GANs now a separate folder with README and images.
+  - Rebranded to distinguish from, and provide an alternative to SDG - Generate Synthetic Data through SMOTE.
 
 - Version 1.1 (16AUG2023):
 
