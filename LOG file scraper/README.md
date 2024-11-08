@@ -13,11 +13,11 @@ In a situation where your process generates physical log files, you can extract 
 ![Properties](img/UI_Properties.PNG)
 
 Here you need to select the following:
-- **Select the SAS Compute file directory where the log files can be found:**: The needs to be the directory where the log files are written and/or downloaded to. Note that the custom step doesn't process subfolders and that the directory can't be a SAS Viya content directory.
+- **Select the SAS Compute file directory where the log files can be found:** This needs to be the directory where the log files are written and/or downloaded to. Note that the custom step doesn't process subfolders and that the directory can't be a SAS Viya content directory.
 - **'Today' minus number of days**: With this value you can specify a date range for the log files you want to include in the scraping process. In this example, this custom step processes the log files for the last 7 days. The default value is 0, meaning it will only scrape log files generated today.
 
 ## Usage
-Download the step, upload it into your environment drag it on the convas of your flow, specify the directory your log files are located and specify the date range and run the custom step. 
+Download the step, upload it into your environment drag it on the canvas of your flow, specify the directory your log files are located and specify the date range and run the custom step. 
 
 An example of its usage is:
 ![Usage](img/UI_Usage.png)
@@ -35,6 +35,8 @@ The table contains the following columns:
 - **linenum**: The line number the warning or error is found at.
 
 ## Change log
-Version 1.1 (08/11/2024):   Published externally.
+ * Version 1.1 (08NOV2024)
+    * Published externally
 
-Version 1.0 (11/12/2023):   Initial version.
+ * Version 1.0 (11DEC2023)
+    * Initial version
