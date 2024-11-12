@@ -20,7 +20,7 @@ Here is a simple code sample and a screenshot to show how this presents itself i
 ```SAS
 data _null_;
     put "ERROR: aborting this step because ...";
-    abort;
+    abort cancel;
 run;
 ```
  ![](abort%20in%20SAS%20Studio%20after%20put%20error%20statement%20-%20screenshot.png)
