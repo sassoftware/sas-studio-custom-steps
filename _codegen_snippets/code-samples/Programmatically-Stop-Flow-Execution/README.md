@@ -19,7 +19,7 @@ To programatically stop code execution use the **abort** statement in a data ste
 Here is a simple code sample and a screenshot to show how this presents itself in SAS Studio
 ```SAS
 data _null_;
-    put "ERROR: aborting this step because ...";
+    putlog "ERROR: aborting this step because ...";
     abort cancel;
 run;
 ```
