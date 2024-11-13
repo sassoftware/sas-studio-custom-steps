@@ -49,7 +49,6 @@ At the Input Options tab you specify  input parameters for the HTTP request.
    ||| **No Auth** - Specifies that no authorization is used for the HTTP request. |
    ||| **Basic Auth** - Specifies to use user identity authentication to authenticate the connected server. The user name and password are supplied in the fields *Username* and *Password*. |
    ||| **Bearer Token** - Specifies to send an OAuth access token along with the HTTP call. The token value is supplied in field *Token*. This can be a direct token value or a SAS macro variable carrying the token. |
-   | Timeout | | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
 
 ### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
@@ -83,20 +82,35 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
    | Edit Line | Set the tag and macro variable name to map. The mapping format is: *Header Tag : Macro Variable Name* |
    | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is *not case sensitive*. |
    
-#### Options<a name="options-"></a> 
-Under Options you can set additional options.
+### Settings tab<a name="settingstab-"></a>
+At the Settings tab can you switch on/off hyperlinks in the UI.
+
+   <img src="img/HTTPRequest-Settings-fl.jpg" width="568" height="481">
+
+#### Timeout<a timeout="debug-"></a> 
+Under Timeout you can set how long a HTTP request is waiting to receive an answer.
+   | UI Field | Comment|
+   | --- | --- |
+   | Timeout | Set the number of seconds of inactivity to wait before cancelling the HTTP request. 0 indecates no timeout. |
+
+
+
+#### Debug<a name="debug-"></a> 
+Under Debug you can set the debug level to get additional log information.
 
    | UI Field | Comment|
    | --- | --- |
    | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log.<br>If you have set the [*Output Folder*](#httpoutputfolder-) the step will write a http json result file for each row (each http request execution) to the output folder. |
 
-### Settings tab<a name="settingstab-"></a>
-At the Settings tab can you switch on/off hyperlinks in the UI.
+#### Hyperlinks<a name="hyperlinks-"></a> 
+Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
 
-   <img src="img/HTTPRequest-Settings-fl.jpg" width="645" height="264">
 
-In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links.<br>
-You can use the below validation rules for the links used in this step:
+   | UI Field | Comment|
+   | --- | --- |
+   | Show hyperlinks in step | In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links. |
+   
+   You can use the below validation rules for the links used in this step:<br>
    ```
    ^https?:\/\/(?:.+\.)?github\.com(?::\d+)?(?:\/.*)?||^https?:\/\/(?:.+\.)?developer\.sas\.com(?::\d+)?(?:\/.*)?
    ```
@@ -163,9 +177,12 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 ---
 
 ## Change Log<a name="changelog-"></a> 
+Version 1.1 (17NOV2024)<br>
+   * Added capability to submit batch requests
+
 Version 1.0.1 (17OCT2024)<br>
-* Increased size of variable containing URL payload
-* Changed UI labels from using term "macro" to "SAS macro variable"<br>
+   * Increased size of variable containing URL payload
+   * Changed UI labels from using term "macro" to "SAS macro variable"<br>
 
 Version 1.0 (15OCT2024)<br>
    * Initial version 
