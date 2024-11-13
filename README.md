@@ -9,9 +9,13 @@ Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://v
 
 [List of custom steps in this repository](./CUSTOM_STEPS_LIST.md)
 
+(***NEW***) [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](./_codegen_snippets/README.md)
+
 ## Getting Started - Making a Custom Step from this repository available in SAS Studio 
 
-Follow the instructions on [Using a Custom Step from this GitHub repository in SAS Studio](./docs/IMPORT_CUSTOM_STEP.md) to download custom steps from this repository and make them available for use in your SAS Studio environment.
+Follow the instructions on [Using a Custom Step from this GitHub repository in SAS Studio](./docs/IMPORT_CUSTOM_STEP.md) to download custom steps from this repository and make them available for use in your SAS Studio environment. 
+
+It describes hwo to do this manually using standard GitHub webUI functionality and also contains a pointer to a SAS Communities blog entry describing how you could automate things using a SAS script and the SAS git functions.
 
 ## Contributing
 

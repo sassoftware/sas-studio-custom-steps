@@ -1,5 +1,10 @@
 # Using Custom Step from this GitHub repository in SAS Studio
 
+There are multiple approaches possible to downloading steps from this GitHub repository. Two very straightforward point-and-click approaches that use standard functionality in the GitHub webUI are desribed below. 
+
+When wanting to automate things, you could use a SAS script that calls the SAS Git functions to achieve this. More info can be found in this [SAS Communities article](https://communities.sas.com/t5/SAS-Communities-Library/Uploading-all-Custom-Steps-from-the-SAS-Software-GitHub/ta-p/887903)
+
+## Manually downloading custom step(s) using standard functionality in the GitHub webUI
 1. Download the **.step** file(s) you want to use from this GitHub repository to your local machine.
     * The complete repository can be downloaded as a ZIP file from the [main repository page](https://github.com/sassoftware/sas-studio-custom-steps) as follows:
         * Click the **Code** button on that main page and select the **Download ZIP** option ![](img/GitHub-Download-ZIP-option.png)

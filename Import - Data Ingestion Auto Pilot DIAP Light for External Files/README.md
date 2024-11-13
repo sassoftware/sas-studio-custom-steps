@@ -181,13 +181,13 @@ If set to 0, the text file is read in as-is.
 If set to 1, then text files is examined before reading for the characthers as outlined in parameter "special_chrctr_seq_2_chck_in_hex", and replaced with the character as outlined in parameter "spcl_chrctr_check_rplcmnt_in_hex".
 This might need to be required, especially if files have NOTES or DESCRIPTION columns, that could contain carriage returns. Those carriage returns would then cause the file to be read in with a few errors, wherever those carriage returns occur.
 
-### **special_chrctr_seq_2_chck_in_hex (In Custom Step Version: "Provide list of characters in hex format to check in text files (sep by #)")**
+### **special_chrctr_seq_2_chck_in_hex (In Custom Step Version: "Provide list of characters in hex format to check in text files (sep by |)")**
 
-suggested default value: 0A#0D
+suggested default value: 0A|0D
 
-This parameter has to be set to one or a sequence of # separated hex formats of a character.
+This parameter has to be set to one or a sequence of | separated hex formats of a character.
 
-0A#0D: checks for new line feed (0A) and carriage return (0D)
+0A|0D: checks for new line feed (0A) and carriage return (0D)
 
 see asciitable.com for an overview of all characters in hex format.
 
@@ -209,21 +209,21 @@ If the target table name is too long, this string determines which characters ar
 E.g. when substitute_string_seq = aeAEoO, then a table name of "ThisIsAVeryLongTableNameThatIsTooLong" and a max_table_name_length = 29
 would be first changed to the following: "ThisIsVryLngTblNmThtIsTLng" which would be short enough without any further action needed by DIAP.
 
-### **skip_files_starting_with_seq (In Custom Step Version: "Provide list of filename beginnings that should be excluded from ingesting (separated by #)")**
+### **skip_files_starting_with_seq (In Custom Step Version: "Provide list of filename beginnings that should be excluded from ingesting (separated by |)")**
 
 default value: \_DIAP_Special_File_Definition.csv
-If not missing, DIAP will skip all the files that start out with the sequence of string snippets separated by #.
+If not missing, DIAP will skip all the files that start out with the sequence of string snippets separated by |.
 E.g. if set to:
-\_DIAP_Special_File_Definition.csv#filebe ginning1#filebeginning2
+\_DIAP_Special_File_Definition.csv|filebe ginning1|filebeginning2
 All files that start out with either \_DIAP_Special_File_Definition.csv filebeginning1 or filebeginning2 will NOT be ingested.
 \_DIAP_Special_File_Definition.csv is the default value used by DIAP to describe fixed width or XML definitions and wouldn't be needed to be read into the target libname.
 
-### **skip_files_ending_with_seq (In Custom Step Version: "Provide list of filename endings that should be excluded from ingesting (separated by #)")**
+### **skip_files_ending_with_seq (In Custom Step Version: "Provide list of filename endings that should be excluded from ingesting (separated by |)")**
 
 default value: empty/missing
-If not missing, DIAP will skip all the files that end with the sequence of string snippets separated by #.
+If not missing, DIAP will skip all the files that end with the sequence of string snippets separated by |.
 E.g. if set to:
-file_ending1#file_ending2#csv
+file_ending1|file_ending2|csv
 All files that end with either file_ending1 or file_ending2 or csv will NOT be ingested.
 E.g. in this example all csv files would be skipped.
 
@@ -277,21 +277,21 @@ If set to 3, the same as setting to (1), but no data is being uploaded. So, when
 
 If set to 4, the same as setting to (2), but no data is being uploaded. So, when it is set to 3, the already uploaded files are treated accordingly.
 
-### **stringseq_2_cutout_from_fn (In Custom Step Version: "Target Filename: Provide String that Should be Cut Out (sep by #)")**
+### **stringseq_2_cutout_from_fn (In Custom Step Version: "Target Filename: Provide String that Should be Cut Out (sep by |)")**
 
 suggested default value: empty/missing.
 
 Provide a sequence of characters strings that should be omitted in the target filename.This prevents the target table name of getting too long.
 
-The sequence is separated by #
+The sequence is separated by |
 
-### **stringseq_2_cutout_from_vn (In Custom Step Version: "Target Variablename: Provide String that Should be Cut Out (sep by #)")**
+### **stringseq_2_cutout_from_vn (In Custom Step Version: "Target Variablename: Provide String that Should be Cut Out (sep by |)")**
 
 suggested default value: empty/missing.
 
 Provide a sequence of characters strings that should be omitted in the target variable name. This prevents the variable table name of getting too long.
 
-The sequence is separated by #.
+The sequence is separated by |.
 
 ### **prefix_4_suspicious_src_fl (In Custom Step Version: "Provide Filename Prefix if source file is suspicious.")**
 
@@ -544,6 +544,12 @@ Please provide the SAS Informat that should be used for that specific entry.
 (2) For the variable type "xml": This is the order in how the variable occurs in the file. Most important is that the last variable that is defined within each block MUST have the highest order number. This matches the entry of the column "variable_start_position".
 
 ## Change Log
+
+Version 5.0.0 (04OCT2024)
+
+- improve the readability of the about section
+- increase length of internal directory variable to handle very deep directories (from 1024 to 4096)
+- deal with weird characters in filenames (~#) that can cause problems, changing default separator from # to |
 
 Version 4.1.2 (28JUL2023)
 
