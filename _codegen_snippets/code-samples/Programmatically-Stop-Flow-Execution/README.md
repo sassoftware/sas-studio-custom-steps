@@ -2,7 +2,7 @@
 
 ## Background
 Sometimes there is a need to stop the execution of SAS code at runtime, as you might not be able to capture all restrictions in the
-custom step UI itself. Therefore the generated code needs to validate things at runtime and then programatically stop flow execution
+custom step UI itself. Therefore the generated code needs to perform validation at runtime and then programmatically stop flow execution
 when required pre-conditions are not met. 
 
 One example would be where the custom step requires both the input and output table to reside in a libref that points to a caslib.
