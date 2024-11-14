@@ -65,6 +65,7 @@ else:
    SAS.logMessage('ERROR: No active CAS session. Connect to a CAS session in upstream step in the flow.')
 ```
 
+# Alternative approaches when CAS session does not exist
 Instead of creating an error when a CAS session does not exist, you could also create a CAS session on the fly and then remove it again at the end of your custom step.
 
 ## Approach 1: Create CAS session directly through SWAT, SAS Compute has no knowledge about that CAS session
