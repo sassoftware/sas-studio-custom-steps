@@ -175,6 +175,10 @@ Refer [here](./extras/LLM%20-%20Azure%20Open%20AI%20RAG.sas) for the SAS program
 ----
 ## Change Log
 
+* Version 1.3.3 (14NOV2024) 
+    * Fix Python code creation by Renato
+    * Update Azure OpenAI GA version to 2024-10-21
+
 * Version 1.3.1 (10JUL2024) 
     * Added option for load from SAS dataset
     * README / About tab minor edits
