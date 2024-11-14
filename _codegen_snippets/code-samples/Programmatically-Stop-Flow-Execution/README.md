@@ -14,7 +14,7 @@ SAS supports the **abort** statement in a data step, and the **%abort** macro st
 cause the user to have to reset the current SAS session. 
 
 ### Example - Using abort statement in data step
-To programatically stop code execution use the **abort** statement in a data step, and have it preceded with a put statement that explains the reason why. [SAS Documentation for the abort statement]( https://go.documentation.sas.com/doc/en/pgmsascdc/default/lestmtsref/p0hp2evpgqvfsfn1u223hh9ubv3g.htm).
+To programmatically stop code execution use the **abort** statement in a data step, and have it preceded with a put statement that explains the reason why. [SAS Documentation for the abort statement]( https://go.documentation.sas.com/doc/en/pgmsascdc/default/lestmtsref/p0hp2evpgqvfsfn1u223hh9ubv3g.htm).
 
 Here is a simple code sample and a screenshot to show how this presents itself in SAS Studio
 ```SAS
