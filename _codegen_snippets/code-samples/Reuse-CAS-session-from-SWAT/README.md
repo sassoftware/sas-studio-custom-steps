@@ -87,7 +87,16 @@ if conn:
 
 ## Cleaning up CAS session that was created on the fly
  * When having used approach 1 to create the CAS session:
-     * Terminate CAS session created by SWAT using swat.CAS.terminate()
+     * Terminate CAS session created by SWAT using
+       ```Python
+       swat.CAS.terminate()
+        ```
  * When having used approach 2 to create the CAS session:
-     * Close SWAT connection to CAS using swat.CAS.close()
-     * Terminate CAS session created by Compute using SAS.submit('cas casauto terminate;')
+     * Close SWAT connection to CAS using
+       ```Python
+       swat.CAS.close()
+       ```
+     * Terminate CAS session created by Compute using
+       ```Python
+       SAS.submit('cas casauto terminate;')
+       ```
