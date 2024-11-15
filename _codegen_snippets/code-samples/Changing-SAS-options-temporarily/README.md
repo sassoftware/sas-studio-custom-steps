@@ -6,7 +6,7 @@ Sometimes you want to change the values of a SAS option in your custom step, so 
 
 Best practice is to only change those setting for the duration of your custom step and then restore the option settings to their original values at the end of your custom step.
 
-A common example would be where your step supports a "debug" option, eg. by having a checkbox in your UI "Run in debug mode", that might change SAS options so it prints generated macro statements and values for macro variables in the SAS log independent of what the configuration settings are for the SAS Compute Context that is in use. Or perhaps such a debug option would not delete intermediate tables created by your custom step that you would normally delete at the end of your custom step. There are many other scenarios possible.
+A common example would be where your step supports a "debug" option. The custom step UI would have a checkbox "Run in debug mode", that might change SAS options settings. Or perhaps such a debug option would not delete intermediate tables created by your custom step that you would normally delete at the end of your custom step. There are many other scenarios possible.
 
 Here is an example that changes SAS options that specify how much detail is shown in the SAS log when you execute SAS macros. It retrieves and stores the current values of specific settings before overwriting them. The macro supports a parameter to switch specific debug options on or off. 
 
