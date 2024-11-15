@@ -12,8 +12,7 @@ Here is an example showing libname **casdata** pointing to caslib **mydat42**:
  ![](Compute%20and%20CAS%20-%20libname%20vs%20caslib%20-%20highres.png)
 
 Now assume the user has selected table **casdata.class_castable** in your custom step for an input table control named **inputtable1**. 
-
-TODO: Add screenshot here
+ ![](Custom%20Step%20-%20using%20CAS%20table%20as%20input.png)
 
 This would result in the following SAS macro variables being generated:
 ```sas
