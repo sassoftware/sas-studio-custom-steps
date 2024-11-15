@@ -1,7 +1,23 @@
 # List of Custom Steps in this Project
 
+## Abbreviations used in name of Custom Step
+
+The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.  
+
+| Abbreviation     | Explanation                                                           |
+| :--------------- | :-------------------------------------------------------------------- |
+| CAS              | Steps in this category provide utilities for working with data in CAS |
+| CV               | Computer Vision                                                       |
+| DQ               | Data Quality                                                          |
+| LLM              | Large Language Model                                                  |
+| NLP              | Natural Language Processing                                           |
+| OCR              | Optical Character Recognition                                         |
+| SDG              | Synthetic Data Generation                                             |
+
+## Available Custom Steps
+
 | Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
-| --- | --- | :-: | :-: | :-: |
+| :--- | :--- | :-: | :-: | :-: |
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 04OCT2024 |
 | [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 <br>or later | 21FEB2024 |
 | [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 <br>or later | 19FEB2024 |
@@ -17,8 +33,10 @@
 | [CV - Create Object Detection Table](./CV%20-%20Create%20Object%20Detection%20Table/README.md) | Create CAS table (training dataset) with images and labels for use with CAS actions for Computer Vision (CV) and for use with SAS DLPy Python library | [Neela Vengateshwaran](https://github.com/neelan29) | 2024.01 <br>or later | 21JUL2024 |
 | [CV - Load Images](./CV%20-%20Load%20Images/README.md) | Load image files into a CAS table for use with CAS image analytics actions | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 04OCT2024 |
 | [CV - Merge Data with Images](./CV%20-%20Merge%20Data%20with%20Images/README.md) | Merge or append data that contains images | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
+| [CV - Train Models](./CV%20-%20Train%20Models/README.md) | Develop Computer Vision (CV) models to accomplish one of four prediction tasks: 1. Image classification, 2. Image regression, 3. Object detection, 4. Multi-task| [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
 | [Data Synthesis with Python faker](./Data%20Synthesis%20with%20Faker/README.md) | Generate synthetic data using Python faker module (also includes custom steps to install/load Python modules) | [Angus Looney](https://github.com/AngusLooneySAS) / Duncan Bain | 2021.1.1 <br>or later | 22DEC2022 |
 | [Detect Data Drift](./Detect%20Data%20Drift/README.md) | Calculate metrics for tracking changes between two groups of records (representing two time intervals) inside a table | [David Weik](https://github.com/Criptic) | 2024.07 <br>or later | 15AUG2024 |
+| [Download Job Execution Log](./Download%20Job%20Execution%20Log/README.md) | Store Job Execution Log in a user-specified location on SAS Compute Server file system | [Remco Gooijer](https://github.com/x7rtfgj4) | 2024.01 <br>or later | 03NOV2024 |
 | [DQ - Cluster Analysis](./DQ%20-%20Cluster%20Analysis/README.md) | Compare pairs of rows in a cluster and identify potential false positives | [Clemens Knobloch](https://github.com/sukckn) | 2023.10 <br>or later | 23JAN2024 |
 | [DQ - Change Case](./DQ%20-%20Change%20Case/README.md) | Upper-, Lower-, or Propercase data values using QKB locale specific rules | [Clemens Knobloch](https://github.com/sukckn) | 2023.01 <br>or later | 15MAR2023 |
 | [DQ - Clustering](./DQ%20-%20Clustering/README.md) | Cluster records based on column values, eg. match codes  | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) / [Nikolaus Hartung](https://github.com/gh4nh)| 2021.1.1 <br>or later | 05AUG2024 |
@@ -56,8 +74,9 @@
 | [Import - GCSFS File Reader](./Import%20-%20GCSFS%20File%20Reader/README.md) | Read Parquet and Delta Lake files from Google Cloud Storage (GCS) and write to SAS and CAS datasets using Python | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 <br>or later | 21DEC2023 |
 | [Import - Google Sheets](./Import%20-%20Google%20Sheets/README.md) | Import public Google Sheets as a SAS data set | [David Weik](https://github.com/Criptic)  | 2022.12 <br>or later | 12JAN2023 |
 | [Import - HTML Table](./Import%20-%20HTML%20Table/README.md) | Import HTML table(s) from web page as SAS data set(s) using Python Pandas | [David Weik](https://github.com/Criptic)  | 2023.07 <br>or later | 28JUL2023 |
-| [LLM - Azure OpenAI RAG](./LLM%20-%20Azure%20OpenAI%20RAG/README.md) | Uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for purposes of answering a question| [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.01 <br>or later | 10JUL2024 |
+| [LLM - Azure OpenAI RAG](./LLM%20-%20Azure%20OpenAI%20RAG/README.md) | Uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for purposes of answering a question| [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.01 <br>or later | 15NOV2024 |
 | [LLM - Prompt Catalog](./LLM%20-%20Prompt%20Catalog/README.md) | Submit queries to a Large Language Model, test prompts (prompt engineering) and save prompt history| [Xin Ru Lee](https://github.com/sspxrl) | 2023.12 <br>or later | 24JUL2024 |
+| [Log File Scraper](./Log%20File%20Scraper/README.md) | Extract ERRORS and WARNINGS from one or more SAS log files and makes them available in a table | [Remco Gooijer](https://github.com/x7rtfgj4) | 2021.1.5 <br>or later | 08NOV2024 |
 | [Lookup](./Lookup/README.md) | Add column by performing lookup on other table (using data step hash object) | [Torben Juul Johansson](https://github.com/torbenjuul) | 2021.2.1 <br>or later | 21SEP2022 |
 | [Loop Deployed Object](./Loop%20Deployed%20Object/README.md) | Parallel execution of a deployed flow or a SAS program for a given set of parameter values | [Remco Gooijer](https://github.com/x7rtfgj4) | 2023.01 <br>or later | 03OCT2024 |
 | [Loop Flow](./Loop%20Flow/README.md) | Iteratively execute another Studio Flow, much like Loop/Loop End in SAS Data Integration Studio | [Torben Juul Johansson](https://github.com/torbenjuul) | 2023.09 <br>or later | 08MAR2024 |
@@ -72,6 +91,8 @@
 | [NLP - Train Text Classifier](./NLP%20-%20Train%20Text%20Classifier/README.md) | Train a text classifier model based on deep learning (BERT-based transformer) architecture using textClassifier.trainTextClassifier CAS action (supports GPUs) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.02 <br>or later | 18MAR2023 |
 | [OCR - AWS Textract](./OCR%20-%20AWS%20Textract/README.md) | Use the AWS Textract service to perform different types of OCR on files that can be stored in S3 buckets or on the SAS Compute file system | [Jannic Horst](https://github.com/jannichorst) | 2022.09 <br>or later | 08JAN2024 |
 | [OCR - Azure AI Document Intelligence](./OCR%20-%20Azure%20AI%20Document%20Intelligence) | Uses Microsoft Azure's Document Intelligence service to perform different types of OCR for files stored in the SAS Server file system or stored on a URL. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) / [Jannic Horst](https://github.com/jannichorst) | 2024.02 <br>or later | 22MAR2024 |
+| [OCR - Document Analysis - Execute Batch OCR Process](./OCR%20-%20Document%20Analysis) | Uses SAS Document Analysis to perform a batch run on files stored in the SAS Server file system. | [William Nadolski](https://github.com/nadolsw) | 2024.08 <br>or later | 09OCT2024 |
+| [OCR - Document Analysis - Produce Usage Report Output](./OCR%20-%20Document%20Analysis) | Uses SAS Document Analysis to to generate a usage report on previous batch processes. | [William Nadolski](https://github.com/nadolsw) | 2024.08 <br>or later | 29OCT2024 |
 | [Python - Load Objects to SAS](./Python%20-%20Load%20Objects%20to%20SAS/README.md) | Load Python objects to SAS Compute or CAS tables | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 01SEP2022 |
 | [Python - Virtual Environments](./Python%20Virtual%20environments/README.md) | A collection of 5 SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
 | [R Runner](./R%20Runner/README.md) | Submit R scripts with support for input and output table | [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 18AUG2023 |
@@ -80,10 +101,12 @@
 | [SAS Content - Create Folder](./SAS%20Content%20-%20Create%20Folder/README.md) | Creates a new folder in SAS Content programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
 | [SAS Content - Obtain Folder URI](./SAS%20Content%20-%20Obtain%20Folder%20URI/README.md) | Obtain URI of selected SAS Content folder and save it in a global macro variable | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
 | [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 28SEP2022 |
-| [Send SMTP Email](./Send%20SMTP%20Email/README.md) | Send Email message  | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2022.1.4 <br>or later | 03APR2023 |
+| [SDG - Generate Synthetic Data through GANs](./SDG%20-%20Generate%20Synthetic%20Data%20through%20GANs/README.md) | Generate synthetic data using a trained GAN model | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 <br>or later | 04NOV2024 |
+| [SDG - Generate Synthetic Data through SMOTE](./SDG%20-%20Generate%20Synthetic%20Data%20through%20SMOTE/README.md) | Generate synthetic data based on an input table, using the Synthetic Minority Oversampling TEchnique (SMOTE). | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 02NOV2024 |
+| [SDG - - Train a Synthetic Data Generator through GANs](./SDG%20-%20Train%20a%20Synthetic%20Data%20Generator%20through%20GANs/README.md) | A collection of 3 steps which help you train, score and assess Synthetic Data models | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 04NOV2024 | 
+[Send SMTP Email](./Send%20SMTP%20Email/README.md) | Send Email message  | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2022.1.4 <br>or later | 03APR2023 |
 | [Send Teams Message](./Send%20Teams%20Message/README.md) | Send Microsoft Teams Messages to a Teams channel | [David Weik](https://github.com/Criptic) / [Tamara Fischer](https://github.com/ATFischer) | 2022.10 <br>or later | 14JUN2023 |
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 29SEP2022 |
-| [Synthetic Data Generation](./Synthetic%20Data%20Generation/README.md) | A collection of 4 SAS Studio custom steps which help you which help you train, score and assess Synthetic Data models. | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 <br>or later | 06OCT2022 |
 | [Translate Text](./Translate%20Text/README.md) | Translates text stored in a column using DeepL API | [David Weik](https://github.com/Criptic) | 2023.04 <br>or later | 10MAY2023 |
 | [Update column labels](./Update%20column%20labels/README.md) | Update column labels from a (metadata) table, delimited file, or interactively | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 <br>or later | 21DEC2023 |
 | [Vector Databases - Hydrate Chroma DB Collection](./Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection/README.md) | Populate a Chroma vector database collection with documents and embeddings contained in a CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.12 <br>or later | 24JAN2024 |

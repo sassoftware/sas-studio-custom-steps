@@ -1,5 +1,17 @@
 /* SAS templated code goes here */
 
+/*-----------------------------------------------------------------------------------------*
+   Large Language Models (LLM) - Azure OpenAI Retrieval Augmented Generation(RAG)
+   Version: 1.3.3 (14NOV2024)
+
+   This custom step uses a Retrieval Augmented Generation (RAG) approach to provide right 
+   context to an Azure OpenAI Large Language Model (LLM) for answering a question.  
+
+   Contact: Samiul.Haque@sas.com
+            Sundaresh.Sankaran@sas.com / Sundaresh.Sankaran@gmail.com
+            Renato.Luppi@sas.com
+
+*------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------*
    Python Block Definition
@@ -20,12 +32,18 @@ filename aorcode temp;
 
 data _null_;
 
+   length line $32767;               * max SAS character size ;
    infile datalines4 truncover pad;
    input ;   
    file aorcode;
-   put @1 _infile_;
-   datalines4;
+   line = strip(_infile_);           * line without leading and trailing blanks ;
+   l1 = length(trimn(_infile_));     * length of line without trailing blanks ;
+   l2 = length(line);                * length of line without leading and trailing blanks ;
+   first_position=l1-l2+1;           * position where the line should start (alignment) ;
+   if (line eq ' ') then put @1;     * empty line ;
+   else put @first_position line;    * line without leading and trailing blanks correctly aligned ;
 
+   datalines4;
 #############################################################################################
 #
 #   Obtain values from UI
