@@ -16,7 +16,7 @@ The list of available Custom Steps further down on this page uses the following 
 
 ## Available Custom Steps
 
-| Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
+| Name | Brief Description | Contributor/Contact | Viya Version Supported | Last Update |
 | :--- | :--- | :-: | :-: | :-: |
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 04OCT2024 |
 | [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 <br>or later | 21FEB2024 |
