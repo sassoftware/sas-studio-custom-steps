@@ -37,6 +37,11 @@ For more information about the different settings please refer to the SAS docume
 
 ### OCR - Document Analysis - Execute Batch OCR Process
 
+**Version 1.2 (21NOV2024)** 
+
+* Added option to enable syncronous processing (useful when adding this as an upstream step in a flow and downstream steps need to wait for this step to finish)
+* Added option to suppress SSL check (provides the ability to avoid SSL cert errors, see: https://go.documentation.sas.com/doc/en/pgmsascdc/v_057/proc/n154smey890g2xn1l6wljfyjcemh.htm)
+
 **Version 1.1 (09OCT2024)** 
 
 * Implemented feedback
@@ -46,6 +51,11 @@ For more information about the different settings please refer to the SAS docume
 * Initial version
 
 ### OCR - Document Analysis - Produce Usage Report Output
+
+**Version 1.2 (21NOV2024)** 
+
+* Added option to enable syncronous processing (useful when adding this as an upstream step in a flow and downstream steps need to wait for this step to finish)
+* Added option to suppress SSL check (provides the ability to avoid SSL cert errors, see: https://go.documentation.sas.com/doc/en/pgmsascdc/v_057/proc/n154smey890g2xn1l6wljfyjcemh.htm)
 
 **Version 1.1 (29OCT2024)** 
 
