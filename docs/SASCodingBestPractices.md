@@ -2,7 +2,7 @@
 
 We will only list some basic guidelines here, promoting readability, comprehension and appearance.  
 Btw. also check out [sasjs/lint](https://github.com/sasjs/lint).
- 1. Code should not produce Errors, Warnings or Concerning Notes in SAS log
+ 1. Code should not produce Errors, Warnings or Concerning Notes in SAS log. Code snippets to check user input for some common scenarios that cannot be performed in the custom step UI itself, can be found in [SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/_codegen_snippets/README.md). 
  2. Indent using spaces instead of tabs
  3. Be consistent with indentation increments
  4. Indent conditional blocks and DO groups, and do it consistently, the logic will be easier to follow

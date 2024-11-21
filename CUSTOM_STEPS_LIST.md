@@ -16,7 +16,7 @@ The list of available Custom Steps further down on this page uses the following 
 
 ## Available Custom Steps
 
-| Name | Brief Description | Owner/Contact | Viya Version Supported | Last Update |
+| Name | Brief Description | Contributor/Contact | Viya Version Supported | Last Update |
 | :--- | :--- | :-: | :-: | :-: |
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 04OCT2024 |
 | [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 <br>or later | 21FEB2024 |
@@ -74,7 +74,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [Import - GCSFS File Reader](./Import%20-%20GCSFS%20File%20Reader/README.md) | Read Parquet and Delta Lake files from Google Cloud Storage (GCS) and write to SAS and CAS datasets using Python | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 <br>or later | 21DEC2023 |
 | [Import - Google Sheets](./Import%20-%20Google%20Sheets/README.md) | Import public Google Sheets as a SAS data set | [David Weik](https://github.com/Criptic)  | 2022.12 <br>or later | 12JAN2023 |
 | [Import - HTML Table](./Import%20-%20HTML%20Table/README.md) | Import HTML table(s) from web page as SAS data set(s) using Python Pandas | [David Weik](https://github.com/Criptic)  | 2023.07 <br>or later | 28JUL2023 |
-| [LLM - Azure OpenAI RAG](./LLM%20-%20Azure%20OpenAI%20RAG/README.md) | Uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for purposes of answering a question| [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.01 <br>or later | 10JUL2024 |
+| [LLM - Azure OpenAI RAG](./LLM%20-%20Azure%20OpenAI%20RAG/README.md) | Uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for purposes of answering a question| [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.01 <br>or later | 15NOV2024 |
 | [LLM - Prompt Catalog](./LLM%20-%20Prompt%20Catalog/README.md) | Submit queries to a Large Language Model, test prompts (prompt engineering) and save prompt history| [Xin Ru Lee](https://github.com/sspxrl) | 2023.12 <br>or later | 24JUL2024 |
 | [Log File Scraper](./Log%20File%20Scraper/README.md) | Extract ERRORS and WARNINGS from one or more SAS log files and makes them available in a table | [Remco Gooijer](https://github.com/x7rtfgj4) | 2021.1.5 <br>or later | 08NOV2024 |
 | [Lookup](./Lookup/README.md) | Add column by performing lookup on other table (using data step hash object) | [Torben Juul Johansson](https://github.com/torbenjuul) | 2021.2.1 <br>or later | 21SEP2022 |
@@ -103,7 +103,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 28SEP2022 |
 | [SDG - Generate Synthetic Data through GANs](./SDG%20-%20Generate%20Synthetic%20Data%20through%20GANs/README.md) | Generate synthetic data using a trained GAN model | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.09 <br>or later | 04NOV2024 |
 | [SDG - Generate Synthetic Data through SMOTE](./SDG%20-%20Generate%20Synthetic%20Data%20through%20SMOTE/README.md) | Generate synthetic data based on an input table, using the Synthetic Minority Oversampling TEchnique (SMOTE). | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 02NOV2024 |
-| [SDG - - Train a Synthetic Data Generator through GANs](./SDG%20-%20Train%20a%20Synthetic%20Data%20Generator%20through%20GANs/README.md) | A collection of 3 steps which help you train, score and assess Synthetic Data models | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 04NOV2024 | 
+| [SDG - Train a Synthetic Data Generator through GANs](./SDG%20-%20Train%20a%20Synthetic%20Data%20Generator%20through%20GANs/README.md) | A collection of 3 steps which help you train, score and assess Synthetic Data models | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 04NOV2024 | 
 [Send SMTP Email](./Send%20SMTP%20Email/README.md) | Send Email message  | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2022.1.4 <br>or later | 03APR2023 |
 | [Send Teams Message](./Send%20Teams%20Message/README.md) | Send Microsoft Teams Messages to a Teams channel | [David Weik](https://github.com/Criptic) / [Tamara Fischer](https://github.com/ATFischer) | 2022.10 <br>or later | 14JUN2023 |
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 29SEP2022 |
