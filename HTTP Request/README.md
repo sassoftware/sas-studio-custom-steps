@@ -5,12 +5,14 @@
    2.1.   [HTTP Request tab](#httprequesttab-)<br>
    2.2.   [Input Options tab](#inputoptionstab-)<br>
    2.3.   [Output Options tab](#outputoptionstab-)<br>
-   2.4.  [Settings tab](#settingstab-)<br>
+   2.4.   [Batch tab](#batchtab-)<br>
+   2.5.   [Settings tab](#settingstab-)<br>
 3. [JSON structure field mapping for HTTP result](#fieldmapping-)
-4. [Requirements](#requirements-)
-5. [Usage](#usage-)<br>
+4. [Calling HTTP request in batch mode](#batchmode-)
+5. [Requirements](#requirements-)
+6. [Usage](#usage-)<br>
    5.1.  [Various usage examples](extras/README.md) 
-6. [Change Log](#changelog-)
+7. [Change Log](#changelog-)
 
 ## Description<a name="description-"></a>
 The HTTP Request step allows you to send HTTP/1.1 requests. The step is using PROC HTTP to execute the HTTP requests. 
@@ -39,7 +41,7 @@ At the HTTP Request tab you set general information for the http request.
 ### Input Options tab<a name="inputoptionstab-"></a> 
 At the Input Options tab you specify  input parameters for the HTTP request.
 
-   <img src="img/HTTPRequest-InputOptions-fl.jpg" width="568" height="545">
+   <img src="img/HTTPRequest-InputOptions-fl.jpg" width="492" height="400">
 
    | Section | UI Field | Comment|
    | --- | --- | --- |
@@ -53,7 +55,7 @@ At the Input Options tab you specify  input parameters for the HTTP request.
 ### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
-   <img src="img/HTTPRequest-OutputOptions-fl.jpg" width="637" height="1185">
+   <img src="img/HTTPRequest-OutputOptions-fl.jpg" width="616" height="1025">
 
 #### Output Body<a name="outputbody-"></a> 
 If the output format is json you can specify fields from the json structure to land in the output table.
@@ -81,7 +83,21 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
    | Header Mappings | Set the number of tags you want to map from the HTTP header result. |
    | Edit Line | Set the tag and macro variable name to map. The mapping format is: *Header Tag : Macro Variable Name* |
    | Tag name is case sensitive | Indicate to look for the tag in case sensitive mode. Default is *not case sensitive*. |
-   
+
+### Batch tab<a name="batchtab-"></a>
+At the Batch tab you define the json batch structure and set the number of records submitted in batch mode.
+
+   <img src="img/HTTPRequest-Batch-fl.jpg" width="488" height="376">
+
+> :memo: **Note:** Batch Mode requires that it is supported by the HTTP request and needs to be called in POST, PUT or PATCH mode.
+
+   | UI Field | Comment|
+   | --- | --- |
+   | Record group size | Set the number of records from the input table to be grouped together to submit them in one HTTP call.<br>***Note:*** When setting the number of grouped records, consider the record size as the overall payload size must not exceed 10MB. | 
+   | Repeated json Structure | The part of the json payload that holds information for one record. |
+   | Batch structure name | The name of the variable token for the json structure used in the payload (HTTP Request tab). The default variable token name is *batch_records*.
+
+
 ### Settings tab<a name="settingstab-"></a>
 At the Settings tab can you switch on/off hyperlinks in the UI.
 
@@ -110,11 +126,11 @@ Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
    | --- | --- |
    | Show hyperlinks in step | In the Step UI are hyper-links to deliver more information and help on some subjects. By default hyper-links in steps are disabled. The SAS Viya administrators can use SAS Environment Manager to enable this functionality and to specify the validation rules for links. |
    
-   You can use the below validation rules for the links used in this step:<br>
+   > :memo: **Note:** You can use the below validation rules for the links used in this step:<br>
    ```
    ^https?:\/\/(?:.+\.)?github\.com(?::\d+)?(?:\/.*)?||^https?:\/\/(?:.+\.)?developer\.sas\.com(?::\d+)?(?:\/.*)?
    ```
-For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm) and also blog [SAS Viya: Link Control for Custom Steps](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Link-Control-for-Custom-Steps/ta-p/919005) on how to set *Link Control* validation rules.
+> For more information see [SAS Studio documentation](https://go.documentation.sas.com/doc/en/webeditorcdc/v_047/webeditorsteps/n1mo7ndvgpomx3n1ir6sm9xzzny0.htm) and also blog [SAS Viya: Link Control for Custom Steps](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Link-Control-for-Custom-Steps/ta-p/919005) on how to set *Link Control* validation rules.
 
 ---
 
@@ -158,6 +174,51 @@ This will produce an output table with columns *zip* and *country* with values f
 
 ---
 
+## Calling HTTP request in batch mode<a name="batchmode-"></a>
+> :memo: **Note:** The HTTP request to be called needs to support batch mode calls! The json payload structure needs to have a repeat section.<br> 
+
+* The HTTP request needs to be called with method POST, PUT or PATCH.<br>
+* The *HTTP Request* step needs to have an input table.<br>
+* The payload needs to have a repeat structure for the batch records to be submitted.<br>
+
+### Prepare batch mode:<br>
+
+**Example:**<br>
+Assuming we have an input table with person information in each row. One column is named *lastname*. We want to submit several lastnames per HTTP PUT method call.<br>
+The payload structure looks like:
+```
+{
+   "names": ["name_1", "name_2", "name_3", ... "name_n"]
+}
+```
+
+At tab *HTTP Request* set *Method* to PUT and the Payload to:
+```
+{
+   "names" : [@lastname_group@]
+}
+```
+
+At tab *Batch* set field *Record group size* to 50 and *Repeated json structure* to:
+```
+"@lastname@"
+```
+Also set field *Batch structure name* to *lastname_group*<br>
+
+We group the *lastname* from several rows together to submit them in one call. This way, if we have 120 rows in the table and group 50 rows together, we need to call the HTTP request 3 times (50, 50, 20) instead of 120 times.<br>
+
+By putting @lastname@ (the table column name) into *Batch structure name* and setting *Record group size* to 50 we group the names from 50 rows together and assign them to batch structure token *lastname_group*:
+```
+lastname_group= "name_1", "name_2", "name_3", ... "name_50"
+```
+When setting the payload in tab *HTTP Request* we use the batch structure token *lastname_group* to add the batch data to the payload.
+
+The step is now prepared for batch mode. With all other settings in place we can run the step.
+
+See  [Batch Demo I](extras/BatchMode_I/README.md) and [Batch Demo II](extras/BatchMode_II/README.md) for more information.
+
+---
+
 ## Requirements <a name="requirements-"></a>
 * SAS Viya 2024.06 or later.
 * Python needs to be installed and configured to work with SAS Studio.
@@ -177,7 +238,7 @@ For more example using the HTTP Request Step see [here](extras/README.md)
 ---
 
 ## Change Log<a name="changelog-"></a> 
-Version 1.1 (17NOV2024)<br>
+Version 1.1 (21NOV2024)<br>
    * Added capability to submit batch requests
 
 Version 1.0.1 (17OCT2024)<br>

@@ -65,7 +65,7 @@ Use the following settings to recreate the above example in SAS Studio.
 	* Execute Demo Flow.
 
 ### Test Data <a name="testdata-"></a>
-Run this code in SAS Studio to create the input data from the demo.
+Run this code in SAS Studio to create the input data for the demo.
 ```
 data work.postcodes;
 	length po1-po03 $10;

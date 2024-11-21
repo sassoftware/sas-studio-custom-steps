@@ -9,5 +9,5 @@ In the sub-folders you find examples how to use the HTTP Request step in deffere
 3. [Enrich Data Flow using POST](../extras/EnrichDataFlow_POST)
 4. [Use HTTP result to macro and output data to SAS Library](../extras/OutputToSASLib)
 5. [Update Global Variable in SAS Intelligent Decisioning using SAS Viya Services](../extras/CallInternalViyaAPI)
-
-
+6. [Call HTTP request in Batch mode I](../extras/BatchMode_I)
+6. [Call HTTP request in Batch mode II](../extras/BatchMode_II)
