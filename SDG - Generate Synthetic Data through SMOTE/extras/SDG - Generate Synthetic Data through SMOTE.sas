@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Synthetic Data Generation (SDG) - Generate Synthetic Data through SMOTE
 
-   v 1.1 (02NOV2024)
+   v 1.2 (11NOV2024)
 
    This program generates synthetic data using the Synthetic Minority Oversampling TEchnique
    and is meant for use within a SAS Studio Custom Step. Please modify requisite macro variables
@@ -46,6 +46,7 @@
 %let OUTPUTTABLE_NAME_BASE=HMEQ_SYNTH;
 %let SEEDNUMBER=123;
 %let extrapolationFactor=0;
+%let sampling_percent=30;
 
 */;
 
@@ -428,11 +429,83 @@
          run;
       %end;
    %end;
+/*-----------------------------------------------------------------------------------------*
+   Check if provenance flag name has been provided otherwise code as default
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      %if %sysfunc(compress("&prov_flag_name."))="" %then %do;
+         %put NOTE: Value not provided for provenance variable.  Using default.;
+         data _null_;
+            call symput("prov_flag_name","Synthetic_Data_Provenance");
+         run;
+      %end;
+   %end;
+/*-----------------------------------------------------------------------------------------*
+   Check if assessment table (optional) has been provided otherwise code as default
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      %if &sampling_percent. > 0 %then %do;
+         %put NOTE: Assessment table value is - &assessmentTable. ;
+         %if %sysevalf(%superq(assessmentTable)=, boolean)  %then %do;
+            %put ERROR: An assessment table has not been attached. Please attach the same.;
+            data _null_;
+               call symputx("_smt_error_flag",1);
+               call symput("_smt_error_desc","An assessment table has not been attached. Please attach the same.");
+            run;
+         %end;
+         %else %if "%sysfunc(substr(&assessmentTable.,1,9))"="WORK._flw" %then %do;
+            %put NOTE: Value not provided for assessment table.  Using default.;
+            data _null_;
+               call symput("assessmentTable","PUBLIC.SMOTE_ASSESSMENT");
+               call symput("assessmentTable_lib","PUBLIC");
+               call symput("assessmentTable_name_base","SMOTE_ASSESSMENT");
+            run;
+         %end;
+         %else %if %sysfunc(compress("&assessmentTable."))="" %then %do;
+            %put NOTE: Value not provided for assessment table.  Using default.;
+            data _null_;
+               call symput("assessmentTable","PUBLIC.SMOTE_ASSESSMENT");
+               call symput("assessmentTable_lib","PUBLIC");
+               call symput("assessmentTable_name_base","SMOTE_ASSESSMENT");
+            run;
+         %end;
+      %end;
+   %end;
+/*-----------------------------------------------------------------------------------------*
+   Test data set created based on percent
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      %if &sampling_percent.=0 %then %do;
+         data &outputTable_lib..__temp_smote;
+            set &inputTable.;
+            _PartInd_ = 0;
+         run;
+      %end;
+      %else %do;
+         proc partition data=&inputTable. partind samppct= &sampling_percent. seed=10 ;
+            output out=&outputTable_lib..__temp_smote copyvars=(_all_);
+            display 'SRSFreq';
+         run;
+         data &outputTable_lib..__temp_smote &outputTable_lib..__assess_orig;
+            set &outputTable_lib..__temp_smote;
+            if _PartInd_=0 then output &outputTable_lib..__temp_smote;
+            else output &outputTable_lib..__assess_orig;
+         run;
+/*-----------------------------------------------------------------------------------------*
+      Add a provenance flag
+*------------------------------------------------------------------------------------------*/
+         data &outputTable_lib..__assess_orig;
+            length &prov_flag_name. $9.;
+            set &outputTable_lib..__assess_orig;
+            &prov_flag_name. = "Original";
+         run;
 
+      %end;
+
+   %end;
 /*-----------------------------------------------------------------------------------------*
    Run SMOTE action
 *------------------------------------------------------------------------------------------*/
-
    %if &_smt_error_flag. = 0 %then %do;
       proc cas;        
          numK                      = symget("numK");
@@ -454,7 +527,8 @@
          else class_to_augment = classToAugment;
 
          smote.smoteSample result=r/
-            table={name=inputTableName, caslib=inputTableCaslib},
+            table={name="__temp_smote", caslib=outputTableCaslib, where='_PartInd_=0'},
+/*             table={name=inputTableName, caslib=inputTableCaslib}, */
             k = numK,
             inputs=${&blankSeparatedInputVars.},
             &nominalString.
@@ -469,8 +543,60 @@
          print r;
       run;
       quit;
+   %end;
+/*-----------------------------------------------------------------------------------------*
+      Add a provenance flag
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      data &outputTable.;
+         length &prov_flag_name. $9.;
+         set &outputTable.;
+         &prov_flag_name. = "Synthetic";
+      run;
 
    %end;
+
+/*-----------------------------------------------------------------------------------------*
+      Take a sample from synthetic data and merge with original data
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      proc sql noprint;
+         select count(*) into: synth_records from &outputTable.;
+         select count(*) into: orig_records from &inputTable.;
+      quit;
+
+      %put NOTE: Number of synthetic records - &synth_records.;
+      %put NOTE: Number of original records - &orig_records.;
+      %put NOTE: Sampling Percent provided - &sampling_percent.;
+      
+      data _null_;
+         call symputx("synth_sampling_percent",100*((&sampling_percent./100) * &orig_records. )/&synth_records.);
+      run;
+      %put NOTE: Synthetic Sampling Percent  - &synth_sampling_percent.;
+
+      %if &sampling_percent.=0 %then %do;
+/*-----------------------------------------------------------------------------------------*
+   Block deliberately left empty for a future consideration
+*------------------------------------------------------------------------------------------*/
+      %end;
+      %else %do;
+         proc partition data=&outputTable. partind samppct= &synth_sampling_percent. seed=10 ;
+            output out=&outputTable_lib..__assess_synth copyvars=(_all_);
+            display 'SRSFreq';
+         run;
+         data &assessmentTable.;
+            set &outputTable_lib..__assess_orig &outputTable_lib..__assess_synth (where=(_PartInd_=1));
+            keep &prov_flag_name. &blankSeparatedInputVars.;
+         run;
+         proc datasets lib=&outputTable_lib.;
+            delete __assess_orig __assess_synth  ;
+         quit;
+      %end;
+      proc datasets lib=&outputTable_lib.;
+         delete __temp_smote;
+      quit;
+   %end;
+
 
 %mend _smt_execution_code;   
 
@@ -526,6 +652,10 @@
 
 %if %symexist(casTableExists) %then %do;
    %symdel casTableExists;
+%end;
+
+%if %symexist(prov_flag_name) %then %do;
+   %symdel prov_flag_name;
 %end;
 
 %if %symexist(_smt_run_trigger) %then %do;

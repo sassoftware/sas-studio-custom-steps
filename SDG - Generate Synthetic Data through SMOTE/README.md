@@ -64,6 +64,8 @@ This video (click on below image to play) provides a basic idea:
 
 2. **Select a seed** (numeric field, optional): specify a seed number to establish (but not completely guarantee) some level of reproducability with respect to results.
 3. **Select extrapolation factor**: specify a number (double) to use as a standard deviation in order to perturb (add noise or randomness) the input data boundaries. 
+4. Name for synthetic data provenance variable (optional, default provided): insert a value only if you want to give a special name to a flag that indicates this data is synthetic.  Otherwise, a default name of Synthetic_Data_Provenance will be used instead.
+5. Provide sampling percentage for assessment (numeric stepper, default is 0):  Enter a value between 0 and 100 to sample a test dataset before running SMOTE.  Note that the test dataset will NOT be used to generate data.  The test dataset will be appended with an equal number of observations from the synthetic dataset (along with the provenance flag described in #4) and can be used for assessment purposes.
 
 ----
 ### Output Specification
@@ -72,6 +74,8 @@ This video (click on below image to play) provides a basic idea:
 1. **Number of synthetic observations** (numeric field): specify the number of synthetic observations you would like in the output table.
 
 2. **Output table** (output port, option): attach a CAS table to the output port to hold results.  
+
+3. Assessment table (output port, optional): Attach a CAS table to the second output port (assessmentTable) of this step in case you select a sampling percentage (refer Configuration tab, pt #5) greater than 0.  A default value of PUBLIC.SMOTE_ASSESSMENT is assigned in case you do not specify a table.
 
 ----
 ## Run-time Control
@@ -139,6 +143,8 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
+* Version 1.2 (11NOV2024) 
+    * Add provenance flag and sampling for assessment
 * Version 1.1 (02NOV2024) 
     * Version for GitHub release
 * Version 1.0 (10APR2024) 
