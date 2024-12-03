@@ -48,5 +48,5 @@ Tested on Viya 4, Stable 2024.05
 - Rik de Ruiter (Rik.deRuiter@sas.com)
 
 ## Change Log
-- Version 1.0 (04OCT2024)
+- Version 1.0 (03DEC2024)
     - Initial version
