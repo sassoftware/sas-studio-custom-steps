@@ -32,10 +32,16 @@ For more information about the different settings please refer to the SAS docume
 
 ## Documentation
 - [SAS Document Analysis documentation](https://go.documentation.sas.com/doc/en/aaimdacdc/default/aaimdawlcm/home.htm)
+- [Custom step documentation](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/OCR%20-%20Document%20Analysis)
 
 ## Change Log
 
 ### OCR - Document Analysis - Execute Batch OCR Process
+
+**Version 1.2 (21NOV2024)** 
+
+* Added option to enable syncronous processing
+* Added option to suppress SSL check
 
 **Version 1.1 (09OCT2024)** 
 
@@ -46,6 +52,11 @@ For more information about the different settings please refer to the SAS docume
 * Initial version
 
 ### OCR - Document Analysis - Produce Usage Report Output
+
+**Version 1.2 (21NOV2024)** 
+
+* Added option to enable syncronous processing
+* Added option to suppress SSL check
 
 **Version 1.1 (29OCT2024)** 
 
