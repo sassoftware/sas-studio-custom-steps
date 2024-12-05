@@ -32,6 +32,7 @@ For more information about the different settings please refer to the SAS docume
 
 ## Documentation
 - [SAS Document Analysis documentation](https://go.documentation.sas.com/doc/en/aaimdacdc/default/aaimdawlcm/home.htm)
+- [Custom step documentation](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/OCR%20-%20Document%20Analysis)
 
 ## Change Log
 
@@ -39,8 +40,8 @@ For more information about the different settings please refer to the SAS docume
 
 **Version 1.2 (21NOV2024)** 
 
-* Added option to enable syncronous processing (useful when adding this as an upstream step in a flow and downstream steps need to wait for this step to finish)
-* Added option to suppress SSL check (provides the ability to avoid SSL cert errors, see: https://go.documentation.sas.com/doc/en/pgmsascdc/v_057/proc/n154smey890g2xn1l6wljfyjcemh.htm)
+* Added option to enable syncronous processing
+* Added option to suppress SSL check
 
 **Version 1.1 (09OCT2024)** 
 
@@ -54,8 +55,8 @@ For more information about the different settings please refer to the SAS docume
 
 **Version 1.2 (21NOV2024)** 
 
-* Added option to enable syncronous processing (useful when adding this as an upstream step in a flow and downstream steps need to wait for this step to finish)
-* Added option to suppress SSL check (provides the ability to avoid SSL cert errors, see: https://go.documentation.sas.com/doc/en/pgmsascdc/v_057/proc/n154smey890g2xn1l6wljfyjcemh.htm)
+* Added option to enable syncronous processing
+* Added option to suppress SSL check
 
 **Version 1.1 (29OCT2024)** 
 
