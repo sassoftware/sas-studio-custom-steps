@@ -12,6 +12,7 @@ Use the HTTP Request Step to call Viya REST API to update the global variable in
 ---
 ## Demo Recreate
 Use the following settings to recreate the above example in SAS Studio.
+
 1. Run code section [Test Data](#testdata-) to create a Global Variable in SAS Intelligent Decisioning.
 2. Create new flow job in SAS Studio.
 3. Step ***Get Global Variable Id***
