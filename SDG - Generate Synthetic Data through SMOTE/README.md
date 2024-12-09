@@ -39,6 +39,20 @@ This video (click on below image to play) provides a basic idea:
    3. [hnswlib](https://pypi.org/project/hnswlib/)
    4. [protobuf](https://pypi.org/project/protobuf/)
 
+### (OPTIONAL) Prerequisites for Singling Out Risk calculation
+
+If you want to measure singling out risk (provided as an option in this step), note the following additional prerequisites:
+
+1. SAS compute session should be configured to access a Python runtime of version of > 3.7 and < 3.12.
+
+2. A Python package - [anonymeter](https://pypi.org/project/anonymeter/) - should be installed in the above runtime.  Make note of details about anonymeter at https://pypi.org/project/anonymeter/
+
+3. As a further dependency on above, anonymeter requires NumPy between version 1.2 and less than 1.7 (specifically, "numpy >=1.22, <1.27", # limited by Numba support)
+
+Note terms of anonymeter license here: https://github.com/statice/anonymeter/blob/main/LICENSE.md
+
+Note citation in [Privacy Risk](#privacy-risk) section below.
+
 -----
 ## Parameters
 ----
@@ -55,6 +69,36 @@ This video (click on below image to play) provides a basic idea:
 5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column.  Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process.  Your class column is required to be in the inputs column list.
 
 6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment.  The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.
+----
+### Privacy Risk
+Synthetic data requires assurances on data privacy.  One aspect of privacy risk is singling out risk, which evolved alongside General Data Protection Regulation (GDPR).  **This is an optional step.**  If you wish to measure singling out risk,  enter the parameters below.
+
+1. **Measure Singling Out Risk** (check box, default not checked):  select this option if you want to measure singling out risk.  Be aware of the Python dependencies (in Prerequisites section) and the fact that this involves a longer runtime in addition to the generation operation.
+
+2. **Evaluation mode** (drop-down list): select either univariate or multivariate to define the type of attack query to be tested.
+
+3. **Confidence interval** (percentage, numeric stepper): select a number from 90 to 99 to define the confidence level while providing privacy risk estimates.
+
+4.  **Number of attacks** (numeric stepper, default 100) : enter number of attacks (queries) to simulate.
+
+5. **Singling Out Risk Results table** (output port): attach a CAS table to the so_results_tbl output port to hold results.
+
+6. **Singling Out Risk Queries table** (output port): attach a CAS table to the so_queries_tbl output port to hold results.
+
+#### Citation for anonymeter
+
+As we make use of an open-source package, anonymeter, to perform these calculations, we note the following citation: 
+
+"A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+
+@misc{anonymeter,
+  doi = {https://doi.org/10.56553/popets-2023-0055},
+  url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},
+  journal = {Proceedings of Privacy Enhancing Technologies Symposium},
+  year = {2023},
+  author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},
+  title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},
+}
 
 
 ----
@@ -118,6 +162,7 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 
 3. PyPi page for [hnswlib](https://pypi.org/project/hnswlib/)
 4. PyPi page for [protobuf](https://pypi.org/project/protobuf/)
+5. PyPi page for [anonymeter](https://pypi.org/project/anonymeter/)
 
 ----
 ## SAS Program
@@ -133,6 +178,7 @@ Refer [here](./extras/SDG_SMOTE_Synthetic_Data.sas) for the SAS program used by 
 ## Created/contact:  
 
 - Sundaresh Sankaran (sundaresh.sankaran@sas.com)
+- Josiah Chua (josiah.chua@sas.com)
 
 Acknowledgements to others for their help on details, testing or exploring the area: 
 - David Olaleye (david.olaleye@sas.com)
@@ -143,6 +189,8 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
+* Version 1.3 (09DEC2024)
+    * Add calculation for privacy risk (singling out risk)
 * Version 1.2 (11NOV2024) 
     * Add provenance flag and sampling for assessment
 * Version 1.1 (02NOV2024) 
