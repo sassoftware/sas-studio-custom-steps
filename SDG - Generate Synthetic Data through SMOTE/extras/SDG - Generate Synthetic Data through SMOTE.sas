@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Synthetic Data Generation (SDG) - Generate Synthetic Data through SMOTE
 
-   v 1.2 (11NOV2024)
+   v 1.3 (09DEC2024)
 
    This program generates synthetic data using the Synthetic Minority Oversampling TEchnique
    and is meant for use within a SAS Studio Custom Step. Please modify requisite macro variables
@@ -55,6 +55,162 @@
 *------------------------------------------------------------------------------------------*/
 
 
+/*-----------------------------------------------------------------------------------------*
+   Python Block Definition
+*------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------*
+   The following block of code has been created for the purpose of allowing proc python 
+   to execute within a macro. Execution within a macro allows for other checks to be carried 
+   out through SAS prior to handing off to the Python step.
+
+   In this example, a temporary file is created containing the requisite Python commands, which 
+   are then executed through infile reference.
+
+   Note that Python code is pasted as-is and may be out of line with the SAS indentation followed.
+
+   This Python block comes into operation only upon the selection of Privacy Risk (Singling
+   Out Risk) metrics.
+
+*------------------------------------------------------------------------------------------*/
+filename smtcode temp;
+
+data _null_;
+
+   length line $32767;               * max SAS character size ;
+   infile datalines4 truncover pad;
+   input ;   
+   file smtcode;
+   line = strip(_infile_);           * line without leading and trailing blanks ;
+   l1 = length(trimn(_infile_));     * length of line without trailing blanks ;
+   l2 = length(line);                * length of line without leading and trailing blanks ;
+   first_position=l1-l2+1;           * position where the line should start (alignment) ;
+   if (line eq ' ') then put @1;     * empty line ;
+   else put @first_position line;    * line without leading and trailing blanks correctly aligned ;
+
+   datalines4;
+# Imports
+_smt_error_flag          = int(SAS.symget("_smt_error_flag"))
+_smt_error_desc          = SAS.symget("_smt_error_desc")
+
+
+citation = """
+
+  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+
+  @misc{anonymeter,
+    doi = {https://doi.org/10.56553/popets-2023-0055},
+    url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},
+    journal = {Proceedings of Privacy Enhancing Technologies Symposium},
+    year = {2023},
+    author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},
+    title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},
+  }
+
+
+"""
+
+
+try:
+   import os
+   import swat
+   import json 
+   from anonymeter.evaluators import SinglingOutEvaluator
+except ImportError as ie:
+   _smt_error_flag = 1
+   _smt_error_desc = ie
+   SAS.symput("_smt_error_flag",_smt_error_flag)
+   SAS.symput("_smt_error_desc",_smt_error_desc)
+   SAS.logMessage(_smt_error_desc,"error")
+
+if _smt_error_flag ==0:
+   # Obtain values from UI & SAS macro variables
+   evaluation_mode          = SAS.symget('evaluation_mode')
+   conf_interval            = float(SAS.symget('conf_interval'))
+   s_o_attacks              = int(SAS.symget('s_o_attacks'))
+   singling_out_results_tbl = SAS.symget('singling_out_results_tbl')
+   singling_out_queries_tbl = SAS.symget('singling_out_queries_tbl')
+   cas_session_exists       = SAS.symget('casSessionExists')
+   assessment_table_name    = SAS.symget('assessmentTable_name_base')
+   assessment_table_caslib  = SAS.symget('assessmentCaslib')
+   input_caslib             = SAS.symget('inputCaslib')
+   input_table_name         = SAS.symget('inputTable_name_base')
+   so_queries_tbl           = SAS.symget('so_queries_tbl_name_base')
+   so_results_tbl           = SAS.symget('so_results_tbl_name_base')
+   so_queries_caslib        = SAS.symget('so_queries_caslib')
+   so_results_caslib        = SAS.symget('so_results_caslib')
+
+   # Retrieve values for SAS options cashost and casport, these are needed by SWAT connection 
+   cas_host_name = SAS.sasfnc('getoption','cashost')
+   cas_host_port = SAS.sasfnc('getoption','casport')
+
+   #  Add certificate location to operating system list of trusted certs
+   os.environ['CAS_CLIENT_SSL_CA_LIST'] = os.environ['SSLCALISTLOC']
+                                                                                                                  
+                                                               
+   #  Connect to CAS
+   if cas_session_exists == '1':
+      cas_session_uuid = SAS.symget('casSessionUUID')
+      SAS.logMessage(f"CAS connection exists. Session UUID is {cas_session_uuid}")   
+      conn = swat.CAS(hostname = cas_host_name, port = cas_host_port, password = os.environ['SAS_SERVICES_TOKEN'], session = cas_session_uuid)
+      if conn:
+         SAS.logMessage('SWAT connection established.')
+   else:
+      SAS.logMessage('ERROR: No active CAS session. Connect to a CAS session in upstream step in the flow.')
+      _smt_error_flag = 1
+      _smt_error_desc = "ERROR: No active CAS session. Connect to a CAS session in upstream step in the flow."
+
+   df_org = conn.CASTable(name=input_table_name, caslib=input_caslib).to_frame()
+   df_syn = conn.CASTable(name=assessment_table_name, caslib=assessment_table_caslib, where="Synthetic_Data_Provenance='Synthetic'").to_frame()
+   df_con = conn.CASTable(name=assessment_table_name, caslib=assessment_table_caslib, where="Synthetic_Data_Provenance='Original'").to_frame()
+
+
+   evaluator = SinglingOutEvaluator(ori=df_org, syn=df_syn, control=df_con, n_attacks=s_o_attacks)
+
+   try:
+      evaluator.evaluate(mode=evaluation_mode)
+      risk = evaluator.risk(confidence_level=conf_interval)
+      print(risk)
+
+   except RuntimeError as ex: 
+      _smt_error_flag = 1
+      _smt_error_desc = f"Singling out evaluation failed with {ex}. Please re-run this operation. For more stable results increase `n_attacks`. Note that this will make the evaluation slower."
+      SAS.symput("_smt_error_flag",1)
+      SAS.symput("_smt_error_desc",_smt_error_desc)
+
+# Create a summary (title section will be modified in future version based on adding more metrics)
+# SAS.submit("title 'Singling Out Risk: Summary'; run;")
+
+if _smt_error_flag == 0:
+    summary = f"Singling out privacy risk has been found to be {risk.value} between a confidence interval of {risk.ci[0]} and {risk.ci[1]}"
+    query_status = f"{len(evaluator.queries())} queries were successful attacks."
+    # Print to SAS results window
+    SAS.submit(f"ods text = 'Singling Out Risk: Summary';")
+    SAS.submit(f"ods text = '{summary}';")
+    SAS.submit(f"ods text = '{query_status}';")
+    SAS.submit(f"ods text = '{citation}';")
+    SAS.logMessage(citation)
+    citation_col = []
+    for a in range(0,len(evaluator.queries())):
+        citation_col.append(citation)
+    # Define table for results and queries
+    so_results_table = conn.CASTable(name=so_results_tbl, caslib=so_results_caslib, replace=True)
+    so_queries_table = conn.CASTable(name=so_queries_tbl, caslib=so_queries_caslib, replace=True)
+    # Create a Results dict
+    so_res = evaluator.results()
+    res_dict = {"Citation":[citation], "Privacy_Risk": [risk.value], "Privacy_Risk_Conf_Interval_Lower": [risk.ci[0]],"Privacy_Risk_Conf_Interval_Upper": [risk.ci[1]],"Attack_Rate":[so_res.attack_rate.value],"Attack_Rate_Error":[so_res.attack_rate.error], "Baseline_Rate":[so_res.baseline_rate.value],"Baseline_Rate_Error":[so_res.baseline_rate.error], "Control_Rate":[so_res.control_rate.value],"Control_Rate_Error":[so_res.control_rate.error], "N_Attacks":[so_res.n_attacks],"N_Success":[so_res.n_success], "N_Baseline": [so_res.n_baseline],"N_Control":[so_res.n_control] }
+    # Load Results to a CAS table
+    so_results_table.from_dict(data=res_dict, connection=conn, casout=so_results_table)
+    SAS.logMessage("Results table loaded to CAS.")
+    # Load Queries to a CAS table
+    so_queries_table.from_dict(data={"Query":evaluator.queries(), "Citation": citation_col}, connection=conn, casout=so_queries_table)
+    SAS.logMessage("Queries table loaded to CAS.")
+
+
+;;;;
+   
+
+run;
 /*-----------------------------------------------------------------------------------------*
    MACROS
 *------------------------------------------------------------------------------------------*/
@@ -129,7 +285,7 @@
 *------------------------------------------------------------------------------------------*/
 
 %macro _env_cas_checkSession(errorFlagName, errorFlagDesc);
-
+    %global casSessionExists;
     %if %sysfunc(symexist(_current_uuid_)) %then %do;
        %symdel _current_uuid_;
     %end;
@@ -298,7 +454,76 @@
    %end;
     
 %mend _cas_table_exists;
-   
+
+/*-----------------------------------------------------------------------------------------*
+   Macro to calculate singling out risk
+
+   Input: invoked with current state of macro variables                     
+   Output (implicit):
+          1. Singling Out Risk Results table
+          2. Singling Out Risk Queries table
+
+  As the calculation of Singling Out Risk is based on an open-source Python package (anonymeter),
+  we note the following citation: 
+
+  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+
+  @misc{anonymeter,
+    doi = {https://doi.org/10.56553/popets-2023-0055},
+    url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},
+    journal = {Proceedings of Privacy Enhancing Technologies Symposium},
+    year = {2023},
+    author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},
+    title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},
+  }
+
+
+*------------------------------------------------------------------------------------------*/ 
+
+%macro _smt_singling_out_risk;
+
+   %put NOTE: Singling out risk macro;
+/*-----------------------------------------------------------------------------------------*
+   Check Results table libref to ensure it points to a valid caslib.
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      %global so_results_caslib;
+      %_usr_getNameCaslib(&so_results_tbl_lib.);
+      %let so_results_caslib=&_usr_nameCaslib.;
+      %put NOTE: &so_results_caslib. is the caslib for the Singling Out Risk results table.;
+      %let _usr_nameCaslib=;
+      %if "&so_results_caslib." = "" %then %do;
+         data _null_;
+            call symputx("_smt_error_flag",1);
+            call symput("_smt_error_desc","ERROR: Singling Out Results table caslib is blank. Check if table is a valid CAS table.");
+         run;
+         %put ERROR: Singling Out Results table caslib is blank. Check if table is a valid CAS table. ;
+      %end;
+   %end;
+/*-----------------------------------------------------------------------------------------*
+   Check Queries table libref to ensure it points to a valid caslib.
+*------------------------------------------------------------------------------------------*/
+   %if &_smt_error_flag. = 0 %then %do;
+      %global so_queries_caslib;
+      %_usr_getNameCaslib(&so_queries_tbl_lib.);
+      %let so_queries_caslib=&_usr_nameCaslib.;
+      %put NOTE: &so_queries_caslib. is the caslib for the Singling Out Risk queries table.;
+      %let _usr_nameCaslib=;
+      %if "&so_queries_caslib." = "" %then %do;
+         data _null_;
+            call symputx("_smt_error_flag",1);
+            call symput("_smt_error_desc","ERROR: Singling Out Queries table caslib is blank. Check if table is a valid CAS table.");
+         run;
+         %put ERROR: Singling Out Queries table caslib is blank. Check if table is a valid CAS table. ;
+      %end;
+   %end;
+   %if &_smt_error_flag. = 0 %then %do;
+      proc python infile=smtcode;
+      quit;
+   %end;
+
+
+%mend _smt_singling_out_risk;
 
 /*-----------------------------------------------------------------------------------------*
    EXECUTION CODE MACRO 
@@ -313,6 +538,17 @@
 *------------------------------------------------------------------------------------------*/
 
    %_create_error_flag(_smt_error_flag, _smt_error_desc);
+
+/*-----------------------------------------------------------------------------------------*
+   Account for edge cases where singling out risk has been requested even without a sample. 
+*------------------------------------------------------------------------------------------*/
+   data _null_;
+      call symputx("singling_out_risk",min(1, &singling_out_risk. * &sampling_percent.));
+   run;
+
+   %if &singling_out_risk.=0 %then %do;
+      %put NOTE: Privacy risk assessment will not be carried out because a sample has not been specified.;
+   %end;
 
 /*-----------------------------------------------------------------------------------------*
    Check if an active CAS session exists. 
@@ -382,17 +618,38 @@
    %end;
 
 /*-----------------------------------------------------------------------------------------*
+   Check Assessment table libref to ensure it points to a valid caslib.
+*------------------------------------------------------------------------------------------*/
+
+   %if &_smt_error_flag. = 0 %then %do;
+
+      %global assessmentCaslib;
+      %_usr_getNameCaslib(&outputTable_lib.);
+      %let assessmentCaslib=&_usr_nameCaslib.;
+      %put NOTE: &assessmentCaslib. is the caslib for the assessment table.;
+      %let _usr_nameCaslib=;
+
+      %if "&assessmentCaslib." = "" %then %do;
+         data _null_;
+            call symputx("_smt_error_flag",1);
+            call symput("_smt_error_desc","ERROR: Assessment table caslib is blank. Check if table is a valid CAS table.");
+         run;
+         %put ERROR: Assessment table caslib is blank. Check if table is a valid CAS table. ;
+      %end;
+
+   %end;
+
+
+/*-----------------------------------------------------------------------------------------*
    Obtain list of input & nominal variables and store them in macro variables.
 *------------------------------------------------------------------------------------------*/
 
    %if &_smt_error_flag. = 0 %then %do;
       %let blankSeparatedInputVars = %_flw_get_column_list(_flw_prefix=inputVars);
       %let blankSeparatedNominalVars = %_flw_get_column_list(_flw_prefix=nominalVars);
+      %put NOTE: Input variables selected - &blankSeparatedInputVars.;
+      %put NOTE: Nominal variables selected - &blankSeparatedNominalVars.;
    %end;
-
-   %put NOTE: Input variables selected - &blankSeparatedInputVars.;
-   %put NOTE: Nominal variables selected - &blankSeparatedNominalVars.;
-
 
 /*-----------------------------------------------------------------------------------------*
    Create a program string based on selection of nominal variables.
@@ -468,6 +725,25 @@
                call symput("assessmentTable_lib","PUBLIC");
                call symput("assessmentTable_name_base","SMOTE_ASSESSMENT");
             run;
+         %end;
+         %else %do;
+/*-----------------------------------------------------------------------------------------*
+   Check Assessment table libref to ensure it points to a valid caslib.
+*------------------------------------------------------------------------------------------*/
+            %if &_smt_error_flag. = 0 %then %do;
+               %global assessmentCaslib;
+               %_usr_getNameCaslib(&outputTable_lib.);
+               %let assessmentCaslib=&_usr_nameCaslib.;
+               %put NOTE: &assessmentCaslib. is the caslib for the assessment table.;
+               %let _usr_nameCaslib=;
+               %if "&assessmentCaslib." = "" %then %do;
+                  data _null_;
+                     call symputx("_smt_error_flag",1);
+                     call symput("_smt_error_desc","ERROR: Assessment table caslib is blank. Check if table is a valid CAS table.");
+                  run;
+                  %put ERROR: Assessment table caslib is blank. Check if table is a valid CAS table. ;
+               %end;
+            %end;
          %end;
       %end;
    %end;
@@ -588,11 +864,20 @@
             set &outputTable_lib..__assess_orig &outputTable_lib..__assess_synth (where=(_PartInd_=1));
             keep &prov_flag_name. &blankSeparatedInputVars.;
          run;
-         proc datasets lib=&outputTable_lib.;
+         proc datasets lib=&outputTable_lib. nolist nodetails;
             delete __assess_orig __assess_synth  ;
          quit;
+/*-----------------------------------------------------------------------------------------*
+   Check and address singling out risk
+*------------------------------------------------------------------------------------------*/
+         %if &singling_out_risk.=1 %then %do;
+
+            %_smt_singling_out_risk;
+
+         %end;
+
       %end;
-      proc datasets lib=&outputTable_lib.;
+      proc datasets lib=&outputTable_lib. nolist nodetails;
          delete __temp_smote;
       quit;
    %end;
@@ -616,6 +901,8 @@
 /*-----------------------------------------------------------------------------------------*
    Execute 
 *------------------------------------------------------------------------------------------*/
+
+
 
 %if &_smt_run_trigger. = 1 %then %do;
 
@@ -650,6 +937,18 @@
    %symdel outputCaslib;
 %end;
 
+%if %symexist(assessmentCaslib) %then %do;
+   %symdel assessmentCaslib;
+%end;
+
+%if %symexist(so_results_caslib) %then %do;
+   %symdel so_results_caslib;
+%end;
+
+%if %symexist(so_queries_caslib) %then %do;
+   %symdel so_queries_caslib;
+%end;
+
 %if %symexist(casTableExists) %then %do;
    %symdel casTableExists;
 %end;
@@ -670,6 +969,10 @@
    %symdel _smt_error_desc;
 %end;
 
+%if %symexist(casSessionExists) %then %do;
+   %symdel casSessionExists;
+%end;
+
 %sysmacdelete _create_error_flag;
 %sysmacdelete _create_runtime_trigger;
 %sysmacdelete _env_cas_checkSession;
@@ -677,3 +980,6 @@
 %sysmacdelete _sas_or_cas;
 %sysmacdelete _cas_table_exists;
 %sysmacdelete _smt_execution_code;
+%sysmacdelete _smt_singling_out_risk;
+
+filename smtcode clear;
