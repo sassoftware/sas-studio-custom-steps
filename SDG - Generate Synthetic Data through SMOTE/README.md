@@ -89,8 +89,11 @@ Synthetic data requires assurances on data privacy.  One aspect of privacy risk 
 
 As we make use of an open-source package, anonymeter, to perform these calculations, we note the following citation: 
 
-"A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+"A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. 
 
+This bibtex entry refers to the paper:
+
+```
 @misc{anonymeter,
   doi = {https://doi.org/10.56553/popets-2023-0055},
   url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},
@@ -99,6 +102,7 @@ As we make use of an open-source package, anonymeter, to perform these calculati
   author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},
   title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},
 }
+```
 
 
 ----
@@ -189,7 +193,7 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
-* Version 1.3 (09DEC2024)
+* Version 1.3.1 (10DEC2024)
     * Add calculation for privacy risk (singling out risk)
 * Version 1.2 (11NOV2024) 
     * Add provenance flag and sampling for assessment

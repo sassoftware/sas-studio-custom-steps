@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Synthetic Data Generation (SDG) - Generate Synthetic Data through SMOTE
 
-   v 1.3 (09DEC2024)
+   v 1.3.1 (10DEC2024)
 
    This program generates synthetic data using the Synthetic Minority Oversampling TEchnique
    and is meant for use within a SAS Studio Custom Step. Please modify requisite macro variables
@@ -96,16 +96,9 @@ _smt_error_desc          = SAS.symget("_smt_error_desc")
 
 citation = """
 
-  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+   Calculated using anonymeter (https://pypi.org/project/anonymeter/)
 
-  @misc{anonymeter,
-    doi = {https://doi.org/10.56553/popets-2023-0055},
-    url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},
-    journal = {Proceedings of Privacy Enhancing Technologies Symposium},
-    year = {2023},
-    author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},
-    title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},
-  }
+  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. 
 
 
 """
@@ -466,7 +459,9 @@ run;
   As the calculation of Singling Out Risk is based on an open-source Python package (anonymeter),
   we note the following citation: 
 
-  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. This bibtex entry can be used to refer to the paper:
+  "A Unified Framework for Quantifying Privacy Risk in Synthetic Data", M. Giomi et al, PoPETS 2023. 
+  
+   This bibtex entry can be used to refer to the paper:
 
   @misc{anonymeter,
     doi = {https://doi.org/10.56553/popets-2023-0055},
