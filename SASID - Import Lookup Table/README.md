@@ -2,7 +2,7 @@
 
 ## Description
 
-The "SASID - Import lookup table" custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning from input data. 
+The **SASID - Import lookup table** custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning from input data. 
 
 ## User Interface
 
