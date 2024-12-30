@@ -20,7 +20,7 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
    * Define a location on the _sas content_ for your lookup table (required).
 		--> the location path can be browsed or defined by a string or a macro variable. 
 		
-   | ![](img/_sasid_ilt_metadata.png)</kbd>
+   <kbd>![](img/_sasid_ilt_metadata.png)</kbd>
 
 ### Additional Parameters tab ###
 
