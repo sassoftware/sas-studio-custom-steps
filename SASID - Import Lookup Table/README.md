@@ -11,7 +11,7 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
    * From input table, select a column for the lookup table keys (required).
    * From input table, select a column for the lookup table values (required).
    
-   |![](img/_sasid_ilt_data.png)|
+   <kbd>![](img/_sasid_ilt_data.png)</kbd>
 
 ### Metadata tab ###
 
@@ -20,13 +20,13 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
    * Define a location on the _sas content_ for your lookup table (required).
 		--> the location path can be browsed or defined by a string or a macro variable. 
 		
-   |![](img/_sasid_ilt_metadata.png)|
+   | ![](img/_sasid_ilt_metadata.png)</kbd>
 
 ### Additional Parameters tab ###
 
    * Activate or not the lookup table. By default, this option is checked. 
    
-   |![](img/_sasid_ilt_addparam.png)|
+   <kbd>![](img/_sasid_ilt_addparam.png)</kbd>
 
 ## Requirements
 
@@ -39,7 +39,7 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
 
    * To be used only in Flow mode. 
    
-   |![](img/_sasid_ilt_flow_usage.png)|
+   <kbd>![](img/_sasid_ilt_flow_usage.png)</kbd>
 	
    * Require an input data set with valid columns for keys and values. 
 
