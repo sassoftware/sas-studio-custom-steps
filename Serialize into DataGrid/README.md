@@ -5,7 +5,7 @@
 This custom step allow the user serialize input data into a Json datagrid using DCM_SERIALIZEGRID macro function. 
 The resulting Datagrid is formatted as below : 
 
-<kbd>![](img/__SIDG_DataGrid.png)</kbd>
+<kbd>![](img/_SIDG_DataGrid.png)</kbd>
 
 ## User Interface
 
@@ -27,7 +27,7 @@ The resulting Datagrid is formatted as below :
 
 	* To be used only in Flow mode. 
    
-   <kbd>![](img/__SIDG_Usage.png)</kbd>
+   <kbd>![](img/_SIDG_Usage.png)</kbd>
 	
 	* Requires an input dataset with columns to be serialized and agregated by. 
 	
