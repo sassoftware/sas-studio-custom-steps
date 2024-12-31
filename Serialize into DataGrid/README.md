@@ -32,10 +32,10 @@ The resulting Datagrid is formatted as below :
    * Requires an input dataset with columns to be serialized and agregated by. 
 
    * DataGrid column is by default a length of 32767 bytes, which is the maximum. 
-     --> If a generated datagrid is longer than this length, truncation will occur. 
-     --> If a generated datagrid is truncated, an error message will be issued by the macro fonction, as well as a warning for each problematic row.
-     --> Note that the DCM_SERIALIZEGRID does not trim properly the character variables, this may lead to unexpected truncated datagrid if input columns length are big. 
-	     Best practice is to reduce the max length of each column to be serialized. 
+      * If a generated datagrid is longer than this length, truncation will occur. 
+      * If a generated datagrid is truncated, an error message will be issued by the macro fonction, as well as a warning for each problematic row.
+      * Note that the DCM_SERIALIZEGRID does not trim properly the character variables, this may lead to unexpected truncated datagrid if input columns length are big. 
+	    Best practice is to reduce the max length of each column to be serialized. 
 		
    * All remaining trailing blanks in serilized character columns into the datagrid are removed by a post process. 
 
