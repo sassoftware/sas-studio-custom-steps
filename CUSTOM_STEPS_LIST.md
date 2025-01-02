@@ -9,6 +9,7 @@ The list of available Custom Steps further down on this page uses the following 
 | CAS              | Steps in this category provide utilities for working with data in CAS |
 | CV               | Computer Vision                                                       |
 | DQ               | Data Quality                                                          |
+| EAC              | External API Connection                                               |
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
