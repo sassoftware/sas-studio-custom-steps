@@ -1,8 +1,8 @@
-# Translate Text
+# EAC - Translate Text
 
 ## Description
 
-The **Translate Text** custom step enables SAS Studio users to translate text using the [DeepL API](https://www.deepl.com/docs-api). This custom step supports both the free and the paid DeepL API, but it only supports the translation of strings and not whole documents.
+The **EAC - Translate Text** custom step enables SAS Studio users to translate text using the [DeepL API](https://www.deepl.com/docs-api). This custom step supports both the free and the paid DeepL API, but it only supports the translation of strings and not whole documents.
 
 ## User Interface
 
@@ -30,5 +30,8 @@ Also you can find an example SAS Studio Flow in this folder [Translate Text Exam
 
 ## Change Log
 
+* Version 1.1 (03JAN2025)
+    * Added EAC category name prefix
+    * Updated the About page to the current template
 * Version 1.0 (10MAY2023)
     * Initial version

@@ -1,8 +1,8 @@
-# Get Exchange Rates
+# EAC - Get Exchange Rates
 
 ## Description
 
-The **Get Exchange Rates** custom step enables SAS Studio users to get current and historic currency exchange rates as table to work with. In the default mode it will always fetch the latest exchange rates. Unchecking the checkbox will enable you to get a historic date for which you want the currency exchange rates.
+The **EAC - Get Exchange Rates** custom step enables SAS Studio users to get current and historic currency exchange rates as table to work with. In the default mode it will always fetch the latest exchange rates. Unchecking the checkbox will enable you to get a historic date for which you want the currency exchange rates.
 
 The following API providers are implemented:
 
@@ -69,5 +69,7 @@ Find a demonstration of this step in this YouTube video: [Get Exchange Rates | C
 
 ## Change Log
 
+* Version 1.1 (03JAN2025)
+    * Added EAC category name prefix
 * Version 1.0 (04SEP2023)
     * Initial version
