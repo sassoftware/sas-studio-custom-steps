@@ -26,7 +26,7 @@ Currently the default translation dropdown comes implemented with German (DE), E
 
 Find a demonstration of this step in this YouTube video: [Translate Text | Custom Step](https://youtu.be/2JMwhU9CLFc)
 
-Also you can find an example SAS Studio Flow in this folder [Translate Text Example.flw](./Translate-Text-Example.flw)
+Also you can find an example SAS Studio Flow in this folder [Translate Text Example.flw](./extras/EAC-Translate-Text-Example.flw)
 
 ## Change Log
 
