@@ -1,15 +1,16 @@
-# SASAPI - GET Request
+# EAC – Query SAS Viya REST API.step
 
 ## Description
 
-This custom step allow the user to call any SAS VIYA API GET requests and returns metadata response into 4 output datasets : root, links, items, items_links
+This custom step allows the user to query SAS Viya applications and services through SAS Viya REST API. The returned data is stored into 4 output datasets : root, links, items, items_links
 
 ## User Interface
 
-### GET Request ###
+### Request ###
 
-  * Define Hyperlink reference for the GET Request. 
-      * All Hyperlink refernces available for SAS VIYA API are listed in the SAS REST API guide :  https://developer.sas.com/rest-apis.
+  * Enter your request hyperlink reference destination to the SAS Viya ressource that you want to query (HREF): 
+      * The HREF is the REST URL section that typically represents the path to access and interact with a SAS Viya ressource.
+      * All HREF available for SAS Viya REST API are listed in the SAS REST API guide :  https://developer.sas.com/rest-apis.
 	  
   * Define Accepted Content-Type associated to the GET Request. 
       * This option is set to application/json by default. Most request will accept this tyoe. 
@@ -22,18 +23,18 @@ This custom step allow the user to call any SAS VIYA API GET requests and return
 
 ## Requirements
 
-* Tested on Viya version Stable 2024.12
+* Tested on SAS Viya version Stable 2024.12
 
-* Uses : SAS REST API (https://developer.sas.com/rest-apis
+* Uses : SAS REST API (https://developer.sas.com/rest-apis)
 
 ## Usage
 
-   * To be used only in Flow mode. 
+	Can be used in a flow or in stand alone. 
    
    <kbd>![](img/_SAPI_Usage.png)</kbd>
 	
    * 4 datasets are created as output : 
-   	   * root : root items returned by the request
+       * root : root items returned by the request
 	   * links : root links returned by the request
 	   * items (if any) : collection items returned by the request + items self HREF and TYPE
 	   * items_links (if any) : collection items links returned by the request
