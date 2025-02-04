@@ -1,8 +1,9 @@
-# SASID - Import lookup table
+# SID - Import Lookup Table
 
 ## Description
 
-The **SASID - Import lookup table** custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning from input data. 
+The **SID - Import Lookup Table** custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning from input data, using DCM_IMPORT_LOOKUP macro. 
+The macro DCM_IMPORT_LOOKUP uses the lookup table name and folder path name to determine whether a lookup table already exists. If the lookup table already exists, then it is updated. If either the path name or lookup table name does not exist, it is created.
 
 ## User Interface
 
@@ -16,7 +17,7 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
 ### Metadata tab ###
 
    * Define a name for your lookup table (required).
-   * Define a description for your lookup table (required).
+   * Define a description for your lookup table (optional).
    * Define a location on the _sas content_ for your lookup table (required).
 		--> the location path can be browsed or defined by a string or a macro variable. 
 		
@@ -32,12 +33,12 @@ The **SASID - Import lookup table** custom step enables SAS Studio users to impo
 
 * Tested on Viya version Stable 2024.12.
 * Requires : SAS® Intelligent Decisioning 5.4 or higher.
-* Uses : DCM_IMPORT_LOOKUP macro (https://go.documentation.sas.com/doc/en/edmcdc/5.4/edmmacro/n0ni2e3h31k5x3n1v1w4e46z7rnh.htm)
+* Uses : DCM_IMPORT_LOOKUP macro (https://go.documentation.sas.com/doc/en/edmcdc/default/edmmacro/n0ni2e3h31k5x3n1v1w4e46z7rnh.htm)
 * Uses : <viyahost>/folders/paths REST API (https://developer.sas.com/rest-apis/folders/findByPath)
 
 ## Usage
 
-   * To be used only in Flow mode. 
+   * Can be used in a flow or in stand alone.
    
    <kbd>![](img/_sasid_ilt_flow_usage.png)</kbd>
 	
