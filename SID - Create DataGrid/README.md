@@ -2,7 +2,7 @@
 
 ## Description
 
-This custom step allow the user serialize source data into a data grid variable using DCM_SERIALIZEGRID macro function. 
+This custom step allow the user serialize source data into a data grid variable using DCM_SERIALIZEGRID macro function.  
 A data grid variable is a variable of type DATAGRID whose value is a table stored in a Json format as below :
 
 <kbd>![](img/_SIDG_DataGrid.png)</kbd>
