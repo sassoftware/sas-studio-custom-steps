@@ -2,12 +2,13 @@
 
 ## Description
 
-This custom step allow the user serialize source data into a data grid variable using DCM_SERIALIZEGRID macro function. 
+This custom step allow the user serialize source data into a data grid variable using SAS macro DCM_SERIALIZEGRID,
+which is part of SAS Intelligent Decisioning (SID). 
 A data grid variable is a variable of type DATAGRID whose value is a table stored in a Json format as below :
 
 <kbd>![](img/_SIDG_DataGrid.png)</kbd>
 
-These data grids can then be used inside decision flows of SAS Inteligent decisioning and treated as embedded tables inside each processed record. 
+These data grids can then be used inside decision flows of SAS Inteligent Decisioning and treated as embedded tables inside each processed record. 
 You will be able to execute a model, rule set, or subdecision against each row of your datagrid or simply iterate on each row via datagrid functions. 
 
 More information about data grid usage in SAS Intelligent Decisioning : https://go.documentation.sas.com/doc/en/edmcdc/default/edmdatagrids/p1x00nj2uyxez7n14kl0bbt4mw9c.htm
@@ -24,7 +25,7 @@ More information about data grid usage in SAS Intelligent Decisioning : https://
 
 ## Requirements
 
-* Tested on Viya version Stable 2024.12
+* Tested on SAS Viya version Stable 2024.12
 
 * Uses : DCM_SERIALIZEGRID macro (https://go.documentation.sas.com/doc/en/edmcdc/default/edmdatagrids/n16ywg120fchftn1fxqdw245jax5.htm)
 
@@ -51,6 +52,6 @@ More information about data grid usage in SAS Intelligent Decisioning : https://
 
 ## Change Log
 
-* Version 1.0 (30DEC2024)
+* Version 1.0 (05FEB2025)
     * Initial version 
 
