@@ -14,6 +14,7 @@ The list of available Custom Steps further down on this page uses the following 
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
 | SDG              | Synthetic Data Generation                                             |
+| SID              | SAS Intelligent Decisioning related                                   |
 
 ## Available Custom Steps
 
@@ -109,6 +110,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [SDG - Train a Synthetic Data Generator through GANs](./SDG%20-%20Train%20a%20Synthetic%20Data%20Generator%20through%20GANs/README.md) | A collection of 3 steps which help you train, score and assess Synthetic Data models | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 04NOV2024 | 
 [Send SMTP Email](./Send%20SMTP%20Email/README.md) | Send Email message  | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2022.1.4 <br>or later | 03APR2023 |
 | [Send Teams Message](./Send%20Teams%20Message/README.md) | Send Microsoft Teams Messages to a Teams channel | [David Weik](https://github.com/Criptic) / [Tamara Fischer](https://github.com/ATFischer) | 2022.10 <br>or later | 14JUN2023 |
+| [SID - Create Data Grid](./SID%20-%20Create%20DataGrid/README.md) | Serialize source data into a data grid variable for use by SAS Intelligent Decisioning flows | [Charlie Vismara](https://github.com/sbxchv) | 2024.12 <br>or later | 05FEB2025|
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 29SEP2022 |
 | [Update column labels](./Update%20column%20labels/README.md) | Update column labels from a (metadata) table, delimited file, or interactively | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 <br>or later | 21DEC2023 |
 | [Vector Databases - Hydrate Chroma DB Collection](./Vector%20Databases%20-%20Hydrate%20Chroma%20DB%20Collection/README.md) | Populate a Chroma vector database collection with documents and embeddings contained in a CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.12 <br>or later | 24JAN2024 |
