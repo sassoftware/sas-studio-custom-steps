@@ -88,7 +88,7 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 ----
 ## SAS Program & Prompt UI
 
-Refer [here](./extras/) for the SAS program and the Prompt UI components (in json format) used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. The Prompt UI components would come in useful in case you wish to design a job which can be execution through the SAS Job Execution Service. 
+Refer [here](./extras/) for the SAS program and the Prompt UI components (in json format) used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications. The Prompt UI components would come in useful in case you wish to design a job which can be executed through the SAS Job Execution Service. 
 
 ----
 ## Installation & Usage
