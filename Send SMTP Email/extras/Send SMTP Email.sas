@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Send SMTP Email
 
-   v 3.0.0 (06FEB2025)
+   v 3.1.0 (07FEB2025)
 
    This program enables SAS Studio users to send an email message and is meant for use within  
    a SAS Studio Custom Step. Please modify requisite macro variables (hint: use the debug section 

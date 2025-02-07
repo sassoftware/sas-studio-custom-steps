@@ -52,8 +52,15 @@ Refer to the SAS Viya documentation for more details about configuring an SMTP E
 
 <br>
 
+## Created / Contact
+- Mary Kathryn Queen (marykathryn.queen@sas.com)
+- Sundaresh Sankaran (sundaresh.sankaran@sas.com)
+
+
 ## Change Log
 
+* Version 3.1 (07FEB2025)
+    * Email Attachment Functionality for files on SAS Server
 * Version 2.0 (03APR2023)
     * Updated code to clear emailBody_count macro
 * Version 1.0 (17OCT2022)
