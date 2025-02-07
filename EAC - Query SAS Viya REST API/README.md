@@ -43,5 +43,5 @@ This custom step allows the user to query SAS Viya applications and services thr
    
 ## Change Log
 
-* Version 1.0 (30DEC2024) 
+* Version 1.0 (07FEB2025) 
     * Initial version
