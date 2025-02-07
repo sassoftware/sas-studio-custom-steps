@@ -62,7 +62,7 @@ Btw. also check out [sasjs/lint](https://github.com/sasjs/lint).
      
      ```SAS
      /* Removing user-defined SAS macro variables */
-     %symdel myUserDefinedMacroVariable;
+     %symdel myUserDefinedMacroVariable /nowarn;
      
      /* Removing user-defined SAS macros */
      %sysmacdelete myUserDefinedMacro / nowarn; 
