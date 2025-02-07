@@ -145,9 +145,22 @@
 				{
 					"id": "aboutText",
 					"type": "text",
-					"text": "The Send SMTP Email custom step enables SAS Studio users to send an email message.  It also allows for the setting of the message's importance, text color, and request a read receipt.\n\nRefer to the SAS Viya documentation for more details about configuring an SMTP Email server: https://go.documentation.sas.com/doc/en/pgmsascdc/default/lepg/n1w4ntt16ty6gvn17e68ggvhspwm.htm\n\n\nVersion 2.0 (03APR2023)",
+					"text": "The Send SMTP Email custom step enables SAS Studio users to send an email message.  It also allows for the setting of the message's importance, text color, and request a read receipt.\n\nUsers may also choose to provide an attachment (currently,a maximum of one file) along with the email message. The attachment file should be chosen from the SAS Server, and not the SAS Content service (planned enhancement in a future version).\n\nRefer to the SAS Viya documentation for more details about configuring an SMTP Email server: https://go.documentation.sas.com/doc/en/pgmsascdc/default/lepg/n1w4ntt16ty6gvn17e68ggvhspwm.htm\n\n",
 					"visible": ""
-				}
+				},
+				{
+                    "id": "version_text",
+                    "type": "text",
+                    "text": "Version: 3.1  (07FEB2025)",
+                    "visible": ""
+                },
+                {
+                    "id": "contact_text",
+                    "type": "text",
+                    "text": "Created/contact: \n- Mary Kathryn Queen (marykathryn.queen@sas.com) \n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)",
+                    "visible": ""
+                }
+
 			]
 		}
 	],
