@@ -132,66 +132,185 @@
 
 %macro _sse_execution_code;
 
+   %put NOTE: Starting main execution code;
+   
+   /*-----------------------------------------------------------------------------------------*
+   Create an error flag. 
+*------------------------------------------------------------------------------------------*/
+
+   %_create_error_flag(_sse_error_flag, _sse_error_desc);
+
+   %put NOTE: Error flag created;
+
+/*-----------------------------------------------------------------------------------------*
+   Check if path for attachment happens to be a filesystem (SAS Server) opath. 
+*------------------------------------------------------------------------------------------*/
+   %if &_sse_error_flag. = 0 %then %do;
+
+      %_identify_content_or_server(&attachment_path.);
+
+      %if "&_path_identifier."="sasserver" %then %do;
+         %put NOTE: File location prefixed with &_path_identifier. is on the SAS Server.;
+      %end;
+
+      %else %do;
+
+         %let _sse_error_flag=1;
+         data _null_;
+            call symput("_sse_error_desc","Please select a valid file on the SAS Server (filesystem).");
+         run;
+         %put ERROR: &_sse_error_desc. ;
+
+      %end;
+
+   %end;
+
+   %if &_sse_error_flag. = 0 %then %do;
+
+      %_extract_sas_folder_path(&attachment_path.);
+
+/*-----------------------------------------------------------------------------------------*
+   Create attachment string 
+*------------------------------------------------------------------------------------------*/
+      %if "&_sas_folder_path." = "" %then %do;
+
+         %let _sse_error_flag=0;
+         %let _sse_error_desc = The attachment provided is empty, no file will be attached ;
+         %put NOTE: &_sse_error_desc. ;
+         %let attachment_string=;
+
+      %end;
+      %else %do;
+         data _null_;
+            call symput("attachment_string","attach="||'"'||"&sas_folder_path."||'" ');
+         run;
+      %end;
+
+   %end;
+
+
+
+
    /* Set email options */
    options emailsys=smtp emailhost=&smtpHost emailport=&smtpPort ;
+
+   /* if emailBody_count is empty (doesnt exist) create it and create emailBody_1 */
+   %let emailBodyCount=;
+   %if &emailBody_count eq %then %do ; 
+	   %let emailBody_count=1 ;
+	   %let emailBody_1=&emailBody ;
+   %end ;  
+
+   /* Format input information if multiple email addresses entered */
+   data _null_ ;
+      newEmailTo=cats(transtrn(strip(compbl(translate("&emailTo"," ",",")))," ",'" "')) ;
+      call symput('emailTo',strip(newEmailTo)) ;
+      newEmailCC=cats(transtrn(strip(compbl(translate("&emailCC"," ",",")))," ",'" "')) ;
+      call symput('emailCC',strip(newEmailCC)) ;
+      newEmailBCC=cats(transtrn(strip(compbl(translate("&emailBCC"," ",",")))," ",'" "')) ;
+      call symput('emailBCC',strip(newEmailBCC)) ;
+   run ;
+
+   /* Format and send email */
+   filename outmail email
+	   from="&emailFrom"
+ 	   to=("&emailTo")
+	   cc=("&emailCC")
+	   bcc=("&emailBCC")
+	   subject="&emailSubject"
+      &attachment_string. 
+ 	   importance="&importance" /* Low Normal High.  Default is Normal */
+	   /* If ReadReceipt option is checked */
+	   %if &readReceipt %then %do ;
+		   readreceipt
+	   %end ;
+ 	   ct="text/html"
+   ;
+
+   /* Build the body of the email */
+   data _null_ ;
+      file outmail ;
+      put "<html><body>" ;
+      put "<p style='color: #&textColor'>" ;
+      do i = 1 to &emailBody_count ;
+         if symget("emailBody_" || strip(put(i,12.))) eq '' then do ;
+            text=cats("<br>") ;
+         end ;
+         else do ;
+            text=cats(symget("emailBody_" || strip(put(i,12.))),"<br>") ;
+         end ;
+         put text ;
+      end ;
+      put "</p>" ;
+      put "</body></html>" ;
+   run ;
 	
 %mend _sse_execution_code;
 
+/*-----------------------------------------------------------------------------------------*
+   EXECUTION CODE
+   The execution code is controlled by the trigger variable defined in this custom step. This
+   trigger variable is in an "enabled" (value of 1) state by default, but in some cases, as 
+   dictated by logic, could be set to a "disabled" (value of 0) state.
+*------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*
+   Create run-time trigger. 
+*------------------------------------------------------------------------------------------*/
+
+%_create_runtime_trigger(_sse_run_trigger);
+
+/*-----------------------------------------------------------------------------------------*
+   Execute 
+*------------------------------------------------------------------------------------------*/
+
+%if &_sse_run_trigger. = 1 %then %do;
+
+   %_sse_execution_code;
+
+%end;
+
+%if &_sse_run_trigger. = 0 %then %do;
+
+   %put NOTE: This step has been disabled.  Nothing to do.;
+
+%end;
 
 
-/* if emailBody_count is empty (doesnt exist) create it and create emailBody_1 */
-%global emailBody_count ;
-%if &emailBody_count eq %then %do ; 
-	%let emailBody_count=1 ;
-	%let emailBody_1=&emailBody ;
-%end ;
+%put NOTE: Final summary;
+%put NOTE: Status of error flag - &_sse_error_flag. ;
+%put NOTE: Error desc - &_sse_error_desc. ;
 
 
-/* Format input information if multiple email addresses entered */
-data _null_ ;
-    newEmailTo=cats(transtrn(strip(compbl(translate("&emailTo"," ",",")))," ",'" "')) ;
-    call symput('emailTo',strip(newEmailTo)) ;
-    newEmailCC=cats(transtrn(strip(compbl(translate("&emailCC"," ",",")))," ",'" "')) ;
-    call symput('emailCC',strip(newEmailCC)) ;
-    newEmailBCC=cats(transtrn(strip(compbl(translate("&emailBCC"," ",",")))," ",'" "')) ;
-    call symput('emailBCC',strip(newEmailBCC)) ;
-run ;
+/*-----------------------------------------------------------------------------------------*
+   Clean up existing macro variables and macro definitions.
+*------------------------------------------------------------------------------------------*/
+
+%if %symexist(_sse_run_trigger) %then %do;
+   %symdel _sse_run_trigger;
+%end;
+
+%if %symexist(_path_identifier) %then %do;
+   %symdel _path_identifier;
+%end;
+
+%if %symexist(_sas_folder_path) %then %do;
+   %symdel _sas_folder_path;
+%end;
+
+%if %symexist(_sse_error_flag) %then %do;
+   %symdel _sse_error_flag;
+%end;
+
+%if %symexist(_sse_error_desc) %then %do;
+   %symdel _sse_error_desc;
+%end;
+
+%sysmacdelete _create_error_flag;
+%sysmacdelete _create_runtime_trigger;
+%sysmacdelete _identify_content_or_server;
+%sysmacdelete _extract_sas_folder_path;
+%sysmacdelete _sse_execution_code;
 
 
-/* Format and send email */
-filename outmail email
-	from="&emailFrom"
- 	to=("&emailTo")
-	cc=("&emailCC")
-	bcc=("&emailBCC")
-	subject="&emailSubject"
- 	importance="&importance" /* Low Normal High.  Default is Normal */
-	/* If ReadReceipt option is checked */
-	%if &readReceipt %then %do ;
-		readreceipt
-	%end ;
- 	ct="text/html"
-;
 
 
-/* Build the body of the email */
-data _null_ ;
-	file outmail ;
-	put "<html><body>" ;
-    put "<p style='color: #&textColor'>" ;
-	do i = 1 to &emailBody_count ;
-        if symget("emailBody_" || strip(put(i,12.))) eq '' then do ;
-			text=cats("<br>") ;
-        end ;
-        else do ;
-			text=cats(symget("emailBody_" || strip(put(i,12.))),"<br>") ;
-		end ;
-		put text ;
-	end ;
-    put "</p>" ;
-	put "</body></html>" ;
-run ;
-
-
-/* Clear macro */
-%symdel emailBody_count ;
