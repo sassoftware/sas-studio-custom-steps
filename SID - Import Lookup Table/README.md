@@ -2,8 +2,8 @@
 
 ## Description
 
-The **SID - Import Lookup Table** custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning from input data, using DCM_IMPORT_LOOKUP macro. 
-The macro DCM_IMPORT_LOOKUP uses the lookup table name and folder path name to determine whether a lookup table already exists. If the lookup table already exists, then it is updated. If either the path name or lookup table name does not exist, it is created.
+The custom step enables SAS Studio users to import and activate a lookup table for SAS Intelligent Decisioning (SID) from input data, using DCM_IMPORT_LOOKUP macro. 
+The macro DCM_IMPORT_LOOKUP (part of SID) uses the lookup table name and folder path name to determine whether a lookup table already exists. If the lookup table already exists, then it is updated. If either the path name or lookup table name does not exist, it is created.
 
 ## User Interface
 
@@ -46,5 +46,5 @@ The macro DCM_IMPORT_LOOKUP uses the lookup table name and folder path name to d
 
 ## Change Log
 
-* Version 1.0 (30DEC2024) 
+* Version 1.0 (07FEB2025) 
     * Initial version 
