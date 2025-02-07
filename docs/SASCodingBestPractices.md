@@ -48,3 +48,22 @@ Btw. also check out [sasjs/lint](https://github.com/sasjs/lint).
       temporary tables at the end of the step.
 
  13. Use the macro name on the %mend statement. It makes the code easier to read, especially when you have many macros and/or nested macros.
+     
+ 14. Remove SAS macro variables and SAS macros at the end of step when they are not needed anymore.
+     ```SAS
+     /* Example SAS macro variable definition */
+     %let myUserDefinedMacroVariable=The answer is 42;
+     
+     /* Example SAS macrodefinition */
+     %macro myUserDefinedMacro;
+         %put Hello World;
+     %mend myUserDefinedMacro */
+     ```
+     
+     ```SAS
+     /* Removing user-defined SAS macro variables */
+     %symdel myUserDefinedMacroVariable;
+     
+     /* Removing user-defined SAS macros */
+     %sysmacdelete myUserDefinedMacro / nowarn; 
+     ```
