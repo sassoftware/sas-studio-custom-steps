@@ -146,56 +146,49 @@
    Check if path for attachment happens to be a filesystem (SAS Server) opath. 
 *------------------------------------------------------------------------------------------*/
    %if &_sse_error_flag. = 0 %then %do;
+      %let attachment_string=;
+/*-----------------------------------------------------------------------------------------*
+   You Don't HAVE to attach a file, remember.
+*------------------------------------------------------------------------------------------*/
+      %if "&attachment_path." = "" %then %do;
 
-      %_identify_content_or_server(&attachment_path.);
-
-      %if "&_path_identifier."="sasserver" %then %do;
-         %put NOTE: File location prefixed with &_path_identifier. is on the SAS Server.;
       %end;
-
       %else %do;
-
-         %let _sse_error_flag=1;
-         data _null_;
-            call symput("_sse_error_desc","Please select a valid file on the SAS Server (filesystem).");
-         run;
-         %put ERROR: &_sse_error_desc. ;
-
-      %end;
-
-   %end;
-
-   %if &_sse_error_flag. = 0 %then %do;
-
-      %_extract_sas_folder_path(&attachment_path.);
-
+         %_identify_content_or_server(&attachment_path.);
+         %if "&_path_identifier."="sasserver" %then %do;
+            %put NOTE: File location prefixed with &_path_identifier. is on the SAS Server.;
+         %end;
+         %else %do;
+            %let _sse_error_flag=1;
+            %data _null_;
+               call symput("_sse_error_desc","Please select a valid file on the SAS Server (filesystem).");
+            run;
+            %put ERROR: &_sse_error_desc. ;
+         %end;
+         %if &_sse_error_flag. = 0 %then %do;
+            %_extract_sas_folder_path(&attachment_path.);
 /*-----------------------------------------------------------------------------------------*
    Create attachment string 
 *------------------------------------------------------------------------------------------*/
-      %if "&_sas_folder_path." = "" %then %do;
-
-         %let _sse_error_flag=0;
-         %let _sse_error_desc = The attachment provided is empty, no file will be attached ;
-         %put NOTE: &_sse_error_desc. ;
-         %let attachment_string=;
-
+            %if "&_sas_folder_path." = "" %then %do;
+               %let _sse_error_flag=0;
+               %let _sse_error_desc = The attachment provided is empty, no file will be attached ;
+               %put NOTE: &_sse_error_desc. ;
+            %end;
+            %else %do;
+               data _null_;
+                  call symput("attachment_string","attach="||'"'||"&_sas_folder_path."||'" ');
+               run;
+            %end;
+         %end;
       %end;
-      %else %do;
-         data _null_;
-            call symput("attachment_string","attach="||'"'||"&sas_folder_path."||'" ');
-         run;
-      %end;
-
    %end;
-
-
-
 
    /* Set email options */
    options emailsys=smtp emailhost=&smtpHost emailport=&smtpPort ;
 
    /* if emailBody_count is empty (doesnt exist) create it and create emailBody_1 */
-   %let emailBodyCount=;
+   %let emailBody_count=;
    %if &emailBody_count eq %then %do ; 
 	   %let emailBody_count=1 ;
 	   %let emailBody_1=&emailBody ;
