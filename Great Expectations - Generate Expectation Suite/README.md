@@ -79,7 +79,7 @@ run;
  
 ## Change Log
 
-* Version 1.11 (14FEB2025)
+* Version 1.1.1 (14FEB2025)
     * Added warning: Is using experimental functionality and only works with older versions of Great Expectations
 * Version 1.1 (19OCT2023)
     * Removed unsupported sd2df parameters
