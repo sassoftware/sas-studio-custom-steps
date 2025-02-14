@@ -80,8 +80,7 @@ run;
 ## Change Log
 
 * Version 1.11 (14FEB2025)
-    * Added warning explaining that this usese experimental functionality in Great Expectations and only
-      works with very specific versions of Great Expectations
+    * Added warning: Is using experimental functionality and only works with older versions of Great Expectations
 * Version 1.1 (19OCT2023)
     * Removed unsupported sd2df parameters
 * Version 1.0 (12OCT2023)
