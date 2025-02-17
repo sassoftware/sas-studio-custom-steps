@@ -149,6 +149,10 @@ proc datasets library=sampsio; run;
 
 ## Change Log
 
+- Version 2.1 (17FEB2025)
+
+  - Fix bug: hardcoded reference to library
+
 - Version 2.0 (05NOV2024)
 
   - The Train a Synthetic Data Generator step is now "Train a Synthetic Data Generator through GANs" within dedicated folder (partial)

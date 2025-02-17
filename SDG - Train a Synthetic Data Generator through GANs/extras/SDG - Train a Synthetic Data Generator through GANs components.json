@@ -1,0 +1,306 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "param",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "section1",
+					"type": "section",
+					"label": "Input parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "inputtable1",
+							"type": "inputtable",
+							"label": "Input table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "text2",
+							"type": "text",
+							"text": "Connect a SAS Cloud Analytics Services (CAS) table to the input port attached to this step.",
+							"visible": ""
+						},
+						{
+							"id": "intervalVars",
+							"type": "columnselector",
+							"label": "Select interval candidate variables (min 1) :",
+							"order": false,
+							"columntype": "n",
+							"max": null,
+							"min": 1,
+							"visible": "",
+							"table": "inputtable1",
+							"include": null
+						},
+						{
+							"id": "nominalVars",
+							"type": "columnselector",
+							"label": "Select nominal candidate variables:",
+							"order": false,
+							"columntype": "a",
+							"max": null,
+							"min": null,
+							"visible": "",
+							"table": "inputtable1",
+							"include": null
+						}
+					]
+				},
+				{
+					"id": "section2",
+					"type": "section",
+					"label": "Output specification",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "text1_1",
+							"type": "text",
+							"text": "Attach CAS tables to the two output ports of this step.  The second port (for sample output records) is optional.",
+							"visible": ""
+						},
+						{
+							"id": "outputtable2",
+							"type": "outputtable",
+							"label": "Desired model binary name:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "text1",
+							"type": "text",
+							"text": "Note: the model table gets persisted in the given caslib as a sashdat by default.",
+							"visible": ""
+						},
+						{
+							"id": "outputtable1",
+							"type": "outputtable",
+							"label": "Sample output table:",
+							"required": true,
+							"placeholder": "PUBLIC.__TEMP_SDGGAN_SAMPLES",
+							"visible": ""
+						},
+						{
+							"id": "numSamples",
+							"type": "numberfield",
+							"label": "Provide number of samples:",
+							"placeholder": "",
+							"required": true,
+							"max": null,
+							"min": null,
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "advanced",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "aeEpochs",
+					"type": "numberfield",
+					"label": "Enter # of epochs for the Autoencoder optimizer:",
+					"placeholder": "1",
+					"required": false,
+					"max": null,
+					"min": 1,
+					"excludemin": false,
+					"visible": ""
+				},
+				{
+					"id": "ganEpochs",
+					"type": "numberfield",
+					"label": "Enter # of epochs for the GAN optimizer:",
+					"placeholder": "1",
+					"required": false,
+					"max": null,
+					"min": 1,
+					"excludemin": false,
+					"visible": ""
+				},
+				{
+					"id": "miniBatchSize",
+					"type": "numberfield",
+					"label": "Provide minibatch size:",
+					"placeholder": "60",
+					"required": false,
+					"max": null,
+					"min": null,
+					"visible": ""
+				},
+				{
+					"id": "gpuEnabled",
+					"type": "checkbox",
+					"label": "Enable GPU",
+					"visible": ""
+				},
+				{
+					"id": "numDevices",
+					"type": "numberfield",
+					"label": "Specify GPU device ID (max 1):",
+					"placeholder": "",
+					"required": false,
+					"max": null,
+					"min": null,
+					"visible": "$gpuEnabled"
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "text_description",
+					"type": "text",
+					"text": "Train a Synthetic Data Generator through Generative Adversarial Networks (GANs)\n========================================================\n\nThis custom step helps you train a model through Generative Adversarial Networks (GANs) using underlying distributions and correlations learnt from an existing dataset.  This step results in a model binary, known as an astore, which can be used in a scoring process.\n",
+					"visible": ""
+				},
+				{
+					"id": "about_parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "parameters_text",
+							"type": "text",
+							"text": "This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib). Ensure you are connected to CAS before running this step.",
+							"visible": ""
+						},
+						{
+							"id": "parameters_input",
+							"type": "section",
+							"label": "Input Parameters",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text",
+									"type": "text",
+									"text": "1. An input dataset referring to an in-memory CAS table, which serves as the training data - connect this to the input port of this step.\n\n2. Provide both interval (min=1) and nominal variables to be used for training the model. \n\n",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_config",
+							"type": "section",
+							"label": "Configuration",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text_1",
+									"type": "text",
+									"text": "1. Number of epochs for autoencoder optimizer (numeric field, default 1): change as required.\n\n2. Number of epochs for the GAN optimizer (numeric field, default 1): change as required\n\n3. Minibatch size (default 60): change as required\n\n4. Enable GPU (check box, deselected by default): check this option if you wish to use GPUs to train.\n\n5. GPU device ID (text field, dependent on GPU enabled): enter a value only if you want to specify a device ID different from the default.  Note that the tabularGanTrain action is set to use a max of 1 GPU.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_output_specs",
+							"type": "section",
+							"label": "Output specification",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text",
+									"type": "text",
+									"text": "1. Provide number of sample observations to generate.\n\n2. Attach a table to the output port for Desired Model Binary, which will hold the astore table. (Note: the astore is a binary table. Do not attempt to open it within SAS Studio as it won't be readable.)\n\n3. Attach a table to the output port for Output Data, which contains sample generated observations for review.\n",
+									"visible": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "about_runtimecontrol",
+					"type": "section",
+					"label": "Run-time Control",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "runtimecontrol_text",
+							"type": "text",
+							"text": "Note: Run-time control is optional.  You may choose whether to execute the main code of this step or not, based on upstream conditions set by earlier SAS programs.  This includes nodes run prior to this custom step earlier in a SAS Studio Flow, or a previous program in the same session.\n\nRefer this blog (https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.\n\nThe following macro variable,\n\n_tsdg_run_trigger\n\nwill initialize with a value of 1 by default, indicating an \"enabled\" status and allowing the custom step to run.\n\nIf you wish to control execution of this custom step, include code in an upstream SAS program to set this variable to 0.  This \"disables\" execution of the custom step.\n\nTo \"disable\" this step, run the following code upstream:\n\n%global _tsdg_run_trigger;\n%let _tsdg_run_trigger =0;\n\nTo \"enable\" this step again, run the following (it's assumed that this has already been set as a global variable):\n\n%let _tsdg_run_trigger =1;\n\nIMPORTANT: Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_documentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "documentation_text",
+							"type": "text",
+							"text": "1. The proc tabularGAN procedure is documented here: https://go.documentation.sas.com/doc/en/vwbcasml/v_001/vwbcasml_tabulargan_toc.htm\n\n2. The generativeAdversarialNet.tabularGanTrain action (a CASL-oriented interface for the algorithm) is documented here: https://documentation.sas.com/?cdcId=pgmsascdc&cdcVersion=default&docsetId=casactml&docsetTarget=cas-generativeadversarialnet-tabulargantrain.htm\n\n3. The proc gmm procedure is documented here: https://go.documentation.sas.com/doc/en/sasstudiocdc/v_056/pgmsascdc/casml/casml_gmm_toc.htm\n\n4. The nonparametricBayes.gmm action (a CASL-oriented interface for the algorithm) is documented here: https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_nonparametricbayes_details01.htm\n\n5. This SAS Communities article: https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526 referred to earlier suggests an approach through which execution of this custom step is controlled during run time.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "change_log_text",
+					"type": "text",
+					"text": "Version: 2.1  (17FEB2025)",
+					"visible": ""
+				},
+				{
+					"id": "contact_text",
+					"type": "text",
+					"text": "Created/contact: \n\n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)\n- Brett Wujek (brett.wujek@sas.com)\n- Reza Nazari (reza.nazari@sas.com) \n- Ruiwen Zhang (ruiwen.zhang@sas.com) \n- Lorne Rothman (lorne.rothman@sas.com)",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"intervalVars": [],
+		"nominalVars": [],
+		"outputtable2": {
+			"library": "",
+			"table": ""
+		},
+		"outputtable1": {
+			"library": "PUBLIC",
+			"table": "__TEMP_SDGGAN_SAMPLES"
+		},
+		"numSamples": 20,
+		"aeEpochs": 1,
+		"ganEpochs": 1,
+		"miniBatchSize": 60,
+		"gpuEnabled": false,
+		"numDevices": 0
+	},
+	"promptHierarchies": [],
+	"columnExclusions": [
+		[
+			"nominalVars",
+			"intervalVars"
+		]
+	]
+}
