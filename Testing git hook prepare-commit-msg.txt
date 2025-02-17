@@ -1,0 +1,13 @@
+Updated .git/hooks to include a file prepare-commit-msg.txt
+
+That file should automatically add a signed-by-line to each commmit
+as described in the following stackoverflow posting:
+
+https://stackoverflow.com/questions/15015894/git-add-signed-off-by-line-using-format-signoff-not-working/46536244#46536244
+
+This test is about seeing if GitHub Desktop commits use this.
+
+a git config --list shows that the following definitions are known:
+user.name: snlwih
+user.email: wilbram.hazejager@sas.com
+
