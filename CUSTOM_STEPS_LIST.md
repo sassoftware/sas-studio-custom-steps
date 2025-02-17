@@ -2,7 +2,7 @@
 
 ## Abbreviations used in name of Custom Step
 
-The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.  
+The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.
 
 | Abbreviation     | Explanation                                                           |
 | :--------------- | :-------------------------------------------------------------------- |
