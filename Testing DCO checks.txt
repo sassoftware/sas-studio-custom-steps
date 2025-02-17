@@ -1,0 +1,6 @@
+Testing if DCO-bot complains for initial pull request
+=====================================================
+
+Test if commits and pushes to fork that do not have signed-off-by line
+when the commits were created before the pull request was started,
+generate a DCO bot flag when the pull request is created from the fork.
