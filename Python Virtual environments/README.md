@@ -68,9 +68,9 @@ Refer this [blog](https://blogs.sas.com/content/subconsciousmusings/2022/05/16/p
 
 Watch this example! 
 
-![SAS & Open Source (Python) Integration : Better Together](https://www.youtube.com/watch?v=YVaX-A-ZsQ0&list=PLpe69msCs2C8IcarG0aEs_iKy4gyRSFPN&index=3)
+[SAS & Open Source (Python) Integration : Better Together](https://www.youtube.com/watch?v=YVaX-A-ZsQ0&list=PLpe69msCs2C8IcarG0aEs_iKy4gyRSFPN&index=3)
 
-![Creating virtual Python environments within SAS Studio.](https://youtu.be/UIYZf2bKcWw)
+[Creating virtual Python environments within SAS Studio.](https://youtu.be/UIYZf2bKcWw)
 
 This repository contains 5 custom steps which are offered as examples of how you could create, activate, switch between, and package virtual Python environments from within SAS Viya applications and tools, such as SAS Studio.  It makes use of [Custom Steps](https://go.documentation.sas.com/doc/en/webeditorcdc/v_006/webeditorug/n0b7ljqhka8lh5n12judc27x5gph.htm), a component within SAS Studio which help users package repeatable steps in an user-friendly manner.
 
