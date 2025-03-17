@@ -153,3 +153,9 @@ Custom Step options filled:
 
 * Version 1.0 (14FEB2025)
     * Initial version
+
+<!-- DCO Remediation Commit for Bogdan Teleuca <bogdan.teleuca@sas.com>
+
+I, Bogdan Teleuca <bogdan.teleuca@sas.com>, hereby add my Signed-off-by to this commit: eccafa3b97a067447bb8ba9d2935d444a99a1c0d
+
+Signed-off-by: Bogdan Teleuca <bogdan.teleuca@sas.com>   -->
