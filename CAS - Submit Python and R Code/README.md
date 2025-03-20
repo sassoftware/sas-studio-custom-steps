@@ -15,15 +15,15 @@ df = gateway.read_table(gateway.args['inputtable1'])
  
 # Write to output table1
 gateway.write_table(df, (gateway.args['outputtable1'])
- ```
- 
+```
+
 **R example:**
 ```r
 # Read from input table 1
 tbl <- read_table(gw$args[['inputtable1']])
 
 # Write to output table1
-tbl <- write_table(gw$args[['outputtable1']])
+write_table(tbl, gw$args[['outputtable1']])
 ```
 
 
@@ -51,8 +51,13 @@ Find a demonstration of this step in this YouTube video: [CAS - Submit Python an
 
 ## Change Log
 
+* Version 1.1 (20MAR2025)
+    * Fix Bug in from Flow Mode execution
+    
+    * Update readme
+    
 * Version 1.01 (11JAN2024)
     * Updated readme
-      
+
 * Version 1.0 (19NOV2023)
     * Initial version
