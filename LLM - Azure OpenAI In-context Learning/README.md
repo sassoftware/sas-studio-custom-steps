@@ -114,9 +114,8 @@ Refer [here](./extras/LLM%20-%20Azure%20OpenAI%20In-context%20Learning.sas) for 
 
 ## Created/contact:
 
-- [Sundaresh Sankaran](sundaresh.sankaran@sas.com)
 - [Crystal Baker](crystal.baker@sas.com)
-
+- [Sundaresh Sankaran](sundaresh.sankaran@sas.com)
 ----
 ## Change Log
 * Version 1.0.0(24MAR2025)
