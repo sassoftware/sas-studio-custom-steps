@@ -120,5 +120,12 @@ Run the SAS Studio flow.
 
 ## Change Log
 
-* Version 1.0 (12FEB2025)
-    * Initial version
+* Version 1.0 (09APR2025):
+
+    * Initial version.
+
+<!-- DCO Remediation Commit for Bogdan Teleuca <bogdan.teleuca@sas.com>
+
+I, Bogdan Teleuca <bogdan.teleuca@sas.com>, hereby add my Signed-off-by to this commit: 795fa3edd94c81767366d793dfa6ab232d7f3179
+
+Signed-off-by: Bogdan Teleuca <bogdan.teleuca@sas.com>   -->
