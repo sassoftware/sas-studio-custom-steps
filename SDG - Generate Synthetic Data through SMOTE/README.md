@@ -4,6 +4,8 @@ This custom step helps you generate synthetic data based on an input table, usin
 
 SMOTE is an alternative approach to Generative Adversarial Networks (GANs) for generating synthetic tabular data. Access to synthetic data helps you make better, data-informed decisions in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data.
 
+SAS Viya provides a smoteSample SAS Cloud Analytics Services (CAS) action and a proc smote procedure, both of which use the same implementation.
+
 ## A general idea
 
 This video (click on below image to play) provides a basic idea: 
@@ -26,18 +28,14 @@ This video (click on below image to play) provides a basic idea:
 ----
 ## Requirements
 
-1. A SAS Viya 4 environment, preferably monthly stable 2024.10 or later
+1. A SAS Viya 4 environment, monthly stable 2025.03 or later.  This corresponds to when PROC SMOTE was introduced.  Refer earlier commits for the action-based code.
 
 2. A Visual Data Mining and Machine Learning (VDMML) license, usually provided with SAS Viya, SAS Viya Enterprise or Advanced.
 
 3. An active SAS Cloud Analytics Services (CAS) connection during runtime.
 
-4. The smote.smoteSample CAS action requires Python configuration, as specified in [SAS documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm). Please work with your SAS administrator to have the same configured. Specifically, ensure the following:
+4. As of SAS Viya Stable 2025.02, no additional configuration is required in order to run proc smote.  Earlier versions require some additional configurations, for which you may refer the same.
 
-   1. The correct version of Python is installed (as of version 2024.10, this was 3.11.x)  
-   2. [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) , version atleast 0.7.0 and beyond 
-   3. [hnswlib](https://pypi.org/project/hnswlib/)
-   4. [protobuf](https://pypi.org/project/protobuf/)
 
 ### (OPTIONAL) Prerequisites for Singling Out Risk calculation
 
