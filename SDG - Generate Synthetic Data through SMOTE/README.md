@@ -158,13 +158,15 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 ----
 ## Documentation
 
-1. [SAS documentation for the smote.smoteSample CAS action.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm)
+1. [SAS documentation for the proc smote procedure.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casml/casml_smote_overview01.htm)
 
-2. PyPi page for [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) 
+2. [SAS documentation for the smote.smoteSample CAS action.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm)
 
-3. PyPi page for [hnswlib](https://pypi.org/project/hnswlib/)
-4. PyPi page for [protobuf](https://pypi.org/project/protobuf/)
-5. PyPi page for [anonymeter](https://pypi.org/project/anonymeter/)
+3. PyPi page for [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) 
+
+4. PyPi page for [hnswlib](https://pypi.org/project/hnswlib/)
+5. PyPi page for [protobuf](https://pypi.org/project/protobuf/)
+6. PyPi page for [anonymeter](https://pypi.org/project/anonymeter/)
 
 ----
 ## SAS Program
