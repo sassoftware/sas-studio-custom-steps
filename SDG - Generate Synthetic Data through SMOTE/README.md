@@ -193,6 +193,8 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
+* Version 2.0.0 (17APR2025)
+    * Refactored code for Proc SMOTE
 * Version 1.3.1 (10DEC2024)
     * Add calculation for privacy risk (singling out risk)
 * Version 1.2 (11NOV2024) 
