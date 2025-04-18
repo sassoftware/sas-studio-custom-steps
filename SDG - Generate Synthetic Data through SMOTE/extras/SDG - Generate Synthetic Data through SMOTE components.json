@@ -1,0 +1,575 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "section1",
+					"type": "section",
+					"label": "Input Table",
+					"open": true,
+					"children": [
+						{
+							"id": "text2",
+							"type": "text",
+							"text": "Connect a SAS Cloud Analytics Services (CAS) table to the input port of this step.",
+							"visible": ""
+						},
+						{
+							"id": "inputTable",
+							"type": "inputtable",
+							"label": "Select input table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "parameters_section",
+					"type": "section",
+					"label": "Parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "numK",
+							"type": "numstepper",
+							"label": "Select number of nearest neighbors:",
+							"required": false,
+							"integer": true,
+							"min": 1,
+							"max": 1000,
+							"stepsize": 1
+						},
+						{
+							"id": "inputVars",
+							"type": "columnselector",
+							"label": "Select input columns:",
+							"include": null,
+							"order": false,
+							"columntype": "a",
+							"max": null,
+							"min": 1,
+							"visible": "",
+							"table": "inputTable"
+						},
+						{
+							"id": "nominalVars",
+							"type": "columnselector",
+							"label": "Select nominal columns:",
+							"include": "inputVars",
+							"order": false,
+							"columntype": "a",
+							"max": null,
+							"min": 0,
+							"visible": "",
+							"table": null
+						},
+						{
+							"id": "classVar",
+							"type": "columnselector",
+							"label": "Select a class column to augment:",
+							"include": "inputVars",
+							"order": false,
+							"columntype": "a",
+							"max": 1,
+							"min": 0,
+							"visible": "",
+							"table": null
+						},
+						{
+							"id": "classToAugment",
+							"type": "dropdown",
+							"label": "Select a class value to augment:",
+							"items": {
+								"ref": "classVar"
+							},
+							"required": false,
+							"placeholder": "",
+							"visible": "$classVar",
+							"enabled": "$classVar",
+							"indent": 1
+						}
+					]
+				},
+				{
+					"id": "section9",
+					"type": "section",
+					"label": "Output specification",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "numSamples",
+							"type": "numberfield",
+							"label": "Number of synthetic observations:",
+							"placeholder": "",
+							"required": true,
+							"max": null,
+							"min": 10,
+							"excludemin": false,
+							"visible": "",
+							"integer": true
+						},
+						{
+							"id": "text1",
+							"type": "text",
+							"text": "Connect a SAS Cloud Analytics Services (CAS) table to the output port of this step.",
+							"visible": ""
+						},
+						{
+							"id": "outputTable",
+							"type": "outputtable",
+							"label": "Provide output table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "assessmentTable",
+							"type": "outputtable",
+							"label": "Provide assessment table (optional):",
+							"required": false,
+							"placeholder": "PUBLIC.SMOTE_ASSESSMENT",
+							"visible": [
+								"$sampling_percent",
+								">",
+								0
+							],
+							"enabled": [
+								"$sampling_percent",
+								">",
+								0
+							]
+						},
+						{
+							"id": "text3",
+							"type": "text",
+							"text": "Note: Assessment table will be populated only if a value greater than 0 has been selected for the sampling percentage (Configuration tab).",
+							"visible": [
+								"$sampling_percent",
+								">",
+								0
+							],
+							"enabled": [
+								"$sampling_percent",
+								">",
+								0
+							]
+						}
+					]
+				},
+				{
+					"id": "privacyRisk",
+					"type": "section",
+					"label": "Privacy Risk",
+					"open": true,
+					"visible": [
+						"$sampling_percent",
+						">",
+						0
+					],
+					"enabled": [
+						"$sampling_percent",
+						">",
+						0
+					],
+					"children": [
+						{
+							"id": "singling_out_risk",
+							"type": "checkbox",
+							"label": "Measure Singling Out Risk",
+							"visible": [
+								"$sampling_percent",
+								">",
+								0
+							],
+							"enabled": [
+								"$sampling_percent",
+								">",
+								0
+							]
+						},
+						{
+							"id": "evaluation_mode",
+							"type": "dropdown",
+							"label": "Select evaluation mode:",
+							"items": [
+								{
+									"value": "univariate",
+									"label": "univariate"
+								},
+								{
+									"value": "multivariate",
+									"label": "multivariate"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"indent": 2,
+							"enabled": [
+								"$singling_out_risk",
+								"=",
+								true
+							]
+						},
+						{
+							"id": "conf_interval",
+							"type": "numstepper",
+							"label": "Select confidence interval (percentage):",
+							"required": false,
+							"integer": false,
+							"min": 0.9,
+							"max": 0.99,
+							"stepsize": 0.01,
+							"indent": 2,
+							"visible": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"enabled": [
+								"$singling_out_risk",
+								"=",
+								true
+							]
+						},
+						{
+							"id": "s_o_attacks",
+							"type": "numstepper",
+							"label": "Provide number of singling out attacks to simulate:",
+							"required": false,
+							"integer": false,
+							"min": 10,
+							"max": 2000,
+							"stepsize": 1,
+							"visible": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"indent": 2,
+							"enabled": [
+								"$singling_out_risk",
+								"=",
+								true
+							]
+						},
+						{
+							"id": "so_results_tbl",
+							"type": "outputtable",
+							"label": "Provide singling out risk results table:",
+							"required": true,
+							"placeholder": "",
+							"visible": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"enabled": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"indent": 2
+						},
+						{
+							"id": "so_queries_tbl",
+							"type": "outputtable",
+							"label": "Provide singling out risk queries table:",
+							"required": true,
+							"placeholder": "",
+							"visible": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"enabled": [
+								"$singling_out_risk",
+								"=",
+								true
+							],
+							"indent": 2
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "numThreads",
+					"type": "numstepper",
+					"label": "Select number of threads:",
+					"required": false,
+					"integer": true,
+					"min": 0,
+					"max": 1024,
+					"stepsize": 1
+				},
+				{
+					"id": "seedNumber",
+					"type": "numberfield",
+					"label": "Select a seed:",
+					"placeholder": "",
+					"required": false,
+					"max": null,
+					"min": null,
+					"visible": ""
+				},
+				{
+					"id": "extrapolationFactor",
+					"type": "numberfield",
+					"label": "Provide extrapolation factor (to perturb input data boundary):",
+					"placeholder": "",
+					"required": false,
+					"max": null,
+					"min": 0,
+					"excludemin": false,
+					"visible": "",
+					"integer": false
+				},
+				{
+					"id": "prov_flag_name",
+					"type": "textfield",
+					"label": "Edit provenance variable name:",
+					"placeholder": "Synthetic_Data_Provenance",
+					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "sampling_percent",
+					"type": "numstepper",
+					"label": "Provide sampling percentage for assessment:",
+					"required": false,
+					"integer": false,
+					"min": 0,
+					"max": 99,
+					"stepsize": 1
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "about_description",
+					"type": "text",
+					"text": "Synthetic Minority Oversampling TEchnique (SMOTE) \n=====================================\n\nThis custom step helps you generate synthetic data based on an input table, using the Synthetic Minority Oversampling TEchnique (SMOTE). SMOTE is an oversampling technique which identifies new data observations in the neighborhood of closely associated original observations. \n\nSMOTE is an alternative approach to Generative Adversarial Networks (GANs) for generating synthetic tabular data. Access to synthetic data helps you make better, data-informed decisions in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data.",
+					"visible": ""
+				},
+				{
+					"id": "section8",
+					"type": "section",
+					"label": "Prerequisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "text4",
+							"type": "text",
+							"text": "1. A SAS Viya 4 environment, preferably monthly stable 2024.10 or later\n\n2. A Visual Data Mining and Machine Learning (VDMML) license, usually provided with SAS Viya, SAS Viya Enterprise or Advanced.\n\n3. An active SAS Cloud Analytics Services (CAS) connection during runtime.\n\n4. The smote.smoteSample CAS action requires Python configuration, as specified in SAS documentation. Please work with your SAS administrator to have the same configured. Specifically, ensure the following:\n\n    1. The correct version of Python is installed (as of version 2024.10, this was 3.11.x)  \n   2. [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) , version atleast 0.7.0 and beyond \n   3. [hnswlib](https://pypi.org/project/hnswlib/)\n   4. [protobuf](https://pypi.org/project/protobuf/)\n\n(OPTIONAL) Prerequisites for Singling Out Risk calculation\n\nIf you want to measure singling out risk (provided as an option in this step), note the following additional prerequisites:\n\n1. SAS compute session should be configured to access a Python runtime of version of > 3.7 and < 3.12.\n\n2. A Python package - anonymeter - should be installed in the above runtime.  Make note of details about anonymeter at https://pypi.org/project/anonymeter/\n\n3. As a further dependency on above, anonymeter requires NumPy between version 1.2 and less than 1.7 (specifically, \"numpy >=1.22, <1.27\", # limited by Numba support)\n\nNote terms of anonymeter license here: https://github.com/statice/anonymeter/blob/main/LICENSE.md\n\nNote citation in Privacy Risk section below.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "section10",
+					"type": "section",
+					"label": "Assumptions",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "text6",
+							"type": "text",
+							"text": "Current assumptions for this initial versions (future versions may improve upon the same):\n\n1. Users  choose either an existing Chroma DB vector database collection or load PDF or CSV files to an existing or new Chroma DB collection.\n\n2. Users may load all PDFs in a directory on the SAS Server (filesystem), or select a PDF / CSV of their choice.\n\n3. The code assumes use of a Chroma DB vector store.  Users may choose to replace this with other supported vector stores.\n\n4. The code uses the langchain LLM framework.  \n\n5. PDFs (containing text) and single CSV files are currently the only loadable file format allowed.  Users are however free to ingest various other document types into a Chroma DB collection beforehand, using the \"Vector Databases - Hydrate Chroma DB collection\" SAS Studio Custom Step (refer documentation)\n\n6. User has already configured Azure OpenAI to deploy both an embedding function and LLM service, or knows the deployment names. \n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "parameters_input",
+							"type": "section",
+							"label": "Input parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text",
+									"type": "text",
+									"text": "1. Input table (input port, required): connect a CAS table to the input port.\n\n2. Nearest neighbors (numeric stepper, default 5): select the number of nearest neighbours to be used by the SMOTE algorithm as the basis for identifying candidate synthetic points.\n\n3. Input columns (column selector): select all inputs for the SMOTE process. You would also need to include the class and any nominal columns.\n\n4. Nominal variables (column selector): select any nominal variables you wish to use. Your nominal variables are required to be in the inputs column list.\n\n5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column. Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process. Your class column is required to be in the inputs column list.\n\n6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment. The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_output_specs",
+							"type": "section",
+							"label": "Output specifications",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text",
+									"type": "text",
+									"text": "1. Number of synthetic observations (numeric field): specify the number of synthetic observations you would like in the output table.\n\n2. Output table (output port): attach a CAS table to the output port to hold results.\n\n3. Assessment table (output port, optional): Attach a CAS table to the second output port (assessmentTable) of this step in case you select a sampling percentage (refer Configuration tab, pt #5) greater than 0.  A default value of PUBLIC.SMOTE_ASSESSMENT is assigned in case you do not specify a table.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_privacy_risk",
+							"type": "section",
+							"label": "Privacy Risk",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "pr_parameters_text",
+									"type": "text",
+									"text": "Synthetic data requires assurances on data privacy.  One aspect of privacy risk is singling out risk, which evolved alongside General Data Protection Regulation (GDPR).  This is an optional step.  If you wish to measure singling out risk,  enter the parameters below.\n\n1. Measure Singling Out Risk (check box, default not checked):  select this option if you want to measure singling out risk.  Be aware of the Python dependencies (in Prerequisites section) and the fact that this involves a longer runtime in addition to the generation operation.\n\n2. Evaluation mode (drop-down list): select either univariate or multivariate to define the type of attack query to be tested.\n\n3. Confidence interval (percentage, numeric stepper): select a number from 90 to 99 to define the confidence level while providing privacy risk estimates.\n\n4.  Number of attacks (numeric stepper, default 100) : enter number of attacks (queries) to simulate.\n\n5. Singling Out Risk Results table (output port): attach a CAS table to the so_results_tbl output port to hold results.\n\n6. Singling Out Risk Queries table (output port): attach a CAS table to the so_queries_tbl output port to hold results.\n",
+									"visible": ""
+								},
+								{
+									"id": "section2",
+									"type": "section",
+									"label": "Citation",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "text5",
+											"type": "text",
+											"text": "Since we make use of an open-source package, anonymeter, to perform these calculations, we provide the following citation as mentioned in package documentation: \n\n\"A Unified Framework for Quantifying Privacy Risk in Synthetic Data\", M. Giomi et al, PoPETS 2023. \n\nThis bibtex entry can be used to refer to the paper:\n\n@misc{anonymeter,\n  doi = {https://doi.org/10.56553/popets-2023-0055},\n  url = {https://petsymposium.org/popets/2023/popets-2023-0055.php},\n  journal = {Proceedings of Privacy Enhancing Technologies Symposium},\n  year = {2023},\n  author = {Giomi, Matteo and Boenisch, Franziska and Wehmeyer, Christoph and Tasnádi, Borbála},\n  title = {A Unified Framework for Quantifying Privacy Risk in Synthetic Data},\n}\n",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "parameters_config_1",
+							"type": "section",
+							"label": "Configuration ",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text_1",
+									"type": "text",
+									"text": "1. Number of threads: (numeric stepper, optional): most of the time, you do not need to modify this. Change if you need to especially control the number of threads in which the process runs.\n\n2. Select a seed (numeric field, optional): specify a seed number to establish (but not completely guarantee) some level of reproducability with respect to results.\n\n3. Select extrapolation factor: specify a number (double) to use as a standard deviation in order to perturb (add noise or randomness) the input data boundaries.\n\n4. Name for synthetic data provenance variable (optional, default provided): insert a value only if you want to give a special name to a flag that indicates this data is synthetic.  Otherwise, a default name of Synthetic_Data_Provenance will be used instead.\n\n5. Provide sampling percentage for assessment (numeric stepper, default is 0):  Enter a value between 0 and 100 to sample a test dataset before running SMOTE.  Note that the test dataset will NOT be used to generate data.  The test dataset will be appended with an equal number of observations from the synthetic dataset (along with the provenance flag described in #4) and can be used for assessment purposes.",
+									"visible": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "about_runtimecontrol",
+					"type": "section",
+					"label": "Run-time Control",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "runtimecontrol_text",
+							"type": "text",
+							"text": "Note: Run-time control is optional.  You may choose whether to execute the main code of this step or not, based on upstream conditions set by earlier SAS programs.  This includes nodes run prior to this custom step earlier in a SAS Studio Flow, or a previous program in the same session.\n\nRefer this blog (https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.\n\nThe following macro variable,\n\n_smt_run_trigger\n\nwill initialize with a value of 1 by default, indicating an \"enabled\" status and allowing the custom step to run.\n\nIf you wish to control execution of this custom step, include code in an upstream SAS program to set this variable to 0.  This \"disables\" execution of the custom step.\n\nTo \"disable\" this step, run the following code upstream:\n\n%global _smt_run_trigger;\n%let _smt_run_trigger =0;\n\nTo \"enable\" this step again, run the following (it's assumed that this has already been set as a global variable):\n\n%let _smt_run_trigger =1;\n\nIMPORTANT: Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_documentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "documentation_text",
+							"type": "text",
+							"text": "1.  Documentation on the smote.smoteSample CAS action: https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm\n\n2. PyPi page for sas-ipc-queue.  While an implementation detail for the smoteSample action, this is a good place to highlight efficient memory handling techniques, for interested programmers: https://pypi.org/project/sas-ipc-queue/\n\n3. PyPi page for hnswlib, an algorithm for fast approximate nearest neighbour search, used in smoteSample: https://pypi.org/project/hnswlib/\n\n4. PyPi page for protobuf (Python package used within action): https://pypi.org/project/protobuf/\n\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "version_text",
+					"type": "text",
+					"text": "Version: 1.3.1  (10DEC2024)",
+					"visible": ""
+				},
+				{
+					"id": "contact_text",
+					"type": "text",
+					"text": "Created/contact: \n\n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)\n- Josiah Chua (josiah.chua@sas.com)\n\nAcknowledgements to others for their help on details, testing or exploring the area: \n- David Olaleye (david.olaleye@sas.com)\n- Suneel Grover (suneel.grover@sas.com)\n- Reza Nazari (reza.nazari@sas.com)\n- SAS Analytics R&D team",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputTable": {
+			"library": "",
+			"table": ""
+		},
+		"numK": 5,
+		"inputVars": [],
+		"nominalVars": [],
+		"classVar": [],
+		"classToAugment": null,
+		"numSamples": 100,
+		"outputTable": {
+			"library": "",
+			"table": ""
+		},
+		"assessmentTable": {
+			"library": "",
+			"table": ""
+		},
+		"singling_out_risk": false,
+		"evaluation_mode": {
+			"value": "multivariate",
+			"label": "multivariate"
+		},
+		"conf_interval": 0.95,
+		"s_o_attacks": 100,
+		"so_results_tbl": {
+			"library": "",
+			"table": ""
+		},
+		"so_queries_tbl": {
+			"library": "",
+			"table": ""
+		},
+		"numThreads": 0,
+		"seedNumber": 123,
+		"extrapolationFactor": 0,
+		"prov_flag_name": "Synthetic_Data_Provenance",
+		"sampling_percent": 0
+	}
+}
