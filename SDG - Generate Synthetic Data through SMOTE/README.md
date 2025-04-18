@@ -60,13 +60,14 @@ Note citation in [Privacy Risk](#privacy-risk) section below.
 
 2. Nearest neighbors (numeric stepper, default 5): select the number of nearest neighbours to be used by the SMOTE algorithm as the basis for identifying candidate synthetic points.
 
-3. Input columns (column selector): select all inputs for the SMOTE process.  You would also need to include the class and any nominal columns.
+3. Interval input columns (column selector): select all interval inputs for the SMOTE process.  
 
-4. Nominal variables (column selector): select any nominal variables you wish to use. Your nominal variables are required to be in the inputs column list.
+4. Nominal input columns (column selector): select any nominal input columns you wish to use. 
 
-5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column.  Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process.  Your class column is required to be in the inputs column list.
+5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column.  Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process.  Your class column is required to be in the nominal input column list.
 
-6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment.  The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.
+6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment.  The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.  The class variable needs to be part of the nominal input column list.
+
 ----
 ### Privacy Risk
 Synthetic data requires assurances on data privacy.  One aspect of privacy risk is singling out risk, which evolved alongside General Data Protection Regulation (GDPR).  **This is an optional step.**  If you wish to measure singling out risk,  enter the parameters below.
@@ -193,7 +194,7 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
-* Version 2.0.0 (17APR2025)
+* Version 2.0.0 (18APR2025)
     * Refactored code for Proc SMOTE
 * Version 1.3.1 (10DEC2024)
     * Add calculation for privacy risk (singling out risk)

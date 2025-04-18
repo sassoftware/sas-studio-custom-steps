@@ -46,12 +46,12 @@
 							"stepsize": 1
 						},
 						{
-							"id": "inputVars",
+							"id": "intervalVars",
 							"type": "columnselector",
-							"label": "Select input columns:",
+							"label": "Select interval input columns:",
 							"include": null,
 							"order": false,
-							"columntype": "a",
+							"columntype": "n",
 							"max": null,
 							"min": 1,
 							"visible": "",
@@ -61,19 +61,20 @@
 							"id": "nominalVars",
 							"type": "columnselector",
 							"label": "Select nominal columns:",
-							"include": "inputVars",
+							"exclude": "intervalVars",
 							"order": false,
 							"columntype": "a",
 							"max": null,
 							"min": 0,
 							"visible": "",
-							"table": null
+							"table": "inputTable",
+							"include": null
 						},
 						{
 							"id": "classVar",
 							"type": "columnselector",
 							"label": "Select a class column to augment:",
-							"include": "inputVars",
+							"include": "nominalVars",
 							"order": false,
 							"columntype": "a",
 							"max": 1,
@@ -419,7 +420,7 @@
 								{
 									"id": "input_parameters_text",
 									"type": "text",
-									"text": "1. Input table (input port, required): connect a CAS table to the input port.\n\n2. Nearest neighbors (numeric stepper, default 5): select the number of nearest neighbours to be used by the SMOTE algorithm as the basis for identifying candidate synthetic points.\n\n3. Input columns (column selector): select all inputs for the SMOTE process. You would also need to include the class and any nominal columns.\n\n4. Nominal variables (column selector): select any nominal variables you wish to use. Your nominal variables are required to be in the inputs column list.\n\n5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column. Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process. Your class column is required to be in the inputs column list.\n\n6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment. The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.",
+									"text": "1. Input table (input port, required): connect a CAS table to the input port.\n\n2. Nearest neighbors (numeric stepper, default 5): select the number of nearest neighbours to be used by the SMOTE algorithm as the basis for identifying candidate synthetic points.\n\n3. Interval input columns (column selector): select all interval (e.g. continuous, numeric) for the SMOTE process. \n\n4. Nominal variables (column selector): select any nominal variables you wish to use. \n\n5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column. Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process. Your class column is required to be in the nominal variables list.\n\n6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment. The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.",
 									"visible": ""
 								}
 							]
@@ -519,7 +520,7 @@
 				{
 					"id": "version_text",
 					"type": "text",
-					"text": "Version: 1.3.1  (10DEC2024)",
+					"text": "Version: 2.0.0  (18APR2025)",
 					"visible": ""
 				},
 				{
@@ -538,7 +539,7 @@
 			"table": ""
 		},
 		"numK": 5,
-		"inputVars": [],
+		"intervalVars": [],
 		"nominalVars": [],
 		"classVar": [],
 		"classToAugment": null,
@@ -571,5 +572,11 @@
 		"extrapolationFactor": 0,
 		"prov_flag_name": "Synthetic_Data_Provenance",
 		"sampling_percent": 0
-	}
+	},
+	"columnExclusions": [
+		[
+			"nominalVars",
+			"intervalVars"
+		]
+	]
 }
