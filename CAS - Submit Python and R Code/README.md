@@ -51,7 +51,7 @@ Find a demonstration of this step in this YouTube video: [CAS - Submit Python an
 
 ## Change Log
 
-* Version 1.1 (20MAR2025)
+* Version 1.1 (05MAY2025)
     * Fix Bug in from Flow Mode execution
     
     * Update readme
