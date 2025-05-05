@@ -55,6 +55,9 @@ https://github.com/sassoftware/python-dlpy
 
 5. Peter Styliadis provides this helpful post (SAS documentation link contained therein) on how to identify a current active CAS session: https://communities.sas.com/t5/SAS-Viya/Programmatically-detect-an-active-CAS-session/m-p/890914#M1985
 
+## Ideas for future enhancements
+ - Modify Python routine to create a CAS session using SAS.submit() when there is no existing CAS session. Currently, when there is no CAS session a new one will be created using SWAT. Which means that SAS Compute has no knowledge about the CAS session. Code snippets can be found [here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/_codegen_snippets/code-samples/Reuse-CAS-session-from-SWAT#alternative-approaches-when-cas-session-does-not-exist).
+ 
 ## Created / contact:
 
 - Neela Vengateshwaran (Neela.Vengateshwaran@sas.com)
