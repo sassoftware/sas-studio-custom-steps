@@ -47,11 +47,14 @@ Note that the flow shown can be used by the [Loop Deployed Object](../Loop%20Dep
 
 ## Output port
 
-The custom step has one output table with the following information:
+The custom step has one output table with the following columns:
 ![output](img/Output%20port.PNG)
 
 ## Change Log
 
+* Version 1.4 (20MAY2025)
+    * Removed several small issues.
+    * Added the reportModifier to the output table.
 * Version 1.3 (16APR2024)
     * Small GUI changes.
     * Removed a small issue and did a name change.
