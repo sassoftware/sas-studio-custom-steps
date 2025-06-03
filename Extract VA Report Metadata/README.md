@@ -50,8 +50,22 @@ Note that the flow shown can be used by the [Loop Deployed Object](../Loop%20Dep
 The custom step has one output table with the following columns:
 ![output](img/Output%20port.PNG)
 
+## Version 1.5
+
+New in version 1.5 are the columns:
+* reportCreator
+* reportCreateTS
+* reportUpdateTS
+
+The column 'reportPath' has been renamed to 'reportContentFolder'.
+
+Also new in version 1.5 is the extraction of additional metadata depending on the resources used by the report.
+
 ## Change Log
 
+* Version 1.5 (03JUN2025)
+    * Added three additional columns to the output table.
+    * Extracting additional report metadata.
 * Version 1.4 (20MAY2025)
     * Removed several small issues.
     * Added the reportModifier to the output table.
