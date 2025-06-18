@@ -87,19 +87,23 @@ Note that:
 - Here you can download the log file for each instance of the **deployed** flow or you can use the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step to download the log file from within the flow.
 
 ## Custom step messages
-| Step message                                                     | Reason    |
-|------------------------------------------------------------------|-----------|
-| ERROR: The items table in the response file does not exist. Aborting process.  | The HTTP response file, for the **/jobExecution/jobRequests** endpoint, doesn't contain the 'items' table. This prevents the custom step from retrieving the deployed flow URI.|
-| ERROR: The response file does not exist. Aborting process.  | The HTTP response file for the **../jobExecution/jobs**- and/or **../jobExecution/jobRequests** endpoint doesn't exist.  |
-| ERROR: Input table could not be opened.  | The custom step input table could not be opened for reading. |
-| ERROR: 0 of more then 1 job encountered with name &_jobname. Aborting process.  | The number of, based on the job defintion name, isn't 1. This could mean that the job definition name is not unique enough or there's no job for the given job defintion name.|
-|ERROR: job_uri table does not exist. Aborting process. | The work table, created in the **get_job_uri** macro, where the job uri should be stored is not available. |
-| ERROR: Not enough parameters to run the loop step. Aborting process. | The source table for this custom step is empty. |
-| ERROR: No URI provided. Aborting process. | The macro 'exec_job' didn't receive a value for the job_uri parameter. |
-| ERROR: Unable to update the status table. No response file encountered. | The macro 'update_status' didn't receive a response file. Might be caused by a Viya hick-up. This will not cause the custom step to abort... |
-| ERROR: The status table, &_output, does not exist. | The internal status table, which is exposed as the step output table, doesn't exist!. This will cause the step to abort. |
+| Step message                                                     | Reason    | Hard Exit? |
+|------------------------------------------------------------------|-----------|-----|
+| ERROR: The items table in the response file does not exist. Aborting process.  | The HTTP response file, for the **/jobExecution/jobRequests** endpoint, doesn't contain the 'items' table. This prevents the custom step from retrieving the deployed flow URI.| Yes |
+| ERROR: The response file does not exist. Aborting process.  | The HTTP response file for the **../jobExecution/jobs**- and/or **../jobExecution/jobRequests** endpoint doesn't exist. | Yes |
+| ERROR: Input table could not be opened.  | The custom step input table could not be opened for reading. | Yes |
+| ERROR: 0 of more then 1 job encountered with name &_jobname. Aborting process.  | The number of job definitions, based on the job defintion name, isn't 1. This could mean that the job definition name is not unique enough or there's no job for the given job defintion name.| Yes |
+|ERROR: job_uri table does not exist. Aborting process. | The work table, created in the **get_job_uri** macro, where the job uri should be stored is not available. | Yes |
+| ERROR: Not enough parameters to run the loop step. Aborting process. | The source table for this custom step is empty. | Yes |
+| ERROR: No URI provided. Aborting process. | The macro 'exec_job' didn't receive a value for the job_uri parameter. | Yes |
+| ERROR: Unable to update the status table. No response file encountered. | The macro 'update_status' didn't receive a response file. Might be caused by a Viya hick-up. This will not cause the custom step to abort... | No |
+| ERROR: The status table, &_output, does not exist. | The internal status table, which is exposed as the step output table, doesn't exist!. This will cause the step to abort. | Yes |
+| ERROR: &exception exception(s) encountered. Aborting process. | You have specified to abort in case one or more looped processes failed. | Yes |
+
 
 ## Change Log
+
+Version 1.95 (17JUN2025): Hard exit in case crucial components are missing.
 
 Version 1.9 (03OCT2024) : Removed a bug where the custom step would never finish.
 
