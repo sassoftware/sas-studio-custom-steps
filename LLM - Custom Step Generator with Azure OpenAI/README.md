@@ -1,4 +1,4 @@
-# LLM - Custom Step Generator
+# LLM - Custom Step Generator with Azure OpenAI
 
 ## Description
 
@@ -33,7 +33,7 @@ AZURE_OAI_KEY='your_api_key'
 AZURE_OAI_DEPLOYMENT='gpt-4'
 ```
 
-You can find an example in [.env.sample.txt](/LLM%20-%20Custom%20Step%20Generator/.env.sample.txt).
+You can find an example in [extras/.env.sample.txt](extras/.env.sample.txt).
 
 ## 3. System Message File
 
@@ -43,7 +43,7 @@ You can find an example in [.env.sample.txt](/LLM%20-%20Custom%20Step%20Generato
   - Guidelines for structuring the output (e.g., prompt UI, program, and `.step` file).
 - This file acts as an "instruction manual" for the LLM, ensuring accurate and relevant output.
 
-You can find an example in [cs2_system_message_new.md](/LLM%20-%20Custom%20Step%20Generator/cs2_system_message_new.md).
+You can find an example in [extras/cs2_system_message_new.md](extras/cs2_system_message_new.md).
 
 ## 4. Python Dependencies
 
@@ -57,7 +57,7 @@ You can find an example in [cs2_system_message_new.md](/LLM%20-%20Custom%20Step%
 
 ## 6. SAS Studio Environment
 
-- A working SAS Studio environment is required to upload and test the generated custom step file (`.step`). The custom step was tested with SAS Viya LTS 2024.09.
+- A working SAS Studio environment is required to upload and test the generated custom step file (`.step`). The custom step was tested with SAS Viya LTS 2025.03 and Stable 2024.09.
 
 ## 7. Detailed Prompt
 
@@ -81,7 +81,7 @@ You can find an example in [cs2_system_message_new.md](/LLM%20-%20Custom%20Step%
 
 ## Requirements
 
-Tested on Viya version Stable 2024.09.
+Tested on Viya version LTS 2025.03 and Stable 2024.09.
 
 ## Usage
 
@@ -151,6 +151,8 @@ Custom Step options filled:
 
 ## Change Log
 
+* Version 1.1 (29JUN2025)
+    * Reviewer suggestions.
 * Version 1.0 (14FEB2025)
     * Initial version
 

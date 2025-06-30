@@ -1,5 +1,5 @@
 
-# LLM - Document Flows with Azure OpenAI Custom Step
+# LLM - Document Studio Flows with Azure OpenAI Custom Step
 
 ## Description
 
