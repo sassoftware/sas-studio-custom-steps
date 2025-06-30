@@ -56,11 +56,11 @@ AZURE_OAI_KEY='my_api_key' # change my_key
 AZURE_OAI_DEPLOYMENT='gpt-4o' # change to match your deployment name
 ```
 
-Example available at [.env.sample.txt](.env.sample.txt).
+Example available at [extras/.env.sample.txt](extras/.env.sample.txt).
 
 ### 4. System Message File
 
-A `system_message.txt` file shapes the documentation by guiding the LLM. It defines structure, detail level, and focus areas. Example available at [system_message.txt](system_message.txt).
+A `system_message.txt` file shapes the documentation by guiding the LLM. It defines structure, detail level, and focus areas. Example available at [extras/system_message.txt](extras/system_message.txt).
 
 ### 5. Output Location
 
@@ -90,9 +90,9 @@ Specify a file path for the generated documentation. Ensure write permissions.
 
 #### Required Inputs
 
-1. **Flow to be documented (.flw file)**: Full path to the SAS Studio flow file to be documented. Example: `Car_Make_with_SubFlows.flw`.
-2. **Folder for .env file**: Directory containing the `.env` file for Azure OpenAI connection.
-3. **File for LLM system message (system_message.txt)**: Path to a .txt file containing the system message.
+1. **Flow to be documented (.flw file)**: Full path to the SAS Studio flow file to be documented. Example: document `Flow.flw` stored in `sasserver:/azuredm/code/Flow.flw`.
+2. **Folder for the .env file**: Directory containing the `.env` file for the Azure OpenAI connection.
+3. **File for LLM system message (system_message.txt)**: Path to the `system_message.txt` file containing the system message.
 
 #### Required Outputs
 
@@ -108,9 +108,9 @@ Run the SAS Studio flow.
 
   ![Expected Result A](img/LLM%20-%20Document%20Flows%20with%20Azure%20OpenAI%20-%20Expected%20Result%20A.png)
 
-- The file contains Markdown. View it with a Markdown viewer, e.g., Visual Studio Code.
-
   ![Expected Result B](img/LLM%20-%20Document%20Flows%20with%20Azure%20OpenAI%20-%20Expected%20Result%20B.png)
+
+- The file contains Markdown. View it with a Markdown viewer, e.g., Visual Studio Code.
 
   ![Expected Result C](img/LLM%20-%20Document%20Flows%20with%20Azure%20OpenAI%20-%20Expected%20Result%20C.png)
 
@@ -119,6 +119,10 @@ Run the SAS Studio flow.
 ---
 
 ## Change Log
+
+* Version 1.1 (29JUN2025):
+
+    * Implemented reviewer suggestions.
 
 * Version 1.0 (09APR2025):
 
