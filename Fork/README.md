@@ -21,7 +21,9 @@ You can deploy an object, from within SAS Studio Flow, by selecting a SAS Studio
 
 ![Properties](img/Fork%20Run%20-%20Properties.png)
 
-The 'Fork Run' custom step needs the name of the deployed object, flow or program, to run the object. The **'Specify the deployed object name (Case sensitive!)'** setting gives you the possibility to enter that name. Note that the name is case sensitive!
+The 'Fork Run' custom step needs the name of the deployed object, flow or program, to run the object. The **'Specify the deployed object name (Case sensitive!)'** setting gives you the possibility to enter that name. 
+
+Note that the name is case sensitive and needs to be unique throughout the SAS Viya environment.
 
 ### Tab: About
 
@@ -83,11 +85,18 @@ Download the .step files, upload them into your environment and start using them
 
 Something to be aware of, it takes a fraction of a second for the input table, for the 'Fork Wait' custom step, to appear when trying to connect the 'Fork Run' output table to one of the 8 input tables.
 
+In version 2025.6 you need to explicitly create an input port 
+for the 'Fork Wait' custom step before connecting the 'Fork Run' output table.
+
+![Add Input Port](img/Fork%20Wait%20-%20Add%20input%20port.png)
+
+The logs for each of the started deployed objects are available via the 'Jobs and Flows' section within the SAS Environment Manager. Another option is to download each log using the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step. This way you also can use the [**LOG file scaper**](../LOG%20file%20scraper/README.md) custom step to identify 'ERROR'- and 'WARNING' messages during the Fork run.
+
 # Custom steps defined error messages
 
 | custom step | message | Reason |
 | ---- | ------- | -------| 
-| Fork **Run** | ERROR: Importants columns do not exist in the response file. Aborting process. | The columns 'name' and 'jobDefinitionUri' are missing from the response file. Are you authorized to read the metadata for the deployed object? **Macro: get_job_uri** |
+| Fork **Run** | ERROR: Importants columns do not exist in the response file. Aborting process. | The columns 'name' and 'jobDefinitionUri' are missing from the response file. Are you authorized to read the metadata for the deployed object and/or are you sure the deployed object exists? **Macro: get_job_uri** |
 | Fork **Run** | ERROR: Unable to open the 'items' array. Aborting process. | Is the 'dataset' already opened in the same session? **Macro: get_job_uri** |
 | Fork **Run** | ERROR: The items array in the response file does not exist. Aborting process. | The response file is missing the items array. This should never happen! **Macro: get_job_uri**|
 | Fork **Run** | ERROR: The response file does not exist. Aborting process. | The Viya REST API didn't return a response file. **Macros: exec_job** and  **get_job_uri** |
