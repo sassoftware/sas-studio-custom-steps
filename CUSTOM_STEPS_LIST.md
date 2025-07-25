@@ -21,7 +21,7 @@ The list of available Custom Steps further down on this page uses the following 
 | Name | Brief Description | Contributor/Contact | Viya Version Supported | Last Update |
 | :--- | :--- | :-: | :-: | :-: |
 | [_template](./_template/README.md) | Template to use for contributions | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 04OCT2024 |
-| [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) | 2023.12 <br>or later | 21FEB2024 |
+| [Airflow - Generate DAG](./Airflow%20-%20Generate%20DAG/README.md) | Generates an Apache Airflow DAG using SAS Studio Flow where flow steps represent Airflow tasks using the [SAS Airflow Provider](https://github.com/sassoftware/sas-airflow-provider) | [Nicolas Robert](https://github.com/nicrobert) / [apsaros](https://github.com/apsaros)| 2023.12 <br>or later | 25JUL2025 |
 | [Anonymize and Mask Data](./Anonymize%20and%20Mask%20Data/README.md) | Anonymize and Mask Data using QKB definitions | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2023.06 <br>or later | 19FEB2024 |
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 26OCT2022 |
 | [CAS - Convert Char to Varchar](./CAS%20-%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 <br>or later | 05SEP2023 |
