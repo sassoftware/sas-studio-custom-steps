@@ -15,6 +15,7 @@ The list of available Custom Steps further down on this page uses the following 
 | OCR              | Optical Character Recognition                                         |
 | SDG              | Synthetic Data Generation                                             |
 | SID              | SAS Intelligent Decisioning related                                   |
+| VA               | SAS Visual Analytics related                                          |
 
 ## Available Custom Steps
 
