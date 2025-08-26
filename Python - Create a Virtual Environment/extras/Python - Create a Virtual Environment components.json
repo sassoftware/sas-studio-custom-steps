@@ -2,16 +2,23 @@
 	"showPageContentOnly": true,
 	"pages": [
 		{
-			"id": "page1",
+			"id": "param",
 			"type": "page",
 			"label": "Parameters",
 			"children": [
 				{
 					"id": "venv",
-					"type": "textfield",
-					"label": "Provide a name for your virtual environment (note: provide the full path if you want to persist your virtual environment)",
-					"placeholder": "venv",
+					"type": "path",
+					"label": "Provide a path for your virtual environment (note: provide a path on the filesystem if you want to persist your virtual environment):",
+					"pathtype": "folder",
+					"placeholder": "",
 					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "install_system_site_packages",
+					"type": "checkbox",
+					"label": "Install system site packages (inherited from global environment)",
 					"visible": ""
 				},
 				{
@@ -25,7 +32,7 @@
 				{
 					"id": "text1",
 					"type": "text",
-					"text": "Note: Creation of a virtual environment also activates the same.",
+					"text": "Notes: \n1. Creation of a virtual environment also activates the same.\n2. The virtual environment will be created under a folder named venv.",
 					"visible": ""
 				}
 			]
@@ -38,15 +45,46 @@
 				{
 					"id": "text2",
 					"type": "text",
-					"text": "Python - Create a virtual environment\n\nThe \"Python - Create a virtual environment\" custom step helps users create a virtual Python environment, install a given set of packages, and work within the confines of the new Python environment for project or program-specific purposes.\n\nUsers may choose to persist the virtual environment folder for later reuse, by simply providing a full path to a persistent location, when asked to provide a name for the location (make sure to include the name for the virtualenv folder - i.e. /path/to/storage/venv).  In such a case, please provide a path on a shared file system, which you expect to access through another SAS session later on.  Most SAS Viya deployments may contain a /mnt/... folder location which serves this purpose.\n\nUsers also have an option to provide a requirements file consisting of packages which they would like pip-installed.  Either provide a path to a requirements.txt file which contains a list of python packages (and optionally, specific versions), or provide a list of packages as a string, separated by a space.\n\nCreated / contact : Sundaresh Sankaran (sundaresh.sankaran@sas.com) and Ali Aiello (ali.aiello@sas.com) \n\nVersion : 1.0.  (20MAY2022)\n\nFor more details, refer https://blogs.sas.com/content/subconsciousmusings/2022/05/16/python-a-la-carte/",
+					"text": "Python - Create a Virtual Environment\n===============================\n\nThe \"Python - Create a Virtual Environment\" custom step helps users create a virtual Python environment, install a given set of packages if needed, and work within the confines of the new Python environment for project or program-specific purposes.\n\nUsers may choose to persist the virtual environment folder for later reuse, by simply providing a full path to a persistent location folder.  Please provide a path on a shared file system, which you expect to access through another SAS session later on.  Most SAS Viya deployments may contain a /mnt/... folder location which serves this purpose.\n\nUsers also have an option to provide a requirements file consisting of packages which they would like pip-installed.  Either provide a path to a requirements.txt file which contains a list of python packages (and optionally, specific versions), or provide a list of packages as a string, separated by a space.\n\nFor more details, refer https://blogs.sas.com/content/subconsciousmusings/2022/05/16/python-a-la-carte/",
 					"visible": ""
+				},
+				{
+					"id": "contact_details",
+					"type": "section",
+					"label": "Created / Contact",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "created_contact_text",
+							"type": "text",
+							"text": "Sundaresh Sankaran (sundaresh.sankaran@sas.com) and Ali Aiello (ali.aiello@sas.com) ",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_version",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 2.0.0  (26AUG2025)",
+							"visible": ""
+						}
+					]
 				}
 			]
 		}
 	],
 	"syntaxversion": "1.3.0",
 	"values": {
-		"venv": "venv",
+		"venv": "",
+		"install_system_site_packages": true,
 		"req": ""
 	}
 }

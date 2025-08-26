@@ -1,7 +1,7 @@
-# SAS Studio Custom Steps for virtual Python environments
+# Python - Create a Virtual Environment
 
 ## Description
-Package your Python-based analytics solutions in a portable, repeatable, and reusable manner.  This repo contains **five** SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.  
+Package your Python-based analytics solutions in a portable, repeatable, and reusable manner.  This SAS Studio custom step helps you create a virtual Python environments for use within SAS Viya. This enables ephemeral and isolated sessions  
 
 A general idea :
 
@@ -11,38 +11,17 @@ A general idea :
 
 Refer the "About" tab on each of the individual steps for more details on what they are used for.
 
-### Create a virtual environment
+### Parameters
 This step helps you create a virtual environment. Input arguments required :
-1. A name provided for your virtual environment (which can optionally be expressed as a full path to a persistent location, for future retrieval)
+1. A location for your virtual environment to reside (which can optionally be expressed as a full path to a persistent location on the filesystem, for future retrieval)
 2. Additional packages you would like installed inside this virtual environment. As instructions note, you can provide a space-delimited string, or a path to a requirements.txt file.
 
 ![Python - Create a virtual environment](./img/create-a-virtual-environment.png)
 
-### Activate a virtual environment
-This step helps you activate an existing virtual environment. It requires a single argument to a folder path pointing to your virtual environment.
-
-![Python - Activate a virtual environment](./img/activate-a-virtual-environment.png)
-
-### Freeze environment details
-This step helps you save details of all the packages currently installed in your environment, to a requirements.txt.  You can reuse this requirements.txt file for other environments or create a new virtual environment based on this definition. You provide a single argument pointing to the path where you want your requirements.txt to be saved.
-
-![Python - Freeze requirement details](./img/freeze-requirement-details.png)
-
-### Revert to original environment 
-This step switches a SAS Studio session, currently under a virtual Python environment, to the Python environment that was in operation earlier. This step does not require any arguments.
-
-![Python - Revert to original Python environment](./img/revert-to-original-environment.png)
-
-### Obtain requirements file from Project Directory
-This step helps users generate a relevant, more compact requirements.txt for a project containing one or more Python programs.  The resulting requirements.txt can be used for specifying configuration for a virtual environment meant for running the said project.
-
-![Python - Obtain requirements from project directory](./img/obtain-requirements-from-project-directory.png)
-
 ## Requirements
 
-1. A SAS Viya 4 environment (monthly release 2021.2.1 or later) with SAS Studio Flows
+1. A SAS Viya 4 environment (last update on a monthly release 2025.07) with SAS Studio Flows
 2. Python configured with the above environment (preferably using the [SAS Configurator for Open Source](https://go.documentation.sas.com/doc/en/itopscdc/v_016/itopswn/p19hj5ipftk86un1axa51rzr5mxv.htm))
-3. Python [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) package installed in above Python environment (the base environment)
 
 
 ## Installation & Usage
@@ -70,9 +49,11 @@ This repository contains 5 custom steps which are offered as examples of how you
 ## Change Log
 
 * Version 2.0 (18APR2025)
-  - Separate folders in repository
-  - Refactored code to leverage venv
+  - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
+  - Separate folder in repository
   - Additional parameters
+  - Accepts folder selector as input
+  - Handles errors in requirements and folder input
   
 * Version 1.1 (12JUL2022)
   - Added new Custom Step - "Python - Obtain requirements from project directory"  : Ju1 12 2022
