@@ -50,13 +50,18 @@ This repository contains 5 custom steps which are offered as examples of how you
 
 ## Change Log
 
-* Version 2.0 (18APR2025)
-  - **Refactored code to leverage venv (*Goodbye, virtualenv (dependency for original version)!*)**
+* Version 2.0.0 (26AUG2025)
+  - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
   - Separate folder in repository
   - Additional parameters
   - Accepts folder selector as input
   - Handles errors in requirements and folder input
-
+  
+* Version 1.1 (12JUL2022)
+  - Added new Custom Step - "Python - Obtain requirements from project directory"
+  
+* Version 1.0 (20MAY2022)
+  - Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze"
 
 
 
