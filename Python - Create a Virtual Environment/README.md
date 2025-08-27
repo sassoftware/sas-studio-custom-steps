@@ -7,8 +7,7 @@ A general idea of how to use steps related to virtual environments:
 
 ![General idea](./img/general-idea.png)
 
-A quick video:
-![Video](./img/Create%20a%20Virtual%20Environment.mp4)
+A quick video:[Video](./img/Create%20a%20Virtual%20Environment.mp4)
 
 ## User Interface
 
@@ -51,13 +50,8 @@ This repository contains 5 custom steps which are offered as examples of how you
 
 ## Change Log
 
-<<<<<<< HEAD
 * Version 2.0 (18APR2025)
   - **Refactored code to leverage venv (*Goodbye, virtualenv (dependency for original version)!*)**
-=======
-* Version 2.0.0 (26AUG2025)
-  - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
->>>>>>> 2d1f46f49cb02b5e5cefa41fed948a7f10e50c06
   - Separate folder in repository
   - Additional parameters
   - Accepts folder selector as input
