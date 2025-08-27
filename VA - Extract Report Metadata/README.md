@@ -1,8 +1,8 @@
-# Extract VA Report Metadata
+# VA - Extract Report Metadata
 
 ## Description
 
-This custom step extracts matadata information from a SAS Visual Analytics report. The mentioned metadata starts with the CAS librar(y)(ies) and follows the CAS table(s), the CAS table columns, the report columns, the calculated columns and the use of the report/calculated columns in the different report objects.
+This custom step extracts certain metadata information from a SAS Visual Analytics report. The mentioned metadata starts with the CAS librar(y)(ies) and follows the CAS table(s), the CAS table columns, the report columns, the calculated columns and the use of the report/calculated columns in the different report objects.
 
 ## SAS Viya Support
 
@@ -63,6 +63,9 @@ Also new in version 1.5 is the extraction of additional metadata depending on th
 
 ## Change Log
 
+* Version 1.51 (27AUG2025)
+    * Renamed to use the new VA prefix to group VA related custom steps.
+    * Did not change screenshots
 * Version 1.5 (03JUN2025)
     * Added three additional columns to the output table.
     * Extracting additional report metadata.
