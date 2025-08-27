@@ -48,7 +48,7 @@ This repository contains 5 custom steps which are offered as examples of how you
 
 ## Change Log
 
-* Version 2.0 (18APR2025)
+* Version 2.0.0 (26AUG2025)
   - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
   - Separate folder in repository
   - Additional parameters
