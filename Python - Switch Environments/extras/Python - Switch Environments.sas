@@ -1,22 +1,51 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------* 
-   Python - Create a Virtual Environment
+   Python - Switch Environments
 
-   v 2.0.0 (26AUG2025)
+   v 1.0.0 (27AUG2025)
 
-   This program helps you create a Python virtual environment from within a SAS session.
-   It captures the current Python executable path and creates a virtual environment in the
-   specified location (or current working directory if not specified). It also allows you to
-   install packages either from a requirements.txt file or a space-separated list of packages.
+   This program helps you switch between different Python environments from within a SAS session.
+   It is also meant as a mechanism for a user to revert to the base environment from an active 
+   virtual environment.
 
    Sundaresh Sankaran (sundaresh.sankaran@sas.com|sundaresh.sankaran@gmail.com)
 *-------------------------------------------------------------------------------------------- */
 
 /*-----------------------------------------------------------------------------------------*
-   Python Block Definition
+   Debug Section
+
+   The following code block (to be commented out or deleted in production) is meant to 
+   help you debug the custom step. It sets values for the macro variables that would 
+   normally be set through the custom step interface.
+
+   Uncomment and modify the values as needed to test the custom step outside of SAS Studio.
+   
+   Here's the requirement from the project:
+
+   Receives input from user regarding folder location of venv (include venv)
+   Changes options to point to same
+   If user wants to revert to original, check for presence of ORIGINAL_PYPATH
+   Revert to Original_PYPATH if so
+   SAS log message to indicate success
+   sys.executable to specify the interpreter and remove confusion
+   All the useful macro and wiring
+
 *------------------------------------------------------------------------------------------*/
 
+/* === User Input Macro Variables (in logical order) === */
+
+/* 1. Option to revert to original Python environment (1 = Revert, 0 = Use specified venv) */
+%let revert_to_original = 1; /* Set to 1 to revert to ORIGINAL_PYPATH, 0 to use a specified venv */
+
+/* 2. If not reverting, specify the folder location of the virtual environment (venv) */
+%let venv = ; /* Provide the full path including 'venv' folder if revert_to_original=0 */
+
+
+
+/*-----------------------------------------------------------------------------------------*
+   Python Block Definition
+*------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*
    The following block of code has been created for the purpose of allowing proc python 
    to execute within a macro. Execution within a macro allows for other checks to be carried 
@@ -29,14 +58,14 @@
 
 *------------------------------------------------------------------------------------------*/
 
-filename cvirenv temp;
+filename printint temp;
 
 data _null_;
 
    length line $32767;               * max SAS character size ;
    infile datalines4 truncover pad;
    input ;   
-   file cvirenv;
+   file printint;
    line = strip(_infile_);           * line without leading and trailing blanks ;
    l1 = length(trimn(_infile_));     * length of line without trailing blanks ;
    l2 = length(line);                * length of line without leading and trailing blanks ;
@@ -47,103 +76,9 @@ data _null_;
    datalines4;
 
 # Import necessary libraries
-import os
-import subprocess
-from pathlib import Path
-
-# Capture current Python executable and save in a macro variable called  ORIGINAL_PYPATH for reference
-pyt=os.environ["PROC_PYPATH"]
-SAS.symput("ORIGINAL_PYPATH",str(pyt))
-
-# Create a virtual environment in the directory specified.
-venv_input=SAS.symget("venv_input")
-path = Path(venv_input)
-if path.exists():
-    venv=os.path.join(venv_input,"venv")
-else:
-    venv=os.path.join(os.getcwd(),"venv")
-
-install_system_site_packages=int(SAS.symget("install_system_site_packages"))
-
-if install_system_site_packages==1:
-    command = f"{pyt} -m venv {venv} --system-site-packages"
-else:
-    command = f"{pyt} -m venv {venv}"
-
-
-ret = subprocess.run(command, capture_output=True, shell=True)
-
-if ret.__dict__["returncode"]==0: 
-    SAS.symput("TEMP_PYPATH",str(os.path.join(venv,"bin","python3")))
-    SAS.logMessage("Virtual environment created successfully.")
-else:
-    SAS.logMessage("Error creating virtual environment. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]),"error")
-    SAS.symput("_cvirenv_error_flag",1)  # if error, retain original Python path ;
-    SAS.symput("_cvirenv_error_desc","Error creating virtual environment. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]))
-
-
-;;;;
-run;   
-
-filename instpack temp;
-
-data _null_;
-
-   length line $32767;               * max SAS character size ;
-   infile datalines4 truncover pad;
-   input ;   
-   file instpack;
-   line = strip(_infile_);           * line without leading and trailing blanks ;
-   l1 = length(trimn(_infile_));     * length of line without trailing blanks ;
-   l2 = length(line);                * length of line without leading and trailing blanks ;
-   first_position=l1-l2+1;           * position where the line should start (alignment) ;
-   if (line eq ' ') then put @1;     * empty line ;
-   else put @first_position line;    * line without leading and trailing blanks correctly aligned ;
-
-   datalines4;
-
-# Import necessary libraries
-import os
-import subprocess
 import sys
 
 SAS.logMessage(f"Current Python Path: {sys.executable}")
-pyt=SAS.symget("TEMP_PYPATH")
-SAS.logMessage("Starting Requirements install")
-req=SAS.symget("req")
-
-# Error prevention: check for empty requirements file or no package provided
-if not req or req.strip() == "":
-   SAS.logMessage("No requirements file or package list provided. Skipping pip install.")
-else:
-   if os.path.isfile(req):
-      # Check if file is empty
-      if os.path.getsize(req) == 0:
-         SAS.logMessage(f"Requirements file '{req}' is empty. Skipping pip install.")
-      else:
-         print("File provided")
-         command = "{pyt} -m pip install -r {req}".format(pyt=pyt,req=req)
-         ret = subprocess.run(command, capture_output=True, shell=True)
-         if ret.__dict__["returncode"]==0: 
-            SAS.logMessage("Requirements installed successfully.")
-         else:
-            SAS.logMessage("Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]),"error")
-            SAS.symput("_cvirenv_error_flag",1)  # if error, retain original Python path ;
-            SAS.symput("_cvirenv_error_desc","Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]))
-   else:
-      # Check if req is just whitespace
-      if req.strip() == "":
-         SAS.logMessage("No packages specified in the list. Skipping pip install.")
-      else:
-         print("List provided")
-         command = "{pyt} -m pip install {req}".format(pyt=pyt,req=req)
-         ret = subprocess.run(command, capture_output=True, shell=True)
-         if ret.__dict__["returncode"]==0: 
-            SAS.logMessage("Requirements installed successfully.")
-         else:
-            SAS.logMessage("Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]),"error")
-            SAS.symput("_cvirenv_error_flag",1)  # if error, retain original Python path ;
-            SAS.symput("_cvirenv_error_desc","Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]))
 
 
 ;;;;
@@ -223,50 +158,88 @@ run;
 
 %mend _extract_sas_folder_path;
 
+
 /*-----------------------------------------------------------------------------------------*
    EXECUTION CODE MACRO 
 
-   _cvirenv prefix stands for Create Virtual Environment
+   _switchenv prefix stands for Switch Environments
 *------------------------------------------------------------------------------------------*/
-%macro _cvirenv_execution_code;
+%macro _switchenv_execution_code;
 
-   %_create_error_flag(_cvirenv_error_flag, _cvirenv_error_desc);
-
-/*-----------------------------------------------------------------------------------------*
-    Extract value from folder selector
-*------------------------------------------------------------------------------------------*/
-   %if &_cvirenv_error_flag. = 0 %then %do;
-      %_extract_sas_folder_path(&venv.);
-      %let venv_input=&_sas_folder_path.;
-   %end;   
+   %_create_error_flag(_switchenv_error_flag, _switchenv_error_desc);
 
 /*-----------------------------------------------------------------------------------------*
-    Create a virtual environment in the specified location
+    Check if user wants to revert to original environment
 *------------------------------------------------------------------------------------------*/
-   %if &_cvirenv_error_flag. = 0 %then %do;
-      proc python infile=cvirenv;
-      run;
-   %end;   
+   %if &_switchenv_error_flag. = 0 %then %do;
+      %if &revert_to_original. = 1 %then %do;
+         %if %symexist(ORIGINAL_PYPATH) %then %do;
+            options set=PROC_PYPATH="&ORIGINAL_PYPATH.";
+            %let _switchenv_error_flag=0;
+            %let _switchenv_error_desc=NOTE: Set Python path to original Python environment at &ORIGINAL_PYPATH..;
+         %end;
+         %else %do;
 /*-----------------------------------------------------------------------------------------*
-    Change interpreter to new virtual environment
+    Insert code to check if default path exists at /opt/sas/viya/home/sas-pyconfig
+*------------------------------------------------------------------------------------------*/
+            %if "%str(%sysfunc(fileexist(/opt/sas/viya/home/sas-pyconfig/default_py/bin/python3)))" %eq "1" %then %do;
+               options set=PROC_PYPATH="/opt/sas/viya/home/sas-pyconfig/default_py/bin/python3";
+               %let _switchenv_error_flag=0;
+               %let _switchenv_error_desc=NOTE: Set Python path to default Python profile environment at /opt/sas/viya/home/sas-pyconfig/default_py/bin/python3.;
+            %end;
+            %else %do;
+               %let _switchenv_error_flag=1;
+               %let _switchenv_error_desc=ERROR: ORIGINAL_PYPATH does not exist. Cannot revert to original environment.;
+            %end;
+         %end;
+      %end;
+      %else %if &revert_to_original. = 0 %then %do;
+         %_extract_sas_folder_path(&venv.);
+         %let venv_input=&_sas_folder_path.;
+         %if "&venv_input." = "" %then %do;
+            %let _switchenv_error_flag=1;
+            %let _switchenv_error_desc=ERROR: No virtual environment path specified. Please provide a valid path.;
+         %end;
+         %else %do;
+            %if %str(%sysfunc(fileexist(&venv_input./bin/python3))) %eq "0" %then %do;
+               %let _switchenv_error_flag=1;
+               %let _switchenv_error_desc=ERROR: The specified virtual environment path &venv_input. does not exist or is invalid. Please provide a valid path.;
+            %end;
+            %else %do;
+               options set=PROC_PYPATH="&venv_input./bin/python3";
+               %let _switchenv_error_flag=0;
+               %let _switchenv_error_desc=NOTE: Set Python path to virtual environment at &venv_input./bin/python3.;
+            %end;
+         %end;
+      %end;
+   %end;
+
+/*-----------------------------------------------------------------------------------------*
+    Reset interpreter to new virtual environment
 *------------------------------------------------------------------------------------------*/
    %if &_cvirenv_error_flag. = 0 %then %do;
         proc python terminate;
         quit;
-        
-        options set=PROC_PYPATH="&TEMP_PYPATH.";
-        
-   %end;   
-   
-/*-----------------------------------------------------------------------------------------*
-    Install Packages
-*------------------------------------------------------------------------------------------*/
-   %if &_cvirenv_error_flag. = 0 %then %do;
-      proc python infile=instpack;
-      run;
+
+        proc python infile=printint; 
+        run;
+
    %end;   
 
-%mend _cvirenv_execution_code;
+/*-----------------------------------------------------------------------------------------*
+    Clear earlier macro variables
+*------------------------------------------------------------------------------------------*/
+   %if &_cvirenv_error_flag. = 0 %then %do;
+      %if %symexist(ORIGINAL_PYPATH) %then %do;
+         %symdel ORIGINAL_PYPATH;
+      %end;
+      %if %symexist(TEMP_PYPATH) %then %do;
+         %symdel TEMP_PYPATH;
+      %end;
+   %end;   
+   
+
+%mend _switchenv_execution_code;
 
 /*-----------------------------------------------------------------------------------------*
    END MACROS
@@ -279,19 +252,19 @@ run;
 /*-----------------------------------------------------------------------------------------*
    Create Runtime Trigger
 *------------------------------------------------------------------------------------------*/
-%_create_runtime_trigger(_cvirenv_run_trigger);
+%_create_runtime_trigger(_switchenv_run_trigger);
 
 /*-----------------------------------------------------------------------------------------*
    Execute 
 *------------------------------------------------------------------------------------------*/
 
-%if &_cvirenv_run_trigger. = 1 %then %do;
+%if &_switchenv_run_trigger. = 1 %then %do;
 
-   %_cvirenv_execution_code;
+   %_switchenv_execution_code;
 
 %end;
 
-%if &_cvirenv_run_trigger. = 0 %then %do;
+%if &_switchenv_run_trigger. = 0 %then %do;
 
    %put NOTE: This step has been disabled.  Nothing to do.;
 
@@ -299,9 +272,9 @@ run;
 
 
 %put NOTE: Final summary;
-%put NOTE: Status of error flag - &_cvirenv_error_flag. ;
-%put &_cvirenv_error_desc.;
-%put NOTE: Error desc - &_cvirenv_error_desc. ;
+%put NOTE: Status of error flag - &_switchenv_error_flag. ;
+%put &_switchenv_error_desc.;
+%put NOTE: Error desc if any - &_switchenv_error_desc. ;
 
 /*-----------------------------------------------------------------------------------------*
    END EXECUTION CODE
@@ -310,24 +283,24 @@ run;
    Clean up existing macro variables and macro definitions.
 *------------------------------------------------------------------------------------------*/
 
-%if %symexist(_cvirenv_run_trigger) %then %do;
-   %symdel _cvirenv_run_trigger;
+%if %symexist(_switchenv_run_trigger) %then %do;
+   %symdel _switchenv_run_trigger;
 %end;
-%if %symexist(_cvirenv_error_flag) %then %do;
-   %symdel _cvirenv_error_flag;
+%if %symexist(_switchenv_error_flag) %then %do;
+   %symdel _switchenv_error_flag;
 %end;
-%if %symexist(_cvirenv_error_desc) %then %do;
-   %symdel _cvirenv_error_desc;
+%if %symexist(_switchenv_error_desc) %then %do;
+   %symdel _switchenv_error_desc;
 %end;
 
 
 %sysmacdelete _create_runtime_trigger;
 %sysmacdelete _create_error_flag;
 %sysmacdelete _extract_sas_folder_path;
-%sysmacdelete _cvirenv_execution_code;
+%sysmacdelete _switchenv_execution_code;
 
-filename instpack clear;
-filename cvirenv clear;
+
+filename printint clear;
 
 
 
