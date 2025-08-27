@@ -1,5 +1,9 @@
 # SAS Studio Custom Steps for virtual Python environments
 
+> **NOTE**: Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
+
+> 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
+
 ## Description
 Package your Python-based analytics solutions in a portable, repeatable, and reusable manner.  This repo contains **five** SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.  
 
@@ -12,6 +16,8 @@ A general idea :
 Refer the "About" tab on each of the individual steps for more details on what they are used for.
 
 ### Create a virtual environment
+> 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
+
 This step helps you create a virtual environment. Input arguments required :
 1. A name provided for your virtual environment (which can optionally be expressed as a full path to a persistent location, for future retrieval)
 2. Additional packages you would like installed inside this virtual environment. As instructions note, you can provide a space-delimited string, or a path to a requirements.txt file.
@@ -56,10 +62,10 @@ When successfully uploaded, the following structure will be present in the Share
 
 ## Change Log
 Version 1.1 (12JUL2022)
-- Added new Custom Step - "Python - Obtain requirements from project directory"  : Ju1 12 2022
+- Added new Custom Step - "Python - Obtain requirements from project directory"  
 
 Version 1.0 (20MAY2022)
-- Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze" : Jun 15 2022
+- Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze" 
 
 
 ## The WHY :  Background information
