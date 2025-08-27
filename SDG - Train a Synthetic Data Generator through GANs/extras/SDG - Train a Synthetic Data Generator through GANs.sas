@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Synthetic Data Generation (SDG) - Train a Synthetic Data Generator through GANs
 
-   v 2.0 (05NOV2024)
+   v 2.1 (17FEB2025)
 
    This program train a model through Generative Adversarial Networks (GANs) using underlying 
    distributions and correlations learnt from an existing dataset.  
@@ -156,7 +156,7 @@
     %if %sysfunc(compress("&&&tableEngine.")) = "V9" %THEN %DO;
         data _null_;
             call symput("&tableEngine.","SAS");
-            call symputx("&errorFlag.",0);
+            call symputx("&errorFlagName.",0);
             call symput("&errorFlagDesc.","");
         run;
     %end;
@@ -367,26 +367,6 @@
    %end;
 
 /*-----------------------------------------------------------------------------------------*
-   Check Output table libref to ensure it points to a valid caslib.
-*------------------------------------------------------------------------------------------*/
-
-   %if &_tsdg_error_flag. = 0 %then %do;
-
-      %global _sas_or_cas_op;
-      %_sas_or_cas(&outputtable1_lib., _sas_or_cas_op, _tsdg_error_flag, _tsdg_error_desc, 1 );
-      %put NOTE: Output table engine is &_sas_or_cas_inp. ;
-      %if %sysfunc(compress("&_sas_or_cas_op."))="CAS" %then %do;
-         %put NOTE: Output table belongs to a CAS libref.;
-      %end;
-      %else %do;
-         data _null_;
-            call symputx("_tsdg_error_flag", 60);
-            call symput("_tsdg_error_desc","The output table should be associated with a CAS engine.");
-         run;
-      %end;
-   %end;
-
-/*-----------------------------------------------------------------------------------------*
    Check output table 2 (model) table libref to ensure it points to a valid caslib.
 *------------------------------------------------------------------------------------------*/
 
@@ -394,7 +374,7 @@
 
       %global _sas_or_cas_op2;
       %_sas_or_cas(&outputtable2_lib., _sas_or_cas_op2, _tsdg_error_flag, _tsdg_error_desc, 1 );
-      %put NOTE: Model table engine is &_sas_or_cas_inp. ;
+      %put NOTE: Model table engine is &_sas_or_cas_op2. ;
       %if %sysfunc(compress("&_sas_or_cas_op2."))="CAS" %then %do;
          %put NOTE: Model table belongs to a CAS libref.;
       %end;
@@ -405,6 +385,37 @@
          run;
       %end;
    %end;
+
+/*-----------------------------------------------------------------------------------------*
+   Check Sample output table libref to ensure it points to a valid caslib.
+*------------------------------------------------------------------------------------------*/
+
+   %if &_tsdg_error_flag. = 0 %then %do;
+      %if %sysevalf(%superq(outputtable1_lib)=,boolean)  %then %do;
+         %put ERROR: No sample table library provided. Please attach a CAS table to the outputtable1 port.;
+         data _null_;
+            call symput("_tsdg_error_flag",1);
+            call symput("_tsdg_error_desc","No sample table library provided. Please attach a CAS table to the outputtable1 port.");
+         run;
+      %end;
+      %else %do;
+         %global _sas_or_cas_op;
+         %_sas_or_cas(&outputtable1_lib., _sas_or_cas_op, _tsdg_error_flag, _tsdg_error_desc, 1 );
+         %put NOTE: Sample output table engine is &_sas_or_cas_op. ;
+         %if %sysfunc(compress("&_sas_or_cas_op."))="CAS" %then %do;
+            %put NOTE: Sample output table belongs to a CAS libref.;
+         %end;
+         %else %if %sysfunc(compress("&_sas_or_cas_op."))="SAS" %then %do;
+            data _null_;
+               call symputx("_tsdg_error_flag", 60);
+               call symput("_tsdg_error_desc","The sample table should be associated with a CAS engine.");
+            run;
+            %put ERROR:&_tsdg_error_desc.;
+         %end;
+      %end;
+   %end;
+
+
 
 /*-----------------------------------------------------------------------------------------*
    Check if input table exists.
@@ -465,7 +476,7 @@
    %if &_tsdg_error_flag. = 0 %then %do;
       %_tsdg_create_centroids_table;
 
-      data public._centroids;
+      data &outputtable2_lib.._centroids;
          set work._centroids;
       run;
 
@@ -493,7 +504,7 @@
       ;
          input               &blankSeparatedIntervalVars. /level=interval;
          input               &blankSeparatedNominalVars./level=nominal;
-         gmm                 centroidsTable=&outputtable1_lib.._centroids;
+         gmm                 centroidsTable=&outputtable2_lib.._centroids;
          aeoptimization      ADAM numEpochs=&aeEpochs.;
          ganoptimization     ADAM numEpochs=&ganEpochs.;
          train               miniBatchSize=&miniBatchSize.;
@@ -501,9 +512,9 @@
          output              out=&outputtable1.;
       run;
 
-      data &outputtable1.;
-      set &outputtable1.;
-      SYNTHETIC_DATA_FLAG = 1;
+      data &outputtable1.;      
+         set &outputtable1.;      
+         SYNTHETIC_DATA_FLAG = 1;       
       run;
 
    %end;
@@ -534,7 +545,7 @@
          ;
       quit;
 
-      proc datasets lib=&outputtable1_lib.;
+      proc datasets lib=&outputtable2_lib.;
          delete _centroids;
       run;
 
