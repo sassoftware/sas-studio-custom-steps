@@ -12,7 +12,7 @@ The **VA - Get Report Content** custom steps provides the ability to either retr
 
 ## Requirements
 
-2025.07 or later
+Tested on Viya version Stable 2025.07
 
 ## Usage
 
