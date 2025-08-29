@@ -53,7 +53,7 @@ from pathlib import Path
 
 # Capture current Python executable and save in a macro variable called  ORIGINAL_PYPATH for reference
 pyt=os.environ["PROC_PYPATH"]
-SAS.symput("ORIGINAL_PYPATH",str(pyt))
+SAS.logMessage(f"Current Python Path: {pyt}")
 
 # Create a virtual environment in the directory specified.
 venv_input=SAS.symget("venv_input")
@@ -152,6 +152,15 @@ run;
 /*-----------------------------------------------------------------------------------------*
    MACROS
 *------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------*
+   The following two macro variable is meant to be global as it refers to a changed state 
+   of the global environment (SAS Studio session) it exists in.
+*------------------------------------------------------------------------------------------*/
+%global ORIGINAL_PYPATH;
+
+
+
 /* -------------------------------------------------------------------------------------------* 
    Macro to initialize a run-time trigger global macro variable to run SAS Studio Custom Steps. 
    A value of 1 (the default) enables this custom step to run.  A value of 0 (provided by 
@@ -231,6 +240,13 @@ run;
 %macro _cvirenv_execution_code;
 
    %_create_error_flag(_cvirenv_error_flag, _cvirenv_error_desc);
+
+/*-----------------------------------------------------------------------------------------*
+    Extract existing Python path
+*------------------------------------------------------------------------------------------*/
+   %if &_cvirenv_error_flag. = 0 %then %do;
+      %let ORIGINAL_PYPATH=%sysget(PROC_PYPATH);
+   %end;  
 
 /*-----------------------------------------------------------------------------------------*
     Extract value from folder selector

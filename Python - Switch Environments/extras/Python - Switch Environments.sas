@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Python - Switch Environments
 
-   v 1.0.0 (27AUG2025)
+   v 1.0.0 (29AUG2025)
 
    This program helps you switch between different Python environments from within a SAS session.
    It is also meant as a mechanism for a user to revert to the base environment from an active 
@@ -35,13 +35,14 @@
 
 /* === User Input Macro Variables (in logical order) === */
 
-/* 1. Option to revert to original Python environment (1 = Revert, 0 = Use specified venv) */
-%let revert_to_original = 1; /* Set to 1 to revert to ORIGINAL_PYPATH, 0 to use a specified venv */
+
+/* 1. Option to revert to original Python environment (1 = Revert, 0 = Use specified venv)*/;
+* %let revert_to_original = 1; /* Set to 1 to revert to ORIGINAL_PYPATH, 0 to use a specified venv */
 
 /* 2. If not reverting, specify the folder location of the virtual environment (venv) */
-%let venv = ; /* Provide the full path including 'venv' folder if revert_to_original=0 */
+* %let venv = ; /* Provide the full path including 'venv' folder if revert_to_original=0 */
 
-
+*/; 
 
 /*-----------------------------------------------------------------------------------------*
    Python Block Definition
@@ -87,6 +88,14 @@ run;
 /*-----------------------------------------------------------------------------------------*
    MACROS
 *------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------*
+   The following macro variable is defined as global because it will help in cases
+   involving repeated use of this step. 
+*------------------------------------------------------------------------------------------*/
+
+%global ORIGINAL_PYPATH;
+
 /* -------------------------------------------------------------------------------------------* 
    Macro to initialize a run-time trigger global macro variable to run SAS Studio Custom Steps. 
    A value of 1 (the default) enables this custom step to run.  A value of 0 (provided by 
@@ -166,13 +175,16 @@ run;
 *------------------------------------------------------------------------------------------*/
 %macro _switchenv_execution_code;
 
+   %let revertt=&REVERT_TO_ORIGINAL;
+
    %_create_error_flag(_switchenv_error_flag, _switchenv_error_desc);
 
 /*-----------------------------------------------------------------------------------------*
     Check if user wants to revert to original environment
 *------------------------------------------------------------------------------------------*/
    %if &_switchenv_error_flag. = 0 %then %do;
-      %if &revert_to_original. = 1 %then %do;
+      %put NOTE: This is the current state of revertt - &revertt. ;
+      %if "&revertt." = "1" %then %do;
          %if %symexist(ORIGINAL_PYPATH) %then %do;
             options set=PROC_PYPATH="&ORIGINAL_PYPATH.";
             %let _switchenv_error_flag=0;
@@ -182,18 +194,31 @@ run;
 /*-----------------------------------------------------------------------------------------*
     Insert code to check if default path exists at /opt/sas/viya/home/sas-pyconfig
 *------------------------------------------------------------------------------------------*/
-            %if "%str(%sysfunc(fileexist(/opt/sas/viya/home/sas-pyconfig/default_py/bin/python3)))" %eq "1" %then %do;
+            %if "%str(%sysfunc(fileexist(/opt/sas/viya/home/sas-pyconfig/default_py/bin/python3)))" = "1" %then %do;
                options set=PROC_PYPATH="/opt/sas/viya/home/sas-pyconfig/default_py/bin/python3";
                %let _switchenv_error_flag=0;
                %let _switchenv_error_desc=NOTE: Set Python path to default Python profile environment at /opt/sas/viya/home/sas-pyconfig/default_py/bin/python3.;
+ /*-----------------------------------------------------------------------------------------*
+    Retain ORIGINAL_PYPATH for any future repeated use
+*------------------------------------------------------------------------------------------*/
+                %let ORIGINAL_PYPATH = %sysget(PROC_PYPATH);              
             %end;
             %else %do;
                %let _switchenv_error_flag=1;
-               %let _switchenv_error_desc=ERROR: ORIGINAL_PYPATH does not exist. Cannot revert to original environment.;
+               %let _switchenv_error_desc=ERROR: Neither an ORIGINAL_PYPATH variable or default Python path exists. Cannot revert to original environment.;
+/*-----------------------------------------------------------------------------------------*
+    Record current path as ORIGINAL_PYPATH for any future repeated use
+*------------------------------------------------------------------------------------------*/
+                %let ORIGINAL_PYPATH = %sysget(PROC_PYPATH);              
             %end;
          %end;
       %end;
-      %else %if &revert_to_original. = 0 %then %do;
+      %else %if "&revertt." = "0" %then %do;
+/*-----------------------------------------------------------------------------------------*
+    Record ORIGINAL_PYPATH in order to roll back if needed
+    Note: Original means the current path before the following code runs.
+*------------------------------------------------------------------------------------------*/
+         %let ORIGINAL_PYPATH = %sysget(PROC_PYPATH);     
          %_extract_sas_folder_path(&venv.);
          %let venv_input=&_sas_folder_path.;
          %if "&venv_input." = "" %then %do;
@@ -201,7 +226,7 @@ run;
             %let _switchenv_error_desc=ERROR: No virtual environment path specified. Please provide a valid path.;
          %end;
          %else %do;
-            %if %str(%sysfunc(fileexist(&venv_input./bin/python3))) %eq "0" %then %do;
+            %if %str(%sysfunc(fileexist(&venv_input./bin/python3))) = "0" %then %do;
                %let _switchenv_error_flag=1;
                %let _switchenv_error_desc=ERROR: The specified virtual environment path &venv_input. does not exist or is invalid. Please provide a valid path.;
             %end;
@@ -209,6 +234,7 @@ run;
                options set=PROC_PYPATH="&venv_input./bin/python3";
                %let _switchenv_error_flag=0;
                %let _switchenv_error_desc=NOTE: Set Python path to virtual environment at &venv_input./bin/python3.;
+         
             %end;
          %end;
       %end;
@@ -217,7 +243,7 @@ run;
 /*-----------------------------------------------------------------------------------------*
     Reset interpreter to new virtual environment
 *------------------------------------------------------------------------------------------*/
-   %if &_cvirenv_error_flag. = 0 %then %do;
+   %if &_SWITCHENV_ERROR_FLAG. = 0 %then %do;
         proc python terminate;
         quit;
 
@@ -226,17 +252,7 @@ run;
 
    %end;   
 
-/*-----------------------------------------------------------------------------------------*
-    Clear earlier macro variables
-*------------------------------------------------------------------------------------------*/
-   %if &_cvirenv_error_flag. = 0 %then %do;
-      %if %symexist(ORIGINAL_PYPATH) %then %do;
-         %symdel ORIGINAL_PYPATH;
-      %end;
-      %if %symexist(TEMP_PYPATH) %then %do;
-         %symdel TEMP_PYPATH;
-      %end;
-   %end;   
+
    
 
 %mend _switchenv_execution_code;
@@ -301,6 +317,4 @@ run;
 
 
 filename printint clear;
-
-
 

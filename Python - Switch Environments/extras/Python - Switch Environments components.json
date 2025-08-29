@@ -11,20 +11,34 @@
 					"type": "radiogroup",
 					"label": "What would you like to do?",
 					"items": [
-						{"value": "Revert to original Python environment"},
-						{"value": "Switch to a specified virtual environment (venv)"}
+						{
+							"value": "1",
+							"label": "Revert to original Python environment"
+						},
+						{
+							"value": "0",
+							"label": "Switch to specified Python environment(venv)"
+						}
 					],
-                    "visible":""
+					"visible": ""
 				},
 				{
 					"id": "venv",
 					"type": "path",
-					"label": "Provide a path to your virtual environment (include the 'venv' folder):",
+					"label": "Provide a path to your virtual environment (the 'venv' folder or the folder containing /bin/python3):",
 					"pathtype": "folder",
 					"placeholder": "",
 					"required": false,
-					"visible": ["revert_to_original","=","Revert to original Python environment"],
-                    "enabled": ["revert_to_original","=","Revert to original Python environment"]
+					"visible": [
+						"$revert_to_original",
+						"=",
+						"0"
+					],
+					"enabled": [
+						"$revert_to_original",
+						"=",
+						"0"
+					]
 				},
 				{
 					"id": "text1",
@@ -70,7 +84,7 @@
 						{
 							"id": "version_text",
 							"type": "text",
-							"text": "Version : 1.0.0  (27AUG2025)",
+							"text": "Version : 1.0.0  (29AUG2025)",
 							"visible": ""
 						}
 					]
@@ -80,7 +94,10 @@
 	],
 	"syntaxversion": "1.3.0",
 	"values": {
-		"revert_to_original": "Revert to original Python environment",
+		"revert_to_original": {
+			"value": "1",
+			"label": "Revert to original Python environment"
+		},
 		"venv": ""
 	}
 }
