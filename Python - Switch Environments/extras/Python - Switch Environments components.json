@@ -1,0 +1,86 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "param",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "revert_to_original",
+					"type": "radiogroup",
+					"label": "What would you like to do?",
+					"items": [
+						{"value": "Revert to original Python environment"},
+						{"value": "Switch to a specified virtual environment (venv)"}
+					],
+                    "visible":""
+				},
+				{
+					"id": "venv",
+					"type": "path",
+					"label": "Provide a path to your virtual environment (include the 'venv' folder):",
+					"pathtype": "folder",
+					"placeholder": "",
+					"required": false,
+					"visible": ["revert_to_original","=","Revert to original Python environment"],
+                    "enabled": ["revert_to_original","=","Revert to original Python environment"]
+				},
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "If you choose to revert, the Python environment will be set to the original or default environment used by SAS Studio. If you choose to switch, you must provide the full path to the virtual environment you wish to use.",
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "about_text",
+					"type": "text",
+					"text": "Python - Switch Environments\n===============================\n\nThis custom step allows you to switch between different Python environments from within a SAS session, or revert to the original environment.\n\nFor more details, refer to the documentation or contact the author.",
+					"visible": ""
+				},
+				{
+					"id": "contact_details",
+					"type": "section",
+					"label": "Created / Contact",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "created_contact_text",
+							"type": "text",
+							"text": "Sundaresh Sankaran (sundaresh.sankaran@sas.com)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_version",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 1.0.0  (27AUG2025)",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"revert_to_original": "Revert to original Python environment",
+		"venv": ""
+	}
+}
