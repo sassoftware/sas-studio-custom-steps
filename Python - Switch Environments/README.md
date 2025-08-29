@@ -4,11 +4,9 @@
 ## Description
 Switch between different Python environments or revert to the original environment from within your SAS Viya session. This SAS Studio custom step enables you to seamlessly toggle between a specified virtual environment (venv) and the default/original Python environment, supporting reproducible and portable analytics workflows.
 
-A general idea of how to use steps related to virtual environments:
+A quick look: 
 
-![General idea](./img/general-idea.gif)
-
-A quick video: [Video](./img/Switch_Environments.gif)
+![Video](./img/Switch_Environments.gif)
 
 ## User Interface
 
@@ -22,8 +20,6 @@ This step helps you switch between Python environments. Input arguments required
     - Switch to specified Python environment (venv)
 2. **If switching, provide the path to your virtual environment**
   - The full path to the 'venv' folder or the folder containing `/bin/python3`.
-
-![Python - Switch Environments UI](./img/switch-environments-ui.png)
 
 ## Requirements
 
