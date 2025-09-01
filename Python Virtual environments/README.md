@@ -1,6 +1,7 @@
 # SAS Studio Custom Steps for virtual Python environments
 
-> **NOTE**: Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
+>[!NOTE]
+>Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
 
 > 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
 
