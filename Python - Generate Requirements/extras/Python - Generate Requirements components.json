@@ -1,0 +1,143 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "param",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "req_task",
+					"type": "radiogroup",
+					"label": "What do you want to generate?",
+					"items": [
+						{
+							"value": "freeze",
+							"label": "Freeze all packages in a Python environment (pip freeze)"
+						},
+						{
+							"value": "project",
+							"label": "Generate requirements for a project folder (pipreqs)"
+						}
+					],
+					"required": true
+				},
+				{
+					"id": "env_folder",
+					"type": "path",
+					"label": "Python environment folder (folder containing /bin/python3):",
+					"pathtype": "folder",
+					"placeholder": "",
+					"required": false,
+					"visible": [
+						"$req_task",
+						"=",
+						"freeze"
+					],
+					"enabled": [
+						"$req_task",
+						"=",
+						"freeze"
+					]
+				},
+				{
+					"id": "project_folder",
+					"type": "path",
+					"label": "Project folder containing Python scripts:",
+					"pathtype": "folder",
+					"placeholder": "",
+					"required": false,
+					"visible": [
+						"$req_task",
+						"=",
+						"project"
+					],
+					"enabled": [
+						"$req_task",
+						"=",
+						"project"
+					]
+				},
+				{
+					"id": "req_file",
+					"type": "path",
+					"label": "Output requirements.txt file location:",
+					"pathtype": "file",
+					"placeholder": "",
+					"required": true
+				},
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "Choose whether to freeze all packages in a Python environment (pip freeze) or generate requirements for a project folder (pipreqs).",
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "about_text",
+					"type": "text",
+					"text": "Python - Generate Requirements\n===============================\n\nThis custom step helps you generate a requirements.txt file for your Python project or environment. You can either freeze all packages in a given Python environment, or generate requirements based on the imports used in a folder of Python scripts.\n\nFor more details, refer to the documentation or contact the author.",
+					"visible": ""
+				},
+				{
+					"id": "about_prereq",
+					"type": "section",
+					"label": "Prerequisites",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "about_prereq_text",
+							"type": "text",
+							"text": "- Install the pipreqs Python package: https://pypi.org/project/pipreqs/",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "contact_details",
+					"type": "section",
+					"label": "Created / Contact",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "created_contact_text",
+							"type": "text",
+							"text": "Sundaresh Sankaran (sundaresh.sankaran@sas.com)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_version",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 1.1.0  (31AUG2025)",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"req_task": "freeze",
+		"env_folder": "",
+		"project_folder": "",
+		"req_file": ""
+	}
+}
