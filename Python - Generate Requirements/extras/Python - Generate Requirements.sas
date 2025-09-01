@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Python - Generate Requirements
 
-   v 1.1.0 (31AUG2025)
+   v 1.1.0 (01SEP2025)
 
    This program helps you generate a requirements.txt file for your Python project or environment.
    You can either freeze all packages in a given Python environment, or generate requirements
@@ -17,13 +17,13 @@
    Uncomment and modify the values as needed to test the custom step outside of SAS Studio.
 *------------------------------------------------------------------------------------------*/
 
-%let req_task = project;
+/* %let req_task = project; */
 
-%let env_folder = %str(sasserver:/opt/sas/viya/home/sas-pyconfig/base_py);
+/* %let env_folder = %str(sasserver:/opt/sas/viya/home/sas-pyconfig/base_py); */
 
-%let project_folder = %str(sasserver:/mnt/viya-share/data/sinsrn/);
+/* %let project_folder = %str(sasserver:/mnt/viya-share/data/sinsrn/); */
 
-%let req_file = %str(sasserver:/mnt/viya-share/data/sinsrn/requirements.txt);
+/* %let req_file = %str(sasserver:/mnt/viya-share/data/sinsrn/requirements.txt); */
 
 /*-----------------------------------------------------------------------------------------*
    Python Block Definitions
@@ -60,10 +60,12 @@ pyt = SAS.symget("python_exec")
 command = f"{pyt} -m pip freeze > {req}"
 ret = subprocess.run(command, shell=True, capture_output=True)
 
-if ret.returncode == 0:
+if ret.__dict__['returncode'] == 0:
     print(f"Requirements file saved at {req}")
 else:
-    print(f"Error occurred while generating requirements file: {ret.stderr.decode()}")
+    SAS.symput("_genreq_error_flag", 1)
+    SAS.symput("_genreq_error_desc", f"ERROR: Failed to generate requirements file at {req}. {ret.__dict__['stderr'].decode()}")
+    print(f"Error occurred while generating requirements file: {ret.__dict__['stderr'].decode()}")
 
 ;;;;
 run;
@@ -93,10 +95,12 @@ command = f"{pyt} -m pipreqs.pipreqs --save {resultloc} --force {projectarea}"
 
 ret = subprocess.run(command, shell=True, capture_output=True)
 
-if ret.returncode == 0:
+if ret.__dict__['returncode'] == 0:
     print(f"Requirements file saved at {resultloc}")
 else:
-    print(f"Error occurred while generating requirements file: {ret.stderr.decode()}")
+    SAS.symput("_genreq_error_flag", 1)
+    SAS.symput("_genreq_error_desc", f"ERROR: Failed to generate requirements file at {resultloc}. {ret.__dict__['stderr'].decode()}")  
+    print(f"Error occurred while generating requirements file: {ret.__dict__['stderr'].decode()}")
 
 ;;;;
 run;
@@ -224,7 +228,9 @@ run;
                         %let python_exec = &env_folder./bin/python3;
                         proc python infile=pipfreez;
                         run;
-                        %let _genreq_error_desc=NOTE: Requirements frozen from environment &env_folder. available in folder &req_file. ;
+                        %if &_genreq_error_flag. = 0 %then %do;
+                            %let _genreq_error_desc=NOTE: Requirements frozen from environment &env_folder. available in folder &req_file. ;
+                        %end;
                 %end;
             %end;
         %end;
@@ -246,7 +252,9 @@ run;
                 %if &_genreq_error_flag. = 0 %then %do;
                     proc python infile=projreq;
                     run;
-                    %let _genreq_error_desc=NOTE: Requirements generated from project folder &project_folder. available in folder &req_file.;
+                    %if &_genreq_error_flag. = 0 %then %do;
+                        %let _genreq_error_desc=NOTE: Requirements generated from project folder &project_folder. available in folder &req_file.;
+                    %end;
                 %end;
             %end;
         %end;

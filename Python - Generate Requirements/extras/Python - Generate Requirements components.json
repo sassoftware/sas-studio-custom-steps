@@ -85,6 +85,21 @@
 					"text": "Python - Generate Requirements\n===============================\n\nThis custom step helps you generate a requirements.txt file for your Python project or environment. You can either freeze all packages in a given Python environment, or generate requirements based on the imports used in a folder of Python scripts.\n\nFor more details, refer to the documentation or contact the author.",
 					"visible": ""
 				},
+                {
+					"id": "about_param",
+					"type": "section",
+					"label": "Parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "about_param_text",
+							"type": "text",
+							"text": "1. What do you want to generate? (radio button group)\n   - Freeze all packages in a Python environment\n   - Generate requirements from a folder of Python scripts\n\n 2. Python environment folder (folder selector)\n   - The folder containing `/bin/python3` (required if freezing environment)\n\n3. Project folder (folder selector)\n   - The folder containing your Python scripts (required if generating from scripts)\n\n4. Requirements file path (file selector)\n   - The output path for the generated `requirements.txt` file",
+							"visible": ""
+						}
+					]
+				},
 				{
 					"id": "about_prereq",
 					"type": "section",
@@ -101,6 +116,21 @@
 					]
 				},
 				{
+					"id": "about_version",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 1.1.0  (01SEP2025)",
+							"visible": ""
+						}
+					]
+				},
+				{
 					"id": "contact_details",
 					"type": "section",
 					"label": "Created / Contact",
@@ -111,21 +141,6 @@
 							"id": "created_contact_text",
 							"type": "text",
 							"text": "Sundaresh Sankaran (sundaresh.sankaran@sas.com)",
-							"visible": ""
-						}
-					]
-				},
-				{
-					"id": "about_version",
-					"type": "section",
-					"label": "Version",
-					"open": true,
-					"visible": "",
-					"children": [
-						{
-							"id": "version_text",
-							"type": "text",
-							"text": "Version : 1.1.0  (31AUG2025)",
 							"visible": ""
 						}
 					]
