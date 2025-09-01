@@ -1,15 +1,6 @@
 
 # Python - Generate Requirements
 
----
-
-This custom step helps you generate a requirements.txt file for your Python project or environment. You can either freeze all packages in a given Python environment, or generate requirements based on the imports used in a folder of Python scripts.
-
-A general idea:
-![Gif](./img/Python_Generate_Requirements.gif)
-
----# Python - Generate Requirements
-
 ## Description
 Generate a `requirements.txt` file for your Python project or environment directly from SAS Studio. This custom step allows you to either:
 - Freeze all packages in a given Python environment, or
@@ -47,6 +38,15 @@ This step helps you generate a requirements file. Input arguments required:
 - SAS Viya 4 environment (tested on monthly release 2025.07) with SAS Studio Flows
 - Python environment accessible to the SAS Compute Server
 - Python package 'pipreqs' to be installed if you wish to generate requirements from Python scripts. Details [here](https://pypi.org/project/pipreqs/).
+
+## Installation & Usage
+
+Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
+
+When successfully uploaded, the following structure will be present in the Shared Section of your SAS Studio application - Custom Steps tab.
+
+![SAS Studio view](./img/view-custom-steps.png)
+
 
 ## Version
 
