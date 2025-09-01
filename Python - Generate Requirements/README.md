@@ -43,9 +43,6 @@ This step helps you generate a requirements file. Input arguments required:
 
 Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
 
-When successfully uploaded, the following structure will be present in the Shared Section of your SAS Studio application - Custom Steps tab.
-
-![SAS Studio view](./img/view-custom-steps.png)
 
 
 ## Version
