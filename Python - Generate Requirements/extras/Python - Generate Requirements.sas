@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Python - Generate Requirements
 
-   v 1.1.0 (30AUG2025)
+   v 1.1.0 (31AUG2025)
 
    This program helps you generate a requirements.txt file for your Python project or environment.
    You can either freeze all packages in a given Python environment, or generate requirements
