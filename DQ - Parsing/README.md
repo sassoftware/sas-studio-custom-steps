@@ -2,6 +2,9 @@
 
 ## Description
 
+>[!NOTE]
+>The **Parse Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **DQ - Parsing** step allows you to parse a column by dividing a string into a set of tokens. When a parse definition is applied to a data string, the string is analysed and split into substrings that are assigned to the output tokens. For example: Mr. Bob Brauer [Mr. = Prefix, Bob = Given Name, Brauer = Family Name]. 
 
 The QKB parse definition uses a vocabulary to identify the basic categories for each word or character. The patterns constructed from the categories of those words or characters are then compared with rules in the grammar. If the system finds a rule that captures these patterns, a solution is produced.
@@ -13,9 +16,6 @@ Parse definitions are useful when you want to break data strings into substrings
   * If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.  
   * This version supports the following locales: ENUSA, ENGBR, FRFRA, DEDEU, ITITA and ESESP
   * For information about parsing tokens search the QKB documentation for “Definitions by Locale/Parse Definitions”: [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/documentation/onlinedoc/qkb/32/QKBCI32/Help/qkb-help.html)
-
->**Note**: The **Parse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2024.01, provides similar functionality, 
-and it is highly recommended to use that step going forward when possible.
 
 ## User Interface  
 

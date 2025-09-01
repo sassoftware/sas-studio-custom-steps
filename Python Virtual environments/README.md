@@ -1,8 +1,10 @@
 # SAS Studio Custom Steps for virtual Python environments
 
-> **NOTE**: Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
+>[!NOTE]
+>Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
 
-> 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
+>[!TIP]
+>27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
 
 > 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
 
@@ -18,7 +20,8 @@ A general idea :
 Refer the "About" tab on each of the individual steps for more details on what they are used for.
 
 ### Create a virtual environment
-> 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
+>[!TIP]
+>27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
 
 This step helps you create a virtual environment. Input arguments required :
 1. A name provided for your virtual environment (which can optionally be expressed as a full path to a persistent location, for future retrieval)

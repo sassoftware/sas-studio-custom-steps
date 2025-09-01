@@ -2,6 +2,9 @@
 
 ## Description
 
+>[!NOTE]
+>The **Clean Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **DQ - Identify** step allows you to obtain the Identity Type for each individual row in a column of data based on a locale and an Identification Analysis definition using the **dqIdentify** function.  This version supports seven locales (ENCAN, ENUSA, FRCAN, FRFRA, DEDEU, ITITA and ESESP) and allows you to do Identification Analysis on up to 5 columns. 
 
 ## User Interface  
@@ -18,9 +21,6 @@ The **DQ - Identify** step allows you to obtain the Identity Type for each indiv
 2. **Identification results column**  - Specify name of output column to contain generated Identity Types. If left empty, a new column will be created using name of input column suffixed with **_ID**.      
 3. **Locale**                         - Pick the Locale to be used for Identification Analysis.  If left empty, the **English - USA** Locale will be used. 
 4. **Definition**                     - Pick the Definition to be used for Identification Analysis. If left empty, the **Field Content (Global)** Definition will be used.  
-
->**Note**: The **Cleanse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2024.01, provides similar functionality, 
-and it is highly recommended to use that step going forward when possible.
 
 ## Requirements
 

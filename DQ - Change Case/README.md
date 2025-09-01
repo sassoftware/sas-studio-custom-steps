@@ -2,6 +2,9 @@
 
 ## Description
 
+>[!NOTE]
+**Note**: The **Clean Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **DQ - Change Case** step allows you to specify data and logic that can be used to uppercase, lowercase, or propercase a text string. A case definition can be helpful in situations where casing rules are not straightforward. For example, consider the following German word: 
 Straße. When uppercasing this word, it is desirable to transform the "ß" character to a double "S": STRASSE. A case definition for uppercasing German data can be used to perform this type of special processing.
   * The step will add an extra output column for each cased input column.
@@ -9,9 +12,6 @@ Straße. When uppercasing this word, it is desirable to transform the "ß" chara
   * This version supports the following locales: ENUSA, ENGBR, FRFRA, DEDEU, ITITA and ESESP
   * For information about Change Case search the QKB documentation for “Definitions by Locale/Case Definitions”: [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/documentation/onlinedoc/qkb/32/QKBCI32/Help/qkb-help.html)
   
-> **Note**: The **Cleanse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2024.01, provides similar functionality, 
-and it is highly recommended to use that step going forward when possible.
-
 ## User Interface  
 
 * ### Change Case Options tab ###
