@@ -18,7 +18,8 @@ A general idea :
 Refer the "About" tab on each of the individual steps for more details on what they are used for.
 
 ### Create a virtual environment
-> 27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
+>[!TIP]
+>27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
 
 This step helps you create a virtual environment. Input arguments required :
 1. A name provided for your virtual environment (which can optionally be expressed as a full path to a persistent location, for future retrieval)
