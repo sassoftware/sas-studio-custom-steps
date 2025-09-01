@@ -2,7 +2,8 @@
 
 ## Description
 
->**Note**: The **Parse Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
+>[!NOTE]
+>The **Parse Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
 
 The **DQ - Parsing** step allows you to parse a column by dividing a string into a set of tokens. When a parse definition is applied to a data string, the string is analysed and split into substrings that are assigned to the output tokens. For example: Mr. Bob Brauer [Mr. = Prefix, Bob = Given Name, Brauer = Family Name]. 
 
