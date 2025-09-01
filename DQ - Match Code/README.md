@@ -2,6 +2,8 @@
 
 ## Description
 
+>**Note**: The **Match Codes** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2023.08, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. 
  * This version uses SASDQREF tables, supports all Locales defined in the QKB and allows to generate match code for up to 10 columns. 
  * Prompts take advantage of dynamic prompt lists (SASDQREF) and hierarchies 
