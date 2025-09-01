@@ -6,7 +6,7 @@ The **Anonymize and Mask Data** custom step enables SAS Studio users to select a
 
 This custom step is related to the [DQ - Standardize](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/DQStandardize) custom step.
 
-**Note**: The **Mask Data** step in the **Transform Data** group in the **Steps** pane in SAS Studio, introduced in release 2023.07, provides the same functionality, and it is highly recommended to use that step going forward.
+>**Note**: The **Mask Data** step in the **Transform Data** group in the **Steps** pane in SAS Studio, introduced in release 2023.07, provides the same functionality, and it is highly recommended to use that step going forward.
 
 ## User Interface
 
