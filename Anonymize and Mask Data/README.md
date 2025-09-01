@@ -2,11 +2,12 @@
 
 ## Description
 
+>[!NOTE]
+>The **Mask Data** step in the **Transform Data** group in the **Steps** pane in SAS Studio, introduced in release 2023.07, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **Anonymize and Mask Data** custom step enables SAS Studio users to select a standardization definition from the [SAS Quality Knowledge Base (QKB)](https://support.sas.com/en/software/quality-knowledge-base-support.html#documentation) to mask or anonymize data in a selected column.  The selected column is dropped from the output and its masked version is returned instead.  For more information on how this custom step was built refer to [this blog](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Using-a-SAS-Quality-Knowledge-QKB-Reference-Table-in-a/ta-p/886106)
 
 This custom step is related to the [DQ - Standardize](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/DQStandardize) custom step.
-
-**Note**: The **Mask Data** step in the **Transform Data** group in the **Steps** pane in SAS Studio, introduced in release 2023.07, provides the same functionality, and it is highly recommended to use that step going forward.
 
 ## User Interface
 
