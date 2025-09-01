@@ -2,6 +2,8 @@
 
 ## Description
 
+>**Note**: The **Clean Data** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2024.01, provides the same functionality, and it is highly recommended to use that step going forward.
+
 The **DQ - Standardize** step allows you to create a column with standardized values based on a locale and standardization definition using the **dqStandardize** function.
  * Best practice is to write the output to a new column, but you can overwrite an existing column as well.
  * If both the input table and the output table are in CAS then the step will run in CAS, otherwise it will run in the SAS Compute Server.
