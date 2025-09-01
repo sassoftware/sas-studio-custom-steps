@@ -17,9 +17,6 @@ Parse definitions are useful when you want to break data strings into substrings
   * This version supports the following locales: ENUSA, ENGBR, FRFRA, DEDEU, ITITA and ESESP
   * For information about parsing tokens search the QKB documentation for “Definitions by Locale/Parse Definitions”: [SAS Quality Knowledge Base for Contact Information](https://support.sas.com/documentation/onlinedoc/qkb/32/QKBCI32/Help/qkb-help.html)
 
->**Note**: The **Parse Data** step in the **Data Quality** group in the **Steps** pane in SAS Studio, introduced in release 2024.01, provides similar functionality, 
-and it is highly recommended to use that step going forward when possible.
-
 ## User Interface  
 
 * ### Parsing Options tab ###
