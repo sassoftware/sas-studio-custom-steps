@@ -1,5 +1,8 @@
 # List of Custom Steps in this Project
 
+>[!WARNING]
+>02SEP2025: Steps listed as **<sup> (DEPRECATED)</sup>** will be removed on 30SEP2025.
+
 ## Abbreviations used in name of Custom Step
 
 The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.
@@ -107,7 +110,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [Python - Generate Requirements](./Python%20-%20Generate%20Requirements/README.md) | Generate a `requirements.txt` file for your Python project or environment | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.07 <br>or later | 01SEP2025 |
 | [Python - Load Objects to SAS](./Python%20-%20Load%20Objects%20to%20SAS/README.md) | Load Python objects to SAS Compute or CAS tables | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 01SEP2022 |
 | [Python - Switch Environments](./Python%20-%20Switch%20Environments/README.md) | Switch between different Python environments or revert to the original environment for use within SAS Viya | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.07 <br>or later | 29AUG2025 |
-| [Python - Virtual Environments](./Python%20Virtual%20environments/README.md) | A collection of 5 SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.<sup> (*)</sup> | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
+| [Python - Virtual Environments](./Python%20Virtual%20environments/README.md)**<sup> (DEPRECATED)</sup>** | A collection of SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.**<sup> (DEPRECATED)</sup>** | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
 | [R Runner](./R%20Runner/README.md) | Submit R scripts with support for input and output table | [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 18AUG2023 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 26AUG2022 |
 | [SAS Content - Copy File from File System](./SAS%20Content%20-%20Copy%20File%20from%20File%20System/README.md) | Copy file from Compute file system into SAS Content folder programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 09JAN2024 |
