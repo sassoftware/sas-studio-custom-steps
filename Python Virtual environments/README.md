@@ -1,16 +1,19 @@
-# SAS Studio Custom Steps for virtual Python environments
+# SAS Studio Custom Steps for virtual Python environments**<sup> (DEPRECATED)</sup>**
 
->[!NOTE]
->Over time the steps in this subfolder will be deprecated and replaced with a new version that will be stored in a step-specific subfolder
+>[!WARNING]
+>02SEP2025: All of the steps in this folder have been replaced with new steps that are maintained in a different folder and are now deprecated. These deprecated steps will be removed on 30SEP2025. See the list of tips below for more details on each of the deprecated steps. 
 
 >[!TIP]
 >27AUG2025: Custom step **Python - Create a Virtual Environment** has a new version that now lives in a dedicated subfolder, see [subfolder Python - Create a Virtual Environment](../Python%20-%20Create%20a%20Virtual%20Environment).
 
 >[!TIP]
-> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they have been merged into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+
+>[!TIP]
+> 02SEP2025: Custom steps **Python - Freeze environment details** and **Python - Obtain Requirements File from Project Directory** have been merged into a single step that lives in a dedicated subfolder, see [subfolder Python - Generate Requirements](../Python%20-%20Generate%20Requirements).
 
 ## Description
-Package your Python-based analytics solutions in a portable, repeatable, and reusable manner.  This repo contains **five** SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.  
+Package your Python-based analytics solutions in a portable, repeatable, and reusable manner.  This repo contains SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.  
 
 A general idea :
 
@@ -32,26 +35,32 @@ This step helps you create a virtual environment. Input arguments required :
 
 ### Activate a virtual environment
 >[!TIP]
-> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they have been merged into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
 
 This step helps you activate an existing virtual environment. It requires a single argument to a folder path pointing to your virtual environment.
 
 ![Python - Activate a virtual environment](./img/activate-a-virtual-environment.png)
 
 ### Freeze environment details
+>[!TIP]
+> 02SEP2025: Custom steps **Python - Freeze environment details** and **Python - Obtain Requirements File from Project Directory** have been merged into a single step that lives in a dedicated subfolder, see [subfolder Python - Generate Requirements](../Python%20-%20Generate%20Requirements).
+
 This step helps you save details of all the packages currently installed in your environment, to a requirements.txt.  You can reuse this requirements.txt file for other environments or create a new virtual environment based on this definition. You provide a single argument pointing to the path where you want your requirements.txt to be saved.
 
 ![Python - Freeze requirement details](./img/freeze-requirement-details.png)
 
 ### Revert to original environment 
 >[!TIP]
-> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they have been merged into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
 
 This step switches a SAS Studio session, currently under a virtual Python environment, to the Python environment that was in operation earlier. This step does not require any arguments.
 
 ![Python - Revert to original Python environment](./img/revert-to-original-environment.png)
 
 ### Obtain requirements file from Project Directory
+>[!TIP]
+> 02SEP2025: Custom steps **Python - Freeze environment details** and **Python - Obtain Requirements File from Project Directory** have been merged into a single step that lives in a dedicated subfolder, see [subfolder Python - Generate Requirements](../Python%20-%20Generate%20Requirements).
+
 This step helps users generate a relevant, more compact requirements.txt for a project containing one or more Python programs.  The resulting requirements.txt can be used for specifying configuration for a virtual environment meant for running the said project.
 
 ![Python - Obtain requirements from project directory](./img/obtain-requirements-from-project-directory.png)
