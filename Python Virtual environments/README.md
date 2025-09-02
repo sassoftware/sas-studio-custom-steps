@@ -1,4 +1,4 @@
-# SAS Studio Custom Steps for virtual Python environments**<sup> (DEPRECATED)</sup>**
+# SAS Studio Custom Steps for virtual Python environments **<sup> (DEPRECATED)</sup>**
 
 >[!WARNING]
 >02SEP2025: All of the steps in this folder have been replaced with new steps that are maintained in a different folder and are now deprecated. These deprecated steps will be removed on 30SEP2025. See the list of tips below for more details on each of the deprecated steps. 
