@@ -31,6 +31,9 @@ This step helps you create a virtual environment. Input arguments required :
 ![Python - Create a virtual environment](./img/create-a-virtual-environment.png)
 
 ### Activate a virtual environment
+>[!TIP]
+> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+
 This step helps you activate an existing virtual environment. It requires a single argument to a folder path pointing to your virtual environment.
 
 ![Python - Activate a virtual environment](./img/activate-a-virtual-environment.png)
@@ -41,6 +44,9 @@ This step helps you save details of all the packages currently installed in your
 ![Python - Freeze requirement details](./img/freeze-requirement-details.png)
 
 ### Revert to original environment 
+>[!TIP]
+> 29AUG2025: Custom steps **Python - Activate a Virtual Environment** and **Python - Revert to Original Environment** have been removed as they are now subsumed into a new step, see [subfolder Python - Switch Environments](../Python%20-%20Switch%20Environments/).
+
 This step switches a SAS Studio session, currently under a virtual Python environment, to the Python environment that was in operation earlier. This step does not require any arguments.
 
 ![Python - Revert to original Python environment](./img/revert-to-original-environment.png)
