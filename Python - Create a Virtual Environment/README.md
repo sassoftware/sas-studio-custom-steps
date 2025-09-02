@@ -50,6 +50,8 @@ This repository contains 5 custom steps which are offered as examples of how you
 
 ## Change Log
 
+* Version 2.1.0 (01SEP2025)
+  - Converted ORIGINAL_PYPATH to global macro variable to avoid breaking downstream steps
 * Version 2.0.0 (26AUG2025)
   - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
   - Separate folder in repository
