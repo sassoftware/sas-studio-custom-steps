@@ -102,6 +102,7 @@ Note that:
 
 
 ## Change Log
+Version 1.96 (28SEP2025): Removed a small issue.
 
 Version 1.95 (17JUN2025): Hard exit in case crucial components are missing.
 
