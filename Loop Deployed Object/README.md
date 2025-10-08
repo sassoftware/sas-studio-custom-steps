@@ -10,7 +10,7 @@ You can deploy a flow or SAS program by right clicking on the object, from withi
 
 ## SAS Viya Version Support
 
-Initially created and tested on Viya 4, Stable 2023.01
+Tested on Viya 4, Stable 2025.08
 
 ## User Interface
 
