@@ -1,7 +1,7 @@
 # List of Custom Steps in this Project
 
 >[!WARNING]
->02SEP2025: Steps listed as **<sup> (DEPRECATED)</sup>** will be removed on 30SEP2025.
+>02SEP2025: Steps listed as **<sup> (DEPRECATED)</sup>** will be removed soon.
 
 ## Abbreviations used in name of Custom Step
 
