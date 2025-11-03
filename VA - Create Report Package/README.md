@@ -22,7 +22,7 @@ This custom step is created and tested in Viya 4, Stable 2025.08
 
 | # | option | desciption | example result|
 |---|--------|------------|---------------|
-| 1 | < Nothing>| This will add nothing to the resulting package name. Not that the default package name is the same as the name of the report. **This is the default value** | report_name.zip |
+| 1 | &lt;Nothing>| This will add nothing to the resulting package name. Not that the default package name is the same as the name of the report. **This is the default value** | report_name.zip |
 | 2 | Date | This will add the current date in format YYYYMMD to the package name. | report_name_20251029.zip |
 | 3 | Timestamp | This will add the current date and time in format YYYYMMDD_HHMMSS to the package name. | report_name_20251029_150530.zip |
 
