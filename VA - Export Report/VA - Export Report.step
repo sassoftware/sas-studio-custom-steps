@@ -1,0 +1,77 @@
+{
+    "creationTimeStamp": "2025-11-04T07:40:19.20424Z",
+    "createdBy": "gerdaw",
+    "modifiedTimeStamp": "2025-11-04T07:55:27.040096Z",
+    "modifiedBy": "gerdaw",
+    "name": "VA - Export Report.step",
+    "displayName": "VA - Export Report.step",
+    "localDisplayName": "VA - Export Report.step",
+    "links": [
+        {
+            "method": "GET",
+            "rel": "self",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "type": "application/vnd.sas.data.flow.step"
+        },
+        {
+            "method": "GET",
+            "rel": "alternate",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "type": "application/vnd.sas.data.flow.step.summary"
+        },
+        {
+            "method": "GET",
+            "rel": "up",
+            "href": "/dataFlows/steps",
+            "uri": "/dataFlows/steps",
+            "type": "application/vnd.sas.collection",
+            "itemType": "application/vnd.sas.data.flow.step.summary"
+        },
+        {
+            "method": "PUT",
+            "rel": "update",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "type": "application/vnd.sas.data.flow.step",
+            "responseType": "application/vnd.sas.data.flow.step"
+        },
+        {
+            "method": "DELETE",
+            "rel": "delete",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e"
+        },
+        {
+            "method": "POST",
+            "rel": "copy",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e/copy",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e/copy",
+            "responseType": "application/vnd.sas.data.flow.step"
+        },
+        {
+            "method": "GET",
+            "rel": "transferExport",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "responseType": "application/vnd.sas.transfer.object"
+        },
+        {
+            "method": "PUT",
+            "rel": "transferImportUpdate",
+            "href": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "uri": "/dataFlows/steps/c141a8fb-0077-4c8c-8ada-d89e63995f1e",
+            "type": "application/vnd.sas.transfer.object",
+            "responseType": "application/vnd.sas.summary"
+        }
+    ],
+    "metadataVersion": 1,
+    "version": 2,
+    "type": "code",
+    "flowMetadata": {},
+    "ui": "{\n\t\"showPageContentOnly\": true,\n\t\"pages\": [\n\t\t{\n\t\t\t\"id\": \"page1\",\n\t\t\t\"type\": \"page\",\n\t\t\t\"label\": \"Options\",\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"_report\",\n\t\t\t\t\t\"type\": \"path\",\n\t\t\t\t\t\"label\": \"Select the report for which you want to create an export package:\",\n\t\t\t\t\t\"pathtype\": \"file\",\n\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"_packageDir\",\n\t\t\t\t\t\"type\": \"path\",\n\t\t\t\t\t\"label\": \"Select the SAS Server directory where the package will be created:\",\n\t\t\t\t\t\"pathtype\": \"folder\",\n\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"_addition\",\n\t\t\t\t\t\"type\": \"dropdown\",\n\t\t\t\t\t\"label\": \"Add the following to the package name:\",\n\t\t\t\t\t\"items\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"<Nothing>\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"Date\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"Timestamp\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\"placeholder\": \"\",\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"id\": \"page2\",\n\t\t\t\"type\": \"page\",\n\t\t\t\"label\": \"About\",\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"text1\",\n\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\"text\": \"VA - Export Report step\\n==================================\\nExports a package for the report in a compressed (zip) format. The returned content contains the report source files, plus the results of data queries and image rendering, constituting all that is needed for remote viewing of the report.\\n\\nThe step needs the location and name of the report and a physical location where the package will be stored.\\n\\nThe name of the package will always be the same as the report name with the optional addition of a date, format YYYYMMDD, or timestamp, format YYYYMMDD_HHMMSS.\",\n\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"section1\",\n\t\t\t\t\t\"type\": \"section\",\n\t\t\t\t\t\"label\": \"Changelog\",\n\t\t\t\t\t\"open\": true,\n\t\t\t\t\t\"visible\": \"\",\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"text2\",\n\t\t\t\t\t\t\t\"type\": \"text\",\n\t\t\t\t\t\t\t\"text\": \"* Version 1.1 (04NOV2025)\\n  - Rename step and update wordings\\n* Version 1.0 (16OCT2025)\\n  - Initial version\",\n\t\t\t\t\t\t\t\"visible\": \"\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"syntaxversion\": \"1.3.0\",\n\t\"values\": {\n\t\t\"_report\": \"\",\n\t\t\"_packageDir\": \"\",\n\t\t\"_addition\": {\n\t\t\t\"value\": \"<Nothing>\"\n\t\t}\n\t},\n\t\"promptHierarchies\": []\n}",
+    "templates": {
+        "SAS": "/*\r\n    The base URL for your SAS Viya installation.\r\n*/\r\n%let base_uri=%sysfunc(getoption(SERVICESBASEURL));\r\n\r\n/*\r\n    The following timestamp can be used to configure the package name.    \r\n*/\r\n%let timestamp = %sysfunc(compress(%sysfunc(time(), time8.), ':'));\r\n%let datestamp = %SYSFUNC(DATE(), YYMMDDN8.);\r\n%let dttmstamp = &datestamp._&timestamp;\r\n\r\n/*\r\n    From the _report macro variable create a separate value for reportName and path.\r\n*/\r\ndata _null_;\r\n    call symputx('reportName', kreverse(kscan(kreverse(kscan(\"&_report\", 2, ':')), 1, '/')));\r\n    call symputx(\"path\", kreverse(ksubstr(kreverse(kscan(\"&_report\", 2, ':')), kfind(kreverse(kscan(\"&_report\", 2, ':')), '/'))));\r\n    call symputx(\"packageDir\", kscan(\"&_packageDir\", 2, ':'));\r\n    call symputx(\"dirType\", kstrip(kscan(\"&_packageDir\", 1, ':')));\r\nrun;\r\n\r\n/*\r\n    This version will only work when the package is stored on a physical file system.\r\n*/\r\n%if &dirType eq sasserver %then %do;\r\n\r\n    /*\r\n        Based on the 'path' macro variable retrieve the endpoint to give me the folder members/content.\r\n    */\r\n    filename ref temp ;\r\n    proc http\r\n        url = \"&base_uri./folders/folders/@item\"\r\n            query = (\"path\" = \"&path\")\r\n            oauth_bearer = sas_services\r\n        out= ref;\r\n        headers\r\n            'Accept'= 'application/vnd.sas.content.folder+json';\r\n    run;\r\n    libname ref json;\r\n\r\n    /*\r\n        From the links table, store the member end-point and the content type into macro variables.\r\n    */\r\n    proc sql noprint;\r\n        select \r\n            href, \r\n            type into :endpoint, :type\r\n        from \r\n            ref.links\r\n        where \r\n            method = \"GET\" and \r\n            rel = \"members\";\r\n    quit; \r\n\r\n    /*\r\n        Retrieve the members/content within the directory\r\n    \r\n        Note the limit addition, which needs to be large enough to contain the requested report.\r\n    */\r\n    filename members temp; \r\n    proc http\r\n        url = \"&base_uri.%trim(&endpoint)?limit=100\"\r\n            oauth_bearer = sas_services\r\n        out = members;\r\n        headers\r\n            \"Accept\"= \"%trim(&type)+json\";\r\n    run; \r\n    libname members json;\r\n\r\n    /*\r\n        Get the reportId for the specified report.\r\n    */\r\n    proc sql noprint;\r\n        select\r\n            kstrip(kreverse(kscan(kreverse(uri), 1, '/'))) as reportId length=64 into :reportId TRIMMED\r\n        from\r\n            members.items\r\n        where\r\n            name = \"&reportName\";\r\n    quit;\r\n\r\n    /*\r\n        End user feedback.\r\n    */\r\n    %macro request_status;\r\n        %if &SYS_PROCHTTP_STATUS_CODE eq 200 %then %do;\r\n            %put NOTE: Report package for \"&reportName\" successfully created.;\r\n        %end;\r\n        %else %do;\r\n            %put ERROR: Report package creation for \"&reportName\" failed.;\r\n            %put &=SYS_PROCHTTP_STATUS_CODE;\r\n            %put &=SYS_PROCHTTP_STATUS_PHRASE;\r\n        %end;\r\n    %mend;\r\n\r\n    %macro create_package;\r\n        /*\r\n            Note, the resulting file will be a zip file.\r\n        */\r\n        %if &_addition eq Date %then %do;\r\n            /*\r\n                The export package has the date, YYYYMMMDD, added to it.\r\n            */\r\n            filename resp \"&packageDir/&reportName._&datestamp..zip\";\r\n        %end;\r\n        %else %do;\r\n            %if &_addition eq Timestamp %then %do;\r\n                /*\r\n                    The export package has the date/time, YYYYMMDD_HHMMSS, added to it.\r\n                */\r\n                filename resp \"&packageDir/&reportName._&dttmstamp..zip\";\r\n            %end;\r\n            %else %do;\r\n                filename resp \"&packageDir/&reportName..zip\";\r\n            %end;\r\n        %end;\r\n\r\n        /*\r\n            Ask Viya to create the export package for the requested report.\r\n\r\n            API documentation: https://developer.sas.com/rest-apis/visualAnalytics/getExportedReportPackage\r\n\r\n        */\r\n        proc http\r\n            method='get'\r\n            url = \"&base_uri./visualAnalytics/reports/&reportId./package\"\r\n            oauth_bearer = sas_services\r\n            out=resp;\r\n            headers\r\n                'Accept'='application/zip, application/json, application/vnd.sas.error+json, aplication/json';\r\n        run;\r\n\r\n        /*\r\n            Validate the return codes for the last HTTP call and give feedback to the end-user.\r\n        */\r\n        %request_status;\r\n    %mend;\r\n    %create_package;\r\n%end;\r\n%else %do;\r\n    %put ERROR: Please select a location on the SAS Server. SAS Content folders are not supported by this custom step;\r\n%end;\r\n\r\n/*\r\n    Remove all macro variables from memory.\r\n*/\r\n%symdel base_uri /NOWARN;\r\n%symdel timestamp /NOWARN;\r\n%symdel datestamp /NOWARN;\r\n%symdel dttmstamp /NOWARN;\r\n%symdel reportName /NOWARN;\r\n%symdel path /NOWARN;\r\n%symdel packageDir /NOWARN;\r\n%symdel reportId /NOWARN;\r\n%symdel dir_type /NOWARN;\r\n\r\n/*\r\n    Remove all macros from memory.\r\n*/\r\n%SYSMACDELETE request_status / NOWARN;\r\n%SYSMACDELETE create_package / NOWARN;"
+    }
+}
