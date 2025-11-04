@@ -1,4 +1,4 @@
-# VA - Create Report Package
+# VA - Export Report
 
 ## Description
 Exports a package for the report in a compressed (zip) format. The returned content contains the report source files, plus the results of data queries and image rendering, constituting all that is needed for remote viewing of the report.
@@ -13,9 +13,9 @@ This custom step is created and tested in Viya 4, Stable 2025.08
 
 ## User interface
 
-### Tab: VA - Create Report Package Properties
+### Tab: Options
 
-![properties](img/Step%20-%20Properties.png.jpg)
+![Options](img/VA-Export-Report-Options.png)
 - **Select the report for which you want to create an export package:**: Here you select the report for which you want to create the report package.
 - **Select the SAS compute file directory where the package will be created:** Here you need to select a physical directory where the report package will be stored.
 - **Add the following to the package name:** Here you have three choices:
@@ -28,7 +28,7 @@ This custom step is created and tested in Viya 4, Stable 2025.08
 
 ### Tab: About
 
-![About](img/Step%20-%20About.jpg)
+![About](img/VA-Export-Report-About.png)
 
 ## Usage
 
@@ -42,4 +42,5 @@ Download the .step file, upload it into your environment and start using it by s
 | ERROR: Report package creation for "&reportName" failed. | The package creation failed. You will see the HTTP return code and the error description in the log file. | No package has been created.| 
 
 ## Change log
+Version 1.1 (04NOV2025): Rename step and update wordings
 Version 1.0 (16OCT2025): Initial version.
