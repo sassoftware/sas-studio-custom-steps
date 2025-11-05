@@ -42,5 +42,7 @@ Download the .step file, upload it into your environment and start using it by s
 | ERROR: Report package creation for "&reportName" failed. | The package creation failed. You will see the HTTP return code and the error description in the log file. | No package has been created.| 
 
 ## Change log
-Version 1.1 (04NOV2025): Rename step and update wordings
-Version 1.0 (16OCT2025): Initial version.
+ - Version 1.1 (04NOV2025)
+   - Rename step and update wordings
+ - Version 1.0 (16OCT2025)
+   - Initial version
