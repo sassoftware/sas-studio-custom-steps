@@ -48,6 +48,7 @@ Note that the flow shown can be used by the [Loop Deployed Object](../Loop%20Dep
 ## Output port
 
 The custom step has one output table with the following columns:
+
 ![output](img/Output%20port.PNG)
 
 ## Version 1.5
