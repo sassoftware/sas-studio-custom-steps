@@ -53,7 +53,7 @@ For more information about the different settings please refer to the SAS docume
   * Added option to suppress SSL check
 
 * Version 1.1 (09OCT2024)
-* Implemented feedback
+  * Implemented feedback
 
 * Version 1.0 (07OCT2024)
   * Initial version
