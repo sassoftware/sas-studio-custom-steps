@@ -23,7 +23,8 @@ First use the OCR - Document Analysis - Execute Batch OCR Process step in order 
 
 ## Requirements
 
--   SAS Viya 2024.08 or later
+-   SAS Viya 2024.08 or later (OCR - Document Analysis - Produce Usage Report Output)
+-   SAS Viya 2025.10 or later (OCR - Document Analysis - Execute Batch OCR Process) 
 -   A license for SAS Document Analysis is required
 
 ## Settings
