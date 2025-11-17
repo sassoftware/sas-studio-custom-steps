@@ -38,39 +38,33 @@ For more information about the different settings please refer to the SAS docume
 
 ### OCR - Document Analysis - Execute Batch OCR Process
 
-**Version 1.4 (04NOV2025)**
-* Add PaddleOCR to OCR engine options
-* Add MS OCR model name - available when "Microsoft" is selected as the OCR engine
-* Add Custom Document Intelligence model name - available when "Custom" is selected as the MS OCR model
-* Remove optional setting to maintain directory structure
+* Version 1.4 (04NOV2025)
+  * Add PaddleOCR to OCR engine options
+  * Add MS OCR model name - available when "Microsoft" is selected as the OCR engine
+  * Add Custom Document Intelligence model name - available when "Custom" is selected as the MS OCR model
+  * Remove optional setting to maintain directory structure
 
-**Version 1.3 (25FEB2025)**
-* Use launcher context name instead ID
+* Version 1.3 (25FEB2025)
+  * Use launcher context name instead ID
 
-**Version 1.2 (21NOV2024)** 
+* Version 1.2 (21NOV2024)
+  * Added option to enable syncronous processing
+  * Added option to suppress SSL check
 
-* Added option to enable syncronous processing
-* Added option to suppress SSL check
-
-**Version 1.1 (09OCT2024)** 
-
+* Version 1.1 (09OCT2024)
 * Implemented feedback
 
-**Version 1.0 (07OCT2024)** 
-
-* Initial version
+* Version 1.0 (07OCT2024)
+  * Initial version
 
 ### OCR - Document Analysis - Produce Usage Report Output
 
-**Version 1.2 (21NOV2024)** 
+* Version 1.2 (21NOV2024)
+  * Added option to enable syncronous processing
+  * Added option to suppress SSL check
 
-* Added option to enable syncronous processing
-* Added option to suppress SSL check
+* Version 1.1 (29OCT2024)
+  * Implemented feedback
 
-**Version 1.1 (29OCT2024)** 
-
-* Implemented feedback
-
-**Version 1.0 (07OCT2024)** 
-
-* Initial version
+*Version 1.0 (07OCT2024)
+  * Initial version
