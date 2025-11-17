@@ -1,4 +1,4 @@
-# OCR - Document Analysis - SAS Custom Steps
+# OCR - Document Analysis
 
 ## Description
 
