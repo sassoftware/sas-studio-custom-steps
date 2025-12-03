@@ -2,7 +2,7 @@
 
 ## Description
 
-.[!NOTE]
+>[!NOTE]
 >The **Match Codes** step in the **Data Quality** group in the Steps pane in SAS Studio, introduced in release 2023.08, provides the same functionality, and it is highly recommended to use that step going forward.
 
 The **DQ - Match Code** step allows you to create a column match code based on locale and rule definition using a **dqMatch** function in the SAS Compute Server. 
