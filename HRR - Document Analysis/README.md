@@ -14,11 +14,11 @@ If using SAS as the input source, the following file extensions are supported: [
 
 * ### HRR - Document Analysis - Medical Information - Options Page - Main Inputs ###
 
-   ![](img/HRR - Document Analysis - Medical Information Extraction - Options 1.png)
+   ![](img/hrr_document_analysis_medical_information_extraction_options_1.png)
 
 * ### HRR - Document Analysis - Medical Information - Options Page - Additional Inputs (Optional) ###
 
-   ![](img/HRR - Document Analysis - Medical Information Extraction - Options 2.png)
+   ![](img/hrr_document_analysis_medical_information_extraction_options_2.png)
 
 ## Requirements
  
