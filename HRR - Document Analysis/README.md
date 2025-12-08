@@ -2,7 +2,7 @@
 
 ## Description
 
->This custom step is provided to enable point-and-click usage of the functionality available as part of the [Health Record Review](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
+This custom step is provided to enable point-and-click usage of the functionality available as part of the [Health Record Review](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
 
 SAS Studio Custom Step for executing the SAS Document Analysis Health Record Review information extraction process. At a minimum, user must specify a folder containing either the SAS or SDA file to be processed, the output directory to export results, and the desired file type format for the exported results.
 
@@ -13,10 +13,12 @@ If using SAS as the input source, the following file extensions are supported: [
 ## User Interface
 
 * ### HRR - Document Analysis - Medical Information - Options Page - Main Inputs ###
-![HRR - Document Analysis - Medical Information Extraction options page](img/HRR - Document Analysis - Medical Information Extraction - Options 1.png)
+
+   ![](img/HRR - Document Analysis - Medical Information Extraction - Options 1.png)
 
 * ### HRR - Document Analysis - Medical Information - Options Page - Additional Inputs (Optional) ###
-![HRR - Document Analysis - Medical Information Extraction options page](img/HRR - Document Analysis - Medical Information Extraction - Options 2.png)
+
+   ![](img/HRR - Document Analysis - Medical Information Extraction - Options 2.png)
 
 ## Requirements
  
