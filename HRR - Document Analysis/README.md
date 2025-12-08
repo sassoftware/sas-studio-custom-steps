@@ -8,7 +8,7 @@ SAS Studio Custom Step for executing the SAS Document Analysis Health Record Rev
 
 The source directory should be located on the server file system (not in SAS Content). 
 
-If using SAS as the input source, the following file extensions are supported: [sas7bdat, sashdat]. If using the mapping output from the upstream SDA OCR process, the following file types are supported: [csv, xls, xlsx].
+If using SAS as the input source, the following file extensions are supported: [sas7bdat, sashdat]. If using the mapping output from the upstream SDA OCR process, the following file types are supported: [csv, xlsx].
 
 ## User Interface
 
@@ -19,6 +19,16 @@ If using SAS as the input source, the following file extensions are supported: [
 * ### HRR - Document Analysis - Medical Information - Options Page - Additional Inputs (Optional) ###
 
    ![](img/hrr_document_analysis_medical_information_extraction_options_2.png)
+
+## Required Inputs
+
+At a minimum, user must specify the following to execute this custom step:
+
+  - a folder or directory containing either the SAS or SDA file to be processed, 
+  - an output directory to export results, 
+  - a desired file type format for the exported results,
+  - a folder or directory containing model astore files and 
+  - a folder or directory containing SAS macro catalog 
 
 ## Requirements
  
