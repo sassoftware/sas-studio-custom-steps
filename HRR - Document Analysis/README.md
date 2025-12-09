@@ -2,9 +2,17 @@
 
 ## Description
 
-This custom step is provided to enable point-and-click usage of the functionality available as part of the [Health Record Review](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
+SAS Studio Custom Step for executing the SAS Document Analysis Health Record Review information extraction process. This custom step is provided to enable point-and-click usage of the functionality available as part of the [Health Record Review](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
 
-SAS Studio Custom Step for executing the SAS Document Analysis Health Record Review information extraction process. At a minimum, user must specify a folder containing either the SAS or SDA file to be processed, the output directory to export results, and the desired file type format for the exported results.
+## Required Inputs
+
+At a minimum, user must specify the following to execute this custom step:
+
+  - a folder / directory containing either the SAS or SDA file to be processed,
+  - an output folder / directory to export results,
+  - a desired file type format for the exported results,
+  - a folder / directory containing model astore files and
+  - a folder / directory containing SAS macro catalog
 
 The source directory should be located on the server file system (not in SAS Content). 
 
@@ -19,16 +27,6 @@ If using SAS as the input source, the following file extensions are supported: [
 * ### HRR - Document Analysis - Medical Information - Options Page - Additional Inputs (Optional) ###
 
    ![](img/hrr_document_analysis_medical_information_extraction_options_2.png)
-
-## Required Inputs
-
-At a minimum, user must specify the following to execute this custom step:
-
-  - a folder or directory containing either the SAS or SDA file to be processed, 
-  - an output directory to export results, 
-  - a desired file type format for the exported results,
-  - a folder or directory containing model astore files and 
-  - a folder or directory containing SAS macro catalog 
 
 ## Requirements
  
