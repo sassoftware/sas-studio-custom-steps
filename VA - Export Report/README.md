@@ -22,7 +22,7 @@ In case a png or svg file is generated, the result might not be useable/readable
 
 ![Options](img/Step%20-%20Options.jpg)
 - **Select the report for which you want to create an export:**: Here you select the report for which you want to create the report package, PDF, PNG or SVG.
-- **Select the SAS Server directory where the export will be created:** Here you need to select a physical directory where the report package, PDF, PNG or SVG file will be stored.
+- **Select the SAS Server directory where the export will be created:** Here you need to select a **physical** directory where the report package, PDF, PNG or SVG file will be stored.
 - **Export as:** NEW in version 2.0. Here you can select the following options:
 
 | # | option | description | comment |
