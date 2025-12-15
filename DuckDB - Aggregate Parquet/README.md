@@ -1,24 +1,21 @@
 # DuckDB - Aggregate Parquets
 
 ## Description
-This custom step dynamically builds a DuckDB SQL aggregation query against Parquet files and pushes the query down to DuckDB via the SAS/ACCESS Interface to DuckDB. It lets users run one or more aggregations over Parquet data without manually writing DuckDB SQL, reducing data movement and taking advantage of DuckDB's columnar performance.
+This custom step dynamically builds a DuckDB SQL aggregation query against Parquet files and pushes the query down to DuckDB via the SAS/ACCESS Interface to DuckDB. It lets users run one or more aggregations over Parquet data without manually writing DuckDB SQL, reducing data movement and taking advantage of DuckDB's columnar performance. This step explicitly pushes down the query to avoid making a copy which might happen in case of implicit reference.
 
 ## User Interface
 See the step's **About** tab in SAS Studio for contextual help. The Parameters tab prompts for the inputs required to build the aggregation SQL automatically.
 
 ### Parameters
 - **Parquet file path (file selector, required):** select a Parquet file on the SAS server filesystem (used when selecting a single file).
-- **Parquet files directory or prefix (text, required):** directory or prefix for Parquet files to query (used for partitioned sets or file collections).
-- **Parquet table file name (text, required):** table name to reference when constructing the DuckDB query (without extension).
 - **Aggregation functions (list, required):** choose one or more aggregation functions (e.g., AVG, SUM, COUNT, STDDEV, STDDEV_POP).
-- **Number of aggregation functions / function names (legacy fields):** legacy controls for older UI configurations (kept for compatibility).
 - **List columns to aggregate (space separated, required):** columns to apply the aggregation functions to.
 - **Group-by columns (space separated, optional):** optional columns to group the aggregations by.
 - **Output table (output port / libname-qualified preferred, required):** destination table for the aggregated results; prefer a DuckDB-backed library name.
 
 ## Requirements
 - SAS Viya environment with SAS Studio flows
-- SAS/ACCESS Interface to DuckDB configured on the compute server
+- SAS/ACCESS Interface to DuckDB configured on the compute server. Note that SAS supports DuckDB from version 2025.07 onwards.
 - Parquet files accessible from the SAS compute server filesystem
 
 ## Usage
