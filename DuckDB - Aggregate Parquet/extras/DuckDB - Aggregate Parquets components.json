@@ -1,0 +1,207 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "params",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "section_input_params",
+					"type": "section",
+					"label": "Input Parameters",
+					"open": true,
+					"children": [
+						{
+							"id": "parquet_file_path",
+							"type": "path",
+							"label": "Enter path to parquet file:",
+							"pathtype": "file",
+							"placeholder": "",
+							"required": true,
+							"visible": ""
+						},
+						{
+							"id": "file_path",
+							"type": "textfield",
+							"label": "Parquet files directory or prefix:",
+							"placeholder": "/path/to/parquet/files",
+							"required": true
+						},
+						{
+							"id": "parquet_table_name",
+							"type": "textfield",
+							"label": "Parquet table file name (without extension):",
+							"placeholder": "MY_TABLE",
+							"required": true
+						},
+						{
+							"id": "function_name",
+							"type": "list",
+							"items": [
+								{
+									"value": "AVG"
+								},
+								{
+									"value": "COUNT"
+								},
+								{
+									"value": "SUM"
+								},
+								{
+									"value": "STDDEV"
+								},
+								{
+									"value": "STDDEV_POP"
+								}
+							],
+							"label": "Select all aggregation functions",
+							"max": null,
+							"min": null,
+							"visible": ""
+						},
+						{
+							"id": "function_name_count_old",
+							"type": "numstepper",
+							"label": "Number of aggregation functions:",
+							"required": true,
+							"integer": true,
+							"min": 1,
+							"max": 20,
+							"stepsize": 1
+						},
+						{
+							"id": "function_names_old",
+							"type": "textarea",
+							"label": "Aggregation function names (one per line, in order):",
+							"placeholder": "AVG\nSUM\nSTDDEV\nCOUNT",
+							"required": true
+						},
+						{
+							"id": "agg_columns",
+							"type": "textfield",
+							"label": "List columns to aggregate (space separated):",
+							"placeholder": "DELINQ DEBTINC",
+							"required": true
+						},
+						{
+							"id": "group_by_columns",
+							"type": "textfield",
+							"label": "List Group-by columns (optional):",
+							"placeholder": "",
+							"required": false
+						},
+						{
+							"id": "output_table",
+							"type": "outputtable",
+							"label": "Output table (preferably a data set backed by a DuckDB lib name)",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "output_table_old",
+							"type": "textfield",
+							"label": "Output table (libname qualified preferred):",
+							"placeholder": "dukonce.TABLE_NUM_AGGS_DD",
+							"required": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "DuckDB - Aggregate Parquets",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "text1",
+							"type": "text",
+							"text": "This custom step dynamically builds a DuckDB SQL aggregation query on parquet file formats and pushes it down to DuckDB through the SAS/ACCESS Interface to DuckDB.\n\nOpen file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Presently, the benefits of DuckDB are better realised if the query is pushed down through explicit passthrough.  This custom step helps users conveniently run multiple aggregation queries without having to explicitly write SQL in the DuckDB dialect.",
+							"visible": ""
+						},
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Input Parameters",
+									"open": false,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "1. Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem)\n2. Select Aggregation functions (list, required): select one or more functions to aggregate by.  This list shall expand in future.\n3. List columns to aggregate (text field, required): list your columns in a space separated format.  This step does not provide a column selector as it queries directly from parquet.\n4. List Group-by columns (text field, optional): list any columns which you like to group your aggregations by. ",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Output parameters",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "-Output table (output port, required): select an output table.  Choose based on your use case, but it's preferred that this belongs to a DuckDB lib name. ",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "version_text",
+									"type": "text",
+									"text": "Version: 1.1.4 (14DEC2025)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+								}
+							]
+						},
+						{
+							"id": "about_description",
+							"type": "text",
+							"text": "This manifest exposes parameters used by duckdb-aggregations_v1.1.4.sas to build and execute a DuckDB SQL aggregation against parquet files."
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"parquet_file_path": "",
+		"file_path": "/mnt/viya-share/data/parquet-test/ss-new/parquet-test",
+		"parquet_table_name": "HMEQ_WITH_CUST",
+		"function_name": [],
+		"function_name_count_old": 4,
+		"function_names_old": "AVG\nSUM\nSTDDEV\nCOUNT",
+		"agg_columns": "DELINQ DEBTINC",
+		"group_by_columns": "",
+		"output_table": {
+			"library": "",
+			"table": ""
+		}
+	}
+}
