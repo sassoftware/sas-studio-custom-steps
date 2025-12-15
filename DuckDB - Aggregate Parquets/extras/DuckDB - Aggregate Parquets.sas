@@ -25,32 +25,24 @@
     Users can modify these parameters to suit their specific data and analysis needs.
 * -------------------------------------------------------------------------------------------- */
 
-/* Directory or prefix containing parquet files */
-%let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet;
+/*  Directory or prefix containing parquet files  */
+/* %let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet; */
 
  
 
 /* Aggregation function list: define count then each function name macro */
-%let function_name_count=4;
-%let function_name_1=AVG;
-%let function_name_2=SUM;
-%let function_name_3=STDDEV;
-%let function_name_4=COUNT;
+/* %let function_name_count=4; */
+/* %let function_name_1=AVG; */
+/* %let function_name_2=SUM; */
+/* %let function_name_3=STDDEV; */
+/* %let function_name_4=COUNT; */
 
-/* Comma-separated list of columns to aggregate and group-by columns (space or comma separated OK) */
-%let agg_columns=DELINQ DEBTINC;                   
-%let group_by_columns= ;                 
+/* Comma-separated list of columns to aggregate and group-by columns (space or comma separated OK)  */
+/* %let agg_columns=DELINQ DEBTINC;                    */
+/* %let group_by_columns= ;                  */
 
-/* Output table assigned to the Duck DB engine. Provide libname-qualified name if desired. */
-%let output_table=dukonce.TABLE_NUM_AGGS_DD;
-
-
-/* -------------------------------------------------------------------------------------------*
-    Assign Libnames
-* -------------------------------------------------------------------------------------------- */
-
-/* Assign libname to SAS Duck DB Access Interface (duckdb file access) */
-libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
+/*  Output table assigned to the Duck DB engine. Provide libname-qualified name if desired.  */
+/* %let output_table=dukonce.TABLE_NUM_AGGS_DD; */
 
 
 /* -----------------------------------------------------------------------------------------*
@@ -61,6 +53,7 @@ libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
    - small utility macros for runtime triggers and error flags
    - a focused macro to build SQL strings and one to execute the Duck DB query
 *------------------------------------------------------------------------------------------*/
+
 /* -------------------------------------------------------------------------------------------* 
    Macro to initialize a run-time trigger global macro variable to run SAS Studio Custom Steps. 
    A value of 1 (the default) enables this custom step to run.  A value of 0 (provided by 
@@ -213,7 +206,11 @@ libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
 
 %macro _duckdb_execute_aggregations;
 
-    %if &_duckdb_error_flag. = 0 %then %do;
+   %if &_duckdb_error_flag. = 0 %then %do;
+      libname dukonce sasioduk;
+   %end;
+
+   %if &_duckdb_error_flag. = 0 %then %do;
       %_identify_content_or_server(&parquet_file_path.);
 
       %if "&_path_identifier."="sasserver" %then %do;
@@ -229,7 +226,7 @@ libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
          run;
       
       %end;
-    %end;
+   %end;
 
    %if &_duckdb_error_flag. = 0 %then %do;
 
@@ -249,15 +246,15 @@ libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
    %end;
 
 
-    %if &_duckdb_error_flag. = 0 %then %do;
+   %if &_duckdb_error_flag. = 0 %then %do;
         %put NOTE: Building SQL aggregation strings...;
         %_create_sql_string;
-    %end;
+   %end;
 
-    %put NOTE: Final string resolves to &final_agg_columns.;
-    %put NOTE: Final group by columns resolve to &final_group_by_columns.;
+   %put NOTE: Final string resolves to &final_agg_columns.;
+   %put NOTE: Final group by columns resolve to &final_group_by_columns.;
 
-    %if &_duckdb_error_flag. = 0 %then %do;
+   %if &_duckdb_error_flag. = 0 %then %do;
         %put NOTE: Executing DuckDB aggregation query...;
         proc sql;
             connect using dukonce;
@@ -269,11 +266,11 @@ libname dukonce sasioduk FILE_PATH="&file_path." FILE_TYPE="PARQUET";
                 &group_by_clause.
             );
         quit;
-    %end;
-    %else %do;
+   %end;
+   %else %do;
         %let _duckdb_error_desc = Cannot execute DuckDB aggregation query.; 
         %put ERROR: &_duckdb_error_desc.;
-    %end;
+   %end;
 
 %mend _duckdb_execute_aggregations;
 

@@ -6,6 +6,8 @@ This custom step dynamically builds a DuckDB SQL aggregation query against Parqu
 ## User Interface
 See the step's **About** tab in SAS Studio for contextual help. The Parameters tab prompts for the inputs required to build the aggregation SQL automatically.
 
+Watch this ![video](https://youtu.be/sgV-4xgusKY) for a simple demo.
+
 ### Parameters
 - **Parquet file path (file selector, required):** select a Parquet file on the SAS server filesystem (used when selecting a single file).
 - **Aggregation functions (list, required):** choose one or more aggregation functions (e.g., AVG, SUM, COUNT, STDDEV, STDDEV_POP).

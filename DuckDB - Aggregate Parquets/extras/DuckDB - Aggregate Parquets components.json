@@ -41,7 +41,7 @@
 									"value": "STDDEV_POP"
 								}
 							],
-							"label": "Select all aggregation functions",
+							"label": "Select required aggregation functions:",
 							"max": null,
 							"min": null,
 							"visible": ""
