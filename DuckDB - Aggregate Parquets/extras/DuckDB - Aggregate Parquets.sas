@@ -118,12 +118,19 @@
         %let function_name = &&function_name_&i.;
 
         data _null_;
+        length new $32767.;
         /* Surrounding double-quotes let the macro variable &function_name insert into the pattern */
-        new = prxchange("s/\b\w+\b/&function_name.($0) AS &function_name._$0, /i", -1, "&agg_columns.");
-        call symput("new_agg_columns_&i.", new);
+        new = prxchange('s/\s+/,/i', -1, trim("&agg_columns."));
+        new = prxchange("s/\b\w+\b/&function_name.($0) AS &function_name._$0/i", -1, new );       
+        call symput("new_agg_columns_&i.", trim(new));
         run;
 
-        %let final_agg_columns=&final_agg_columns. &&new_agg_columns_&i..;
+        %if &i = 1 %then %do;
+            %let final_agg_columns=&&new_agg_columns_&i..;
+        %end;
+        %else %do;
+            %let final_agg_columns=&final_agg_columns., &&new_agg_columns_&i..;
+        %end;
 
     %end;
 
