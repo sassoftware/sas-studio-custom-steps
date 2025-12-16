@@ -32,6 +32,21 @@
 									"value": "COUNT"
 								},
 								{
+									"value": "MEDIAN"
+								},
+								{
+									"value": "MODE"
+								},								
+								{
+									"value": "MIN"
+								},
+								{
+									"value": "MAX"
+								},
+								{
+									"value": "MAD"
+								},
+								{
 									"value": "SUM"
 								},
 								{
@@ -39,6 +54,12 @@
 								},
 								{
 									"value": "STDDEV_POP"
+								},
+								{
+									"value": "VAR_SAMP"
+								},
+								{
+									"value": "VAR_POP"
 								}
 							],
 							"label": "Select required aggregation functions:",
