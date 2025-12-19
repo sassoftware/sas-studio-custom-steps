@@ -8,6 +8,9 @@
 
 ## Description <a name="description-"></a>
 
+>[!NOTE]
+>SAS has added support for DuckDB on the SAS Viya Platform during the second half of 2025 and now supports a libname statement for DuckDB. See [SAS/Access Interface to DuckDB - What's New](https://go.documentation.sas.com/doc/en/pgmsascdc/default/acwn/p1ozr0t2ly4bc2n0zxncjtshlyor.htm#n0nq4eenzeyi5un1qhgfugj7dm6y) for more details. It is highly recommended to use a libname statement for DuckDB where possible and then take advantage of all the other steps SAS Studio has to offer. This step should only be used when you want to take advantage of DuckDB capabilities that are not (yet) supported by SAS/Access. 
+
 The **DuckDB** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data. It is designed with a focus on high-performance analytics. DuckDB’s architecture is optimized for vectorized query execution, which allows it to process large amounts of data efficiently, providing impressive query performance. It has particular strength working with Parquet files and csv files. Depending on the use case running analytical SQL queries (using SQL aggregate functions) can be very efficient when using DuckDB.
 
 The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/README.md). 
@@ -166,5 +169,7 @@ If DuckDB is not installed or Python cannot find it you will receive an error: "
 For examples using the DuckDB step in a flow in SAS Studio see [here](extras/README.md)
 
 ## Change Log <a name="change-log-"></a>
-Version 1.0 (12JUL2023)
- * Initial version 
+* Version 1.0.1 (19DEC2025)
+   * Added note about SAS/Access Interface to DuckDB availability 
+* Version 1.0 (12JUL2023)
+   * Initial version 
