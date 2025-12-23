@@ -1,0 +1,183 @@
+{
+  "showPageContentOnly": true,
+  "pages": [
+    {
+      "id": "params",
+      "type": "page",
+      "label": "Parameters",
+      "children": [
+        {
+          "id": "section_input_params",
+          "type": "section",
+          "label": "Input Parameters",
+          "open": true,
+          "children": [
+                    {
+					"id": "input_table",
+					"type": "inputtable",
+					"label": "Input table",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+            {
+              "id": "nominal_vars",
+              "type": "columnselector",
+              "label": "Nominal variables (space separated)",
+              "include": null,
+				"order": false,
+				"columntype": "a",
+				"max": null,
+				"min": 1,
+				"visible": "",
+				"table": "input_table"
+            },
+            {
+              "id": "other_vars",
+              "type": "columnselector",
+              "label": "Other variables to copy (space separated)",
+              "include": null,
+				"order": false,
+				"columntype": "a",
+				"max": null,
+				"min": 1,
+				"visible": "",
+				"table": "input_table"
+            },
+            {
+					"id": "num_dimensions",
+					"type": "numstepper",
+					"label": "Number of dimensions",
+					"required": false,
+					"integer": false,
+					"min": null,
+					"max": null,
+					"stepsize": 1
+				},
+            {
+					"id": "method",
+					"type": "dropdown",
+					"label": "Method",
+					"items": [
+						{
+							"value": "MCA",
+							"label": "MCA"
+						},
+						{
+							"value": "LPCA",
+							"label": "LPCA"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+            {
+              "id": "prefix",
+              "type": "textfield",
+              "label": "Output prefix",
+              "placeholder": "mca_rv_",
+              "required": false
+            },
+            {
+					"id": "output_table",
+					"type": "outputtable",
+					"label": "Output table",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+             {
+					"id": "rstore_name",
+					"type": "outputtable",
+					"label": "RStore name",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				}
+          ]
+        }
+      ]
+    },
+    {
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "Nominal Dimensionality Reduction",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "section_about_intro_text",
+							"type": "text",
+							"text": "This custom step performs nominal dimension reduction using PROC NOMINALDR. This custom step adds runtime guards, helpful defaults and a small cleanup routine for macro variables.",
+							"visible": ""
+						},
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Input Parameters",
+									"open": false,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "1. Input table(input table, required): select an input dataset\n2. Select nominal variables (column selector, required): select one or more nominal variables to reduce. \n3. Other variables to copy (column selector, optional): select any other variables to copy to the output table.\n4. Method (list box, default MCA): select either MCA or LPCA. \n",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Output parameters",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "1. Number of dimensions (number stepper, optional): specify the number of dimensions to reduce to. \n2. Output prefix (text field, optional): specify a prefix for the output variables. \n3. Output table (output port, required): specify an output table. \n4. RStore name (output port, required): select an RStore name.  ",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "version_text",
+									"type": "text",
+									"text": "Version: 1.0.0 (22DEC2025)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+  ],
+  "syntaxversion": "1.3.0",
+  "values": {
+
+  }
+}
