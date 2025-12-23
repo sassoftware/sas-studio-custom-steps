@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   Nominal Dimensionality Reduction - Version 1.0.0
+   Nominal Dimensionality Reduction - Version 1.0.1
 
    This program uses the SAS procedure NOMINALDR to perform dimensionality reduction on
    nominal variables in a dataset. It supports two methods: Multiple Correspondence Analysis (MCA)
@@ -10,7 +10,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.0.0 (22DEC2025)
+   Version: 1.0.1 (23DEC2025)
 *-------------------------------------------------------------------------------------------- */
 
 %put NOTE: Starting Nominal Dimensionality Reduction program...;
@@ -26,28 +26,28 @@
 * -------------------------------------------------------------------------------------------- */
 
 /* input_table takes in the name of the input data set from an input port */
-%let input_table=SASHELP.CARS;
+/* %let input_table=SASHELP.CARS; */
 
 /* nominal_vars takes in the list of nominal variables to be reduced through a column selector */
-%let nominal_vars=Make Model Type Origin DriveTrain;
+/* %let nominal_vars=Make Model Type Origin DriveTrain; */
 
 /* other_vars takes in the list of other variables to copy to output through a column selector */
-%let other_vars=MSRP Invoice EngineSize Cylinders Horsepower MPG_City MPG_Highway Weight Wheelbase Length;
+/* %let other_vars=MSRP Invoice EngineSize Cylinders Horsepower MPG_City MPG_Highway Weight Wheelbase Length; */
 
 /* num_dimensions takes in the number of dimensions specified for the analysis */
-%let num_dimensions=8;
+/* %let num_dimensions=8; */
 
 /* method takes in the method to be used for the analysis, either MCA or LPCA*/
-%let method=MCA;
+/* %let method=MCA; */
 
 /* prefix takes in the prefix for the output variables */
-%let prefix=mca_rv_;
+/* %let prefix=mca_rv_; */
 
 /* output_table takes in the name of the output data set with reduced dimensions */
-%let output_table=WORK.NEWCARS;
+/* %let output_table=WORK.NEWCARS; */
 
 /* rstore_name takes in the name of the RStore file to save the model binary.  */
-%let rstore_name=MCASTORE;
+/* %let rstore_name=MCASTORE; */
 
 /* -----------------------------------------------------------------------------------------*
    Macros
@@ -120,6 +120,13 @@
     %_create_error_flag(_ndr_error_flag, _ndr_error_desc);
 
    %if &_ndr_error_flag. = 0 %then %do;
+        %if "%sysfunc(symexist(rstore_name))"="0" %then %do; 
+            %let rstore_name_name_base=_TEMP_RSTORE; 
+            %put NOTE: rstore_name not provided, defaulting to _TEMP_RSTORE.; 
+        %end;
+   %end;
+
+   %if &_ndr_error_flag. = 0 %then %do;
         %if %sysevalf(%superq(input_table)=, boolean) %then %do; 
             %let _ndr_error_flag=1; 
             %let _ndr_error_desc=Input table is required.; 
@@ -142,9 +149,34 @@
    %if &_ndr_error_flag. = 0 %then %do;
         proc NOMINALDR data=&input_table. dimension=&num_dimensions. method=%upcase(&method.) prefix=&prefix.;
             input &nominal_vars. / level=nominal;
-            %if %sysevalf(%superq(other_vars)=, boolean) %then %do; %end; %else %do; output out=&output_table. copyVars=(&other_vars.); %end;
-            %if %sysevalf(%superq(rstore_name)=, boolean) %then %do; %end; %else %do; savestate RSTORE=&rstore_name.; %end;
+            %if %sysevalf(%superq(other_vars)=, boolean) %then %do;output out=&output_table.; %end; %else %do; output out=&output_table. copyVars=(&other_vars.); %end;
+            savestate RSTORE=&rstore_name_name_base.; 
         run;
+   %end;
+   %if &_ndr_error_flag. = 0 %then %do;
+        %if "%sysfunc(symexist(rstore_name))"="0" %then %do;
+            %put NOTE: rstore_name not provided, no RStore file will be saved.; 
+            proc datasets lib = _SASUSR_ nolist;
+                delete &rstore_name_name_base.;
+            run;
+            proc datasets lib = WORK nolist;
+                delete &rstore_name_name_base.;
+            run;
+        %end;
+        %else %if "&rstore_name."="" %then %do; 
+            %put NOTE: rstore_name not provided, no RStore file will be saved.; 
+            proc datasets lib = _SASUSR_ nolist;
+                delete &rstore_name_name_base.;
+            run;
+            proc datasets lib = WORK nolist;
+                delete &rstore_name_name_base.;
+            run;
+         %end;
+        %else %do;
+            data &rstore_name.;
+               set _SASUSR_.&rstore_name_name_base.;
+            run;
+         %end;
    %end;
 
 %mend _ndr_execution_code;
