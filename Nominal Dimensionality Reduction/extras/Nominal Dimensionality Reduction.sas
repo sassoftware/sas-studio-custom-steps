@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   Nominal Dimensionality Reduction - Version 1.0.1
+   Nominal Dimensionality Reduction - Version 1.0.2
 
    This program uses the SAS procedure NOMINALDR to perform dimensionality reduction on
    nominal variables in a dataset. It supports two methods: Multiple Correspondence Analysis (MCA)
@@ -10,7 +10,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.0.1 (23DEC2025)
+   Version: 1.0.2 (24DEC2025)
 *-------------------------------------------------------------------------------------------- */
 
 %put NOTE: Starting Nominal Dimensionality Reduction program...;

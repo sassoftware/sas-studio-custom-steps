@@ -40,13 +40,13 @@ This folder contains:
 Use the About tab and the step parameters in SAS Studio to configure inputs and outputs before running the step in a Flow.
 
 ## References
-1. [Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan and Zohreh Asgharzadeh, SAS Institute](https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf)
+1. [Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan, SAS Institute](https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf)
 
 2. [Documentation, PROC NOMINALDR, SAS Institute](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/casml/casml_nominaldr_syntax.htm)
 
 ## Version
 
-1.0.1 (23DEC2025)
+1.0.2 (24DEC2025)
 
 ## Contact
 

@@ -176,7 +176,7 @@
 								{
 									"id": "about_ref_text",
 									"type": "text",
-									"text": "1. Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan and Zohreh Asgharzadeh, SAS Institute: https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf\n 2.Documentation, PROC NOMINALDR, SAS Institute: https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/casml/casml_nominaldr_syntax.htm"
+									"text": "1. Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan, SAS Institute: https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf\n 2.Documentation, PROC NOMINALDR, SAS Institute: https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/casml/casml_nominaldr_syntax.htm"
 								}
 							]
 						},
@@ -189,7 +189,7 @@
 								{
 									"id": "about_version_text",
 									"type": "text",
-									"text": "Version: 1.0.1 (23DEC2025)"
+									"text": "Version: 1.0.2 (24DEC2025)"
 								},
 								{
 									"id": "about_contact_text",
