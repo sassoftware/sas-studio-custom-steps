@@ -9,6 +9,8 @@ This custom step wraps the PROC NOMINALDR call with runtime guards, helpful defa
 
 Refer to the "About" tab on this step in SAS Studio for more details.
 
+Watch this [video](https://youtu.be/f8SmfdO7mOs) for a quick walkthrough.
+
 ### Parameters
 
 1. **Input table (input port):** Select the input dataset containing nominal variables (required).
