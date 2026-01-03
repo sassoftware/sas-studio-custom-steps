@@ -13,17 +13,61 @@
 					"open": true,
 					"children": [
 						{
+							"id": "input_option",
+							"type": "radiogroup",
+							"label": "Select your input type:",
+							"items": [
+								{
+									"value": "single",
+									"label": "Single parquet file"
+								},
+								{
+									"value": "multiple",
+									"label": "Multiple parquet files in a folder"
+								}
+							],
+							"visible": ""
+						},
+						{
 							"id": "parquet_file_path",
 							"type": "path",
-							"label": "Enter path to parquet file:",
+							"label": "Enter path to parquet file (should be located on the SAS server):",
 							"pathtype": "file",
 							"placeholder": "",
-							"required": true,
-							"visible": ""
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"single"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"single"
+							]
+						},
+						{
+							"id": "parquet_path",
+							"type": "path",
+							"label": "Enter path to folder containing parquet files (should be located on the SAS server):",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"multiple"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"multiple"
+							]
 						},
 						{
 							"id": "function_name",
 							"type": "list",
+							"label": "Select required aggregation functions:",
 							"items": [
 								{
 									"value": "AVG"
@@ -36,7 +80,7 @@
 								},
 								{
 									"value": "MODE"
-								},								
+								},
 								{
 									"value": "MIN"
 								},
@@ -62,7 +106,6 @@
 									"value": "VAR_POP"
 								}
 							],
-							"label": "Select required aggregation functions:",
 							"max": null,
 							"min": null,
 							"visible": ""
@@ -77,14 +120,14 @@
 						{
 							"id": "group_by_columns",
 							"type": "textfield",
-							"label": "List Group-by columns (optional):",
+							"label": "List Group-by columns (optional, space separated):",
 							"placeholder": "",
 							"required": false
 						},
 						{
 							"id": "output_table",
 							"type": "outputtable",
-							"label": "Output table (preferably a data set backed by a DuckDB lib name)",
+							"label": "Output table (preferably a data set backed by a DuckDB libname)",
 							"required": true,
 							"placeholder": "",
 							"visible": ""
@@ -108,7 +151,7 @@
 						{
 							"id": "section_about_intro_text",
 							"type": "text",
-							"text": "This custom step dynamically builds a DuckDB SQL aggregation query on parquet file formats and pushes it down to DuckDB through the SAS/ACCESS Interface to DuckDB.\n\nOpen file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Presently, the benefits of DuckDB are better realised if the query is pushed down through explicit passthrough.  This custom step helps users conveniently run multiple aggregation queries without having to explicitly write SQL in the DuckDB dialect.",
+							"text": "This custom step dynamically builds a DuckDB SQL aggregation query on parquet file formats and pushes it down to DuckDB through a connection to the SAS/ACCESS Interface to DuckDB.\n\nOpen file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Presently, the benefits of DuckDB are better realised if the query is pushed down through explicit passthrough.  This custom step helps users conveniently run multiple aggregation queries without having to explicitly write SQL in the DuckDB dialect.",
 							"visible": ""
 						},
 						{
@@ -127,7 +170,7 @@
 										{
 											"id": "section_about_parameters_input_text",
 											"type": "text",
-											"text": "1. Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem)\n2. Select Aggregation functions (list, required): select one or more functions to aggregate by.  This list shall expand in future.\n3. List columns to aggregate (text field, required): list your columns in a space separated format.  This step does not provide a column selector as it queries directly from parquet.\n4. List Group-by columns (text field, optional): list any columns which you like to group your aggregations by. ",
+											"text": "1. Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem)\n2. Select Aggregation functions (list, required): select one or more functions to aggregate by.  This list shall expand in future.\n3. List columns to aggregate (text field, required): list your columns in a space-separated format.  This step does not provide a column selector as it queries directly from parquet.\n4. List Group-by columns (text field, optional): list any columns in space-separated formatwhich you like to group your aggregations by. ",
 											"visible": ""
 										}
 									]
@@ -142,7 +185,7 @@
 										{
 											"id": "section_about_parameters_output_text",
 											"type": "text",
-											"text": "-Output table (output port, required): select an output table.  Choose based on your use case, but it's preferred that this belongs to a DuckDB lib name. ",
+											"text": "-Output table (output port, required): select an output table.  Choose based on your use case, but it's preferred that this belongs to a DuckDB libname. ",
 											"visible": ""
 										}
 									]
@@ -158,7 +201,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 1.1.4 (15DEC2025)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 1.1.5 (02JAN2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
@@ -169,10 +212,15 @@
 	],
 	"syntaxversion": "1.3.0",
 	"values": {
+		"input_option": {
+			"value": "single",
+			"label": "Single parquet file"
+		},
 		"parquet_file_path": "",
+		"parquet_path": "",
 		"function_name": [],
-		"agg_columns": "DELINQ DEBTINC",
-		"group_by_columns": "",
+		"agg_columns": "example_col1 example_col2",
+		"group_by_columns": "example_groupby_col",
 		"output_table": {
 			"library": "",
 			"table": ""

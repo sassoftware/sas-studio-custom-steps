@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Aggregate Parquets - Version 1.1.4
+   DuckDB - Aggregate Parquets - Version 1.1.5
 
    This program dynamically builds a DuckDB SQL aggregation query and
    pushes it down to Duck DB through the SAS/ACCESS Interface to Duck DB.
@@ -12,7 +12,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.1.4 (2025-12-15)
+   Version: 1.1.5 (2026-01-02)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -48,7 +48,7 @@
 /* -----------------------------------------------------------------------------------------*
    Macros
 
-   The macros below follow the structural conventions used in the LLM-Azure example:
+   The macros below follow the structural conventions used in prior custom steps by author:
 
    - small utility macros for runtime triggers and error flags
    - a focused macro to build SQL strings and one to execute the Duck DB query
@@ -105,6 +105,9 @@
   Behavior: Does not execute SQL; only constructs macro variables:
             - &final_agg_columns.  (aggregations with aliases)
             - &final_group_by_columns. (comma-separated grouping columns)
+  Output:
+      1. &final_agg_columns : A global variable which contains a string of aggregation functions.
+      2. &final_group_by_columns : A global variable which contains a comma-separated list of group-by columns.
 *------------------------------------------------------------------------------------------ */
 
 %macro _create_sql_string;
@@ -113,16 +116,19 @@
     %local i function_name;
     %let final_agg_columns=;
 
+    %put NOTE: &function_name_count. functions have been selected.;
+
     %do i = 1 %to &function_name_count.;
 
         %let function_name = &&function_name_&i.;
+        %put NOTE: Constructing query for function &function_name.;
 
         data _null_;
-        length new $32767.;
-        /* Surrounding double-quotes let the macro variable &function_name insert into the pattern */
-        new = prxchange('s/\s+/,/i', -1, trim("&agg_columns."));
-        new = prxchange("s/\b\w+\b/&function_name.($0) AS &function_name._$0/i", -1, new );       
-        call symput("new_agg_columns_&i.", trim(new));
+            length new $32767.;
+            /* Surrounding double-quotes let the macro variable &function_name insert into the pattern */
+            new = prxchange('s/\s+/,/i', -1, trim("&agg_columns."));
+            new = prxchange("s/\b\w+\b/&function_name.($0) AS &function_name._$0/i", -1, new );       
+            call symput("new_agg_columns_&i.", trim(new));
         run;
 
         %if &i = 1 %then %do;
@@ -134,10 +140,14 @@
 
     %end;
 
+    %put NOTE: The final aggregation expression is &final_agg_columns.;
 
+    %put NOTE: Starting build of group by expression.;
+    %put NOTE: Group by columns provided are &group_by_columns.;
 
 /* Create GROUP BY clause only if group-by columns are provided */
     %if "&group_by_columns." = "" %then %do;
+      %put NOTE: No GROUP BY columns provided. No group by expression will be built.;
       %let final_group_by_columns=;
       %let group_by_clause=;
     %end;
@@ -149,6 +159,7 @@
          run;
         %let group_by_clause=group by &final_group_by_columns.;
         %let final_group_by_columns=&final_group_by_columns.,;
+        %put NOTE: The final group by expression is &final_group_by_columns. ; 
     %end;
     
 %mend _create_sql_string;
@@ -174,7 +185,7 @@
 %macro _identify_content_or_server(pathReference);
    %global _path_identifier;
    data _null_;
-      call symput("_path_identifier", scan("&pathReference.",1,":","MO"));
+      call symput("_path_identifier", scan(%str(&pathReference.),1,":","MO"));
    run;
    %put NOTE: _path_identifier is &_path_identifier. ;
 %mend _identify_content_or_server;
@@ -198,27 +209,62 @@
    %global _sas_folder_path;
 
    data _null_;
-      call symput("_sas_folder_path", scan("&pathReference.",2,":","MO"));
+      call symput("_sas_folder_path", scan(%str(&pathReference.),2,":","MO"));
    run;
 
 %mend _extract_sas_folder_path;
 
+/* -----------------------------------------------------------------------------------------* 
+  Macro: _assign_input_file_path
+  Purpose: Based on the type of input selected, assign either the value of a path to a single
+           parquet file or a glob pointing to all parquet files in a folder.
+   Output:
+      1. &_input_file_path : A global variable which contains the resolved input file path.
+*------------------------------------------------------------------------------------------ */
+
+%macro _assign_input_file_path;
+    %global _input_file_path;
+
+    %if "&input_option."="single" %then %do;
+        %let _input_file_path=&parquet_file_path.;
+    %end;
+    %if "&input_option."="multiple" %then %do;
+        data _null_;
+            call symput("_input_file_path",%str("&parquet_path./*.parquet"));
+        run;
+    %end;
+
+    %put NOTE: The input file path has been set as "&_input_file_path.";
+
+%mend _assign_input_file_path;
 
 /* -----------------------------------------------------------------------------------------* 
   Macro: _duckdb_execute_aggregations
   Purpose: Build the SQL (via create_sql_string) and run a direct connection
            to the Duck DB engine, executing the aggregation and returning
            the results from the pushed-down query.
+   Behavior: Connects to DuckDB, executes aggregation query, creates output table.
 *------------------------------------------------------------------------------------------ */
 
 %macro _duckdb_execute_aggregations;
+    
+   %put NOTE: Step 1 - Assign in-memory DuckDB libname.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
-      libname dukonce sasioduk;
+      libname dukonce duckdb;
    %end;
 
+   %put NOTE: Step 2 - Assign input file path macro variable.;
+
+   %if &_duckdb_error_flag.=0 %then %do;
+      %_assign_input_file_path;
+   %end;
+
+   
+   %put NOTE: Step 3 - Identify if this file reference is on Server or Content.;
+
    %if &_duckdb_error_flag. = 0 %then %do;
-      %_identify_content_or_server(&parquet_file_path.);
+      %_identify_content_or_server("&_input_file_path.");
 
       %if "&_path_identifier."="sasserver" %then %do;
          %put NOTE: Folder location prefixed with &_path_identifier. is on the SAS Server.;
@@ -227,17 +273,19 @@
       %else %do;
 
          %let _duckdb_error_flag=1;
-         %put ERROR: Please select a valid file on the SAS Server (filesystem) containing your Azure OpenAI key.  Key should be in a secure location within filesystem. ;
+         %put ERROR: Please select a valid file on the SAS Server (filesystem). ;
          data _null_;
-            call symputx("_duckdb_error_desc", "Please select a valid file on the SAS Server (filesystem) containing your Azure OpenAI key.  Key should be in a secure location within filesystem.");
+            call symputx("_duckdb_error_desc", "Please select a valid file on the SAS Server (filesystem).");
          run;
       
       %end;
    %end;
 
+   %put NOTE: Step 4 - Extract the path from the input_file_path macro variable.;
+
    %if &_duckdb_error_flag. = 0 %then %do;
 
-      %_extract_sas_folder_path(&parquet_file_path.);
+      %_extract_sas_folder_path("&_input_file_path.");
 
       %if "&_sas_folder_path." = "" %then %do;
 
@@ -252,19 +300,22 @@
       %end;
    %end;
 
-
+   %put NOTE: Step 5 - Build SQL Aggregation string and group by string.;
    %if &_duckdb_error_flag. = 0 %then %do;
         %put NOTE: Building SQL aggregation strings...;
         %_create_sql_string;
    %end;
 
-   %put NOTE: Final string resolves to &final_agg_columns.;
-   %put NOTE: Final group by columns resolve to &final_group_by_columns.;
+   %put NOTE: Aggregation string resolves to &final_agg_columns.;
+   %put NOTE: Group by columns resolve to &final_group_by_columns.;
+
+   %put NOTE: Step 6 - Execute DuckDB aggregation query and create output table.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
         %put NOTE: Executing DuckDB aggregation query...;
         proc sql;
             connect using dukonce;
+            create table &output_table. (replace=yes) as
             select * from connection to dukonce(
                 select 
                 &final_group_by_columns.
@@ -285,12 +336,14 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Control
 *------------------------------------------------------------------------------------------ */
-
+%put NOTE: Starting duckdb aggregations program (v1.1.5)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
+
+%put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
+
 %_create_runtime_trigger(_duckdb_run_trigger);
 
-%put NOTE: Starting duckdb aggregations program (v1.1.4)...;
-%put NOTE: Run trigger value is &_duckdb_run_trigger.;
+%put NOTE: Step 0 - 0.2 - Runtime trigger value is &_duckdb_run_trigger.;
 
 %if &_duckdb_run_trigger. = 1 %then %do;
    %_duckdb_execute_aggregations;
@@ -304,9 +357,22 @@
 /* ----------------------------------------------------------------------------------* 
     Cleanup 
 *------------------------------------------------------------------------------------------ */
+%put NOTE: Step CLEANUP - CLEANUP.1 - Clean up global macro variables created during execution;
 
 %if %symexist(final_agg_columns) %then %do;
    %symdel final_agg_columns;
+%end;
+
+%if %symexist(_input_file_path) %then %do;
+   %symdel _input_file_path;
+%end;
+
+%if %symexist(_SAS_FOLDER_PATH) %then %do;
+   %symdel _SAS_FOLDER_PATH;
+%end;
+
+%if %symexist(_PATH_IDENTIFIER) %then %do;
+   %symdel _PATH_IDENTIFIER;
 %end;
 
 %if %symexist(final_group_by_columns) %then %do;
@@ -337,10 +403,16 @@
    %symdel _duckdb_error_desc;
 %end;
 
+
 /* Remove helper macros from global symbol table */
+%put NOTE: Step CLEANUP - CLEANUP.2 - Delete helper macros from global symbol table.;
+
 %sysmacdelete _create_runtime_trigger;
 %sysmacdelete _create_error_flag;
 %sysmacdelete _create_sql_string;
+%sysmacdelete _identify_content_or_server;
+%sysmacdelete _assign_input_file_path;
 %sysmacdelete _duckdb_execute_aggregations;
+%sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb aggregations program (v1.1.4) completed.;
+%put NOTE: duckdb aggregations program (v1.1.5) completed.;

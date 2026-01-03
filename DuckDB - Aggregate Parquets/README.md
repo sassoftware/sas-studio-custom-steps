@@ -6,13 +6,15 @@ This custom step dynamically builds a DuckDB SQL aggregation query against Parqu
 ## User Interface
 See the step's **About** tab in SAS Studio for contextual help. The Parameters tab prompts for the inputs required to build the aggregation SQL automatically.
 
-Watch this [video](https://www.youtube.com/watch?v=sgV-4xgusKY) for a simple demo.
+Watch this [video](https://www.youtube.com/watch?v=sgV-4xgusKY) for a simple demo. 
+
+Read this [article](https://communities.sas.com/t5/SAS-Communities-Library/Performant-Aggregations-on-Parquet-using-DuckDB/ta-p/981117) to learn more.
 
 ### Parameters
-- **Parquet file path (file selector, required):** select a Parquet file on the SAS server filesystem (used when selecting a single file).
+- **Parquet file path (file selector, required):** select a Parquet file on the SAS server filesystem.
 - **Aggregation functions (list, required):** choose one or more aggregation functions (e.g., AVG, SUM, COUNT, STDDEV, STDDEV_POP).
-- **List columns to aggregate (space separated, required):** columns to apply the aggregation functions to.
-- **Group-by columns (space separated, optional):** optional columns to group the aggregations by.
+- **List columns to aggregate (space-separated, required):** columns to apply the aggregation functions to.
+- **Group-by columns (space-separated, optional):** optional columns to group the aggregations by.
 - **Output table (output port / libname-qualified preferred, required):** destination table for the aggregated results; prefer a DuckDB-backed library name.
 
 ## Requirements
@@ -33,7 +35,7 @@ The step will build DuckDB-compliant SQL and execute it via explicit passthrough
 This step is part of the `sas-studio-custom-steps` collection. Follow the repository instructions in the top-level README to make custom steps available in SAS Studio.
 
 ## Version
-Version: 1.1.4 (15DEC2025)
+Version: 1.1.5 (02JAN2026)
 
 ## Contact
 Sundaresh Sankaran (Sundaresh.sankaran@sas.com)
