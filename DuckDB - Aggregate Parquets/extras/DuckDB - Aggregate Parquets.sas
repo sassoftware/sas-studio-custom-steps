@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Aggregate Parquets - Version 1.1.5
+   DuckDB - Aggregate Parquets - Version 1.2.5
 
    This program dynamically builds a DuckDB SQL aggregation query and
    pushes it down to Duck DB through the SAS/ACCESS Interface to Duck DB.
@@ -12,7 +12,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.1.5 (2026-01-02)
+   Version: 1.2.5 (2026-01-05)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -124,11 +124,38 @@
         %put NOTE: Constructing query for function &function_name.;
 
         data _null_;
-            length new $32767.;
+            length new $32767. match new_match $100. start len 8.;
             /* Surrounding double-quotes let the macro variable &function_name insert into the pattern */
             new = prxchange('s/\s+/,/i', -1, trim("&agg_columns."));
-            new = prxchange("s/\b\w+\b/&function_name.($0) AS &function_name._$0/i", -1, new );       
+
+            /* Firstly, we construct a wrapper around each variable to derive a basic expression to call a function */
+            new = prxchange("s/([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)/&function_name.($1) AS &function_name._$1/i", -1, new );  
+           
+            /* Then, we handle the case of column names with hyphens (swearing softly under our breath) */
+            /* SAS PRX functions to the rescue */
+
+            pos=1;
+            if _n_ = 1 then pattern_id=PRXPARSE("/&function_name._([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)*/");
+            length = length(new);
+  
+            /* Iterate over all matches */
+            call prxnext(pattern_id, pos, length, new, start, len);
+            
+            do while (start > 0);
+                match = substr(new, start, len);
+                put "NOTE: Matched a hyphen pattern - " match;
+                new_match = trim(transtrn(match,"-","_"));
+                new_match = trim(transtrn(new_match,"-","_"));
+                put "NOTE: Changed pattern to - " new_match;
+                new = transtrn(new,trim(match),trim(new_match));
+                call prxnext(pattern_id, pos, length, new, start, len);
+            end;
+
+            /* Finally, a garnish - DuckDB SQL might mistakenly consider symbols as operators, and therefore let us wrap them... */
+            new = prxchange("s/&function_name.\(([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)\)/&function_name.("||'"'||"$1"||'"'||")/i", -1, new ); 
+            
             call symput("new_agg_columns_&i.", trim(new));
+
         run;
 
         %if &i = 1 %then %do;
@@ -152,11 +179,15 @@
       %let group_by_clause=;
     %end;
     %else %do;
-    /* Convert whitespace-separated group-by columns to comma-separated list */
+    
          data _null_;
-            new = prxchange('s/\s+/,/i', -1, "&group_by_columns.");
-            call symput('final_group_by_columns', new);
+            /* Take care of hyphens in group-by columns */
+            new = trim(prxchange("s/([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)/"||'"'||"$1"||'"'||"/i", -1, "&group_by_columns." ));
+            /* Convert whitespace-separated quoted group-by columns to comma-separated list */
+            new=transtrn(trim(new)," ",",");
+            call symput('final_group_by_columns',new);
          run;
+        %put NOTE: Final group by columns is &final_group_by_columns.;
         %let group_by_clause=group by &final_group_by_columns.;
         %let final_group_by_columns=&final_group_by_columns.,;
         %put NOTE: The final group by expression is &final_group_by_columns. ; 
@@ -336,7 +367,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Control
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb aggregations program (v1.1.5)...;
+%put NOTE: Starting duckdb aggregations program (v1.2.5)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -415,4 +446,4 @@
 %sysmacdelete _duckdb_execute_aggregations;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb aggregations program (v1.1.5) completed.;
+%put NOTE: duckdb aggregations program (v1.2.5) completed.;

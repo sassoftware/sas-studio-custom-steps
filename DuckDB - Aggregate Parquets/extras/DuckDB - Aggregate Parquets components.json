@@ -178,7 +178,7 @@
 								{
 									"id": "section_about_parameters_output",
 									"type": "section",
-									"label": "Output parameters",
+									"label": "Output specification",
 									"open": true,
 									"visible": "",
 									"children": [
@@ -186,6 +186,21 @@
 											"id": "section_about_parameters_output_text",
 											"type": "text",
 											"text": "-Output table (output port, required): select an output table.  Choose based on your use case, but it's preferred that this belongs to a DuckDB libname. ",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_future",
+									"type": "section",
+									"label": "Future enhancements planned",
+									"open": false,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_future_text",
+											"type": "text",
+											"text": "There are pros and cons to any approach.  Keeping the scope of this step in mind, and since it 'generates' DuckDB SQL dialect for explicit passthrough on the fly, we may not be able to cover all syntactic and functional patterns. Some known items slated to be addressed in a future version are:\n\n1. Support for column names with spaces in them (note that version 1.2.5 makes significant progress by handling hyphens in column names and also preventing hyphens from getting considered as operators)\n2. Filters (i.e. WHERE clauses)\n3. Aggregation functions with multiple parameters\n\nThis custom step does **not** have the ambition to evolve into a full-fledged translator to DuckDB SQL (though it will be nice if it can).",
 											"visible": ""
 										}
 									]
@@ -201,7 +216,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 1.1.5 (02JAN2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 1.2.5 (05JAN2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
