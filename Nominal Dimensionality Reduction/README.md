@@ -1,33 +1,36 @@
 # Nominal Dimensionality Reduction
 
 ## Description
-Performs dimensionality reduction on nominal variables using SAS's PROC NOMINALDR. The step supports Multiple Correspondence Analysis (MCA) and Logistic Principal Component Analysis (LPCA) to reduce the dimensionality of categorical features for downstream modeling and analysis.
+This custom step performs dimensionality reduction on nominal variables using SAS's PROC NOMINALDR. The step supports Multiple Correspondence Analysis (MCA) and Logistic Principal Component Analysis (LPCA) to reduce the dimensionality of categorical features for downstream modeling and analysis.
 
-This custom step wraps the PROC NOMINALDR call with runtime guards, helpful defaults, and small cleanup routines so it can be executed either standalone or from SAS Studio Flows.
+This custom step wraps the PROC NOMINALDR call with runtime guards, helpful defaults, and small cleanup routines so it can be executed either standalone or from a SAS Studio Flow.
 
+-----
 ## User Interface
 
 Refer to the "About" tab on this step in SAS Studio for more details.
 
 Watch this [video](https://youtu.be/f8SmfdO7mOs) for a quick walkthrough.
 
+-----
 ### Parameters
 
 1. **Input table (input port):** Select the input dataset containing nominal variables (required).
 2. **Select nominal variables (column selector):** One or more nominal variables to reduce (required).
-3. **Select other variables to copy (column selector):** Optional variables to pass through to the output.
+3. **Select other variables to copy (column selector):** Optional variables to pass through to the output. If you wish, you can even include the original nominal variables.
 4. **Select method (dropdown):** Choose `MCA` (Multiple Correspondence Analysis) or `LPCA` (Logistic Principal Components Analysis) (required).
 5. **Select number of dimensions (numeric stepper):** Target number of dimensions.
 6. **Specify output prefix (text field):** Prefix for generated reduced variable names (optional).
 7. **Specify output table (output port):** Output dataset to save reduced variables (required).
 8. **Specify RStore name (output port):** Optional RStore name to save model artifacts.
 
-## Requirements
+-----
+## Prerequisites
 
-- SAS Viya with access to PROC NOMINALDR (CASML)
-- SAS Viya monthly cadence of 2025.12 or later
-- An execution environment where SAS Studio Flows can invoke the step.
+1. SAS Viya offering or higher (i.e. includes Visual Data Mining and Machine Learning and SAS Studio) 
+2. SAS Viya Monthly version of 2025.05 or later (step developed and tested on SAS Viya monthly cadence of 2025.12)
 
+-----
 ## Installation & Usage
 
 This step is delivered as a SAS Studio custom step. See the main repository README for installation and registration instructions for custom steps in SAS Studio.
@@ -39,14 +42,21 @@ This folder contains:
 
 Use the About tab and the step parameters in SAS Studio to configure inputs and outputs before running the step in a Flow.
 
+-----
+## SAS Program
+
+Refer [here](./extras/Nominal%20Dimensionality%20Reduction.sas) for the SAS program used by the step.  You'd find this useful for situations where you wish to execute this step through non-SAS Studio Custom Step interfaces such as the [SAS Extension for Visual Studio Code](https://github.com/sassoftware/vscode-sas-extension), with minor modifications.
+
+-----
 ## References
 1. [Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan, SAS Institute](https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf)
 
 2. [Documentation, PROC NOMINALDR, SAS Institute](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/casml/casml_nominaldr_syntax.htm)
 
-## Version
+## Change Log
 
-1.0.2 (24DEC2025)
+* Version 1.0.3 (08JAN2026)
+   - Initial version on GitHub
 
 ## Contact
 
