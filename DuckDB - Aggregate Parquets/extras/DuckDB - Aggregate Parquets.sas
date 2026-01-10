@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Aggregate Parquets - Version 1.2.5
+   DuckDB - Aggregate Parquets - Version 1.3.5
 
    This program dynamically builds a DuckDB SQL aggregation query and
    pushes it down to Duck DB through the SAS/ACCESS Interface to Duck DB.
@@ -12,7 +12,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.2.5 (2026-01-05)
+   Version: 1.3.5 (2026-01-10)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -24,6 +24,9 @@
     
     Users can modify these parameters to suit their specific data and analysis needs.
 * -------------------------------------------------------------------------------------------- */
+
+/* Input option: 'single' for a single parquet file, 'multiple' for all parquet files in a folder */
+/* %let input_option=single; */
 
 /*  Directory or prefix containing parquet files  */
 /* %let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet; */
@@ -41,8 +44,13 @@
 /* %let agg_columns=DELINQ DEBTINC;                    */
 /* %let group_by_columns= ;                  */
 
+/* Where clause to filter parquet data before aggregation (optional) */
+/* %let where_clause=       BAD=1; */
+
 /*  Output table assigned to the Duck DB engine. Provide libname-qualified name if desired.  */
 /* %let output_table=dukonce.TABLE_NUM_AGGS_DD; */
+
+
 
 
 /* -----------------------------------------------------------------------------------------*
@@ -192,6 +200,25 @@
         %let final_group_by_columns=&final_group_by_columns.,;
         %put NOTE: The final group by expression is &final_group_by_columns. ; 
     %end;
+
+/* Create WHERE clause only if a filter is provided */
+      %if "&where_clause." = "" %then %do;
+         %put NOTE: No WHERE clause provided. No filtering will be applied.;
+         %let where_clause=;
+      %end;
+      %else %do;
+         %put NOTE: WHERE clause provided is &where_clause.;
+         %let wherec=%sysfunc(substr(%str(&where_clause.),1,6));
+         %let wherec=%upcase(%str(&wherec.));
+         %let wherec=%trim(%str(&wherec.));
+         %if "&wherec."="WHERE" %then %do;
+            %let where_clause=&where_clause.;
+         %end;
+         %else %do;
+            %put NOTE: Adding WHERE keyword to the clause.;
+            %let where_clause=WHERE &where_clause.;
+         %end;
+      %end;
     
 %mend _create_sql_string;
 
@@ -352,7 +379,9 @@
                 &final_group_by_columns.
                 &final_agg_columns.
                 from read_parquet("&file_path.")
+                &where_clause.
                 &group_by_clause.
+                
             );
         quit;
    %end;
@@ -367,7 +396,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Control
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb aggregations program (v1.2.5)...;
+%put NOTE: Starting duckdb aggregations program (v1.3.5)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -446,4 +475,4 @@
 %sysmacdelete _duckdb_execute_aggregations;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb aggregations program (v1.2.5) completed.;
+%put NOTE: duckdb aggregations program (v1.3.5) completed.;
