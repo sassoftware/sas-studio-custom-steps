@@ -1,0 +1,227 @@
+{
+  "showPageContentOnly": true,
+  "pages": [
+    {
+      "id": "params",
+      "type": "page",
+      "label": "Parameters",
+      "children": [
+        {
+          "id": "section_input_params",
+          "type": "section",
+          "label": "Input Parameters",
+          "open": true,
+          "children": [
+                    {
+					"id": "input_table",
+					"type": "inputtable",
+					"label": "Select input table:",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+            {
+              "id": "nominal_vars",
+              "type": "columnselector",
+              "label": "Select nominal variables:",
+              "include": null,
+				"order": false,
+				"columntype": "a",
+				"max": null,
+				"min": 1,
+				"visible": "",
+				"table": "input_table"
+            },
+            {
+              "id": "other_vars",
+              "type": "columnselector",
+              "label": "Select other variables to copy:",
+              "include": null,
+				"order": false,
+				"columntype": "a",
+				"max": null,
+				"min": null,
+				"visible": "",
+				"table": "input_table"
+            },
+            {
+					"id": "method",
+					"type": "dropdown",
+					"label": "Select method:",
+					"items": [
+						{
+							"value": "MCA",
+							"label": "Multiple Correspondence Analysis"
+						},
+						{
+							"value": "LPCA",
+							"label": "Logistic Principal Component Analysis"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				}
+            
+          ]
+        },
+		{
+          "id": "section_output_spec",
+          "type": "section",
+          "label": "Output Specification",
+          "open": true,
+          "children": [
+			 {
+							"id": "num_dimensions",
+							"type": "numstepper",
+							"label": "Select number of dimensions:",
+							"required": false,
+							"integer": true,
+							"min": 1,
+							"max": null,
+							"stepsize": 1
+						},
+					{
+					"id": "prefix",
+					"type": "textfield",
+					"label": "Specify output prefix:",
+					"placeholder": "rv_",
+					"required": false
+					},
+					{
+							"id": "output_table",
+							"type": "outputtable",
+							"label": "Specify output table:",
+							"required": true,
+							"placeholder": "",
+							"visible": "",
+							"filter": false
+						},
+             {
+					"id": "rstore_name",
+					"type": "outputtable",
+					"label": "Specify RStore name:",
+					"required": false,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				}
+		  ]
+		}
+      ]
+    },
+    {
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "Nominal Dimensionality Reduction",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "section_about_intro_text",
+							"type": "text",
+							"text": "This custom step performs dimensionality reduction on nominal variables using the PROC NOMINALDR procedure. In addition to wrapping the main procedure call, this custom step adds runtime guards, helpful defaults and a small cleanup routine for macro variables.\n\nNominal variables may contain multiple levels and categories, which lead to a multiplicity of features (taking all possible combinations into account) in downstream machine learning and turn out to be computationally expensive. Also, some machine learning models support only interval variables. This step reduces features by applying a dimensionality reduction technique such as Multiple Correspondence Analysis (MCA) or Logistic Principal Component Analysis (LPCA).",
+							"visible": ""
+						},
+						{
+							"id": "section_about_prerequisites",
+							"type": "section",
+							"label": "Prerequisites",
+							"open": false,
+							"visible": "",
+							"children": [
+										{
+									"id": "section_about_prerequisites_text",
+									"type": "text",
+									"text": "1. SAS Viya offering or higher (i.e. includes Visual Data Mining and Machine Learning and SAS Studio) \n2. SAS Viya Monthly version of 2025.05 or later (step developed and tested on SAS Viya monthly cadence of 2025.12)",
+									"visible": ""
+								}
+							]
+						},
+						
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Input Parameters",
+									"open": false,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "1. Input table(input port, required): connect an input dataset to the input port.\n2. Select nominal variables (column selector, required): select one or more nominal variables to reduce. \n3. Other variables to copy (column selector, optional): select any other variables to copy to the output table.\n4. Method (list box, default MCA): select either MCA (for Multiple Correspondence Analysis) or LPCA (for Logistic Principal Component Analysis). \n",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Output Specification",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "1. Number of dimensions (numeric stepper, optional): specify the number of dimensions to reduce to. \n2. Output prefix (text field, optional): specify a prefix for the output variables. \n3. Output table (output port, required): specify an output table connected to the output port. \n4. RStore name (output port, required): specify a name for the RStore binary.  ",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_about_references",
+							"type": "section",
+							"label": "References",
+							"open": true,
+							"children": [
+								{
+									"id": "about_ref_text",
+									"type": "text",
+									"text": "1. Technical Paper, Nominal Variables Dimension Reduction Using SAS®, Yonggui Yan, SAS Institute: https://support.sas.com/content/dam/SAS/support/en/technical-papers/nominal-variables-dimension-reduction-using-sas.pdf\n 2.Documentation, PROC NOMINALDR, SAS Institute: https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/casml/casml_nominaldr_syntax.htm"
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "about_version_text",
+									"type": "text",
+									"text": "Version: 1.0.3 (08JAN2026)"
+								},
+								{
+									"id": "about_contact_text",
+									"type": "text",
+									"text": "Contact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+  ],
+  "syntaxversion": "1.3.0",
+  "values": {
+		"num_dimensions": 8,
+		"prefix": "rv_"
+  }
+}
