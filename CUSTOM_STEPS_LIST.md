@@ -12,6 +12,7 @@ The list of available Custom Steps further down on this page uses the following 
 | CAS              | Steps in this category provide utilities for working with data in CAS |
 | CV               | Computer Vision                                                       |
 | DQ               | Data Quality                                                          |
+| DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
 | EAC              | External API Connection                                               |
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
@@ -54,8 +55,8 @@ The list of available Custom Steps further down on this page uses the following 
 | [DQ - Parsing](./DQ%20-%20Parsing/README.md) | Parse a string into a set of tokens using QKB locale specific rules<sup> (*)</sup> | [Clemens Knobloch](https://github.com/sukckn) | 2023.01 <br>or later | 15MAR2023 |
 | [DQ - Standardize](./DQ%20-%20Standardize/README.md) | Create standardized values based on locale, using SAS QKB and dqStandardize function (includes support for generating masked values)<sup> (*)</sup> | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2024.01 <br>or later | 21MAR2024 |
 | [DQ - Surviving Record](./DQ%20-%20Surviving%20Record/README.md) | Extract the best record (aka. Golden Record) from clusters of records, with support for standard deduplication routines and user-defined rules | [Lorenzo Toja](https://github.com/lorenzotoja) | 2023.06 <br>or later | 24AUG2023 |
-| [DuckDB](./DuckDB/README.md) | Uses proc python and [DuckDB](https://duckdb.org/) libraries to read and write data in various DBMS and file types| [Clemens Knobloch](https://github.com/sukckn) | 2023.01 <br>or later | 19DEC2025 |
-| [DuckDB - Aggregate Parquets](./DuckDB%20-%20Aggregate%20Parquets/README.md) | Aggregate Parquet files using SAS/Access interface to [DuckDB](https://duckdb.org/) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.12 <br>or later | 05JAN2026 |
+| [DuckDB - Aggregate Parquets](./DuckDB%20-%20Aggregate%20Parquets/README.md) | Aggregate Parquet files using SAS/Access interface to [DuckDB](https://duckdb.org/) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.01 <br>or later | 05JAN2026 |
+| [DuckDB - Execute DuckDB SQL](./DuckDB%20-%20Execute%20DuckDB%20SQL/README.md) | Uses proc python and [DuckDB](https://duckdb.org/) libraries to read and write data in various DBMS and file types| [Clemens Knobloch](https://github.com/sukckn) | 2025.12 <br>or later | 16JAN2026 |
 | [Dynamic Aggregations From Timeseries DAFT](./Dynamic%20Aggregations%20From%20Timeseries%20DAFT/README.md) | Perform dynamic aggregations on timeseries data | [Stephan Weigandt](https://github.com/stephanweigandt) | 2022.1.2 <br>or later | 08MAY2023 |
 | [EAC - Get Exchange Rates](./EAC%20-%20Get%20Exchange%20Rates/README.md) | Get Exchange Rates from Service Provider | [David Weik](https://github.com/Criptic) | 2023.08 <br>or later | 03JAN2025 |
 | [EAC - Query SAS Viya REST API](./EAC%20-%20Query%20SAS%20Viya%20REST%20API/README.md) | Query SAS Viya applications and services through SAS Viya REST API | [Charlie Vismara](https://github.com/sbxchv) | 2024.12 <br>or later | 07FEB2025 |
