@@ -30,11 +30,11 @@ These custom steps add an interface around the SAS Packages Framework, enabling 
 
 ## SAS Viya Version Support
 
-Tested on Viya 4, Stable 2025.11
+Tested on Viya 4, Stable 2025.12
 
 ## Requirements
 
-- SAS Packages Framework (SPFInit.sas) 202512XX or higher
+- SAS Packages Framework (SPFInit.sas) 20251231 or higher
 
 ## Documentation:
 - SAS Packages Framework: https://github.com/yabwon/SAS_PACKAGES
@@ -57,8 +57,5 @@ TODO
 - SAS Packages Framework: Bart Jablonski (https://github.com/yabwon)
 
 ## Change Log
-- Version 1.0 (XXDEC2025)
+- Version 1.0 (XXMON2026)
     - Initial version
-
-
-
