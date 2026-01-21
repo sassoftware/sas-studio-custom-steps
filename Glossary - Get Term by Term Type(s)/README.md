@@ -47,6 +47,10 @@ Example flow:
 
 ![usage](img/Step%20-%20Usage.png)
 
+In this example:
+- The source table is generated and filled by the '[**Glossary - Get Term Types**](../Glossary%20-%20Get%20Term%20Types/README.md)' custom step, containing ALL term types.
+- You can exclude the term types for which you do not want extract the terms.
+
 ### Output table 1 (_output1)
 
 Contains information on the term and its properties.
