@@ -8,6 +8,9 @@ This step can be viewed both as a general purpose "data profiler" or as a specif
 ## User Interface
 See the step's **About** tab in SAS Studio for contextual help. The Parameters tab prompts for the inputs required to build the aggregation SQL automatically.
 
+A video showing a quick walkthrough of this step: [here](https://youtu.be/5ZjB7BN1EAI)
+
+A wiki of this repo has been generated using DeepWiki and is available here: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SundareshSankaran/Data-Maker-Analyse-Data)
 
 ### Parameters
 - **Parquet file path (file selector, required):** based on a radio button select either a single Parquet file or a folder containing multiple Parquet files on the SAS server filesystem.
