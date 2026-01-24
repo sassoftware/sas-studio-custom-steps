@@ -4,11 +4,11 @@
    Data Maker - Analyse Data
 
    This SAS program analyses Parquet input files using DuckDB, a typical (but by NO means limiting)
-   use case being a pre-analysis prior to ingestion into SAS DAta Maker for synthetic data generation.
+   use case being analysis prior to ingestion into SAS Data Maker for synthetic data generation.
    The analysis job informs data configuration decisions made during synthetic data generation.
 
    Author: [Sundaresh Sankaran](sundaresh.sankaran@sas.com)
-   Version: 0.1.0 (2026-01-21)
+   Version: 0.2.0 (2026-01-23)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -16,21 +16,25 @@
     
     The parameters below allow customization, debugging and testing of the program.
     
-    Users can modify these parameters to suit their specific data and analysis needs.
+    Users can modify these parameters to run standalone and debug the program.
+    Uncomment and modify the parameters as needed.
+    
+    When running as part of a SAS Studio Custom Step, these parameters will be
+    provided by upstream code and should remain commented out.
 * -------------------------------------------------------------------------------------------- */;
 
 /* Input option: single or multiple */
-/* %let input_option=multiple; */
+/* %let input_option=multiple;  */
 
 /*  Directory or prefix containing parquet files  */;
-/* data _null_; */
-/*    call symput("parquet_path","sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test" );; */
-/*    run; */
+/* data _null_;  */
+/*   call symput("parquet_path","sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test" );; */
+/* run;  */
 
-/* %let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet; */
+/* %let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet;  */
 
 /* Output table assigned to the DuckDB engine. Provide libname-qualified name if desired. */
-/* %let output_table = WORK.TEMP_RESULTS; */
+/* %let output_table = WORK.TEMP_RESULTS;  */
 
 /* -----------------------------------------------------------------------------------------*
    Macros
@@ -172,7 +176,7 @@
    %put NOTE: Step 1 - Assign in-memory DuckDB libname.;
 
    %if &_dm_analysis_error_flag. = 0 %then %do;
-      libname dukinhel duckdb;;
+      libname DUKINHEL duckdb;;
    %end;
 
    %put NOTE: Step 2 - Assign input file path macro variable.;
@@ -233,17 +237,39 @@
    %end;
 
    /* -----------------------------------------------------------------------------------------* 
-   Extract columns from parquet metadata
+   Extract columns from parquet metadata and schema
    *------------------------------------------------------------------------------------------ */
    %if &_dm_analysis_error_flag. = 0 %then %do;
-      %put NOTE: Step 5 - Extract parquet metadata from files in &file_path..;
+      %put NOTE: Step 5 - Extract parquet metadata and schema from files in &file_path..;
       proc sql;
-         connect using dukinhel;
-         create table dukinhel.metadata_table as 
+         connect using DUKINHEL;
+         create table DUKINHEL.metadata_schema_table (replace=yes) as 
             select * from
-               connection to dukinhel(
-               SELECT *
-                  FROM parquet_metadata("&file_path.") 
+               connection to DUKINHEL(
+                  SELECT
+                     a.*,b.* 
+                  FROM
+                     (
+                        SELECT 
+                           *
+                        FROM 
+                           parquet_metadata("&file_path.") 
+                     ) a 
+
+                     JOIN
+
+                     (
+                        SELECT 
+                           *
+                        FROM 
+                           parquet_schema("&file_path.") 
+                     ) b
+                  ON 
+                     a.file_name=b.file_name 
+                     AND 
+                     a.path_in_schema = b.name 
+                     AND
+                     a.type = b.type
                );
       quit;
    %end;
@@ -254,19 +280,28 @@
    %if &_dm_analysis_error_flag. = 0 %then %do;
       %put NOTE: Step 6 - Build SQL aggregation strings for each column in parquet files.;
 
-      data dukinhel.metadata_table_sql (keep = sql_full_string replace=yes);
-         set DUKINHEL.metadata_table;
+      data DUKINHEL.metadata_table_sql (keep = sql_full_string replace=yes);
+         set DUKINHEL.metadata_schema_table;
          length sql_full_string VARCHAR(*);
-         sql_leader_string = "SELECT '"||trim(file_name)||"' as file_path, parse_filename('"||trim(file_name)||"') as file_name, '"||trim(path_in_schema)||"' as col_name";
+         sql_leader_string = "SELECT '"||trim(file_name)||"' as file_path, parse_filename('"||trim(file_name)||"') as filename, '"||trim(path_in_schema)||"' as column_name";
          sql_query_num =  " COUNT(*) as total_count";
          sql_query_cardinality = "COUNT(DISTINCT "||'"'||trim(path_in_schema)||'"'||") as cardinality";
-         sql_query_missing = "COUNT(CASE WHEN "||'"'||trim(path_in_schema)||'"'||" IS NULL THEN "||'"'||trim(path_in_schema)||'"'||" END) as null_values";
+         sql_query_missing = "COUNT(CASE WHEN "||'"'||trim(path_in_schema)||'"'||" IS NULL THEN 1 END) as null_values";
          sql_query_max = "MAX("||'"'||trim(path_in_schema)||'"'||") as max_value";
          sql_query_min = "MIN("||'"'||trim(path_in_schema)||'"'||") as min_value";
          sql_query_median = "MEDIAN("||'"'||trim(path_in_schema)||'"'||") as median_value";
-         if type ne "BYTE_ARRAY" then do;
-            sql_query_avg = "AVG("||'"'||trim(path_in_schema)||'"'||") as avg_value";
+         if converted_type = "DATE" then do;
+            sql_query_avg = "AVG(date_diff('day', DATE '1970-01-01', CAST("||'"'||trim(path_in_schema)||'"'||" AS DATE))) as avg_value";
          end;
+         else if converted_type = "TIMESTAMP" then do;
+            sql_query_avg = "AVG(date_diff('millisecond', TIMESTAMP '1970-01-01 00:00:00',"||'"'||trim(path_in_schema)||'"'||")::DOUBLE) as avg_value";
+         end;
+         else if converted_type = "TIMESTAMP_MICROS" then do;
+            sql_query_avg = "AVG(date_diff('microsecond', TIMESTAMP '1970-01-01 00:00:00',"||'"'||trim(path_in_schema)||'"'||")::DOUBLE) as avg_value";
+         end;
+         else if type ne "BYTE_ARRAY" then do;
+            sql_query_avg = "AVG("||'"'||trim(path_in_schema)||'"'||") as avg_value";
+         end; 
          else do;
             sql_query_avg = "SUM(NULL) as avg_value";
          end;
@@ -285,14 +320,21 @@
    *------------------------------------------------------------------------------------------ */
    %if &_dm_analysis_error_flag. = 0 %then %do;
       %put NOTE: Step 7 - Generate final SQL string to execute. ;
-   
-      proc sql noprint;
-         select 
-            distinct sql_full_string into: sql_string 
-               SEPARATED BY " UNION ALL " 
-            from 
-               dukinhel.metadata_table_sql ;
+
+      proc sql;
+         connect using DUKINHEL;
+         execute(
+            CREATE OR REPLACE TABLE METADATA_TABLE_SQL AS
+               SELECT DISTINCT sql_full_string FROM METADATA_TABLE_SQL;
+         ) by DUKINHEL;
       quit;
+
+      data _null_;
+        set DUKINHEL.metadata_table_sql end = EOF;
+        call symput("sql_string_"||compress(put(_n_,8.)),sql_full_string);
+        if EOF then call symputx("nbr_queries",_n_);
+      run;
+
    %end;
 
    /* -----------------------------------------------------------------------------------------*
@@ -307,25 +349,59 @@
    *------------------------------------------------------------------------------------------ */
 
       proc sql;
-         connect using dukinhel;
-         create table &output_table. (replace=yes) 
-         as
-         select * from connection to dukinhel(
-            &sql_string.
-         );
+         connect using DUKINHEL;
+         execute(
+            CREATE TABLE IF NOT EXISTS RESULT_ANALYSIS (
+                file_path	VARCHAR	,	 	 	 
+                filename	VARCHAR	,	 	 	 
+                column_name	VARCHAR	,	 	 	 
+                total_count	BIGINT	,	 	 	 
+                cardinality	BIGINT	,	 	 	 
+                null_values	BIGINT	,	 	 	 
+                min_value	VARCHAR	,	 	 	 
+                median_value	VARCHAR	,	 	 	 
+                avg_value	DOUBLE	,	 	 	 
+                max_value	VARCHAR		
+            );
+
+            %do i = 1 %to &nbr_queries.;
+            INSERT INTO RESULT_ANALYSIS 
+                &&sql_string_&i. ;
+            %end;
+
+         ) by DUKINHEL;
+
       quit;
 
+    %end;
+
+    /* -----------------------------------------------------------------------------------------*
+    Print final output table to results window
+    *------------------------------------------------------------------------------------------ */
+
+   %if &_dm_analysis_error_flag. = 0 %then %do;
+ 
+     %put NOTE: Step 9 - Create output table ;
+     
+     data &output_table.;
+        set DUKINHEL.RESULT_ANALYSIS;
+      run;
+      
       options nosymbolgen;
+
    %end;
    /* -----------------------------------------------------------------------------------------*
    Print final output table to results window
    *------------------------------------------------------------------------------------------ */
    %if &_dm_analysis_error_flag. = 0 %then %do;
-      %put NOTE: Step 9 - Print final output table to results window. ;
+
+      %put NOTE: Step 10 - Print final output table to results window. ;
+
       proc print data=&output_table.;
       run;
 
-      libname dukinhel clear;
+      libname DUKINHEL clear;
+
    %end;
     
 %mend _dm_analysis_parquet;
@@ -335,7 +411,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting Data Maker Analysis program (v0.1.0)...;
+%put NOTE: Starting Data Maker Analysis program (v0.2.0)...;
 %_create_error_flag(_dm_analysis_error_flag, _dm_analysis_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -404,4 +480,4 @@
 %sysmacdelete _dm_analysis_parquet;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: Data Maker analysis program (v0.1.0) completed.;
+%put NOTE: Data Maker analysis program (v0.2.0) completed.;

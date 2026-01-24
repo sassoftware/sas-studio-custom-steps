@@ -33,7 +33,7 @@ The step will build DuckDB-compliant SQL and execute it via explicit passthrough
 This step is available as an individual repo and might also form part of the `sas-studio-custom-steps` collection. Follow these [instructions](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/docs/IMPORT_CUSTOM_STEP.md) to make custom steps available in SAS Studio.
 
 ## Version
-Version: 0.1.0 (22JAN2026)
+Version: 0.2.0 (23JAN2026)
 
 ## Contact
 Sundaresh Sankaran (Sundaresh.sankaran@sas.com)
