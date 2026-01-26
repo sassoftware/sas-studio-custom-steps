@@ -45,7 +45,12 @@ For more information about the different settings please refer to the SAS docume
 
 ### SAAM - Document Analysis for Health Records Review
 
-* Version 1.2 (22JAN2026)
+* Version 1.3 (23JAN2026)
+-----------------------------
+
+  * Updated Program code with code fixes
+
+* Version 1.2 (21JAN2026)
 
   * Updated the Program code with few code fixes
 
