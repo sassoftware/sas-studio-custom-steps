@@ -31,6 +31,7 @@ If using SAS as the input source, the following file extensions are supported: [
 ## Pre-requisites
  
 -   SAS Viya 2025.12 or later 
+-   sas-model-medical-record-review-sa version 0.3.0 or higher
 -   A license for SAS Document Analysis is required
 
 ## Settings
@@ -39,22 +40,29 @@ For more information about the different settings please refer to the SAS docume
 
 ## Documentation
 
-- [SAS Document Analysis documentation](https://go.documentation.sas.com/doc/en/aaimdacdc/default/aaimdawlcm/home.htm)
+- [SAS Document Analysis documentation](https://go.documentation.sas.com/doc/en/aaimdahrcdc/v_001/aaimdahrwlcm/home.htm)
 
 ## Change Log
 
 ### SAAM - Document Analysis for Health Records Review
 
-* Version 1.3 (23JAN2026)
------------------------------
+* Version 1.0.4 (28JAN2026)
+---------------------------
+
+  * Updates to SAS Documentation links, pre-requisites and semantic versioning
+
+* Version 1.0.3 (23JAN2026)
+---------------------------
 
   * Updated Program code with code fixes
 
-* Version 1.2 (21JAN2026)
+* Version 1.0.2 (21JAN2026)
+---------------------------
 
   * Updated the Program code with few code fixes
 
-* Version 1.1 (14JAN2026)
+* Version 1.0.1 (14JAN2026)
+---------------------------
 
   * Updated the Options page with additional required parameters for the user to populate to execute the step
   * Updated the About page with more description explaining the usage of the step
@@ -62,7 +70,8 @@ For more information about the different settings please refer to the SAS docume
   * Added cleanup code towards the end of completion of the step to delete macro variables that were created by the step
   * Updated the UI field names and column names to use proper casing and end of line punctuation (: or ?)
 
-* Version 1.0 (08DEC2025)
+* Version 1.0.0 (08DEC2025)
+---------------------------
 
   * Initial version
 
