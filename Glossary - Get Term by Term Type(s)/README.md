@@ -88,4 +88,5 @@ Contains, for each term , the attribute and the value for it.
 |3|ERROR: No response file received for macro 'getTermTypeById'. Please review the log for more details.| A REST API call to the 'termTypes' endpoint was unsuccessful. | There's no response file available. The custom step is not able to continue for the specified Id. The resulting table might be not complete.
 
 ## Change log
-Version 1.0 (16JAN2025): Initial version.
+ - Version 1.0 (16JAN2025)
+   - Initial version.

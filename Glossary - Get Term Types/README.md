@@ -85,4 +85,5 @@ Contains the possible values an end-user can choose from, when creating a term f
 |3|ERROR: No response file received for macro 'getTermTypeById'. Please review the log for more details.| A REST API call to the 'termTypes' endpoint was unsuccessful. | There's no response file available. The custom step is not able to continue for the specified Id. The resulting table might be not complete.
 
 ## Change log
-Version 1.0 (12JAN2026): Initial version.
+ - Version 1.0 (12JAN2026)
+   - Initial version.
