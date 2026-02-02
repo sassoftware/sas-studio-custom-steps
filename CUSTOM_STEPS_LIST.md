@@ -10,6 +10,7 @@ The list of available Custom Steps further down on this page uses the following 
 | Abbreviation     | Explanation                                                           |
 | :--------------- | :-------------------------------------------------------------------- |
 | CAS              | Steps in this category provide utilities for working with data in CAS |
+| Catalog          | SAS Information Catalog related                                       |
 | CV               | Computer Vision                                                       |
 | DQ               | Data Quality                                                          |
 | DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
