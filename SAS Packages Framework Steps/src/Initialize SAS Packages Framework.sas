@@ -133,7 +133,7 @@
         %if &spf_package_path_is_sascontent %then %do;
             %put NOTE: SAS packages are being stored in &spf_package_folder, but SAS packages must be on disk. It is highly recommended to use a physical location for best performance.;
             %put NOTE: PACKAGES fileref has been reassigned to the WORK directory.;
-            %put NOTE: SPF Tools steps will automatically copy packages to/from SAS Content and WORK. Use %nrstr(%%)relocatePackage to manually transfer packages.;
+            %put NOTE: SPF steps will automatically copy packages to/from SAS Content and WORK. Use %nrstr(%%)relocatePackage to manually transfer packages.;
         %end;
 
         %put NOTE: SAS Packages Framework initialized in &spf_package_path;
