@@ -15,6 +15,7 @@ These custom steps add an interface around the SAS Packages Framework, enabling 
 - Install, load, and unload SAS packages as individual steps for granular control
 - Load SAS packages individually with advanced options, or load many packages in bulk
 - Unload packages individually or in bulk
+- Get package help, preview a package, or generate a list of packages in a repository
   
 ## User Interface
 #### Initialize:
@@ -27,6 +28,10 @@ These custom steps add an interface around the SAS Packages Framework, enabling 
 
 
 #### Unload:
+
+
+#### Get Package Info:
+
 
 ## SAS Viya Version Support
 
@@ -49,6 +54,9 @@ TODO
 TODO
 
 #### Unload SAS Packages
+TODO
+
+#### Get Package Info
 TODO
 
 ## Created / contact:
