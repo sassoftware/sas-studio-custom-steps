@@ -48,8 +48,20 @@ The step will build DuckDB-compliant SQL and execute it via explicit passthrough
 ## Installation & Notes
 This step is part of the `sas-studio-custom-steps` collection. Follow the repository instructions in the top-level README to make custom steps available in SAS Studio.
 
-## Version
-Version: 1.3.5 (10JAN2026)
+## Change Log
+* Version: 1.3.0 (03FEB2026)
+   - Addition of a field for a WHERE clause
+   - Minor changes to UI defaults
+   - Documented external wiki for detailed documentation
+
+
+* Version: 1.2.5 (05JAN2026)
+   - Initial version on GitHub
+   - Highlights:
+      - Auto-generation of DuckDB dialect SQL
+      - Expanded list of 12 single-parameter aggregations
+      - Treatment of hyphenated column names
+
 
 ## Contact
 Sundaresh Sankaran (Sundaresh.sankaran@sas.com)

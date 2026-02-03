@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Aggregate Parquets - Version 1.3.5
+   DuckDB - Aggregate Parquets - Version 1.3.0
 
    This program dynamically builds a DuckDB SQL aggregation query and
    pushes it down to Duck DB through the SAS/ACCESS Interface to Duck DB.
@@ -12,7 +12,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.3.5 (2026-01-10)
+   Version: 1.3.0 (2026-02-03)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -396,7 +396,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Control
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb aggregations program (v1.3.5)...;
+%put NOTE: Starting duckdb aggregations program (v1.3.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -475,4 +475,4 @@
 %sysmacdelete _duckdb_execute_aggregations;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb aggregations program (v1.3.5) completed.;
+%put NOTE: duckdb aggregations program (v1.3.0) completed.;
