@@ -15,6 +15,7 @@ The list of available Custom Steps further down on this page uses the following 
 | DQ               | Data Quality                                                          |
 | DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
 | EAC              | External API Connection                                               |
+| Glosssary        | Glossary related - a component of SAS Information Catalog             |
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
