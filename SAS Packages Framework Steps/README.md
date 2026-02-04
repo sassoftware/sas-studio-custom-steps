@@ -29,7 +29,7 @@ package{version}
 package==version
 ```
 
-**\* Not all features are supported. A physical disk or mounted network drive is highly recommended for package storage.**
+**\* Not all SPF features are supported with the Viya File Service. A physical disk or mounted network drive is highly recommended for package storage.**
 
 ## Quick Start Guide
 1. Upload _Initialize SAS Packages Framework_ to SAS Viya
