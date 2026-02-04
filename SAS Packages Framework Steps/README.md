@@ -49,16 +49,16 @@ run;
 ## Example workflows
 
 #### Initialize, install, and load packages, run code, then unload
-<img width="397" height="124" alt="image" src="https://github.com/user-attachments/assets/59d8e860-5c1a-4d53-9f13-b10983703ab0" />
+<img width="371" height="129" alt="image" src="https://github.com/user-attachments/assets/2a6640cb-ef99-4f73-97bb-6f55acf3f4e5" />
 
 #### Initialize and install packages from two different sources, run code, then unload
-<img width="602" height="246" alt="image" src="https://github.com/user-attachments/assets/5f619bd3-9cda-4236-9b01-70f2e2ddb91a" />
+<img width="585" height="274" alt="image" src="https://github.com/user-attachments/assets/26240ce4-0d9f-488e-abee-cd822d2fe5b8" />
 
 #### Initialize and load packages, run code, then unload
-<img width="507" height="145" alt="image" src="https://github.com/user-attachments/assets/acd63441-1178-44c3-ba08-9b33e8d415db" />
+<img width="492" height="121" alt="image" src="https://github.com/user-attachments/assets/35a11884-b8a8-4c6a-a794-f3c4f7d0af60" />
 
-#### Get help about packages
-<img width="143" height="120" alt="image" src="https://github.com/user-attachments/assets/0465c4a0-1932-4a69-b967-f3c27a4dfaf5" />
+#### Get help or other information about packages
+<img width="262" height="113" alt="image" src="https://github.com/user-attachments/assets/ba46073c-dbfc-4ebc-b63e-78ec3302b090" />
 
 ## User Interface
 #### Initialize:
