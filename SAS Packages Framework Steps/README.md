@@ -91,7 +91,7 @@ Tested on Viya 4, Stable 2025.12
 
 ## Requirements
 
-- SAS Packages Framework (SPFInit.sas) 20251231 or higher
+- [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES/tree/main) [(SPFInit.sas)](https://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.sas) 20251231 or higher
 
 ## Documentation:
 - SAS Packages Framework: https://github.com/yabwon/SAS_PACKAGES
