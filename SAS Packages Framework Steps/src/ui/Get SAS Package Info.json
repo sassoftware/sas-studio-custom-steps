@@ -120,6 +120,15 @@
 						}
 					],
 					"visible": ""
+				},
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Used only to add an input port for connecting nodes",
+					"required": false,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
 				}
 			]
 		},
@@ -193,6 +202,10 @@
 		"spf_result_ds": false,
 		"spf_info_output_type": {
 			"value": "Results window"
+		},
+		"inputtable1": {
+			"library": "",
+			"table": ""
 		}
 	},
 	"promptHierarchies": []
