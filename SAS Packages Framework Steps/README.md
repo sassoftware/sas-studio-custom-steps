@@ -48,14 +48,17 @@ run;
 
 ## Example workflows
 
-#### Initialize, install, and load packages, run code, then unload
+#### Initialize, install, and load packages, run code, then unload packages
 <img width="371" height="129" alt="image" src="https://github.com/user-attachments/assets/2a6640cb-ef99-4f73-97bb-6f55acf3f4e5" />
 
-#### Initialize and install packages from two different sources, run code, then unload
+#### Initialize and install packages from two different sources, run code, then unload packages
 <img width="585" height="274" alt="image" src="https://github.com/user-attachments/assets/26240ce4-0d9f-488e-abee-cd822d2fe5b8" />
 
-#### Initialize and load packages, run code, then unload
+#### Initialize and load packages, run code, then unload packages
 <img width="492" height="121" alt="image" src="https://github.com/user-attachments/assets/35a11884-b8a8-4c6a-a794-f3c4f7d0af60" />
+
+#### Initialize using SAS code, load packages, run code, then unload packages
+<img width="509" height="113" alt="image" src="https://github.com/user-attachments/assets/73d25336-11d4-4bdf-ba70-16c951d0bba6" />
 
 #### Get help or other information about packages
 <img width="262" height="113" alt="image" src="https://github.com/user-attachments/assets/ba46073c-dbfc-4ebc-b63e-78ec3302b090" />
