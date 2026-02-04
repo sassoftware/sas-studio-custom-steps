@@ -1,0 +1,56 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "folder",
+			"label": "Main",
+			"type": "page",
+			"children": [
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "Select code to extract",
+					"visible": ""
+				},
+				{
+					"id": "checkbox1",
+					"type": "checkbox",
+					"label": "Program",
+					"visible": ""
+				},
+				{
+					"id": "checkbox2",
+					"type": "checkbox",
+					"label": "JSON",
+					"visible": ""
+				},
+				{
+					"id": "input_folder",
+					"type": "path",
+					"label": "Select an input folder of custom steps",
+					"pathtype": "folder",
+					"placeholder": "",
+					"required": true,
+					"visible": ""
+				},
+				{
+					"id": "output_folder",
+					"type": "path",
+					"label": "Select an output folder",
+					"pathtype": "file",
+					"placeholder": "",
+					"required": true,
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"checkbox1": true,
+		"checkbox2": false,
+		"input_folder": "",
+		"output_folder": ""
+	},
+	"promptHierarchies": []
+}
