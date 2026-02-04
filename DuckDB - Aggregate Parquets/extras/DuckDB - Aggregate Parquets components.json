@@ -114,14 +114,21 @@
 							"id": "agg_columns",
 							"type": "textfield",
 							"label": "List columns to aggregate (space separated):",
-							"placeholder": "DELINQ DEBTINC",
+							"placeholder": "example_col1 example_col2",
 							"required": true
 						},
 						{
 							"id": "group_by_columns",
 							"type": "textfield",
 							"label": "List Group-by columns (optional, space separated):",
-							"placeholder": "",
+							"placeholder": "example_groupby_col",
+							"required": false
+						},
+						{
+							"id": "where_clause",
+							"type": "textfield",
+							"label": "Add a WHERE clause to filter the parquet file (while permitted, avoid using the WHERE keyword):",
+							"placeholder": "AGE > 30 AND INCOME < 50000",
 							"required": false
 						},
 						{
@@ -170,7 +177,7 @@
 										{
 											"id": "section_about_parameters_input_text",
 											"type": "text",
-											"text": "1. Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem)\n2. Select Aggregation functions (list, required): select one or more functions to aggregate by.  This list shall expand in future.\n3. List columns to aggregate (text field, required): list your columns in a space-separated format.  This step does not provide a column selector as it queries directly from parquet.\n4. List Group-by columns (text field, optional): list any columns in space-separated formatwhich you like to group your aggregations by. ",
+											"text": "1. Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem)\n2. Select Aggregation functions (list, required): select one or more functions to aggregate by.  This list shall expand in future.\n3. List columns to aggregate (text field, required): list your columns in a space-separated format.  This step does not provide a column selector as it queries directly from parquet.\n4. List Group-by columns (text field, optional): list any columns in space-separated formatwhich you like to group your aggregations by.\n5. WHERE clause (text field, optional): provide a WHERE clause to filter the parquet data before aggregation.  Note that the WHERE keyword is added automatically and if provided, will be used as is.\n",
 											"visible": ""
 										}
 									]
@@ -200,7 +207,7 @@
 										{
 											"id": "section_about_parameters_future_text",
 											"type": "text",
-											"text": "There are pros and cons to any approach.  Keeping the scope of this step in mind, and since it 'generates' DuckDB SQL dialect for explicit passthrough on the fly, we may not be able to cover all syntactic and functional patterns. Some known items slated to be addressed in a future version are:\n\n1. Support for column names with spaces in them (note that version 1.2.5 makes significant progress by handling hyphens in column names and also preventing hyphens from getting considered as operators)\n2. Filters (i.e. WHERE clauses)\n3. Aggregation functions with multiple parameters\n\nThis custom step does **not** have the ambition to evolve into a full-fledged translator to DuckDB SQL (though it will be nice if it can).",
+											"text": "There are pros and cons to any approach.  Keeping the scope of this step in mind, and since it 'generates' DuckDB SQL dialect for explicit passthrough on the fly, we may not be able to cover all syntactic and functional patterns. Some known items slated to be addressed in a future version are:\n\n1. Support for column names with spaces in them (note that version 1.2.5 onwards makes significant progress by handling hyphens in column names and also preventing hyphens from getting considered as operators)\n2. Aggregation functions with multiple parameters\n\nThis custom step does **not** have the ambition to evolve into a full-fledged translator to DuckDB SQL (though it will be nice if it can).",
 											"visible": ""
 										}
 									]
@@ -216,7 +223,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 1.2.5 (05JAN2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 1.3.0 (03FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
@@ -234,8 +241,6 @@
 		"parquet_file_path": "",
 		"parquet_path": "",
 		"function_name": [],
-		"agg_columns": "example_col1 example_col2",
-		"group_by_columns": "example_groupby_col",
 		"output_table": {
 			"library": "",
 			"table": ""
