@@ -98,7 +98,7 @@ All documentation is provided within the **Help** section of each step. A genera
 _Note: SAS packages must be created with SAS Packages macros. Package creation and modification steps are not available at this time._
 
 #### Initialize SAS Packages Framework
-Initializes the SAS Packages Framework, and optionally intalls and loads packages in a single step.
+Initializes the SAS Packages Framework, and optionally installs and loads packages in a single step.
 
 #### Install SAS Packages
 An independent step to install SAS packages.
