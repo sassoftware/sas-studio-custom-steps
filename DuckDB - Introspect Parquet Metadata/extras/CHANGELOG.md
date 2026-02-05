@@ -4,6 +4,6 @@ This page contains a detailed change log which tracks development changes, inclu
 
 
 |**Version**|**Changes**|
+|---|---|
 |0.1.0| Starting initial version|
 ||Initial Prototype|
-|---|---|
