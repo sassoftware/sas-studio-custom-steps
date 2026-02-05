@@ -4,6 +4,7 @@
 This custom step extracts and outputs metadata from input parquet files. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.
 
 Open file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Functions available as part of DuckDB parquet support provide useful tools which assist query engines to use parquet file metadata better.
+
 ---
 ## User Interface
 
