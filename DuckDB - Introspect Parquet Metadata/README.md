@@ -1,6 +1,5 @@
 # DuckDB - Introspect Parquet Metadata
 
-
 ## Description
 This custom step extracts and outputs metadata from input parquet files. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.
 
