@@ -47,23 +47,15 @@ For more information about the different settings please refer to the SAS docume
 ### SAAM - Document Analysis for Health Records Review
 
 * Version 1.0.4 (28JAN2026)
----------------------------
-
   * Updates to SAS Documentation links, pre-requisites and semantic versioning
 
 * Version 1.0.3 (23JAN2026)
----------------------------
-
   * Updated Program code with code fixes
 
 * Version 1.0.2 (21JAN2026)
----------------------------
-
   * Updated the Program code with few code fixes
 
 * Version 1.0.1 (14JAN2026)
----------------------------
-
   * Updated the Options page with additional required parameters for the user to populate to execute the step
   * Updated the About page with more description explaining the usage of the step
   * Updated logic to handle conflicts with output libref name 
@@ -71,7 +63,4 @@ For more information about the different settings please refer to the SAS docume
   * Updated the UI field names and column names to use proper casing and end of line punctuation (: or ?)
 
 * Version 1.0.0 (08DEC2025)
----------------------------
-
   * Initial version
-
