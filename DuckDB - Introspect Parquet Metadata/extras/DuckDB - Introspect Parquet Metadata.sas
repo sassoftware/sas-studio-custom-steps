@@ -476,3 +476,65 @@
 %sysmacdelete _extract_sas_folder_path;
 
 %put NOTE: duckdb aggregations program (v1.3.0) completed.;
+
+
+
+/*------------------------------------------------------------------------*
+CODE DUMP!
+*-------------------------------------------------------------------------*/
+libname gotakaff sasioduk;
+
+proc sql;
+    connect using gotakaff;
+    execute(
+    create table meta as 
+    select * from
+    parquet_metadata("/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet")
+    ) by gotakaff;
+quit;
+
+
+cas ss;
+caslib _all_ assign;
+
+
+DATA PUBLIC.META_HMEQ_1 (PROMOTE=YES);
+    SET GOTAKAFF.META;
+RUN;
+
+proc sql;
+    connect using gotakaff;
+    execute(
+    COPY (SELECT * FROM "/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet")
+    TO "/tmp/HMEQ_WITH_CUST.parquet" (FORMAT PARQUET);
+
+    create table meta_2 as 
+    select * from
+    parquet_metadata("/tmp/HMEQ_WITH_CUST.parquet");
+
+
+    ) by gotakaff;
+quit;
+
+DATA PUBLIC.META_HMEQ_2 (PROMOTE=YES);
+    SET GOTAKAFF.META_2;
+RUN;
+
+proc sql;
+    connect using gotakaff;
+    execute(
+    COPY (SELECT * FROM "/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet" ORDER BY BAD, JOB, REASON, VALUE)
+    TO "/tmp/HMEQ_WITH_CUST.parquet" (FORMAT PARQUET)  ;
+
+    create table meta_3 as 
+    select * from
+    parquet_metadata("/tmp/HMEQ_WITH_CUST.parquet");
+
+
+    ) by gotakaff;
+quit;
+
+DATA PUBLIC.META_HMEQ_3 (PROMOTE=YES);
+    SET GOTAKAFF.META_3;
+RUN;
+
