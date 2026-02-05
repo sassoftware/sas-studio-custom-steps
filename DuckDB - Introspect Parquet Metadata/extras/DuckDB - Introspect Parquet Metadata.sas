@@ -1,18 +1,19 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Aggregate Parquets - Version 1.3.0
+   DuckDB - Introspect Parquet Metadata - Version 0.1.0
 
-   This program dynamically builds a DuckDB SQL aggregation query and
-   pushes it down to Duck DB through the SAS/ACCESS Interface to Duck DB.
+   This custom step extracts and outputs metadata from input parquet files. 
+   A future plan is that, based on user parameters, the step modifies parquet reflecting in 
+   changed metadata, particularly partitioning information and rowgroups to optimise query 
+   performance.  
    
-   This version refactored to follow the structural patterns, macro usage and
-   verbose commenting style used by the "LLM - Azure OpenAI In-context Learning.sas"
-   program while preserving the original purpose and logic.
+   It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work 
+   with parquet files.
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 1.3.0 (2026-02-03)
+   Version: 0.1.0 (2026-02-04)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -32,20 +33,8 @@
 /* %let parquet_file_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet; */
 
  
+/* %let parquet_path=sasserver:/mnt/viya-share/data/parquet-test/ss-new/parquet-test; */
 
-/* Aggregation function list: define count then each function name macro */
-/* %let function_name_count=4; */
-/* %let function_name_1=AVG; */
-/* %let function_name_2=SUM; */
-/* %let function_name_3=STDDEV; */
-/* %let function_name_4=COUNT; */
-
-/* Comma-separated list of columns to aggregate and group-by columns (space or comma separated OK)  */
-/* %let agg_columns=DELINQ DEBTINC;                    */
-/* %let group_by_columns= ;                  */
-
-/* Where clause to filter parquet data before aggregation (optional) */
-/* %let where_clause=       BAD=1; */
 
 /*  Output table assigned to the Duck DB engine. Provide libname-qualified name if desired.  */
 /* %let output_table=dukonce.TABLE_NUM_AGGS_DD; */
@@ -104,123 +93,6 @@
    %global &errorFlagDesc.;
 
 %mend _create_error_flag;
-
-
-/* -----------------------------------------------------------------------------------------* 
-  Macro: _create_sql_string
-  Purpose: Build the comma-separated list of aggregate expressions and the
-           group-by column list suitable for injection into the DuckDB SQL.
-  Behavior: Does not execute SQL; only constructs macro variables:
-            - &final_agg_columns.  (aggregations with aliases)
-            - &final_group_by_columns. (comma-separated grouping columns)
-  Output:
-      1. &final_agg_columns : A global variable which contains a string of aggregation functions.
-      2. &final_group_by_columns : A global variable which contains a comma-separated list of group-by columns.
-*------------------------------------------------------------------------------------------ */
-
-%macro _create_sql_string;
-
-    %global final_agg_columns final_group_by_columns group_by_clause;
-    %local i function_name;
-    %let final_agg_columns=;
-
-    %put NOTE: &function_name_count. functions have been selected.;
-
-    %do i = 1 %to &function_name_count.;
-
-        %let function_name = &&function_name_&i.;
-        %put NOTE: Constructing query for function &function_name.;
-
-        data _null_;
-            length new $32767. match new_match $100. start len 8.;
-            /* Surrounding double-quotes let the macro variable &function_name insert into the pattern */
-            new = prxchange('s/\s+/,/i', -1, trim("&agg_columns."));
-
-            /* Firstly, we construct a wrapper around each variable to derive a basic expression to call a function */
-            new = prxchange("s/([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)/&function_name.($1) AS &function_name._$1/i", -1, new );  
-           
-            /* Then, we handle the case of column names with hyphens (swearing softly under our breath) */
-            /* SAS PRX functions to the rescue */
-
-            pos=1;
-            if _n_ = 1 then pattern_id=PRXPARSE("/&function_name._([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)*/");
-            length = length(new);
-  
-            /* Iterate over all matches */
-            call prxnext(pattern_id, pos, length, new, start, len);
-            
-            do while (start > 0);
-                match = substr(new, start, len);
-                put "NOTE: Matched a hyphen pattern - " match;
-                new_match = trim(transtrn(match,"-","_"));
-                new_match = trim(transtrn(new_match,"-","_"));
-                put "NOTE: Changed pattern to - " new_match;
-                new = transtrn(new,trim(match),trim(new_match));
-                call prxnext(pattern_id, pos, length, new, start, len);
-            end;
-
-            /* Finally, a garnish - DuckDB SQL might mistakenly consider symbols as operators, and therefore let us wrap them... */
-            new = prxchange("s/&function_name.\(([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)\)/&function_name.("||'"'||"$1"||'"'||")/i", -1, new ); 
-            
-            call symput("new_agg_columns_&i.", trim(new));
-
-        run;
-
-        %if &i = 1 %then %do;
-            %let final_agg_columns=&&new_agg_columns_&i..;
-        %end;
-        %else %do;
-            %let final_agg_columns=&final_agg_columns., &&new_agg_columns_&i..;
-        %end;
-
-    %end;
-
-    %put NOTE: The final aggregation expression is &final_agg_columns.;
-
-    %put NOTE: Starting build of group by expression.;
-    %put NOTE: Group by columns provided are &group_by_columns.;
-
-/* Create GROUP BY clause only if group-by columns are provided */
-    %if "&group_by_columns." = "" %then %do;
-      %put NOTE: No GROUP BY columns provided. No group by expression will be built.;
-      %let final_group_by_columns=;
-      %let group_by_clause=;
-    %end;
-    %else %do;
-    
-         data _null_;
-            /* Take care of hyphens in group-by columns */
-            new = trim(prxchange("s/([A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*)/"||'"'||"$1"||'"'||"/i", -1, "&group_by_columns." ));
-            /* Convert whitespace-separated quoted group-by columns to comma-separated list */
-            new=transtrn(trim(new)," ",",");
-            call symput('final_group_by_columns',new);
-         run;
-        %put NOTE: Final group by columns is &final_group_by_columns.;
-        %let group_by_clause=group by &final_group_by_columns.;
-        %let final_group_by_columns=&final_group_by_columns.,;
-        %put NOTE: The final group by expression is &final_group_by_columns. ; 
-    %end;
-
-/* Create WHERE clause only if a filter is provided */
-      %if "&where_clause." = "" %then %do;
-         %put NOTE: No WHERE clause provided. No filtering will be applied.;
-         %let where_clause=;
-      %end;
-      %else %do;
-         %put NOTE: WHERE clause provided is &where_clause.;
-         %let wherec=%sysfunc(substr(%str(&where_clause.),1,6));
-         %let wherec=%upcase(%str(&wherec.));
-         %let wherec=%trim(%str(&wherec.));
-         %if "&wherec."="WHERE" %then %do;
-            %let where_clause=&where_clause.;
-         %end;
-         %else %do;
-            %put NOTE: Adding WHERE keyword to the clause.;
-            %let where_clause=WHERE &where_clause.;
-         %end;
-      %end;
-    
-%mend _create_sql_string;
 
 
 /* -----------------------------------------------------------------------------------------* 
@@ -297,14 +169,12 @@
 %mend _assign_input_file_path;
 
 /* -----------------------------------------------------------------------------------------* 
-  Macro: _duckdb_execute_aggregations
-  Purpose: Build the SQL (via create_sql_string) and run a direct connection
-           to the Duck DB engine, executing the aggregation and returning
-           the results from the pushed-down query.
-   Behavior: Connects to DuckDB, executes aggregation query, creates output table.
+  EXECUTION Macro: _dpm_execution_macro
+  Purpose: Extract metadata and write to output table.
+   Behavior: Connects to DuckDB, extracts metadata, creates output table.
 *------------------------------------------------------------------------------------------ */
 
-%macro _duckdb_execute_aggregations;
+%macro _dpm_execution_macro;
     
    %put NOTE: Step 1 - Assign in-memory DuckDB libname.;
 
@@ -333,7 +203,7 @@
          %let _duckdb_error_flag=1;
          %put ERROR: Please select a valid file on the SAS Server (filesystem). ;
          data _null_;
-            call symputx("_duckdb_error_desc", "Please select a valid file on the SAS Server (filesystem).");
+            call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid file on the SAS Server (filesystem).");
          run;
       
       %end;
@@ -348,7 +218,7 @@
       %if "&_sas_folder_path." = "" %then %do;
 
          %let _duckdb_error_flag = 1;
-         %let _duckdb_error_desc = The field is empty, please select a valid path  ;
+         %let _duckdb_error_desc = &_duckdb_error_desc. <-> The field is empty, please select a valid path  ;
          %put ERROR: &_duckdb_error_desc. ;
 
       %end;
@@ -358,45 +228,36 @@
       %end;
    %end;
 
-   %put NOTE: Step 5 - Build SQL Aggregation string and group by string.;
-   %if &_duckdb_error_flag. = 0 %then %do;
-        %put NOTE: Building SQL aggregation strings...;
-        %_create_sql_string;
-   %end;
 
-   %put NOTE: Aggregation string resolves to &final_agg_columns.;
-   %put NOTE: Group by columns resolve to &final_group_by_columns.;
-
-   %put NOTE: Step 6 - Execute DuckDB aggregation query and create output table.;
+   %put NOTE: Step 5 - Execute DuckDB metadata extraction and create output table.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
-        %put NOTE: Executing DuckDB aggregation query...;
+        %put NOTE: Executing DuckDB metadata extraction query...;
         proc sql;
             connect using dukonce;
             create table &output_table. (replace=yes) as
             select * from connection to dukonce(
                 select 
-                &final_group_by_columns.
-                &final_agg_columns.
-                from read_parquet("&file_path.")
-                &where_clause.
-                &group_by_clause.
+                * from parquet_metadata("&file_path.")
                 
             );
         quit;
    %end;
    %else %do;
-        %let _duckdb_error_desc = Cannot execute DuckDB aggregation query.; 
+        %let _duckdb_error_desc = &_duckdb_error_desc. <-> Cannot execute DuckDB aggregation query.; 
         %put ERROR: &_duckdb_error_desc.;
    %end;
 
-%mend _duckdb_execute_aggregations;
-
+%mend _dpm_execution_macro;
 
 /* -----------------------------------------------------------------------------------------* 
-  Execution Control
+  END MACROS
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb aggregations program (v1.3.0)...;
+
+/* -----------------------------------------------------------------------------------------* 
+  Execution Code
+*------------------------------------------------------------------------------------------ */
+%put NOTE: Starting duckdb metadata introspection program (v0.1.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -406,22 +267,23 @@
 %put NOTE: Step 0 - 0.2 - Runtime trigger value is &_duckdb_run_trigger.;
 
 %if &_duckdb_run_trigger. = 1 %then %do;
-   %_duckdb_execute_aggregations;
+   %_dpm_execution_macro;
 %end;
 
 %if &_duckdb_run_trigger. = 0 %then %do;
    %put NOTE: This step has been disabled. Nothing to do.;
 %end;
 
+%if &_duckdb_error_flag. = 1 %then %do;
+   %put ERROR: DuckDB metadata introspection program ended with errors. Description: &_duckdb_error_desc.;
+%end;
 
 /* ----------------------------------------------------------------------------------* 
     Cleanup 
 *------------------------------------------------------------------------------------------ */
 %put NOTE: Step CLEANUP - CLEANUP.1 - Clean up global macro variables created during execution;
 
-%if %symexist(final_agg_columns) %then %do;
-   %symdel final_agg_columns;
-%end;
+
 
 %if %symexist(_input_file_path) %then %do;
    %symdel _input_file_path;
@@ -435,13 +297,6 @@
    %symdel _PATH_IDENTIFIER;
 %end;
 
-%if %symexist(final_group_by_columns) %then %do;
-   %symdel final_group_by_columns;
-%end;
-
-%if %symexist(group_by_clause) %then %do;
-   %symdel group_by_clause;
-%end;
 
 %if %symexist(_duckdb_run_trigger) %then %do;
    %symdel _duckdb_run_trigger;
@@ -469,13 +324,13 @@
 
 %sysmacdelete _create_runtime_trigger;
 %sysmacdelete _create_error_flag;
-%sysmacdelete _create_sql_string;
+
 %sysmacdelete _identify_content_or_server;
 %sysmacdelete _assign_input_file_path;
-%sysmacdelete _duckdb_execute_aggregations;
+%sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb aggregations program (v1.3.0) completed.;
+%put NOTE: duckdb metadata introspection program (v0.1.0) completed.;
 
 
 
