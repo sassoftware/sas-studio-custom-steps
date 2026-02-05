@@ -1,0 +1,167 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "params",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "section_input_params",
+					"type": "section",
+					"label": "Input Parameters",
+					"open": true,
+					"children": [
+						{
+							"id": "input_option",
+							"type": "radiogroup",
+							"label": "Select your input type:",
+							"items": [
+								{
+									"value": "single",
+									"label": "Single parquet file"
+								},
+								{
+									"value": "multiple",
+									"label": "Multiple parquet files in a folder"
+								}
+							],
+							"visible": ""
+						},
+						{
+							"id": "parquet_file_path",
+							"type": "path",
+							"label": "Enter path to parquet file (should be located on the SAS server):",
+							"pathtype": "file",
+							"placeholder": "",
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"single"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"single"
+							]
+						},
+						{
+							"id": "parquet_path",
+							"type": "path",
+							"label": "Enter path to folder containing parquet files (should be located on the SAS server):",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"multiple"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"multiple"
+							]
+						},
+						{
+							"id": "output_table",
+							"type": "outputtable",
+							"label": "Output table (preferably a data set backed by a DuckDB libname)",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "DuckDB - Introspect Parquet Metadata",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "section_about_intro_text",
+							"type": "text",
+							"text": "This custom step extracts and outputs metadata from input parquet files. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Functions available as part of DuckDB Parquet support provide useful tools which assist query engines to use parquet file metadata better.",
+							"visible": ""
+						},
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Input Parameters",
+									"open": false,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "- Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem). Based on earlier selection, these correspond to a single parquet file or a folder comprising multiple files.\n\n",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Output specification",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "- Output table (output port, required): select an output table which holds schema results.  Choose based on your use case, but it's preferred that this belongs to a DuckDB libname. ",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "version_text",
+									"type": "text",
+									"text": "Version: 0.1.0 (04FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"input_option": {
+			"value": "single",
+			"label": "Single parquet file"
+		},
+		"parquet_file_path": "",
+		"parquet_path": "",
+		"function_name": [],
+		"output_table": {
+			"library": "",
+			"table": ""
+		}
+	}
+}
