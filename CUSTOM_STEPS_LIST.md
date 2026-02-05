@@ -19,6 +19,7 @@ The list of available Custom Steps further down on this page uses the following 
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
+| SAAM             | SAS Applied Agents & Models related                                   |
 | SDG              | Synthetic Data Generation                                             |
 | SID              | SAS Intelligent Decisioning related                                   |
 | VA               | SAS Visual Analytics related                                          |
