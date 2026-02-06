@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Introspect Parquet Metadata - Version 0.1.0
+   DuckDB - Introspect Parquet Metadata - Version 0.2.1
 
    This custom step extracts and outputs metadata from input parquet files. 
    A future plan is that, based on user parameters, the step modifies parquet reflecting in 
@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.1.0 (2026-02-04)
+   Version: 0.2.1 (2026-02-05)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -207,6 +207,7 @@
          run;
       
       %end;
+
    %end;
 
    %put NOTE: Step 4 - Extract the path from the input_file_path macro variable.;
@@ -229,6 +230,18 @@
    %end;
 
 
+    %if &_duckdb_error_flag. = 0 %then %do;
+         %if "&input_option."="single" %then %do;
+            %let file_path=&file_path.;
+        %end;
+        %if "&input_option."="multiple" %then %do;
+            data _null_;
+                call symput("file_path",%str("&file_path./*.parquet"));
+            run;
+        %end;
+   %end;
+
+
    %put NOTE: Step 5 - Execute DuckDB metadata extraction and create output table.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
@@ -248,6 +261,27 @@
         %put ERROR: &_duckdb_error_desc.;
    %end;
 
+   %if &_duckdb_error_flag. = 0 %then %do;
+        %if &load_cas. = 1 %then %do;
+            %put NOTE: Loading output table into CAS...;
+            cas mySession sessopts=(caslib=public timeout=1800);
+
+            /* === Use PROC CASUTIL to load and promote in one step === */
+            proc casutil;
+               droptable casdata="Parquet_Metadata" incaslib="public" quiet;
+               droptable casdata="Parquet_Metadata" incaslib="public" quiet;
+               load data=&output_table. casout="Parquet_Metadata" outcaslib="public" promote;
+            run;
+
+            cas mySession terminate;
+            %put NOTE: DuckDB metadata extraction and output table creation completed successfully.;
+         %end;
+   %end;
+   %else %do;
+        %let _duckdb_error_desc = &_duckdb_error_desc. <-> Cannot execute DuckDB aggregation query.; 
+        %put ERROR: &_duckdb_error_desc.;
+   %end;   
+
 %mend _dpm_execution_macro;
 
 /* -----------------------------------------------------------------------------------------* 
@@ -257,7 +291,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb metadata introspection program (v0.1.0)...;
+%put NOTE: Starting duckdb metadata introspection program (v0.2.1)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -330,13 +364,13 @@
 %sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb metadata introspection program (v0.1.0) completed.;
+%put NOTE: duckdb metadata introspection program (v0.2.1) completed.;
 
 
 
 /*------------------------------------------------------------------------*
 CODE DUMP!
-*-------------------------------------------------------------------------*/
+
 libname gotakaff sasioduk;
 
 proc sql;
@@ -393,3 +427,4 @@ DATA PUBLIC.META_HMEQ_3 (PROMOTE=YES);
     SET GOTAKAFF.META_3;
 RUN;
 
+*-------------------------------------------------------------------------*/
