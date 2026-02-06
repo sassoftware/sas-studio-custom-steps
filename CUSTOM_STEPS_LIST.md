@@ -10,13 +10,16 @@ The list of available Custom Steps further down on this page uses the following 
 | Abbreviation     | Explanation                                                           |
 | :--------------- | :-------------------------------------------------------------------- |
 | CAS              | Steps in this category provide utilities for working with data in CAS |
+| Catalog          | SAS Information Catalog related                                       |
 | CV               | Computer Vision                                                       |
 | DQ               | Data Quality                                                          |
 | DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
 | EAC              | External API Connection                                               |
+| Glosssary        | Glossary related - a component of SAS Information Catalog             |
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
+| SAAM             | SAS Applied Agents & Models related                                   |
 | SDG              | Synthetic Data Generation                                             |
 | SID              | SAS Intelligent Decisioning related                                   |
 | VA               | SAS Visual Analytics related                                          |
@@ -55,7 +58,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [DQ - Parsing](./DQ%20-%20Parsing/README.md) | Parse a string into a set of tokens using QKB locale specific rules<sup> (*)</sup> | [Clemens Knobloch](https://github.com/sukckn) | 2023.01 <br>or later | 15MAR2023 |
 | [DQ - Standardize](./DQ%20-%20Standardize/README.md) | Create standardized values based on locale, using SAS QKB and dqStandardize function (includes support for generating masked values)<sup> (*)</sup> | [Lorenzo Toja](https://github.com/lorenzotoja) / [Arnold Toporowski](https://github.com/ArnoldToporowski) | 2024.01 <br>or later | 21MAR2024 |
 | [DQ - Surviving Record](./DQ%20-%20Surviving%20Record/README.md) | Extract the best record (aka. Golden Record) from clusters of records, with support for standard deduplication routines and user-defined rules | [Lorenzo Toja](https://github.com/lorenzotoja) | 2023.06 <br>or later | 24AUG2023 |
-| [DuckDB - Aggregate Parquets](./DuckDB%20-%20Aggregate%20Parquets/README.md) | Aggregate Parquet files using SAS/Access interface to [DuckDB](https://duckdb.org/) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.01 <br>or later | 05JAN2026 |
+| [DuckDB - Aggregate Parquets](./DuckDB%20-%20Aggregate%20Parquets/README.md) | Aggregate Parquet files using SAS/Access interface to [DuckDB](https://duckdb.org/) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.07 <br>or later | 03FEB2026 |
 | [DuckDB - Execute DuckDB SQL](./DuckDB%20-%20Execute%20DuckDB%20SQL/README.md) | Uses proc python and [DuckDB](https://duckdb.org/) libraries to read and write data in various DBMS and file types| [Clemens Knobloch](https://github.com/sukckn) | 2025.12 <br>or later | 16JAN2026 |
 | [Dynamic Aggregations From Timeseries DAFT](./Dynamic%20Aggregations%20From%20Timeseries%20DAFT/README.md) | Perform dynamic aggregations on timeseries data | [Stephan Weigandt](https://github.com/stephanweigandt) | 2022.1.2 <br>or later | 08MAY2023 |
 | [EAC - Get Exchange Rates](./EAC%20-%20Get%20Exchange%20Rates/README.md) | Get Exchange Rates from Service Provider | [David Weik](https://github.com/Criptic) | 2023.08 <br>or later | 03JAN2025 |
@@ -71,10 +74,13 @@ The list of available Custom Steps further down on this page uses the following 
 | [FTP Download Files](./FTP%20Download%20Files/README.md) | Download file from an FTP Server, where list of files to download is provided in an input table | [Remco Gooijer](https://github.com/x7rtfgj4) | 2023.01 <br>or later | 14AUG2024 |
 | [GEO - Shape Files](./GEO%20-%20Shape%20Files/README.md) | Manage Shape Files used in GIS systems for use in SAS Visual Analytics | [Stefano Tucciarone](https://github.com/Stefano86T) | 2023.10 <br>or later | 18APR2024 |
 | [GeoDistance with Rounding](./GeoDistance%20with%20Rounding/README.md) | Calculate the distance between 2 supplied lat/long locations in either kilometers or miles | [Mary Kathryn Queen](https://github.com/maquee-sas) | 2020.1.5 <br>or later | 28SEP2022 |
+| [Get SAS Job Definition Information](./Get%20SAS%20Job%20Definition%20Information/README.md) | Lists all SAS Job Definitions into three output tables | [David Weik](https://github.com/Criptic) | 2025.12 <br>or later | 12JAN2026 |
 | [Git - Clone Git Repo](./Git%20-%20Clone%20Git%20Repo/README.md) | Clone Git Repo as part of running a flow |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 25JAN2023 |
 | [Git - Delete Local Repo](./Git%20-%20Delete%20Local%20Repo/README.md) | Delete LOCAL Repo as part of running a flow |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 25JAN2023 |
 | [Git - List Local Repo Changes](./Git%20-%20List%20Local%20Repo%20Changes/README.md) | List changed files inside local Git repository folder into a dataset as part of running a flow for easy reporting |  [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 07FEB2023 |
 | [Git - Stage, Commit, Pull and Push Changes](./Git%20-%20Stage%2C%20Commit%2C%20Pull%20and%20Push%20Changes/README.md) | Perform stage, commit, pull and push changes  as part of running a flow | [David Weik](https://github.com/Criptic) | 2023.01 <br>or later | 19FEB2023 |
+| [Glossary - Get Term Types](./Glossary%20-%20Get%20Term%20Types/README.md) | Extract attributes of Terms Types from Glossary into 3 output tables | [Remco Gooijer](https://github.com/x7rtfgj4) | 2025.08 <br>or later | 04FEB2026 |
+| [Glossary - Get Terms by Term Type(s)](./Glossary%20-%20Get%20Term%20by%20Term%20Type(s)/README.md) | Extract attributes of Terms for selected Term Type into 2 output tables | [Remco Gooijer](https://github.com/x7rtfgj4) | 2025.08 <br>or later | 04FEB2026 |
 | [Great Expectations - Execute Rule](./Great%20Expectations%20-%20Execute%20Rule/README.md) | Run business rules based on Great Expectations Python package | [Stephen Kotiang](https://github.com/kotiang54) | 2023.03 <br>or later | 11OCT2023 |
 | [Great Expectations - Generate Expectation Suite](./Great%20Expectations%20-%20Generate%20Expectation%20Suite/README.md) | Generate rules on input data using Great Expectations | [Mackenzie Looney](https://github.com/mackloon) | 2023.04 <br>or later | 14FEB2025 |
 | [Great Expectations - Run Expectations Suite](./Great%20Expectations%20-%20Run%20Expectation%20Suite/README.md) | Compare data against an Expectation Suite| [Mackenzie Looney](https://github.com/mackloon) | 2023.04 <br>or later | 19OCT2023 |
@@ -116,6 +122,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [Python - Virtual Environments](./Python%20Virtual%20environments/README.md)**<sup> (DEPRECATED)</sup>** | A collection of SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.**<sup> (DEPRECATED)</sup>** | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
 | [R Runner](./R%20Runner/README.md) | Submit R scripts with support for input and output table | [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 18AUG2023 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 26AUG2022 |
+| [SAAM - Document Analysis for Health Records Review](./SAAM%20-%20Document%20Analysis%20for%20Health%20Records%20Review/README.md) | Executes the SAS Document Analysis Health Records Review information extraction process | [Murali Pagolu](https://github.com/mupago) | 2025.12 <br>or later | 28JAN2026 |
 | [SAS Content - Copy File from File System](./SAS%20Content%20-%20Copy%20File%20from%20File%20System/README.md) | Copy file from Compute file system into SAS Content folder programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 09JAN2024 |
 | [SAS Content - Create Folder](./SAS%20Content%20-%20Create%20Folder/README.md) | Creates a new folder in SAS Content programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
 | [SAS Content - Obtain Folder URI](./SAS%20Content%20-%20Obtain%20Folder%20URI/README.md) | Obtain URI of selected SAS Content folder and save it in a global macro variable | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
