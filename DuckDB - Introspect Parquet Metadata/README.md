@@ -1,9 +1,9 @@
 # DuckDB - Introspect Parquet Metadata
 
 ## Description
-This custom step extracts and outputs metadata from input parquet files. It loads the output to a SAS Cloud Analytics Services (CAS) table for visualization. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.
+This custom step extracts and outputs metadata from input parquet files. Optionally, it loads output to a SAS Cloud Analytics Services (CAS) table for visualisation. A future plan is that, based on user-specified parameters, the step modifies parquet files reflecting in changed metadata, particularly partitioning information and rowgroups for optimised query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.
 
-Open file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Functions available as part of DuckDB parquet support provide useful tools which assist query engines to use parquet file metadata better.
+Open file formats such as Parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  DuckDB is a popular and performant query processing engine that reduces data movement.  DuckDB parquet functions provide useful tools which help query engines use parquet file metadata better.
 
 ---
 ## User Interface
@@ -24,7 +24,8 @@ Configure the parameters as needed in the Parameters tab and run the step.
 
 ### Output Specification
 
-- Output table (output port, required): select an output table which holds schema results.  Choose based on your use case, but it's preferred that this belongs to a DuckDB libname. 
+1. Output table (output port, required): select an output table to hold schema results.  
+2. Load to CAS (checkbox, optional): if checked, the output table is loaded to CAS for visualisation. The default table is PARQUET_METADATA in PUBLIC caslib (can be changed by user).
 ---
 ## Installation & Notes
 This step is part of the `sas-studio-custom-steps` collection. Follow the repository instructions in the top-level README to make custom steps available in SAS Studio.
@@ -32,7 +33,7 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 ---
 ## Change Log
 
-- Version: 0.2.1 (05FEB2026)
+- Version: 0.3.0 (08FEB2026)
    - Working Version
 
 - Version: 0.1.0 (04FEB2026)

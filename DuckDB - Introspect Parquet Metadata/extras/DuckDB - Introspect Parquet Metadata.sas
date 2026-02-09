@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Introspect Parquet Metadata - Version 0.2.1
+   DuckDB - Introspect Parquet Metadata - Version 0.3.0
 
    This custom step extracts and outputs metadata from input parquet files. 
    A future plan is that, based on user parameters, the step modifies parquet reflecting in 
@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.2.1 (2026-02-05)
+   Version: 0.3.0 (08FEB2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -271,7 +271,8 @@
                droptable casdata="Parquet_Metadata" incaslib="public" quiet;
                droptable casdata="Parquet_Metadata" incaslib="public" quiet;
                load data=&output_table. casout="Parquet_Metadata" outcaslib="public" promote;
-            run;
+               run;
+            quit;
 
             cas mySession terminate;
             %put NOTE: DuckDB metadata extraction and output table creation completed successfully.;
@@ -291,7 +292,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb metadata introspection program (v0.2.1)...;
+%put NOTE: Starting duckdb metadata introspection program (v0.3.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -364,7 +365,7 @@
 %sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb metadata introspection program (v0.2.1) completed.;
+%put NOTE: duckdb metadata introspection program (v0.3.0) completed.;
 
 
 

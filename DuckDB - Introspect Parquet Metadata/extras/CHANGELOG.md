@@ -11,3 +11,4 @@ This page contains a detailed change log which tracks development changes, inclu
 ||Code for Load to CAS||
 |0.2.1| Fix Multiple Files|05FEB2026|
 || Loads by default to PARQUET_METADATA CAS Table||
+|0.3.0| User can specify CAS location|08FEB2026|

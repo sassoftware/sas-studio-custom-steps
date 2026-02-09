@@ -67,15 +67,49 @@
 						{
 							"id": "load_cas",
 							"type": "checkbox",
-							"label": "Load output to Cloud Analytics Services (CAS",
+							"label": "Load output to Cloud Analytics Services (CAS)",
 							"visible": ""
 						},
 						{
-											"id": "load_cas_text",
-											"type": "text",
-											"text": "If checked, the output table is loaded to CAS for visualization. At present, the default table is PARQUET_METADATA in PUBLIC Caslib (to change).\n\n",
-											"visible": ""
-										},
+							"id": "load_cas_text",
+							"type": "text",
+							"text": "If checked, the output table is loaded to CAS for visualisation. At present, the default table is PARQUET_METADATA in PUBLIC Caslib (user can change this).\n\n",
+							"visible": ""
+						},
+						{
+							"id": "target_caslib",
+							"type": "textfield",
+							"label": "Target CAS library name:",
+							"placeholder": "PUBLIC",
+							"required": false,
+							"visible": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"enabled": [
+								"$load_cas",
+								"=",
+								true
+							]
+						},
+						{
+							"id": "target_tblname",
+							"type": "textfield",
+							"label": "Target CAS table name:",
+							"placeholder": "PARQUET_METADATA",
+							"required": false,
+							"visible": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"enabled": [
+								"$load_cas",
+								"=",
+								true
+							]
+						},
 						{
 							"id": "output_table",
 							"type": "outputtable",
@@ -103,7 +137,7 @@
 						{
 							"id": "section_about_intro_text",
 							"type": "text",
-							"text": "This custom step extracts and outputs metadata from input parquet files. It also loads this output to SAS Cloud Analytics Services (CAS) table for visualization. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as Parquet are popular due to the benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB has gained popularity as a performant query processing engine which reduces data movement.  Functions available as part of DuckDB Parquet support provide useful tools which assist query engines to use parquet file metadata better.",
+							"text": "DuckDB - Introspect Parquet Metadata\n================================\nThis custom step extracts and outputs metadata from input parquet files. It also loads this output to SAS Cloud Analytics Services (CAS) table for visualisation. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as Parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement.  DuckDB Parquet functions are useful tools that assist query engines to use parquet file metadata better.",
 							"visible": ""
 						},
 						{
@@ -122,7 +156,7 @@
 										{
 											"id": "section_about_parameters_input_text",
 											"type": "text",
-											"text": "- Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem). Based on earlier selection, these correspond to a single parquet file or a folder comprising multiple files.\n\n",
+											"text": "- Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem). Based on earlier selection, this could be a single parquet file or a folder comprising multiple files.\n\n",
 											"visible": ""
 										}
 									]
@@ -137,7 +171,7 @@
 										{
 											"id": "section_about_parameters_output_text",
 											"type": "text",
-											"text": "- Output table (output port, required): select an output table which holds schema results.  Choose based on your use case, but it's preferred that this belongs to a DuckDB libname. ",
+											"text": "1. Output table (output port, required): select an output table to hold schema results.  \n\n2. Load to CAS (checkbox, optional): if checked, the output table is loaded to CAS for visualisation. The default table is PARQUET_METADATA in PUBLIC caslib (can be changed by user).",
 											"visible": ""
 										}
 									]
@@ -153,7 +187,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 0.2.1 (05FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 0.3.0 (08FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
@@ -170,7 +204,9 @@
 		},
 		"parquet_file_path": "",
 		"parquet_path": "",
-		"function_name": [],
+		"load_cas": false,
+		"target_caslib": "PUBLIC",
+		"target_tblname": "PARQUET_METADATA",
 		"output_table": {
 			"library": "",
 			"table": ""
