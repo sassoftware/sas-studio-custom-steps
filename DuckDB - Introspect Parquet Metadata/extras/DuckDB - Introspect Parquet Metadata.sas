@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.3.0 (08FEB2026)
+   Version: 0.3.0 (09FEB2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -268,9 +268,9 @@
 
             /* === Use PROC CASUTIL to load and promote in one step === */
             proc casutil;
-               droptable casdata="Parquet_Metadata" incaslib="public" quiet;
-               droptable casdata="Parquet_Metadata" incaslib="public" quiet;
-               load data=&output_table. casout="Parquet_Metadata" outcaslib="public" promote;
+               droptable casdata="&target_tblname." incaslib="&target_caslib." quiet;
+               droptable casdata="&target_tblname." incaslib="&target_caslib." quiet;
+               load data=&output_table. casout="&target_tblname." outcaslib="&target_caslib." promote;
                run;
             quit;
 

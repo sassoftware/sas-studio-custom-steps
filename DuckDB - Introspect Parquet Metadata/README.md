@@ -33,7 +33,7 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 ---
 ## Change Log
 
-- Version: 0.3.0 (08FEB2026)
+- Version: 0.3.0 (09FEB2026)
    - Working Version
 
 - Version: 0.1.0 (04FEB2026)
