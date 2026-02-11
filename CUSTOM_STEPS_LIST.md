@@ -12,6 +12,7 @@ The list of available Custom Steps further down on this page uses the following 
 | CAS              | Steps in this category provide utilities for working with data in CAS |
 | Catalog          | SAS Information Catalog related                                       |
 | CV               | Computer Vision                                                       |
+| Data Maker       | SAS Data Maker related                                                |
 | DQ               | Data Quality                                                          |
 | DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
 | EAC              | External API Connection                                               |
@@ -46,6 +47,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [CV - Load Images](./CV%20-%20Load%20Images/README.md) | Load image files into a CAS table for use with CAS image analytics actions | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 04OCT2024 |
 | [CV - Merge Data with Images](./CV%20-%20Merge%20Data%20with%20Images/README.md) | Merge or append data that contains images | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
 | [CV - Train Models](./CV%20-%20Train%20Models/README.md) | Develop Computer Vision (CV) models to accomplish one of four prediction tasks: 1. Image classification, 2. Image regression, 3. Object detection, 4. Multi-task| [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
+| [Data Maker - Analyse Data](./Data%20Maker%20-%20Analyse%20Data/README.md) | Analyse parquet files to help drive data configuration decisions in [SAS Data Maker](https://www.sas.com/en_us/software/data-maker.html) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.07 <br>or later | 23JAN2026 |
 | [Data Synthesis with Python faker](./Data%20Synthesis%20with%20Faker/README.md) | Generate synthetic data using Python faker module (also includes custom steps to install/load Python modules) | [Angus Looney](https://github.com/AngusLooneySAS) / Duncan Bain | 2021.1.1 <br>or later | 22DEC2022 |
 | [Detect Data Drift](./Detect%20Data%20Drift/README.md) | Calculate metrics for tracking changes between two groups of records (representing two time intervals) inside a table | [David Weik](https://github.com/Criptic) | 2024.07 <br>or later | 15AUG2024 |
 | [Download Job Execution Log](./Download%20Job%20Execution%20Log/README.md) | Store Job Execution Log in a user-specified location on SAS Compute Server file system | [Remco Gooijer](https://github.com/x7rtfgj4) | 2024.01 <br>or later | 03NOV2024 |
