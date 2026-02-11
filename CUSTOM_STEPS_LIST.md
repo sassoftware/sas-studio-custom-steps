@@ -14,7 +14,7 @@ The list of available Custom Steps further down on this page uses the following 
 | CV               | Computer Vision                                                       |
 | Data Maker       | SAS Data Maker related                                                |
 | DQ               | Data Quality                                                          |
-| DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
+| DuckDB           | [DuckDB](https://duckdb.org/) related                                 |
 | EAC              | External API Connection                                               |
 | Glosssary        | Glossary related - a component of SAS Information Catalog             |
 | LLM              | Large Language Model                                                  |
