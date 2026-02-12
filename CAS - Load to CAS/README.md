@@ -15,7 +15,7 @@ This custom step lets you:
 
 ## Important
 ### Convert CHAR to VARCHAR
-Be cautious when using this option. The conversion doesn't always save memory and might degrade performance. Besides the memory needed to store the character values the system needs an additional 16 bytes, for length- and offset information, flag bits and alignment, for *each* VARCHAR column, for each row.
+Be cautious when using this option. The conversion doesn't always save memory and might degrade performance. Besides the memory needed to store the character value the system needs an additional 16 bytes, for length- and offset information, flag bits and alignment, for *each* VARCHAR column, for each row.
 
 You can use the following decision table:
 |#|Scenario|Choose|
@@ -42,7 +42,7 @@ You can use the [SAS Viya information catalog](https://documentation.sas.com/doc
 ### Good to know
 - When converting a character field to a variable character field, the length stays the same, i.e. CHAR(X) => VARCHAR(X)
 - The custom step uses the CASUSER caslib in case there's the need for appending to a existing CAS table and performing a CHAR to VARCHAR conversion.
-- When trying to convert columns for a non SAS dataset table, the conversion is canceled but the table is loaded into CAS.
+- When trying to convert columns for a non SAS dataset/table, the conversion is canceled but the table is loaded into CAS.
 
 ## SAS Viya version support
 
