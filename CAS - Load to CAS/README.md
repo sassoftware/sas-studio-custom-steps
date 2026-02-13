@@ -94,7 +94,7 @@ Note that:
 |3| WARNING: Conversion to VARCHAR is canceled because of incompatible source table engine. | The user tries to load or append a *source* table, with columns to convert, into CAS that is not a SAS Dataset. | Nothing is converted but the step tries to load/append the table as-is.   
 
 ## Change log
-Version 1.3 (11FEB2025): 
+Version 1.3 (11FEB2026): 
 - Added the optional CHAR to VARCHAR conversion and the possibility to compress the CAS table.
 - First public release
 
