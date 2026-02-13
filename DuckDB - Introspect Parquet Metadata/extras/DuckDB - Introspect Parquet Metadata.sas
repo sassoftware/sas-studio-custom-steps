@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Introspect Parquet Metadata - Version 0.3.0
+   DuckDB - Introspect Parquet Metadata - Version 0.4.0
 
    This custom step extracts and outputs metadata from input parquet files. 
    A future plan is that, based on user parameters, the step modifies parquet reflecting in 
@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.3.0 (09FEB2026)
+   Version: 0.4.0 (13FEB2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -168,6 +168,8 @@
 
 %mend _assign_input_file_path;
 
+
+
 /* -----------------------------------------------------------------------------------------* 
   EXECUTION Macro: _dpm_execution_macro
   Purpose: Extract metadata and write to output table.
@@ -254,11 +256,13 @@
                 * from parquet_metadata("&file_path.")
                 
             );
+        run;
         quit;
    %end;
    %else %do;
-        %let _duckdb_error_desc = &_duckdb_error_desc. <-> Cannot execute DuckDB aggregation query.; 
+        %let _duckdb_error_desc = &_duckdb_error_desc. <-> Cannot execute DuckDB aggregation query; 
         %put ERROR: &_duckdb_error_desc.;
+        %put NOTE: &_duckdb_error_flag.;
    %end;
 
    %if &_duckdb_error_flag. = 0 %then %do;
@@ -278,7 +282,76 @@
             %put NOTE: DuckDB metadata extraction and output table creation completed successfully.;
          %end;
    %end;
-   %else %do;
+   %if "&input_option."="single" %then %do;
+        %if &write_parquet.=1 %then %do;
+            %if &_duckdb_error_flag.=0 %then %do;
+                %put NOTE: Writing Parquet file ;
+                %if "&order_by_cols."="" %then %do;
+                    %let order_by_string=;
+                %end;
+                %else %do;
+                    %let order_by_string=ORDER BY &order_by_cols.;
+                %end;
+                      
+                %_identify_content_or_server("&output_parquet_folder.");
+
+                %if "&_path_identifier."="sasserver" %then %do;
+                    %put NOTE: Folder location prefixed with &_path_identifier. is on the SAS Server.;
+                %end;
+
+                %else %do;
+
+                    %let _duckdb_error_flag=1;
+                    %put ERROR: Please select a valid file on the SAS Server (filesystem). ;
+                    data _null_;
+                        call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid output file on the SAS Server (filesystem).");
+                    run;
+                %end;
+
+            %end;
+            %if &_duckdb_error_flag. = 0 %then %do;
+                %if "&output_parquet_name."="" %then %do;
+                    %let _duckdb_error_flag = 1;
+                    %let _duckdb_error_desc = &_duckdb_error_desc. <-> No parquet file name provided;
+                    %put ERROR: &_duckdb_error_desc.;
+                %end;
+            %end;
+            %if &_duckdb_error_flag.=0 %then %do;
+                %_extract_sas_folder_path("&output_parquet_folder.");
+                %if "&_sas_folder_path." = "" %then %do;
+
+                    %let _duckdb_error_flag = 1;
+                    %let _duckdb_error_desc = &_duckdb_error_desc. <-> The field is empty, please select a valid path  ;
+                    %put ERROR: &_duckdb_error_desc. ;
+
+                %end;
+                %else %do;
+                    %let output_file_path=&_sas_folder_path./&output_parquet_name.;
+                    %put NOTE: Extracted file path for output file is &output_file_path.;
+                %end;
+            %end;
+            %if &_duckdb_error_flag.=0 %then %do;
+                proc sql;
+                    connect using dukonce;
+                    execute(
+                        COPY (SELECT * FROM "&file_path." &order_by_string.)
+                            TO "&output_file_path." (
+                                FORMAT PARQUET,
+                                OVERWRITE,
+                                &METADATA_OPTION_TBL_COL_1. &METADATA_OPTION_TBL_R1_C1.,
+                                &METADATA_OPTION_TBL_COL_2. &METADATA_OPTION_TBL_R1_C2.,
+                                &METADATA_OPTION_TBL_COL_3. &METADATA_OPTION_TBL_R1_C3.,
+                                &METADATA_OPTION_TBL_COL_4. &METADATA_OPTION_TBL_R1_C4.
+                        
+                                );
+                    ) by dukonce;
+            
+                quit;
+                %put NOTE: Output parquet file created succesfully;
+            %end;
+        %end;
+   %end;
+   %if &_duckdb_error_flag. = 1 %then %do;
         %let _duckdb_error_desc = &_duckdb_error_desc. <-> Cannot execute DuckDB aggregation query.; 
         %put ERROR: &_duckdb_error_desc.;
    %end;   
@@ -292,7 +365,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb metadata introspection program (v0.3.0)...;
+%put NOTE: Starting duckdb metadata introspection program (v0.4.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -365,67 +438,4 @@
 %sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb metadata introspection program (v0.3.0) completed.;
-
-
-
-/*------------------------------------------------------------------------*
-CODE DUMP!
-
-libname gotakaff sasioduk;
-
-proc sql;
-    connect using gotakaff;
-    execute(
-    create table meta as 
-    select * from
-    parquet_metadata("/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet")
-    ) by gotakaff;
-quit;
-
-
-cas ss;
-caslib _all_ assign;
-
-
-DATA PUBLIC.META_HMEQ_1 (PROMOTE=YES);
-    SET GOTAKAFF.META;
-RUN;
-
-proc sql;
-    connect using gotakaff;
-    execute(
-    COPY (SELECT * FROM "/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet")
-    TO "/tmp/HMEQ_WITH_CUST.parquet" (FORMAT PARQUET);
-
-    create table meta_2 as 
-    select * from
-    parquet_metadata("/tmp/HMEQ_WITH_CUST.parquet");
-
-
-    ) by gotakaff;
-quit;
-
-DATA PUBLIC.META_HMEQ_2 (PROMOTE=YES);
-    SET GOTAKAFF.META_2;
-RUN;
-
-proc sql;
-    connect using gotakaff;
-    execute(
-    COPY (SELECT * FROM "/mnt/viya-share/data/parquet-test/ss-new/parquet-test/HMEQ_WITH_CUST.parquet" ORDER BY BAD, JOB, REASON, VALUE)
-    TO "/tmp/HMEQ_WITH_CUST.parquet" (FORMAT PARQUET)  ;
-
-    create table meta_3 as 
-    select * from
-    parquet_metadata("/tmp/HMEQ_WITH_CUST.parquet");
-
-
-    ) by gotakaff;
-quit;
-
-DATA PUBLIC.META_HMEQ_3 (PROMOTE=YES);
-    SET GOTAKAFF.META_3;
-RUN;
-
-*-------------------------------------------------------------------------*/
+%put NOTE: duckdb metadata introspection program (v0.4.0) completed.;

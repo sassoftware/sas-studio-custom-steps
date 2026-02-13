@@ -63,17 +63,25 @@
 								"=",
 								"multiple"
 							]
-						},
+						}
+					]
+				},
+				{
+					"id": "section1",
+					"type": "section",
+					"label": "Output Specifications",
+					"open": true,
+					"children": [
 						{
 							"id": "load_cas",
 							"type": "checkbox",
-							"label": "Load output to Cloud Analytics Services (CAS)",
+							"label": "Load output to SAS Cloud Analytics Services (CAS)",
 							"visible": ""
 						},
 						{
 							"id": "load_cas_text",
 							"type": "text",
-							"text": "If checked, the output table is loaded to CAS for visualisation. At present, the default table is PARQUET_METADATA in PUBLIC Caslib (user can change this).\n\n",
+							"text": "If checked, the output table is loaded to CAS for visualisation. The default target table is PARQUET_METADATA in PUBLIC Caslib (user can change this).\n\n",
 							"visible": ""
 						},
 						{
@@ -117,6 +125,177 @@
 							"required": true,
 							"placeholder": "",
 							"visible": ""
+						},
+						{
+							"id": "write_parquet",
+							"type": "checkbox",
+							"label": "Write new parquet file (for single parquet files only) and specify metadata options ",
+							"visible": [
+								"$input_option",
+								"=",
+								"single"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"single"
+							]
+						}
+					]
+				},
+				{
+					"id": "section_parquet_writer",
+					"type": "section",
+					"label": "Parquet Writer Specifications",
+					"open": true,
+					"visible": [
+						[
+							"$write_parquet",
+							"=",
+							true
+						],
+						"&",
+						[
+							"$input_option",
+							"=",
+							"single"
+						]
+					],
+					"enabled": [
+						[
+							"$write_parquet",
+							"=",
+							true
+						],
+						"&",
+						[
+							"$input_option",
+							"=",
+							"single"
+						]
+					],
+					"children": [
+						{
+							"id": "metadata_option_tbl",
+							"type": "optiontable",
+							"label": "Specify metadata options:",
+							"required": false,
+							"tabletype": "authorboth",
+							"initialrowcount": 1,
+							"min": null,
+							"max": null,
+							"showcolumnlabels": true,
+							"columns": [
+								{
+									"id": "ROW_GROUP_SIZE",
+									"type": "numberfield",
+									"required": false,
+									"placeholder": "",
+									"value": 122880,
+									"integer": true,
+									"max": null,
+									"min": 2048,
+									"excludemax": false,
+									"excludemin": false,
+									"label": "ROW_GROUP_SIZE"
+								},
+								{
+									"id": "ROW_GROUPS_PER_FILE",
+									"type": "numberfield",
+									"required": false,
+									"label": "ROW_GROUPS_PER_FILE",
+									"placeholder": "",
+									"value": 8,
+									"integer": true,
+									"max": null,
+									"min": 8,
+									"excludemax": false,
+									"excludemin": false
+								},
+								{
+									"id": "COMPRESSION",
+									"type": "dropdown",
+									"label": "COMPRESSION",
+									"placeholder": "",
+									"required": false,
+									"value": {
+										"value": "\"ZSTD\"",
+										"label": "ZSTD"
+									},
+									"items": [
+										{
+											"value": "\"SNAPPY\"",
+											"label": "SNAPPY"
+										},
+										{
+											"value": "\"GZIP\"",
+											"label": "GZIP"
+										},
+										{
+											"value": "\"LZ4\"",
+											"label": "LZ4"
+										},
+										{
+											"value": "\"ZSTD\"",
+											"label": "ZSTD"
+										},
+										{
+											"value": "\"UNCOMPRESSED\"",
+											"label": "UNCOMPRESSED"
+										},
+										{
+											"value": "\"BROTLI\"",
+											"label": "BROTLI"
+										}
+									]
+								},
+								{
+									"id": "STRING_DICTIONARY_PAGE_SIZE_LIMIT",
+									"type": "numberfield",
+									"required": false,
+									"label": "STRING_DICTIONARY_PAGE_SIZE_LIMIT",
+									"placeholder": "",
+									"value": 100000,
+									"integer": false,
+									"max": null,
+									"min": null,
+									"excludemax": false,
+									"excludemin": false
+								}
+							],
+							"repeatref": null
+						},
+						{
+							"id": "metadata_options_text",
+							"type": "text",
+							"text": "We will seek to support additional options in future versions.",
+							"visible": ""
+						},
+						{
+							"id": "order_by_cols",
+							"type": "textfield",
+							"label": "Specify comma-separated list of columns to order by:",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						},
+						{
+							"id": "output_parquet_folder",
+							"type": "path",
+							"label": "Select output folder:",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						},
+						{
+							"id": "output_parquet_name",
+							"type": "textfield",
+							"label": "Specify output filename (include .parquet extension):",
+							"placeholder": "",
+							"required": false,
+							"visible": "",
+							"indent": 0
 						}
 					]
 				}
@@ -137,7 +316,7 @@
 						{
 							"id": "section_about_intro_text",
 							"type": "text",
-							"text": "DuckDB - Introspect Parquet Metadata\n================================\nThis custom step extracts and outputs metadata from input parquet files. It also loads this output to SAS Cloud Analytics Services (CAS) table for visualisation. A future plan is that, based on user parameters, the step modifies parquet reflecting in changed metadata, particularly partitioning information and rowgroups to optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as Parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement.  DuckDB Parquet functions are useful tools that assist query engines to use parquet file metadata better.",
+							"text": "DuckDB - Introspect Parquet Metadata\n================================\nThis custom step extracts and outputs metadata from input parquet files. It also gives you an option to load this output to SAS Cloud Analytics Services (CAS) table for visualisation. Further, based on user-specified parameters, the step can write parquet files reflecting changed metadata, particularly partitioning information and rowgroups that optimise query performance.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement.  DuckDB Parquet functions are useful tools that assist query engines to use parquet file metadata better.",
 							"visible": ""
 						},
 						{
@@ -175,6 +354,21 @@
 											"visible": ""
 										}
 									]
+								},
+								{
+									"id": "section_about_parameters_parquet_write",
+									"type": "section",
+									"label": "Parquet writer options",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text_1",
+											"type": "text",
+											"text": "1. Select whether you want to write to a new parquet file with new metadata options (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version.",
+											"visible": ""
+										}
+									]
 								}
 							]
 						},
@@ -187,7 +381,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 0.3.0 (09FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 0.4.0 (13FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
@@ -210,6 +404,11 @@
 		"output_table": {
 			"library": "",
 			"table": ""
-		}
+		},
+		"write_parquet": false,
+		"metadata_option_tbl": null,
+		"order_by_cols": "",
+		"output_parquet_folder": "",
+		"output_parquet_name": ""
 	}
 }
