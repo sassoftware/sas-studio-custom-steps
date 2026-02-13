@@ -4,6 +4,8 @@ This custom step helps you generate synthetic data based on an input table, usin
 
 SMOTE is an alternative approach to Generative Adversarial Networks (GANs) for generating synthetic tabular data. Access to synthetic data helps you make better, data-informed decisions in situations where you have imbalanced, scant, poor quality, unobservable, or restricted data.
 
+SAS Viya provides a smoteSample SAS Cloud Analytics Services (CAS) action and a proc smote procedure, both of which use the same implementation.
+
 ## A general idea
 
 This video (click on below image to play) provides a basic idea: 
@@ -26,18 +28,14 @@ This video (click on below image to play) provides a basic idea:
 ----
 ## Requirements
 
-1. A SAS Viya 4 environment, preferably monthly stable 2024.10 or later
+1. A SAS Viya 4 environment, monthly stable 2025.03 or later.  This corresponds to when PROC SMOTE was introduced.  Refer earlier commits for the action-based code.
 
 2. A Visual Data Mining and Machine Learning (VDMML) license, usually provided with SAS Viya, SAS Viya Enterprise or Advanced.
 
 3. An active SAS Cloud Analytics Services (CAS) connection during runtime.
 
-4. The smote.smoteSample CAS action requires Python configuration, as specified in [SAS documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm). Please work with your SAS administrator to have the same configured. Specifically, ensure the following:
+4. As of SAS Viya Stable 2025.02, no additional configuration is required in order to run proc smote.  Earlier versions require some additional configurations, for which you may refer the same.
 
-   1. The correct version of Python is installed (as of version 2024.10, this was 3.11.x)  
-   2. [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) , version atleast 0.7.0 and beyond 
-   3. [hnswlib](https://pypi.org/project/hnswlib/)
-   4. [protobuf](https://pypi.org/project/protobuf/)
 
 ### (OPTIONAL) Prerequisites for Singling Out Risk calculation
 
@@ -62,13 +60,14 @@ Note citation in [Privacy Risk](#privacy-risk) section below.
 
 2. Nearest neighbors (numeric stepper, default 5): select the number of nearest neighbours to be used by the SMOTE algorithm as the basis for identifying candidate synthetic points.
 
-3. Input columns (column selector): select all inputs for the SMOTE process.  You would also need to include the class and any nominal columns.
+3. Interval input columns (column selector): select all interval inputs for the SMOTE process.  
 
-4. Nominal variables (column selector): select any nominal variables you wish to use. Your nominal variables are required to be in the inputs column list.
+4. Nominal input columns (column selector): select any nominal input columns you wish to use. 
 
-5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column.  Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process.  Your class column is required to be in the inputs column list.
+5. Select a class column (column selector, optional): select a column if you wish to use SMOTE in order to balance or augment a level within the class column.  Be judicious in the choice of this column since a column with a high number of levels may slow down or even fail the process.  Your class column is required to be in the nominal input column list.
 
-6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment.  The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.
+6. Class to augment (drop-down list, values from class column if selected): select the level of the class variable you wish to augment.  The values that appear here depend on the data that's contained in the class column, so may take time to populate based on actual data and number of levels.  The class variable needs to be part of the nominal input column list.
+
 ----
 ### Privacy Risk
 Synthetic data requires assurances on data privacy.  One aspect of privacy risk is singling out risk, which evolved alongside General Data Protection Regulation (GDPR).  **This is an optional step.**  If you wish to measure singling out risk,  enter the parameters below.
@@ -160,13 +159,15 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 ----
 ## Documentation
 
-1. [SAS documentation for the smote.smoteSample CAS action.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm)
+1. [SAS documentation for the proc smote procedure.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casml/casml_smote_overview01.htm)
 
-2. PyPi page for [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) 
+2. [SAS documentation for the smote.smoteSample CAS action.](https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_smote_details01.htm)
 
-3. PyPi page for [hnswlib](https://pypi.org/project/hnswlib/)
-4. PyPi page for [protobuf](https://pypi.org/project/protobuf/)
-5. PyPi page for [anonymeter](https://pypi.org/project/anonymeter/)
+3. PyPi page for [sas-ipc-queue](https://pypi.org/project/sas-ipc-queue/) 
+
+4. PyPi page for [hnswlib](https://pypi.org/project/hnswlib/)
+5. PyPi page for [protobuf](https://pypi.org/project/protobuf/)
+6. PyPi page for [anonymeter](https://pypi.org/project/anonymeter/)
 
 ----
 ## SAS Program
@@ -193,6 +194,8 @@ Acknowledgements to others for their help on details, testing or exploring the a
 ----
 ## Change Log
 
+* Version 2.0.0 (18APR2025)
+    * Refactored code for Proc SMOTE
 * Version 1.3.1 (10DEC2024)
     * Add calculation for privacy risk (singling out risk)
 * Version 1.2 (11NOV2024) 
