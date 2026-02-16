@@ -12,13 +12,15 @@ The list of available Custom Steps further down on this page uses the following 
 | CAS              | Steps in this category provide utilities for working with data in CAS |
 | Catalog          | SAS Information Catalog related                                       |
 | CV               | Computer Vision                                                       |
+| Data Maker       | SAS Data Maker related                                                |
 | DQ               | Data Quality                                                          |
-| DuckDB           | [DuckDB](https://duckdb.org/) related steps                           |
+| DuckDB           | [DuckDB](https://duckdb.org/) related                                 |
 | EAC              | External API Connection                                               |
 | Glosssary        | Glossary related - a component of SAS Information Catalog             |
 | LLM              | Large Language Model                                                  |
 | NLP              | Natural Language Processing                                           |
 | OCR              | Optical Character Recognition                                         |
+| SAAM             | SAS Applied Agents & Models related                                   |
 | SDG              | Synthetic Data Generation                                             |
 | SID              | SAS Intelligent Decisioning related                                   |
 | VA               | SAS Visual Analytics related                                          |
@@ -33,6 +35,8 @@ The list of available Custom Steps further down on this page uses the following 
 | [Append Table](./Append%20Table/README.md) | Appends data to a target table with support for maintaining unique incremental id | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 26OCT2022 |
 | [CAS - Convert Char to Varchar](./CAS%20-%20Convert%20Char%20to%20Varchar/README.md) | Create a copy of a table and convert chars to varchars | [Carlo Petti](https://github.com/itacrp) | 2023.01 <br>or later | 05SEP2023 |
 | [CAS - Generate unique ID](./CAS%20-%20Generate%20Unique%20ID/README.md) | Generates a new column containing a unique identifier (ID) per observation for a given input CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 07FEB2023 |
+
+| [CAS - Load to CAS](./CAS%20-%20Load%20to%20CAS/README.md) | Load CAS table, with support for Append/Compress/Promote and other options | [Remco Gooijer](https://github.com/x7rtfgj4) | 2025.12.01 <br>or later | 11FEB2026 |
 | [CAS - Load Tables from Folders in Filesystem](./CAS%20-%20Load%20Tables%20from%20Folders%20in%20Filesystem/README.md) | Load all files in a directory to CAS tables | [Sundaresh Sankaran](https://github.com/SundareshSankaran) / [Wilbram Hazejager](https://github.com/snlwih) | 2022.11 <br>or later | 21DEC2022 |
 | [CAS - Submit Python and R code](./CAS%20-%20Submit%20Python%20and%20R%20Code/README.md) | Submit Python/R code to CAS server using CAS Gateway action | [David Weik](https://github.com/Criptic) | 2023.11 <br>or later | 05MAY2025 |
 | [CAS - Validate unique ID](./CAS%20-%20Validate%20Unique%20ID/README.md) | Validates if column contains unique values for a given input CAS table | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.06 <br>or later | 11JUL2023 |
@@ -45,6 +49,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [CV - Load Images](./CV%20-%20Load%20Images/README.md) | Load image files into a CAS table for use with CAS image analytics actions | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 04OCT2024 |
 | [CV - Merge Data with Images](./CV%20-%20Merge%20Data%20with%20Images/README.md) | Merge or append data that contains images | [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
 | [CV - Train Models](./CV%20-%20Train%20Models/README.md) | Develop Computer Vision (CV) models to accomplish one of four prediction tasks: 1. Image classification, 2. Image regression, 3. Object detection, 4. Multi-task| [Robert W Blanchard](https://github.com/Rwinstonbnc) | 2024.05 <br>or later | 19SEP2024 |
+| [Data Maker - Analyse Data](./Data%20Maker%20-%20Analyse%20Data/README.md) | Analyse parquet files to help drive data configuration decisions in [SAS Data Maker](https://www.sas.com/en_us/software/data-maker.html) | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2025.07 <br>or later | 23JAN2026 |
 | [Data Synthesis with Python faker](./Data%20Synthesis%20with%20Faker/README.md) | Generate synthetic data using Python faker module (also includes custom steps to install/load Python modules) | [Angus Looney](https://github.com/AngusLooneySAS) / Duncan Bain | 2021.1.1 <br>or later | 22DEC2022 |
 | [Detect Data Drift](./Detect%20Data%20Drift/README.md) | Calculate metrics for tracking changes between two groups of records (representing two time intervals) inside a table | [David Weik](https://github.com/Criptic) | 2024.07 <br>or later | 15AUG2024 |
 | [Download Job Execution Log](./Download%20Job%20Execution%20Log/README.md) | Store Job Execution Log in a user-specified location on SAS Compute Server file system | [Remco Gooijer](https://github.com/x7rtfgj4) | 2024.01 <br>or later | 03NOV2024 |
@@ -121,6 +126,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [Python - Virtual Environments](./Python%20Virtual%20environments/README.md)**<sup> (DEPRECATED)</sup>** | A collection of SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.**<sup> (DEPRECATED)</sup>** | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
 | [R Runner](./R%20Runner/README.md) | Submit R scripts with support for input and output table | [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 18AUG2023 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 26AUG2022 |
+| [SAAM - Document Analysis for Health Records Review](./SAAM%20-%20Document%20Analysis%20for%20Health%20Records%20Review/README.md) | Executes the SAS Document Analysis Health Records Review information extraction process | [Murali Pagolu](https://github.com/mupago) | 2025.12 <br>or later | 28JAN2026 |
 | [SAS Content - Copy File from File System](./SAS%20Content%20-%20Copy%20File%20from%20File%20System/README.md) | Copy file from Compute file system into SAS Content folder programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 09JAN2024 |
 | [SAS Content - Create Folder](./SAS%20Content%20-%20Create%20Folder/README.md) | Creates a new folder in SAS Content programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
 | [SAS Content - Obtain Folder URI](./SAS%20Content%20-%20Obtain%20Folder%20URI/README.md) | Obtain URI of selected SAS Content folder and save it in a global macro variable | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
