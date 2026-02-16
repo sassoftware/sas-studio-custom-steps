@@ -13,3 +13,4 @@ This page contains a detailed change log which tracks development changes, inclu
 || Loads by default to PARQUET_METADATA CAS Table||
 |0.3.0| User can specify CAS location|09FEB2026|
 |0.4.0| Writer capabilities|13FEB2026|
+|0.5.0| Added ROW_GROUP_SIZE_BYTES|15FEB2026|

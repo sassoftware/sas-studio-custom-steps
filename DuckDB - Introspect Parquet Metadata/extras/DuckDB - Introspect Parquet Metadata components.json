@@ -200,6 +200,14 @@
 									"label": "ROW_GROUP_SIZE"
 								},
 								{
+									"id": "ROW_GROUP_SIZE_BYTES",
+									"type": "textfield",
+									"label": "ROW_GROUP_SIZE_BYTES",
+									"placeholder": "",
+									"required": false,
+									"value": "'512MB'"
+								},
+								{
 									"id": "ROW_GROUPS_PER_FILE",
 									"type": "numberfield",
 									"required": false,
@@ -219,44 +227,44 @@
 									"placeholder": "",
 									"required": false,
 									"value": {
-										"value": "\"ZSTD\"",
+										"value": "'ZSTD'",
 										"label": "ZSTD"
 									},
 									"items": [
 										{
-											"value": "\"SNAPPY\"",
+											"value": "'SNAPPY'",
 											"label": "SNAPPY"
 										},
 										{
-											"value": "\"GZIP\"",
+											"value": "'GZIP'",
 											"label": "GZIP"
 										},
 										{
-											"value": "\"LZ4\"",
+											"value": "'LZ4'",
 											"label": "LZ4"
 										},
 										{
-											"value": "\"ZSTD\"",
+											"value": "'ZSTD'",
 											"label": "ZSTD"
 										},
 										{
-											"value": "\"UNCOMPRESSED\"",
+											"value": "'UNCOMPRESSED'",
 											"label": "UNCOMPRESSED"
 										},
 										{
-											"value": "\"BROTLI\"",
+											"value": "'BROTLI'",
 											"label": "BROTLI"
 										}
 									]
 								},
 								{
-									"id": "STRING_DICTIONARY_PAGE_SIZE_LIMIT",
+									"id": "S_D_PAGE_SIZE_LIMIT",
 									"type": "numberfield",
 									"required": false,
 									"label": "STRING_DICTIONARY_PAGE_SIZE_LIMIT",
 									"placeholder": "",
 									"value": 100000,
-									"integer": false,
+									"integer": true,
 									"max": null,
 									"min": null,
 									"excludemax": false,
@@ -381,7 +389,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 0.4.0 (13FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 0.5.0 (15FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}

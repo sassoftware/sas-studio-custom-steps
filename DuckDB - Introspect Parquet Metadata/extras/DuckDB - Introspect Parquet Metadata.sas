@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Introspect Parquet Metadata - Version 0.4.0
+   DuckDB - Introspect Parquet Metadata - Version 0.5.0
 
    This custom step extracts and outputs metadata from input parquet files. 
    A future plan is that, based on user parameters, the step modifies parquet reflecting in 
@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.4.0 (13FEB2026)
+   Version: 0.5.0 (15FEB2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -334,6 +334,7 @@
                 proc sql;
                     connect using dukonce;
                     execute(
+                        SET preserve_insertion_order=false;
                         COPY (SELECT * FROM "&file_path." &order_by_string.)
                             TO "&output_file_path." (
                                 FORMAT PARQUET,
@@ -341,7 +342,8 @@
                                 &METADATA_OPTION_TBL_COL_1. &METADATA_OPTION_TBL_R1_C1.,
                                 &METADATA_OPTION_TBL_COL_2. &METADATA_OPTION_TBL_R1_C2.,
                                 &METADATA_OPTION_TBL_COL_3. &METADATA_OPTION_TBL_R1_C3.,
-                                &METADATA_OPTION_TBL_COL_4. &METADATA_OPTION_TBL_R1_C4.
+                                &METADATA_OPTION_TBL_COL_4. &METADATA_OPTION_TBL_R1_C4.,
+                                STRING_DICTIONARY_PAGE_SIZE_LIMIT &METADATA_OPTION_TBL_R1_C5. 
                         
                                 );
                     ) by dukonce;
@@ -365,7 +367,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb metadata introspection program (v0.4.0)...;
+%put NOTE: Starting duckdb metadata introspection program (v0.5.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -438,4 +440,4 @@
 %sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb metadata introspection program (v0.4.0) completed.;
+%put NOTE: duckdb metadata introspection program (v0.5.0) completed.;

@@ -46,8 +46,8 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 ---
 ## Change Log
 
-- Version: 0.4.0 (13FEB2026)
-   - Working Version
+- Version: 0.5.0 (15FEB2026)
+   - Version submitted to GitHub
 
 - Version: 0.1.0 (04FEB2026)
    - Initial Prototype
