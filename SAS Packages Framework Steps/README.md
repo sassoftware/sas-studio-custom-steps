@@ -49,41 +49,37 @@ run;
 ## Example workflows
 
 #### Initialize, install, and load packages, run code, then unload packages
-<img width="371" height="129" alt="image" src="https://github.com/user-attachments/assets/2a6640cb-ef99-4f73-97bb-6f55acf3f4e5" />
+![](img/workflow1_init-install-load-aio.png)
 
 #### Initialize and install packages from two different sources, run code, then unload packages
-<img width="585" height="274" alt="image" src="https://github.com/user-attachments/assets/26240ce4-0d9f-488e-abee-cd822d2fe5b8" />
+![](img/workflow2_init-install-load-separate.png)
 
 #### Initialize and load packages, run code, then unload packages
-<img width="492" height="121" alt="image" src="https://github.com/user-attachments/assets/35a11884-b8a8-4c6a-a794-f3c4f7d0af60" />
+![](img/workflow3_init-load-unload.png)
 
 #### Initialize using SAS code, load packages, run code, then unload packages
-<img width="509" height="113" alt="image" src="https://github.com/user-attachments/assets/73d25336-11d4-4bdf-ba70-16c951d0bba6" />
+![](img/workflow4_codeinit-load-unload.png)
 
 #### Get help or other information about packages
-<img width="262" height="113" alt="image" src="https://github.com/user-attachments/assets/ba46073c-dbfc-4ebc-b63e-78ec3302b090" />
+![](img/workflow5_init-getinfo.png)
 
 ## User Interface
 #### Initialize:
-<img width="438" height="299" alt="image" src="https://github.com/user-attachments/assets/31306608-5ac3-443d-8f6f-ac7344b4f0e3" />
+![](img/ui_init.png)
 
-<img width="653" height="519" alt="image" src="https://github.com/user-attachments/assets/026568ce-22ea-4d4b-8fa9-2f823d88bb8a" />
-
-<img width="847" height="480" alt="image" src="https://github.com/user-attachments/assets/b95743a2-55dd-49db-8606-e02c7db92832" />
+![](img/ui_init_install_load.png)
 
 #### Install:
-<img width="430" height="433" alt="image" src="https://github.com/user-attachments/assets/a25abf48-eef4-4d1d-a872-1e555b4300c6" />
+![](img/ui_install.png)
 
 #### Load:
-<img width="468" height="433" alt="image" src="https://github.com/user-attachments/assets/2e49fa82-929a-4e5b-bec2-2567bbd233aa" />
-<br/>
-<img width="430" height="287" alt="image" src="https://github.com/user-attachments/assets/2ec58e04-20d2-443f-8d82-f109cde18edf" />
+![](img/ui_load.png)
 
 #### Unload:
-<img width="426" height="269" alt="image" src="https://github.com/user-attachments/assets/4326e015-334d-4481-aa43-a635bcaf2994" />
+![](img/ui_unload.png)
 
 #### Get Package Info:
-<img width="427" height="419" alt="image" src="https://github.com/user-attachments/assets/d789f051-8652-40be-b5a3-47800bd21012" />
+![](img/ui_package_info.png)
 
 ## SAS Viya Version Support
 
