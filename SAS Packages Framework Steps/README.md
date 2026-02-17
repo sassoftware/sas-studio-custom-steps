@@ -66,7 +66,7 @@ run;
 ## User Interface
 #### Initialize:
 ![](img/ui_init.png)
-
+<br/>
 ![](img/ui_init_install_load.png)
 
 #### Install:
