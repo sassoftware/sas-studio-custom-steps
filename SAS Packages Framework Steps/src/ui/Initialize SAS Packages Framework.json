@@ -111,13 +111,6 @@
 					"visible": ""
 				},
 				{
-					"id": "text2",
-					"type": "text",
-					"text": "ℹ️ Packages stored in SAS Content will be copied to the WORK directory before loading.",
-					"visible": "$spf_package_load",
-					"indent": 1
-				},
-				{
 					"id": "spf_repo",
 					"type": "radiogroup",
 					"label": "Select a package repository:",
