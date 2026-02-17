@@ -2,7 +2,7 @@
 	"showPageContentOnly": true,
 	"pages": [
 		{
-			"id": "init",
+			"id": "pageInitialize",
 			"type": "page",
 			"label": "Initialize",
 			"children": [
@@ -19,7 +19,7 @@
 				{
 					"id": "spf_init_type",
 					"type": "radiogroup",
-					"label": "Select a location for SPFInit.sas",
+					"label": "Select SPFInit.sas:",
 					"items": [
 						{
 							"value": "URL"
@@ -48,7 +48,7 @@
 					"type": "path",
 					"label": "",
 					"pathtype": "file",
-					"placeholder": "Select SPFInit.sas",
+					"placeholder": "",
 					"required": true,
 					"visible": [
 						"$spf_init_type",
@@ -59,34 +59,34 @@
 				{
 					"id": "spf_package_folder",
 					"type": "path",
-					"label": "Select a folder for SAS packages",
+					"label": "Select a folder for SAS packages:",
 					"pathtype": "folder",
 					"placeholder": "",
 					"required": true,
 					"visible": ""
 				},
 				{
-					"id": "outputtable1",
-					"type": "outputtable",
-					"label": "Used only to add an output port for connecting nodes",
-					"required": true,
-					"placeholder": "",
-					"visible": ""
-				},
-				{
 					"id": "inputtable1",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Input connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": "",
 					"filter": false,
 					"readonly": false
+				},
+				{
+					"id": "outputtable1",
+					"type": "outputtable",
+					"label": "Output connector:",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
 				}
 			]
 		},
 		{
-			"id": "Install_load",
+			"id": "pageInstallLoad",
 			"type": "page",
 			"label": "Install / Load",
 			"children": [
@@ -113,14 +113,14 @@
 				{
 					"id": "text2",
 					"type": "text",
-					"text": "ℹ️ Packages stored in SAS Content will be copied to the WORK directory before loading",
+					"text": "ℹ️ Packages stored in SAS Content will be copied to the WORK directory before loading.",
 					"visible": "$spf_package_load",
 					"indent": 1
 				},
 				{
 					"id": "spf_repo",
 					"type": "radiogroup",
-					"label": "Package Repository",
+					"label": "Select a package repository:",
 					"items": [
 						{
 							"value": "SAS Packages"
@@ -141,7 +141,7 @@
 					"id": "spf_github_name",
 					"type": "textfield",
 					"label": "",
-					"placeholder": "Enter GitHub username or organization",
+					"placeholder": "Enter a GitHub username or organization",
 					"required": true,
 					"visible": [
 						[
@@ -157,7 +157,7 @@
 					"id": "spf_custom_url",
 					"type": "textfield",
 					"label": "",
-					"placeholder": "Enter URL for a package repository",
+					"placeholder": "Enter a URL for a package repository",
 					"required": true,
 					"visible": [
 						[
@@ -173,7 +173,7 @@
 				{
 					"id": "spf_package_list_type",
 					"type": "radiogroup",
-					"label": "Packages",
+					"label": "Choose how to supply packages:",
 					"items": [
 						{
 							"value": "List"
@@ -196,7 +196,7 @@
 				{
 					"id": "spf_package_list",
 					"type": "textarea",
-					"label": "Enter package list (space or carriage-return separated)",
+					"label": "",
 					"placeholder": "Enter one or more packages",
 					"required": true,
 					"visible": [
@@ -229,7 +229,7 @@
 				{
 					"id": "spf_package_file_fqp",
 					"type": "path",
-					"label": "Select package file",
+					"label": "",
 					"pathtype": "file",
 					"placeholder": "",
 					"required": true,
@@ -263,72 +263,96 @@
 			]
 		},
 		{
-			"id": "help",
+			"id": "pageAbout",
 			"type": "page",
-			"label": "Help",
+			"label": "About",
 			"children": [
 				{
-					"id": "text3",
+					"id": "textAbout",
 					"type": "text",
-					"text": "",
+					"text": "Initialize SAS Packages Framework step\n================================\n\nThe SAS Packages Framework, created by Bart Jablonski, allows users to develop and use SAS packages.\n\nA SAS package is an automatically generated, single, stand alone zip file containing organised and ordered code structures, created by the developer and extended > with additional automatically generated \"driving\" files (i.e. description, metadata, load, unload, and help files).\n\nThis step is an all-in-one interface to initialize the SAS Packages Framework and optionally load and install packages using the macros provided by the SAS Packages Framework:\n\n• %installPackage\n• %loadPackage\n• %loadPackages\n• %relocatePackage\n\nFor more information on the SAS Packages Framework, see:\nhttps://github.com/yabwon/SAS_PACKAGES",
 					"visible": ""
 				},
 				{
-					"id": "section1",
+					"id": "sectionPrereqs",
 					"type": "section",
-					"label": "About the SAS Packages Framework",
+					"label": "Pre-requisites",
 					"open": false,
 					"visible": "",
 					"children": [
 						{
-							"id": "text4",
+							"id": "textPrereqs",
 							"type": "text",
-							"text": "The SAS Packages Framework, created by Bart Jablonski, allows users to develop and use SAS packages.\n\nA SAS package is an automatically generated, single, stand alone zip file containing organised and ordered code structures, created by the developer and extended > with additional automatically generated \"driving\" files (i.e. description, metadata, load, unload, and help files).\n\nThis step is an all-in-one interface to initialize the SAS Packages Framework and optionally load and install packages using the macros provided by the SAS Packages Framework.\n\nFor more information on the SAS Packages Framework, see:\nhttps://github.com/yabwon/SAS_PACKAGES",
+							"text": "• SAS Packages Framework >= 20251231",
 							"visible": ""
 						}
 					]
 				},
 				{
-					"id": "section2",
+					"id": "sectionDocumentation",
 					"type": "section",
-					"label": "Initializing the SAS Packages Framework",
+					"label": "Documentation",
 					"open": false,
 					"visible": "",
 					"children": [
 						{
-							"id": "text5",
-							"type": "text",
-							"text": "Initialize the SAS Packages Framework by pointing to:\n\n1. SPFInit.sas\n2. A folder to store packages\n\nBy default, the Initialize step points to the latest SPFInit.sas in the SAS Packages Framwork GitHub:\nhttps://raw.githubusercontent.com/yabwon/SAS_PACKAGES/refs/heads/main/SPF/SPFinit.sas\n\n⚠️ Storing SAS Packages in SAS Content will result in decreased performance. A physical storage space or mounted network drive is highly recommended.\n\nWhen a physical disk or network drive is selected, the PACKAGES fileref points to that location. \n\nWhen SAS Content is selected, packages are automatically copied from SAS Content to the WORK directory, and the PACKAGES fileref points to the WORK directory. The SAS Packages Framework Steps automatically copy packages to/from WORK as needed.\n\nThree global macro variables are created to control this behavior:\n\n1. spf_package_path: The path of the PACKAGES fileref\n2. spf_package_path_sascontent: The path of packages on SAS Content (if chosen)\n3. spf_package_path_is_sascontent: Boolean value that identifies if the user chose to save packages in SAS Content",
-							"visible": ""
+							"id": "subsectionInitializing",
+							"type": "section",
+							"label": "Initializing the SAS Packages Framework",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textInitializing",
+									"type": "text",
+									"text": "Initialize the SAS Packages Framework by pointing to:\n\n1. SPFInit.sas\n2. A folder to store packages\n\nBy default, the Initialize step points to the latest SPFInit.sas in the SAS Packages Framwork GitHub:\nhttps://raw.githubusercontent.com/yabwon/SAS_PACKAGES/refs/heads/main/SPF/SPFinit.sas\n\n⚠️ Storing SAS packages in SAS Content will result in decreased performance. A physical storage space or mounted network drive is highly recommended.\n\nWhen a physical disk or network drive is selected, the PACKAGES fileref points to that location. \n\nWhen SAS Content is selected, packages are automatically copied from SAS Content to the WORK directory, and the PACKAGES fileref points to the WORK directory. The SAS Packages Framework Steps automatically copy packages to/from WORK as needed with the %relocatePackage macro.\n\nThree global macro variables are created to control this behavior:\n\n1. spf_package_path: The path of the PACKAGES fileref\n2. spf_package_path_sascontent: The path of packages on SAS Content (if chosen)\n3. spf_package_path_is_sascontent: Boolean value that identifies if the user chose to save packages in SAS Content",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "subsectionInstalling",
+							"type": "section",
+							"label": "(Optional) Installing SAS packages",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textInstalling",
+									"type": "text",
+									"text": "SAS Packages can be installed either from a list of packages or a text file. Packages must be space or carriage-return separated, and may include a version. Valid package name formats are:\n\npackage\npackage(version)\npackage[version]\npackage{version}\npackage==version\n\nIf a package already exists, it will be overwritten if the \"Update packages\" option is selected.\n\nPackages can be installed from one of four sources:\n\n1. SAS Packages Archive: https://github.com/SASPAC/\n2. PharmaForest: https://github.com/PharmaForest/\n3. GitHub: https://github.com/<github>/<packagename>/raw/...\n4. Custom: Any website that hosts SAS packages\n\nYou can only choose one source at a time. All packages to be installed must come from the same source.\n\nℹ️ Packages installed to SAS Content are first installed to the WORK directory, then copied to SAS Content with %relocatePackage. \n\nIf \"Update packages\" is enabled and the package checksums differ between the newly downloaded package and the one in SAS Content, then the package is copied. If \"Update packages\" is disabled or the checksums match, then the package is not copied.\n\nFor more information on the %installPackage macro, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#installPackage",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "subsectionLoading",
+							"type": "section",
+							"label": "(Optional) Loading SAS packages",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textLoading",
+									"type": "text",
+									"text": "SAS packages installed on your system can be loaded from either a list of packages or a text file. Packages must be space or carriage-return separated. \n\nVersions do not have an effect when loading and are automatically ignored. For a list of valid package name formats, expand the \"Installing SAS Packages\" section.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory with %relocatePackage before loading. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nFor more information on the %loadPackage macro, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#loadPackage",
+									"visible": ""
+								}
+							]
 						}
 					]
 				},
 				{
-					"id": "section3",
+					"id": "sectionChangelog",
 					"type": "section",
-					"label": "(Optional) Installing SAS Packages",
-					"open": false,
+					"label": "Changelog",
+					"open": true,
 					"visible": "",
 					"children": [
 						{
-							"id": "text6",
+							"id": "textChangelog",
 							"type": "text",
-							"text": "SAS Packages can be installed either from a list of packages or a text file. Packages must be space or carriage-return separated, and may include a version. Valid package name formats are:\n\npackage\npackage(version)\npackage[version]\npackage{version}\npackage==version\n\nIf a package already exists, it will be overwritten if the \"Update Packages\" option is selected.\n\nPackages can be installed from one of four sources:\n\n1. SAS Packages Archive: https://github.com/SASPAC/\n2. PharmaForest: https://github.com/PharmaForest/\n3. GitHub: https://github.com/<github>/<packagename>/raw/...\n4. Custom: Any website that hosts SAS packages\n\nYou can only choose one source at a time. All packages to be installed must come from the same source.\n\nℹ️ Packages installed to SAS Content are first installed to the WORK directory, then copied to SAS Content. \n\nIf \"Update packages\" is enabled and the package checksums differ between the newly downloaded package and the one in SAS Content, then the package is copied. If \"Update packages\" is disabled or the checksums match, then the package is not copied.",
-							"visible": ""
-						}
-					]
-				},
-				{
-					"id": "section4",
-					"type": "section",
-					"label": "(Optional) Loading SAS Packages",
-					"open": false,
-					"visible": "",
-					"children": [
-						{
-							"id": "text7",
-							"type": "text",
-							"text": "SAS packages installed on your system can be loaded from either a list of packages or a text file. Packages must be space or carriage-return separated. \n\nVersions do not have an effect when loading and are automatically ignored. For a list of valid package name formats, expand the \"Installing SAS Packages\" section.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory before loading. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.",
+							"text": "* Version 1.0.0 (17FEB2026)\n    - Initial version",
 							"visible": ""
 						}
 					]
@@ -345,11 +369,11 @@
 		"spf_init_url": "https://raw.githubusercontent.com/yabwon/SAS_PACKAGES/refs/heads/main/SPF/SPFinit.sas",
 		"spf_init_fqp": "",
 		"spf_package_folder": "",
-		"outputtable1": {
+		"inputtable1": {
 			"library": "",
 			"table": ""
 		},
-		"inputtable1": {
+		"outputtable1": {
 			"library": "",
 			"table": ""
 		},

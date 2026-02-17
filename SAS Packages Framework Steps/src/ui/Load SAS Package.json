@@ -2,7 +2,7 @@
 	"showPageContentOnly": true,
 	"pages": [
 		{
-			"id": "load",
+			"id": "pageLoad",
 			"type": "page",
 			"label": "Load",
 			"children": [
@@ -19,7 +19,7 @@
 				{
 					"id": "spf_package_list_type",
 					"type": "radiogroup",
-					"label": "",
+					"label": "Choose how to supply packages:",
 					"items": [
 						{
 							"value": "One package",
@@ -81,8 +81,8 @@
 						{
 							"id": "spf_lazy_data_list",
 							"type": "textarea",
-							"label": "Lazy data list (space or carriage-return separated)",
-							"placeholder": "Enter one or more lazy datasets, or enter * to load all.",
+							"label": "",
+							"placeholder": "Enter one or more lazy datasets, or enter * to load all",
 							"required": true,
 							"visible": "$spf_load_lazy_data",
 							"indent": 2
@@ -97,8 +97,8 @@
 						{
 							"id": "spf_package_elements_list",
 							"type": "textarea",
-							"label": "Package element list (space or carriage-return separated)",
-							"placeholder": "Enter one or more package elements, or enter * to include all.",
+							"label": "",
+							"placeholder": "Enter one or more package elements, or enter * to load all",
 							"required": true,
 							"visible": "$spf_load_package_elements",
 							"indent": 2
@@ -122,7 +122,7 @@
 				{
 					"id": "spf_package_list",
 					"type": "textarea",
-					"label": "Package list (space or carriage-return separated)",
+					"label": "",
 					"placeholder": "Enter one or more packages",
 					"required": true,
 					"visible": [
@@ -134,7 +134,7 @@
 				{
 					"id": "spf_package_file_fqp",
 					"type": "path",
-					"label": "Select package file",
+					"label": "",
 					"pathtype": "file",
 					"placeholder": "",
 					"required": true,
@@ -147,7 +147,7 @@
 				{
 					"id": "inputtable1",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Input connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": "",
@@ -157,7 +157,7 @@
 				{
 					"id": "inputtable2",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Input connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": "",
@@ -166,7 +166,7 @@
 				{
 					"id": "inputtable3",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Input connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": "",
@@ -175,7 +175,7 @@
 				{
 					"id": "outputtable1",
 					"type": "outputtable",
-					"label": "Used only to add an output port for connecting nodes",
+					"label": "Output connector:",
 					"required": true,
 					"placeholder": "",
 					"visible": ""
@@ -183,15 +183,60 @@
 			]
 		},
 		{
-			"id": "help",
+			"id": "pageAbout",
 			"type": "page",
-			"label": "Help",
+			"label": "About",
 			"children": [
 				{
-					"id": "text2",
+					"id": "textAbout",
 					"type": "text",
-					"text": "The Load Packages step is an independent step that supports workflows such as loading after initializing or fine-grained control over a flow.\n\nℹ️ The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory before loading. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nSAS packages installed on your system can be loaded one at a time, as a list of packages, or from or a text file. Packages from a list or a file must be space or carriage-return separated. Versions do not have an effect when loading and are automatically ignored.\n\nLoading one package enables advanced options for package loading. The following advanced options correspond to each parameter of %loadPackage:\n\n• Load additional content: loadAddCnt\n• Load lazy data: lazyData\n• Load additional package elements: cherryPick\n• Overwrite SAS datasets with DS2 packages or threads: DS2force\n• Suppress \"exec\" type files: suppressExec\n\nFor more information, see the SAS Packages Framework documentation:\n\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#loadpackage",
+					"text": "Load SAS Package step\n===================\n\nThe Load SAS Package step is an independent step that loads one or more SAS packages into the current session. It acts as an interface to the %loadPackage and %loadPackages macro from the SAS Packages Framework. This step supports workflows for fine-grained control over a flow.\n\nFor more information on these macros, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md",
 					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "• SAS Packages Framework >= 20251231\n\n• The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "SAS packages installed on your system can be loaded one at a time, as a list of packages, or from a text file. Packages from a list or a file must be space or carriage-return separated. Versions do not have an effect when loading and are automatically ignored. \n\nℹ️ Packages stored in SAS Content are copied to the WORK directory with %relocatePackage before loading. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nLoading one package enables advanced options. The following advanced options correspond to each parameter of %loadPackage:\n\n• Load additional content: loadAddCnt\n• Load lazy data: lazyData\n• Load additional package elements: cherryPick\n• Overwrite SAS datasets with DS2 packages or threads: DS2force\n• Suppress \"exec\" type files: suppressExec\n\nFor more information on these options, see the SAS Packages Framework documentation for %loadPackage:\n\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#loadpackage",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.0.0 (17FEB2026)\n    - Initial version",
+							"visible": ""
+						}
+					]
 				}
 			]
 		}

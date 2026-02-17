@@ -244,3 +244,5 @@
             &spf_install_orig_mprintnest
     ;
 %end;
+
+%sysmacdelete spf_install_step / NOWARN;

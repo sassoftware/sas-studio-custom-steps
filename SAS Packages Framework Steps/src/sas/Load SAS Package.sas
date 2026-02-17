@@ -217,3 +217,5 @@
             &spf_load_orig_mprintnest
     ;
 %end;
+
+%sysmacdelete spf_load_step / NOWARN;

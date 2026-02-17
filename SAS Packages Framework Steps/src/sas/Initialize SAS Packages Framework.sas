@@ -374,3 +374,5 @@
             &spf_init_orig_mprintnest
     ;
 %end;
+
+%sysmacdelete spf_init_step / NOWARN;

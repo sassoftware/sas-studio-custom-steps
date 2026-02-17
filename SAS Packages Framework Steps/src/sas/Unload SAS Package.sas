@@ -141,3 +141,5 @@
             &spf_unload_orig_mprintnest
     ;
 %end;
+
+%sysmacdelete spf_unload_step / NOWARN;

@@ -2,10 +2,11 @@
    https://support.sas.com/kb/51/626.html
 */
 %macro spf_package_info / minoperator mindelimiter = ' ';
-    %local log_loc spf_package_list_dsn;
+    %local log_loc spf_package_list_dsn spf_result_ds;
 
     %let spf_package_info_option = %upcase(&spf_package_info_option);
     %let spf_package_list_dsn    =;
+    %let spf_result_ds           = %sysevalf(&spf_result_ds_content OR &spf_result_ds_list, boolean);
 
     %if (&spf_package_info_option = HELP    AND NOT %sysmacexist(helpPackage) ) OR
         (&spf_package_info_option = PREVIEW AND NOT %sysmacexist(previewPackage) ) OR
@@ -91,5 +92,7 @@
         quit;
     %end;
 
-%mend;
+%mend spf_package_info;
 %spf_package_info;
+
+%sysmacdelete spf_package_info / NOWARN;

@@ -2,7 +2,7 @@
 	"showPageContentOnly": true,
 	"pages": [
 		{
-			"id": "install",
+			"id": "pageInstall",
 			"type": "page",
 			"label": "Install",
 			"children": [
@@ -26,7 +26,7 @@
 				{
 					"id": "spf_repo",
 					"type": "radiogroup",
-					"label": "Package Repository",
+					"label": "Select a package repository:",
 					"items": [
 						{
 							"value": "SAS Packages"
@@ -47,7 +47,7 @@
 					"id": "spf_github_name",
 					"type": "textfield",
 					"label": "",
-					"placeholder": "Enter GitHub username or organization",
+					"placeholder": "Enter a GitHub username or organization",
 					"required": true,
 					"visible": [
 						"$spf_repo",
@@ -59,7 +59,7 @@
 					"id": "spf_custom_url",
 					"type": "textfield",
 					"label": "",
-					"placeholder": "Enter URL for a package repository",
+					"placeholder": "Enter a URL for a package repository",
 					"required": true,
 					"visible": [
 						"$spf_repo",
@@ -71,7 +71,7 @@
 				{
 					"id": "spf_package_list_type",
 					"type": "radiogroup",
-					"label": "Packages",
+					"label": "Choose how to supply packages:",
 					"items": [
 						{
 							"value": "List"
@@ -85,7 +85,7 @@
 				{
 					"id": "spf_package_list",
 					"type": "textarea",
-					"label": "Package list (space or carriage-return separated)",
+					"label": "",
 					"placeholder": "Enter one or more packages",
 					"required": true,
 					"visible": [
@@ -97,7 +97,7 @@
 				{
 					"id": "spf_package_file_fqp",
 					"type": "path",
-					"label": "Select package file",
+					"label": "",
 					"pathtype": "file",
 					"placeholder": "",
 					"required": true,
@@ -110,7 +110,7 @@
 				{
 					"id": "inputtable1",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Input connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": [
@@ -124,7 +124,7 @@
 				{
 					"id": "outputtable1",
 					"type": "outputtable",
-					"label": "Used only to add an output port for connecting nodes",
+					"label": "Output connector:",
 					"required": true,
 					"placeholder": "",
 					"visible": [
@@ -136,15 +136,60 @@
 			]
 		},
 		{
-			"id": "help",
-			"label": "Help",
+			"id": "pageAbout",
 			"type": "page",
+			"label": "About",
 			"children": [
 				{
-					"id": "text2",
+					"id": "textAbout",
 					"type": "text",
-					"text": "The Install Packages step is an independent step that supports workflows such as installing from multiple sources or fine-grained control over a flow.\n\nℹ️ The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.\n\nSAS Packages can be installed from either a list of packages or a text file. Packages must be space or carriage-return separated, and may include a version. Valid package name formats are:\n\npackage\npackage(version)\npackage[version]\npackage{version}\npackage==version\n\nIf a package already exists, it will be overwritten if the \"Update Packages\" option is selected.\n\nPackages can be installed from one of four sources:\n\n1. SAS Packages Archive: https://github.com/SASPAC/\n2. PharmaForest: https://github.com/PharmaForest/\n3. GitHub: https://github.com/<github>/<packagename>/raw/...\n4. Custom: Any website that hosts SAS packages\n\nYou can only choose one source at a time. All packages to be installed must come from the same source.\n\nℹ️ Packages installed to SAS Content are first installed to the WORK directory, then copied to SAS Content. \n\nIf \"Update packages\" is enabled and the package checksums differ between the newly downloaded package and the one in SAS Content, then the package is copied. If \"Update packages\" is disabled or the checksums match, then the package is not copied.",
+					"text": "Install SAS Package step\n====================\n\nThe Install SAS Package step installs one or more SAS packages from a repository to a mounted network location or SAS Content. It is an independent step that acts as an interface to the %installPackage macro from the SAS Packages Framework. This step supports workflows such as installing SAS packages from multiple sources or fine-grained control over a flow.\n\nFor more information on the %installPackage macro, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#installPackage",
 					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "• SAS Packages Framework >= 20251231\n\n• The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "SAS packages can be installed from either a list of packages or a text file (packages.txt). Packages must be space or carriage-return separated, and may include a version. Valid package name formats are:\n\npackage\npackage(version)\npackage[version]\npackage{version}\npackage==version\n\nIf a package already exists, it will be overwritten if the \"Update packages\" option is selected.\n\nPackages can be installed from one of four sources:\n\n1. SAS Packages Archive: https://github.com/SASPAC/\n2. PharmaForest: https://github.com/PharmaForest/\n3. GitHub: https://github.com/<github>/<packagename>/raw/...\n4. Custom: Any website that hosts SAS packages\n\nYou can only choose one source at a time. All packages to be installed must come from the same source.\n\nℹ️ Packages installed to SAS Content are first installed to the WORK directory, then copied to SAS Content with %relocatePackage.\n\nIf \"Update packages\" is enabled and the package checksums differ between the newly downloaded package and the one in SAS Content, then the package is copied. If \"Update packages\" is disabled or the checksums match, then the package is not copied.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.0.0 (17FEB2026)\n    - Initial version",
+							"visible": ""
+						}
+					]
 				}
 			]
 		}

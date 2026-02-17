@@ -9,7 +9,7 @@
 				{
 					"id": "spf_package_info_option",
 					"type": "radiogroup",
-					"label": "",
+					"label": "Select a task:",
 					"items": [
 						{
 							"value": "Help",
@@ -21,7 +21,7 @@
 						},
 						{
 							"value": "List",
-							"label": "List all packages in PACKAGES fileref"
+							"label": "List all packages in the PACKAGES fileref"
 						}
 					],
 					"visible": ""
@@ -29,7 +29,7 @@
 				{
 					"id": "spf_package",
 					"type": "textfield",
-					"label": "Enter package name",
+					"label": "Enter package name:",
 					"regexp": "",
 					"placeholder": "",
 					"required": true,
@@ -50,7 +50,7 @@
 				{
 					"id": "spf_info_keyword",
 					"type": "textfield",
-					"label": "(Optional) keyword to search",
+					"label": "(Optional) Search for a keyword:",
 					"placeholder": "",
 					"required": false,
 					"visible": [
@@ -68,49 +68,29 @@
 					]
 				},
 				{
-					"id": "spf_result_ds",
+					"id": "spf_result_ds_content",
 					"type": "checkbox",
-					"label": "Generate a result dataset in the WORK directory",
-					"visible": [
-						[
-							"$spf_package_info_option",
-							"=",
-							"Help"
-						],
-						"|",
-						[
-							"$spf_package_info_option",
-							"=",
-							"List"
-						]
-					]
-				},
-				{
-					"id": "text2",
-					"type": "text",
-					"text": "ℹ️ Includes package contents",
+					"label": "Generate a dataset of package contents",
 					"visible": [
 						"$spf_package_info_option",
 						"=",
 						"Help"
-					],
-					"indent": 1
+					]
 				},
 				{
-					"id": "text3",
-					"type": "text",
-					"text": "ℹ️ Includes a list of SAS packages in the PACKAGES fileref\n",
+					"id": "spf_result_ds_list",
+					"type": "checkbox",
+					"label": "Generate a dataset of all packages in the PACKAGES fileref",
 					"visible": [
 						"$spf_package_info_option",
 						"=",
 						"List"
-					],
-					"indent": 1
+					]
 				},
 				{
 					"id": "spf_info_output_type",
 					"type": "radiogroup",
-					"label": "Output location",
+					"label": "Select an output location:",
 					"items": [
 						{
 							"value": "Results window"
@@ -124,7 +104,7 @@
 				{
 					"id": "inputtable1",
 					"type": "inputtable",
-					"label": "Used only to add an input port for connecting nodes",
+					"label": "Output connector:",
 					"required": false,
 					"placeholder": "",
 					"visible": "",
@@ -135,55 +115,94 @@
 		{
 			"id": "help",
 			"type": "page",
-			"label": "Help",
+			"label": "About",
 			"children": [
 				{
-					"id": "text1",
+					"id": "textAbout",
 					"type": "text",
-					"text": "This step returns information about a SAS package or the SAS packages currently available in the PACKAGES fileref. Results are printed to the Results window or can be optionally redirected to the log.\n\nℹ️ The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.",
+					"text": "The Get SAS Package Info step returns information about a SAS package or the SAS packages currently available in the PACKAGES fileref. Results are printed to the Results window or can be optionally redirected to the log.\n\nThis step acts as an interface to the %helpPackage, %previewPackage, and %listPackages macros from the SAS Packages Framework.\n\nFor more information on these macros, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md",
 					"visible": ""
 				},
 				{
-					"id": "section1",
+					"id": "sectionPrereqs",
 					"type": "section",
-					"label": "Display help for a SAS package",
+					"label": "Prerequisites",
 					"open": false,
 					"visible": "",
 					"children": [
 						{
-							"id": "text4",
+							"id": "textPrereqs",
 							"type": "text",
-							"text": "Displays built-in help information about a package provided by the developer.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory before displaying help. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nYou can optionally type in a keyword to search and filter. For example, \"license\" will print the license, while \"*\" will print all help.\n\nGenerating a result dataset will create a dataset in WORK named PACKAGENAME_CONTENT that contains information about the package content.\n\nThe following options correspond to each parameter of %helpPackage:\n\n• Keyword to search: helpKeyword\n• Generate a result dataset in the WORK directory: packageContentDS\n\nFor more information about these options, see SAS Package Framework documentation:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#helppackage",
+							"text": "• SAS Packages Framework >= 20251231\n\n• The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.",
 							"visible": ""
 						}
 					]
 				},
 				{
-					"id": "section2",
+					"id": "sectionDocumentation",
 					"type": "section",
-					"label": "Preview a SAS package",
+					"label": "Documentation",
 					"open": false,
 					"visible": "",
 					"children": [
 						{
-							"id": "text5",
-							"type": "text",
-							"text": "Displays built-in help information about a package provided by the developer.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory before previewing. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nYou can optionally type in a keyword to search and filter. For example, \"license\" will print the license, while \"*\" will print all help.\n\nThe available option for Preview corresponds to the below argument in %previewPackage:\n\n• Keyword to search: helpKeyword\n\nFor more information about this option, see SAS Package Framework documentation:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#previewPackage",
-							"visible": ""
+							"id": "subsectionHelp",
+							"type": "section",
+							"label": "Display help for a SAS package",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textHelp",
+									"type": "text",
+									"text": "Displays built-in help information about a package provided by the developer.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory with %relocatePackage before displaying help. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nYou can optionally type in a keyword to search and filter. For example, \"license\" will print the license, while \"*\" will print all help.\n\nGenerating a dataset will create a dataset in WORK named PACKAGENAME_CONTENT that contains information about the package content.\n\nThe following options correspond to each parameter of %helpPackage:\n\n• Keyword to search: helpKeyword\n• Generate a dataset of package contents: packageContentDS\n\nFor more information about these options, see SAS Package Framework documentation:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#helppackage",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "subsectionPreview",
+							"type": "section",
+							"label": "Preview a SAS package",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textPreview",
+									"type": "text",
+									"text": "Displays built-in help information about a package provided by the developer.\n\nℹ️ Packages stored in SAS Content are copied to the WORK directory with %relocatePackage before previewing. If the checksum of the package in SAS Content is different from the checksum of the package in WORK, or if the package is not in WORK, the package is copied automatically.\n\nYou can optionally type in a keyword to search and filter. For example, \"license\" will print the license, while \"*\" will print all help.\n\nThe available option corresponds to the below argument in %previewPackage:\n\n• Keyword to search: helpKeyword\n\nFor more information about this option, see SAS Package Framework documentation:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#previewPackage",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "subsectionList",
+							"type": "section",
+							"label": "List all packages in the PACKAGES fileref",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "textList",
+									"type": "text",
+									"text": "This option lists all packages available in the PACKAGES fileref, including additional information about each package. \n\n⚠️ Packages stored in SAS Content are not supported. The PACKAGES fileref always points to a physical location. If you have initialized the SAS Packages Framework with the Initialize step and chose to store packages in SAS Content, the packages listed by this step are only those currently in the WORK directory.\n\nGenerating a dataset creates a dataset in WORK named SPF_PACKAGE_LIST that contains a list of packages in the PACKAGES fileref.\n\nThe available option corresponds to the below argument in %listPackages:\n\n• Generate a dataset of all packages in the PACKAGES fileref: listDataSet\n\nFor more information about this option, see SAS Package Framework documentation:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#listPackages",
+									"visible": ""
+								}
+							]
 						}
 					]
 				},
 				{
-					"id": "section3",
+					"id": "sectionChangelog",
 					"type": "section",
-					"label": "List all packages in the PACKAGES fileref",
-					"open": false,
+					"label": "Changelog",
+					"open": true,
 					"visible": "",
 					"children": [
 						{
-							"id": "text6",
+							"id": "textChangelog",
 							"type": "text",
-							"text": "This option lists all packages available in the PACKAGES fileref, including additional information about each package. \n\n⚠️ Packages stored in SAS Content are not supported. The PACKAGES fileref always points to a physical location. If you have initialized the SAS Packages Framework with the Initialize step and chose to store packages in SAS Content, the packages listed by this step are only those currently in the WORK directory.\n\nGenerating a result dataset creates a dataset in WORK named SPF_PACKAGE_LIST that contains a list of packages in the PACKAGES fileref.\n\nThe available option for List corresponds to the below argument in %listPackages:\n\n• Generate a result dataset in the WORK directory: listDataSet",
+							"text": "* Version 1.0.0 (17FEB2026)\n    - Initial version",
 							"visible": ""
 						}
 					]
@@ -199,7 +218,8 @@
 		},
 		"spf_package": "",
 		"spf_info_keyword": "",
-		"spf_result_ds": false,
+		"spf_result_ds_content": false,
+		"spf_result_ds_list": false,
 		"spf_info_output_type": {
 			"value": "Results window"
 		},
