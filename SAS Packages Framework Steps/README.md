@@ -5,7 +5,7 @@ The [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES), created by
 
 > A SAS package is an automatically generated, single, stand alone zip file containing organised and ordered code structures, created by the developer and extended > with additional automatically generated "driving" files (i.e. description, metadata, load, unload, and help files).
 >
-> The purpose of a package is to be a simple, and easy to access, code sharing medium, which will allow: on the one hand, to separate the code complex dependencies > created by the developer from the user experience with the final product and, on the other hand, reduce developer's and user's unnecessary frustration related to > a remote deployment process.
+> The purpose of a package is to be a simple, and easy to access, code sharing medium, which will allow: on the one hand, to separate the code complex dependencies created by the developer from the user experience with the final product and, on the other hand, reduce developer's and user's unnecessary frustration related to a remote deployment process.
 
 These custom steps add an interface around the SAS Packages Framework, enabling SAS Packages to be easily embedded into a SAS Studio flow.
 
@@ -17,7 +17,7 @@ These custom steps add an interface around the SAS Packages Framework, enabling 
 * Get HTML results for package help, package previews, or a list of packages
 * Get an inventory of packages on your system
 * Viya File Service support<sup>*</sup>
-* Comprehensive help tab within each step
+* Comprehensive documentation within each step
 * Connect together multiple steps within a single flow
 * Specify packages as a list or from a file in one of five intuitive formats:
 ###### packages.txt
@@ -29,7 +29,10 @@ package{version}
 package==version
 ```
 
-**\* Not all SPF features used by these steps are supported with the Viya File Service. A physical disk or mounted network drive is highly recommended for package storage.**
+> [!WARNING]  
+> Not all SPF features used by these steps are supported with the Viya File Service.
+> 
+> A physical disk or mounted network drive is **highly recommended** for package storage to ensure optimal performance and compatibility.
 
 ## Quick Start Guide
 1. Upload _Initialize SAS Packages Framework_ to SAS Viya
@@ -97,16 +100,16 @@ All documentation is provided within the **About** section of each step. A gener
 #### Initialize SAS Packages Framework
 Initializes the SAS Packages Framework, and optionally installs and loads packages in a single step.
 
-#### Install SAS Packages
+#### Install SAS Package
 An independent step to install SAS packages.
 
-#### Load SAS Packages
+#### Load SAS Package
 An independent step to load SAS packages.
 
-#### Unload SAS Packages
+#### Unload SAS Package
 Unload SAS packages from the current session.
 
-#### Get Package Info
+#### Get SAS Package Info
 - Prints developer-provided package help and optionally generates a dataset of package content
 - Prints a package preview
 - Prints all SAS packages in the PACKAGES fileref and optionally generates a dataset with all packages to create an inventory
