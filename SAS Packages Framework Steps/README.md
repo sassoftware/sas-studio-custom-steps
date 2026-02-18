@@ -3,7 +3,7 @@
 ## Description
 The [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES), created by [Bart Jablonski](https://github.com/yabwon), allows users to develop and use SAS packages:
 
-> A SAS package is an automatically generated, single, stand alone zip file containing organised and ordered code structures, created by the developer and extended > with additional automatically generated "driving" files (i.e. description, metadata, load, unload, and help files).
+> A SAS package is an automatically generated, single, stand alone zip file containing organised and ordered code structures, created by the developer and extended with additional automatically generated "driving" files (i.e. description, metadata, load, unload, and help files).
 >
 > The purpose of a package is to be a simple, and easy to access, code sharing medium, which will allow: on the one hand, to separate the code complex dependencies created by the developer from the user experience with the final product and, on the other hand, reduce developer's and user's unnecessary frustration related to a remote deployment process.
 
