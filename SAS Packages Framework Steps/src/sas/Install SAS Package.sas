@@ -60,12 +60,12 @@
 
         %if &spf_package_file_sascontent %then %do;
             filename &spf_package_file_fileref filesrvc
-                filename="&spf_package_file"
-                folderpath="&spf_package_file_path"
+                filename=%sysfunc(quote(&spf_package_file))
+                folderpath=%sysfunc(quote(&spf_package_file_path))
             ;
         %end;
             %else %do;
-                filename &spf_package_file_fileref "&spf_package_file_fqp";
+                filename &spf_package_file_fileref %sysfunc(quote(&spf_package_file_fqp));
             %end;
     %end;
 

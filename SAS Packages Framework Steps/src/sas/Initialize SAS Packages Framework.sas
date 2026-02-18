@@ -95,13 +95,13 @@
         %let spf_package_path            = %qsysfunc(pathname(work));
     %end;
 
-    filename packages "&spf_package_path";
+    filename packages %sysfunc(quote(&spf_package_path));
 
     /******* SPF Initialization File Location *******/
 
     /* Create a filename statement for either a URL, SAS Content, or a physical path */
     %if &spf_init_type = URL %then %do;
-        filename &spf_init_fileref url "&spf_init_url";
+        filename &spf_init_fileref url %sysfunc(quote(&spf_init_url));
     %end;
 
         %else %if &spf_init_type = FILE %then %do;
@@ -114,14 +114,14 @@
 
             %if &spf_init_sascontent %then %do;   
                 filename &spf_init_fileref filesrvc
-                    folderpath="&spf_init_path"
-                    filename="&spf_init_file"
+                    folderpath=%sysfunc(quote(&spf_init_path))
+                    filename=%sysfunc(quote(&spf_init_file))
                 ;
             %end;
 
                 /* Otherwise, use the physical path on the filesystem */
                 %else %do;
-                    filename &spf_init_fileref "&spf_init_fqp";
+                    filename &spf_init_fileref %sysfunc(quote(&spf_init_fqp));
                 %end;
         %end;
 
@@ -162,12 +162,12 @@
 
             %if &spf_package_file_sascontent %then %do;
                 filename &spf_package_file_fileref filesrvc
-                    filename="&spf_package_file"
-                    folderpath="&spf_package_file_path"
+                    filename=%sysfunc(quote(&spf_package_file))
+                    folderpath=%sysfunc(quote(&spf_package_file_path))
                 ;
             %end;
                 %else %do;
-                    filename &spf_package_file_fileref "&spf_package_file_fqp";
+                    filename &spf_package_file_fileref %sysfunc(quote(&spf_package_file_fqp));
                 %end;
         %end;
 

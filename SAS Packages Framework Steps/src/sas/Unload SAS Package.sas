@@ -14,6 +14,7 @@
            spf_package_file_path
            spf_package_file_fileref
            i
+           s
     ;
 
     %if NOT %sysmacexist(unloadPackage) %then %do;
@@ -46,12 +47,12 @@
 
         %if &spf_package_file_sascontent %then %do;
             filename &spf_package_file_fileref filesrvc
-                filename="&spf_package_file"
-                folderpath="&spf_package_file_path"
+                filename=%sysfunc(quote(&spf_package_file))
+                folderpath=%sysfunc(quote(&spf_package_file_path))
             ;
         %end;
             %else %do;
-                filename &spf_package_file_fileref "&spf_package_file_fqp";
+                filename &spf_package_file_fileref %sysfunc(quote(&spf_package_file_fqp));
             %end;
     %end;
 
@@ -110,7 +111,7 @@
               - package1(6.7.0) package2(6.9.0) package3(4.2.0) --> package1 package2 package3
        */
            call symputx('spf_package_list_nover', package_list_nover, 'L');
-
+           call symputx('n_packages', countw(package_list_nover, ' '), 'L');
         %if &spf_package_list_type = FILE %then %do;
 
         end;
@@ -120,10 +121,15 @@
         keep package version;
     run;
 
-    %if &spf_package_list_nover = %then %do;
+    %if &n_packages < 1 %then %do;
         %put ERROR: You must specify at least one package to unload.;
         %abort;
-    %end;   
+    %end;
+
+    %if &n_packages > 1 %then %let s = s;
+            %else %let s =;
+                        
+    %put NOTE: Unloading &n_packages package&s;
 
     %do i = 1 %to %sysfunc(countw(&spf_package_list_nover));
         %let spf_package = %scan(&spf_package_list_nover, &i);

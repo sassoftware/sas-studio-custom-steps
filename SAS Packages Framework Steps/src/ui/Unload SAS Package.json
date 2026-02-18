@@ -19,7 +19,7 @@
 				{
 					"id": "spf_package_list_type",
 					"type": "radiogroup",
-					"label": "Choose how to supply packages:",
+					"label": "Choose how to provide packages:",
 					"items": [
 						{
 							"value": "List"
