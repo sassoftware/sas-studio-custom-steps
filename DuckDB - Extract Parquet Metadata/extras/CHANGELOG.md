@@ -9,6 +9,7 @@ This page contains a detailed change log which tracks development changes, inclu
 | | 19FEB2026|Change name to Extract not Introspect - @snlwih feedback|2026.01|
 | | 19FEB2026|Explain inner workings of parquet_metadata - @snlwih feedback|2026.01|
 | | 19FEB2026|Explain primary use case - @snlwih feedback|2026.01|
+| | 19FEB2026|Two tabs for easier experience- @snlwih & @Criptic feedback|2026.01|
 |0.5.1| 16FEB2026|Detailed changelog reverse-chronological|2026.01|
 |0.5.0| 15FEB2026|Added ROW_GROUP_SIZE_BYTES|2026.01|
 |0.4.0| 13FEB2026|Writer capabilities|2026.01|

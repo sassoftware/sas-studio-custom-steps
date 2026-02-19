@@ -7,9 +7,15 @@
 			"label": "Parameters",
 			"children": [
 				{
+							"id": "text_page_extract_metadata",
+							"type": "text",
+							"text": "Parameters related to extraction of parquet metadata",
+							"visible": ""
+						},
+				{
 					"id": "section_input_params",
 					"type": "section",
-					"label": "Input Parameters",
+					"label": "Source Parameters",
 					"open": true,
 					"children": [
 						{
@@ -69,7 +75,7 @@
 				{
 					"id": "section1",
 					"type": "section",
-					"label": "Output Specifications",
+					"label": "Target Parameters",
 					"open": true,
 					"children": [
 						{
@@ -82,7 +88,8 @@
 							"id": "load_cas_text",
 							"type": "text",
 							"text": "If checked, the output table is loaded to CAS for visualisation. The default target table is PARQUET_METADATA in PUBLIC caslib (user can change this).\n\n",
-							"visible": ""
+							"visible": "",
+							"indent": 1
 						},
 						{
 							"id": "target_caslib",
@@ -99,7 +106,8 @@
 								"$load_cas",
 								"=",
 								true
-							]
+							],
+							"indent":1
 						},
 						{
 							"id": "target_tblname",
@@ -116,7 +124,8 @@
 								"$load_cas",
 								"=",
 								true
-							]
+							],
+							"indent":1
 						},
 						{
 							"id": "output_table",
@@ -124,6 +133,22 @@
 							"label": "Output table (preferably a data set backed by a DuckDB libname)",
 							"required": true,
 							"placeholder": "",
+							"visible": ""
+						}
+					]
+				}
+				
+			]
+		},
+		{
+			"id": "page_copy_file",
+			"type": "page",
+			"label": "Copy File",
+			"children": [
+				{
+							"id": "text_page_copy_file",
+							"type": "text",
+							"text": "Parameters to copy input file to a new parquet file with new metadata specifications (available only if a single parquet file is selected).",
 							"visible": ""
 						},
 						{
@@ -140,9 +165,7 @@
 								"=",
 								"single"
 							]
-						}
-					]
-				},
+						},
 				{
 					"id": "section_parquet_writer",
 					"type": "section",
@@ -337,7 +360,7 @@
 								{
 									"id": "section_about_parameters_input",
 									"type": "section",
-									"label": "Input Parameters",
+									"label": "Source Parameters",
 									"open": false,
 									"children": [
 										{
@@ -351,7 +374,7 @@
 								{
 									"id": "section_about_parameters_output",
 									"type": "section",
-									"label": "Output specification",
+									"label": "Target Parameters",
 									"open": true,
 									"visible": "",
 									"children": [
@@ -366,14 +389,14 @@
 								{
 									"id": "section_about_parameters_parquet_write",
 									"type": "section",
-									"label": "Parquet writer options",
+									"label": "Copy file parameters (Copy File tab; parquet writer options)",
 									"open": true,
 									"visible": "",
 									"children": [
 										{
 											"id": "section_about_parameters_output_text_1",
 											"type": "text",
-											"text": "1. Select whether you want to write to a new parquet file with new metadata options  and provide output table location and name (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version. Refer https://duckdb.org/docs/stable/data/parquet/overview for an overview of these options. Future updates shall include more detailed overview of writer options.",
+											"text": "Available only for single input file selections.\n\n1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version. Refer https://duckdb.org/docs/stable/data/parquet/overview for an overview of these options. Future updates shall include more detailed overview of writer options.",
 											"visible": ""
 										}
 									]

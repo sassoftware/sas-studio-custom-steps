@@ -41,18 +41,19 @@ Configure the parameters as needed in the Parameters tab and run the step.
 ---
 ## Parameters
 
-### Input Parameters
+### Source Parameters
 
 - Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem). Based on earlier selection, this could be a single parquet file or a folder comprising multiple files.
 
-### Output Specification
+### Target Parameters 
 
 1. Output table (output port, required): connect an output table to the output port for holding schema results.  
 2. Load to CAS (checkbox, optional): if checked, the output table is loaded to Cloud Analytics Services (and promoted to global scope) for visualisation. The default table is PARQUET_METADATA in PUBLIC caslib (can be changed by user). 
 
 Visualising this output in applications like SAS Visual Analytics helps us understand if  parquet metadata or rowgroup structure needs adjustment to yield faster query performance. The Load-to-CAS option is provided as part of this custom step as a convenience (to remind you of this quick option for visualisation rather than scrolling through a long table in case of many rowgroups).  Even if you choose not to load to CAS at this stage, you can always load the output table later through the [Load to CAS](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/CAS%20-%20Load%20to%20CAS) custom step also available in this repo.
 
-### Parquet Writer Options
+### Copy File Parameters (Copy File tab; Parquet Writer Options)
+Available only for single input file selections.
 1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).
 2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.
 3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version.
