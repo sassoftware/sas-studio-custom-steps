@@ -5,10 +5,10 @@ This page contains a detailed change log which tracks development changes, inclu
 
 |**Version**|**Date**|**Updates**|**SAS Viya Version**|
 |---|---|---|---|
-|0.6.0| 18FEB2026|Provide clarification on load to CAS - @snlwih feedback|2026.01|
-| | 18FEB2026|Change name to Extract not Introspect - @snlwih feedback|2026.01|
-| | 18FEB2026|Explain inner workings of parquet_metadata - @snlwih feedback|2026.01|
-| | 18FEB2026|Explain primary use case - @snlwih feedback|2026.01|
+|0.6.0| 19FEB2026|Provide clarification on load to CAS - @snlwih feedback|2026.01|
+| | 19FEB2026|Change name to Extract not Introspect - @snlwih feedback|2026.01|
+| | 19FEB2026|Explain inner workings of parquet_metadata - @snlwih feedback|2026.01|
+| | 19FEB2026|Explain primary use case - @snlwih feedback|2026.01|
 |0.5.1| 16FEB2026|Detailed changelog reverse-chronological|2026.01|
 |0.5.0| 15FEB2026|Added ROW_GROUP_SIZE_BYTES|2026.01|
 |0.4.0| 13FEB2026|Writer capabilities|2026.01|
