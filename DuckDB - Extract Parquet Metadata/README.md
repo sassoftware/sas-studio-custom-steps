@@ -26,8 +26,8 @@ Because we have nothing better to do :)?  On a serious note,
 
 (Watch out for a more detailed walkthrough soon.)
 
-![Feast Your Eyes](./img/parquet-extract-metadata-holding-screenshot.png)
-
+![Feast Your Eyes](./img/parquet-extract-metadata-holding-screenshot_1.png)
+![Go For Seconds](./img/parquet-extract-metadata-holding-screenshot_2.png)
 
 ---
 ## Requirements
