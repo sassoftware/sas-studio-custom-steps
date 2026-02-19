@@ -11,15 +11,15 @@ Because we have nothing better to do :)?  On a serious note,
 
 1. Parquet, as a format, is valued due to its ability to segment and partition data.  
 
-*This means that parquet metadata captures pre-calculated information about individual segments of the file (including partitions) represented as rowgroups.  These rowgroups provide advance information to "reader" programs (a query in simple terms) regarding the distribution and range of data available in observations contained in a rowgroup, and smart readers use this to decide whether to skip sections of a file altogether to satisfy a rowgroup.   A simple example - if a rowgroup contains information only for males, i.e. Gender="M" and the query criteria is for selecting females (Gender="F"), the query does not need to read any observation in that rowgroup, resulting in faster execution.*
+*This means that parquet metadata captures pre-calculated information about individual segments of the file (including order and partitions) represented as rowgroups.  These rowgroups provide advance information to "reader" programs (a query in simple terms) regarding the distribution and range of data available in observations contained in a rowgroup, and smart readers use this to decide whether to skip sections of a file altogether to satisfy a query.   A simple example is when a rowgroup contains information only for males, i.e. Gender="M" and the query criteria filters for females (Gender="F"), the query does not need to read any observation in that rowgroup, resulting in faster execution.*
 
-2. Rowgroups can be manipulated and **should** be manipulated where possible to satisfy organisations' use cases.
+2. Rowgroups can be manipulated and organisations **should** take advantage of this opportunity to satisfy their analytics use cases.
 
-*The naive behaviour of parquet writer programs is to use a default number of rowgroups and distribute data equally across all rowgroups. This doesn't however yield benefits in query execution, especially when querying for sparsely distributed data which can lie just about anywhere. Parquet writer options contained in this step allow you to manipulate metadata to suit your purposes and align rowgroups towards commonly queried columns or patterns. Users can find out their common query patterns through carrying out code analysis or using their domain knowledge.*
+*The naïve behaviour of parquet writer programs is to use a default number of rowgroups and distribute data equally across all rowgroups. However, this doesn't yield much benefit in query execution, especially when querying for sparsely distributed data which can lie just about anywhere. Parquet writer options contained in this step allow you to manipulate metadata to suit your purposes and align rowgroups towards commonly queried columns or patterns. Users can find out their common query patterns through carrying out code analysis or using their domain knowledge.*
 
-3. Open-source files and file formats can originate from just about anywhere.
+3. Parquet can originate from just about anywhere.
 
-*Open file formats like parquet, provides us benefits, but also makes us more vulnerable to problems posed by inefficient writers which wrote the file under analysis.  Extracting metadata leads to understanding of metadata (introspection) and allows you opportunity for remediation by writing a new file more aligned to your organisational/ query goals.*
+*Parquet provides us benefits, but also makes us more vulnerable to problems posed by inefficient writers which may have been used in the past.  Extracting metadata helps you understand metadata (introspection) better and allows you remediation opportunity by writing a new file more aligned to your organisational/ query goals.*
 
 ---
 ## User Interface
@@ -31,8 +31,8 @@ Because we have nothing better to do :)?  On a serious note,
 
 ---
 ## Requirements
-- SAS Viya environment with SAS Studio flows (step tested on Monthly Stable 2026.01)
-- SAS/ACCESS Interface to DuckDB configured on the compute server. Note that SAS supports DuckDB from version 2025.07 onwards.
+- SAS Viya environment with SAS Studio flows (step tested on monthly stable 2026.01)
+- SAS/ACCESS Interface to DuckDB configured on the compute server. Note that SAS supports DuckDB from monthly stable 2025.07 onwards.
 ---
 ## Usage
 
