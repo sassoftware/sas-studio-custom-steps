@@ -1,0 +1,445 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "params",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+							"id": "text_page_extract_metadata",
+							"type": "text",
+							"text": "Parameters related to extraction of parquet metadata",
+							"visible": ""
+						},
+				{
+					"id": "section_input_params",
+					"type": "section",
+					"label": "Source Parameters",
+					"open": true,
+					"children": [
+						{
+							"id": "input_option",
+							"type": "radiogroup",
+							"label": "Select your input type:",
+							"items": [
+								{
+									"value": "single",
+									"label": "Single parquet file"
+								},
+								{
+									"value": "multiple",
+									"label": "Multiple parquet files in a folder"
+								}
+							],
+							"visible": ""
+						},
+						{
+							"id": "parquet_file_path",
+							"type": "path",
+							"label": "Enter path to parquet file (should be located on the SAS server):",
+							"pathtype": "file",
+							"placeholder": "",
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"single"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"single"
+							]
+						},
+						{
+							"id": "parquet_path",
+							"type": "path",
+							"label": "Enter path to folder containing parquet files (should be located on the SAS server):",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": false,
+							"visible": [
+								"$input_option",
+								"=",
+								"multiple"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"multiple"
+							]
+						}
+					]
+				},
+				{
+					"id": "section1",
+					"type": "section",
+					"label": "Target Parameters",
+					"open": true,
+					"children": [
+						{
+							"id": "load_cas",
+							"type": "checkbox",
+							"label": "Load output to SAS Cloud Analytics Services (CAS)",
+							"visible": ""
+						},
+						{
+							"id": "load_cas_text",
+							"type": "text",
+							"text": "If checked, the output table is loaded to CAS for visualisation. The default target table is PARQUET_METADATA in PUBLIC caslib (user can change this).\n\n",
+							"visible": "",
+							"indent": 1
+						},
+						{
+							"id": "target_caslib",
+							"type": "textfield",
+							"label": "Target CAS library name:",
+							"placeholder": "PUBLIC",
+							"required": false,
+							"visible": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"enabled": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"indent":1
+						},
+						{
+							"id": "target_tblname",
+							"type": "textfield",
+							"label": "Target CAS table name:",
+							"placeholder": "PARQUET_METADATA",
+							"required": false,
+							"visible": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"enabled": [
+								"$load_cas",
+								"=",
+								true
+							],
+							"indent":1
+						},
+						{
+							"id": "output_table",
+							"type": "outputtable",
+							"label": "Output table (preferably a data set backed by a DuckDB libname)",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				}
+				
+			]
+		},
+		{
+			"id": "page_copy_file",
+			"type": "page",
+			"label": "Copy File",
+			"children": [
+				{
+							"id": "text_page_copy_file",
+							"type": "text",
+							"text": "Parameters to copy input file to a new parquet file with new metadata specifications (available only if a single parquet file is selected).",
+							"visible": ""
+						},
+						{
+							"id": "write_parquet",
+							"type": "checkbox",
+							"label": "Write new parquet file (for single parquet files only) and specify metadata options ",
+							"visible": [
+								"$input_option",
+								"=",
+								"single"
+							],
+							"enabled": [
+								"$input_option",
+								"=",
+								"single"
+							]
+						},
+				{
+					"id": "section_parquet_writer",
+					"type": "section",
+					"label": "Parquet Writer Specifications",
+					"open": true,
+					"visible": [
+						[
+							"$write_parquet",
+							"=",
+							true
+						],
+						"&",
+						[
+							"$input_option",
+							"=",
+							"single"
+						]
+					],
+					"enabled": [
+						[
+							"$write_parquet",
+							"=",
+							true
+						],
+						"&",
+						[
+							"$input_option",
+							"=",
+							"single"
+						]
+					],
+					"children": [
+						{
+							"id": "metadata_option_tbl",
+							"type": "optiontable",
+							"label": "Specify metadata options:",
+							"required": false,
+							"tabletype": "authorboth",
+							"initialrowcount": 1,
+							"min": null,
+							"max": null,
+							"showcolumnlabels": true,
+							"columns": [
+								{
+									"id": "ROW_GROUP_SIZE",
+									"type": "numberfield",
+									"required": false,
+									"placeholder": "",
+									"value": 122880,
+									"integer": true,
+									"max": null,
+									"min": 2048,
+									"excludemax": false,
+									"excludemin": false,
+									"label": "ROW_GROUP_SIZE"
+								},
+								{
+									"id": "ROW_GROUP_SIZE_BYTES",
+									"type": "textfield",
+									"label": "ROW_GROUP_SIZE_BYTES",
+									"placeholder": "",
+									"required": false,
+									"value": "'512MB'"
+								},
+								{
+									"id": "ROW_GROUPS_PER_FILE",
+									"type": "numberfield",
+									"required": false,
+									"label": "ROW_GROUPS_PER_FILE",
+									"placeholder": "",
+									"value": 8,
+									"integer": true,
+									"max": null,
+									"min": 8,
+									"excludemax": false,
+									"excludemin": false
+								},
+								{
+									"id": "COMPRESSION",
+									"type": "dropdown",
+									"label": "COMPRESSION",
+									"placeholder": "",
+									"required": false,
+									"value": {
+										"value": "'ZSTD'",
+										"label": "ZSTD"
+									},
+									"items": [
+										{
+											"value": "'SNAPPY'",
+											"label": "SNAPPY"
+										},
+										{
+											"value": "'GZIP'",
+											"label": "GZIP"
+										},
+										{
+											"value": "'LZ4'",
+											"label": "LZ4"
+										},
+										{
+											"value": "'ZSTD'",
+											"label": "ZSTD"
+										},
+										{
+											"value": "'UNCOMPRESSED'",
+											"label": "UNCOMPRESSED"
+										},
+										{
+											"value": "'BROTLI'",
+											"label": "BROTLI"
+										}
+									]
+								},
+								{
+									"id": "S_D_PAGE_SIZE_LIMIT",
+									"type": "numberfield",
+									"required": false,
+									"label": "STRING_DICTIONARY_PAGE_SIZE_LIMIT",
+									"placeholder": "",
+									"value": 100000,
+									"integer": true,
+									"max": null,
+									"min": null,
+									"excludemax": false,
+									"excludemin": false
+								}
+							],
+							"repeatref": null
+						},
+						{
+							"id": "metadata_options_text",
+							"type": "text",
+							"text": "We will seek to support additional options in future versions.",
+							"visible": ""
+						},
+						{
+							"id": "order_by_cols",
+							"type": "textfield",
+							"label": "Specify comma-separated list of columns to order by:",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						},
+						{
+							"id": "output_parquet_folder",
+							"type": "path",
+							"label": "Select output folder:",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						},
+						{
+							"id": "output_parquet_name",
+							"type": "textfield",
+							"label": "Specify output filename (include .parquet extension):",
+							"placeholder": "",
+							"required": false,
+							"visible": "",
+							"indent": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "DuckDB - Extract Parquet Metadata",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "section_about_intro_text",
+							"type": "text",
+							"text": "DuckDB - Extract Parquet Metadata\n=============================\nThis custom step extracts and outputs metadata from input parquet files. It also gives you an option to load this output to a SAS Cloud Analytics Services (CAS) table for visualisation.  Visualising this output in applications like SAS Visual Analytics helps us understand if parquet metadata or rowgroup structure needs adjustment to yield faster query performance.  \n\nThen, based on user-specified parameters, this step can write parquet files reflecting changed metadata, particularly sorting information and rowgroups.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.\n\nOpen file formats such as parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement.  Parquet functions in DuckDB are useful tools that assist better use of parquet file metadata.",
+							"visible": ""
+						},
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Source Parameters",
+									"open": false,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "- Path to parquet file(file selector, required): select only files on the SAS server (i.e. the filesystem). Based on earlier selection, this could be a single parquet file or a folder comprising multiple files.\n\n",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Target Parameters",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "1. Output table (output port, required): connect an output table to the output port for holding schema results.  \n\n2. Load to CAS (checkbox, optional): if checked, the output table is loaded to SAS Cloud Analytics Services (and promoted to global scope) for visualisation. The default table is PARQUET_METADATA in PUBLIC caslib (can be changed by user). \n\nVisualising this output in applications like SAS Visual Analytics helps us understand if parquet metadata or rowgroup structure needs adjustment to yield faster query performance. The Load-to-CAS option is provided as part of the custom step as a convenience (to remind you of this quick option for visualisation rather than scrolling through a long output table in case of many rowgroups).  Even if you choose not to load to CAS at this stage, you can always load the output table later through the [Load to CAS](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/CAS%20-%20Load%20to%20CAS) custom step.",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_parquet_write",
+									"type": "section",
+									"label": "Copy file parameters (Copy File tab; parquet writer options)",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text_1",
+											"type": "text",
+											"text": "Available only for single input file selections.\n\n1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version. Refer https://duckdb.org/docs/stable/data/parquet/overview for an overview of these options. Future updates shall include more detailed overview of writer options.",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "version_text",
+									"type": "text",
+									"text": "Version: 0.6.0 (19FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"input_option": {
+			"value": "single",
+			"label": "Single parquet file"
+		},
+		"parquet_file_path": "",
+		"parquet_path": "",
+		"load_cas": false,
+		"target_caslib": "PUBLIC",
+		"target_tblname": "PARQUET_METADATA",
+		"output_table": {
+			"library": "",
+			"table": ""
+		},
+		"write_parquet": false,
+		"metadata_option_tbl": null,
+		"order_by_cols": "",
+		"output_parquet_folder": "",
+		"output_parquet_name": ""
+	}
+}
