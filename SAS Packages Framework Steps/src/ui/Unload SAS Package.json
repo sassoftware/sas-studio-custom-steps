@@ -1,0 +1,163 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "unload",
+			"type": "page",
+			"label": "Unload",
+			"children": [
+				{
+					"id": "spf_unload_debug",
+					"type": "checkbox",
+					"label": "Debug (Change dependency to view or hide)",
+					"visible": [
+						1,
+						"=",
+						0
+					]
+				},
+				{
+					"id": "spf_package_list_type",
+					"type": "radiogroup",
+					"label": "Choose how to provide packages:",
+					"items": [
+						{
+							"value": "List"
+						},
+						{
+							"value": "File"
+						}
+					],
+					"visible": ""
+				},
+				{
+					"id": "spf_package_list",
+					"type": "textarea",
+					"label": "",
+					"placeholder": "Enter one or more packages",
+					"required": true,
+					"visible": [
+						"$spf_package_list_type",
+						"=",
+						"List"
+					]
+				},
+				{
+					"id": "spf_package_file_fqp",
+					"type": "path",
+					"label": "",
+					"pathtype": "file",
+					"placeholder": "",
+					"required": true,
+					"visible": [
+						"$spf_package_list_type",
+						"=",
+						"File"
+					]
+				},
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Input connector:",
+					"required": false,
+					"placeholder": "",
+					"visible": [
+						1,
+						"=",
+						0
+					],
+					"filter": false,
+					"readonly": false
+				},
+				{
+					"id": "outputtable1",
+					"type": "outputtable",
+					"label": "Output connector:",
+					"required": true,
+					"placeholder": "",
+					"visible": [
+						1,
+						"=",
+						0
+					]
+				}
+			]
+		},
+		{
+			"id": "help",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "textAbout",
+					"type": "text",
+					"text": "Unload SAS Package step\n=====================\n\nThe Unload SAS Package step unloads one or more SAS packages from the current SAS session. It acts as an interface to the %unloadPackage macro from the SAS Packages Framework. \n\nFor more information on the %unloadPackage macro, see:\nhttps://github.com/yabwon/SAS_PACKAGES/blob/main/SPF/SPFinit.md#unloadPackage",
+					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "• SAS Packages Framework >= 20251231\n\n• The SAS Packages Framework must be initialized before running this step. This step is supported if the SAS Packages Framework is initialized with code.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "SAS packages can be unloaded from either a list of packages or a text file. Packages must be space or carriage-return separated. Versions do not have an effect when unloading and are automatically ignored.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.0.0 (17FEB2026)\n    - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"spf_unload_debug": false,
+		"spf_package_list_type": {
+			"value": "List"
+		},
+		"spf_package_list": "",
+		"spf_package_file_fqp": "",
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"outputtable1": {
+			"library": "",
+			"table": ""
+		}
+	},
+	"promptHierarchies": []
+}
