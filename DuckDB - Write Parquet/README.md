@@ -8,7 +8,7 @@ As may be apparent, this is work in progress and serves as a signal on how we ma
 
 As you may ALSO make out, I'm in the market for "WIP" symbols.  Quite the exhibitionist, aren't we? :)
 
-
+Refer my [plan](./extras/PLAN.md) as we seek to be as specific as possible in outlining our approach (until we get sick of the exercise).
 
 ## Description
 This custom step ....
