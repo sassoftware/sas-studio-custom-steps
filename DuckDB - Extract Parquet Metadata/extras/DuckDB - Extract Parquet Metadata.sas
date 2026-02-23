@@ -13,7 +13,7 @@
 
    Author: Sundaresh Sankaran (original)
    Refactor: Polished after AI-assisted automation
-   Version: 0.6.0 (19FEB2026)
+   Version: 0.7.0 (23FEB2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -339,6 +339,7 @@
                             TO "&output_file_path." (
                                 FORMAT PARQUET,
                                 OVERWRITE,
+                                PARTITION_BY NULL,
                                 &METADATA_OPTION_TBL_COL_1. &METADATA_OPTION_TBL_R1_C1.,
                                 &METADATA_OPTION_TBL_COL_2. &METADATA_OPTION_TBL_R1_C2.,
                                 &METADATA_OPTION_TBL_COL_3. &METADATA_OPTION_TBL_R1_C3.,
