@@ -5,7 +5,7 @@ This page contains a detailed change log which tracks development changes, inclu
 
 |**Version**|**Date**|**Updates**|**SAS Viya Version**|
 |---|---|---|---|
-|0.7.0| 23FEB2026|Add partitioning support|2026.01|
+|0.7.0| 25FEB2026|Add partitioning support|2026.01|
 |0.6.0| 19FEB2026|Provide clarification on load to CAS - @snlwih feedback|2026.01|
 | | 19FEB2026|Change name to Extract not Introspect - @snlwih feedback|2026.01|
 | | 19FEB2026|Explain inner workings of parquet_metadata - @snlwih feedback|2026.01|

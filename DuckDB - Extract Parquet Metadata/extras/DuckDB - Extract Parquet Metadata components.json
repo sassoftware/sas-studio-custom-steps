@@ -7,11 +7,11 @@
 			"label": "Parameters",
 			"children": [
 				{
-							"id": "text_page_extract_metadata",
-							"type": "text",
-							"text": "Parameters related to extraction of parquet metadata",
-							"visible": ""
-						},
+					"id": "text_page_extract_metadata",
+					"type": "text",
+					"text": "Parameters related to extraction of parquet metadata",
+					"visible": ""
+				},
 				{
 					"id": "section_input_params",
 					"type": "section",
@@ -107,7 +107,7 @@
 								"=",
 								true
 							],
-							"indent":1
+							"indent": 1
 						},
 						{
 							"id": "target_tblname",
@@ -125,7 +125,7 @@
 								"=",
 								true
 							],
-							"indent":1
+							"indent": 1
 						},
 						{
 							"id": "output_table",
@@ -137,7 +137,6 @@
 						}
 					]
 				}
-				
 			]
 		},
 		{
@@ -146,26 +145,26 @@
 			"label": "Copy File",
 			"children": [
 				{
-							"id": "text_page_copy_file",
-							"type": "text",
-							"text": "Parameters to copy input file to a new parquet file with new metadata specifications (available only if a single parquet file is selected).",
-							"visible": ""
-						},
-						{
-							"id": "write_parquet",
-							"type": "checkbox",
-							"label": "Write new parquet file (for single parquet files only) and specify metadata options ",
-							"visible": [
-								"$input_option",
-								"=",
-								"single"
-							],
-							"enabled": [
-								"$input_option",
-								"=",
-								"single"
-							]
-						},
+					"id": "text_page_copy_file",
+					"type": "text",
+					"text": "Parameters to copy input file to a new parquet file with new metadata specifications (available only if a single parquet file is selected).",
+					"visible": ""
+				},
+				{
+					"id": "write_parquet",
+					"type": "checkbox",
+					"label": "Write new parquet file (for single parquet files only) and specify metadata options ",
+					"visible": [
+						"$input_option",
+						"=",
+						"single"
+					],
+					"enabled": [
+						"$input_option",
+						"=",
+						"single"
+					]
+				},
 				{
 					"id": "section_parquet_writer",
 					"type": "section",
@@ -303,6 +302,20 @@
 							"visible": ""
 						},
 						{
+							"id": "metadata_options_text_2",
+							"type": "text",
+							"text": "Important: please consider the following prior to deciding whether to partition your file or not.  You have options to adjust code to work around; see README for details.\n\n1. ROW_GROUPS_PER_FILE ignored when partitioning: Partitioning (PARTITION_BY) leads to this step automatically overriding and ignoring the ROW_GROUPS_PER_FILE option, as it conflicts with parallel partition writes.\n​\n2.  Avoid partitioning and ordering (PARTITION_BY + ORDER BY): This combination breaks global row ordering (due to multithreaded partition writes) and often triggers runtime errors like \"Invalid unicode (byte sequence mismatch)\" during directory construction/sorting. \n\n3. Choose partitions wisely: High-cardinality or continuous values (e.g., timestamps, IDs) create excessive directories, complicating structure and hurting query performance. Prefer low-cardinality category columns.\n\n4. Avoid overwriting an existing partitioned file: behaviour varies based on file system and it is likely that a different directory structure due to different partition variables would not remove existing directories.\n",
+							"visible": ""
+						},
+						{
+							"id": "part_by_cols",
+							"type": "textfield",
+							"label": "Specify comma-separated list of columns to partition by:",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						},
+						{
 							"id": "order_by_cols",
 							"type": "textfield",
 							"label": "Specify comma-separated list of columns to order by:",
@@ -396,7 +409,7 @@
 										{
 											"id": "section_about_parameters_output_text_1",
 											"type": "text",
-											"text": "Available only for single input file selections.\n\n1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version. Refer https://duckdb.org/docs/stable/data/parquet/overview for an overview of these options. Future updates shall include more detailed overview of writer options.",
+											"text": "Available only for single input file selections.\n\n1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).\n\n2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.\n\n3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version. Refer https://duckdb.org/docs/stable/data/parquet/overview for an overview of these options. Future updates shall include more detailed overview of writer options.\n\n4. Partition-by columns (text field, optional): specify a list of comma-separated columns which you would like the file to be partitioned by.    Please note the considerations listed on the Copy File tab. In the interest of space, the README provides more details.",
 											"visible": ""
 										}
 									]
@@ -412,7 +425,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 0.6.0 (19FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
+									"text": "Version: 0.7.0 (25FEB2026)\nContact: Sundaresh Sankaran (Sundaresh.sankaran@sas.com)"
 								}
 							]
 						}
@@ -438,6 +451,7 @@
 		},
 		"write_parquet": false,
 		"metadata_option_tbl": null,
+		"part_by_cols": "",
 		"order_by_cols": "",
 		"output_parquet_folder": "",
 		"output_parquet_name": ""

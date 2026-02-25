@@ -57,8 +57,20 @@ Available only for single input file selections.
 1. Select whether you want to write to a new parquet file with new metadata options and provide output table location and name (you will be able to overwrite existing file if you give the same name).
 2. Order By Columns (text field):  Parquet rowgroups and metadata provide best value when planned in alignment with commonly queried columns.  Specify an Order By clause (without the \"ORDER BY\") in comma-separated form listing columns that you would like the new table to be ordered by.
 3. Parquet writer options (option table): Change options for the new file if you wish. A limited set of options are offered as parquet writer options are numerous and differ based on DuckDB version.
+4. Partition-by columns (text field, optional): specify a list of comma-separated columns which you would like the file to be partitioned by.    Please note the considerations listed on the Copy File tab. Note the [**About Partitioning**](#about-partitioning) section below.
 
 Refer [DuckDB documentation](https://duckdb.org/docs/stable/data/parquet/overview) for an overview of these options. Future updates shall include more detailed overview of writer options.
+
+#### About Partitioning
+Decisions on whether and how to partition a parquet file are non-trivial.  Please consider the following prior to deciding whether to partition your file or not.  You have options to adjust code to work around, as mentioned under some of these points.
+
+1. ROW_GROUPS_PER_FILE ignored when partitioning: Partitioning (PARTITION_BY) leads to this step automatically overriding and ignoring the ROW_GROUPS_PER_FILE option, as it conflicts with parallel partition writes. 
+​
+2.  Avoid partitioning and ordering (PARTITION_BY + ORDER BY): This combination breaks global row ordering (due to multithreaded partition writes) and often triggers runtime errors like "Invalid unicode (byte sequence mismatch)" during directory construction/sorting. This [discussion](https://github.com/duckdb/duckdb/issues/14349) is a useful reference and also a way to track any future plans on this subject. Also refer this [discussion](https://github.com/duckdb/duckdb/issues/7263).Further, note that if you `SET threads TO 1;` (through a modification of this step's DuckDB SQL query) you stand a better chance (but not a guarantee) of success since this forces all processing under a single thread, **but** consider the costs in terms of speed.
+
+3. Choose partitions wisely: High-cardinality or continuous values (e.g., timestamps, IDs) create excessive directories, complicating structure and hurting query performance. Prefer low-cardinality category columns.
+
+4. Avoid overwriting an existing partitioned file: behaviour varies based on file system and it is likely that a different directory structure due to different partition variables would not remove existing directories. Refer this [page](https://duckdb.org/docs/stable/data/partitioning/partitioned_writes#overwriting) on DuckDB documentation which mentions (albeit not in much detail) the same.
 
 ---
 ## Installation & Notes
@@ -69,7 +81,7 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 
 Refer detailed changelog [here](./extras/CHANGELOG.md).
 
-- Version: 0.6.0 (19FEB2026)
+- Version: 0.7.0 (25FEB2026)
    - Version submitted to GitHub
 
 - Version: 0.1.0 (04FEB2026)
