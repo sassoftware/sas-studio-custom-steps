@@ -7,7 +7,7 @@ This custom step exports a complete collection of SAS Studio Flows from a direct
 The generated code can be used in a CI/CD pipeline and/or versioning environment.
 
 ## Prerequisites
-The custom step **needs** Python to be available on your SAS Viya environment to extract the code from the response file to the .sas file.
+The custom step **requires** Python to be installed and accessible in your SAS Viya environment in order to extract the code from the response file and write it to a .sas file.
 
 ## Documentation used
 The following documentation is used while creating the custom step:
@@ -63,7 +63,7 @@ Note that:
 |4| ERROR: No error message response file received.| The status is other then 200 and there's no response file.| Processing the current flow stops.|
 |5| ERROR: The custom step only supports physical directories to write to .sas file to.| The end-user has selected a SAS content directory for the .SAS file to be written to. **This is not supported** | No processing is taking place.|
 |6| ERROR: The file " + responseLocation + " does not exist.| This is a Python message, telling that it can't find the response file containing the .SAS code.| No code for the specified flow is generated.|
-|7| Exception caught: \<ERROR MESSAGE> | This is an unhandled Python error message.||
+|7| Exception caught: \<ERROR MESSAGE> | This is an unhandled Python error message.| No code for the specified flow is generated.|
 |8| ERROR: Unable to retrieve content directory members. | The custom step didn't receive the response file containing the flows |  No flow(s) can/will be processed.|
 |9| ERROR: Unable to retrieve content directory.| The custom step didn't receive the response file containing content directory information.| No flow(s) can/will be processed.|
 |10| WARNING: No flow(s) to process.| The end-user selected a directory not containing any flows ***or*** something went not as planned resulting in the situation that there are no flows to process.| No flow(s) can/will be processed.
