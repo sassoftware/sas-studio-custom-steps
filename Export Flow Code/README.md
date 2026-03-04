@@ -52,6 +52,7 @@ Note that:
 - Processing SAS Studio Flows stored on the file system can take a bit longer.
 - The time-out value for the PROC HTTP might be overruled by the time-out set by the REST API.
 - When code, for whatever reason, can't be generated, the custom step will make that know by a line in the log file simular to **'ERROR: Unable to generated code for ...'** and by retrieving the error message from the response file.
+- It will check if the target directory exists. In case it doesn't, the custom steps stops process and will write the line **'ERROR: The target directory does not exist'**. in the log.
 - The name of the .sas file is the same as the name of the flow post-fixed with the .sas extension. Example: ***flow_name.flw*** => ***flow_name.flw.sas***
 
 ## Custom step messages
