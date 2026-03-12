@@ -116,7 +116,7 @@ Unload SAS packages from the current session.
 
 Results are printed to either HTML or the log.
 
-## Created / contact:
+## Created / Contact:
 
 - Custom Steps: Stu Sztukowski (stu.sztukowski@sas.com; https://github.com/stu-code)
 - SAS Packages Framework: Bart Jablonski (https://github.com/yabwon)
