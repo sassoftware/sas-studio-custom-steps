@@ -7,23 +7,24 @@
 
 The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.
 
-| Abbreviation     | Explanation                                                           |
-| :--------------- | :-------------------------------------------------------------------- |
-| CAS              | Steps in this category provide utilities for working with data in CAS |
-| Catalog          | SAS Information Catalog related                                       |
-| CV               | Computer Vision                                                       |
-| Data Maker       | SAS Data Maker related                                                |
-| DQ               | Data Quality                                                          |
-| DuckDB           | [DuckDB](https://duckdb.org/) related                                 |
-| EAC              | External API Connection                                               |
-| Glosssary        | Glossary related - a component of SAS Information Catalog             |
-| LLM              | Large Language Model                                                  |
-| NLP              | Natural Language Processing                                           |
-| OCR              | Optical Character Recognition                                         |
-| SAAM             | SAS Applied Agents & Models related                                   |
-| SDG              | Synthetic Data Generation                                             |
-| SID              | SAS Intelligent Decisioning related                                   |
-| VA               | SAS Visual Analytics related                                          |
+| Abbreviation              | Explanation                                                               |
+| :------------------------ | :------------------------------------------------------------------------ |
+| CAS                       | Steps in this category provide utilities for working with data in CAS     |
+| Catalog                   | SAS Information Catalog related                                           |
+| CV                        | Computer Vision                                                           |
+| Data Maker                | SAS Data Maker related                                                    |
+| DQ                        | Data Quality                                                              |
+| DuckDB                    | [DuckDB](https://duckdb.org/) related                                     |
+| EAC                       | External API Connection                                                   |
+| Glosssary                 | Glossary related - a component of SAS Information Catalog                 |
+| LLM                       | Large Language Model                                                      |
+| NLP                       | Natural Language Processing                                               |
+| OCR                       | Optical Character Recognition                                             |
+| SAAM                      | SAS Applied Agents & Models related                                       |
+| SAS Packages              | [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES) related  |
+| SDG                       | Synthetic Data Generation                                                 |
+| SID                       | SAS Intelligent Decisioning related                                       |
+| VA                        | SAS Visual Analytics related                                              |
 
 ## Available Custom Steps
 
@@ -130,6 +131,8 @@ The list of available Custom Steps further down on this page uses the following 
 | [SAS Content - Copy File from File System](./SAS%20Content%20-%20Copy%20File%20from%20File%20System/README.md) | Copy file from Compute file system into SAS Content folder programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 09JAN2024 |
 | [SAS Content - Create Folder](./SAS%20Content%20-%20Create%20Folder/README.md) | Creates a new folder in SAS Content programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
 | [SAS Content - Obtain Folder URI](./SAS%20Content%20-%20Obtain%20Folder%20URI/README.md) | Obtain URI of selected SAS Content folder and save it in a global macro variable | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 18DEC2023 |
+| [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 28SEP2022 |
+| [SAS Packages - SAS Packages Framework Steps](./SAS%20Packages%20Framework%20Steps/README.md) | A collection of 5 steps to install and work with [SAS Packages](https://github.com/yabwon/SAS_PACKAGES) | [Stu Sztukowsk](https://github.com/stu-code) | 2025.12 <br>or later | 17FEB2025|
 | [SCD Loader](./SCD%20Loader/README.md) | Slowly Changing Dimensions loader with support for type 1 and type 2 changes | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 28SEP2022 |
 | [SDG - Generate Synthetic Data through GANs](./SDG%20-%20Generate%20Synthetic%20Data%20through%20GANs/README.md) | Generate synthetic data using a trained GAN model | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2024.10 <br>or later | 10DEC2024 |
 | [SDG - Generate Synthetic Data through SMOTE](./SDG%20-%20Generate%20Synthetic%20Data%20through%20SMOTE/README.md) | Generate synthetic data based on an input table, using the Synthetic Minority Oversampling TEchnique (SMOTE). | [Sundaresh Sankaran](https://github.com/SundareshSankaran) / [Josiah Chua](https://github.com/josiah-chua)  | 2024.10 <br>or later | 11NOV2024 |
