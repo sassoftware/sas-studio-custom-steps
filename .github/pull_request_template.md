@@ -11,3 +11,5 @@ In the GitHub webUI, use the Write tab to modify the Markdown text that is part 
 - **Q3: Confirm your contribution does not include any encryption or other export-controlled technology.**
    - [ ] My contribution does NOT contain encryption or other export-controlled technology
    - [ ] My contribution includes encryption or other export-controlled technology
+
+NOTE: If your contribution was generated in whole or in part by artificial intelligence tools, then make sure your commit messages show this using the approach explained in [Contributor Agreement](ContributorAgreement.txt).
