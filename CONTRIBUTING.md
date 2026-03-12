@@ -35,8 +35,12 @@ When adding your contribution using a Pull Request, you will be asked the follow
 2. Store your contribution in its own subfolder and follow the same structure as in the **_template** folder
 3. Recommendations to use in the Program part (code generation) of a custom step can be found in 
   [SAS coding best practices](./docs/SASCodingBestPractices.md).
-4. Recommendations to  use in the UI part of a custom step can be found in [UI Guidelines](./docs/UI-guidelines.md)
-5. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
+4. Recommendations to use in the UI part of a custom step can be found in [UI Guidelines](./docs/UI-guidelines.md)
+5. When you want to provide additional files, that please store them in a folder called **_extras_**
+     * Some contributions use this to provide the code generator that belongs to their custom step as a separate .sas file, and
+       add %let statements at the top of the file for each of the UI components. This makes it easy to use the code generator
+       in a batch environment.
+7. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
    Consult [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more information on using pull requests in general.
    The next section will go through the detailed steps from start to finish.  
 
@@ -68,3 +72,4 @@ After you have submitted the pull request the following will happen:
     perform a **merge request** 
   * Once the **merge request** has finished successfully, your contribution is available in the public repository and you (the contributor) 
     will automatically be notified by GitHub 
+
