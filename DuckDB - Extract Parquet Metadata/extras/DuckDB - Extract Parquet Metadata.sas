@@ -1,7 +1,7 @@
 /* SAS templated code goes here */
 
 /* -------------------------------------------------------------------------------------------*
-   DuckDB - Extract Parquet Metadata - Version 0.7.0
+   DuckDB - Extract Parquet Metadata - Version 1.0.0
 
    This custom step extracts and outputs metadata from input parquet files. 
    A future plan is that, based on user parameters, the step modifies parquet reflecting in 
@@ -12,8 +12,8 @@
    with parquet files.
 
    Author: Sundaresh Sankaran (original)
-   Refactor: Polished after AI-assisted automation
-   Version: 0.7.0 (25FEB2026)
+   Generative AI assistance: GPT-4.1 through GitHub Copilot for code structuring
+   Version: 1.0.0 (12MAR2026)
 *-------------------------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------------------------*
@@ -379,7 +379,7 @@
 /* -----------------------------------------------------------------------------------------* 
   Execution Code
 *------------------------------------------------------------------------------------------ */
-%put NOTE: Starting duckdb metadata Extraction program (v0.7.0)...;
+%put NOTE: Starting duckdb metadata Extraction program (v1.0.0)...;
 %_create_error_flag(_duckdb_error_flag, _duckdb_error_desc);
 
 %put NOTE: Step 0 - 0.1 - Error Flag & Desc variable created.;
@@ -452,4 +452,4 @@
 %sysmacdelete _dpm_execution_macro;
 %sysmacdelete _extract_sas_folder_path;
 
-%put NOTE: duckdb metadata Extraction program (v0.7.0) completed.;
+%put NOTE: duckdb metadata Extraction program (v1.0.0) completed.;

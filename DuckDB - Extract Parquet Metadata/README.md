@@ -1,9 +1,9 @@
 # DuckDB - Extract Parquet Metadata
 
 ## Description
-This custom step extracts and outputs metadata from input parquet files. It also gives you an option to load this output to a SAS Cloud Analytics Services (CAS) table for visualisation. Visualising this output in applications like SAS Visual Analytics helps us understand if the parquet metadata and rowgroup structure need adjustment to yield faster query performance.  Then, based on user-specified parameters, this step can write parquet files reflecting changed metadata, particularly sorting information and rowgroups.  It takes advantage of the SAS/ACCESS Interface to DuckDB and inbuilt functions to work with parquet files.
+This custom step extracts and outputs metadata from input parquet files. It also gives you an option to load this output to a SAS Cloud Analytics Services (CAS) table for visualisation. Visualising this output in applications like SAS Visual Analytics helps us understand if the parquet metadata and rowgroup structure need adjustment to yield faster query performance.  Then, based on user-specified parameters, this step can write parquet files reflecting changed metadata, particularly sorting information and rowgroups. Users may also choose to partition the file by specifying partitioning columns.  The step uses the SAS/ACCESS Interface to DuckDB and DuckDB's functions to work with parquet files.
 
-Open file formats such as parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement. Parquet functions in DuckDB are useful tools that assist better use of parquet file metadata.
+Open file formats such as Parquet are popular due to benefits they offer in reduced data footprint and columnar structure.  Also, DuckDB is a popular and performant query processing engine that reduces data movement. Parquet functions in DuckDB are useful tools that assist better use of parquet file metadata.
 
 ### Why do we need to extract parquet metadata?
 
@@ -79,13 +79,12 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 ---
 ## Change Log
 
-Refer detailed changelog [here](./extras/CHANGELOG.md).
+Reflects most recent update.  For previous updates, refer detailed changelog [here](./extras/CHANGELOG.md).
 
-- Version: 0.7.0 (25FEB2026)
-   - Version submitted to GitHub
+- Version: 1.0.0 (12MAR2026)
+   - Added option to define partitioning variables for file copy
 
-- Version: 0.1.0 (04FEB2026)
-   - Initial Prototype
+Generative AI assistance: GPT-4.1 through GitHub Copilot for code structuring
 
 ---
 ## Contact
