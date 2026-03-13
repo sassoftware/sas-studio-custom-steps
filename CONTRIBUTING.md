@@ -22,6 +22,9 @@ When adding your contribution using a Pull Request, you will be asked the follow
 2. Confirm that your contribution does not include any personally identifiable information (PII), for example, in any examples used 
    in your README file.
 3. Confirm your contribution does not include any encryption or other export-controlled technology.  
+4. If your contribution was generated in whole or in part by artificial intelligence tools, then make sure your commit messages
+   show this using the approach that is explained in [Contributor Agreement](ContributorAgreement.txt)
+
 
 ## Guidelines for contributions
 
@@ -40,7 +43,7 @@ When adding your contribution using a Pull Request, you will be asked the follow
      * Some contributions use this to provide the code generator that belongs to their custom step as a separate .sas file, and
        add %let statements at the top of the file for each of the UI components. This makes it easy to use the code generator
        in a batch environment.
-7. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
+6. All submissions, including submissions by project members, require review. We use GitHub pull requests for this purpose.
    Consult [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more information on using pull requests in general.
    The next section will go through the detailed steps from start to finish.  
 
