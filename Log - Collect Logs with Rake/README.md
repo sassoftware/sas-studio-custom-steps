@@ -49,7 +49,9 @@ This section shows the minimum steps required to run Rake using the SAS Studio C
 4. On the first run, open the **OpenSearch Login** section and enter your OpenSearch username and password.
 5. (Optional) Specify the time range for log extraction by setting the start and end time. If not specified, Rake runs with the default time window (for example, `now-15m`).
    The time fields support OpenSearch *Date Math* expressions, which allow relative time notation based on the current time, such as `now`, `now-15m` (15 minutes ago), or `now-1h` (one hour ago).
-6. Click **Run**.
+6. Click **▷Run**.
+
+![Rake](img/rake-quick-start.png)
 
 After the first execution, the encoded credentials are stored in SAS Content and reused automatically for subsequent runs. The extracted logs are displayed in SAS Studio and are available as a SAS data set for further inspection.
 
