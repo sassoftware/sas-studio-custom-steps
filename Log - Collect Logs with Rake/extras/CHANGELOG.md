@@ -3,8 +3,12 @@
 This file documents notable, user-visible changes to the Rake (Kumade)
 SAS Studio custom step.
 
-## Version 1.2.2 (2026-05-03)
+## Version 1.3 (2026-05-07)
 
+- Added a **Default** option to the time zone selection and changed the default value from `UTC` to `default`.
+- Fixed incorrect handling of the `to=` parameter passed from the Custom Step UI.
+- Added a UI option to extract the embedded `rake.sas` code from the Custom Step.
+- Updated parameter documentation in `extras/MACRO.md` to reflect the revised time zone behavior.
 - Refactored the custom step to comply with the `CONTRIBUTING.md` guidelines by embedding the macro logic directly in the step.
 - Updated the public README and cleaned up auxiliary files under the `extras/` directory.
 

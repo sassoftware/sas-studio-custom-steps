@@ -86,6 +86,26 @@ The following options are available in the Custom Step UI:
 
 All options are optional. When no additional options are selected, Rake simply extracts and saves logs using the default behavior.
 
+
+## Additional Documentation
+
+The `extras/` directory contains supplementary Markdown files that provide
+more detailed information about this project:
+
+- **CHANGELOG.md**  
+  A chronological summary of notable changes and updates.
+
+- **CUSTOM-STEP.md**  
+  Detailed documentation of the Custom Step UI, including usage notes
+  and configuration options.
+
+- **MACRO.md**  
+  A reference guide for the underlying SAS macros, including parameters,
+  settings, and output details.
+
+- **TEST.md**  
+  Test patterns and validation examples used during development.
+
 ## Limitations
 
 Rake relies on the OpenSearch REST API provided by SAS Viya Monitoring for Kubernetes.
