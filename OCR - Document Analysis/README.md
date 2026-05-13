@@ -38,6 +38,19 @@ For more information about the different settings please refer to the SAS docume
 ## Change Log
 
 ### OCR - Document Analysis - Execute Batch OCR Process
+
+* Version 1.8 (22APR2026)
+  * Add the following options and associated defaults:
+    * Retain line breaks (True)
+    * Generate images from PDFs (False)
+    * Output mapping file format (XSLX)
+
+* Version 1.7 (22APR2026)
+  * Remove "bypass SSL" option. Default to False
+
+* Version 1.6 (16APR2026)
+  * Communicate exit codes for failed SDA batch processes
+
 * Version 1.5 (19FEB2026)
   * Use absolute path for python command
 
@@ -61,6 +74,12 @@ For more information about the different settings please refer to the SAS docume
   * Initial version
 
 ### OCR - Document Analysis - Produce Usage Report Output
+* Version 1.5 (22APR2026)
+  * Remove "bypass SSL" option. Default to False
+
+* Version 1.4 (16APR2026)
+  * Communicate exit codes for failed SDA batch processes
+
 * Version 1.3 (19FEB2026)
   * Use absolute path for python command
 
