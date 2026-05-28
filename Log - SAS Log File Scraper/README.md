@@ -2,7 +2,7 @@
 
 ### Description
 
-The "**Log File Scraper**" custom step makes it possible to extract ERRORS and WARNINGS from one or more SAS log files and makes them available in a table. Finding the ERRORS and/or WARNINGS is done using a regular expression.
+The "**SAS Log File Scraper**" custom step makes it possible to extract ERRORS and WARNINGS from one or more SAS log files and makes them available in a table. Finding the ERRORS and/or WARNINGS is done using a regular expression.
 
 ## Typical usage
 
@@ -35,6 +35,9 @@ The table contains the following columns:
 - **linenum**: The line number the warning or error is found at.
 
 ## Change log
+ * Version 1.2 (28MAY2026)
+    * Renamed to avoid confusion with other log-related custom steps in the repository
+    
  * Version 1.1 (08NOV2024)
     * Published externally
 
