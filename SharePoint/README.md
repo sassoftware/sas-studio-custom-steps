@@ -64,12 +64,13 @@ Before using any of these custom steps, register a new application in the [Azure
 3. Copy the **Client ID** and **Tenant ID** — these are needed in the config file for the custom steps
 4. Config file (config.json) template:
 
-    {
-    "tenant_id": "your-tenant-id-here",
-    "client_id": "your-client-id-here",
-    "redirect_uri": "https://login.microsoftonline.com/common/oauth2/nativeclient",
-    "resource": "https://graph.microsoft.com"
-    }
+| Key | Value |
+|-----|-------|
+| tenant_id | your-tenant-id-here |
+| client_id | your-client-id-here |
+| redirect_uri | https://login.microsoftonline.com/common/oauth2/nativeclient |
+| resource | https://graph.microsoft.com |
+
 
 ### Step 2 – SharePoint - Token Generator (run once per project)
 Use the **SharePoint - Token Generator** step to perform the initial OAuth 2.0 authorization code flow:
@@ -98,10 +99,11 @@ Use the **SharePoint - File Import Export** step to move files between SAS Viya 
 
 ### References
 
-For detailed implementation steps, see this [SAS Communities Article](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Integration-with-SharePoint-Microsoft-365-Using-Custom/ta-p/989042).
+1. For detailed implementation steps, see this *SAS Viya Integration with SharePoint (Microsoft 365) Using Custom Steps: A No-Code/Low-Code Approach* [https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Integration-with-SharePoint-Microsoft-365-Using-Custom/ta-p/989042](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Integration-with-SharePoint-Microsoft-365-Using-Custom/ta-p/989042)
 
 
-The code implemented within these custom steps is derived from, and inspired by, the following article:
+
+2. The code implemented within these custom steps is derived from, and inspired by, the following article:
 > *Using SAS with Microsoft 365 (OneDrive, Teams, and SharePoint)*. SAS Users Blog, 2026.
 > [https://blogs.sas.com/content/sasdummy/2026/02/02/sas-programming-office-365-onedrive/](https://blogs.sas.com/content/sasdummy/2026/02/02/sas-programming-office-365-onedrive/)
 
