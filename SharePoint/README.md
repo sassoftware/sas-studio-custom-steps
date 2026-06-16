@@ -40,11 +40,11 @@ Together, these steps allow SAS Studio users to automate file-based integration 
 
 ### SharePoint - File Import Export step
 
-#### Options tab (Action: Import)
+#### Options tab (Action:Import)
 
 ![](img/SharePointFileImportExport-tabOptions-Import.png)
 
-#### Options tab (Action: Export)
+#### Options tab (Action:Export)
 
 ![](img/SharePointFileImportExport-tabOptions-Export.png)
 
@@ -64,7 +64,7 @@ Before using any of these custom steps, register a new application in the [Azure
 3. Copy the **Client ID** and **Tenant ID** — these are needed in the config file for the custom steps
 4. Config file (config.json) template:
 
-| Key | Value |
+|Key | Value |
 |-----|-------|
 | tenant_id | your-tenant-id-here |
 | client_id | your-client-id-here |
