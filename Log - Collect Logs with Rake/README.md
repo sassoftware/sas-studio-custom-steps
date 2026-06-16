@@ -26,6 +26,11 @@ To use Rake, the following environment is required:
 - SAS Viya Monitoring for Kubernetes enabled
 - Access credentials for OpenSearch
 
+This step has been tested on the following SAS Viya version:
+
+- SAS Viya LTS 2025.03
+- SAS Viya LTS 2025.09
+
 Rake has been tested on recent SAS Viya LTS releases. No specific product configuration beyond the monitoring stack is required.
 
 ## What This Step Does
