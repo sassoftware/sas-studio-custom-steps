@@ -72,7 +72,7 @@ Before using any of these custom steps, register a new application in the [Azure
 | resource | https://graph.microsoft.com |
 
 
-### Step 2 – SharePoint - Token Generator (run once per project)
+### Step 2 – SharePoint - Token Generator (one-time set up)
 Use the **SharePoint - Token Generator** step to perform the initial OAuth 2.0 authorization code flow:
 1. Provide your **Client ID**, **Tenant ID**, and **Redirect URI**
 2. The step will generate an authorization URL — open this in a browser while signed in to Microsoft 365
