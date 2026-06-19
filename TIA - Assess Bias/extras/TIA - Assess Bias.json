@@ -1,0 +1,259 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "config",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "inputTable",
+					"type": "inputtable",
+					"label": "Input table",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+				{
+					"id": "probabilityVariable",
+					"type": "columnselector",
+					"label": "Predicted Probability Variable",
+					"include": null,
+					"order": false,
+					"columntype": "a",
+					"max": null,
+					"min": 1,
+					"visible": "",
+					"table": "inputTable"
+				},
+				{
+					"id": "sensitiveVariable",
+					"type": "columnselector",
+					"label": "Sensitive Variable",
+					"include": null,
+					"order": false,
+					"columntype": "a",
+					"max": 1,
+					"min": 1,
+					"visible": "",
+					"table": "inputTable"
+				},
+				{
+					"id": "targetSection",
+					"type": "section",
+					"label": "Target",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "targetVariable",
+							"type": "columnselector",
+							"label": "Target Variable",
+							"include": null,
+							"order": false,
+							"columntype": "a",
+							"max": 1,
+							"min": 1,
+							"visible": "",
+							"table": "inputTable"
+						},
+						{
+							"id": "targetLevel",
+							"type": "dropdown",
+							"label": "Target Level",
+							"items": [
+								{
+									"value": "Interval"
+								},
+								{
+									"value": "Nominal"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": [
+								"$targetVariable",
+								"!=",
+								""
+							]
+						},
+						{
+							"id": "targetEvent",
+							"type": "dropdown",
+							"label": "Target Event",
+							"items": {
+								"ref": "targetVariable"
+							},
+							"required": false,
+							"placeholder": "",
+							"visible": [
+								"$targetLevel",
+								"=",
+								"Nominal"
+							]
+						},
+						{
+							"id": "fitStatSection",
+							"type": "section",
+							"label": "FitStat",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "pVars",
+									"type": "columnselector",
+									"label": "P Variables",
+									"include": null,
+									"order": false,
+									"columntype": "a",
+									"max": 1,
+									"min": null,
+									"visible": "",
+									"table": "inputTable"
+								},
+								{
+									"id": "pEvent",
+									"type": "dropdown",
+									"label": "P Event",
+									"items": {
+										"ref": "targetVariable"
+									},
+									"required": false,
+									"placeholder": "",
+									"visible": ""
+								},
+								{
+									"id": "FitStatDelimiter",
+									"type": "dropdown",
+									"label": "Delimiter",
+									"items": [
+										{
+											"value": " (Space)"
+										},
+										{
+											"value": "; (Semicolon)"
+										},
+										{
+											"value": "* (Astrisk)"
+										},
+										{
+											"value": ". (Period)"
+										},
+										{
+											"value": ", (Comma)"
+										}
+									],
+									"required": true,
+									"placeholder": "",
+									"visible": [
+										"$pEvent",
+										"!=",
+										""
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "options",
+			"type": "page",
+			"label": "Options",
+			"children": [
+				{
+					"id": "cutoff",
+					"type": "numstepper",
+					"label": "Cutoff Ratio",
+					"required": false,
+					"integer": false,
+					"min": 0,
+					"max": 1,
+					"stepsize": 0.1
+				},
+				{
+					"id": "numBins",
+					"type": "numstepper",
+					"label": "Number Of Bins",
+					"required": false,
+					"integer": true,
+					"min": 2,
+					"max": null,
+					"stepsize": 1
+				},
+				{
+					"id": "numCuts",
+					"type": "numstepper",
+					"label": "Number Of Cuts",
+					"required": false,
+					"integer": true,
+					"min": 2,
+					"max": 100,
+					"stepsize": 1
+				},
+				{
+					"id": "selectionDepth",
+					"type": "numstepper",
+					"label": "Selection Depth",
+					"required": false,
+					"integer": true,
+					"min": 1,
+					"max": 100,
+					"stepsize": 1
+				},
+				{
+					"id": "freq",
+					"type": "columnselector",
+					"label": "Frequency",
+					"include": null,
+					"order": false,
+					"columntype": "a",
+					"max": 1,
+					"min": null,
+					"visible": "",
+					"table": "inputTable"
+				},
+				{
+					"id": "weight",
+					"type": "columnselector",
+					"label": "Weight",
+					"include": null,
+					"order": false,
+					"columntype": "a",
+					"max": 1,
+					"min": null,
+					"visible": "",
+					"table": "inputTable"
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputTable": {
+			"library": "",
+			"table": ""
+		},
+		"probabilityVariable": [],
+		"sensitiveVariable": [],
+		"targetVariable": [],
+		"targetLevel": {
+			"value": "Interval"
+		},
+		"targetEvent": null,
+		"pVars": [],
+		"pEvent": null,
+		"FitStatDelimiter": {
+			"value": " (Space)"
+		},
+		"cutoff": 0.5,
+		"numBins": 20,
+		"numCuts": 100,
+		"selectionDepth": 10,
+		"freq": [],
+		"weight": []
+	},
+	"promptHierarchies": []
+}
