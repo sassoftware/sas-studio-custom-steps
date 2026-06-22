@@ -8,7 +8,7 @@
    The following program will utilize the P_[ColumnName] Column from a previous statistic 
    step in order to determine if there is a bias in the dataset using PROC ASSESSBIAS.
 
-   Tested in SAS Viya 9.4
+   Tested in SAS Viya 2026.05
 
    Dawn Pancholi (Shubham.pancholi@sas.com)
    
