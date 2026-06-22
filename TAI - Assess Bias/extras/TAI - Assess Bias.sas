@@ -8,7 +8,7 @@
    The following program will utilize the P_[ColumnName] Column from a previous statistic 
    step in order to determine if there is a bias in the dataset using PROC ASSESSBIAS.
 
-   Tested in SAS Studio 9.4
+   Tested in SAS Viya 9.4
 
    Dawn Pancholi (Shubham.pancholi@sas.com)
    
@@ -131,7 +131,11 @@
     %end;
 %mend setDelimiter;
 
-/* Macro to determine which fitstat step to do if there's a pEvent and a Delimiter */
+/* 
+    Macro to determine which fitstat step to do if there's a pEvent and a Delimiter
+    If there is, then use the pEvent and Delimiter add-ons
+    If not, use the base fitstat
+*/
 %macro conditionalFitstat();
     %if %superq( pVars ) ne and %superq( pEvent ) ne %then %do;
         fitstat pVar=&pVars / pEvent= "&pEvent" Delimiter = "&fsDelimiterClean";
@@ -142,65 +146,50 @@
 %mend conditionalFitstat;
 
 
-
+/*
+    Macro to determine direction of execution on the code.
+    If there's a major component missing (specified in the if statements below _create_error_flag) then the if block will execute
+    Otherwise, the else block containing the proc assessbias will execute
+*/
 %macro _ab_guard;
 %if &_ab_error_flag. = 1 %then %do;
       %put NOTE: PROC ASSESSBIAS will not run because one or more required variables are missing.;
    %end;
 %else %do;
-    proc assessbias 
-    data=&inputTable_lib..&inputTable_name
-    cutoff=&cutoff nBins=&numBins 
-    nCuts=&numCuts 
-    selectionDepth=&selectionDepth;
-        
+    proc assessbias data=&inputTable_lib..&inputTable_name cutoff=&cutoff nBins=&numBins nCuts=&numCuts selectionDepth=&selectionDepth;
         
         /* Input/Probability Variable*/
-        var &probabilityVariable;
+            var &probabilityVariable;
         
         /* Target Code */
-        %if %upcase(&targetLevel)=NOMINAL and %superq(targetEvent) ne %then %do;
-            target &targetVariable / event="&targetEvent" level=&targetLevel;
-        %end;
-        %else %do;
-            target &targetVariable;
-        %end;    
+            %if %upcase(&targetLevel)=NOMINAL and %superq(targetEvent) ne %then %do;
+                target &targetVariable / event="&targetEvent" level=&targetLevel;
+            %end;
+            %else %do;
+                target &targetVariable;
+            %end;    
         
         /*Sensitive Variable */
-        sensitivevar &sensitiveVariable;
+            sensitivevar &sensitiveVariable;
         
         /* Weight (Optional) */
-        %if %superq( weight ) ne %then %do;
-            weight &weight;
-        %end;
+            %if %superq( weight ) ne %then %do;
+                weight &weight;
+            %end;
 
         /* Frequency */
-        %if %superq( freq ) ne %then %do;
-            freq &freq;
-        %end;
+            %if %superq( freq ) ne %then %do;
+                freq &freq;
+            %end;
 
-        
         /* Normalize delimiter value */
-        %let fsDelimiterClean=;
+            %let fsDelimiterClean=;
 
-        
-        %setDelimiter;
-        
+        /* Calling the setDelimiter macro to set up the delimiter */
+            %setDelimiter;
 
-
-        *Design for fitstat;  
-        %conditionalFitstat;
-
-        *Extra/Discarded Code;
-
-        /*%if %upcase(%superq(FitStatDelimiter)) = %upcase(%str( )) 
-            or %superq(FitStatDelimiter) = %nrquote(%(Space%)) %then %do;
-            %let fsDelimiterClean=%str( );
-        %end;  */
-
-        *target &targetVar;
-        /*fitstat pVar=&pVars / pEvent=&pEvent Delimiter = &fsDelimiter;
-        target &targetVar / event = &targetEvent level = &targetLevel;*/
+        /* Calling the conditionalFitstat macro to determine which fitStat to run */
+            %conditionalFitstat;
     run;
 
    %end;
