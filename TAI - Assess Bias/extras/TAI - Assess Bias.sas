@@ -19,7 +19,7 @@
 *-------------------------------------------------------------------------------------------- */
 
 
-/* Setting up variables for inputTable's libarary and table name */
+/* Setting up variables for inputTable's library and table name */
 %let inputTable_lib = &inputTable_lib.;
 %let inputTable_name = &inputTable_name.;
 
