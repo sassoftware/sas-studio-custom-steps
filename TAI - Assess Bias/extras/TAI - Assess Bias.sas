@@ -7,6 +7,10 @@
 
    The following program will utilize the P_[ColumnName] Column from a previous statistic 
    step in order to determine if there is a bias in the dataset using PROC ASSESSBIAS.
+   This will create a series of tables that assess Group Metrics (including # of obs, Average Squared, and Absolute errors),
+   Max Difference Between Sensitive Groups to depict the "worst case" scenario
+   Bias Metrics using the group metrics to find differences in average prediction, misclassification, etc.
+   The closer a value is to 0, the more similar treatment was across groups.
 
    Tested in SAS Viya 2026.05
 
@@ -43,6 +47,10 @@
 %let pVars = &pVars.;
 %let pEvent = &pEvent.;
 %let FitStatDelimiter = &FitStatDelimiter.;
+
+/* Normalize delimiter value */
+%global fsDelimiterClean;
+%let fsDelimiterClean=;
 
 /*************************************************************
  MACRO DEFINITIONS
@@ -112,7 +120,6 @@
 
 /* Macro to determine which delimiter the dropdown in FitStatDelimiter is referring to */
 %macro setDelimiter();
-    %global fsDelimiterClean;
 
     %if %superq(FitStatDelimiter) = %str(%;) %then %do;
         %let fsDelimiterClean = %str(%;);
@@ -154,7 +161,7 @@
 %macro _ab_guard;
 %if &_ab_error_flag. = 1 %then %do;
       %put NOTE: PROC ASSESSBIAS will not run because one or more required variables are missing.;
-   %end;
+%end;
 %else %do;
     proc assessbias data=&inputTable_lib..&inputTable_name cutoff=&cutoff nBins=&numBins nCuts=&numCuts selectionDepth=&selectionDepth;
         
@@ -182,17 +189,14 @@
                 freq &freq;
             %end;
 
-        /* Normalize delimiter value */
-            %let fsDelimiterClean=;
-
-        /* Calling the setDelimiter macro to set up the delimiter */
+         /* Calling the setDelimiter macro to set up the delimiter */
             %setDelimiter;
 
         /* Calling the conditionalFitstat macro to determine which fitStat to run */
             %conditionalFitstat;
-    run;
-
-   %end;
+    
+        run;
+%end;
 %mend _ab_guard;
 
 /*************************************************************
