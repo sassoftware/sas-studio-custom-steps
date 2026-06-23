@@ -25,6 +25,8 @@ More information about PROC ASSESSBIAS: [https://go.documentation.sas.com/doc/en
     - **P Variables** — Optional column used in the `fitstat` statement.
     - **P Event** — Optional event for the FitStat probability variable, referenced from the target variable.
     - **Delimiter** *(visible when P Event is set)* — Choose the delimiter used by the FitStat statement: Space, `;`, `*`, `.`, or `,`.
+    - <img width="240" height="450" alt="TAI - Assess Bias Configuration Screen" src="https://github.com/user-attachments/assets/6e884d76-df14-42f9-a919-a9ac23b5c9b1" />
+
 
 #### Options tab
 - **Cutoff Ratio** — Classification cutoff for predicted probabilities (range 0–1, default 0.5).
@@ -33,6 +35,8 @@ More information about PROC ASSESSBIAS: [https://go.documentation.sas.com/doc/en
 - **Selection Depth** — Selection depth percentage for depth-based metrics (range 1–100, default 10).
 - **Frequency** — Optional frequency column.
 - **Weight** — Optional observation weight column.
+- <img width="350" height="360" alt="TAI - Assess Bias Options Screen" src="https://github.com/user-attachments/assets/e7aa201d-240c-4df8-adb1-45b5e9f11222" />
+
 
 ### Requirements
 - Tested on SAS Viya version Stable 2026.05.
