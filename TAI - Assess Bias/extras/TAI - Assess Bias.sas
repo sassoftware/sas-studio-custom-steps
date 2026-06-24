@@ -5,12 +5,8 @@
 
    v 1.0.0 (19JUN2026)
 
-   The following program will utilize the P_[ColumnName] Column from a previous statistic 
-   step in order to determine if there is a bias in the dataset using PROC ASSESSBIAS.
-   This will create a series of tables that assess Group Metrics (including # of obs, Average Squared, and Absolute errors),
-   Max Difference Between Sensitive Groups to depict the "worst case" scenario
-   Bias Metrics using the group metrics to find differences in average prediction, misclassification, etc.
-   The closer a value is to 0, the more similar treatment was across groups.
+   This program helps users to check if the model treats different groups fairly by comparing predictions across demographics. 
+   Helps identify potential bias in the results.
 
    Tested in SAS Viya 2026.05
 
