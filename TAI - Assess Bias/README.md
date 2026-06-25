@@ -55,3 +55,8 @@ More information about PROC ASSESSBIAS: [https://go.documentation.sas.com/doc/en
 ### Change Log
 - Version 1.0.0 (19JUN2026)
 - Initial version
+
+- Version 1.0.14 (25JUN2026)
+- Begining of updating change log
+- Re-organized SAS code to have macros in macro section and execution code in execution section
+- Modified UI to follow ([UI Guidelines](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/docs/UI-guidelines.md))

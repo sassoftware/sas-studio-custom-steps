@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------*
    TAI - Assess Bias
 
-   v 1.0.0 (19JUN2026)
+   v 1.0.14 (25JUN2026)
 
    This program helps users to check if the model treats different groups fairly by comparing predictions across demographics. 
    Helps identify potential bias in the results.
@@ -44,9 +44,6 @@
 %let pEvent = &pEvent.;
 %let FitStatDelimiter = &FitStatDelimiter.;
 
-/* Normalize delimiter value */
-%global fsDelimiterClean;
-%let fsDelimiterClean=;
 
 /*************************************************************
  MACRO DEFINITIONS
@@ -73,46 +70,44 @@
 %mend _create_error_flag;
 
 
-/* Calling the macro to create an error flager */
-%_create_error_flag(_ab_error_flag, _ab_error_desc);
+/* Macro to ensure that there's a proper input for all the required fields */
+%macro _ab_validate_inputs;
 
+    /* Check Input Table library */
+    %if %sysevalf(%superq(inputTable_lib)=, boolean) %then %do;
+        %let _ab_error_flag = 1;
+        %let _ab_error_desc = Input Table has not been specified;
+        %put ERROR: &_ab_error_desc. ;
+    %end;
 
+    /* Check Input Table name */
+    %if %sysevalf(%superq(inputTable_name)=, boolean) %then %do;
+        %let _ab_error_flag = 1;
+        %let _ab_error_desc = Input Table has not been specified;
+        %put ERROR: &_ab_error_desc. ;
+    %end;
 
-/* Check Input Table library */
-%if %sysevalf(%superq(inputTable_lib)=, boolean) %then %do;
-   %let _ab_error_flag = 1;
-   %let _ab_error_desc = Input Table has not been specified;
-   %put ERROR: &_ab_error_desc. ;
-%end;
+    /* Check Predicted Probability Variable */
+    %if %sysevalf(%superq(probabilityVariable)=, boolean) %then %do;
+        %let _ab_error_flag = 1;
+        %let _ab_error_desc = Predicted Probability Variable has not been specified.;
+        %put ERROR: &_ab_error_desc. ;
+    %end;
 
-/* Check Input Table name */
-%if %sysevalf(%superq(inputTable_name)=, boolean) %then %do;
-   %let _ab_error_flag = 1;
-   %let _ab_error_desc = Input Table has not been specified;
-   %put ERROR: &_ab_error_desc. ;
-%end;
+    /* Check Target Variable */
+    %if %sysevalf(%superq(targetVariable)=, boolean) %then %do;
+        %let _ab_error_flag = 1;
+        %let _ab_error_desc = Target Variable has not been specified.;
+        %put ERROR: &_ab_error_desc. ;
+    %end;
 
-/* Check Predicted Probability Variable */
-%if %sysevalf(%superq(probabilityVariable)=, boolean) %then %do;
-   %let _ab_error_flag = 1;
-   %let _ab_error_desc = Predicted Probability Variable has not been specified.;
-   %put ERROR: &_ab_error_desc. ;
-%end;
-
-/* Check Target Variable */
-%if %sysevalf(%superq(targetVariable)=, boolean) %then %do;
-   %let _ab_error_flag = 1;
-   %let _ab_error_desc = Target Variable has not been specified.;
-   %put ERROR: &_ab_error_desc. ;
-%end;
-
-/* Check Sensitive Variable */
-%if %sysevalf(%superq(sensitiveVariable)=, boolean) %then %do;
-   %let _ab_error_flag = 1;
-   %let _ab_error_desc = Sensitive Variable has not been specified;
-   %put ERROR: &_ab_error_desc. ;
-%end;
-
+    /* Check Sensitive Variable */
+    %if %sysevalf(%superq(sensitiveVariable)=, boolean) %then %do;
+        %let _ab_error_flag = 1;
+        %let _ab_error_desc = Sensitive Variable has not been specified;
+        %put ERROR: &_ab_error_desc. ;
+    %end;
+%mend _ab_validate_inputs;
 
 /* Macro to determine which delimiter the dropdown in FitStatDelimiter is referring to */
 %macro setDelimiter();
@@ -155,44 +150,52 @@
     Otherwise, the else block containing the proc assessbias will execute
 */
 %macro _ab_guard;
-%if &_ab_error_flag. = 1 %then %do;
-      %put NOTE: PROC ASSESSBIAS will not run because one or more required variables are missing.;
-%end;
-%else %do;
-    proc assessbias data=&inputTable_lib..&inputTable_name cutoff=&cutoff nBins=&numBins nCuts=&numCuts selectionDepth=&selectionDepth;
-        
-        /* Input/Probability Variable*/
-            var &probabilityVariable;
-        
-        /* Target Code */
-            %if %upcase(&targetLevel)=NOMINAL and %superq(targetEvent) ne %then %do;
-                target &targetVariable / event="&targetEvent" level=&targetLevel;
-            %end;
-            %else %do;
-                target &targetVariable;
-            %end;    
-        
-        /*Sensitive Variable */
-            sensitivevar &sensitiveVariable;
-        
-        /* Weight (Optional) */
-            %if %superq( weight ) ne %then %do;
-                weight &weight;
-            %end;
-
-        /* Frequency */
-            %if %superq( freq ) ne %then %do;
-                freq &freq;
-            %end;
-
-         /* Calling the setDelimiter macro to set up the delimiter */
-            %setDelimiter;
-
-        /* Calling the conditionalFitstat macro to determine which fitStat to run */
-            %conditionalFitstat;
     
-        run;
-%end;
+    %local fsDelimiterClean;
+    %let fsDelimiterClean=;
+
+    %if &_ab_error_flag. = 1 %then %do;
+        %put NOTE: PROC ASSESSBIAS will not run because one or more required variables are missing.;
+    %end;
+    %else %do;
+        proc assessbias data=&inputTable_lib..&inputTable_name 
+            cutoff=&cutoff 
+            nBins=&numBins 
+            nCuts=&numCuts 
+            selectionDepth=&selectionDepth;
+            
+            /* Input/Probability Variable*/
+                var &probabilityVariable;
+            
+            /* Target Code */
+                %if %upcase(&targetLevel)=NOMINAL and %superq(targetEvent) ne %then %do;
+                    target &targetVariable / event="&targetEvent" level=&targetLevel;
+                %end;
+                %else %do;
+                    target &targetVariable;
+                %end;    
+            
+            /*Sensitive Variable */
+                sensitivevar &sensitiveVariable;
+            
+            /* Weight (Optional) */
+                %if %superq( weight ) ne %then %do;
+                    weight &weight;
+                %end;
+
+            /* Frequency */
+                %if %superq( freq ) ne %then %do;
+                    freq &freq;
+                %end;
+
+            /* Calling the setDelimiter macro to set up the delimiter */
+                %setDelimiter;
+
+            /* Calling the conditionalFitstat macro to determine which fitStat to run */
+                %conditionalFitstat;
+        
+            run;
+    %end;
 %mend _ab_guard;
 
 /*************************************************************
@@ -201,4 +204,11 @@
 
 TITLE1 "AssessBias";
 
+/* Calling the macro to create an error flager */
+%_create_error_flag(_ab_error_flag, _ab_error_desc);
+
+/* Validate that all required inputs were provided */
+%_ab_validate_inputs;
+
+/* Macro to determine direction of execution on the code. */
 %_ab_guard;
