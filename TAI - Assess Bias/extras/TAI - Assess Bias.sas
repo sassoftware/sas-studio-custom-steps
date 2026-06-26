@@ -1,9 +1,7 @@
-/**/
-
 /* -------------------------------------------------------------------------------------------*
    TAI - Assess Bias
 
-   v 1.0.14 (25JUN2026)
+   v 1.0.15 (26JUN2026)
 
    This program helps users to check if the model treats different groups fairly by comparing predictions across demographics. 
    Helps identify potential bias in the results.
@@ -110,7 +108,7 @@
 %mend _ab_validate_inputs;
 
 /* Macro to determine which delimiter the dropdown in FitStatDelimiter is referring to */
-%macro setDelimiter();
+%macro setDelimiter;
 
     %if %superq(FitStatDelimiter) = %str(%;) %then %do;
         %let fsDelimiterClean = %str(%;);
@@ -124,7 +122,7 @@
     %else %if %superq(FitStatDelimiter) = %str(,) %then %do;
         %let fsDelimiterClean = %str(,);
     %end;
-    %else %do;                /* ← fixed: %do instead of ; */
+    %else %do;
         %let fsDelimiterClean = %str( );
     %end;
 %mend setDelimiter;
@@ -134,7 +132,7 @@
     If there is, then use the pEvent and Delimiter add-ons
     If not, use the base fitstat
 */
-%macro conditionalFitstat();
+%macro conditionalFitstat;
     %if %superq( pVars ) ne and %superq( pEvent ) ne %then %do;
         fitstat pVar=&pVars / pEvent= "&pEvent" Delimiter = "&fsDelimiterClean";
     %end;
@@ -212,3 +210,23 @@ TITLE1 "AssessBias";
 
 /* Macro to determine direction of execution on the code. */
 %_ab_guard;
+
+/*************************************************************
+ CLEANUP
+*************************************************************/;
+
+*Clean up global macros created during execution;
+%if %symexist(_ab_error_flag) %then %do;
+   %symdel _ab_error_flag;
+%end;
+
+%if %symexist(_ab_error_desc) %then %do;
+   %symdel _ab_error_desc;
+%end;
+
+/* Remove helper macros from global symbol table */
+%sysmacdelete _create_error_flag;
+%sysmacdelete _ab_validate_inputs;
+%sysmacdelete setDelimiter;
+%sysmacdelete conditionalFitstat;
+%sysmacdelete _ab_guard;

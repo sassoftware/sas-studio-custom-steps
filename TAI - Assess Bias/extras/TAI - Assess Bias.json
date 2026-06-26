@@ -9,7 +9,7 @@
         {
           "id": "inputTable",
           "type": "inputtable",
-          "label": "Input table:",
+          "label": "Select an input table:",
           "required": true,
           "placeholder": "",
           "visible": "",
@@ -18,7 +18,7 @@
         {
           "id": "probabilityVariable",
           "type": "columnselector",
-          "label": "Predicted probability variable:",
+          "label": "Select a predicted probability variable:",
           "include": null,
           "order": false,
           "columntype": "a",
@@ -30,7 +30,7 @@
         {
           "id": "sensitiveVariable",
           "type": "columnselector",
-          "label": "Sensitive variable:",
+          "label": "Select a sensitive variable:",
           "include": null,
           "order": false,
           "columntype": "a",
@@ -49,7 +49,7 @@
             {
               "id": "targetVariable",
               "type": "columnselector",
-              "label": "Target variable:",
+              "label": "Select a target variable:",
               "include": null,
               "order": false,
               "columntype": "a",
@@ -61,7 +61,7 @@
             {
               "id": "targetLevel",
               "type": "dropdown",
-              "label": "Target level:",
+              "label": "Select a target level:",
               "items": [
                 { "value": "Interval" },
                 { "value": "Nominal" }
@@ -73,7 +73,7 @@
             {
               "id": "targetEvent",
               "type": "dropdown",
-              "label": "Target event:",
+              "label": "Select a target event:",
               "items": { "ref": "targetVariable" },
               "required": false,
               "placeholder": "",
@@ -89,7 +89,7 @@
                 {
                   "id": "pVars",
                   "type": "columnselector",
-                  "label": "P variables:",
+                  "label": "Select a P variable:",
                   "include": null,
                   "order": false,
                   "columntype": "a",
@@ -101,7 +101,7 @@
                 {
                   "id": "pEvent",
                   "type": "dropdown",
-                  "label": "P event:",
+                  "label": "Select a P event:",
                   "items": { "ref": "targetVariable" },
                   "required": false,
                   "placeholder": "",
@@ -110,7 +110,7 @@
                 {
                   "id": "FitStatDelimiter",
                   "type": "dropdown",
-                  "label": "Delimiter:",
+                  "label": "Select a delimiter:",
                   "items": [
                     { "value": " (space)" },
                     { "value": "; (semicolon)" },
@@ -136,7 +136,7 @@
         {
           "id": "cutoff",
           "type": "numstepper",
-          "label": "Cutoff ratio:",
+          "label": "Specify the cutoff ratio:",
           "required": false,
           "integer": false,
           "min": 0,
@@ -146,7 +146,7 @@
         {
           "id": "numBins",
           "type": "numstepper",
-          "label": "Number of bins:",
+          "label": "Specify the number of bins:",
           "required": false,
           "integer": true,
           "min": 2,
@@ -156,7 +156,7 @@
         {
           "id": "numCuts",
           "type": "numstepper",
-          "label": "Number of cuts:",
+          "label": "Specify the number of cuts:",
           "required": false,
           "integer": true,
           "min": 2,
@@ -166,7 +166,7 @@
         {
           "id": "selectionDepth",
           "type": "numstepper",
-          "label": "Selection depth:",
+          "label": "Specify the selection depth:",
           "required": false,
           "integer": true,
           "min": 1,
@@ -176,7 +176,7 @@
         {
           "id": "freq",
           "type": "columnselector",
-          "label": "Frequency:",
+          "label": "Select a frequency:",
           "include": null,
           "order": false,
           "columntype": "a",
@@ -188,7 +188,7 @@
         {
           "id": "weight",
           "type": "columnselector",
-          "label": "Weight:",
+          "label": "Select a weight:",
           "include": null,
           "order": false,
           "columntype": "a",
@@ -211,10 +211,10 @@
           "visible": ""
         },
         {
-          "id": "prerequisites_section",                      
+          "id": "prerequisites_section",
           "type": "section",
-          "label": "Pre-requisites",                          
-          "open": true,                                      
+          "label": "Pre-requisites",
+          "open": true,
           "visible": "",
           "children": [
             {
@@ -226,10 +226,10 @@
           ]
         },
         {
-          "id": "documentation_section",                      
+          "id": "documentation_section",
           "type": "section",
-          "label": "Documentation",                           
-          "open": true,                                      
+          "label": "Documentation",
+          "open": true,
           "visible": "",
           "children": [
             {
@@ -279,8 +279,8 @@
           "children": [
             {
               "id": "usage_text",
-              "type": "text",
               "text": "Required inputs:\n\t 1. Input table\n\t 2. Predicted probability variable\n\t 3. Sensitive variable\n\t 4. Target variable\n\nIf any of these are missing, the step will not execute PROC ASSESSBIAS; instead, an error message saying \"PROC ASSESSBIAS will not run because one or more required variables are missing.\"",
+              "type": "text",
               "visible": ""
             }
           ]
@@ -310,7 +310,7 @@
             {
               "id": "version_text",
               "type": "text",
-              "text": "Version : 1.0.14  (25JUN2026)"
+              "text": "Version : 1.0.15  (26JUN2026)"
             }
           ]
         }
