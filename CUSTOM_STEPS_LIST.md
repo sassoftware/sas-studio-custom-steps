@@ -3,6 +3,9 @@
 >[!WARNING]
 >02SEP2025: Steps listed as **<sup> (DEPRECATED)</sup>** will be removed soon.
 
+>[!NOTE]
+>26JUN2026: New category - TAI for Trustworthy AI introduced.
+
 ## Abbreviations used in name of Custom Step
 
 The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.
@@ -25,6 +28,7 @@ The list of available Custom Steps further down on this page uses the following 
 | SAS Packages              | [SAS Packages Framework](https://github.com/yabwon/SAS_PACKAGES) related  |
 | SDG                       | Synthetic Data Generation                                                 |
 | SID                       | SAS Intelligent Decisioning related                                       |
+| TAI                       | Trustworthy AI related                                                    |
 | VA                        | SAS Visual Analytics related                                              |
 
 ## Available Custom Steps
@@ -145,6 +149,7 @@ The list of available Custom Steps further down on this page uses the following 
 | [SID - Create Data Grid](./SID%20-%20Create%20DataGrid/README.md) | Serialize source data into a data grid variable for use by SAS Intelligent Decisioning flows | [Charlie Vismara](https://github.com/sbxchv) | 2024.12 <br>or later | 05FEB2025|
 | [SID - Import Lookup Table](./SID%20-%20Import%20Lookup%20Table/README.md) | Import and activate a lookup table for SAS Intelligent Decisioning (SID) from input data | [Charlie Vismara](https://github.com/sbxchv) | 2024.12 <br>or later | 07FEB2025|
 | [Surrogate Key Generator](./Surrogate%20Key%20Generator/README.md) | Generates a surrogate key based on a business key | [Torben Juul Johansson](https://github.com/torbenjuul) | 2020.1.5 <br>or later | 29SEP2022 |
+| [TAI - Assess Bias](./TAI%20-%20Assess%20Bias/README.md) | Analyses and measures bias in prediction across values of a sensitive variable | [Dawn Pancholi](https://github.com/ShuPancholi) | 2026.05 <br>or later | 26JUN2026 |
 | [Update column labels](./Update%20column%20labels/README.md) | Update column labels from a (metadata) table, delimited file, or interactively | [Ignacio Rodríguez](https://github.com/nachorodriguez79) | 2023.11 <br>or later | 21DEC2023 |
 | [VA - Copy and Replace Report](./VA%20-%20Copy%20and%20Replace%20Report/README.md) | The VA - Copy and Replace Report custom step enables SAS Studio users to take an existing SAS Visual Analytics report and either copy the report and keep the original data, or copy the report and replace the original data with a new data set | [Mary Dolegowski](https://github.com/mary-dolegowski) | 2025.12 <br>or later | 14MAY2026 |
 | [VA - Export Report](./VA%20-%20Export%20Report/README.md) | Exports a package for the report in a compressed (zip) format. The returned content contains the report source files, plus the results of data queries and image rendering, constituting all that is needed for remote viewing of the report | [Remco Gooijer](https://github.com/x7rtfgj4) | 2025.08 <br>or later | 21NOV2025 |
