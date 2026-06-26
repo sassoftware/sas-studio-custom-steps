@@ -53,15 +53,17 @@ More information about PROC ASSESSBIAS: [https://go.documentation.sas.com/doc/en
 - The optional **Weight** and **Frequency** columns are performed only when populated.
 
 ### Change Log
-- Version 1.0.0 (19JUN2026)
-  - Initial version
-
-- Version 1.0.14 (25JUN2026)
-  - Begining of updating change log
-  - Re-organized SAS code to have macros in macro section and execution code in execution section
-  - Modified UI to follow ([UI Guidelines](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/docs/UI-guidelines.md))
 
 - Version 1.0.15 (26JUN2026)
   - Added Cleanup for global and helper macros in source to improve memory and security
   - Modified UI so that all options have action verbs (Input table -> Select an input table)
   - Fixed mis-formating in README so that changes are indented under the appropriate version
+
+- Version 1.0.14 (25JUN2026)
+  - Begining of updating change log
+  - Re-organized SAS code to have macros in macro section and execution code in execution section
+  - Modified UI to follow ([UI Guidelines](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/docs/UI-guidelines.md))
+    
+- Version 1.0.0 (19JUN2026)
+  - Initial version
+
