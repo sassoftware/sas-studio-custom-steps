@@ -29,7 +29,6 @@ This project is licensed under the [Apache 2.0 License](LICENSE).
 * [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ)
 > [!TIP] 
 > - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](./_codegen_snippets/README.md)
-> - [Helper scripts to create identity groups and authorization rules in Viya to restrict access to Custom Steps](https://github.com/sassoftware/sas-data-and-ai-studio-step-access-control)
 > - [Tools to help you build, modify and unpack SAS Studio Custom Steps](https://pypi.org/project/py-sas-studio-custom-steps/)
 
 
