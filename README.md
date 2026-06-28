@@ -2,14 +2,12 @@
 
 ## Overview
 
-A custom step enables you to create a user interface for SAS Studio on SAS Viya users at your site to complete a specific task. Custom steps are saved to SAS Content, so they can be shared with others at your site. The Steps panel lists all SAS steps available to a user, including custom steps.
+A custom step provides a user interface for SAS programs in SAS Studio (now known as SAS Data and AI Studio). SAS Studio Custom Steps help SAS Viya users set parameters and run specific tasks. Custom steps are saved to SAS Content, so they can be shared with others at your site. The Steps panel lists all SAS steps available to a user, including custom steps.
 Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://video.sas.com/detail/videos/sas-viya-quick-start/video/6347011003112/create-custom-steps-with-sas-studio?autoStart=true) for a quick introduction. For more details see [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm). 
 
 ## List of Contributions
 
-[List of custom steps in this repository](./CUSTOM_STEPS_LIST.md)
-
-(***NEW***) [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](./_codegen_snippets/README.md)
+>[List of custom steps in this repository](./CUSTOM_STEPS_LIST.md)
 
 ## Getting Started - Making a Custom Step from this repository available in SAS Studio 
 
@@ -29,4 +27,9 @@ This project is licensed under the [Apache 2.0 License](LICENSE).
 
 * [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm)
 * [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ)
+> [!TIP] 
+> - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](./_codegen_snippets/README.md)
+> - [Helper scripts to create identity groups and authorization rules in Viya to restrict access to Custom Steps](https://github.com/sassoftware/sas-data-and-ai-studio-step-access-control)
+> - [Tools to help you build, modify and unpack SAS Studio Custom Steps](https://pypi.org/project/py-sas-studio-custom-steps/)
+
 
