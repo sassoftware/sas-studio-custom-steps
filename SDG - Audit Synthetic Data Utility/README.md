@@ -122,7 +122,7 @@ run;
     synthTable      = WORK.SYNTH,
     outLib          = WORK,
     tablePrefix     = test1,
-    summary         = summary_table
+    summary         = summary_table,
     extraTables     = 1
 );
 ```
@@ -139,7 +139,7 @@ run;
 
 ## Change Log
 
-* Version 1.1 (1JUL2026)
+* Version 1.1 (01JUL2026)
 * Version 1.0 (11JUN2026)
     * Initial version
 
