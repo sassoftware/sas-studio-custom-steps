@@ -7,22 +7,26 @@ A general idea of how to use steps related to virtual environments:
 
 ![General idea](./img/general-idea.png)
 
-A quick video:[Video](./img/Create%20a%20Virtual%20Environment.mp4)
+A quick video: Watch this YouTube video [here](https://www.youtube.com/watch?v=RaiPOU0M278).
+
+*Link: https://www.youtube.com/watch?v=RaiPOU0M278*
+
 
 ## User Interface
 
-Refer the "About" tab on each of the individual steps for more details on what they are used for.
+Refer the "About" tab on the step for more details.
 
 ### Parameters
 This step helps you create a virtual environment. Input arguments required :
-1. A location for your virtual environment to reside (which can optionally be expressed as a full path to a persistent location on the filesystem, for future retrieval)
-2. Additional packages you would like installed inside this virtual environment. As instructions note, you can provide a space-delimited string, or a path to a requirements.txt file.
+1. Path to your virtual environment (optional) : specify a full path to a persistent location on the filesystem, for future reuse
+2. Requirements (optional) : either specify a path to a requirements.txt or enter them in space-delimited format.
+3. Install system-site packages (checkbox): Keep this checked to ensure system-site packages from the base environment are also made available in the virtual environment. 
 
 ![Python - Create a virtual environment](./img/create-a-virtual-environment.png)
 
 ## Requirements
 
-1. A SAS Viya 4 environment (last update on a monthly release 2025.07) with SAS Studio Flows
+1. A SAS Viya 4 environment (last update on a monthly release 2026.05) with SAS Studio Flows
 2. Python configured with the above environment (preferably using the [SAS Configurator for Open Source](https://go.documentation.sas.com/doc/en/itopscdc/v_016/itopswn/p19hj5ipftk86un1axa51rzr5mxv.htm))
 
 
@@ -50,6 +54,8 @@ This repository contains 5 custom steps which are offered as examples of how you
 
 ## Change Log
 
+* Version 2.2.0 (02JUL2026)
+  - Additional documentation and refinement
 * Version 2.1.0 (01SEP2025)
   - Converted ORIGINAL_PYPATH to global macro variable to avoid breaking downstream steps
 * Version 2.0.0 (26AUG2025)
