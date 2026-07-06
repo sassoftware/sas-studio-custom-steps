@@ -48,9 +48,9 @@ Specifically, this custom step:
 
 This section shows the minimum steps required to run Rake using the SAS Studio Custom Step interface.
 
-1. Download the `Rake.step` file from this repository.
+1. Download the `Log - Collect SAS Viya Monitoring Logs.step` file from this repository.
 2. In SAS Studio, upload the file to a folder where you have write access (for example, under *My Folder*).
-3. Right-click `Rake.step` and select **Open in a tab**.
+3. Right-click `Log - Collect SAS Viya Monitoring Logs.step` and select **Open in a tab**.
 4. On the first run, open the **OpenSearch Login** section and enter your OpenSearch username and password.
 5. (Optional) Specify the time range for log extraction by setting the start and end time. If not specified, Rake runs with the default time window (for example, `now-15m`).
    The time fields support OpenSearch *Date Math* expressions, which allow relative time notation based on the current time, such as `now`, `now-15m` (15 minutes ago), or `now-1h` (one hour ago).
@@ -58,7 +58,7 @@ This section shows the minimum steps required to run Rake using the SAS Studio C
 
 ![Rake](img/rake-quick-start.png)
 
-After the first execution, the encoded credentials are stored in SAS Content and reused automatically for subsequent runs. The extracted logs are displayed in SAS Studio and are available as a SAS data set for further inspection.
+The extracted logs are displayed in SAS Studio and are available as a SAS data set for further inspection.
 
 ## Input and Output
 
@@ -125,7 +125,7 @@ Rake is designed for interactive and exploratory log analysis. It is not optimiz
 
 ## Change Log
 
-## Version 1.3 (07MAY2026)
+## Version 1.3 (06JUL2026)
 
 - Added a **Default** option to the time zone selection and changed the default value from `UTC` to `default`.
 - Fixed incorrect handling of the `to=` parameter passed from the Custom Step UI.
@@ -133,6 +133,7 @@ Rake is designed for interactive and exploratory log analysis. It is not optimiz
 - Updated parameter documentation in `extras/MACRO.md` to reflect the revised time zone behavior.
 - Refactored the custom step to comply with the `CONTRIBUTING.md` guidelines by embedding the macro logic directly in the step.
 - Updated the public README and cleaned up auxiliary files under the `extras/` directory.
+- Removed the feature to save encrypted credentials.
 
 ## Version 1.2.1 (19NOV2025)
 
