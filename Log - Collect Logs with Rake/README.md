@@ -1,8 +1,8 @@
-# Rake (Kumade) – SAS Studio Custom Step
+# Log - Collect SAS Viya Monitoring Logs
 
 ## Overview
 
-Rake (also known as Kumade) is a SAS Studio custom step designed to help administrators and advanced users extract logs from OpenSearch in SAS Viya environments.
+Log - Collect SAS Viya Monitoring Logs (also known as Rake or Kumade) is a SAS Studio custom step designed to help administrators and advanced users extract logs from OpenSearch in SAS Viya environments. In the rest of this document, this custom step is referred to as "Rake".
 
 OpenSearch, as used in SAS Viya Monitoring for Kubernetes, retrieves a maximum of 10,000 log entries per request due to limitations of the REST API. Rake addresses this limitation by executing multiple OpenSearch queries over a specified time range and combining the results into a single, structured output that focuses on commonly used log fields.
 
