@@ -63,4 +63,4 @@ Tested on Viya version Stable 2022.09
 > Note: Please list versions in descending date order, so the most recent version at the top of the change log.  - ***Remove this line***
 > Note: As your change log increases in size, consider moving the details to a separate CHANGELOG.md file and keep only the most recent changes in the Change Log section.  Refer users to the detailed change log as follows  - ***Remove this line***
 
-Refer CHANGELOG.md](./CHANGELOG.md) for details - ***Optional if using a separate change log***
+Refer [CHANGELOG.md](./CHANGELOG.md) for details - ***Optional if using a separate change log***
