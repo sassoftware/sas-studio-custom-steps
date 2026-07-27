@@ -164,6 +164,35 @@
 					"id": "aboutText",
 					"type": "text",
 					"text": "TAI - Explain Predictions with Shapley\n\nThis custom step executes PROC SHAPLEY in SAS to compute Shapley values for explaining machine learning model predictions. the step examines your predictive model and shows how each input variable contributed to the model's predictions. This can help you understand which factors were most important and build confidence in the model's results.\n\nMethods Supported:\n     HyperSHAP: Fast approximation method optimized for tree-based models.\n     KernelSHAP: Model-agnostic kernel-based approximation method for general models.\n\nThe step can help you:\n     See which variables have the biggest impact on predictions.\n     Understand the factors driving model decisions.\n     Explain model results to business users, managers, auditors, or other stakeholders.\n     Improve transparency when working with machine learning models.\n\nBy making model predictions easier to understand, this step helps users move beyond what the model predicted and better understand why it made that prediction.\n\nUse the Design tab to supply input datasets and configure model roles. Adjust algorithm-specific hyperparameters under the Configuration tab.\n\nMore information about PROC SHAPLEY:\nhttps://go.documentation.sas.com/doc/cn/pgmsascdc/v_072/casml/casml_shapley_toc.htm"
+				},
+				{
+					"id": "contact_section",
+					"type": "section",
+					"label": "Created / contact",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "created_contact_text",
+							"type": "text",
+							"text": "Dawn Pancholi (Shubham.Pancholi@sas.com)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "version_section",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 1.0.2 (27JUL2026)"
+						}
+					]
 				}
 			]
 		}

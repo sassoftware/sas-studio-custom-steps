@@ -1,5 +1,5 @@
 /************************************************************************
-TAI - Explain Predictions with Shapley
+Trustworthy AI (TAI) - Explain Predictions with Shapley
 
 Purpose: This SAS program executes PROC SHAPLEY to compute Shapley values 
 for explaining machine learning model predictions. It supports both 
@@ -26,13 +26,21 @@ Method - KernelSHAP Options:
 
 
 Tested in SAS Viya 2026.05
-Version: 1.0.1 (17JUL2026)
+Version: 1.0.2 (27JUL2026)
 ************************************************************************/;
 
 
 /************************************************************************
-EXECUTION CODE
+MACRO DEFINITION
 ************************************************************************/;
+
+
+/* -----------------------------------------------------------------------------------------* 
+   Macro to set up the error flagging and determine how Proc Shapley should run assuming all required fields
+   Have been filled out
+   If there's a major component missing (specified in the if statement) then the if block will execute and throw an error
+   Otherwise, the else block containing the proc shapley will execute
+*------------------------------------------------------------------------------------------ */
 %macro _shapley;
 
     /* Ensure required parameters are provided before executing */
@@ -100,6 +108,10 @@ EXECUTION CODE
         run;
     %end;
 %mend _shapley;
+
+/************************************************************************
+EXECUTION CODE
+************************************************************************/;
 
 TITLE1 "Shapley";
 
