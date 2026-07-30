@@ -9,6 +9,13 @@ The step supports two calculation algorithms:
 
 More information about PROC SHAPLEY: [PROC SHAPLEY documentation](https://go.documentation.sas.com/doc/cn/pgmsascdc/default/casml/casml_shapley_toc.htm)
 
+---
+## Understanding Shapley Values
+Shapley values are a method for determining how much individual factors contribute to a particular outcome. Rather than looking at each factor in isolation, Shapley values evaluate how the outcome changes when a factor is considered alongside different combinations of other factors. By averaging these contributions across many possible combinations, a Shapley value provides a fair and consistent measure of the influence of each factor on the final result.
+
+Because this approach considers interactions between factors, it can provide a more complete view of contribution than simple importance measures. Shapley values are widely used to help explain complex decisions and outcomes by showing how each contributing factor increases, decreases, or otherwise influences a result. This makes them useful for education, transparency, auditing, and building trust in data-driven decision-making processes.
+
+---
 ## Requirements
 - **SAS Viya** environment (tested on stable release `2026.05`).
 - **SAS Trustworthy AI** / **SAS Visual Data Mining and Machine Learning (VDMML)** license to access `PROC SHAPLEY`.
@@ -95,6 +102,9 @@ This step is part of the `sas-studio-custom-steps` collection. Follow the reposi
 
 ---
 ## Change Log
+
+- Version 1.0.3 (28JUL2026)
+  - Creation of `Understanding Shapley Values` section in README to explain what Shapley is
 
 - Version 1.0.2 (27JUL2026)
   - SAS Code formatting changes (Properly Located Macro and Execution Code comments and Corrected Version Date)
