@@ -77,7 +77,6 @@ This extracts only log entries whose message field contains the specified string
 %rake(reset=1);
 ```
 
-- `save=1` stores credentials and URL in the configuration file
 - `reset=1` deletes and recreates the configuration file
 
 ## 3. Execution Model (Overview)
