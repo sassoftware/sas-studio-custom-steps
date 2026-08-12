@@ -71,10 +71,9 @@ This extracts logs between the specified start and end times.
 
 This extracts only log entries whose message field contains the specified string.
 
-### 2.5 Update or Recreate the Configuration File
+### 2.5 Recreate the Configuration File
 
 ```sas
-%rake(save=1, user=admin, password=foobar, url=default);
 %rake(reset=1);
 ```
 
@@ -108,10 +107,8 @@ This section explains what each macro parameter does.
 |8|verbose=0|Arguments for debugging. Set verbose=1 to log NOTE information.|
 |9|summary=0|Arguments to enable/disable the ability to aggregate logs. When summary=0 is set, the log frequency summary and plotting are not performed. This should be specified when the amount of logs is large and the time for frequency aggregation and plotting is desired to be omitted.|
 |10|check=0|Argument to enable/disable the error pattern checking function. If check=0 is set, no error pattern check is performed. Error patterns are defined as multiple strings, such as "Out Of Memory" or "SAS/TK is aborting". The pattern is checked to see if it is included in the message, and if so, the variable check in the log is set to the number of the pattern. Error patterns are defined in the configuration file (rakeConfig.txt). Any pattern can be added by editing the configuration file with an editor.|
-|11|save=0|If save=1 is specifed, the encoded credentials and URL will be saved in the configuration file. No search is performed. <br>This option has been added to allow you to change the username and password from the custom step UI and have the changes reflected in the configuration file. |
-|12|reset=0|If reset=1 is specified, the config file is deleted and recreated. If the encodedCredential value can be obtained from the file before it is deleted, that value is reused. No search is performed. <br>Since the OpenSearch URL may differ depending on the environment, this option has been added so that the default value can be changed from the UI.|
-|13|url=|Specify the OpenSearch URL. This will be used instead of the URL value in the configuration file. If you specify url=default, the default URL will be applied.|
-|14|query=work.query|Holds the number of cases matching the pattern contained in WORK.LOG.|
+|11|reset=0|If reset=1 is specified, the config file is deleted and recreated. If the encodedCredential value can be obtained from the file before it is deleted, that value is reused. No search is performed. <br>Since the OpenSearch URL may differ depending on the environment, this option has been added so that the default value can be changed from the UI.|
+|12|query=work.query|Holds the number of cases matching the pattern contained in WORK.LOG.|
 
 
 ## 5. Configuration File: rakeConfig.txt
@@ -120,7 +117,6 @@ The macro uses a configuration file to persist settings across runs.
 
 ### What Is Stored
 
-- Encoded credentials
 - OpenSearch API URL
 - Error message patterns used for log checking
 
@@ -132,7 +128,6 @@ The macro uses a configuration file to persist settings across runs.
 ### Typical Lifecycle
 
 - Created automatically on first run
-- Updated with `save=1`
 - Recreated with `reset=1` if necessary
 
 ## 6. Output Datasets
