@@ -210,19 +210,53 @@ While the default patterns cover common cases, operational use often requires ad
 Only a subset of error patterns is shown here.
 Because these patterns may change over time, refer to the configuration file for the complete and up-to-date list.
 
-- SAS/TK is aborting
-- Error creating compute session
-- Unable to launch node
-- Error stopping CAS session
-- ObjectOptimisticLockingFailureException
-- ServerOperationException
-- ODBC SQL Server Wire Protocol driver
-- Internal Server Error
 - Child terminated by signal
-- Unhandled Exception
+- endpoints have no available addresses
+- Error creating compute session
+- Error stopping CAS session
+- EvictionThresholdMet
+- Exception
+- FailedScheduling
+- Failure
+- FreeDiskSpaceFailed
+- Gateway Time-out
+- I/O error on
+- ImageGCFailed
+- Insufficient ephemeral-storage
+- Internal Server Error
+- INTERNAL_SERVER_ERROR
+- Java heap space
+- JobExecutionException
 - killed
+- NetworkUnavailable
+- No left space
+- No space left
+- NodeHasDiskPressure
+- NodeHasMemoryPressure
+- NodeHasPIDPressure
+- NodeNotReady
+- OAuth token is expired
+- ObjectOptimisticLockingFailureException
+- ODBC SQL Server Wire Protocol driver
 - OOM
+- OOMKilled
+- OOMKilling
+- Operation timed out
+- out of memory
 - OutOfMemory
+- panic:
+- SAS/TK is aborting
+- ServerOperationException
+- ServletOutputStream failed to write:
+- SIGSEGV
+- SSL error
+- SystemOOM
+- The system has encountered an unhandled Exception
+- timed out after 60
+- Traceback
+- Unable to launch node
+- Unexpected
+- unhandled Exception
 
 You can edit the configuration file to customize the error checking patterns according to your environment and operational needs.
 
