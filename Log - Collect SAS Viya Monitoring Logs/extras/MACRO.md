@@ -20,8 +20,6 @@ This document does not cover:
 - Custom Step UI usage
 - Internal macro implementation details
 
-
-
 ## 2. Quick Start
 
 ### 2.1 Run with Defaults
@@ -104,11 +102,12 @@ This section explains what each macro parameter does.
 |6|message=|Specify the characters contained in the MESSAGE field as log extraction criteria. This option is intended to capture specific error messages over a relatively broad time period. <br>message="failed container"|
 |7|debug=0|Arguments for debugging. Set debug=1 to output detailed logs.|
 |8|verbose=0|Arguments for debugging. Set verbose=1 to log NOTE information.|
-|9|summary=0|Arguments to enable/disable the ability to aggregate logs. When summary=0 is set, the log frequency summary and plotting are not performed. This should be specified when the amount of logs is large and the time for frequency aggregation and plotting is desired to be omitted.|
+|9|freq=0|Arguments to enable/disable the ability to aggregate logs. When freq=0 is set, the log frequency summary and plotting are not performed. This should be specified when the amount of logs is large and the time for frequency aggregation and plotting is desired to be omitted.|
 |10|check=0|Argument to enable/disable the error pattern checking function. If check=0 is set, no error pattern check is performed. Error patterns are defined as multiple strings, such as "Out Of Memory" or "SAS/TK is aborting". The pattern is checked to see if it is included in the message, and if so, the variable check in the log is set to the number of the pattern. Error patterns are defined in the configuration file (rakeConfig.txt). Any pattern can be added by editing the configuration file with an editor.|
 |11|reset=0|If reset=1 is specified, the config file is deleted and recreated. If the encodedCredential value can be obtained from the file before it is deleted, that value is reused. No search is performed. <br>Since the OpenSearch URL may differ depending on the environment, this option has been added so that the default value can be changed from the UI.|
 |12|query=work.query|Holds the number of cases matching the pattern contained in WORK.LOG.|
-
+|13|folder=sasserver:/tmp| Specify the folder where output files are saved. Required when using the filename parameter.|
+|12|filname=OpenSearch_${date}T${timne}.tsv|Specify the output file name. The output format is determined by the file extension (.tsv or .json).|
 
 ## 5. Configuration File: rakeConfig.txt
 
@@ -183,6 +182,12 @@ This section describes configuration options that may need to be adjusted depend
 
 For initial testing, these settings usually do not need to be changed.  
 However, they often become important when the macro is used continuously in daily operations.
+
+### Environment Variable
+
+If the `RAKE_CREDENTIALS` environment variable is defined, the Custom Step uses it as the OpenSearch credential.
+
+Run the Custom Step once with a valid user name and password. Rake generates an `options set=RAKE_CREDENTIALS=...` statement in the SAS log. Copy the statement to your AUTOEXEC file to avoid entering credentials each time.
 
 ### Macro Variables Defined in Rake.step
 
