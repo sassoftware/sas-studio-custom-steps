@@ -13,14 +13,14 @@ The list of available Custom Steps further down on this page uses the following 
 | Abbreviation              | Explanation                                                               |
 | :------------------------ | :------------------------------------------------------------------------ |
 | CAS                       | Steps in this category provide utilities for working with data in CAS     |
-| Catalog                   | SAS Information Catalog related                                           |
+| Catalog                   | SAS Data Governance related                                               |
 | CV                        | Computer Vision                                                           |
 | Data Maker                | SAS Data Maker related                                                    |
 | DQ                        | Data Quality                                                              |
 | DuckDB                    | [DuckDB](https://duckdb.org/) related                                     |
 | EAC                       | External API Connection                                                   |
-| GEO                       | Geohgraphic                                                               |
-| Glosssary                 | Glossary related - a component of SAS Information Catalog                 |
+| GEO                       | Geographic data related                                                   |
+| Glossary                  | Glossary related - a component of SAS Data Governance                     |
 | LLM                       | Large Language Model                                                      |
 | Log                       | Log file processing related                                               |
 | NLP                       | Natural Language Processing                                               |
