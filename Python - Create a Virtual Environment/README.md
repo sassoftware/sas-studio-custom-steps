@@ -34,11 +34,6 @@ This step helps you create a virtual environment. Input arguments required :
 
 Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
 
-When successfully uploaded, the following structure will be present in the Shared Section of your SAS Studio application - Custom Steps tab.
-
-![SAS Studio view](./img/view-custom-steps.png)
-
-
 ## The WHY :  Background information
 
 Refer this [blog](https://blogs.sas.com/content/subconsciousmusings/2022/05/16/python-a-la-carte) for background.  The ability to create and use virtual Python environments for use within SAS Viya helps data scientists create portable solutions,  maintain solution integrity, and exploit the integration between SAS and Python to the fullest extent.
