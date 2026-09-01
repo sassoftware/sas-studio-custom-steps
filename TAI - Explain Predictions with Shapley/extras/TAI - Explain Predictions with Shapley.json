@@ -1,0 +1,223 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "designPage",
+			"type": "page",
+			"label": "Design",
+			"children": [
+				{
+					"id": "refData",
+					"type": "inputtable",
+					"label": "Select Reference Data Table (Background Dataset):",
+					"required": true,
+					"placeholder": "Select background dataset for reference"
+				},
+				{
+					"id": "targetVar",
+					"type": "columnselector",
+					"label": "Specify Predicted Target Column:",
+					"table": "refData",
+					"max": 1,
+					"min": 1,
+					"required": true,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "intervalVars",
+					"type": "columnselector",
+					"label": "Specify Interval Inputs:",
+					"table": "refData",
+					"multiple": true,
+					"required": false,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "nominalVars",
+					"type": "columnselector",
+					"label": "Specify Nominal Inputs:",
+					"table": "refData",
+					"multiple": true,
+					"required": false,
+					"include": null
+				}
+			]
+		},
+		{
+			"id": "configPage",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "astoreTable",
+					"type": "inputtable",
+					"label": "Analytic Store Model Table",
+					"required": false,
+					"placeholder": "Select an ASTORE model table"
+				},
+				{
+					"id": "weightVar",
+					"type": "columnselector",
+					"label": "Select a weight column:",
+					"table": "refData",
+					"max": 1,
+					"min": 0,
+					"required": false,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "methodType",
+					"type": "dropdown",
+					"label": "Explanation Method:",
+					"items": [
+						{
+							"value": "HYPERSHAP",
+							"label": "HyperSHAP"
+						},
+						{
+							"value": "KERNELSHAP",
+							"label": "KernelSHAP"
+						}
+					],
+					"required": true
+				},
+				{
+					"id": "hyperOptionsSec",
+					"type": "section",
+					"label": "HyperSHAP Method Options",
+					"visible": [
+						"$methodType",
+						"=",
+						"HYPERSHAP"
+					],
+					"open": true,
+					"children": [
+						{
+							"id": "hyperDepth",
+							"type": "numstepper",
+							"label": "Maximum Depth of Coalitional Approximation:",
+							"required": true,
+							"integer": true,
+							"min": 1,
+							"max": 2
+						}
+					]
+				},
+				{
+					"id": "kernelOptionsSec",
+					"type": "section",
+					"label": "KernelSHAP Method Options",
+					"visible": [
+						"$methodType",
+						"=",
+						"KERNELSHAP"
+					],
+					"open": true,
+					"children": [
+						{
+							"id": "kernelBinWidth",
+							"type": "numstepper",
+							"label": "Bin Width for Interval Variables:",
+							"required": true,
+							"decimalPlaces": 4,
+							"min": 0
+						},
+						{
+							"id": "kernelIncMissing",
+							"type": "checkbox",
+							"label": "Include missing values in calculations"
+						},
+						{
+							"id": "kernelSampleSize",
+							"type": "numstepper",
+							"label": "Sample Size (Number of coalition samples):",
+							"required": true,
+							"integer": true,
+							"min": 1
+						},
+						{
+							"id": "kernelSeed",
+							"type": "numstepper",
+							"label": "Random Seed:",
+							"required": false,
+							"integer": true,
+							"min": 0
+						},
+						{
+							"id": "kernelUseRaw",
+							"type": "checkbox",
+							"label": "Use raw data for calculation"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "aboutPage",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "aboutText",
+					"type": "text",
+					"text": "TAI - Explain Predictions with Shapley\n\nThis custom step executes PROC SHAPLEY in SAS to compute Shapley values for explaining machine learning model predictions. the step examines your predictive model and shows how each input variable contributed to the model's predictions. This can help you understand which factors were most important and build confidence in the model's results.\n\nMethods Supported:\n     HyperSHAP: Fast approximation method optimized for tree-based models.\n     KernelSHAP: Model-agnostic kernel-based approximation method for general models.\n\nThe step can help you:\n     See which variables have the biggest impact on predictions.\n     Understand the factors driving model decisions.\n     Explain model results to business users, managers, auditors, or other stakeholders.\n     Improve transparency when working with machine learning models.\n\nBy making model predictions easier to understand, this step helps users move beyond what the model predicted and better understand why it made that prediction.\n\nUse the Design tab to supply input datasets and configure model roles. Adjust algorithm-specific hyperparameters under the Configuration tab.\n\nMore information about PROC SHAPLEY:\nhttps://go.documentation.sas.com/doc/cn/pgmsascdc/v_072/casml/casml_shapley_toc.htm"
+				},
+				{
+					"id": "contact_section",
+					"type": "section",
+					"label": "Created / contact",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "created_contact_text",
+							"type": "text",
+							"text": "Dawn Pancholi (Shubham.Pancholi@sas.com)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "version_section",
+					"type": "section",
+					"label": "Version",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "version_text",
+							"type": "text",
+							"text": "Version : 1.0.3 (28JUL2026)"
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"refData": {
+			"library": "",
+			"table": ""
+		},
+		"targetVar": [],
+		"intervalVars": [],
+		"nominalVars": [],
+		"astoreTable": {
+			"library": "",
+			"table": ""
+		},
+		"weightVar": [],
+		"methodType": "HYPERSHAP",
+		"hyperDepth": 1,
+		"kernelBinWidth": 0.1,
+		"kernelIncMissing": false,
+		"kernelSampleSize": 500,
+		"kernelSeed": null,
+		"kernelUseRaw": false
+	},
+	"promptHierarchies": []
+}
