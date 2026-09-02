@@ -40,10 +40,10 @@ What is happening in this flow?
 
 ## Change Log
 
-- Version 1.0 (12DEC2022)
-  - Initial version
 - Version 1.1 (14JUN2023)
   - Added naming convention for macros
   - Removed temporary work table
   - Added Content-Type to REST call to comply with best practices of the Microsoft Teams API
   - Raised requirement to SAS Viya 2023.05
+- Version 1.0 (12DEC2022)
+  - Initial version

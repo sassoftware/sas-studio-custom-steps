@@ -3,15 +3,37 @@
 /* -------------------------------------------------------------------------------------------* 
    Python - Create a Virtual Environment
 
-   v 2.1.0 (01SEP2025)
+   v 2.2.0 (02JUL2026)
 
    This program helps you create a Python virtual environment from within a SAS session.
    It captures the current Python executable path and creates a virtual environment in the
    specified location (or current working directory if not specified). It also allows you to
    install packages either from a requirements.txt file or a space-separated list of packages.
 
+   Path on GitHub: https://raw.githubusercontent.com/sassoftware/sas-studio-custom-steps/refs/heads/main/Python%20-%20Create%20a%20Virtual%20Environment/extras/Python%20-%20Create%20a%20Virtual%20Environment.sas
+
+   Inputs: 
+    - venv: path to persist virtual env
+    - install_system_site_packages: 1 or 0
+    - req: path to requirements.txt or list of requirements
+
+   Output:
+   - Check log and status for success / failure
+
    Sundaresh Sankaran (sundaresh.sankaran@sas.com|sundaresh.sankaran@gmail.com)
 *-------------------------------------------------------------------------------------------- */
+
+
+/*-----------------------------------------------------------------------------------------*
+   Define Macro Variables
+
+   (Note: we redefine macro variables used in step UI definition so that this SAS program
+          effectively can be run standalone)
+*------------------------------------------------------------------------------------------*/;
+
+%let venv=&venv.;
+%let install_system_site_packages=&install_system_site_packages.;
+%let req=&req.;
 
 /*-----------------------------------------------------------------------------------------*
    Python Block Definition
@@ -27,7 +49,7 @@
 
    Note that Python code is pasted as-is and may be out of line with the SAS indentation followed.
 
-*------------------------------------------------------------------------------------------*/
+*------------------------------------------------------------------------------------------*/;
 
 filename cvirenv temp;
 
@@ -55,7 +77,7 @@ from pathlib import Path
 pyt=os.environ["PROC_PYPATH"]
 SAS.logMessage(f"Current Python Path: {pyt}")
 
-# Create a virtual environment in the directory specified.
+# Create a virtual environment in the directory specified
 venv_input=SAS.symget("venv_input")
 path = Path(venv_input)
 if path.exists():
