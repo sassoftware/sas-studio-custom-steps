@@ -24,19 +24,19 @@ Models are picked up either from a SAS Content location or directly from the com
 
    The core inputs: the first model's pickle file, an optional name and algorithm label (auto-detected from the model's class if left blank), the training data CSV, optional explicit predictor columns (auto-detected from the model if left blank), the target column, an optional held-out evaluation dataset for honest model-card metrics, and the model function (classification or regression/prediction — for classification, also which class value is the target "event").
 
-   ![](img/PickleFileToModelManager-tabModelData.png)
+   ![alt text](image.png)
 
 * ### Additional Models ###
 
    Optionally, up to three more models (pickle file, name, algorithm label each), sharing the same training table, target, and project as the first model.
 
-   ![](img/PickleFileToModelManager-tabAdditionalModels.png)
+   ![alt text](image-1.png)
 
 * ### Project ###
 
    Whether to require an existing project or create one if it's missing, the project name, and whether re-running should overwrite an existing model version.
 
-   ![](img/PickleFileToModelManager-tabProject.png)
+    ![alt text](image-2.png)
 
 * ### Optional Steps ###
 
@@ -46,19 +46,20 @@ Models are picked up either from a SAS Content location or directly from the com
 
    Also whether to set up performance monitoring for the imported model(s) — binary classification and regression/prediction models only, multiclass models are skipped — and which CAS library to upload the monitoring input table to (default `Public`). This requires **Publish** to be checked too: SAS Model Manager scores each model itself to compute performance, so the model has to already be published for that to work. This option configures the project's Model Evaluation properties, uploads a monitoring input table, and creates the performance definition — it deliberately does **not** run the performance job itself (see Requirements below for why). Once the step finishes, open the project's **Performance** tab in Model Manager and click **Run** on the definition it created.
 
-   ![](img/PickleFileToModelManager-tabOptional.png)
+  ![alt text](image-3.png)
 
 * ### Connection ###
 
    An optional explicit Viya host, only needed if the step can't derive one automatically from the SAS Studio session it's running in.
 
-   ![](img/PickleFileToModelManager-tabConnection.png)
+    ![alt text](image-4.png)
+
 
 * ### About ###
 
    General description of the step, plus collapsible **Pre-requisites** and **Documentation** sections and an expanded **Changelog** section showing the current version — kept in sync with the Requirements and Change Log sections of this README.
 
-   ![](img/PickleFileToModelManager-tabAbout.png)
+   ![alt text](image-5.png)
 
 ## Requirements
 
