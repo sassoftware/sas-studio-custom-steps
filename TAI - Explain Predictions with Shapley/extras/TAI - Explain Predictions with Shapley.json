@@ -1,0 +1,312 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "designPage",
+			"type": "page",
+			"label": "Design",
+			"children": [
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "Compute Shapley values for explaining machine learning model predictions. Note that currently only the first row of the reference data table is getting evaluated.",
+					"visible": ""
+				},
+				{
+					"id": "refData",
+					"type": "inputtable",
+					"label": "Select reference data table (background dataset):",
+					"required": true,
+					"placeholder": "Select background dataset for reference"
+				},
+				{
+					"id": "targetVar",
+					"type": "columnselector",
+					"label": "Specify predicted target column:",
+					"table": "refData",
+					"max": 1,
+					"min": 1,
+					"required": true,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "intervalVars",
+					"type": "columnselector",
+					"label": "Specify interval inputs:",
+					"table": "refData",
+					"multiple": true,
+					"required": false,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "nominalVars",
+					"type": "columnselector",
+					"label": "Specify nominal inputs:",
+					"table": "refData",
+					"multiple": true,
+					"required": false,
+					"include": null
+				}
+			]
+		},
+		{
+			"id": "configPage",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "astoreTable",
+					"type": "inputtable",
+					"label": "Analytic store model table:",
+					"required": false,
+					"placeholder": "Select an ASTORE model table"
+				},
+				{
+					"id": "weightVar",
+					"type": "columnselector",
+					"label": "Select a weight column:",
+					"table": "refData",
+					"max": 1,
+					"min": 0,
+					"required": false,
+					"columntype": "n",
+					"include": null
+				},
+				{
+					"id": "impute",
+					"type": "dropdown",
+					"label": "Select method to impute missing observations:",
+					"items": [
+						{
+							"value": "NONE",
+							"label": "None"
+						},
+						{
+							"value": "MEAN",
+							"label": "Mean"
+						},
+						{
+							"value": "WEIGHTEDMEAN",
+							"label": "Weighted mean"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "methodType",
+					"type": "dropdown",
+					"label": "Explanation method:",
+					"items": [
+						{
+							"value": "HYPERSHAP",
+							"label": "HyperSHAP"
+						},
+						{
+							"value": "KERNELSHAP",
+							"label": "KernelSHAP"
+						}
+					],
+					"required": true
+				},
+				{
+					"id": "hyperOptionsSec",
+					"type": "section",
+					"label": "HyperSHAP method options",
+					"visible": [
+						"$methodType",
+						"=",
+						"HYPERSHAP"
+					],
+					"open": true,
+					"children": [
+						{
+							"id": "text2",
+							"type": "text",
+							"text": "Using the HyperSHAP method requires an ASTORE model table to be provided.",
+							"visible": ""
+						},
+						{
+							"id": "hyperDepth",
+							"type": "numstepper",
+							"label": "Maximum depth of coalitional approximation:",
+							"required": true,
+							"integer": true,
+							"min": 1,
+							"max": 2
+						}
+					]
+				},
+				{
+					"id": "kernelOptionsSec",
+					"type": "section",
+					"label": "KernelSHAP method options",
+					"visible": [
+						"$methodType",
+						"=",
+						"KERNELSHAP"
+					],
+					"open": true,
+					"children": [
+						{
+							"id": "kernelBinWidth",
+							"type": "numstepper",
+							"label": "Bin width for interval variables:",
+							"required": true,
+							"decimalPlaces": 4,
+							"min": 0
+						},
+						{
+							"id": "kernelIncMissing",
+							"type": "checkbox",
+							"label": "Include missing values in calculations"
+						},
+						{
+							"id": "kernelSampleSize",
+							"type": "numstepper",
+							"label": "Sample size (number of coalition samples):",
+							"required": true,
+							"integer": true,
+							"min": 1
+						},
+						{
+							"id": "kernelSeed",
+							"type": "numstepper",
+							"label": "Random seed:",
+							"required": false,
+							"integer": true,
+							"min": 0
+						},
+						{
+							"id": "text3",
+							"type": "text",
+							"text": "If you select to use raw data for calculation then you do not have to provide an ASTORE model table.",
+							"visible": ""
+						},
+						{
+							"id": "kernelUseRaw",
+							"type": "checkbox",
+							"label": "Use raw data for calculation"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "pageAbout",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "textAbout",
+					"type": "text",
+					"text": "TAI - Explain Predictions with Shapley\n==========\n\nThe \"TAI - Explain Predictions with Shapley\" custom steps executes PROC SHAPLEY in SAS to compute Shapley values for explaining machine learning model predictions. the step examines your predictive model and shows how each input variable contributed to the model's predictions. This can help you understand which factors were most important and build confidence in the model's results.\n\nMethods Supported:\n-     HyperSHAP: Fast approximation method optimized for tree-based models.\n-     KernelSHAP: Model-agnostic kernel-based approximation method for general models.\n\nThe step can help you:\n-     See which variables have the biggest impact on predictions.\n-     Understand the factors driving model decisions.\n-     Explain model results to business users, managers, auditors, or other stakeholders.\n-     Improve transparency when working with machine learning models.\n\nBy making model predictions easier to understand, this step helps users move beyond what the model predicted and better understand why it made that prediction.\n\nUse the Design tab to supply input datasets and configure model roles. Adjust algorithm-specific hyperparameters under the Configuration tab.\n",
+					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "Pre-requisites:  Tested on Viya version Stable 2026.08",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "* SHAPLEY\nhttps://go.documentation.sas.com/doc/en/pgmsascdc/default/casml/casml_shapley_toc.htm\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.0.4 (06SEP2026)\n      - Implement reviewer feedback\n\n* Version 1.0.3 (28JUL2026)\n      - Creation of Understanding Shapley Values section in README to explain what Shapley is\n\n* Version 1.0.2 (27JUL2026)\n      - SAS Code formatting changes (Properly Located Macro and Execution Code comments and Corrected Version Date)\n      - Added version and contact info into step UI\n\n* Version 1.0.1 (24JUL2026)\n      - Feedback implementation\n\n* Version: 1.0.0 (06JUL2026)\n      - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"refData": {
+			"library": "",
+			"table": ""
+		},
+		"targetVar": [],
+		"intervalVars": [],
+		"nominalVars": [],
+		"astoreTable": {
+			"library": "",
+			"table": ""
+		},
+		"weightVar": [],
+		"impute": {
+			"value": "NONE",
+			"label": "None"
+		},
+		"methodType": {
+			"value": "HYPERSHAP",
+			"label": "HyperSHAP"
+		},
+		"hyperDepth": 1,
+		"kernelBinWidth": 0.1,
+		"kernelIncMissing": false,
+		"kernelSampleSize": 500,
+		"kernelSeed": 37,
+		"kernelUseRaw": false
+	},
+	"columnExclusions": [
+		[
+			"targetVar",
+			"weightVar"
+		],
+		[
+			"intervalVars",
+			"targetVar"
+		],
+		[
+			"intervalVars",
+			"weightVar"
+		],
+		[
+			"nominalVars",
+			"targetVar"
+		],
+		[
+			"nominalVars",
+			"intervalVars"
+		],
+		[
+			"nominalVars",
+			"weightVar"
+		]
+	]
+}
