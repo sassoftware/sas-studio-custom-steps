@@ -1,3 +1,5 @@
+# About the /extras subfolder
+
 You can use the extras subfolder to store optional/special items related to your custom step.
 
 Please do not store .step files, .zip files or sample data in this folder. 
@@ -16,3 +18,6 @@ Please do not store .step files, .zip files or sample data in this folder.
 Examples of files that could be included in this extras subfolder: 
 * A SAS Export Package for your custom step, please use a ".package.json" extension for such a file.
 * A .sas file containing a slighly modified/simplified version of the SAS code generator (macro) of your step for use in other SAS applications.
+* Instructions for carrying out dependent tasks related to this step (for example, obtaining a key for an external web service)
+* Configuration schemas which help you in executing steps, such as json or yaml files
+* In short, any artifact (other than the exclusions above) which helps in using your custom step.

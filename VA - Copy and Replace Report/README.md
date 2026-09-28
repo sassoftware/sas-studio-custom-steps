@@ -26,5 +26,7 @@ Tested on Viya version Stable 2025.12
 
 ## Change Log
 
+* Version 1.1 (14MAY2026) 
+    * Dataset Label Update
 * Version 1.0 (16FEB2026) 
     * Initial version

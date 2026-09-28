@@ -32,5 +32,5 @@ Please note that this step can only find SAS Job Definitions that you have acces
 Find a demonstration of this step and the report in this YouTube video: [Get SAS Job Definition Information |Custom Step](https://youtu.be/hr0Wim6K5v8).
 
 ## Change Log
- - Version: 1.0 (10JAN2025)
+ - Version: 1.0 (10JAN2026)
    - Initial Version
