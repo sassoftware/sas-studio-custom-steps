@@ -1,0 +1,154 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "Controls",
+			"children": [
+				{
+					"id": "realTable",
+					"type": "inputtable",
+					"label": "Provide real data:",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+				{
+					"id": "synthTable",
+					"type": "inputtable",
+					"label": "Provide synthetic data:",
+					"required": true,
+					"placeholder": "",
+					"visible": "",
+					"filter": false
+				},
+				{
+					"id": "outLib",
+					"type": "libraryselector",
+					"label": "Provide output library name:",
+					"required": false,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "summary",
+					"type": "outputtable",
+					"label": "Provide name for the summary table:",
+					"required": true,
+					"placeholder": "summary table",
+					"visible": ""
+				},
+				{
+					"id": "extraTables",
+					"type": "checkbox",
+					"label": "Create detail tables for the variables",
+					"visible": ""
+				},
+				{
+					"id": "tablePrefix",
+					"type": "textfield",
+					"label": "Provide prefix for the output tables:",
+					"placeholder": "",
+					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "filterCondition",
+					"type": "textfield",
+					"label": "Filter condition:",
+					"placeholder": "e.g. BAD = 1",
+					"required": false,
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "title1",
+					"type": "section",
+					"label": "Synthetic Data Fidelity & Utility Audit",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "intro_text",
+							"type": "text",
+							"text": "This custom step compares a real dataset against a synthetic dataset to produce a composite similarity score. It evaluates data fidelity across four dimensions: numeric univariate similarity (mean, median, standard deviation), categorical univariate similarity (total variation distance and Jensen–Shannon divergence), categorical relationship fidelity (pairwise Cramér's V comparison), and numeric relationship fidelity (pairwise Spearman correlation comparison). Each dimension produces a detail table for drill-through analysis, and the results are combined into weighted statistical and relational similarity scores — proportional to the number of numeric and categorical variables — giving a single overall similarity percentage. An optional filter condition allows evaluation on specific subsets of the data.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "Parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "Parameters_text",
+							"type": "text",
+							"text": "1. Real data — the two-level name of the real (original) dataset to use as the baseline for comparison (e.g. CASUSER.REAL).\n2. Synthetic data — the two-level name of the synthetic dataset to evaluate against the real data (e.g. CASUSER.SYNTH).\n3. Output library — the output library where all five result tables will be written (e.g. WORK or CASUSER). Defaults to WORK. \n4. Summary table — Always written as similarity_scores in the output library (with any prefix applied). The output port lets you connect downstream flow nodes; the Table node itself is where you'd assign a custom flow name if needed.\n5. Create detail tables (checkbox) — When ticked, four detail tables are written to the output library alongside the summary (per-variable and per-pair breakdowns for drill-through analysis). When unticked, only the summary table is kept.\n6. Table prefix (optional) — Prefix prepended to all output table names (e.g. q4 produces q4_similarity_scores). Useful when running multiple comparisons in the same library without overwriting previous results.\n7. Filter Condition — an optional WHERE expression to subset both tables before evaluation (e.g. bad=1). Leave blank to run against the full tables.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "References_id",
+					"type": "section",
+					"label": "References",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "References_text",
+							"type": "text",
+							"text": "The framework is mentioned in a presentation at SAS Innovate 2026 - watch here: https://www.youtube.com/watch?v=0waLptixaOk&list=PLVBcK_IpFVi-BXicJ5ZMcXuPNQTphJuhv&index=146&t=1s ",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "About",
+					"type": "section",
+					"label": "About",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "About_text",
+							"type": "text",
+							"text": "* Version: 1.1 (01JUL2026)\n    - Implement review feedback\n\n* Version: 1.0 (11JUN2026)\n    - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"realTable": {
+			"library": "",
+			"table": ""
+		},
+		"synthTable": {
+			"library": "",
+			"table": ""
+		},
+		"outLib": "WORK",
+		"summary": {
+			"library": "",
+			"table": ""
+		},
+		"extraTables": true,
+		"tablePrefix": "",
+		"filterCondition": ""
+	}
+}

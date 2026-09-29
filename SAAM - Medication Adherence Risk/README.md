@@ -8,14 +8,14 @@
 >1. All data must exist in a SAS library
 >2. Libraries must be defined prior to interacting with the Custom Step
 >3. Certain variables that are used to join datasets must have consistent names across datasets in which they appear. Variables include: 
->   a. Member ID (exists in Pharmacy Claims, Member Information, Patients to Score, and Inpatient Stays)
->   b. Drug code (exists in Pharmacy Claims, Patients to Score, and Drug Look Up)
->   c. Drug class (exists in Pharmacy Claims and Drug Look Up)
->   d. Drug fill date (exists in Pharmacy Claims and Patients to Score)
->   e. Member state (exists in Member Information and SDOH Data)
->   f. Member county or zip code (exists in Member Information and SDOH Data)
+>     a. Member ID (exists in Pharmacy Claims, Member Information, Patients to Score, and Inpatient Stays)
+>     b. Drug code (exists in Pharmacy Claims, Patients to Score, and Drug Look Up)
+>     c. Drug class (exists in Pharmacy Claims and Drug Look Up)
+>     d. Drug fill date (exists in Pharmacy Claims and Patients to Score)
+>     e. Member state (exists in Member Information and SDOH Data)
+>     f. Member county or zip code (exists in Member Information and SDOH Data)
 >4. Patients to Score data and related data field inputs are required for scoring and are not used for model training. The fields 
-    are only available when "Use previously trained model and score patients" is the selected process request. 
+      are only available when "Use previously trained model and score patients" is the selected process request. 
 >5. When running the custom step in a flow, an input port must be added on the step node to connect the Patients to Score data. 
 
 ## Intended Use
@@ -51,6 +51,6 @@
 * [SAS Medication Adherence Risk documentation] (https://go.documentation.sas.com/doc/en/aaimhpmacdc/v_001/aaimhpmawlcm/home.htm)
 
 ## Change Log
-* Version 1.0 (26MAR2026) 
+* Version 1.0.0 (26MAR2026) 
     * Initial version
 
