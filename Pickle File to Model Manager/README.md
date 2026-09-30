@@ -22,7 +22,7 @@ Models are picked up either from a SAS Content location or directly from the com
 
 * ### Model & Data ###
 
-   The core inputs: the first model's pickle file, an optional name and algorithm label (auto-detected from the model's class if left blank), the training data CSV, optional explicit predictor columns (auto-detected from the model if left blank), the target column, an optional held-out evaluation dataset for honest model-card metrics, and — for classification models only — which class value is the target "event" (whether each model is classification or regression/prediction is detected automatically from the pickle; there's no field for it).
+   The core inputs: the first model's pickle file, an optional name and algorithm label (auto-detected from the model's class if left blank), the training data CSV, optional explicit predictor columns (auto-detected from the model if left blank), the target column (optional, auto-detected from the training table if left blank), an optional held-out evaluation dataset for honest model-card metrics, and — for classification models only — which class value is the target "event" (whether each model is classification or regression/prediction is detected automatically from the pickle; there's no field for it).
 
    ![](img/image.png)
 
@@ -38,15 +38,13 @@ Models are picked up either from a SAS Content location or directly from the com
 
    ![](img/image-2.png)
 
-* ### Optional Steps ###
+* ### Publishing and Monitoring ###
 
-   Whether to generate a model card, and an optional sensitive column for a bias/fairness assessment (classification only).
+   A model card is always generated; optionally give a sensitive column for a bias/fairness assessment (classification only).
 
    Whether to publish the imported model(s), and the name of the (already-existing) Viya publishing destination to publish to. The destination is verified up front — the step fails immediately with a clear message (and the list of destinations that *do* exist) if it can't find the one you named, rather than partway through the run.
 
-   Also whether to set up performance monitoring for the imported model(s) — binary classification and regression/prediction models only, multiclass models are skipped — and which CAS library to upload the monitoring input table to (default `Public`). This requires **Publish** to be checked too: SAS Model Manager scores each model itself to compute performance, so the model has to already be published for that to work. This option configures the project's Model Evaluation properties, uploads a monitoring input table, and creates the performance definition — it deliberately does **not** run the performance job itself (see Requirements below for why). Once the step finishes, open the project's **Performance** tab in Model Manager and click **Run** on the definition it created.
-
-   Optionally, warning and critical alert threshold expressions for the performance definition, in SAS Model Manager's own characteristic-alert syntax (e.g. `char_p1>5 or char_p25>0`). Left blank, no alert thresholds are set. The step doesn't validate the expression itself, only passes it through — an invalid expression surfaces as a Model Manager-side error, not from this step.
+   Also whether to set up performance monitoring for the imported model(s) — binary classification and regression/prediction models only, multiclass models are skipped — and which CAS library to upload the monitoring input table to (default `Public`). This requires **Publish** to be checked too: SAS Model Manager scores each model itself to compute performance, so the model has to already be published for that to work. This option configures the project's Model Evaluation properties, uploads a monitoring input table, and creates the performance definition, including drift-alert thresholds set automatically to SAS's recommended defaults — it deliberately does **not** run the performance job itself (see Requirements below for why). Once the step finishes, open the project's **Performance** tab in Model Manager and click **Run** on the definition it created.
 
    ![](img/image-3.png)
 
@@ -110,6 +108,14 @@ The log ends with a run summary listing every phase (model card, import, publish
 
 ## Change Log
 
+* Version 1.23 (30SEP2026)
+    * Target column name is now optional. Leave it blank and it auto-detects from the training table — the same technique `2_pzmm_import.ipynb` already used: whichever non-predictor column matches the first model's own `classes_` (classification) or has more than 2 distinct values (regression). Verified against all 5 demo models, each resolving unambiguously. Still raises a clear error if the training table makes it ambiguous, asking for the column name explicitly rather than guessing wrong.
+* Version 1.22 (30SEP2026)
+    * Performance definitions are scoped to the first monitored model again (having briefly gone back to all models in 1.21). The root cause is now pinned down precisely from a real job log: a brand-new project has none of Model Manager's shared per-project result tables yet (`mm_std_kpi`, `mm_kpi_categories`, and similar) — the first time one gets created, two models' jobs scored at the same instant can both see "doesn't exist" and race to create it, and one loses with a "table ... already exists" error. Once those tables exist, later runs safely *append* instead, even with multiple models scored together — confirmed by a real log showing the identical tables handled via "Updated by key"/"Successfully appended" on a subsequent run. Add the rest of the models to the definition via Model Manager's Edit Definition wizard once this first run has completed cleanly — safe from then on.
+* Version 1.21 (29SEP2026)
+    * Performance definitions are back to including every monitored model again, instead of just the first one. The Model Manager job-collision risk that motivated scoping to one model (Version 1.13) was confirmed transient rather than a reliable blocker, by a real multi-model test run that completed successfully.
+* Version 1.20 (29SEP2026)
+    * Removed the drift-alert UI boxes entirely (the Warning/Critical count fields added in 1.17, and the two Advanced expression overrides), along with their explanatory notes. Drift alerts still get set automatically with SAS's recommended defaults (`char_p1>2` warning, `char_p1>5 or char_p25>0` critical) - there's simply nothing left to configure or explain on the tab, in the interest of keeping the step's UI simple.
 * Version 1.19 (29SEP2026)
     * Reworded the Connection tab's "Viya host" field label to say plainly what to type in it: "For scheduled jobs outside SAS Studio: enter the Viya URL as if you were in Studio (leave blank otherwise)". Confirmed `sasctl`'s `Session()` accepts either a full URL or a bare hostname (it parses out the hostname via `urlsplit()` either way), so telling users to just paste the same address they use to open SAS Studio is accurate, not just simpler.
 * Version 1.18 (29SEP2026)
