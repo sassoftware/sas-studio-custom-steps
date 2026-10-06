@@ -34,6 +34,12 @@ For more information about the different settings please refer to the SAS docume
 
 ### SAAM - Document Analysis - Execute Batch OCR Process
 
+* Version 1.10 (21AUG2026)
+  * Add optional setting to assign a deterministic batch output folder name:
+    * Generates a prefixed, timestamped name and passes it to the batch as BATCH_OUTPUT_FOLDER_NAME
+    * Reports the resulting batch output directory in the results
+    * Retains _sda_batch_output_folder_name and _sda_batch_output_directory for downstream steps
+
 * Version 1.9 (28MAY2026)
   * Renamed step from "OCR - Document Analysis - Execute Batch OCR Process" to "SAAM - Document Analysis - Execute Batch OCR Process" to conform to the SAAM naming standard
 

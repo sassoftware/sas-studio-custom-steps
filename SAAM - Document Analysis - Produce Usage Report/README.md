@@ -30,6 +30,9 @@ For more information about the different settings please refer to the SAS docume
 
 ### SAAM - Document Analysis - Produce Usage Report
 
+* Version 1.7 (23JUN2026)
+  * Added "OCR Usage" report type option (create_ocr_usage_report.py)
+
 * Version 1.6 (28MAY2026)
   * Renamed step from "OCR - Document Analysis - Produce Usage Report Output" to "SAAM - Document Analysis - Produce Usage Report" to conform to the SAAM naming standard
 
