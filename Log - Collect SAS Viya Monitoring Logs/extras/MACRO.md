@@ -20,8 +20,6 @@ This document does not cover:
 - Custom Step UI usage
 - Internal macro implementation details
 
-
-
 ## 2. Quick Start
 
 ### 2.1 Run with Defaults
@@ -71,14 +69,12 @@ This extracts logs between the specified start and end times.
 
 This extracts only log entries whose message field contains the specified string.
 
-### 2.5 Update or Recreate the Configuration File
+### 2.5 Recreate the Configuration File
 
 ```sas
-%rake(save=1, user=admin, password=foobar, url=default);
 %rake(reset=1);
 ```
 
-- `save=1` stores credentials and URL in the configuration file
 - `reset=1` deletes and recreates the configuration file
 
 ## 3. Execution Model (Overview)
@@ -99,20 +95,19 @@ This section explains what each macro parameter does.
 |No.|Parameters and Defaults|Description and Examples|
 |---|---|---|
 |1|out=work.log|Specify the name of the dataset to be logged. If omitted, WORK.LOG is used. <br>out=work.log|
-|2|from="now-15m"<br>to="now"|Specify the period of time from which logs are to be extracted.<br>From is the starting point and to is the ending point, and only one of them cannot be omitted.<br>Values in the following format, enclosed in double quotes that can be specified. Postfixes indicating time relative to the current time, where s means seconds, m means minutes, h means hours, d means days, w means weeks, and M means months. now-3h means 3 hours before the current time.<br><br>Sepcify local date and time<br>from="2024-06-30T12:00:15"<br><br>current time<br>from="now"<br><br>30 seconds before the current time<br>from="now-30s"<br><br>1 minute before the current time<br>from="now-1m"<br><br>1 day before the current time<br>from="now-1d"<br><br>1 week before the current time<br>from="now-1w"<br><br>1 month before the current time<br>from="now-1M"|
+|2|from="now-10m"<br>to="now"|Specify the period of time from which logs are to be extracted.<br>From is the starting point and to is the ending point, and only one of them cannot be omitted.<br>Values in the following format, enclosed in double quotes that can be specified. Postfixes indicating time relative to the current time, where s means seconds, m means minutes, h means hours, d means days, w means weeks, and M means months. now-3h means 3 hours before the current time.<br><br>Sepcify local date and time<br>from="2024-06-30T12:00:15"<br><br>current time<br>from="now"<br><br>30 seconds before the current time<br>from="now-30s"<br><br>1 minute before the current time<br>from="now-1m"<br><br>1 day before the current time<br>from="now-1d"<br><br>1 week before the current time<br>from="now-1w"<br><br>1 month before the current time<br>from="now-1M"<br><br>Use /m, /h or /d to round the current time down to the beginning of the current minute, hour or day.<br>from="now/h"|
 |3|tz=default| Specify the time zone used to interpret timestamps. The default value is "default", which uses the session’s default time zone. Other valid values include JST, UTC, or a time zone ID such as America/New_York. <br>tz=Asia/Tokyo|
 |4|user=|Specify an OpenSearch user name. Instead of the argument, it can be specified by the global macro variable opensearch_user. <br>user=%str(admin)|
 |5|password=|Specify the OpenSearch password. Instead of the argument, it can be specified by the global macro variable opensearch_password. <br>password=%str(foobar)|
 |6|message=|Specify the characters contained in the MESSAGE field as log extraction criteria. This option is intended to capture specific error messages over a relatively broad time period. <br>message="failed container"|
 |7|debug=0|Arguments for debugging. Set debug=1 to output detailed logs.|
 |8|verbose=0|Arguments for debugging. Set verbose=1 to log NOTE information.|
-|9|summary=0|Arguments to enable/disable the ability to aggregate logs. When summary=0 is set, the log frequency summary and plotting are not performed. This should be specified when the amount of logs is large and the time for frequency aggregation and plotting is desired to be omitted.|
+|9|freq=0|Arguments to enable/disable the ability to aggregate logs. When freq=0 is set, the log frequency summary and plotting are not performed. This should be specified when the amount of logs is large and the time for frequency aggregation and plotting is desired to be omitted.|
 |10|check=0|Argument to enable/disable the error pattern checking function. If check=0 is set, no error pattern check is performed. Error patterns are defined as multiple strings, such as "Out Of Memory" or "SAS/TK is aborting". The pattern is checked to see if it is included in the message, and if so, the variable check in the log is set to the number of the pattern. Error patterns are defined in the configuration file (rakeConfig.txt). Any pattern can be added by editing the configuration file with an editor.|
-|11|save=0|If save=1 is specifed, the encoded credentials and URL will be saved in the configuration file. No search is performed. <br>This option has been added to allow you to change the username and password from the custom step UI and have the changes reflected in the configuration file. |
-|12|reset=0|If reset=1 is specified, the config file is deleted and recreated. If the encodedCredential value can be obtained from the file before it is deleted, that value is reused. No search is performed. <br>Since the OpenSearch URL may differ depending on the environment, this option has been added so that the default value can be changed from the UI.|
-|13|url=|Specify the OpenSearch URL. This will be used instead of the URL value in the configuration file. If you specify url=default, the default URL will be applied.|
-|14|query=work.query|Holds the number of cases matching the pattern contained in WORK.LOG.|
-
+|11|reset=0|If reset=1 is specified, the config file is deleted and recreated. If the encodedCredential value can be obtained from the file before it is deleted, that value is reused. No search is performed. <br>Since the OpenSearch URL may differ depending on the environment, this option has been added so that the default value can be changed from the UI.|
+|12|query=work.query|Holds the number of cases matching the pattern contained in WORK.LOG.|
+|13|folder=sasserver:/tmp| Specify the folder where output files are saved. Required when using the filename parameter.|
+|12|filname=OpenSearch_${date}T${timne}.tsv|Specify the output file name. The output format is determined by the file extension (.tsv or .json).|
 
 ## 5. Configuration File: rakeConfig.txt
 
@@ -120,7 +115,6 @@ The macro uses a configuration file to persist settings across runs.
 
 ### What Is Stored
 
-- Encoded credentials
 - OpenSearch API URL
 - Error message patterns used for log checking
 
@@ -132,7 +126,6 @@ The macro uses a configuration file to persist settings across runs.
 ### Typical Lifecycle
 
 - Created automatically on first run
-- Updated with `save=1`
 - Recreated with `reset=1` if necessary
 
 ## 6. Output Datasets
@@ -190,6 +183,12 @@ This section describes configuration options that may need to be adjusted depend
 For initial testing, these settings usually do not need to be changed.  
 However, they often become important when the macro is used continuously in daily operations.
 
+### Environment Variable
+
+If the `RAKE_CREDENTIALS` environment variable is defined, the Custom Step uses it as the OpenSearch credential.
+
+Run the Custom Step once with a valid user name and password. Rake generates an `options set=RAKE_CREDENTIALS=...` statement in the SAS log. Copy the statement to your AUTOEXEC file to avoid entering credentials each time.
+
 ### Macro Variables Defined in Rake.step
 
 Some default settings are defined as macro variables at the top of the SAS program embedded in `Rake.step`.
@@ -216,19 +215,53 @@ While the default patterns cover common cases, operational use often requires ad
 Only a subset of error patterns is shown here.
 Because these patterns may change over time, refer to the configuration file for the complete and up-to-date list.
 
-- SAS/TK is aborting
-- Error creating compute session
-- Unable to launch node
-- Error stopping CAS session
-- ObjectOptimisticLockingFailureException
-- ServerOperationException
-- ODBC SQL Server Wire Protocol driver
-- Internal Server Error
 - Child terminated by signal
-- Unhandled Exception
+- endpoints have no available addresses
+- Error creating compute session
+- Error stopping CAS session
+- EvictionThresholdMet
+- Exception
+- FailedScheduling
+- Failure
+- FreeDiskSpaceFailed
+- Gateway Time-out
+- I/O error on
+- ImageGCFailed
+- Insufficient ephemeral-storage
+- Internal Server Error
+- INTERNAL_SERVER_ERROR
+- Java heap space
+- JobExecutionException
 - killed
+- NetworkUnavailable
+- No left space
+- No space left
+- NodeHasDiskPressure
+- NodeHasMemoryPressure
+- NodeHasPIDPressure
+- NodeNotReady
+- OAuth token is expired
+- ObjectOptimisticLockingFailureException
+- ODBC SQL Server Wire Protocol driver
 - OOM
+- OOMKilled
+- OOMKilling
+- Operation timed out
+- out of memory
 - OutOfMemory
+- panic:
+- SAS/TK is aborting
+- ServerOperationException
+- ServletOutputStream failed to write:
+- SIGSEGV
+- SSL error
+- SystemOOM
+- The system has encountered an unhandled Exception
+- timed out after 60
+- Traceback
+- Unable to launch node
+- Unexpected
+- unhandled Exception
 
 You can edit the configuration file to customize the error checking patterns according to your environment and operational needs.
 
