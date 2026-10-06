@@ -7,9 +7,11 @@
 >26JUN2026: New category - TAI for Trustworthy AI introduced.
 
 ## Abbreviations used in name of Custom Step
-
+<details>
+  <summary>
 The list of available Custom Steps further down on this page uses the following abbreviations to group related steps.
-
+</summary>
+  
 | Abbreviation              | Explanation                                                               |
 | :------------------------ | :------------------------------------------------------------------------ |
 | CAS                       | Steps in this category provide utilities for working with data in CAS     |
@@ -31,6 +33,8 @@ The list of available Custom Steps further down on this page uses the following 
 | SID                       | SAS Intelligent Decisioning related                                       |
 | TAI                       | Trustworthy AI related                                                    |
 | VA                        | SAS Visual Analytics related                                              |
+
+</details>
 
 ## Available Custom Steps
 
@@ -133,8 +137,8 @@ The list of available Custom Steps further down on this page uses the following 
 | [Python - Virtual Environments](./Python%20Virtual%20environments/README.md)**<sup> (DEPRECATED)</sup>** | A collection of SAS Studio custom steps which help you create, activate, and switch between virtual Python environments for use within SAS Viya.**<sup> (DEPRECATED)</sup>** | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2020.1.5 <br>or later | 12JUL2022 |
 | [R Runner](./R%20Runner/README.md) | Submit R scripts with support for input and output table | [Samiul Haque](https://github.com/samiulhq) / [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2023.08 <br>or later | 18AUG2023 |
 | [Rank Columns - Starter template](./Rank%20Columns%20-%20Starter%20template/README.md) | Simple Example (based on template) | [SAS](https://github.com/sassoftware) | 2020.1.5 <br>or later | 25AUG2022 |
-| [SAAM - Document Analysis - Execute Batch OCR Process](./SAAM%20-%20Document%20Analysis%20-%20Execute%20Batch%20OCR%20Process/README.md) | Uses SAS Document Analysis to perform a batch run on files stored in the SAS Server file system. | [Corey Kozak](https://github.com/kozak1c) | 2025.10 <br>or later | 28MAY2026 |
-| [SAAM - Document Analysis - Produce Usage Report Output](./SAAM%20-%20Document%20Analysis%20-%20Produce%20Usage%20Report/README.md) | Uses SAS Document Analysis to to generate a usage report on previous batch processes. | [Corey Kozak](https://github.com/kozak1c) | 2024.08 <br>or later | 28MAY2026 |
+| [SAAM - Document Analysis - Execute Batch OCR Process](./SAAM%20-%20Document%20Analysis%20-%20Execute%20Batch%20OCR%20Process/README.md) | Uses SAS Document Analysis to perform a batch run on files stored in the SAS Server file system. | [Corey Kozak](https://github.com/kozak1c) | 2025.10 <br>or later | 21AUG2026 |
+| [SAAM - Document Analysis - Produce Usage Report Output](./SAAM%20-%20Document%20Analysis%20-%20Produce%20Usage%20Report/README.md) | Uses SAS Document Analysis to to generate a usage report on previous batch processes. | [Corey Kozak](https://github.com/kozak1c) | 2024.08 <br>or later | 23JUN2026 |
 | [SAAM - Document Analysis for Health Records Review](./SAAM%20-%20Document%20Analysis%20for%20Health%20Records%20Review/README.md) | Executes the SAS Document Analysis Health Records Review information extraction process | [Murali Pagolu](https://github.com/mupago) | 2025.12 <br>or later | 28JAN2026 |
 | [SAAM - Medication Adherence Risk](./SAAM%20-%20Medication%20Adherence%20Risk/README.md) | Executes the SAS Medication Adherence Risk model pipeline | [Jennifer Hargrove](https://github.com/jehargdemo) | SAS Viya 2024.06 <br> or later <br> Licence for Medication Adherence Risk | 26MAR2026 |
 | [SAS Content - Copy File from File System](./SAS%20Content%20-%20Copy%20File%20from%20File%20System/README.md) | Copy file from Compute file system into SAS Content folder programmatically | [Sundaresh Sankaran](https://github.com/SundareshSankaran) | 2022.11 <br>or later | 09JAN2024 |
