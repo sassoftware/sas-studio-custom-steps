@@ -1,0 +1,417 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "pageOptions",
+			"type": "page",
+			"label": "Options",
+			"children": [
+				{
+					"id": "_esb_source_data_directory_txt",
+					"type": "text",
+					"text": "SAS Studio Custom Step for executing the SAS Document Analysis OCR batch process. At a minimum, users must specify a folder containing files to be processed, the OCR engine to use, and the name of the SAS Launcher Context associated with the SDA deployment.\n\nThe source directory should contain files of the following types in order to be processed and should be located on the server file sysem (not in SAS Content): [PDF, PNG, JPG, JPEG, TIF, TIFF, BMP, ZIP]",
+					"visible": ""
+				},
+				{
+					"id": "ai_disclaimer",
+					"type": "text",
+					"text": "Disclaimer: AI-generated content - evaluate accuracy and suitability before use.",
+					"visible": ""
+				},
+				{
+					"id": "_sda_source_data_directory",
+					"type": "path",
+					"label": "Select directory containing source files to process:",
+					"pathtype": "folder",
+					"placeholder": "Select directory containing source files to process",
+					"required": true,
+					"visible": ""
+				},
+				{
+					"id": "_sda_ocr_engine",
+					"type": "dropdown",
+					"label": "Select OCR engine:",
+					"items": [
+						{
+							"value": "ms",
+							"label": "Microsoft"
+						},
+						{
+							"value": "aws",
+							"label": "AWS Textract"
+						},
+						{
+							"value": "paddle",
+							"label": "PaddleOCR"
+						}
+					],
+					"required": true,
+					"placeholder": "Select OCR engine",
+					"visible": ""
+				},
+				{
+					"id": "_sda_ms_ocr_model",
+					"type": "dropdown",
+					"label": "Select Microsoft OCR model",
+					"items": [
+						{
+							"value": "prebuilt-read",
+							"label": "Standard Read"
+						},
+						{
+							"value": "prebuilt-layout",
+							"label": "Layout"
+						},
+						{
+							"value": "prebuilt-contract",
+							"label": "Contract"
+						},
+						{
+							"value": "prebuilt-healthInsuranceCard.us",
+							"label": "Health insurance card"
+						},
+						{
+							"value": "prebuilt-idDocument",
+							"label": "ID document"
+						},
+						{
+							"value": "prebuilt-invoice",
+							"label": "Invoice"
+						},
+						{
+							"value": "prebuilt-receipt",
+							"label": "Receipt"
+						},
+						{
+							"value": "prebuilt-marriageCertificate.us",
+							"label": "Marriage certificate"
+						},
+						{
+							"value": "prebuilt-creditCard",
+							"label": "Credit card"
+						},
+						{
+							"value": "prebuilt-check.us",
+							"label": "Bank check"
+						},
+						{
+							"value": "prebuilt-payStub.us",
+							"label": "Pay stub"
+						},
+						{
+							"value": "prebuilt-bankStatement",
+							"label": "Bank statement"
+						},
+						{
+							"value": "prebuilt-mortgage.us.1003",
+							"label": "US mortgage 1003"
+						},
+						{
+							"value": "prebuilt-mortgage.us.1004",
+							"label": "US mortgage 1004"
+						},
+						{
+							"value": "prebuilt-mortgage.us.1005",
+							"label": "US mortgage 1005"
+						},
+						{
+							"value": "prebuilt-mortgage.us.1008",
+							"label": "US mortgage 1008 summary"
+						},
+						{
+							"value": "prebuilt-mortgage.us.closingDisclosure",
+							"label": "US mortgage closing disclosure"
+						},
+						{
+							"value": "prebuilt-tax.us",
+							"label": "US tax unified"
+						},
+						{
+							"value": "prebuilt-tax.us.w2",
+							"label": "US tax W2"
+						},
+						{
+							"value": "prebuilt-tax.us.w4",
+							"label": "US tax W4"
+						},
+						{
+							"value": "prebuilt-tax.us.1040",
+							"label": "US tax 1040"
+						},
+						{
+							"value": "prebuilt-tax.us.1095A",
+							"label": "US tax 1095A"
+						},
+						{
+							"value": "prebuilt-tax.us.1095C",
+							"label": "US tax 1095C"
+						},
+						{
+							"value": "prebuilt-tax.us.1098",
+							"label": "US tax 1098"
+						},
+						{
+							"value": "prebuilt-tax.us.1098E",
+							"label": "US tax 1098E"
+						},
+						{
+							"value": "prebuilt-tax.us.1098T",
+							"label": "US tax 1098T"
+						},
+						{
+							"value": "prebuilt-tax.us.1099",
+							"label": "US tax 1099"
+						},
+						{
+							"value": "prebuilt-tax.us.1099SSA",
+							"label": "US tax 1099 SSA"
+						},
+						{
+							"value": "cv",
+							"label": "Computer Vision OCR (legacy model)"
+						},
+						{
+							"value": "custom",
+							"label": "Custom Document Intelligence model"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": [
+						"$_sda_ocr_engine",
+						"=",
+						"ms"
+					],
+					"indent": 1,
+					"enabled": [
+						"$_sda_ocr_engine",
+						"=",
+						"ms"
+					]
+				},
+				{
+					"id": "_sda_ms_custom_model",
+					"type": "textfield",
+					"label": "Enter custom model name",
+					"placeholder": "",
+					"required": true,
+					"visible": [
+						"$_sda_ms_ocr_model",
+						"=",
+						"custom"
+					],
+					"indent": 2,
+					"enabled": [
+						"$_sda_ms_ocr_model",
+						"=",
+						"custom"
+					]
+				},
+				{
+					"id": "_sda_launcher_context_name",
+					"type": "textfield",
+					"label": "Enter SAS launcher context name:",
+					"placeholder": "ex. SAS Document Analysis",
+					"required": true,
+					"visible": ""
+				},
+				{
+					"id": "_sda_log_level",
+					"type": "dropdown",
+					"label": "Select logging level:",
+					"items": [
+						{
+							"value": "INFO",
+							"label": "Info"
+						},
+						{
+							"value": "WARNING",
+							"label": "Warning"
+						},
+						{
+							"value": "ERROR",
+							"label": "Error"
+						},
+						{
+							"value": "CRITICAL",
+							"label": "Critical"
+						},
+						{
+							"value": "DEBUG",
+							"label": "Debug"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "_sda_optional_settings_section",
+					"type": "section",
+					"label": "Optional settings",
+					"open": false,
+					"visible": "",
+					"indent": 0,
+					"children": [
+						{
+							"id": "_sda_batch_tag",
+							"type": "textfield",
+							"label": "Provide an optional batch tag identifier:",
+							"placeholder": "ex. Batch_123ABC",
+							"required": false,
+							"visible": ""
+						},
+						{
+							"id": "_esb_batch_tag_txt",
+							"type": "text",
+							"text": "The optional batch tag identifier allows users to group files by a common label.",
+							"visible": ""
+						},
+						{
+							"id": "_sda_mapping_file_format",
+							"type": "dropdown",
+							"label": "Output format for mapping files (XLSX or CSV)",
+							"items": [
+								{
+									"value": "XLSX"
+								},
+								{
+									"value": "CSV"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "_sda_assign_output_folder_name",
+							"type": "checkbox",
+							"label": "Assign a deterministic batch output folder name",
+							"visible": ""
+						},
+						{
+							"id": "_sda_skip_re_ocr",
+							"type": "checkbox",
+							"label": "Avoid duplicate OCR calls",
+							"visible": ""
+						},
+						{
+							"id": "_sda_use_uuid_as_name",
+							"type": "checkbox",
+							"label": "Assign UUID to file names",
+							"visible": ""
+						},
+						{
+							"id": "_sda_delete_source_files",
+							"type": "checkbox",
+							"label": "Remove source files",
+							"visible": ""
+						},
+						{
+							"id": "_sda_wait_for_completion",
+							"type": "checkbox",
+							"label": "Wait for batch execution before terminating (synchronous processing)",
+							"visible": ""
+						},
+						{
+							"id": "_sda_ocr_keep_line_breaks",
+							"type": "checkbox",
+							"label": "Retain line breaks within extracted text",
+							"visible": ""
+						},
+						{
+							"id": "_sda_convert_pdf_to_images",
+							"type": "checkbox",
+							"label": "Generate images from PDF files",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "pageAbout",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "textAbout",
+					"type": "text",
+					"text": "SAAM - Document Analysis - Execute Batch OCR Process step\n==========\n\nThe \"SAAM - Document Analysis - Execute Batch OCR Process\" custom steps enables an easy integration with the SAS Document Analysis (SDA) model, to run a full batch job, without the need to write any code.\n\nThe following OCR engines are supported: \n  * PaddleOCR (local)\n  * Microsoft OCR\n  * AWS Textract\n\nThe location of the generated output will be displayed for after running this step.\n",
+					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "A license for SAS Document Analysis (SDA) is required and you will need to know the name of the launcher context that was created during the deployment of SDA.\n\nPre-requisites:  Tested on Viya version Stable 2024.08 & Stable 2026.01",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "* SAS Document Analysis documentation (https://go.documentation.sas.com/doc/en/aaimdacdc/default/aaimdawlcm/home.htm)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.11 (13OCT2026)\n     - Show the AI-generated content disclaimer at the top of the Options page, for every OCR engine\n\n* Version 1.10 (21AUG2026)\n     - Add optional setting to assign a deterministic batch output folder name:\n        - Generates a prefixed, timestamped name and passes it to the batch as BATCH_OUTPUT_FOLDER_NAME\n        - Reports the resulting batch output directory in the results\n        - Retains _sda_batch_output_folder_name and _sda_batch_output_directory for downstream steps\n\n* Version 1.9 (28MAY2026)\n     - Renamed step from \"OCR - Document Analysis - Execute Batch OCR Process\" to \"SAAM - Document Analysis - Execute Batch OCR Process\" to conform to the SAAM naming standard\n\n* Version 1.8 (22APR2026)\n     - Add the following options and associated defaults:\n        - Retain line breaks (True)\n        - Generate images from PDFs (False)\n        - Output mapping file format (XSLX)\n\n* Version 1.7 (22APR2026)\n     - Remove \"bypass SSL\" option. Default to False\n\n* Version 1.6 (16APR2026)\n     - Communicate exit codes for failed SDA batch processes\n\n* Version 1.5 (19FEB2026)\n     - Use absolute path for python command\n\n* Version 1.4 (09OCT2025)\n     - Add PaddleOCR to OCR engine options\n     - Add MS OCR model name - available when \"Microsoft\" is selected as the OCR engine\n     - Add Custom Document Intelligence model name - available when \"Custom\" is selected as the MS OCR model\n     - Remove optional setting to maintain directory structure\n\n* Version 1.3 (25FEB2025)\n - Use launcher context name instead ID\n\n* Version 1.2 (04NOV2024)\n     - Added option to wait for batch completion with ability to specify a max wait time.\n\n* Version 1.1 (09OCT2024)\n     - Implemented feedback\n\n* Version: 1.0 (07OCT2024)\n      - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"_sda_source_data_directory": "",
+		"_sda_ocr_engine": null,
+		"_sda_ms_ocr_model": {
+			"value": "prebuilt-read",
+			"label": "Read"
+		},
+		"_sda_ms_custom_model": "",
+		"_sda_launcher_context_name": "SAS Document Analysis Runtime",
+		"_sda_log_level": {
+			"value": "INFO",
+			"label": "Info"
+		},
+		"_sda_batch_tag": "",
+		"_sda_mapping_file_format": {
+			"value": "XLSX"
+		},
+		"_sda_assign_output_folder_name": true,
+		"_sda_skip_re_ocr": true,
+		"_sda_use_uuid_as_name": false,
+		"_sda_delete_source_files": false,
+		"_sda_wait_for_completion": true,
+		"_sda_ocr_keep_line_breaks": true,
+		"_sda_convert_pdf_to_images": false
+	}
+}
