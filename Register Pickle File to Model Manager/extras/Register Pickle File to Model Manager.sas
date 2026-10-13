@@ -117,7 +117,7 @@
 
 /* Build banner - if you don't see this exact line in the log, SAS Studio is
    running an OLD copy of the step (re-upload the .step and replace the flow node). */
-%put NOTE: ===== Register Pickle File to Model Manager - step build 1.24 (13OCT2026) =====;
+%put NOTE: ===== Register Pickle File to Model Manager - step build 1.25 (14OCT2026) =====;
 
 proc python;
 submit;
@@ -620,45 +620,37 @@ for _idx, _slot in enumerate(model_slots, start=1):
             )
 
         # --- Governance / lineage metadata --------------------------------------
-        # Provenance (who/what/when/how) + hyperparameters into ModelProperties'
-        # custom "properties" list, so audit/governance can see origin in MM.
-        # Non-fatal; only prints/logs if it fails, to keep the run quiet.
+        # Provenance (who/what/when/how) + hyperparameters, written into Model
+        # Manager's own custom "properties" list after import (below) so audit/
+        # governance can see origin in MM. NOTE: writing this into
+        # ModelProperties.json's "properties" key before import, as earlier
+        # versions did, silently does nothing - pzmm.ImportModel.import_model()
+        # never reads that key. Confirmed empirically: a model imported that
+        # way comes back from mr.get_model() with properties=None. The only
+        # channel that actually works is a get/set/update_model round-trip
+        # against the model resource AFTER it exists - see the call right
+        # after import_model(), below.
+        from datetime import datetime, timezone
+        _gov = [
+            ("registeredBy", (current_session().username or "") if current_session() else ""),
+            ("registeredUTC", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")),
+            ("toolBuild", "RegisterPickleFileToModelManager 1.25 (14OCT2026)"),
+            ("mlFramework", model_framework),
+            ("frameworkRuntime", f"scikit-learn {runtime_sklearn}"),
+            ("pickledWith", f"scikit-learn {pickled_sklearn}"),
+            ("modelClass", type(model).__name__),
+            ("modelFunction", model_function),
+            ("targetVariable", target_variable),
+            ("nFeatures", str(len(predictor_columns))),
+            ("nTrainingRows", str(len(data))),
+        ]
         try:
-            from datetime import datetime, timezone
-            _gov = [
-                ("registeredBy", (current_session().username or "") if current_session() else ""),
-                ("registeredUTC", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")),
-                ("toolBuild", "RegisterPickleFileToModelManager 1.24 (13OCT2026)"),
-                ("mlFramework", model_framework),
-                ("frameworkRuntime", f"scikit-learn {runtime_sklearn}"),
-                ("pickledWith", f"scikit-learn {pickled_sklearn}"),
-                ("modelClass", type(model).__name__),
-                ("modelFunction", model_function),
-                ("targetVariable", target_variable),
-                ("nFeatures", str(len(predictor_columns))),
-                ("nTrainingRows", str(len(data))),
-            ]
-            try:
-                _params = json.dumps({k: str(v) for k, v in model.get_params().items()}, sort_keys=True)
-            except Exception:
-                _params = ""
-            if _params:
-                _gov.append(("hyperparameters", _params))
-            gov_props = [{"name": n, "value": str(v)[:512], "type": "string"} for n, v in _gov]
-            _gp_path = output_dir / "ModelProperties.json"
-            with open(_gp_path) as f:
-                _mp = json.load(f)
-            _existing = _mp.get("properties") or []
-            _have = {p.get("name") for p in _existing if isinstance(p, dict)}
-            for gp in gov_props:
-                if gp["name"] not in _have:
-                    _existing.append(gp)
-            _mp["properties"] = _existing
-            with open(_gp_path, "w") as f:
-                json.dump(_mp, f, indent=4)
-        except Exception as _e:
-            print(f"Governance metadata skipped for '{this_prefix}': {_e}")
-            _log("Governance metadata", "failed", f"{this_prefix}: {_e}")
+            _params = json.dumps({k: str(v) for k, v in model.get_params().items()}, sort_keys=True)
+        except Exception:
+            _params = ""
+        if _params:
+            _gov.append(("hyperparameters", _params))
+        gov_props = [{"name": n, "value": str(v)[:512], "type": "string"} for n, v in _gov]
 
         J.write_file_metadata_json(this_prefix, output_dir)
 
@@ -884,6 +876,26 @@ for _idx, _slot in enumerate(model_slots, start=1):
         model_obj = result[0] if isinstance(result, tuple) else result
         imported_models.append(model_obj)
         _log("Model imported", "success", f"{this_prefix} -> {project_name}")
+
+        # Write the governance/lineage properties computed above onto the
+        # model that now actually exists in Model Manager. Uses model_obj
+        # directly (what import_model itself just returned) rather than a
+        # fresh mr.get_model(this_prefix) lookup - this is a shared,
+        # multi-tenant repository where plain model names like
+        # "DecisionTreeClassifier" collide across many users' projects, and
+        # a name-based re-lookup can silently resolve to someone else's
+        # model instead (confirmed live: it returned a DIFFERENT model than
+        # the one just updated, with a "Multiple items found" warning).
+        # model_obj's id is unique, so updating it directly is unambiguous.
+        # Non-fatal; only logs if it fails, so a governance hiccup doesn't
+        # block the import that already succeeded.
+        try:
+            model_obj["properties"] = gov_props
+            mr.update_model(model_obj)
+            _log("Governance metadata", "success", this_prefix)
+        except Exception as _e:
+            print(f"Governance metadata skipped for '{this_prefix}': {_e}")
+            _log("Governance metadata", "failed", f"{this_prefix}: {_e}")
 
         # --- Publish (optional, per-model so one failure doesn't block the rest
         # of the batch). Uses sasctl's monitored publish_model(), which waits for
