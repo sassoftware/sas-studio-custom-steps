@@ -1,0 +1,207 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "pageOptions",
+			"type": "page",
+			"label": "Options",
+			"children": [
+				{
+					"id": "_sda_explainer_txt",
+					"type": "text",
+					"text": "SAS Studio Custom Step for executing the SAS Document Analysis report creation process. At a minimum, users must specify the report type to be output, the file format of the report, and the SAS Launcher Context ID to execute against.\n\nFor more details, please reference the link to the official documentation in the about page of this step.",
+					"visible": ""
+				},
+				{
+					"id": "_sda_command",
+					"type": "dropdown",
+					"label": "Select report type:",
+					"items": [
+						{
+							"value": "create_batch_summary_report.py",
+							"label": "Batch Summary"
+						},
+						{
+							"value": "create_batch_transactions_report.py",
+							"label": "Batch Transactions"
+						},
+						{
+							"value": "create_file_summary_report.py",
+							"label": "File Summary"
+						},
+						{
+							"value": "create_file_transactions_report.py",
+							"label": "File Transactions"
+						},
+						{
+							"value": "create_ocr_usage_report.py",
+							"label": "OCR Usage"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "_sda_report_output_format",
+					"type": "dropdown",
+					"label": "Select report output format:",
+					"items": [
+						{
+							"value": "xlsx",
+							"label": "Excel (XLSX)"
+						},
+						{
+							"value": "csv",
+							"label": "CSV"
+						},
+						{
+							"value": "html",
+							"label": "HTML"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "_sda_launcher_context_name",
+					"type": "textfield",
+					"label": "Enter the SAS launcher context name:",
+					"placeholder": "ex. SAS Document Analysis Runtime",
+					"required": true,
+					"visible": ""
+				},
+				{
+					"id": "_sda_report_filters_section",
+					"type": "section",
+					"label": "Optional settings and report filters",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "_sda_wait_for_completion",
+							"type": "checkbox",
+							"label": "Wait for batch execution before terminating (synchronous processing)",
+							"visible": ""
+						},
+						{
+							"id": "_sda_report_batch_sk_list",
+							"type": "textfield",
+							"label": "Enter batch SK filter (provide as a comma-separated list):",
+							"placeholder": "ex. 1, 2, 3",
+							"required": false,
+							"visible": "",
+							"indent": 0
+						},
+						{
+							"id": "_sda_report_batch_tag_list",
+							"type": "textfield",
+							"label": "Enter batch tag filter (provide as comma-separated list):",
+							"placeholder": "ex. Batch_123, Batch_ABC",
+							"required": false,
+							"visible": "",
+							"indent": 0
+						},
+						{
+							"id": "_sda_report_min_dt",
+							"type": "datetime",
+							"label": "Select the earliest execution date:",
+							"required": false,
+							"visible": "",
+							"indent": 0
+						},
+						{
+							"id": "_sda_report_max_dt",
+							"type": "datetime",
+							"label": "Select the latest execution date:",
+							"required": false,
+							"visible": "",
+							"indent": 0
+						},
+						{
+							"id": "_sda_report_include_header",
+							"type": "checkbox",
+							"label": "Include report header? (Show filter criteria in output)",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "pageAbout",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "textAbout",
+					"type": "text",
+					"text": "SAAM - Document Analysis - Produce Usage Report step\n==========\n\nThe \"SAAM - Document Analysis - Produce Usage Report\" custom steps enables an easy integration with the SAS Document Analysis (SDA) model, to create output reports on executed runs.\n\nThe location of the generated output will be displayed for after running this step.\n\nThis step can be run after you executed a batch OCR process, for example by using the SAAM - Document Analysis - Execute Batch OCR Process custom step.\n",
+					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"indent": 0,
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "A license for SAS Document Analysis (SDA) is required and you will need to know the name of the launcher context that was created during the deployment of SDA.\n\nPre-requisites:  Tested on Viya version Stable 2024.08 & Stable 2026.01",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "* SAS Document Analysis documentation (https://go.documentation.sas.com/doc/en/aaimdacdc/default/aaimdawlcm/home.htm)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.7 (23JUN2026)\n     - Added \"OCR Usage\" report type option (create_ocr_usage_report.py)\n\n* Version 1.6 (28MAY2026)\n     - Renamed step from \"OCR - Document Analysis - Produce Usage Report Output\" to \"SAAM - Document Analysis - Produce Usage Report\" to conform to the SAAM naming standard\n\n* Version 1.5 (22APR2026)\n     - Remove \"bypass SSL\" option. Default to False\n\n* Version 1.4 (16APR2026)\n     - Communicate exit codes for failed SDA batch processes\n\n* Version 1.3 (19FEB2026)\n     - Use absolute path for python command\n\n* Version 1.2 (25FEB2025)\n - Use launcher context name instead ID\n\n* Version 1.1 (29OCT2024)\n     - Implemented feedback\n\n* Version: 1.0 (07OCT2024)\n      - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"_sda_command": null,
+		"_sda_report_output_format": {
+			"value": "xlsx",
+			"label": "Excel (XLSX)"
+		},
+		"_sda_launcher_context_name": "SAS Document Analysis Runtime",
+		"_sda_wait_for_completion": true,
+		"_sda_report_batch_sk_list": null,
+		"_sda_report_batch_tag_list": "",
+		"_sda_report_min_dt": null,
+		"_sda_report_max_dt": null,
+		"_sda_report_include_header": false
+	}
+}
