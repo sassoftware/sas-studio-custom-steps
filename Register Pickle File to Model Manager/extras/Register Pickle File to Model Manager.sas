@@ -1,6 +1,6 @@
-/* Pickle File to Model Manager - code generator
+/* Register Pickle File to Model Manager - code generator
    ==========================================
-   This is the exact same logic as the "Pickle File to Model Manager" custom step
+   This is the exact same logic as the "Register Pickle File to Model Manager" custom step
    (see the .step file one level up), packaged so it can be run directly in a
    SAS Studio Program tab (or any batch/scheduled SAS session) without the
    step's UI - handy for repeated/scripted runs, or for testing changes to the
@@ -12,7 +12,9 @@
 
    Leave a model's pickle_path blank to skip that model slot (only the first
    is required). model_prefix/algorithm are optional for a filled-in slot -
-   both are auto-detected from the model file if left blank. */
+   both are auto-detected from the model file if left blank. Whether a model
+   is classification or regression/prediction is also auto-detected, directly
+   from the pickle - there's no %let for it. */
 
 %let pickle_path=;             /* required: path/URL to model 1's pickle file */
 %let model_prefix=;            /* optional: model 1's display name in Model Manager */
@@ -30,12 +32,10 @@
 %let predictor_columns=;       /* optional: comma-separated; blank = auto-detect */
 %let target_variable=;         /* required: target column name */
 %let eval_table=;              /* optional: held-out data for honest model-card metrics */
-%let model_function=classification;  /* classification | prediction */
 %let event_value=1;            /* classification only: which class value is the "event" */
 %let project_action=existing;  /* existing | create */
 %let project_name=;            /* required: Model Manager project name */
 %let overwrite_model=0;        /* 1 = add a new version if the model already exists */
-%let do_model_card=1;          /* 1 = generate a model card */
 %let sensitive_column=;        /* optional: column for a bias/fairness assessment */
 %let do_publish=0;             /* 1 = publish the model(s) after import */
 %let publish_destination=;     /* required if do_publish=1: an existing publish destination */
@@ -106,21 +106,29 @@
     %if %symexist(_baseurl) %then %do;
         %let viya_host_auto = %kscan(%superq(_baseurl), 2, %str(/));
     %end;
+    %else %if %symexist(baseurl) %then %do;
+        /* SAS Job Execution Service (scheduled/batch jobs) documents this
+           form without the leading underscore - _baseurl is specific to an
+           interactive SAS Studio session. */
+        %let viya_host_auto = %kscan(%superq(baseurl), 2, %str(/));
+    %end;
 %mend _derive_viya_host;
 %_derive_viya_host;
 
 /* Build banner - if you don't see this exact line in the log, SAS Studio is
    running an OLD copy of the step (re-upload the .step and replace the flow node). */
-%put NOTE: ===== Pickle File to Model Manager - step build 1.7 (03SEP2026) =====;
+%put NOTE: ===== Register Pickle File to Model Manager - step build 1.24 (13OCT2026) =====;
 
 proc python;
 submit;
 import pickle
 import json
 import os
+import time
 from pathlib import Path
 
 import pandas as pd
+from sklearn.base import is_classifier
 import sasctl.pzmm as pzmm
 from sasctl import Session, current_session, publish_model
 from sasctl.services import model_repository as mr
@@ -160,12 +168,11 @@ for _pk_id, _nm_id, _alg_id in _slot_ids:
 training_csv         = SAS.symget("training_table")
 predictor_columns_input = [c.strip() for c in SAS.symget("predictor_columns").split(",") if c.strip()]
 target_variable      = SAS.symget("target_variable")
-model_function       = SAS.symget("model_function")        # classification | prediction
 event_value          = SAS.symget("event_value")
 project_action       = SAS.symget("project_action")        # existing | create
 project_name         = SAS.symget("project_name")
 overwrite_model      = SAS.symget("overwrite_model") == "1"
-do_model_card        = SAS.symget("do_model_card") == "1"
+do_model_card        = True   # always on - no longer a UI choice
 viya_host            = SAS.symget("viya_host")
 sensitive_column     = SAS.symget("sensitive_column")
 eval_csv             = SAS.symget("eval_table")   # optional held-out evaluation data
@@ -178,11 +185,6 @@ monitor_caslib       = SAS.symget("monitor_caslib") or "Public"
 if not training_csv:
     raise RuntimeError(
         "No training data provided. Choose a training CSV file, or pick a training table."
-    )
-if not target_variable:
-    raise RuntimeError(
-        "No target column provided. Type a Target column name, or pick one with the "
-        "table column selector."
     )
 
 # --- Run summary + up-front validation --------------------------------------
@@ -197,10 +199,25 @@ def _log(step, status, detail=""):
     STEP_LOG.append((step, status, detail))
 
 
-if model_function not in ("classification", "prediction"):
-    raise RuntimeError(
-        f"model_function must be 'classification' or 'prediction', got {model_function!r}."
-    )
+# Works around a sasctl bug: generated score code for a plain single-output
+# prediction model does `x = prediction[0][0]`, assuming 2D output, but
+# model.predict() on one row is 1D so prediction[0] is already the value.
+_orig_write_score_code = pzmm.ScoreCode.write_score_code
+
+
+def _patched_write_score_code(self, model_prefix, *args, **kwargs):
+    result = _orig_write_score_code(self, model_prefix, *args, **kwargs)
+    score_code_path = kwargs.get("score_code_path")
+    if score_code_path:
+        sanitized = pzmm.ScoreCode.sanitize_model_prefix(model_prefix)
+        py_path = Path(score_code_path) / f"score_{sanitized}.py"
+        text = py_path.read_text()
+        fixed = text.replace(" = prediction[0][0]\n", " = prediction[0]\n")
+        if fixed != text:
+            py_path.write_text(fixed)
+    return result
+
+
 if do_publish and not publish_destination:
     raise RuntimeError(
         "'Publish the model(s) after import' is checked but no publish destination "
@@ -219,7 +236,63 @@ for _p in [m["path"] for m in model_slots] + [training_csv]:
             f"that SAS Content / Server staging succeeded above)."
         )
 
-is_classification = model_function == "classification"
+# --- Auto-detect model function (classification vs. prediction) from the
+# pickle(s) themselves, via sklearn's own is_classifier() - real, documented,
+# standard sklearn behavior (every estimator exposes an _estimator_type), so
+# there's no separate "Model function" field to fill in or get wrong. A Model
+# Manager project can only be EITHER classification OR prediction, never
+# both, so every model in this batch must agree - checked here, once, before
+# any real work starts, rather than surfacing as a confusing failure deep
+# inside a later PZMM call. Each pickle is loaded once here just for this
+# check (loaded again per-model below); cheap for typical scikit-learn model
+# sizes, and keeps this check self-contained rather than restructuring the
+# whole per-model loop around it.
+_detected = []
+for _slot in model_slots:
+    with open(_slot["path"], "rb") as _f:
+        _detected.append((_slot["path"], is_classifier(pickle.load(_f))))
+if len({t for _, t in _detected}) > 1:
+    _detail = "; ".join(
+        f"{p} -> {'classification' if t else 'prediction'}" for p, t in _detected
+    )
+    raise RuntimeError(
+        "Models in this batch don't agree on classification vs. prediction - a "
+        f"Model Manager project can only be one or the other: {_detail}"
+    )
+is_classification = _detected[0][1]
+model_function = "classification" if is_classification else "prediction"
+print(f"Auto-detected model function: {model_function} (from the pickle(s), via "
+      f"sklearn.base.is_classifier).")
+
+data = pd.read_csv(training_csv)
+
+# Target column, auto-detected from the training table when left blank -
+# same technique as 2_pzmm_import.ipynb: whichever non-predictor column's
+# values match the first model's own classes_ (classification) or has more
+# than 2 distinct values (regression). Ambiguous or no match -> clear error
+# asking for the column name instead of guessing wrong.
+if not target_variable:
+    with open(model_slots[0]["path"], "rb") as _f:
+        _first_model = pickle.load(_f)
+    _first_predictors = list(getattr(_first_model, "feature_names_in_", []))
+    _non_predictor_cols = [c for c in data.columns if c not in _first_predictors]
+    if is_classification:
+        _classes = set(str(c) for c in _first_model.classes_)
+        _candidates = [
+            c for c in _non_predictor_cols
+            if set(data[c].dropna().astype(str).unique()) == _classes
+        ]
+    else:
+        _candidates = [c for c in _non_predictor_cols if data[c].nunique() > 2]
+    if len(_candidates) != 1:
+        raise RuntimeError(
+            f"Could not auto-detect a target column - candidates were "
+            f"{_candidates or _non_predictor_cols}. Type one into 'Target "
+            f"column name' instead."
+        )
+    target_variable = _candidates[0]
+    print(f"Auto-detected target column: '{target_variable}'.")
+
 prob_var = f"P_{target_variable}"   # convention: event-probability output name
 print(f"Processing {len(model_slots)} model(s) into project '{project_name}'.")
 
@@ -236,7 +309,8 @@ import glob
 def _find_reusable_token():
     for key, val in os.environ.items():
         if val and any(t in key.upper() for t in (
-            "ACCESS_TOKEN", "OAUTH_TOKEN", "SAS_SERVICES_TOKEN", "SAS_CLIENT_TOKEN"
+            "ACCESS_TOKEN", "OAUTH_TOKEN", "SAS_SERVICES_TOKEN", "SAS_CLIENT_TOKEN",
+            "VIYA_TOKEN"
         )):
             return val.strip(), f"env:{key}"
     candidates = [
@@ -321,12 +395,8 @@ elif do_performance:
         _log("Performance monitoring setup", "failed", f"CAS connection: {_e}")
         do_performance = False
 
-# --- Shared training/evaluation data -----------------------------------------
-# Loaded ONCE and reused for every model in the batch: all pickles in a run are
-# expected to share the same target/training table (like the PZMM notebook's
-# classifier group sharing one table) - only the algorithm differs per pickle.
-data = pd.read_csv(training_csv)
-
+# --- Shared evaluation data ---------------------------------------------------
+# data (training) was already loaded above, for target auto-detection.
 eval_df = None
 if eval_csv:
     if os.path.exists(eval_csv):
@@ -558,7 +628,7 @@ for _idx, _slot in enumerate(model_slots, start=1):
             _gov = [
                 ("registeredBy", (current_session().username or "") if current_session() else ""),
                 ("registeredUTC", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")),
-                ("toolBuild", "PickleFileToModelManager 1.7 (03SEP2026)"),
+                ("toolBuild", "RegisterPickleFileToModelManager 1.24 (13OCT2026)"),
                 ("mlFramework", model_framework),
                 ("frameworkRuntime", f"scikit-learn {runtime_sklearn}"),
                 ("pickledWith", f"scikit-learn {pickled_sklearn}"),
@@ -599,10 +669,11 @@ for _idx, _slot in enumerate(model_slots, start=1):
         # for this step yet, so it's deliberately left out rather than guessed
         # at - the model still imports fine without a card. -----------
         # _card_generated tracks whether generate_model_card() actually ran (it
-        # uploads a <prefix>_train_data CAS table as a side effect) - performance
-        # monitoring below needs that table's path for the project's Training
-        # table property.
+        # uploads a uniquely-named training-data CAS table as a side effect) -
+        # performance monitoring below needs that table's path (_card_train_table)
+        # for the project's Training table property.
         _card_generated = False
+        _card_train_table = None
         if do_model_card and is_multiclass:
             print(f"Model card skipped for '{this_prefix}': multiclass model-card "
                   f"statistics aren't supported by this step yet.")
@@ -690,24 +761,27 @@ for _idx, _slot in enumerate(model_slots, start=1):
 
                 pzmm.JSONFiles.create_requirements_json(model_path=output_dir, output_path=output_dir)
 
-                # Drop any stale '<prefix>_train_data' CAS table before generate_model_card()
-                # (below) tries to upload a fresh one. PZMM's upload_training_data() raises
-                # 'table already exists' on a name collision rather than overwriting - and
-                # the table name is derived ONLY from the model prefix, not the project, so
-                # re-running this step with the same prefix (normal during repeated testing)
-                # collides with whatever it uploaded last time, silently leaving the card
-                # (and the project's Training table property) stale. Mirrors PZMM.ipynb's
-                # own model_info loop, which does this same cleanup. Only runs if a CAS
-                # connection is already open (established above for performance monitoring) -
-                # skips quietly otherwise rather than opening a new connection just for this.
-                if conn is not None:
-                    try:
-                        _stale_train_tbl = conn.CASTable(f"{this_prefix}_train_data", caslib="Public")
-                        if _stale_train_tbl.exists():
-                            conn.table.droptable(name=f"{this_prefix}_train_data", caslib="Public")
-                            print(f"Dropped stale '{this_prefix}_train_data' CAS table before regenerating.")
-                    except Exception as _e:
-                        print(f"NOTE: could not check/drop stale '{this_prefix}_train_data' table: {_e}")
+                # Give this run's training-data table a name unique to this run,
+                # rather than the fixed '<prefix>_train_data' every run reused.
+                # PZMM's own upload_training_data() does NOT overwrite on a name
+                # collision - it uploads with promote=True but no replace, so a
+                # second call with the same name just gets a Python warning and
+                # SILENTLY KEEPS the old table (confirmed by reading upload_
+                # training_data()'s source: casout has no "replace" key at all).
+                # An earlier version of this step worked around that by dropping
+                # the old table first - but that's a drop-then-hope race: if
+                # ANYTHING failed between the drop and a successful re-upload
+                # (including generate_model_card() itself failing partway,
+                # for any reason), the table was gone and never recreated,
+                # while the project's Training table property - set later,
+                # only when this run's card generation succeeded - was left
+                # pointing at that now-missing name from whatever run last
+                # succeeded. That is exactly the "table ... could not be
+                # located" error Model Manager surfaces once that happens.
+                # A fresh, unique name every run makes that failure mode
+                # structurally impossible: nothing is ever deleted, so there's
+                # nothing to leave half-replaced.
+                _train_table_name = f"{this_prefix}_train_{int(time.time())}"
 
                 card_train = _prep_features(data)
                 card_train[target_variable] = _prep_target(data)
@@ -722,8 +796,17 @@ for _idx, _slot in enumerate(model_slots, start=1):
                     target_value=event_value_typed if is_classification else None,
                     interval_vars=predictor_columns,
                     selection_statistic="_KS_" if is_classification else "_ASE_",
+                    training_table_name=_train_table_name,
                     caslib="Public",
                 )
+
+                # Read back the model's own trainTable property - the exact CAS
+                # path PZMM itself just wrote into ModelProperties.json - rather
+                # than re-deriving the same string a second time by hand. Used
+                # below to set the PROJECT's Training table property to whatever
+                # this run genuinely produced, not a guessed/hardcoded name.
+                with open(output_dir / "ModelProperties.json") as f:
+                    _card_train_table = json.load(f).get("trainTable")
 
                 # Regression Model Health fix: add the missing parameterMap entries
                 # and override selectionStatistic to _RSquare_.
@@ -755,7 +838,7 @@ for _idx, _slot in enumerate(model_slots, start=1):
 
                 _basis = "held-out data" if eval_df is not None else "in-sample"
                 _log("Model card", "success", f"{this_prefix} ({_basis})")
-                _card_generated = True   # <prefix>_train_data now exists in CAS
+                _card_generated = True   # _train_table_name now exists in CAS
             except Exception as _e:
                 print(f"Model card generation failed for '{this_prefix}' (continuing "
                       f"without it): {_e}")
@@ -780,24 +863,23 @@ for _idx, _slot in enumerate(model_slots, start=1):
             score_metrics = [prob_var]
             import_kwargs = {}
 
-        result = pzmm.ImportModel.import_model(
-            model_files=output_dir,
-            model_prefix=this_prefix,
-            project=project_name,
-            input_data=X,
-            predict_method=predict_method,
-            score_metrics=score_metrics,
-            model_file_name=this_prefix + ".pickle",
-            # True bakes a mean-imputation step into the generated score code itself
-            # (computed from input_data=X at import time), so a live scoring table
-            # with real gaps doesn't crash models that can't handle NaN natively
-            # (e.g. GradientBoostingClassifier, unlike DecisionTreeClassifier in this
-            # sklearn version) - matches the same fillna(mean) already applied to X
-            # before training/import, just re-applied at scoring time too.
-            missing_values=True,
-            overwrite_model=overwrite_model,
-            **import_kwargs,
-        )
+        if not is_classification:
+            pzmm.ScoreCode.write_score_code = _patched_write_score_code
+        try:
+            result = pzmm.ImportModel.import_model(
+                model_files=output_dir,
+                model_prefix=this_prefix,
+                project=project_name,
+                input_data=X,
+                predict_method=predict_method,
+                score_metrics=score_metrics,
+                model_file_name=this_prefix + ".pickle",
+                missing_values=True,
+                overwrite_model=overwrite_model,
+                **import_kwargs,
+            )
+        finally:
+            pzmm.ScoreCode.write_score_code = _orig_write_score_code
         pzmm.ScoreCode.score_code = ""   # required between models when importing several
         model_obj = result[0] if isinstance(result, tuple) else result
         imported_models.append(model_obj)
@@ -838,8 +920,11 @@ for _idx, _slot in enumerate(model_slots, start=1):
                     "predictor_columns": predictor_columns,
                     "is_classification": is_classification,
                     "event_index": event_index,
+                    "event_value_typed": event_value_typed,
+                    "ordered_values": ordered_values,
                     "output_dir": output_dir,
                     "card_generated": _card_generated,
+                    "card_train_table": _card_train_table,
                 })
             else:
                 print(f"'{this_prefix}' not added to performance monitoring - it "
@@ -882,21 +967,31 @@ if do_performance and monitor_candidates:
         _proj["targetLevel"] = "binary" if is_classification else "interval"
         if is_classification:
             _proj["eventProbabilityVariable"] = prob_var
+            # Without these two, Model Manager has no way to know which class
+            # is "the event" - misclassification/ROC/Gini/KS/Lift come out
+            # degenerate (a coin-flip-looking ~50%) with no error of its own.
+            # 2_pzmm_import.ipynb's ensure_project() always set both; this
+            # step never did, which is the likely cause of every persistent
+            # near-50%-misclassification report seen against it so far.
+            _proj["targetEventValue"] = str(_first["event_value_typed"])
+            _proj["classTargetValues"] = [str(v) for v in _first["ordered_values"]]
         else:
             _proj["predictionVariable"] = prob_var
 
         # Project-level Training table: generate_model_card() (above, per-model)
-        # already uploaded <prefix>_train_data to CAS and stamped the MODEL's own
-        # trainTable property - but the PROJECT's trainTable property is separate
-        # and performance monitoring reads that one for its training-data baseline.
+        # already uploaded a uniquely-named training-data table to CAS and
+        # stamped the MODEL's own trainTable property with the exact path it
+        # used - but the PROJECT's trainTable property is separate and
+        # performance monitoring reads that one for its training-data baseline.
         # Nothing else in this step sets it, so without this it's silently blank.
+        # Reusing the model's own recorded path (rather than re-deriving the
+        # same string here a second time) keeps the two from ever drifting apart.
         _card_candidate = next(
-            (c for c in monitor_candidates if c.get("card_generated")), None
+            (c for c in monitor_candidates if c.get("card_generated") and c.get("card_train_table")),
+            None,
         )
         if _card_candidate is not None:
-            _proj["trainTable"] = (
-                f"cas-shared-default/Public/{_card_candidate['prefix']}_train_data".upper()
-            )
+            _proj["trainTable"] = _card_candidate["card_train_table"]
         else:
             print("NOTE: no model card was generated for any monitored model, so "
                   "the project's Training table property could not be set - the "
@@ -941,21 +1036,12 @@ if do_performance and monitor_candidates:
             _num_mon = _mon_table.select_dtypes(include="number").columns
             _mon_table[_num_mon] = _mon_table[_num_mon].fillna(_mon_table[_num_mon].mean())
             _mon_table[target_variable] = target_series
-            if is_classification:
-                # Reference probability column (first model only) - CAS re-scores
-                # every monitored model itself (scoring_required=True below), so
-                # this column is for manual inspection only, matching PZMM's
-                # own convention (its CARSCLS_1 table does the same).
-                _mon_table[prob_var] = _first["model"].predict_proba(
-                    data[_first["predictor_columns"]]
-                )[:, _first["event_index"]]
 
-            # Hard-stop rather than silently upload a table that would make Model
-            # Manager quietly degrade to characteristic-analysis-only (no ROC/Lift/
-            # Gini/KS/ASE) with no error of its own - if the actual outcome column
-            # (or, for classification, the score output column) we just built is
-            # entirely missing, that degraded run would still "complete" and look
-            # fine, exactly the misleading failure mode this step exists to avoid.
+            # No pre-computed probability column here - scoring_required=True
+            # means Model Manager runs each model's own score code itself.
+            # A prior version added a static reference P_High_MSRP column
+            # (from one model only) which is suspected of causing every
+            # model sharing this table to show identical performance results.
             if _mon_table[target_variable].isna().all():
                 raise RuntimeError(
                     f"Monitoring table has no usable '{target_variable}' values "
@@ -963,13 +1049,6 @@ if do_performance and monitor_candidates:
                     f"accuracy measures (Gini/ROC/Lift/KS/ASE) rather than error, "
                     f"so refusing to upload it instead of producing a performance "
                     f"definition that looks fine but isn't."
-                )
-            if is_classification and _mon_table[prob_var].isna().all():
-                raise RuntimeError(
-                    f"Monitoring table has no usable '{prob_var}' (score output) "
-                    f"values - Model Manager would silently skip the stability "
-                    f"analysis rather than error, so refusing to upload it instead "
-                    f"of producing a performance definition that looks fine but isn't."
                 )
 
             _existing_tbl = conn.CASTable(_run_table_name, caslib=monitor_caslib)
@@ -992,17 +1071,50 @@ if do_performance and monitor_candidates:
                   "successfully uploaded to CAS (see the failure above).")
             _log("Performance definition executed", "skipped", "no data uploaded")
         else:
+            # Scoped to the first monitored model only. A brand-new project
+            # has none of Model Manager's shared per-project result tables
+            # (mm_std_kpi, mm_kpi_categories, etc.) yet - the first time they
+            # get created, two models' jobs scored at the same instant can
+            # both see "doesn't exist" and race to create it, and one loses.
+            # Once those tables exist, later runs just append safely, even
+            # with multiple models at once. Add the rest via Model Manager's
+            # Edit Definition wizard once this first run has completed.
             perf_def = mm.create_performance_definition(
                 table_prefix=table_prefix,
                 project=project_name,
-                models=[c["model_obj"] for c in monitor_candidates],
+                models=[monitor_candidates[0]["model_obj"]],
                 library_name=monitor_caslib,
                 name=f"{project_name} Performance",
                 scoring_required=True,
             )
-            print(f"Created performance definition for {len(monitor_candidates)} "
-                  f"model(s) in caslib '{monitor_caslib}'.")
-            _log("Performance definition", "success", f"{len(monitor_candidates)} model(s)")
+            print(f"Created performance definition for '{monitor_candidates[0]['prefix']}' "
+                  f"in caslib '{monitor_caslib}'."
+                  + (f" {len(monitor_candidates) - 1} more model(s) can be added via "
+                     f"Model Manager's Edit Definition wizard once this first run "
+                     f"has completed."
+                     if len(monitor_candidates) > 1 else ""))
+            _log("Performance definition", "success", monitor_candidates[0]["prefix"])
+
+            # Drift alerts, on by default so governance doesn't depend on a
+            # user writing SAS's alert syntax themselves - no UI for this,
+            # just SAS's own documented mild/significant drift guidance.
+            # sasctl's create_performance_definition() doesn't expose these
+            # two fields, so they're set with a follow-up PUT instead.
+            try:
+                perf_def["characteristicWarn"] = "char_p1>2"
+                perf_def["characteristicAlert"] = "char_p1>5 or char_p25>0"
+                mm.put(
+                    f"performanceTasks/{perf_def['id']}",
+                    json=perf_def,
+                    headers={"Content-Type": "application/vnd.sas.models.performance.task+json"},
+                )
+                print(f"Alert thresholds set - warning: '{perf_def['characteristicWarn']}', "
+                      f"critical: '{perf_def['characteristicAlert']}'.")
+                _log("Performance alert thresholds", "success")
+            except Exception as _e:
+                print(f"Could not set alert thresholds - the performance "
+                      f"definition itself was still created successfully: {_e}")
+                _log("Performance alert thresholds", "failed", str(_e))
 
             # Deliberately NOT calling mm.execute_performance_definition() here.
             # Running the job is a shared, account-level CAS operation (it promotes

@@ -1,10 +1,10 @@
-# Pickle File to Model Manager
+# Register Pickle File to Model Manager
 
 ## Description
 
-The **Pickle File to Model Manager** custom step enables SAS Studio users to register scikit-learn models — trained entirely outside SAS, in plain Python — into SAS Model Manager, without writing any Python or sasctl code themselves.
+The **Register Pickle File to Model Manager** custom step registers pickled Python models — scikit-learn, or anything exposing the same `predict`/`predict_proba`/`classes_` interface (including XGBoost's and LightGBM's scikit-learn wrappers) — trained entirely outside SAS, into SAS Model Manager, without writing any Python or sasctl code yourself.
 
-Point the step at up to four pickled scikit-learn models (classification or regression) and a training data CSV, and it will:
+Point the step at up to four pickled models (classification or regression) and a training data CSV, and it will:
 
 * Auto-detect predictor columns from each model's own trained feature list (or let you specify them explicitly), and auto-detect whether each model is classification or regression/prediction directly from the pickle itself
 * Handle binary **and** multiclass classification, as well as regression/prediction models, in the same batch
@@ -22,13 +22,25 @@ Models are picked up either from a SAS Content location or directly from the com
 
 * ### Model & Data ###
 
-   The core inputs: the first model's pickle file, an optional name and algorithm label (auto-detected from the model's class if left blank), the training data CSV, optional explicit predictor columns (auto-detected from the model if left blank), the target column (optional, auto-detected from the training table if left blank), an optional held-out evaluation dataset for honest model-card metrics, and — for classification models only — which class value is the target "event" (whether each model is classification or regression/prediction is detected automatically from the pickle; there's no field for it).
+   The core inputs:
+
+   * The first model's pickle file
+   * An optional name and algorithm label (auto-detected from the model's class if left blank)
+   * The training data CSV
+   * Optional explicit predictor columns (auto-detected from the model if left blank)
+   * The target column (optional, auto-detected from the training table if left blank)
+   * An optional held-out evaluation dataset for honest model-card metrics
+   * For classification models only: which class value is the target "event" (whether each model is classification or regression/prediction is detected automatically from the pickle; there's no field for it)
 
    ![](img/image.png)
 
 * ### Additional Models ###
 
-   Optionally, up to three more models (pickle file, name, algorithm label each), sharing the same training table, target, and project as the first model.
+   Optionally, up to three more models, each sharing the same training table, target, and project as the first model:
+
+   * Pickle file
+   * Name
+   * Algorithm label
 
    ![](img/image-1.png)
 
@@ -72,6 +84,8 @@ This step's Python code runs inside the SAS Studio compute session's `proc pytho
 * `scikit-learn`
 * `swat` and `certifi` (needed if you use the SAS Content file picker, and/or performance monitoring — both upload data directly to CAS and this pre-configures SWAT's SSL certificate path so that doesn't fail on servers with the same known broken default; not needed otherwise for `sasserver:`-style paths)
 
+Tested against scikit-learn models; other scikit-learn-API-compatible libraries (e.g. XGBoost, LightGBM) are expected to work the same way but haven't been verified yet — broadening tested coverage is planned.
+
 If you plan to use the **Publish** option, the named destination must already exist in your Viya environment — creating a publishing destination is an admin-only operation and out of scope for this step.
 
 If you plan to use **performance monitoring**, the step only creates the performance definition — it does not execute it. Running a performance job promotes result tables into Model Manager's own results library, which is shared across projects rather than scoped to the one you're working in; if that library is carrying any stale state (from an interrupted earlier job, anywhere on the server), the run fails with a "target table ... already exists" error that has nothing to do with your model or this step, and isn't something the step can detect or clean up on your behalf. Running it yourself from the Performance tab keeps that failure mode a normal, retryable Model Manager job instead of a failure buried in this step's log.
@@ -81,7 +95,7 @@ If you plan to use **performance monitoring**, the step only creates the perform
 The step expects a plain CSV training table and one or more pickled scikit-learn models trained on it. A quick way to produce both from data already available in your Viya environment:
 
 1. Export `SASHELP.CARS` to CSV (or use any tabular dataset with a mix of numeric predictors and a target column).
-2. In a local Python environment (not SAS Studio), train a simple scikit-learn model against it and pickle the result, e.g.:
+2. In a local Python environment (not necessarily SAS Studio), train a simple scikit-learn model against it and pickle the result, e.g.:
 
    ```python
    import pickle
@@ -97,17 +111,23 @@ The step expects a plain CSV training table and one or more pickled scikit-learn
    ```
 
 3. Upload `model.pickle` and the training CSV somewhere SAS Studio's file picker can reach them (a SAS Content folder, or a path on the compute server).
-4. Add the **Pickle File to Model Manager** step to a flow, point **Model & Data** at the pickle and the CSV, name your target column, and run it.
+4. Add the **Register Pickle File to Model Manager** step to a flow, point **Model & Data** at the pickle and the CSV, name your target column, and run it.
 5. Check SAS Model Manager — the project (created if it didn't exist) should now contain the registered model, with a model card if you left that option checked.
 
 The log ends with a run summary listing every phase (model card, import, publish) as OK or ERR per model, so a problem with one model in a multi-model batch is easy to spot without blocking the rest.
 
 ### Running it without the step's UI
 
-`extras/Pickle File to Model Manager.sas` contains the exact same logic as the custom step, with the UI fields exposed as `%let` statements at the top instead. Fill those in and submit the file directly in a SAS Studio Program tab (or any batch/scheduled SAS session) to run it without importing the custom step — useful for repeated or scripted runs.
+`extras/Register Pickle File to Model Manager.sas` contains the exact same logic as the custom step, with the UI fields exposed as `%let` statements at the top instead. Fill those in and submit the file directly in a SAS Studio Program tab (or any batch/scheduled SAS session) to run it without importing the custom step — useful for repeated or scripted runs.
 
 ## Change Log
 
+* Version 1.24 (13OCT2026)
+    * Renamed the step to **Register Pickle File to Model Manager**, per PR review feedback — custom step names should describe the function, not just the input/output.
+    * The Description no longer implies scikit-learn is the only supported framework. Detection is duck-typed (`predict`/`predict_proba`/`classes_`/`feature_names_in_`), so anything exposing that same interface — including XGBoost's and LightGBM's scikit-learn wrappers — is expected to work, though only scikit-learn has actually been tested end-to-end; noted explicitly in Requirements above, and broadening tested coverage is planned.
+    * Converted two prose UI-field descriptions (Model & Data, Additional Models) to bulleted lists for readability.
+    * Clarified "a local Python environment (not SAS Studio)" to "not necessarily SAS Studio" — SAS Studio's own Python environment works fine too; the point was just giving a plain example.
+    * Collapsed the pre-GitHub Change Log history (Versions 1.0-1.6) into a single entry under Version 1.7, the version this step actually first appeared on GitHub under.
 * Version 1.23 (30SEP2026)
     * Target column name is now optional. Leave it blank and it auto-detects from the training table — the same technique `2_pzmm_import.ipynb` already used: whichever non-predictor column matches the first model's own `classes_` (classification) or has more than 2 distinct values (regression). Verified against all 5 demo models, each resolving unambiguously. Still raises a clear error if the training table makes it ambiguous, asking for the column name explicitly rather than guessing wrong.
 * Version 1.22 (30SEP2026)
@@ -143,29 +163,4 @@ The log ends with a run summary listing every phase (model card, import, publish
     * Added optional warning/critical alert threshold expressions for the performance definition (`characteristicWarn`/`characteristicAlert`, in SAS Model Manager's own characteristic-alert syntax). Not exposed by sasctl's `create_performance_definition()`, so this is set with a follow-up call directly against the Model Manager REST API's `performanceTasks` resource.
     * Checked the rest of SAS Model Manager's performance-monitoring setup checklist against what sasctl and the Model Manager REST API actually expose: recurring data ingestion, job scheduling, and full KPI alert-rule (severity/notification) configuration all remain out of scope for a single-run custom step — scheduling in particular isn't present anywhere in the `sasctl` SDK. These need a recurring job/flow outside the step, not a code change to it.
 * Version 1.7 (03SEP2026)
-    * Renamed the step to **Pickle File to Model Manager**.
-    * Reworked the tab layout to follow the SAS Studio custom step UI guidelines: tab labels now use title case; **Model Type** was merged into **Model & Data**; **Publish & performance monitoring** was merged into **Optional Steps**; field labels now end with a colon (checkboxes excepted); two long, paragraph-length control labels (the publish destination and performance monitoring checkboxes) were split into a short label plus separate explanatory text.
-    * Added an **About** tab (general description, collapsible Pre-requisites and Documentation sections, and an expanded Changelog section) — none of this existed before.
-* Version 1.6 (26AUG2026)
-    * Performance monitoring now refuses to upload a monitoring table that's missing usable values in the actual outcome column (or, for classification, the score/probability column), instead of silently uploading it. Model Manager doesn't error on this itself — it just quietly skips the accuracy or stability measures — so this stops the step from producing a performance definition that looks fine but isn't.
-* Version 1.5 (25AUG2026)
-    * Restored performance monitoring, redesigned around `scoring_required=True` (SAS Model Manager scores each model itself against one shared uploaded input table) rather than pre-computed scores — the earlier removed version's numbers didn't reliably match each model's independently-verified accuracy; this one mirrors a proven-working, hand-verified pattern instead.
-    * The step creates the performance definition but deliberately does not execute it — run it yourself from the project's Performance tab in Model Manager. See Requirements above for why.
-    * Fixed a stale-training-data-table bug: re-running the step with the same model prefix (normal during repeated testing) now drops any previously-uploaded `<prefix>_train_data` CAS table before regenerating the model card, instead of leaving the project's Training table property pointing at whatever was uploaded last time.
-* Version 1.4 (20AUG2026)
-    * Removed in-step performance monitoring. It relied on CAS scoring the model directly and produced results that didn't reliably match a model's independently-verified accuracy; set up performance monitoring yourself in Model Manager once your model(s) are published and look right, rather than relying on this step for it.
-    * Publish now uses a monitored publish call that waits for the job to finish and raises a clear error on failure, instead of a fire-and-forget submission that could leave a model looking published when it wasn't.
-* Version 1.3 (20AUG2026)
-    * Missing-value imputation is now baked into the generated score code (computed from the training data at import time), so a live scoring request with real gaps in it doesn't crash models that can't handle `NaN` natively (e.g. `GradientBoostingClassifier`).
-    * Predictor auto-detection now explicitly excludes the target and event-probability columns, so a training table that's previously been used as a monitoring/reference table (and so already contains a scored probability column) doesn't get that column mistaken for a real predictor.
-    * A duplicated predictor column name (typed twice, or produced by a particular model/data combination) now fails fast with a clear message instead of a cryptic internal error several steps later.
-    * **Training data CSV** and **Target column name** are now marked as required fields in the UI, matching what the step already enforced in code.
-* Version 1.2 (19AUG2026)
-    * Added multiclass classification support (verified against sasctl's own score-code dispatch logic), alongside the existing binary classification and regression support.
-    * Added optional model publishing, with the publish destination verified before any model work begins.
-* Version 1.1 (11AUG2026)
-    * Reworked to support up to four models sharing one training table, target, and project, each picked via its own file picker, instead of a single model per run.
-    * Added governance/lineage metadata (registered by, registered when, ML framework, scikit-learn version, hyperparameters) written into each model's properties.
-    * Added optional model card generation with honest held-out metrics (via an optional evaluation dataset) and an optional bias/fairness assessment.
-* Version 1.0 (04AUG2026)
-    * Initial version — single scikit-learn classification model, pickle + training CSV in, registered into a SAS Model Manager project.
+    * Step first made available on GitHub.
