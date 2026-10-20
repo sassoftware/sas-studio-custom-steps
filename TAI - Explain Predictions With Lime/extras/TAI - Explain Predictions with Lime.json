@@ -1,0 +1,481 @@
+{
+    "showPageContentOnly": true,
+    "pages": [
+        {
+            "id": "designPage",
+            "type": "page",
+            "label": "Design",
+            "children": [
+                {
+                    "id": "refData",
+                    "type": "inputtable",
+                    "label": "Select reference data",
+                    "required": true,
+                    "placeholder": "Select the background or reference data table"
+                },
+                {
+                    "id": "useFirstObsAsQuery",
+                    "type": "checkbox",
+                    "label": "Use the first row of the reference data as the query observation"
+                },
+                {
+                    "id": "queryData",
+                    "type": "inputtable",
+                    "label": "Select query data",
+                    "required": false,
+                    "placeholder": "Select the table that contains the query observation",
+                    "visible": [
+                        "$useFirstObsAsQuery",
+                        "=",
+                        false
+                    ]
+                },
+                {
+                    "id": "targetVar",
+                    "type": "columnselector",
+                    "label": "Select predicted target column",
+                    "table": "refData",
+                    "max": 1,
+                    "min": 1,
+                    "required": true,
+                    "columntype": "n",
+                    "include": null
+                },
+                {
+                    "id": "intervalVars",
+                    "type": "columnselector",
+                    "label": "Select interval inputs",
+                    "table": "refData",
+                    "multiple": true,
+                    "required": false,
+                    "columntype": "n",
+                    "include": null
+                },
+                {
+                    "id": "nominalVars",
+                    "type": "columnselector",
+                    "label": "Select nominal inputs",
+                    "table": "refData",
+                    "multiple": true,
+                    "required": false,
+                    "include": null
+                }
+            ]
+        },
+        {
+            "id": "configPage",
+            "type": "page",
+            "label": "Configuration",
+            "children": [
+                {
+                    "id": "modelSection",
+                    "type": "section",
+                    "label": "Model options",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "astoreTable1",
+                            "type": "inputtable",
+                            "label": "Select analytic store model table 1",
+                            "required": false,
+                            "placeholder": "Select the first ASTORE model table"
+                        },
+                        {
+                            "id": "astoreTable2",
+                            "type": "inputtable",
+                            "label": "Select analytic store model table 2",
+                            "required": false,
+                            "placeholder": "Select the second ASTORE model table"
+                        },
+                        {
+                            "id": "astoreTable3",
+                            "type": "inputtable",
+                            "label": "Select analytic store model table 3",
+                            "required": false,
+                            "placeholder": "Select the third ASTORE model table"
+                        },
+                        {
+                            "id": "codeSourceType",
+                            "type": "dropdown",
+                            "label": "Select CODE statement source",
+                            "items": [
+                                {
+                                    "value": "NONE",
+                                    "label": "Do not use a CODE statement"
+                                },
+                                {
+                                    "value": "FILE",
+                                    "label": "Use an external code file"
+                                },
+                                {
+                                    "value": "TABLE",
+                                    "label": "Use a code table"
+                                }
+                            ],
+                            "required": true
+                        },
+                        {
+                            "id": "codeFilePath",
+                            "type": "textfield",
+                            "label": "Enter code file path",
+                            "placeholder": "Example: /path/to/scorecode.sas",
+                            "required": false,
+                            "visible": [
+                                "$codeSourceType",
+                                "=",
+                                "FILE"
+                            ]
+                        },
+                        {
+                            "id": "codeTable",
+                            "type": "inputtable",
+                            "label": "Select code table",
+                            "required": false,
+                            "placeholder": "Select the table that contains score code",
+                            "visible": [
+                                "$codeSourceType",
+                                "=",
+                                "TABLE"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "procOptionsSection",
+                    "type": "section",
+                    "label": "PROC LIME options",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "includeMissing",
+                            "type": "checkbox",
+                            "label": "Treat missing nominal values as valid levels"
+                        },
+                        {
+                            "id": "logLevel",
+                            "type": "dropdown",
+                            "label": "Select log level",
+                            "items": [
+                                {
+                                    "value": "",
+                                    "label": "Default"
+                                },
+                                {
+                                    "value": "0",
+                                    "label": "0 - Print warnings and errors"
+                                },
+                                {
+                                    "value": "1",
+                                    "label": "1 - Print some notes"
+                                },
+                                {
+                                    "value": "2",
+                                    "label": "2 - Print many notes"
+                                }
+                            ],
+                            "required": false
+                        },
+                        {
+                            "id": "nThreads",
+                            "type": "numstepper",
+                            "label": "Enter number of threads",
+                            "required": false,
+                            "integer": true,
+                            "min": 1
+                        },
+                        {
+                            "id": "sampleSize",
+                            "type": "numstepper",
+                            "label": "Enter sample size",
+                            "required": false,
+                            "integer": true,
+                            "min": 1
+                        },
+                        {
+                            "id": "seed",
+                            "type": "numstepper",
+                            "label": "Enter random seed",
+                            "required": false,
+                            "integer": true,
+                            "min": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "roleOptionsSection",
+                    "type": "section",
+                    "label": "Analysis roles",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "weightVar",
+                            "type": "columnselector",
+                            "label": "Select weight column",
+                            "table": "refData",
+                            "max": 1,
+                            "min": 0,
+                            "required": false,
+                            "columntype": "n",
+                            "include": null
+                        },
+                        {
+                            "id": "freqVar",
+                            "type": "columnselector",
+                            "label": "Select frequency column",
+                            "table": "refData",
+                            "max": 1,
+                            "min": 0,
+                            "required": false,
+                            "columntype": "n",
+                            "include": null
+                        }
+                    ]
+                },
+                {
+                    "id": "distanceOptionsSection",
+                    "type": "section",
+                    "label": "Distance options",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "distanceExponentialKernel",
+                            "type": "numstepper",
+                            "label": "Enter exponential kernel denominator",
+                            "required": false,
+                            "decimalPlaces": 4,
+                            "min": 0
+                        },
+                        {
+                            "id": "distanceImpute",
+                            "type": "dropdown",
+                            "label": "Select missing value imputation method",
+                            "items": [
+                                {
+                                    "value": "NONE",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "MEAN",
+                                    "label": "Mean"
+                                },
+                                {
+                                    "value": "WEIGHTEDMEAN",
+                                    "label": "Weighted mean"
+                                }
+                            ],
+                            "required": true
+                        },
+                        {
+                            "id": "distanceMixedWeight",
+                            "type": "numstepper",
+                            "label": "Enter mixed distance weight",
+                            "required": false,
+                            "decimalPlaces": 4,
+                            "min": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "explainerOptionsSection",
+                    "type": "section",
+                    "label": "Explainer options",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "explainerMaxEffects",
+                            "type": "numstepper",
+                            "label": "Enter maximum number of effects",
+                            "required": false,
+                            "integer": true,
+                            "min": 1
+                        },
+                        {
+                            "id": "explainerMinEffects",
+                            "type": "numstepper",
+                            "label": "Enter minimum number of effects",
+                            "required": false,
+                            "integer": true,
+                            "min": 1
+                        },
+                        {
+                            "id": "explainerStandardize",
+                            "type": "dropdown",
+                            "label": "Select estimates to standardize",
+                            "items": [
+                                {
+                                    "value": "NONE",
+                                    "label": "None"
+                                },
+                                {
+                                    "value": "INTERVALS",
+                                    "label": "Interval variables"
+                                }
+                            ],
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "id": "outputOptionsSection",
+                    "type": "section",
+                    "label": "Output options",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "outputTable",
+                            "type": "outputtable",
+                            "label": "Create output table",
+                            "required": false,
+                            "placeholder": "Select or enter an output table"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "aboutPage",
+            "type": "page",
+            "label": "About",
+            "children": [
+                {
+                    "id": "overview_section",
+                    "type": "section",
+                    "label": "Overview",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "overview_text",
+                            "type": "text",
+                            "text": "TAI - Explain Predictions with LIME executes PROC LIME in SAS to explain predictions from a machine learning model. LIME creates a simpler local explanation around a selected query observation, which can make complex model behavior easier to understand and communicate.\n\nThis step supports reference data, optional query data, interval inputs, nominal inputs, predicted target selection, optional ASTORE model tables, optional CODE statement support, distance options, explainer options, weights, frequencies, and optional output capture.\n\nThis step can help you explain individual model predictions, understand which variables influenced a prediction near a selected observation, improve transparency when reviewing machine learning model behavior, and communicate model explanations to technical and non-technical stakeholders."
+                        }
+                    ]
+                },
+                {
+                    "id": "usage_section",
+                    "type": "section",
+                    "label": "Usage",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "usage_text",
+                            "type": "text",
+                            "text": "Use the Design tab to select the reference data, query data, predicted target column, and model inputs. Use the Configuration tab to configure model tables, CODE support, PROC LIME options, distance settings, explainer settings, analysis roles, and optional output."
+                        }
+                    ]
+                },
+                {
+                    "id": "requirements_section",
+                    "type": "section",
+                    "label": "Requirements",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "requirements_text",
+                            "type": "text",
+                            "text": "This step requires a reference data table, a predicted target column, and at least one interval or nominal input. If query data is not supplied, the step can create query data from the first row of the reference data. If more than one ASTORE model table is supplied, a CODE statement source is also required."
+                        }
+                    ]
+                },
+                {
+                    "id": "documentation_section",
+                    "type": "section",
+                    "label": "Documentation",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "documentation_text",
+                            "type": "text",
+                            "text": "For more information about PROC LIME, see the SAS documentation:\nhttps://go.documentation.sas.com/"
+                        }
+                    ]
+                },
+                {
+                    "id": "contact_section",
+                    "type": "section",
+                    "label": "Created / contact",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "created_contact_text",
+                            "type": "text",
+                            "text": "Dawn Pancholi (Shubham.Pancholi@sas.com)"
+                        }
+                    ]
+                },
+                {
+                    "id": "version_section",
+                    "type": "section",
+                    "label": "Version",
+                    "open": true,
+                    "children": [
+                        {
+                            "id": "version_text",
+                            "type": "text",
+                            "text": "Version: 1.0.0 (31JUL2026)"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "syntaxversion": "1.3.0",
+    "values": {
+        "refData": {
+            "library": "",
+            "table": ""
+        },
+        "useFirstObsAsQuery": true,
+        "queryData": {
+            "library": "",
+            "table": ""
+        },
+        "targetVar": [],
+        "intervalVars": [],
+        "nominalVars": [],
+        "astoreTable1": {
+            "library": "",
+            "table": ""
+        },
+        "astoreTable2": {
+            "library": "",
+            "table": ""
+        },
+        "astoreTable3": {
+            "library": "",
+            "table": ""
+        },
+        "codeSourceType": {
+            "value": "NONE",
+            "label": "Do not use a CODE statement"
+        },
+        "codeFilePath": "",
+        "codeTable": {
+            "library": "",
+            "table": ""
+        },
+        "includeMissing": false,
+        "logLevel": "",
+        "nThreads": null,
+        "sampleSize": null,
+        "seed": null,
+        "weightVar": [],
+        "freqVar": [],
+        "distanceExponentialKernel": null,
+        "distanceImpute": {
+            "value": "NONE",
+            "label": "None"
+        },
+        "distanceMixedWeight": null,
+        "explainerMaxEffects": null,
+        "explainerMinEffects": null,
+        "explainerStandardize": {
+            "value": "NONE",
+            "label": "None"
+        },
+        "outputTable": {
+            "library": "",
+            "table": ""
+        }
+    },
+    "promptHierarchies": []
+}
