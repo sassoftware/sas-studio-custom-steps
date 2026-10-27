@@ -11,24 +11,24 @@ Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://v
 
 ## Getting Started - Making a Custom Step from this repository available in SAS Studio 
 
-Follow the instructions on [Using a Custom Step from this GitHub repository in SAS Studio](./docs/IMPORT_CUSTOM_STEP.md) to download custom steps from this repository and make them available for use in your SAS Studio environment. 
+Follow the instructions on [Using a Custom Step from this GitHub repository in SAS Studio](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/docs/IMPORT_CUSTOM_STEP.md) to download custom steps from this repository and make them available for use in your SAS Studio environment. 
 
 It describes how to do this manually using standard GitHub webUI functionality and also contains a pointer to a SAS Communities blog entry describing how you could automate things using a SAS script and the SAS git functions.
 
 ## Contributing
 
-We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit contributions to this project.
+We welcome contributions! Please read [CONTRIBUTING.md](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/CONTRIBUTING.md) for details on how to submit contributions to this project.
 
 ## License
 
-This project is licensed under the [Apache 2.0 License](LICENSE).
+This project is licensed under the [Apache 2.0 License](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LICENSE).
 
 ## Additional Resources
 
 * [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm)
 * [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ)
 > [!TIP] 
-> - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](./_codegen_snippets/README.md)
+> - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/_codegen_snippets/README.md)
 > - [Tools to help you build, modify and unpack SAS Studio Custom Steps](https://pypi.org/project/py-sas-studio-custom-steps/)
 
 
