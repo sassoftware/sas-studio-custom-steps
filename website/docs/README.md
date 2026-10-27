@@ -7,7 +7,7 @@ Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://v
 
 ## List of Contributions
 
->[List of custom steps in this repository](./CUSTOM_STEPS_LIST.md)
+>[List of custom steps in this repository](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/CUSTOM_STEPS_LIST.md)
 
 ## Getting Started - Making a Custom Step from this repository available in SAS Studio 
 
