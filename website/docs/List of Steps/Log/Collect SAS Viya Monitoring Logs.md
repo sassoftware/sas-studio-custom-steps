@@ -56,7 +56,7 @@ This section shows the minimum steps required to run Rake using the SAS Studio C
    The time fields support OpenSearch *Date Math* expressions, which allow relative time notation based on the current time, such as `now`, `now-15m` (15 minutes ago), or `now-1h` (one hour ago).
 6. Click **▷Run**.
 
-![Rake](img/rake-quick-start.png)
+![Rake](/img/rake-quick-start.png)
 
 The extracted logs are displayed in SAS Studio and are available as a SAS data set for further inspection.
 
