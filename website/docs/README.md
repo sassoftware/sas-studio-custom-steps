@@ -7,7 +7,12 @@ Watch this SAS video [Create Custom Steps with SAS Studio on SAS Viya](https://v
 
 ## List of Contributions
 
+:::info
 >[List of custom steps in this repository](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/CUSTOM_STEPS_LIST.md)
+:::
+
+Also refer the sidebar (top left) or the search bar to look for specific steps.
+
 
 ## Getting Started - Making a Custom Step from this repository available in SAS Studio 
 
@@ -24,9 +29,10 @@ We welcome contributions! Please read [CONTRIBUTING.md](https://github.com/sasso
 This project is licensed under the [Apache 2.0 License](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LICENSE).
 
 ## Additional Resources
-
+:::info
 * [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm)
 * [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ)
+:::
 
 :::tip
 > - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/_codegen_snippets/README.md)
