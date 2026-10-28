@@ -27,8 +27,9 @@ This project is licensed under the [Apache 2.0 License](https://github.com/sasso
 
 * [SAS Documentation on Custom Steps in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorsteps&docsetTarget=titlepage.htm)
 * [SAS Demo - Create a Custom Step in SAS Studio on SAS Viya (YouTube)](https://www.youtube.com/watch?v=vkI0mysfAkQ)
-> [!TIP] 
+
+:::tip
 > - [List of SAS code snippets for common tasks in code generator of a SAS Studio Custom Step](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/_codegen_snippets/README.md)
 > - [Tools to help you build, modify and unpack SAS Studio Custom Steps](https://pypi.org/project/py-sas-studio-custom-steps/)
-
+:::
 
