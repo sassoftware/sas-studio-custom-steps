@@ -1,5 +1,11 @@
 # Zip Data
 
+:::note[**ACCESS THE CUSTOM STEP FOLDER**]
+
+[Zip Data](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Zip%20data)
+
+:::
+
 ## Description
 
 The Zip Data custom step allows SAS Studio users to move or copy data to ZIP files.

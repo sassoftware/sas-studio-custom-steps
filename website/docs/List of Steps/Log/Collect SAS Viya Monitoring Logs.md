@@ -1,5 +1,12 @@
 # Log - Collect SAS Viya Monitoring Logs
 
+
+:::note[**ACCESS THE CUSTOM STEP FOLDER**]
+
+[Log - Collect SAS Viya Monitoring Logs](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Log%20-%20Collect%20SAS%20Viya%20Monitoring%20Logs)
+
+:::
+
 ## Overview
 
 Log - Collect SAS Viya Monitoring Logs (also known as Rake or Kumade) is a SAS Studio custom step designed to help administrators and advanced users extract logs from OpenSearch in SAS Viya environments. In the rest of this document, this custom step is referred to as "Rake".
