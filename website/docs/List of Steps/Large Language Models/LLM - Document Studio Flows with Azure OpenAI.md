@@ -63,7 +63,7 @@ AZURE_OAI_KEY='my_api_key' # change my_key
 AZURE_OAI_DEPLOYMENT='gpt-4o' # change to match your deployment name
 ```
 
-Example available at [extras/.env.sample.txt](extras/.env.sample.txt).
+Example available at [extras/.env.sample.txt](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LLM%20-%20Document%20Studio%20Flows%20with%20Azure%20OpenAI/extras/.env.sample.txt).
 
 ### 4. System Message File
 
