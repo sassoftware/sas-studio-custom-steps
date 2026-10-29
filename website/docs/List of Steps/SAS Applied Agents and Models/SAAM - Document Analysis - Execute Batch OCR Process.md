@@ -11,7 +11,7 @@
 
 This custom step is provided to enable point-and-click usage of the functionality available as part of the [SAS Document Analysis](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
 
-Use the SAAM - Document Analysis - Execute Batch OCR Process step in order to turn analysis documents of the following file types: PDF, PNG, JPG, JPEG, TIF, TIFF, BMP & ZIP. After the document analysis has finished you can run the companion step [SAAM - Document Analysis - Produce Usage Report](../SAAM%20-%20Document%20Analysis%20-%20Produce%20Usage%20Report) to generate a report about the performed analysis.
+Use the SAAM - Document Analysis - Execute Batch OCR Process step in order to turn analysis documents of the following file types: PDF, PNG, JPG, JPEG, TIF, TIFF, BMP & ZIP. After the document analysis has finished you can run the companion step [SAAM - Document Analysis - Produce Usage Report](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/SAAM%20-%20Document%20Analysis%20-%20Produce%20Usage%20Report) to generate a report about the performed analysis.
 
 ### Features
 - Multiple OCR engines supported (MS & AWS)
