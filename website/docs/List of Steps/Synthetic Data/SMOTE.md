@@ -51,13 +51,9 @@ This video (click on below image to play) provides a basic idea:
 If you want to measure singling out risk (provided as an option in this step), note the following additional prerequisites:
 
 1. SAS compute session should be configured to access a Python runtime of version of > 3.7 and < 3.12.
-
 2. A Python package - [anonymeter](https://pypi.org/project/anonymeter/) - should be installed in the above runtime.  Make note of details about anonymeter at https://pypi.org/project/anonymeter/
-
-3. As a further dependency on above, anonymeter requires NumPy between version 1.2 and less than 1.7 (specifically, "numpy >=1.22, <1.27", # limited by Numba support)
-
+3. Adhere to numpy versions stated
 Note terms of anonymeter license here: https://github.com/statice/anonymeter/blob/main/LICENSE.md
-
 Note citation in [Privacy Risk](#privacy-risk) section below.
 
 -----
