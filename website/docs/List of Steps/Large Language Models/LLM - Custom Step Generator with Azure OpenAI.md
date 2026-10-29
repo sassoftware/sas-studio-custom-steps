@@ -50,7 +50,7 @@ You can find an example in [extras/.env.sample.txt](extras/.env.sample.txt).
   - Guidelines for structuring the output (e.g., prompt UI, program, and `.step` file).
 - This file acts as an "instruction manual" for the LLM, ensuring accurate and relevant output.
 
-You can find an example in [extras/cs2_system_message_new.md](extras/cs2_system_message_new.md).
+You can find an example in [here](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LLM%20-%20Custom%20Step%20Generator%20with%20Azure%20OpenAI/extras/cs2_system_message_new.md).
 
 ## 4. Python Dependencies
 
