@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-List of Steps/Computer Vision/CV - Train Models" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">CV - Train Models | sas-studio-custom-steps Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://sassoftware.github.io/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="CV - Train Models | sas-studio-custom-steps Documentation"><meta data-rh="true" name="description" content="CV - Train Models"><meta data-rh="true" property="og:description" content="CV - Train Models"><link data-rh="true" rel="icon" href="https://raw.githubusercontent.com/sassoftware/.github/refs/heads/main/assets/sas.png"><link data-rh="true" rel="canonical" href="https://sassoftware.github.io/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models"><link data-rh="true" rel="alternate" href="https://sassoftware.github.io/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models" hreflang="en"><link data-rh="true" rel="alternate" href="https://sassoftware.github.io/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CV - Train Models","item":"https://sassoftware.github.io/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models"}]}</script><link rel="stylesheet" href="/sas-studio-custom-steps/assets/css/styles.f2f08132.css">
+<script src="/sas-studio-custom-steps/assets/js/runtime~main.58e0766e.js" defer="defer"></script>
+<script src="/sas-studio-custom-steps/assets/js/main.b05a28bf.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="https://raw.githubusercontent.com/sassoftware/.github/refs/heads/main/assets/sas.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/sas-studio-custom-steps/"><div class="navbar__logo"><img src="https://raw.githubusercontent.com/sassoftware/.github/refs/heads/main/assets/sas.png" alt="SAS" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="https://raw.githubusercontent.com/sassoftware/.github/refs/heads/main/assets/sas.png" alt="SAS" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">sas-studio-custom-steps Documentation</b></a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/sassoftware/sas-studio-custom-steps" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" title="GitHub repository"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><svg aria-hidden="true" class="searchIcon_T3tP" focusable="false" viewBox="0 0 16 16"><path fill="currentColor" d="M6.02945 10.20327a4.17382 4.17382 0 1 1 4.17382-4.17382 4.15609 4.15609 0 0 1-4.17382 4.17382Zm9.69195 4.2199-4.8225-4.82338A5.88021 5.88021 0 0 0 12.058 6.02856 6.00467 6.00467 0 1 0 9.59979 10.8989l4.82338 4.82338a.89729.89729 0 0 0 1.29912 0 .89749.89749 0 0 0-.00087-1.29909Z"></path></svg><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/sas-studio-custom-steps/List of Steps/Anonymize and Mask Data"><span class="categoryLinkLabel_W154">List of Steps</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Anonymize and Mask Data"><span class="linkLabel_WmDU">Anonymize and Mask Data</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Append Table"><span class="linkLabel_WmDU">Append Table</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Catalog/Catalog - List Agents"><span class="categoryLinkLabel_W154">Catalog</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Cloud Analytics Services/CAS - Convert Char to Varchar"><span class="categoryLinkLabel_W154">Cloud Analytics Services</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Create Object Detection Table"><span class="categoryLinkLabel_W154">Computer Vision</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Create Object Detection Table"><span class="linkLabel_WmDU">CV - Create Object Detection Table</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Display Images"><span class="linkLabel_WmDU">CV - Display Images</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - ESP Zip Creation"><span class="linkLabel_WmDU">CV - ESP Zip Creation</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Load Images"><span class="linkLabel_WmDU">CV - Load Images</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Merge Data with Images"><span class="linkLabel_WmDU">CV - Merge Data with Images</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Train Models"><span class="linkLabel_WmDU">CV - Train Models</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Create Listing Of Directory CLOD"><span class="linkLabel_WmDU">Create Listing Of Directory CLOD</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Export/ADLS File Writer"><span class="categoryLinkLabel_W154">Export</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Generate Airflow DAG"><span class="linkLabel_WmDU">Generate Airflow DAG</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Import/ADLS File Reader"><span class="categoryLinkLabel_W154">Import</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Log/Collect SAS Viya Monitoring Logs"><span class="categoryLinkLabel_W154">Log</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Synthetic Data/Audit Synthetic Data Utility"><span class="categoryLinkLabel_W154">Synthetic Data</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/sas-studio-custom-steps/List of Steps/Zip Data"><span class="linkLabel_WmDU">Zip Data</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/sas-studio-custom-steps/"><span class="linkLabel_WmDU">About SAS Studio Custom Steps</span></a></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/sas-studio-custom-steps/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">List of Steps</span></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Computer Vision</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">CV - Train Models</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>CV - Train Models</h1></header>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span><strong>ACCESS THE CUSTOM STEP FOLDER</strong></div><div class="admonitionContent_BuS1"><p><a href="https://github.com/sassoftware/sas-studio-custom-steps/tree/main/CV%20-%20Train%20Models" target="_blank" rel="noopener noreferrer" class="">CV - Train Models</a></p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="description">Description<a href="#description" class="hash-link" aria-label="Direct link to Description" title="Direct link to Description" translate="no">​</a></h2>
+<p>This custom step helps users develop computer vision (CV) models to accomplish one of four prediction tasks:</p>
+<ol>
+<li class="">Image classification</li>
+<li class="">Image regression</li>
+<li class="">Object detection</li>
+<li class="">Multi-task</li>
+</ol>
+<p>This step (tool) partitions the data, resizes the images, trains a convolutional neural network, and enables the user to perform a neural architecture and hyperparameter search using SAS autotune&#x27;s Evolutional Algorithm Guiding Local Search (EAGLS).</p>
+<p>The user can choose between several model backbones (underlying framework) and modify the backbone/framework to suit their data needs best. Certain features that define the model are task-specific, meaning they only appear when a corresponding task (object detection, classification, regression, or multi-task) is selected. Other features are task agnostic and will occur regardless of the chosen tasks.</p>
+<p>If autotuning is selected, the final model architecture and weights are saved, and training is resumed with an updated learning rate. That is, the new learning rate reflects the characteristics of the learning rate policy used during autotuning. If autotuning is not selected, a model is trained using the criteria listed in the input parameters.</p>
+<p>The step creates an output table that contains reference information needed for the CV - Save Model and CV Model Scoring custom steps. The trained model and other important files are stored in the project folder (see &quot;General Setup Details&quot; below for more information).</p>
+<p>The step saves the log information into the project folder location specified by the user.  The project folder location must sit on the SAS Server and must not reside in the SAS Content folder.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="features">Features<a href="#features" class="hash-link" aria-label="Direct link to Features" title="Direct link to Features" translate="no">​</a></h2>
+<ul>
+<li class="">Trains a computer vision model.</li>
+<li class="">Can perform neural architecture and hyperparameter search.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="user-interface">User Interface<a href="#user-interface" class="hash-link" aria-label="Direct link to User Interface" title="Direct link to User Interface" translate="no">​</a></h2>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="general-setup">General Setup:<a href="#general-setup" class="hash-link" aria-label="Direct link to General Setup:" title="Direct link to General Setup:" translate="no">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/General_Setup-903ee147f565b8796d481890bbbc8158.JPG" width="966" height="724" class="img_ev3q"></p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="general-setup-data">General Setup (Data):<a href="#general-setup-data" class="hash-link" aria-label="Direct link to General Setup (Data):" title="Direct link to General Setup (Data):" translate="no">​</a></h5>
+<p>![alt text for screen readers](./img/General_Setup_ Data_Setup.jpg)</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="general-setup-modeling-setup">General Setup (Modeling Setup):<a href="#general-setup-modeling-setup" class="hash-link" aria-label="Direct link to General Setup (Modeling Setup):" title="Direct link to General Setup (Modeling Setup):" translate="no">​</a></h5>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/General_Setup_Modeling_Task_Setup-81c8403f9bfa325fe5e98c45f71f69bc.jpg" width="520" height="455" class="img_ev3q"></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-options">Modeling Options:<a href="#modeling-options" class="hash-link" aria-label="Direct link to Modeling Options:" title="Direct link to Modeling Options:" translate="no">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/modeling_options-a576260f89e8581ac816c159c988b5b4.JPG" width="1110" height="630" class="img_ev3q"></p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-options-autotuning">Modeling Options (Autotuning):<a href="#modeling-options-autotuning" class="hash-link" aria-label="Direct link to Modeling Options (Autotuning):" title="Direct link to Modeling Options (Autotuning):" translate="no">​</a></h5>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/modeling_options_Autotuning-d2da530161d0be9f54b114d65fe0896c.JPG" width="457" height="719" class="img_ev3q"></p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-options-model-specifications">Modeling Options (Model Specifications):<a href="#modeling-options-model-specifications" class="hash-link" aria-label="Direct link to Modeling Options (Model Specifications):" title="Direct link to Modeling Options (Model Specifications):" translate="no">​</a></h5>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/modeling_options_Model_Specifications-10ae66990bf2a56dbb799c436e7a447b.JPG" width="1029" height="711" class="img_ev3q"></p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-options-final-model-training">Modeling Options (Final Model Training):<a href="#modeling-options-final-model-training" class="hash-link" aria-label="Direct link to Modeling Options (Final Model Training):" title="Direct link to Modeling Options (Final Model Training):" translate="no">​</a></h5>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/modeling_options_Finaltraining-f006b7768558bca24a080e04a7662bd2.jpg" width="620" height="481" class="img_ev3q"></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="about">About:<a href="#about" class="hash-link" aria-label="Direct link to About:" title="Direct link to About:" translate="no">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="alt text for screen readers" src="/sas-studio-custom-steps/assets/images/about-9cf7df3672adb1d86102bbac2438f27e.JPG" width="1284" height="666" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="sas-viya-version-support">SAS Viya Version Support<a href="#sas-viya-version-support" class="hash-link" aria-label="Direct link to SAS Viya Version Support" title="Direct link to SAS Viya Version Support" translate="no">​</a></h2>
+<p>Tested on Viya 4, Stable 2024.05</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="requirements">Requirements<a href="#requirements" class="hash-link" aria-label="Direct link to Requirements" title="Direct link to Requirements" translate="no">​</a></h2>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ensure">Ensure:<a href="#ensure" class="hash-link" aria-label="Direct link to Ensure:" title="Direct link to Ensure:" translate="no">​</a></h4>
+<ul>
+<li class="">SAS Viya is installed with a minimum of a SAS Studio Analyst license.</li>
+<li class="">The model SASHDAT tables will need to be downloaded from: <a href="https://support.sas.com/documentation/prod-p/vdmml/zip/index.html" target="_blank" rel="noopener noreferrer" class="">https://support.sas.com/documentation/prod-p/vdmml/zip/index.html</a>
+Only the following sashdats may be used in the current version of the step:
+Object detection using Tiny YoloV2
+ResNet50 Caffe
+ShuffleNetV2
+Xception</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="general-setup-details">General Setup Details<a href="#general-setup-details" class="hash-link" aria-label="Direct link to General Setup Details" title="Direct link to General Setup Details" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="project-setup-parameters">Project Setup Parameters:<a href="#project-setup-parameters" class="hash-link" aria-label="Direct link to Project Setup Parameters:" title="Direct link to Project Setup Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">Specify project folder path (Required): provide a valid path to a folder located in the SAS Server that will be used to store important files generated from the step.
+These files include:</li>
+</ol>
+<ul>
+<li class="">Autotuning results in html format.</li>
+<li class="">Autotuned weights (autotune_bestweights_.sashdat) and attributes (autotune_bestweights_.ATTRS.sashdat) in sashdat format.</li>
+<li class="">Model table sashdat.</li>
+<li class="">Model weights sashdat derived from final model training.</li>
+<li class="">Model weight attributes sashdat derived from final model training.</li>
+<li class="">Folder containing a sample of holdout data detections for human-in-the-loop inspection (object detection only).</li>
+<li class="">Log files for each autotuned evaluation and &quot;global&quot; log file containing all other SAS log information.</li>
+</ul>
+<ol start="2">
+<li class="">Specify the path to the folder containing the model tables (Required): provide a valid path to a folder located in the SAS Server that contains the following case-sensitive sashdat files (can be downloaded from the Git repository):</li>
+</ol>
+<ul>
+<li class="">
+<p>resnet50_caffe.sashdat</p>
+</li>
+<li class="">
+<p>resnet50_caffe_weights.sashdat</p>
+</li>
+<li class="">
+<p>resnet50_caffe_weights_attr.sashdat</p>
+</li>
+<li class="">
+<p>Tiny-Yolov2.sashdat</p>
+</li>
+<li class="">
+<p>Tiny-Yolov2_weights.sashdat</p>
+</li>
+<li class="">
+<p>Tiny-Yolov2_weights_attr.sashdat</p>
+</li>
+<li class="">
+<p>ShuffleNetV2.sashdat</p>
+</li>
+<li class="">
+<p>ShuffleNetV2_weights.sashdat</p>
+</li>
+<li class="">
+<p>ShuffleNetV2_weights_attr.sashdat</p>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-task-setup-parameters">Modeling Task Setup Parameters:<a href="#modeling-task-setup-parameters" class="hash-link" aria-label="Direct link to Modeling Task Setup Parameters:" title="Direct link to Modeling Task Setup Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<p>Choose a modeling task (Required): select from one of the four modeling task. Choices are object detection, classification, regression, or multi-task.</p>
+</li>
+<li class="">
+<p>Choose the error function to use for regression estimation (Required, regression task only): select from one of the five error functions. Choices are Normal, Poisson, Gamma, L1, and Cross-entropy.</p>
+</li>
+<li class="">
+<p>Choose the activation (inverse link) function to use for regression estimation (Required, regression task only): select from one of the four inverse link functions. Choices are identity, exponential, logistic, and sine.</p>
+</li>
+<li class="">
+<p>Use GPUs: select whether to use GPUs for model training. Ensure you have one or more Nvidia GPUs installed with the appropriate drivers. See SAS documentation, &quot;Requirements for GPU Support&quot; for more details.</p>
+</li>
+</ol>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="data-setup-parameters">Data Setup Parameters:<a href="#data-setup-parameters" class="hash-link" aria-label="Direct link to Data Setup Parameters:" title="Direct link to Data Setup Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<p>Name of target variable (Required for regression and classification task only): provide the name of the target variable column.</p>
+</li>
+<li class="">
+<p>Number of target (outcome) variables for multi-task learning (Required for multi-task only): provide the number of target outcomes. The number must reside within the range of 2 and 21, inclusive.</p>
+</li>
+<li class="">
+<p>Name of target variable 0 to 20 (Required for multi-task only): provide the names of the target variable columns in each respective text box.</p>
+</li>
+<li class="">
+<p>Name of variable (column) containing image binary large object (BLOB) (Required): provide the name of the variable column containing the image BLOB.</p>
+</li>
+<li class="">
+<p>Image size (Required): provide the input image size relative to the number of pixels. The step will resize the images to the specified size. For object detection task, the user must choose an image size from a drop-down with values of 224, 416, 640, or 1280. For classification, regression and multi-task problems, users can specify a customized size as long as the image width and height  is greater than or equal to 64 pixels.</p>
+</li>
+<li class="">
+<p>Number of classes in the object detection data (Required for object detection task only): specify the number of classes present in your data.</p>
+</li>
+<li class="">
+<p>Number of image channels (Required): select the number of channels present in your image data. Choices are 3-channel for color images or single channel for greyscale images. The image data does not have to naturally conform the selected channel. The step will apply a transformation based on the user&#x27;s selection for this parameter.</p>
+</li>
+<li class="">
+<p>Apply photomorphic image mutations (Required): specify whether or not to apply random photomorphic mutations to mini-batches during the training process. If “random” is selected, SAS will mutate images using one of the following methods chosen at random: color jittering, sharpening, or lightening. Approximately half of the input data is subject to the photomorphic mutations.</p>
+</li>
+<li class="">
+<p>Apply random flipping (Required): specify whether or not to apply random “flip” mutations to mini-batches during the training process. Choices are none, horizontal, vertical, or both horizontal and vertical. Approximately half of the input data is subject to flipping.</p>
+</li>
+<li class="">
+<p>Apply random cropping mutations (Required): specify whether or not to apply a cropping mutation. If “Resize then crop” is chosen from the drop-down list, SAS resizes images to 115% of the size of the input layer while maintaining the image aspect ratio. The smaller dimension (width or height) of the original input image size is resized to 115% of the input layer size, then the remaining dimension is resized to match the original image aspect ratio. The last step extracts a random crop (equal to the size of the input layer) from the interim image. No further resizing is required.</p>
+</li>
+<li class="">
+<p>Specify the maximum number of possible bounding box anchors (Required for object detection only): specifies the maximum number of clusters to be searched when determining the optimal number of anchor boxes.</p>
+</li>
+<li class="">
+<p>Specify the criterion to be used to estimate the number of appropriate bounding box anchors to use (Required for object detection only): specifies the criterion to be used to estimate the number of anchor boxes that use the statistics obtained by the ABC method. PROC KCLUS is used to apply clustering to the width and height of the ground truth bounding boxes. The user selects one of the following options from the drop-down list. “First peak” uses the first peak value among the peak values in gap statistics. “First maximum with standardization” uses the smallest k such that the gap value for that k is greater than the one-standard-error adjusted gap value for k+1. “Global peak” uses the maximum peak value among all the peak values in gap statistics. “All - majority selects” selects the number of anchor boxes based on which number of anchor boxes is chosen the most often from all methods included in the drop-down list. If each option selects a different number of anchor boxes, then the number selected by “Global peak” is used.</p>
+</li>
+<li class="">
+<p>Percentage of validation cases (Required): specify the percentage of data to be allocated to the holdout data.</p>
+</li>
+<li class="">
+<p>Name of partition variable (designates training vs. holdout) (Required): specify the name of partition indicator that will be added to the data.</p>
+</li>
+<li class="">
+<p>Random partition seed (Required): specifies an integer that is used to start the pseudorandom number generator. If you do not specify a seed or you specify a value less than or equal to 0, the seed is generated from reading the time of day from the computer’s clock.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="modeling-options-details">Modeling Options Details:<a href="#modeling-options-details" class="hash-link" aria-label="Direct link to Modeling Options Details:" title="Direct link to Modeling Options Details:" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="autotune-parameters">Autotune Parameters:<a href="#autotune-parameters" class="hash-link" aria-label="Direct link to Autotune Parameters:" title="Direct link to Autotune Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<p>Do you want to autotune the model (Required)? user specifies whether to use SAS autotune&#x27;s Evolutional Algorithm Guiding Local Search (EAGLS).</p>
+</li>
+<li class="">
+<p>Name of the table to create with autotune results (Required): specifies the name of the sashdat table that will contain the results from autotuning. The table is saved in the project folder.</p>
+</li>
+<li class="">
+<p>Do you want to leverage a previous search (Required)? user specifies whether to use a previous search in the current execution. Leveraging previous autotune executions is valuable in computer vision modeling because evaluations may take long periods of time. In addition, breaking up the search across executions enables the user to examine the results and make adjustments to the search, meaning human-in-the-loop neural architecture search is supported by this step.</p>
+</li>
+<li class="">
+<p>Name of the table to create with previous autotune results (Required): specifies the name of the sashdat table that contains results from a previous autotuning execution. The table should be stored/located in the project folder.</p>
+</li>
+<li class="">
+<p>Specify the number of previous strong performing evaluations to use in (seed) the next search (Required): specifies the number of previous strong performing evaluations to use in the current search. That is, the number indicates how many best performing evaluations will be retrained and used to influence the current EAGLS search. For example, a value of “3” will retrain the three best performers included in the previous search table.</p>
+</li>
+<li class="">
+<p>Random seed for autotune (Required): specifies the random seed to use when autotuning. It is very important to change the random seed if the user is leveraging a previous autotune search.</p>
+</li>
+<li class="">
+<p>Starting population (evaluations in initial sample) (Required):  specifies the initial number of samples to be drawn from a Latin hypercube sample.</p>
+</li>
+<li class="">
+<p>Number of generations (Required):  specifies the number of generations used by EAGLS. Each generation will perform the following steps, selection, crossover, mutation and generating set search. Selection, crossover and mutation are natural elements of the genetic algorithm. The generating set search is a greedy algorithm that searches from the current best performing evaluations.</p>
+</li>
+<li class="">
+<p>Number of local permutations (greedy search) (Required): specifies the number of permutations created from the generating set search. These evaluations are considered a local, greedy search. Increasing this value will cause the population to more aggressively become homogenous.</p>
+</li>
+<li class="">
+<p>Number of epochs per evaluation (Required): specifies the number of epochs to train each evaluation during the autotuning process.</p>
+</li>
+<li class="">
+<p>Maximum number of seconds to spend on search (Required): specifies the number of seconds to execute autotune.</p>
+</li>
+<li class="">
+<p>Name of HTML file containing autotune results (Required): specify the name of the HTML file that will contain the results. The results HTML file will be stored in the project folder.</p>
+</li>
+</ol>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="model-specifications-parameters">Model Specifications Parameters:<a href="#model-specifications-parameters" class="hash-link" aria-label="Direct link to Model Specifications Parameters:" title="Direct link to Model Specifications Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<p>Number of threads to use (Required): specifies the number of threads to use when training the mode. Increasing threads may increase training speed but will also increase memory usage and can cause failed executions when the system memory is exceeded. Suggested values are 4, 8 or 12.</p>
+</li>
+<li class="">
+<p>Search weight for object&#x27;s presence error (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>Object present scalar (Required for object detection only): specifies the scalar value to use for determining if an object is present in a cell. That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>Object present, lower bound scalar (Required for object detection only): specifies the lower bound scalar for SAS autotune’s search of the object’s presence scalar.</p>
+</li>
+<li class="">
+<p>Object present, upper bound scalar (Required for object detection only): specifies the upper bound scalar for SAS autotune’s search of the object’s presence scalar.</p>
+</li>
+<li class="">
+<p>Search weight for object&#x27;s absence error (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>No Object present scalar (Required for object detection only): specifies the scalar value to use for determining if an object is not present (absent) in a cell. That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>No object present, lower bound scalar (Required for object detection only): specifies the lower bound scalar for SAS autotune’s search of the object’s absence scalar.</p>
+</li>
+<li class="">
+<p>No object present, upper bound scalar (Required for object detection only): specifies the upper bound scalar for SAS autotune’s search of the object’s absence scalar.</p>
+</li>
+<li class="">
+<p>Search weight for object&#x27;s coordinate error (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>Object coordinate scalar (Required for object detection only): specifies the scalar value to use for determining an object’s location in the image and bounding box size (offsets from the anchor boxes). That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>Object coordinate, lower bound scalar (Required for object detection only): specifies the lower bound scalar for SAS autotune’s search of the object’s location in the image and bounding box size estimation.</p>
+</li>
+<li class="">
+<p>Object coordinate, upper bound scalar (Required for object detection only): specifies the upper bound scalar for SAS autotune’s search of the object’s location in the image and bounding box size estimation.</p>
+</li>
+<li class="">
+<p>Search weight for classification error (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>Object classification scalar (Required for object detection only): specifies the scalar value to use for determining an object’s classification. That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>Object classification, lower bound scalar (Required for object detection only): specifies the lower bound scalar for SAS autotune’s search of the object’s classification.</p>
+</li>
+<li class="">
+<p>Object classification, upper bound scalar (Required for object detection only): specifies the upper bound scalar for SAS autotune’s search of the object’s classification.</p>
+</li>
+<li class="">
+<p>Search detection threshold (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>Detection threshold (Required for object detection only): specifies the threshold for probability in object detection.</p>
+</li>
+<li class="">
+<p>Detection threshold, lower bound (Required for object detection only): specifies the lower bound threshold for SAS autotune’s search of the detection threshold.</p>
+</li>
+<li class="">
+<p>Detection threshold, upper bound (Required for object detection only): specifies the upper bound threshold for SAS autotune’s search of the detection threshold.</p>
+</li>
+<li class="">
+<p>Search intersection over union (IoU) threshold (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>IoU threshold (Required for object detection only): specifies the scalar value to use for determining the IoU threshold for maximum suppression in object detection. That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>IoU threshold, lower bound (Required for object detection only): specifies the lower bound threshold for SAS autotune’s search of the IoU threshold for maximum suppression.</p>
+</li>
+<li class="">
+<p>IoU threshold, upper bound (Required for object detection only): specifies the upper bound threshold for SAS autotune’s search of the IoU threshold for maximum suppression.</p>
+</li>
+<li class="">
+<p>Search training intersection over union (IoU) threshold (Required for object detection only): specifies whether to use SAS Autotune to search for an optimal value.</p>
+</li>
+<li class="">
+<p>Train IoU threshold (Required for object detection only): specifies the scalar value to use for determining the IoU threshold to determine a positive sample for training in object detection. That is, this value influences the “value” the corresponding partial error has over the weight updates.</p>
+</li>
+<li class="">
+<p>Train IoU threshold, lower bound (Required for object detection only): specifies the lower bound threshold for SAS autotune’s search of the IoU threshold to determine a positive sample for training in object detection.</p>
+</li>
+<li class="">
+<p>Train IoU threshold, upper bound (Required for object detection only): specifies the upper bound threshold for SAS autotune’s search of the IoU threshold to determine a positive sample for training in object detection.</p>
+</li>
+<li class="">
+<p>Add a projection layer (1 by 1 convolutional) before the output layer(s) (Required for classification, regression and multi-task): specifies whether to insert a projection layer in between the tensor and the final model output.  Projection layers are used for tensor compression or expansion. If set to “yes”, options will appear that allow the user to choose the number of convolutional filters and nonlinear activation function to use.</p>
+</li>
+<li class="">
+<p>Select a model backbone (Required): selects the backbone to use as a baseline for model development.  Choices include:
+Resnet50,
+Tiny-Yolov2 (VGG16-style),
+ShuffleNetV2,
+ShuffleNetV2_x1.5,
+ShuffleNetV2_x2.0,
+ShuffleNetV2_x2.5,
+or users can select Autotune to search all backbones.
+See <a href="https://arxiv.org/abs/1807.11164" target="_blank" rel="noopener noreferrer" class="">https://arxiv.org/abs/1807.11164</a> for more details regarding the different variations of ShuffleNetV2.</p>
+</li>
+<li class="">
+<p>Search the first convolutional layer filter size: select to have SAS autotune search for the optimal filter size.</p>
+</li>
+<li class="">
+<p>Select filter size for first convolution layer from the following sizes (width by height):</p>
+<ul>
+<li class="">3 by 3</li>
+<li class="">3 by 5</li>
+<li class="">5 by 3</li>
+<li class="">5 by 5</li>
+<li class="">5 by 7</li>
+<li class="">7 by 5</li>
+<li class="">7 by 7</li>
+</ul>
+</li>
+<li class="">
+<p>Search the nonlinear activation function to use in model backbone: allows the user to use SAS autotune to search for the best fitting nonlinear activation function.</p>
+</li>
+<li class="">
+<p>Model backbone nonlinear activation function (Required): specifies the nonlinear activation function to use in the model backbone. If SAS autotuning is selected to search the nonlinear activation function, then the nonlinear activation function specified in this option will be used as an inital value in one of the samples.</p>
+<ul>
+<li class="">Rectified linear unit (ReLU)</li>
+<li class="">Leaky rectified linear unit</li>
+<li class="">Softplus</li>
+<li class="">Exponential linear unit (ELU)</li>
+<li class="">Hyperbolic tangent (TanH)</li>
+</ul>
+</li>
+</ol>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="multi-task-target--properties-required-for-multi-task-only--">Multi-task target # properties (Required for multi-task only):  :<a href="#multi-task-target--properties-required-for-multi-task-only--" class="hash-link" aria-label="Direct link to Multi-task target # properties (Required for multi-task only):  :" title="Direct link to Multi-task target # properties (Required for multi-task only):  :" translate="no">​</a></h5>
+<ol>
+<li class="">
+<p>Target variable is nominal: specifies whether the target outcome is nominal. If nominal, cross-entropy error with SoftMax activation is used. If interval, mean squared error with identity activation is used.</p>
+</li>
+<li class="">
+<p>Search scalar value for target # loss: specifies to use autotune to search for a scalar value for the corresponding error function. The greater the value the more weight (or attention) the model places predicting the outcome.</p>
+</li>
+<li class="">
+<p>Scalar loss value for target #: the scalar value for the corresponding error function. If “Search scalar value for target # loss” is set to true (checked), then this specified value is used in the first iteration. The greater the value the more weight (or attention) the model places predicting the outcome.</p>
+</li>
+<li class="">
+<p>Scalar loss value for target #, lower bound: specifies the lower search bound for the scalar value for the corresponding error function.</p>
+</li>
+<li class="">
+<p>Scalar loss value for target #, upper bound: specifies the upper search bound for the scalar value for the corresponding error function.</p>
+</li>
+<li class="">
+<p>Search dimension of projection layer for target #: specifies to use autotune to search for the number of one by one convolution filters to use in the projection layer.</p>
+</li>
+<li class="">
+<p>Number of filters in projection layer for target #: specifies the number of one-by-one convolution filters to use in the projection layer.</p>
+</li>
+<li class="">
+<p>Number of filters in projection layer, lower bound: specifies the lower search bound when searching one-by-one convolution filters.</p>
+</li>
+<li class="">
+<p>Number of filters in projection layer, upper bound: specifies the upper search bound when searching one-by-one convolution filters.</p>
+</li>
+</ol>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="final-model-training-parameters">Final Model Training Parameters:<a href="#final-model-training-parameters" class="hash-link" aria-label="Direct link to Final Model Training Parameters:" title="Direct link to Final Model Training Parameters:" translate="no">​</a></h4>
+<ol>
+<li class="">
+<p>Number of epochs (Required): specifies the number of epochs the final model will be trained. The final model’s full training horizon is equal to the number of epochs each trained during autotune plus the number of epochs specified in this parameter.</p>
+</li>
+<li class="">
+<p>Name of final model weights table (Required): provide the name of the sashdat table that will contain the model’s final weights, as well as the table containing the weight attributes. That is, the value in the text box will be used for both the weights and attributes table with he attributes table having an additional suffix indicating the table contains attributes. Both tables will be stored in the project folder.</p>
+</li>
+<li class="">
+<p>Percentage of holdout data to view (Required for object detection only): specifies the percentage of holdout data that will have the model’s prediction superimposed and printed for viewing.</p>
+</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="created--contact">Created / contact:<a href="#created--contact" class="hash-link" aria-label="Direct link to Created / contact:" title="Direct link to Created / contact:" translate="no">​</a></h2>
+<ul>
+<li class="">Robert Blanchard (<a href="mailto:robert.blanchard@sas.com" target="_blank" rel="noopener noreferrer" class="">robert.blanchard@sas.com</a>)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="change-log">Change Log<a href="#change-log" class="hash-link" aria-label="Direct link to Change Log" title="Direct link to Change Log" translate="no">​</a></h2>
+<ul>
+<li class="">Version 8.0 (19SEP2024)<!-- -->
+<ul>
+<li class="">Initial version</li>
+</ul>
+</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/sassoftware/sas-studio-custom-steps/tree/main/website/docs/List of Steps/Computer Vision/CV - Train Models.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/sas-studio-custom-steps/List of Steps/Computer Vision/CV - Merge Data with Images"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">CV - Merge Data with Images</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/sas-studio-custom-steps/List of Steps/Create Listing Of Directory CLOD"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Create Listing Of Directory CLOD</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#description" class="table-of-contents__link toc-highlight">Description</a></li><li><a href="#features" class="table-of-contents__link toc-highlight">Features</a></li><li><a href="#user-interface" class="table-of-contents__link toc-highlight">User Interface</a></li><li><a href="#sas-viya-version-support" class="table-of-contents__link toc-highlight">SAS Viya Version Support</a></li><li><a href="#requirements" class="table-of-contents__link toc-highlight">Requirements</a><ul><li><a href="#general-setup-details" class="table-of-contents__link toc-highlight">General Setup Details</a></li><li><a href="#modeling-options-details" class="table-of-contents__link toc-highlight">Modeling Options Details:</a></li></ul></li><li><a href="#created--contact" class="table-of-contents__link toc-highlight">Created / contact:</a></li><li><a href="#change-log" class="table-of-contents__link toc-highlight">Change Log</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Support</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/sassoftware/sas-studio-custom-steps" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Repository<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026, SAS Institute Inc., Cary, NC, USA. All Rights Reserved. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
