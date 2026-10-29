@@ -49,7 +49,7 @@ Refer the following animated GIF for a general idea.
 1. Input table (input port, required): Attach either a SAS dataset or a SAS Cloud Analytics Services (CAS) table to the input port of this step.
 2. Select text column (column selector, max 1): Select a column containing the context to be provided to the LLM
 3. System prompt (text area): Provide a system prompt for use by the LLM. The system prompt helps clarify the role that the LLM plays and is also used for other instructions such as how to answer the question and the format in which to present the results.
-4. User prompt (text area): Provide a user prompt which contains specific instructions to be fulfilled by the LLM.  In the user prompt, use fields like {Question} and {Context} to refer to the question or context provided.
+4. User prompt (text area): Provide a user prompt which contains specific instructions to be fulfilled by the LLM.  In the user prompt, use fields like `{Question}` and {Context} to refer to the question or context provided.
 5. Illustrative examples (text area):  Provide some illustrative examples (the 'shots') which are used as a basis for the LLM to answer the question. Provide this in the form of "Question:" and "Answer:" pairs
 
 
