@@ -40,7 +40,7 @@ AZURE_OAI_KEY='your_api_key'
 AZURE_OAI_DEPLOYMENT='gpt-4'
 ```
 
-You can find an example in [extras/.env.sample.txt](extras/.env.sample.txt).
+You can find an example in [extras/.env.sample.txt](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LLM%20-%20Custom%20Step%20Generator%20with%20Azure%20OpenAI/extras/.env.sample.txt).
 
 ## 3. System Message File
 
