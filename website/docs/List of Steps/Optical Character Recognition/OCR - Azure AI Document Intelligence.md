@@ -70,7 +70,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
     <th>Extraction</th>
     <th>PDF</th>
     <th>Image<sup>1</sup></th>
-    <th style="border-right: 1px solid #FFF;">URL</th>
+    <th>URL</th>
     <th>Azure<sup>2</sup></th>
     <th>Local Container<sup>3</sup><sup>,4</sup></th>
   </tr>
@@ -78,7 +78,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
     <td>Text</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
-    <td align="center" style="border-right: 1px solid #FFF;">✅</td>
+    <td align="center" >✅</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
   </tr>
@@ -86,7 +86,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
     <td>Form</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
-    <td align="center" style="border-right: 1px solid #FFF;">✅</td>
+    <td align="center">✅</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
   </tr>
@@ -94,7 +94,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
     <td>Query</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
-    <td align="center" style="border-right: 1px solid #FFF;">✅</td>
+    <td align="center" >✅</td>
     <td align="center">✅</td>
     <td align="center"></td>
   </tr>
@@ -102,7 +102,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
     <td>Table</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
-    <td align="center" style="border-right: 1px solid #FFF;">✅</td>
+    <td align="center" >✅</td>
     <td align="center">✅</td>
     <td align="center">✅</td>
   </tr>
@@ -154,7 +154,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 † Required if ``Input Mode`` is set to *"batch"*.
 
 <details>
-  <summary style="font-size: 16px;">Text Settings</summary>
+  <summary >Text Settings</summary>
   
 | Parameter            | Required | Description                                                                                     |
 |----------------------|:--------:|-------------------------------------------------------------------------------------------------|
@@ -163,7 +163,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 </details>
 
 <details>
-  <summary style="font-size: 16px;">Query Settings</summary>
+  <summary>Query Settings</summary>
   
 | Parameter       | Required | Description                                                                                                         |
 |-----------------|:--------:|---------------------------------------------------------------------------------------------------------------------|
