@@ -48,7 +48,7 @@ For the gathering of Link Metadata you need to provide a Python runtime to the C
 
 For the Advanced Text Analytics features you need to have a SAS Visual Text Analytics license.
 
-For a demonstration of the usage of this step please check out this [YouTube video](https://youtu.be/Dqk5bRhattk) - the example flow is included [here](extras/Extract-Text-Features-Example.flw).
+For a demonstration of the usage of this step please check out this [YouTube video](https://youtu.be/Dqk5bRhattk) - the example flow is included [here](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Extract%20Text%20Features/extras/Extract-Text-Features-Example.flw).
 
 The video makes use of the train.csv data from this [Kaggle Challenge](https://www.kaggle.com/competitions/nlp-getting-started/data?select=train.csv) - to download the data you need an account with Kaggle - for a quick demonstration of how to do this, check this part of the the [YouTube video](https://youtu.be/Dqk5bRhattk?t=225).
 
