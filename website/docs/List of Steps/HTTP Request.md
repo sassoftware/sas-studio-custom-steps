@@ -108,12 +108,12 @@ At the Batch tab you define the json batch structure and set the number of recor
    | Batch structure name | The name of the variable token for the json structure used in the payload (HTTP Request tab). The default variable token name is *batch_records*.
 
 
-### Settings tab<a name="settingstab-"></a>
+### Settings tab 
 At the Settings tab can you switch on/off hyperlinks in the UI.
 
    ![Example](/img/HTTP%20Request/img/HTTPRequest-Settings-fl.jpg)
 
-#### Timeout<a timeout="debug-"></a> 
+#### Timeout
 Under Timeout you can set how long a HTTP request is waiting to receive an answer.
    | UI Field | Comment|
    | --- | --- |
@@ -121,14 +121,14 @@ Under Timeout you can set how long a HTTP request is waiting to receive an answe
 
 
 
-#### Debug<a name="debug-"></a> 
+#### Debug
 Under Debug you can set the debug level to get additional log information.
 
    | UI Field | Comment|
    | --- | --- |
    | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. If you have set the [*Output Folder*](#httpoutputfolder-) the step will write a http json result file for each row (each http request execution) to the output folder. |
 
-#### Hyperlinks<a name="hyperlinks-"></a> 
+#### Hyperlinks
 Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
 
 
@@ -144,7 +144,7 @@ Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
 
 ---
 
-## JSON structure field mapping for HTTP result<a name="fieldmapping-"></a>
+## JSON structure field mapping for HTTP result
 Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table. 
 The mapping format is: *json structure path | map column name* 
 For Example, assuming you have a json result like this:
