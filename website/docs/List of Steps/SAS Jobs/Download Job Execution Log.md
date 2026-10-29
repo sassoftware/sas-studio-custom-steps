@@ -44,7 +44,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 ![Usage](/img/Download%20Job%20Execution%20Log/img/Usage.PNG)
 
-The [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step outputs a table that contains a job execution id. That table can be used as input for this custom step, in order to review/scrape the physical, downloaded, log files.
+The [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step outputs a table that contains a job execution id. That table can be used as input for this custom step, in order to review/scrape the physical, downloaded, log files.
 
 ## Input port
 
