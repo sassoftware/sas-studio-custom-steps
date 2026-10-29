@@ -110,7 +110,7 @@ This custom step uses the [Azure AI Document Intelligence](https://azure.microso
 
 $^1$ JPEG/JPG, PNG, BMP, TIFF, HEIF
 | $^2$ API-Version `2023-10-31-preview` (4.0) 
-| $^3$ API-Version `2022-08-31` (3.0) <br>
+| $^3$ API-Version `2022-08-31` (3.0)  
 $^4$ Only supports `General Document` Model / Container
 
 ### Test data
@@ -134,7 +134,7 @@ Tested on SAS Viya version Stable 2024.02
 - [pandas](https://pypi.org/project/pandas/)
 
 ### 🤖 Azure AI Document Intelligence Resource
-To use this step the endpoint and key for an Azure Document Intelligence Resource is needed. <br> 👉 [Create a Document Intelligence resource](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0)
+To use this step the endpoint and key for an Azure Document Intelligence Resource is needed.   👉 [Create a Document Intelligence resource](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0)
 
 <a name="settings"/>
 
@@ -150,7 +150,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 | Input Table | No†           | The name of the table containing file paths/URLs for batch processing |
 | Path Column | No†           | The column in the input table that contains the file path/URL    |
 
-\* Required if ``Input Mode`` is set to *"single"*. <br>
+\* Required if ``Input Mode`` is set to *"single"*.  
 † Required if ``Input Mode`` is set to *"batch"*.
 
 <details>
@@ -183,8 +183,8 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 | Table Selection Method|    No    | Defines the method to select the table per document that is extracted: <ul><li>**index** - uses the index to select the extracted table.</li><li>**size** - selects the table with the most cells.</li></ul> |
 | Table Index           |    No‡    | Table index to extract.                                                    |
 
-\* Only available if ``Table Output Format`` is set to *"reference"*. <br>
-† Defaults to true when ``Table Output Format`` is *"table"*. <br>
+\* Only available if ``Table Output Format`` is set to *"reference"*.  
+† Defaults to true when ``Table Output Format`` is *"table"*.  
 ‡ Required if ``Table Selection Method`` is set to *"index"*
 
 </details>
@@ -197,7 +197,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 |Local Container |No| Whether or not to use a locally deployed Document Intelligence container. Please make sure to deploy the `General Document` container.   |
 |Container Endpoint |No*| URL and Port of the locally deployed container.|
 
-\* Required if `Local Container` is set to `True`. <br>
+\* Required if `Local Container` is set to `True`.  
 
 <details>
   <summary style="font-weight: bold;">👉Where to find resource key and endpoint</summary>
@@ -218,7 +218,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 |Save as JSON|No|Whether to save the raw output as JSON (one file per document)|
 |Output Folder|No*|Folder for the JSON files.|
 
-† Note: Make sure to set this high enough if your documents are excessively large. <br>
+† Note: Make sure to set this high enough if your documents are excessively large.  
 \* Required if ``Save as JSON`` is set to *true*.
 
 <a name="documentation"/>
