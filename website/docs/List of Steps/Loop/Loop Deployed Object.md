@@ -91,7 +91,7 @@ You can follow the progress of each indivudual instance of the **deployed** flow
 ![Properties](/img/Loop%20Deployed%20Object/img/Runtime.PNG)
 
 Note that: 
-- Here you can download the log file for each instance of the **deployed** flow or you can use the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step to download the log file from within the flow.
+- Here you can download the log file for each instance of the **deployed** flow or you can use the [**Download Job Execution Log**](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Download%20Job%20Execution%20Log/README.md) custom step to download the log file from within the flow.
 
 ## Custom step messages
 | Step message                                                     | Reason    | Hard Exit? |
