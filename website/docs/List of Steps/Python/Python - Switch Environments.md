@@ -35,7 +35,7 @@ This step helps you switch between Python environments. Input arguments required
 
 ## Installation & Usage
 
-Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
+Refer to the [steps](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Python%20-%20Switch%20Environments/extras/README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
 
 ## The WHY :  Background information
 
