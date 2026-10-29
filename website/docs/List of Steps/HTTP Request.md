@@ -63,7 +63,8 @@ At the Input Options tab you specify  input parameters for the HTTP request.
 ### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-OutputOptions-fl.jpg" width="616" height="1025">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-OutputOptions-fl.jpg)
+   
 
 #### Output Body<a name="outputbody-"></a> 
 If the output format is json you can specify fields from the json structure to land in the output table.
@@ -95,8 +96,9 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
 ### Batch tab<a name="batchtab-"></a>
 At the Batch tab you define the json batch structure and set the number of records submitted in batch mode.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-Batch-fl.jpg" width="488" height="376">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-Batch-fl.jpg)
 
+   
 > :memo: **Note:** Batch Mode requires that it is supported by the HTTP request and needs to be called in POST, PUT or PATCH mode.
 
    | UI Field | Comment|
@@ -109,7 +111,7 @@ At the Batch tab you define the json batch structure and set the number of recor
 ### Settings tab<a name="settingstab-"></a>
 At the Settings tab can you switch on/off hyperlinks in the UI.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-Settings-fl.jpg" width="568" height="481">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-Settings-fl.jpg)
 
 #### Timeout<a timeout="debug-"></a> 
 Under Timeout you can set how long a HTTP request is waiting to receive an answer.
