@@ -10,7 +10,7 @@
 ## Description
 
 
-:::warning
+:::note
 
 The **Mask Data** step in the **Transform Data** group in the **Steps** pane in SAS Studio, introduced in release 2023.07, provides the same functionality, and it is highly recommended to use that step going forward.
 
@@ -49,7 +49,6 @@ This custom step is related to the [DQ - Standardize](https://github.com/sassoft
     * Added cleanup routine to delete SAS macros and SAS macro variables that were created by this step.
 * Version 2.1 (26JUL2023)
     * Updated Program code to create SASDQREF library if needed
-    * As this step uses new functionality that is only available in SAS Studio 2023.06 or later, the old version of the step is still available. See [older versions](./extras/)
 * Version 2.0 (17JUL2023)
     * Updated step to use **DM_MKDEF** table from the **SASDQREF** library to populate drop-down lists for QKB locale and definition (SASDQREF library containing QKB metadata is available since SAS Viya 2023.06)
     * Drops the column that is being masked
