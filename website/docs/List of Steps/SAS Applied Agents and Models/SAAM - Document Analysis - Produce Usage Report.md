@@ -11,7 +11,7 @@
 
 This custom step is provided to enable point-and-click usage of the functionality available as part of the [SAS Document Analysis](https://www.sas.com/en_us/solutions/ai/models.html) offering from within the SAS Studio interface.
 
-Run the SAAM - Document Analysis - Produce Usage Report step after a batch OCR process has finished (for example, by using the companion step [SAAM - Document Analysis - Execute Batch OCR Process](../SAAM%20-%20Document%20Analysis%20-%20Execute%20Batch%20OCR%20Process)) to generate a usage report about the performed analysis.
+Run the SAAM - Document Analysis - Produce Usage Report step after a batch OCR process has finished (for example, by using the companion step [SAAM - Document Analysis - Execute Batch OCR Process](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/SAAM%20-%20Document%20Analysis%20-%20Execute%20Batch%20OCR%20Process)) to generate a usage report about the performed analysis.
 
 ### Features
 - Usage reporting metrics for previous SDA batch processes
