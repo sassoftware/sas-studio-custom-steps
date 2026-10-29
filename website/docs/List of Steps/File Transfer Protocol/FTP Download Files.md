@@ -41,7 +41,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 ![Usage](/img/FTP%20Download%20Files/img/Usage_01.PNG)
 
-Note that the [**FTP Directory Listing**](../FTP%20Directory%20Listing/README.md) custom step can be used to generate the input table for this custom step and that the FTP host-, user name- and password settings are defined as macro variables in the initialization step.
+Note that the [**FTP Directory Listing**](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/FTP%20Directory%20Listing/README.md) custom step can be used to generate the input table for this custom step and that the FTP host-, user name- and password settings are defined as macro variables in the initialization step.
 
 ## Output port
 
