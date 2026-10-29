@@ -39,7 +39,7 @@ This step helps you create a virtual environment. Input arguments required :
 
 ## Installation & Usage
 
-Refer to the [steps](../README.md#getting-started---making-a-custom-step-from-this-repository-available-in-sas-studio) listed in the main README.md
+Refer to the steps listed in the main README.md
 
 ## The WHY :  Background information
 
