@@ -18,7 +18,7 @@
 4. [Calling HTTP request in batch mode](#batchmode-)
 5. [Requirements](#requirements-)
 6. [Usage](#usage-) 
-   5.1.  [Various usage examples](extras/README.md) 
+   5.1.  [Various usage examples](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/README.md) 
 7. [Change Log](#changelog-)
 
 ## Description<a name="description-"></a>
@@ -63,7 +63,8 @@ At the Input Options tab you specify  input parameters for the HTTP request.
 ### Output Options tab<a name="outputoptionstab-"></a> 
 At the Output Options tab you specify how to receive the data comming back from the HTTP request.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-OutputOptions-fl.jpg" width="616" height="1025">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-OutputOptions-fl.jpg)
+   
 
 #### Output Body<a name="outputbody-"></a> 
 If the output format is json you can specify fields from the json structure to land in the output table.
@@ -95,8 +96,9 @@ In the Header Mapping section you can map tags from the HTTP header result to SA
 ### Batch tab<a name="batchtab-"></a>
 At the Batch tab you define the json batch structure and set the number of records submitted in batch mode.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-Batch-fl.jpg" width="488" height="376">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-Batch-fl.jpg)
 
+   
 > :memo: **Note:** Batch Mode requires that it is supported by the HTTP request and needs to be called in POST, PUT or PATCH mode.
 
    | UI Field | Comment|
@@ -106,12 +108,12 @@ At the Batch tab you define the json batch structure and set the number of recor
    | Batch structure name | The name of the variable token for the json structure used in the payload (HTTP Request tab). The default variable token name is *batch_records*.
 
 
-### Settings tab<a name="settingstab-"></a>
+### Settings tab 
 At the Settings tab can you switch on/off hyperlinks in the UI.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-Settings-fl.jpg" width="568" height="481">
+   ![Example](/img/HTTP%20Request/img/HTTPRequest-Settings-fl.jpg)
 
-#### Timeout<a timeout="debug-"></a> 
+#### Timeout
 Under Timeout you can set how long a HTTP request is waiting to receive an answer.
    | UI Field | Comment|
    | --- | --- |
@@ -119,14 +121,14 @@ Under Timeout you can set how long a HTTP request is waiting to receive an answe
 
 
 
-#### Debug<a name="debug-"></a> 
+#### Debug
 Under Debug you can set the debug level to get additional log information.
 
    | UI Field | Comment|
    | --- | --- |
    | HTTP Debug Level | Set the debug level for this step. You can set level 1 - 3. Depending on the level PROC HTTP will write additional information to the log. If you have set the [*Output Folder*](#httpoutputfolder-) the step will write a http json result file for each row (each http request execution) to the output folder. |
 
-#### Hyperlinks<a name="hyperlinks-"></a> 
+#### Hyperlinks
 Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
 
 
@@ -142,7 +144,7 @@ Under Hyperlinks can you switch on/off hyperlinks unsed in the UI.
 
 ---
 
-## JSON structure field mapping for HTTP result<a name="fieldmapping-"></a>
+## JSON structure field mapping for HTTP result
 Field mapping offers you a convenient way to map fields from the result json structure to a column in the output table. 
 The mapping format is: *json structure path | map column name* 
 For Example, assuming you have a json result like this:
@@ -223,7 +225,7 @@ When setting the payload in tab *HTTP Request* we use the batch structure token 
 
 The step is now prepared for batch mode. With all other settings in place we can run the step.
 
-See  [Batch Demo I](extras/BatchMode_I/README.md) and [Batch Demo II](extras/BatchMode_II/README.md) for more information.
+See  [Batch Demo I](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/BatchMode_I/README.md) and [Batch Demo II](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/BatchMode_II/README.md) for more information.
 
 ---
 
@@ -241,7 +243,7 @@ Use the HTTP Request step to enrich data in a table. The table country has a col
 
 ![](/img/HTTP%20Request/img/HTTPRequest.gif)
 
-For more example using the HTTP Request Step see [here](extras/README.md)
+For more example using the HTTP Request Step see [here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/README.md)
 
 ---
 

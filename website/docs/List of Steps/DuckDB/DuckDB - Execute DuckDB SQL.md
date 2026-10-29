@@ -25,7 +25,7 @@ SAS has added support for DuckDB on the SAS Viya Platform during the second half
 
 The **DuckDB - Execute DuckDB SQL** step enables you to use [DuckDB](https://duckdb.org), a column-oriented in-process SQL OLAP database management system, to access data. It is designed with a focus on high-performance analytics. DuckDB’s architecture is optimized for vectorized query execution, which allows it to process large amounts of data efficiently, providing impressive query performance. It has particular strength working with Parquet files and csv files. Depending on the use case running analytical SQL queries (using SQL aggregate functions) can be very efficient when using DuckDB.
 
-The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/README.md). 
+The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DuckDB%20-%20Execute%20DuckDB%20SQL/extras/README.md). 
 
 DuckDB is very simple to install. For this Custom Step all it needs is to install its Python libraries via "pip".
 
@@ -180,7 +180,7 @@ If DuckDB is not installed or Python cannot find it you will receive an error: "
    ![Example](/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-Test_Failed.jpg)
 
 
-For examples using the DuckDB step in a flow in SAS Studio see [here](extras/README.md)
+For examples using the DuckDB step in a flow in SAS Studio see [here](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/DuckDB%20-%20Execute%20DuckDB%20SQL/extras/README.md)
 
 ## Change Log <a name="change-log-"></a>
 * Version 1.0.2 (16JAN2026)
