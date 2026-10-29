@@ -11,7 +11,7 @@ This custom step helps you delete a local copy of a Git repository in your files
 
 Note that this affects the LOCAL copy of the Git repository, and not the content on the repository hosting service itself.
 
-Please refer this [page](../Git%20-%20Clone%20Git%20Repo/Overview%20of%20Git-related%20Custom%20Steps.md) which explains the motivation behind Custom Steps which surface Git integration functionality.
+Please refer this [page](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Git%20-%20Clone%20Git%20Repo/Overview%20of%20Git-related%20Custom%20Steps.md) which explains the motivation behind Custom Steps which surface Git integration functionality.
 
 ## User Interface
 
