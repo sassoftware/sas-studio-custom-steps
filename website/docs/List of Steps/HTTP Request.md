@@ -18,7 +18,7 @@
 4. [Calling HTTP request in batch mode](#batchmode-)
 5. [Requirements](#requirements-)
 6. [Usage](#usage-) 
-   5.1.  [Various usage examples](extras/README.md) 
+   5.1.  [Various usage examples](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/README.md) 
 7. [Change Log](#changelog-)
 
 ## Description<a name="description-"></a>
@@ -225,7 +225,7 @@ When setting the payload in tab *HTTP Request* we use the batch structure token 
 
 The step is now prepared for batch mode. With all other settings in place we can run the step.
 
-See  [Batch Demo I](extras/BatchMode_I/README.md) and [Batch Demo II](extras/BatchMode_II/README.md) for more information.
+See  [Batch Demo I](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/BatchMode_I/README.md) and [Batch Demo II](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/BatchMode_II/README.md) for more information.
 
 ---
 
@@ -243,7 +243,7 @@ Use the HTTP Request step to enrich data in a table. The table country has a col
 
 ![](/img/HTTP%20Request/img/HTTPRequest.gif)
 
-For more example using the HTTP Request Step see [here](extras/README.md)
+For more example using the HTTP Request Step see [here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/HTTP%20Request/extras/README.md)
 
 ---
 
