@@ -111,7 +111,7 @@ IMPORTANT: Be aware that disabling this step means that none of its main executi
 
 ## Bonus: Templates for Visualization
 
-The [extras](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/NLP%20-%20Categories%20Testing%20Framework/extras/) folder provides instructions on how to import three SAS Visual Analytics page templates which will help you visualize and assess the output data.  Refer [here](/extras/Import%20Report%20Templates.md) for instructions.
+The [extras](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/NLP%20-%20Categories%20Testing%20Framework/extras/) folder provides instructions on how to import three SAS Visual Analytics page templates which will help you visualize and assess the output data.  Refer [here](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/NLP%20-%20Categories%20Testing%20Framework/extras/Import%20Report%20Templates.md) for instructions.
 
 ### NLP Categories - Confusion Matrix
 
