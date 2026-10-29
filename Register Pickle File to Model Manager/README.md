@@ -4,7 +4,7 @@
 
 The **Register Pickle File to Model Manager** custom step registers pickled Python models — scikit-learn, or anything exposing the same `predict`/`predict_proba`/`classes_` interface (including XGBoost's and LightGBM's scikit-learn wrappers) — trained entirely outside SAS, into SAS Model Manager, without writing any Python or sasctl code yourself.
 
-Point the step at up to four pickled models (classification or regression) and a training data CSV, and it will:
+Point the step at up to four pickled models (classification or regression) and training data — either a CSV, or a table already in Viya connected as an input port — and it will:
 
 * Auto-detect predictor columns from each model's own trained feature list (or let you specify them explicitly), and auto-detect whether each model is classification or regression/prediction directly from the pickle itself
 * Handle binary **and** multiclass classification, as well as regression/prediction models, in the same batch
@@ -26,7 +26,7 @@ Models are picked up either from a SAS Content location or directly from the com
 
    * The first model's pickle file
    * An optional name and algorithm label (auto-detected from the model's class if left blank)
-   * The training data CSV
+   * Training data: connect a table already in Viya (CAS-backed or a classic SAS library) as an input port, or a training data CSV if nothing's connected to the port
    * Optional explicit predictor columns (auto-detected from the model if left blank)
    * The target column (optional, auto-detected from the training table if left blank)
    * An optional held-out evaluation dataset for honest model-card metrics
@@ -118,10 +118,13 @@ The log ends with a run summary listing every phase (model card, import, publish
 
 ### Running it without the step's UI
 
-`extras/Register Pickle File to Model Manager.sas` contains the exact same logic as the custom step, with the UI fields exposed as `%let` statements at the top instead. Fill those in and submit the file directly in a SAS Studio Program tab (or any batch/scheduled SAS session) to run it without importing the custom step — useful for repeated or scripted runs.
+`extras/Register Pickle File to Model Manager.sas` contains the exact same logic as the custom step, with the UI fields exposed as `%let` statements at the top instead. Fill those in and submit the file directly in a SAS Studio Program tab (or any batch/scheduled SAS session) to run it without importing the custom step — useful for repeated or scripted runs. The training-data input port is a Flow-only feature (it depends on the Flow Designer's own port resolution), so this standalone script always reads training data from the CSV `%let`.
 
 ## Change Log
 
+* Version 1.26 (29OCT2026)
+    * Training data can now come from a connected input port instead of only a CSV, per PR review feedback from Sundaresh — a table already in Viya (CAS-backed, or a classic SAS library like `SASHELP`) can be wired directly into the step instead of exporting it to a file first. The port is optional: with nothing connected, the step behaves exactly as before, reading the training CSV field. Verified live against a CAS-backed table, a classic SAS library table, and a CSV-only run with the port disconnected.
+        * Implementation note: the connected table's SAS libref is **not** the same as its real CAS caslib name — confirmed live, handing the libref straight to `swat`'s `CASTable(caslib=...)` fails with "caslib does not exist", and `pathname()` on the libref (the usual way to resolve a CAS libref) returns an internal table GUID, not a usable caslib name either. The fix reads the table through the SAS session itself instead — `SAS.submit()` stages it into `WORK`, then `SAS.sd2df()` reads it — which works identically whether the connected table is CAS-backed or a classic SAS library, with no caslib resolution needed at all.
 * Version 1.25 (14OCT2026)
     * Fixed governance/lineage metadata - it was never actually reaching Model Manager. `pzmm.ImportModel.import_model()` does not read the custom `properties` list out of `ModelProperties.json`, so every model this step has ever registered (confirmed by checking real models already registered from this account - they came back with `properties=None`) never got the `registeredBy`/`toolBuild`/`mlFramework`/`hyperparameters`/etc. metadata this step's own Description has always claimed it writes. The data is now written the way that's actually confirmed to work: `model_obj["properties"] = gov_props` followed by `mr.update_model(model_obj)`, done right after import succeeds - not a pre-import file patch. Uses the model object `import_model()` itself returns, not a fresh name-based lookup: this is a shared, multi-tenant repository, so a plain name like `DecisionTreeClassifier` can collide with other users' models, and a name-based re-lookup was confirmed (live, with a "Multiple items found" warning from sasctl) to silently resolve to someone else's model instead.
 * Version 1.24 (13OCT2026)
