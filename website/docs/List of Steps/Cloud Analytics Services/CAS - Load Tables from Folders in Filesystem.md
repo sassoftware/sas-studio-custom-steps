@@ -12,7 +12,7 @@ The "[CAS - Load Tables from Folders in Filesystem](https://github.com/sassoftwa
 
 **This custom step is useful for applications where the user wishes to load multiple files to CAS in one go.**  
 
-For example, suppose you use source code and data located within a Git repository.  After cloning the repo using [Git Integration]((https://go.documentation.sas.com/doc/en/webeditorcdc/default/webeditorug/p0puc7muifjjycn1uemlm9lj1jkt.htm)), you can then run this step to load all required data to CAS tables.
+For example, suppose you use source code and data located within a Git repository.  After cloning the repo using [Git Integration](https://go.documentation.sas.com/doc/en/webeditorcdc/default/webeditorug/p0puc7muifjjycn1uemlm9lj1jkt.htm), you can then run this step to load all required data to CAS tables.
 
 **Here's a general idea:**
 
