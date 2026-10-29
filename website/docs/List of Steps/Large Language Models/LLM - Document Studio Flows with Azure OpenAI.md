@@ -67,7 +67,7 @@ Example available at [extras/.env.sample.txt](https://github.com/sassoftware/sas
 
 ### 4. System Message File
 
-A `system_message.txt` file shapes the documentation by guiding the LLM. It defines structure, detail level, and focus areas. Example available at [extras/system_message.txt](extras/system_message.txt).
+A `system_message.txt` file shapes the documentation by guiding the LLM. It defines structure, detail level, and focus areas. Example available at [extras/system_message.txt](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/LLM%20-%20Document%20Studio%20Flows%20with%20Azure%20OpenAI/extras/system_message.txt).
 
 ### 5. Output Location
 
