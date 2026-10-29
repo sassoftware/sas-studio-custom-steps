@@ -13,7 +13,7 @@ This custom step extracts for one or more term types the terms.
 The custom step needs 1 input table:
 - A table containing the term type id for which you want to extract the terms.
 
-You can use the custom step '[**Glossary - Get Term Types**](../Glossary%20-%20Get%20Term%20Types/README.md)' to extract all term types, including the column termTypeId, defined by the SAS Viya system.
+You can use the custom step '[**Glossary - Get Term Types**](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Glossary%20-%20Get%20Term%20Types/README.md)' to extract all term types, including the column termTypeId, defined by the SAS Viya system.
 
 The custom steps outputs 2 tables:
 
@@ -55,7 +55,7 @@ Example flow:
 ![usage](/img/Glossary%20-%20Get%20Term%20by%20Term%20Type%28s%29/img/Step%20-%20Usage.png)
 
 In this example:
-- The source table is generated and filled by the '[**Glossary - Get Term Types**](../Glossary%20-%20Get%20Term%20Types/README.md)' custom step, containing ALL term types.
+- The source table is generated and filled by the '[**Glossary - Get Term Types**](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Glossary%20-%20Get%20Term%20Types/README.md)' custom step, containing ALL term types.
 - You can exclude the term types for which you do not want extract the terms.
 
 ### Output table 1 (_output1)
