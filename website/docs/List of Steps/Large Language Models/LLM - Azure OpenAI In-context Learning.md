@@ -121,8 +121,8 @@ Refer [here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/LL
 
 ## Created/contact:
 
-- [Crystal Baker](crystal.baker@sas.com)
-- [Sundaresh Sankaran](sundaresh.sankaran@sas.com)
+- [Crystal Baker](mailto:crystal.baker@sas.com)
+- [Sundaresh Sankaran](mailto:sundaresh.sankaran@sas.com)
 ----
 ## Change Log
 * Version 1.0.0(24MAR2025)
