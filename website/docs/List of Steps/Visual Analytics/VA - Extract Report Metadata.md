@@ -23,7 +23,7 @@ When the JSON format for a SAS VA report changes, it might be possible that this
 
 This custom step generates the metadata for 1 report. The output can be stored in your data warehouse and/or be stored directly in CAS to create a report on.
 
-Note that this custom step is able to run under the control of the [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step to generate the report lineage for more than one report at a time.
+Note that this custom step is able to run under the control of the [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step to generate the report lineage for more than one report at a time.
 
 # User Interface
 
