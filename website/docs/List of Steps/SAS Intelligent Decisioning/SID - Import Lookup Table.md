@@ -41,7 +41,7 @@ The macro DCM_IMPORT_LOOKUP (part of SID) uses the lookup table name and folder 
 * Tested on Viya version Stable 2024.12.
 * Requires : SAS® Intelligent Decisioning 5.4 or higher.
 * Uses : DCM_IMPORT_LOOKUP macro (https://go.documentation.sas.com/doc/en/edmcdc/default/edmmacro/n0ni2e3h31k5x3n1v1w4e46z7rnh.htm)
-* Uses : <viyahost>/folders/paths REST API (https://developer.sas.com/rest-apis/folders/findByPath)
+* Uses : `<viyahost>/folders/paths REST API` (https://developer.sas.com/rest-apis/folders/findByPath)
 
 ## Usage
 
