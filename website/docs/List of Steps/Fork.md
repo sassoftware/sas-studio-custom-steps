@@ -97,7 +97,7 @@ for the 'Fork Wait' custom step before connecting the 'Fork Run' output table.
 
 ![Add Input Port](/img/Fork/img/Fork%20Wait%20-%20Add%20input%20port.png)
 
-The logs for each of the started deployed objects are available via the 'Jobs and Flows' section within the SAS Environment Manager. Another option is to download each log using the [**Download Job Execution Log**](../Download%20Job%20Execution%20Log/README.md) custom step. This way you also can use the [**LOG file scaper**](../LOG%20file%20scraper/README.md) custom step to identify 'ERROR'- and 'WARNING' messages during the Fork run.
+The logs for each of the started deployed objects are available via the 'Jobs and Flows' section within the SAS Environment Manager. Another option is to download each log using the [**Download Job Execution Log**](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Download%20Job%20Execution%20Log/README.md) custom step. This way you also can use the [**LOG file scaper**](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/LOG%20file%20scraper/README.md) custom step to identify 'ERROR'- and 'WARNING' messages during the Fork run.
 
 # Custom steps defined error messages
 
