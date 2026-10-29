@@ -73,7 +73,7 @@ There are **three tasks** you can carry out with this custom step, as offered in
 
 2. **Output caslib for extracted rule configuration tables (text field):** fill this in if you are performing extraction tasks.  For example, provide *Public* to indicate that you want all rule configurations to be saved to the shared Public caslib. 
 
-The rule configuration tables listed in the output are named as per a pattern : <astore_name>_<project_type>_RULESCONFIG.sashdat.  The <astore_name> is usually a long alphanumeric string which is also the same name as the model binary generated.  The <project_type> could refer to either CATEGORY or CONCEPT based on the model in question.
+The rule configuration tables listed in the output are named as per a pattern : `<astore_name>_<project_type>_RULESCONFIG.sashdat`.  The <astore_name> is usually a long alphanumeric string which is also the same name as the model binary generated.  The `<project_type>` could refer to either CATEGORY or CONCEPT based on the model in question.
 
 
 #### Run-time control
