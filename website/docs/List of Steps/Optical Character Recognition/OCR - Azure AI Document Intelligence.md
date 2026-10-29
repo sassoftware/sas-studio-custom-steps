@@ -173,7 +173,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 </details>
 
 <details>
-  <summary style="font-size: 16px;">Table Settings</summary>
+  <summary>Table Settings</summary>
   
 | Parameter             | Required | Description                                                                                                               |
 |-----------------------|:--------:|---------------------------------------------------------------------------------------------------------------------------|
@@ -200,7 +200,7 @@ To use this step the endpoint and key for an Azure Document Intelligence Resourc
 \* Required if `Local Container` is set to `True`.  
 
 <details>
-  <summary style="font-weight: bold;">👉Where to find resource key and endpoint</summary>
+  <summary>👉Where to find resource key and endpoint</summary>
 
   ![](/img/OCR%20-%20Azure%20AI%20Document%20Intelligence/img/keys-and-endpoint.png)
 </details>
