@@ -27,7 +27,7 @@ The **DuckDB - Execute DuckDB SQL** step enables you to use [DuckDB](https://duc
 
 The [Usage](#usage-) section below explains how to check whether the custom step is finding the Python DuckDB libraries. Examples of using this custom step, including some sample data, can be found in [extras/README.md](extras/README.md). 
 
-DuckDB is very simple to install. For this Custom Step all it needs is to install its Python libraries via “pip“.
+DuckDB is very simple to install. For this Custom Step all it needs is to install its Python libraries via "pip".
 
 In this version the following data sources are supported:
 
@@ -38,9 +38,13 @@ In this version the following data sources are supported:
 ---
 
 - You can use the step either as a start step or in the middle of a flow. When used in the middle of a flow, you can reference the input table in a SQL statement as *_flow_table*.  For example: `SELECT * FROM _flow_table`
-- You can build SQL statements referencing tables from different data stores like Parquet, CSV, etc.   For example: `SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number`
+- You can build SQL statements referencing tables from different data stores like Parquet, CSV, etc.   For example: 
 
-<img src="/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-inflow.jpg" alt= “” width="464" height="372"> </img>
+```
+SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number
+```
+[Example](/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-inflow.jpg)
+
 
 For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction).
 
@@ -167,14 +171,14 @@ When you have installed the custom step, test it to ensure it is working with yo
 * Set output table to WORK.duckout
 * Set SQL statement ```SELECT 42```.
 * Run step.
-<p align="center">
-   <img src="/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-Test_Success.jpg" alt= “” width="573" height="360">
-</p>
+
+   ![Example](/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-Test_Success.jpg)
+
 
 If DuckDB is not installed or Python cannot find it you will receive an error: "Unhandled Python exception. No module named 'duckdb'" 
-<p align="center">
-   <img src="/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-Test_Failed.jpg" alt= “” width="573" height="360">
-</p>
+
+   ![Example](/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-Test_Failed.jpg)
+
 
 For examples using the DuckDB step in a flow in SAS Studio see [here](extras/README.md)
 

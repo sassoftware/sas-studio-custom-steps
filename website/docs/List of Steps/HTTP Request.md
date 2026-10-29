@@ -48,7 +48,8 @@ At the HTTP Request tab you set general information for the http request.
 ### Input Options tab<a name="inputoptionstab-"></a> 
 At the Input Options tab you specify  input parameters for the HTTP request.
 
-   <img src="/img/HTTP%20Request/img/HTTPRequest-InputOptions-fl.jpg" width="492" height="400"> </img>
+   [Example](/img/HTTP%20Request/img/HTTPRequest-InputOptions-fl.jpg)
+   
 
    | Section | UI Field | Comment|
    | --- | --- | --- |
