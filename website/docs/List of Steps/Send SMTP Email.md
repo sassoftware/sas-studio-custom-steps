@@ -53,13 +53,14 @@ Note that attachment chosen should reside in a folder on the SAS Server, and the
 
 Refer to the SAS Viya documentation for more details about configuring an SMTP Email server: https://go.documentation.sas.com/doc/en/pgmsascdc/default/lepg/n1w4ntt16ty6gvn17e68ggvhspwm.htm
 
-<br>
+----
 
 ## Usage
 
 ![Send SMTP Email Custom Step Usage](/img/Send%20SMTP%20Email/img/Send_SMTP_Email.gif)
 
-<br>
+
+
 ----
 ## Run-time Control
 

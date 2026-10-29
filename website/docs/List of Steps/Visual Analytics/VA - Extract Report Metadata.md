@@ -34,7 +34,7 @@ Note that this custom step is able to run under the control of the [Loop Deploye
 - **Select report**: Here you can select the report for which you want to generate the metadata.
 
 Note that: 
-- Make sure that, in case of using the [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step, the macro variable as specified in the flow that contains the [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step, needs to be used as shown below, where you can ignore the red cross. After that you can deploy the flow as a job to make it available to the [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step.
+- Make sure that, in case of using the [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step, the macro variable as specified in the flow that contains the [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step, needs to be used as shown below, where you can ignore the red cross. After that you can deploy the flow as a job to make it available to the [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step.
 - The macro variable, 'reportPath', is just an example.
 
 ![macro variable](/img/VA%20-%20Extract%20Report%20Metadata/img/UI_Properties_01.PNG)
@@ -50,7 +50,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 In this simple example, the output of the Extract VA Report Metadata custom step is directly append, by the 'Load to CAS' custom step, into a CAS table to build a report on.
 
-Note that the flow shown can be used by the [Loop Deployed Object](../Loop%20Deployed%20Object/README.md) custom step.
+Note that the flow shown can be used by the [Loop Deployed Object](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/Loop%20Deployed%20Object/README.md) custom step.
 
 ## Output port
 
