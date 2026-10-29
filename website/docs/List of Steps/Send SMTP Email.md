@@ -26,7 +26,7 @@ Note that attachment chosen should reside in a folder on the SAS Server, and the
 
    ![](/img/Send%20SMTP%20Email/img/EmailMessage2.png)
 
-<br>
+  
 
 ### Options tab
 
