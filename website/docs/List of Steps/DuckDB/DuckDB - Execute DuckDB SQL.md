@@ -40,9 +40,7 @@ In this version the following data sources are supported:
 - You can use the step either as a start step or in the middle of a flow. When used in the middle of a flow, you can reference the input table in a SQL statement as *_flow_table*.  For example: `SELECT * FROM _flow_table`
 - You can build SQL statements referencing tables from different data stores like Parquet, CSV, etc.   For example: `SELECT * FROM taxi.parquet t JOIN driver.csv d ON t.driver_id = d.driver_number`
 
-<p align="center">
-   <img src="/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-inflow.jpg" alt= “” width="464" height="372">
-</p>
+<img src="/img/DuckDB%20-%20Execute%20DuckDB%20SQL/img/DuckDB-inflow.jpg" alt= “” width="464" height="372"> </img>
 
 For documentation on supported SQL see [DuckDB SQL documentation](https://duckdb.org/docs/sql/introduction).
 

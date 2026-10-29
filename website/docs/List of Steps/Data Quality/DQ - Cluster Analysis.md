@@ -108,7 +108,7 @@ The step is going to build a cartesian product for each cluster. All records in 
 ### Use rules as cluster rules
    ![](/img/DQ%20-%20Cluster%20Analysis/img/UseRulesAsClusterRules.gif)
 
-You can find some test data for this step [here](extras/README.md).
+You can find some test data for this step [here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/DQ%20-%20Cluster%20Analysis/extras/README.md).
 ## Change Log  
 Version 1.0 (23JAN2024)
  * Initial version
