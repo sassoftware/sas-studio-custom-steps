@@ -1,16 +1,20 @@
 /************************************************************************
 DuckDB - CSV to Parquet Conversion
 
-Purpose: This SAS program utilizes SAS/ACCESS to DuckDB to ingest a CSV file 
+Purpose: This SAS program uses SAS/ACCESS to DuckDB to ingest a CSV file 
          and convert it into a Parquet file.
 Input Parameters:
 - csv_file_path: Full path to the source CSV file (macro variable)
 - has_headers: Boolean (TRUE/FALSE) indicating if the CSV has a header row (macro variable)
 - parquet_output_path: Folder location for the output Parquet file (macro variable)
 - parquet_file_name: Name/prefix for the output Parquet file (macro variable)
+- save_rejects: Whether to save rejects or not (macro variable)
+If you do choose to save rejects,
+- rejects_data_table: Table containing rejected record details at a line and scan level
+- rejects_scan_table: Table containing metadata about the rejected records.
 
 Created: Sundaresh Sankaran
-Version: 0.1.0 (21OCT2026)
+Version: 0.2.0 (02NOV2026)
 ************************************************************************/;
 
 /* Define macro variables for input parameters */
@@ -18,6 +22,14 @@ Version: 0.1.0 (21OCT2026)
 %let has_headers = &has_headers.;                    /* TRUE or FALSE */
 %let parquet_output_path = &parquet_output_path.;    /* e.g., '/data/output/' */
 %let parquet_file_name = &parquet_file_name. ;       /* e.g., 'output_data WITHOUT the .parquet' */
+%let save_rejects = &save_rejects.;                  /* TRUE or FALSE */;
+
+%if "&save_rejects."="1" %then %do;
+    %let rejects_data_table=&rejects_data_table.;
+    %let rejects_scan_table=&rejects_scan_table.;
+    %put NOTE: The Rejects table is &rejects_data_table.;
+    %put NOTE: The Rejects table is &rejects_scan_table.;
+%end;
 
 
 /* -----------------------------------------------------------------------------------------*
@@ -130,6 +142,17 @@ Version: 0.1.0 (21OCT2026)
 
 %macro _dcp_execution_macro;
     
+
+    %if "&save_rejects."="1" %then %do;
+
+        %let rejects_data_table=&rejects_data_table.;
+        %let rejects_scan_table=&rejects_scan_table.;
+        %put NOTE: The Rejects table is &rejects_data_table.;
+        %put NOTE: The Rejects table is &rejects_scan_table.;
+        
+    %end;
+
+
    %put NOTE: Step 1 - Assign in-memory DuckDB libname.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
@@ -231,10 +254,18 @@ Version: 0.1.0 (21OCT2026)
                 */
                 COPY (
                     SELECT * FROM read_csv_auto("&file_path.", 
-                                                header=&has_headers, 
-                                                union_by_name=true)
+                                                header=&has_headers.::BOOLEAN, 
+                                                union_by_name=false, 
+                                                store_rejects=&save_rejects.::BOOLEAN
+                                                )
                 ) TO "&parquet_file_path./&parquet_file_name..parquet" 
                 (FORMAT PARQUET, OVERWRITE TRUE);
+
+                %if "&save_rejects."="1" %then %do;
+                    COPY reject_errors TO "&parquet_file_path./&rejects_data_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
+                    COPY reject_scans TO "&parquet_file_path./&rejects_scan_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
+                %end;
+
             ) by dukonce;
 
             disconnect from dukonce;
