@@ -22,7 +22,7 @@ Models are picked up either from a SAS Content location or directly from the com
 
 ### SAS Viya and model compatibility
 
-* Tested on Viya Stable 2026.06.
+* Tested on Viya Stable 2026.09.
 * Tested with scikit-learn models. Other scikit-learn-API-compatible libraries (e.g. XGBoost and LightGBM) are expected to work but have not yet been verified; broadening tested coverage is planned.
 
 ### Python environment
@@ -48,8 +48,8 @@ The step runs its Python code in the SAS Studio compute session's `proc python` 
    1. The first model's pickle file
    2. An optional name and algorithm label (auto-detected from the model's class if left blank)
    3. Training data: connect a table already in Viya (CAS-backed or a classic SAS library) as an input port, or a training data CSV if nothing's connected to the port
-   4. Optional explicit predictor columns (auto-detected from the model if left blank)
-   5. The target column (optional, auto-detected from the training table if left blank)
+   4. Optional explicit predictor columns. Leave blank to read them from the pickle; only the model's own inputs are registered, not every column in the training table. A model trained on a NumPy array (`.values`) stores no column names, so enter its columns here, in training order.
+   5. The target column: enter it, or leave it blank to let the step detect it (if more than one column could be the target, the step asks you to enter it)
    6. An optional held-out evaluation dataset for honest model-card metrics
    7. For classification models only: which class value is the target "event" (whether each model is classification or regression/prediction is detected automatically from the pickle; there's no field for it)
 
@@ -69,15 +69,19 @@ The step runs its Python code in the SAS Studio compute session's `proc python` 
 
    Whether to require an existing project or create one if it's missing, the project name, and whether re-running should overwrite an existing model version.
 
+   Optionally, set one of the models as the project champion. The step first sets the project's target, event, training table and input/output variables from that model, then makes it champion. This replaces the project's current champion, if it has one.
+
    ![](img/image-2.png)
 
 4. ### Publishing and Monitoring ###
 
-   A model card is always generated; optionally give a sensitive column for a bias/fairness assessment (classification only).
+   A model card is generated for binary classification and regression/prediction models (multiclass models are skipped); optionally give a sensitive column for a bias/fairness assessment (classification only).
 
    Whether to publish the imported model(s), and the name of the (already-existing) Viya publishing destination to publish to. The destination is verified up front — the step fails immediately with a clear message (and the list of destinations that *do* exist) if it can't find the one you named, rather than partway through the run.
 
-   Also whether to set up performance monitoring for the imported model(s) — binary classification and regression/prediction models only, multiclass models are skipped — and which CAS library to upload the monitoring input table to (default `Public`). This requires **Publish** to be checked too: SAS Model Manager scores each model itself to compute performance, so the model has to already be published for that to work. This option configures the project's Model Evaluation properties, uploads a monitoring input table, and creates the performance definition, including drift-alert thresholds set automatically to SAS's recommended defaults — it deliberately does **not** run the performance job itself (see Requirements below for why). Once the step finishes, open the project's **Performance** tab in Model Manager and click **Run** on the definition it created.
+   You can also lock the published version instead of creating a new one, so the model card shows the version that was published (Viya 2025.03 or later; on older releases the step falls back to Model Manager's default of creating a new version, and says so in the log).
+
+   Also whether to set up performance monitoring for the imported model(s) — binary classification and regression/prediction models only, multiclass models are skipped — and which CAS library to upload the monitoring input table to (default `Public`). This requires **Publish** to be checked too: SAS Model Manager scores each model itself to compute performance, so the model has to already be published for that to work. This option configures the project's Model Evaluation properties, uploads a monitoring input table, and creates the performance definition, including drift-alert thresholds set automatically to SAS's recommended defaults — it deliberately does **not** run the performance job itself (see Requirements above for why). Once the step finishes, open the project's **Performance** tab in Model Manager and click **Run** on the definition it created.
 
    ![](img/image-3.png)
 
@@ -96,29 +100,40 @@ The step runs its Python code in the SAS Studio compute session's `proc python` 
 
 ## Usage
 
-The step expects a plain CSV training table and one or more pickled scikit-learn models trained on it. A quick way to produce both from data already available in your Viya environment:
+The step needs a training table (a table connected to its input port, or a CSV) and one or more pickled scikit-learn models trained on it. A quick way to produce a model from data already available in your Viya environment:
 
-1. Export `SASHELP.CARS` to CSV (or use any tabular dataset with a mix of numeric predictors and a target column).
-2. In a local Python environment (not necessarily SAS Studio), train a simple scikit-learn model against it and pickle the result, e.g.:
+1. Export `SASHELP.CARS` to CSV (or use any tabular dataset with numeric predictors and a target column).
+2. In a Python environment (SAS Studio's PROC PYTHON works), train a simple scikit-learn model against it and pickle the result, e.g.:
 
    ```python
    import pickle
-   from sklearn.ensemble import RandomForestClassifier
+   import pandas as pd
+   from sklearn.ensemble import RandomForestRegressor
    from sklearn.model_selection import train_test_split
 
-   # X, y loaded from your exported CSV, target is a binary column
+   # Load the CSV exported in step 1
+   cars = pd.read_csv("cars.csv")
+   cars = cars.dropna(subset=["EngineSize", "Cylinders"])   # CARS has a few missing values
+
+   # Keep X as a DataFrame, not .values, so the pickle remembers its column names
+   X = cars[["EngineSize", "Cylinders"]]
+   y = cars["Horsepower"]
    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-   model = RandomForestClassifier(random_state=42).fit(X_train, y_train)
+
+   model = RandomForestRegressor(random_state=42).fit(X_train, y_train)
+   print("R-squared on the held-out rows:", model.score(X_test, y_test))
 
    with open("model.pickle", "wb") as f:
        pickle.dump(model, f)
    ```
 
-3. Upload `model.pickle` and the training CSV somewhere SAS Studio's file picker can reach them (a SAS Content folder, or a path on the compute server).
-4. Add the **Register Pickle File to Model Manager** step to a flow, point **Model & Data** at the pickle and the CSV, name your target column, and run it.
-5. Check SAS Model Manager — the project (created if it didn't exist) should now contain the registered model, with a model card if you left that option checked.
+   Use a regressor for a continuous target like `Horsepower`. A classifier needs a target with a few classes (e.g. a 0/1 column); on a continuous target it becomes a multiclass model with one class per distinct value.
 
-The log ends with a summary showing whether each step succeeded or had an error, so a problem with one model in a multi-model batch is easy to spot without blocking the rest.
+3. Upload `model.pickle` somewhere SAS Studio's file picker can reach it (a SAS Content folder, or a path on the compute server). Do the same with the CSV if you'll use it as the training table.
+4. Add the **Register Pickle File to Model Manager** step to a flow, connect `SASHELP.CARS` to its input port (or point it at the CSV), choose the pickle, enter the target column (`Horsepower` here, because CARS has several columns the step can't choose between), and run it.
+5. Check SAS Model Manager — the project (created if it didn't exist) should now contain the registered model and its model card.
+
+The log ends with a summary showing whether each part succeeded (`OK`), was skipped (`SKIP`, e.g. no model card for a multiclass model) or failed (`ERR`), so a problem with one model in a multi-model batch is easy to spot without blocking the rest.
 
 ### Running it without the step's UI
 
@@ -126,8 +141,7 @@ The log ends with a summary showing whether each step succeeded or had an error,
 
 ## Change Log
 
-* Version 1.26 (29OCT2026)
-    * Training data can now come from a connected input port instead of only a CSV, per PR review feedback from Sundaresh — a table already in Viya (CAS-backed, or a classic SAS library like `SASHELP`) can be wired directly into the step instead of exporting it to a file first. The port is optional: with nothing connected, the step behaves exactly as before, reading the training CSV field. Verified live against a CAS-backed table, a classic SAS library table, and a CSV-only run with the port disconnected.
-        * Implementation note: the connected table's SAS libref is **not** the same as its real CAS caslib name — confirmed live, handing the libref straight to `swat`'s `CASTable(caslib=...)` fails with "caslib does not exist", and `pathname()` on the libref (the usual way to resolve a CAS libref) returns an internal table GUID, not a usable caslib name either. The fix reads the table through the SAS session itself instead — `SAS.submit()` stages it into `WORK`, then `SAS.sd2df()` reads it — which works identically whether the connected table is CAS-backed or a classic SAS library, with no caslib resolution needed at all.
+* Version 1.27 (04NOV2026)
+    * Step first made available on GitHub.
 
-Previous releases are documented in [extras/CHANGELOG.md](extras/CHANGELOG.md).
+The detailed development history is in [extras/CHANGELOG.md](extras/CHANGELOG.md).

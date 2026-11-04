@@ -29,16 +29,19 @@
 %let model_prefix_4=;
 %let algorithm_4=;
 %let training_table=;          /* required: path/URL to the training data CSV */
-%let predictor_columns=;       /* optional: comma-separated; blank = auto-detect */
-%let target_variable=;         /* required: target column name */
+%let predictor_columns=;       /* optional: comma-separated; blank = read from the pickle */
+%let target_variable=;         /* optional: enter it, or leave blank to let the step detect it */
 %let eval_table=;              /* optional: held-out data for honest model-card metrics */
 %let event_value=1;            /* classification only: which class value is the "event" */
 %let project_action=existing;  /* existing | create */
 %let project_name=;            /* required: Model Manager project name */
 %let overwrite_model=0;        /* 1 = add a new version if the model already exists */
+%let set_champion=0;           /* 1 = set a model as the project champion */
+%let champion_slot=1;          /* which model (1-4) becomes champion */
 %let sensitive_column=;        /* optional: column for a bias/fairness assessment */
 %let do_publish=0;             /* 1 = publish the model(s) after import */
 %let publish_destination=;     /* required if do_publish=1: an existing publish destination */
+%let publish_skip_versioning=1; /* 1 = lock the published version, no new version (Viya 2025.03+) */
 %let do_performance=0;         /* 1 = set up (but not run) performance monitoring - requires do_publish=1 */
 %let monitor_caslib=Public;    /* CAS library for the performance monitoring input table */
 %let viya_host=;               /* optional: only needed if not derivable from the session */
@@ -117,13 +120,14 @@
 
 /* Build banner - if you don't see this exact line in the log, SAS Studio is
    running an OLD copy of the step (re-upload the .step and replace the flow node). */
-%put NOTE: ===== Register Pickle File to Model Manager - step build 1.25 (14OCT2026) =====;
+%put NOTE: ===== Register Pickle File to Model Manager - step build 1.27 (04NOV2026) =====;
 
 proc python;
 submit;
 import pickle
 import json
 import os
+import re
 import time
 from pathlib import Path
 
@@ -160,31 +164,41 @@ _slot_ids = [
     ("pickle_path_4", "model_prefix_4", "algorithm_4"),
 ]
 model_slots = []
-for _pk_id, _nm_id, _alg_id in _slot_ids:
+for _slot_no, (_pk_id, _nm_id, _alg_id) in enumerate(_slot_ids, start=1):
     _p = SAS.symget(_pk_id)
     if _p:
-        model_slots.append({"path": _p, "name": SAS.symget(_nm_id), "algorithm": SAS.symget(_alg_id)})
+        model_slots.append({"slot": _slot_no, "path": _p, "name": SAS.symget(_nm_id),
+                            "algorithm": SAS.symget(_alg_id)})
 
 training_csv         = SAS.symget("training_table")
+training_data_port        = SAS.symget("training_data_port")         # optional input port - see below
+training_data_port_engine = SAS.symget("training_data_port_engine")
+training_data_port_lib    = SAS.symget("training_data_port_lib")
+training_data_port_name   = SAS.symget("training_data_port_name")
+training_data_port_isCas  = SAS.symget("training_data_port_isCas")
 predictor_columns_input = [c.strip() for c in SAS.symget("predictor_columns").split(",") if c.strip()]
 target_variable      = SAS.symget("target_variable")
 event_value          = SAS.symget("event_value")
 project_action       = SAS.symget("project_action")        # existing | create
 project_name         = SAS.symget("project_name")
 overwrite_model      = SAS.symget("overwrite_model") == "1"
+do_champion          = SAS.symget("set_champion") == "1"
+champion_slot        = int(SAS.symget("champion_slot") or 1)
 do_model_card        = True   # always on - no longer a UI choice
 viya_host            = SAS.symget("viya_host")
 sensitive_column     = SAS.symget("sensitive_column")
 eval_csv             = SAS.symget("eval_table")   # optional held-out evaluation data
 do_publish           = SAS.symget("do_publish") == "1"
 publish_destination  = SAS.symget("publish_destination")
+publish_skip_versioning = SAS.symget("publish_skip_versioning") == "1"
 do_performance       = SAS.symget("do_performance") == "1"
 monitor_caslib       = SAS.symget("monitor_caslib") or "Public"
 
-# Training data CSV and target column are required.
-if not training_csv:
+# Training data - a CSV path or a connected input port, not both required.
+if not training_csv and not training_data_port:
     raise RuntimeError(
-        "No training data provided. Choose a training CSV file, or pick a training table."
+        "No training data provided. Choose a training CSV file, or connect the "
+        "training data input port."
     )
 
 # --- Run summary + up-front validation --------------------------------------
@@ -218,6 +232,39 @@ def _patched_write_score_code(self, model_prefix, *args, **kwargs):
     return result
 
 
+# Output variable names must be valid SAS names for MAS/CAS scoring. Class
+# labels like "Iris-setosa" or "high risk" otherwise give P_Iris-setosa /
+# P_high risk - confirmed offline: sasctl writes them into the score code and
+# outputVar.json unchanged.
+def _sas_name(name, taken=None):
+    base = (re.sub(r"[^0-9A-Za-z_]", "_", str(name)) or "_")[:32]
+    if base[0].isdigit():
+        base = ("_" + base)[:32]
+    out, i = base, 2
+    while taken is not None and out.upper() in taken:
+        out = f"{base[:32 - len(str(i)) - 1]}_{i}"
+        i += 1
+    if taken is not None:
+        taken.add(out.upper())
+    return out
+
+
+def _prob_var_names(labels):
+    taken = set()
+    return [_sas_name(f"P_{c}", taken) for c in labels]
+
+
+# The column names a model was fitted on, if it stored them: sklearn >= 1.0
+# (and the XGBoost/LightGBM sklearn wrappers) set feature_names_in_ when fit
+# on a DataFrame; CatBoost uses feature_names_. None when fit on a NumPy array.
+def _model_feature_names(model):
+    for _attr in ("feature_names_in_", "feature_names_"):
+        _names = getattr(model, _attr, None)
+        if _names is not None and len(_names):
+            return [str(n) for n in _names]
+    return None
+
+
 if do_publish and not publish_destination:
     raise RuntimeError(
         "'Publish the model(s) after import' is checked but no publish destination "
@@ -229,7 +276,15 @@ if not model_slots:
         "No pickle files provided. Choose Model 1's pickle file (and optionally more "
         "on the 'Additional models' page)."
     )
-for _p in [m["path"] for m in model_slots] + [training_csv]:
+if do_champion and champion_slot not in [m["slot"] for m in model_slots]:
+    raise RuntimeError(
+        f"'Set a model as the project champion' is checked with Model {champion_slot}, "
+        f"but Model {champion_slot} has no pickle file. Pick a model that's filled in."
+    )
+_paths_to_check = [m["path"] for m in model_slots]
+if not training_data_port:   # CSV path check only applies when not reading from a port
+    _paths_to_check.append(training_csv)
+for _p in _paths_to_check:
     if not _p or not os.path.exists(_p):
         raise RuntimeError(
             f"File not found on the compute server at: {_p!r}. Check the path (and "
@@ -243,14 +298,13 @@ for _p in [m["path"] for m in model_slots] + [training_csv]:
 # Manager project can only be EITHER classification OR prediction, never
 # both, so every model in this batch must agree - checked here, once, before
 # any real work starts, rather than surfacing as a confusing failure deep
-# inside a later PZMM call. Each pickle is loaded once here just for this
-# check (loaded again per-model below); cheap for typical scikit-learn model
-# sizes, and keeps this check self-contained rather than restructuring the
-# whole per-model loop around it.
+# inside a later PZMM call. Each pickle is loaded once, here, and kept on its
+# slot for the predictor check and the per-model loop below.
 _detected = []
 for _slot in model_slots:
     with open(_slot["path"], "rb") as _f:
-        _detected.append((_slot["path"], is_classifier(pickle.load(_f))))
+        _slot["model"] = pickle.load(_f)
+    _detected.append((_slot["path"], is_classifier(_slot["model"])))
 if len({t for _, t in _detected}) > 1:
     _detail = "; ".join(
         f"{p} -> {'classification' if t else 'prediction'}" for p, t in _detected
@@ -264,45 +318,15 @@ model_function = "classification" if is_classification else "prediction"
 print(f"Auto-detected model function: {model_function} (from the pickle(s), via "
       f"sklearn.base.is_classifier).")
 
-data = pd.read_csv(training_csv)
-
-# Target column, auto-detected from the training table when left blank -
-# same technique as 2_pzmm_import.ipynb: whichever non-predictor column's
-# values match the first model's own classes_ (classification) or has more
-# than 2 distinct values (regression). Ambiguous or no match -> clear error
-# asking for the column name instead of guessing wrong.
-if not target_variable:
-    with open(model_slots[0]["path"], "rb") as _f:
-        _first_model = pickle.load(_f)
-    _first_predictors = list(getattr(_first_model, "feature_names_in_", []))
-    _non_predictor_cols = [c for c in data.columns if c not in _first_predictors]
-    if is_classification:
-        _classes = set(str(c) for c in _first_model.classes_)
-        _candidates = [
-            c for c in _non_predictor_cols
-            if set(data[c].dropna().astype(str).unique()) == _classes
-        ]
-    else:
-        _candidates = [c for c in _non_predictor_cols if data[c].nunique() > 2]
-    if len(_candidates) != 1:
-        raise RuntimeError(
-            f"Could not auto-detect a target column - candidates were "
-            f"{_candidates or _non_predictor_cols}. Type one into 'Target "
-            f"column name' instead."
-        )
-    target_variable = _candidates[0]
-    print(f"Auto-detected target column: '{target_variable}'.")
-
-prob_var = f"P_{target_variable}"   # convention: event-probability output name
-print(f"Processing {len(model_slots)} model(s) into project '{project_name}'.")
-
-# --- Connect to Viya --------------------------------------------------------
+# --- Connect to Viya ---------------------------------------------------------
 # The step runs inside an authenticated SAS Studio compute session, but sasctl
 # still needs its own Session. oauth_bearer=sas_services (PROC HTTP) reuses the
 # session token but does NOT expose the raw string to Python, so we best-effort
 # locate a reusable token from the compute environment and hand it to sasctl. If
 # none is found, we print what IS available so auth can be wired for this site.
-import os
+# Moved here (ahead of where this used to run) because reading training data
+# from a CAS input port needs a session before the training data is loaded -
+# CSV-only runs didn't need a session this early.
 import glob
 
 
@@ -352,6 +376,139 @@ if sess is None:
         )
 print("Viya session:", current_session())
 
+# --- Training data: Viya input port or CSV -----------------------------------
+# Per PR review feedback (Sundaresh): connect training data as an input port
+# instead of only a CSV, so a table already in Viya can be reused directly.
+# Verified live against a CAS-backed table and a classic SAS library table.
+# &training_data_port itself is "LIBREF.NAME" (confirmed live: a real test
+# gave "SASHELP.CARS"), but parsing that string is unnecessary and was a real
+# bug in an earlier version - &training_data_port_lib and
+# &training_data_port_name arrive already split, confirmed from the same live
+# test, and &training_data_port_isCas says plainly whether it's actually a CAS
+# table rather than inferring it from the engine name.
+#
+# &training_data_port_lib is a SAS LIBREF the Flow Designer assigned, NOT the
+# real caslib name - confirmed live: swat's CASTable(caslib=<libref>) failed
+# with "caslib does not exist", and pathname() on the libref (the usual way to
+# resolve a CAS libref to its caslib) returned an internal table GUID, not a
+# usable caslib name either. SAS.sd2df() direct on the port's libref.table
+# ALSO failed live ("Data Set CARS does not exist") - sd2df doesn't reliably
+# recognize a CAS-engine libref as an existing data set, even though the SAS
+# session clearly can read it (that's exactly how the flow lists
+# "Input Tables: CARS.CARS" in its own log header). Working around that by
+# having plain SAS - which reads any engine, CAS included - copy the port
+# table into a WORK dataset via SAS.submit(), then sd2df() that WORK copy,
+# which is squarely inside sd2df's normal (classic SAS data set) use case.
+if training_data_port:
+    _port_lib = training_data_port_lib
+    _port_table = training_data_port_name
+    print(f"Training data port connected: libref={_port_lib!r}, table={_port_table!r}, "
+          f"isCas={training_data_port_isCas!r}, engine={training_data_port_engine!r}.")
+    SAS.submit(f"data work._flw_training_port_stage; set {_port_lib}.{_port_table}; run;")
+    data = SAS.sd2df("_flw_training_port_stage", libref="WORK")
+    print(f"Loaded {len(data)} rows from the input port ({_port_lib}.{_port_table}) via a WORK staging copy.")
+else:
+    data = pd.read_csv(training_csv)
+
+# Target column, auto-detected from the training table when left blank -
+# same technique as 2_pzmm_import.ipynb: whichever non-predictor column's
+# values match the first model's own classes_ (classification) or has more
+# than 2 distinct values (regression). Ambiguous or no match -> clear error
+# asking for the column name instead of guessing wrong.
+if not target_variable:
+    _first_model = model_slots[0]["model"]
+    _first_predictors = _model_feature_names(_first_model) or []
+    _non_predictor_cols = [c for c in data.columns if c not in _first_predictors]
+    if is_classification:
+        _classes = set(str(c) for c in _first_model.classes_)
+        _candidates = [
+            c for c in _non_predictor_cols
+            if set(data[c].dropna().astype(str).unique()) == _classes
+        ]
+    else:
+        _candidates = [c for c in _non_predictor_cols if data[c].nunique() > 2]
+    if len(_candidates) != 1:
+        raise RuntimeError(
+            f"Could not auto-detect a target column - candidates were "
+            f"{_candidates or _non_predictor_cols}. Type one into 'Target "
+            f"column name' instead."
+        )
+    target_variable = _candidates[0]
+    print(f"Auto-detected target column: '{target_variable}'.")
+
+prob_var = _sas_name(f"P_{target_variable}")   # convention: event-probability output name
+print(f"Processing {len(model_slots)} model(s) into project '{project_name}'.")
+
+
+# --- Predictors per model, from the pickle itself ---------------------------
+# Per PR review (Sundaresh): a model trained on 2 of a table's columns must
+# register those 2 as its inputs, not every column in the table. The pickle's
+# stored names win; a typed list must match them (reordered to the model's
+# fit order, which sklearn enforces at predict time). A pickle with no stored
+# names (fit on a NumPy array) used to fall back to every numeric column -
+# now that only happens when the count matches n_features_in_, otherwise it
+# fails clearly. Errors are kept on the slot and raised inside the per-model
+# loop, so one misconfigured model doesn't block the rest of the batch.
+def _resolve_predictors(model, label):
+    named = _model_feature_names(model)
+    n_expected = getattr(model, "n_features_in_", None)
+    if predictor_columns_input:
+        cols = list(predictor_columns_input)
+        if named is not None:
+            if set(named) != set(cols):
+                raise RuntimeError(
+                    f"'Predictor columns' {cols} don't match the {len(named)} columns "
+                    f"'{label}' was trained on: {named}. Clear the field to use the "
+                    f"pickle's own list."
+                )
+            cols = named
+    elif named is not None:
+        cols = named
+    else:
+        cols = [c for c in data.select_dtypes(include="number").columns
+                if c not in (target_variable, prob_var)]
+        if n_expected is None or len(cols) != n_expected:
+            raise RuntimeError(
+                f"'{label}' has no stored column names (likely trained on a NumPy "
+                f"array) and expects {n_expected} inputs, but the training data has "
+                f"{len(cols)} numeric non-target columns. Enter its predictor columns, "
+                f"in training order, in 'Predictor columns'."
+            )
+        print(f"WARNING: '{label}' has no stored column names; assuming the "
+              f"{len(cols)} numeric non-target columns in table order: {cols}. "
+              f"Enter 'Predictor columns' if that order is wrong.")
+    if n_expected is not None and len(cols) != n_expected:
+        raise RuntimeError(
+            f"'{label}' expects {n_expected} inputs but {len(cols)} predictor "
+            f"columns were given: {cols}."
+        )
+    missing = [c for c in cols if c not in data.columns]
+    if missing:
+        raise RuntimeError(
+            f"These predictor columns of '{label}' are not in the training data: {missing}"
+        )
+    return cols
+
+
+for _slot in model_slots:
+    try:
+        _slot["predictors"] = _resolve_predictors(
+            _slot["model"], _slot["name"] or Path(_slot["path"]).stem
+        )
+    except Exception as _e:
+        _slot["predictor_error"] = _e
+
+# Keep only what the models use, plus the target (and bias column), so
+# unused table columns never reach the model card, project or monitoring.
+_needed = {target_variable, sensitive_column}
+for _slot in model_slots:
+    _needed.update(_slot.get("predictors", []))
+_dropped = [c for c in data.columns if c not in _needed]
+if _dropped:
+    data = data[[c for c in data.columns if c in _needed]]
+    print(f"Training data trimmed to the {data.shape[1]} column(s) the model(s) use; "
+          f"ignored {len(_dropped)}: {_dropped}")
+
 # --- Publish destination check (fail fast, before any model work, so a typo'd
 # destination name doesn't waste a whole run) --------------------------------
 if do_publish:
@@ -368,6 +525,44 @@ if do_publish:
     publish_destination = _dest_match   # normalize to the destination's exact stored name
     print(f"Publish destination '{publish_destination}' verified - model(s) will be "
           f"published there after import.")
+
+
+# Publishing normally locks the published version and makes a new current one
+# (1.0 published, 2.0 current) - why the model card didn't show "published"
+# (Sophia, 03NOV2026). Model Manager's publish API takes skipVersioning
+# (2025.03+, per developer.sas.com) to lock the published version without a
+# new one; sasctl doesn't expose it, so it's added to the request body sasctl
+# sends. A server that rejects the field (HTTP 400) gets one retry without it.
+# Returns a short note on which behaviour actually applied. (mm is sasctl's
+# ModelManagement class itself, not an instance, so it's patched directly.)
+def _publish(model_obj):
+    if not publish_skip_versioning:
+        publish_model(model_obj, publish_destination, replace=overwrite_model)
+        return "new version created"
+    _own_post = vars(mm).get("post")
+    _base_post = mm.post
+
+    def _post_skip_versioning(cls, path, *args, **kwargs):
+        if path == "/publish" and isinstance(kwargs.get("json"), dict):
+            kwargs["json"] = dict(kwargs["json"], skipVersioning=True)
+        return _base_post(path, *args, **kwargs)
+
+    mm.post = classmethod(_post_skip_versioning)
+    try:
+        publish_model(model_obj, publish_destination, replace=overwrite_model)
+        return "version locked, no new version"
+    except Exception as _e:
+        if getattr(_e, "code", None) != 400:
+            raise
+        print(f"Publish with skipVersioning was rejected ({_e}) - this Viya release may "
+              f"predate 2025.03. Retrying with Model Manager's default versioning.")
+    finally:
+        if _own_post is None:
+            del mm.post
+        else:
+            mm.post = _own_post
+    publish_model(model_obj, publish_destination, replace=overwrite_model)
+    return "new version created (skipVersioning not supported here)"
 
 # --- Performance monitoring pre-flight: mirrors PZMM.ipynb's proven-working setup,
 # which uses scoring_required=True (CAS scores each model itself against one shared
@@ -433,7 +628,8 @@ if project is None:
 
 # --- Per-model loop: pickle/JSON/card/import for each model slot ------------
 imported_models = []          # model_obj for every successfully imported model
-monitor_candidates = []       # per-model info for performance monitoring (non-multiclass only)
+imported_info = []            # per-model info for every imported model (champion, monitoring)
+monitor_candidates = []       # subset of imported_info for performance monitoring (non-multiclass only)
 
 for _idx, _slot in enumerate(model_slots, start=1):
     pickle_path = _slot["path"]
@@ -443,8 +639,9 @@ for _idx, _slot in enumerate(model_slots, start=1):
     this_prefix = _slot["name"] or _stem
     print(f"[{_idx}/{len(model_slots)}] {this_prefix}: {pickle_path}")
     try:
-        with open(pickle_path, "rb") as f:
-            model = pickle.load(f)
+        model = _slot["model"]
+        if "predictor_error" in _slot:
+            raise _slot["predictor_error"]
 
         # Lineage: compare the scikit-learn version this pickle was made with
         # against the Viya runtime (per-model - each pickle may differ). Warned
@@ -482,29 +679,11 @@ for _idx, _slot in enumerate(model_slots, start=1):
                 f"fallback.)"
             )
 
-        # Predictors: fresh copy of the shared prompt value each iteration, so an
-        # auto-detected list for one model never leaks into the next.
-        predictor_columns = list(predictor_columns_input)
-        if not predictor_columns:
-            trained_features = getattr(model, "feature_names_in_", None)
-            if trained_features is not None:
-                predictor_columns = list(trained_features)
-            else:
-                # Exclude the target AND the event-probability output var - a
-                # training CSV that's been through this step's own monitoring
-                # pipeline before (e.g. CARSCLS_1.csv) carries a pre-scored
-                # P_<target> reference column, which is numeric and would
-                # otherwise get swept up here as if it were a real predictor.
-                numeric_cols = data.select_dtypes(include="number").columns.tolist()
-                predictor_columns = [
-                    c for c in numeric_cols if c not in (target_variable, prob_var)
-                ]
-
-        missing_predictors = [c for c in predictor_columns if c not in data.columns]
-        if missing_predictors:
-            raise RuntimeError(
-                f"These predictor columns are not in the training data: {missing_predictors}"
-            )
+        # Resolved up front from the pickle (see _resolve_predictors). The
+        # numeric fallback there still excludes P_<target>: a CSV that's been
+        # through this step's monitoring pipeline (e.g. CARSCLS_1.csv) carries
+        # a pre-scored reference column that isn't a real predictor.
+        predictor_columns = list(_slot["predictors"])
 
         # A duplicated predictor name (typed twice in the prompt field, or a
         # model/CSV combination that produces one) crashes several rows down
@@ -528,6 +707,7 @@ for _idx, _slot in enumerate(model_slots, start=1):
         # index); len(target_values) > 2 -> multiclass (no single "event", every
         # class gets its own probability column instead).
         class_labels = None
+        class_prob_vars = None
         ordered_values = None
         event_label = None
         event_index = 1
@@ -546,7 +726,13 @@ for _idx, _slot in enumerate(model_slots, start=1):
             class_labels = [str(c) for c in raw_classes]
             is_multiclass = len(raw_classes) > 2
             if is_multiclass:
-                print(f"'{this_prefix}': multiclass, {len(class_labels)} classes {class_labels}.")
+                class_prob_vars = _prob_var_names(class_labels)
+                print(f"'{this_prefix}': multiclass, {len(class_labels)} classes {class_labels}, "
+                      f"probability outputs {class_prob_vars}.")
+                if len(class_labels) > 20:
+                    print(f"WARNING: '{this_prefix}' has {len(class_labels)} classes. If "
+                          f"'{target_variable}' is a continuous value, a regressor (e.g. "
+                          f"RandomForestRegressor) is probably what was intended.")
             else:
                 if str(event_value) in class_labels:
                     event_index = class_labels.index(str(event_value))
@@ -570,7 +756,6 @@ for _idx, _slot in enumerate(model_slots, start=1):
 
         J = pzmm.JSONFiles()
         if is_classification and is_multiclass:
-            class_prob_vars = [f"P_{c}" for c in class_labels]
             output_var = pd.DataFrame({target_variable: class_labels})
             for _cv in class_prob_vars:
                 output_var[_cv] = [1.0 / len(class_labels)] * len(class_labels)
@@ -634,7 +819,7 @@ for _idx, _slot in enumerate(model_slots, start=1):
         _gov = [
             ("registeredBy", (current_session().username or "") if current_session() else ""),
             ("registeredUTC", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")),
-            ("toolBuild", "RegisterPickleFileToModelManager 1.25 (14OCT2026)"),
+            ("toolBuild", "RegisterPickleFileToModelManager 1.27 (04NOV2026)"),
             ("mlFramework", model_framework),
             ("frameworkRuntime", f"scikit-learn {runtime_sklearn}"),
             ("pickledWith", f"scikit-learn {pickled_sklearn}"),
@@ -844,7 +1029,7 @@ for _idx, _slot in enumerate(model_slots, start=1):
         # that parameter is binary-only), and target_values = every class.
         if is_classification and is_multiclass:
             predict_method = [model.predict_proba, [float] * len(class_labels)]
-            score_metrics = [target_variable] + [f"P_{c}" for c in class_labels]
+            score_metrics = [target_variable] + class_prob_vars
             import_kwargs = dict(target_values=class_labels)
         elif is_classification:
             predict_method = [model.predict_proba, [int, int]]
@@ -886,12 +1071,16 @@ for _idx, _slot in enumerate(model_slots, start=1):
         # a name-based re-lookup can silently resolve to someone else's
         # model instead (confirmed live: it returned a DIFFERENT model than
         # the one just updated, with a "Multiple items found" warning).
-        # model_obj's id is unique, so updating it directly is unambiguous.
+        # model_obj's id is unique, so it's re-fetched BY ID (refresh=True):
+        # import_model's return value doesn't always carry the ETag that
+        # update_model needs - seen live on Sundaresh's run (03NOV2026):
+        # "Could not find ETag for update of HorsePredict".
         # Non-fatal; only logs if it fails, so a governance hiccup doesn't
         # block the import that already succeeded.
         try:
-            model_obj["properties"] = gov_props
-            mr.update_model(model_obj)
+            _fresh_model = mr.get_model(model_obj, refresh=True)
+            _fresh_model["properties"] = gov_props
+            mr.update_model(_fresh_model)
             _log("Governance metadata", "success", this_prefix)
         except Exception as _e:
             print(f"Governance metadata skipped for '{this_prefix}': {_e}")
@@ -907,10 +1096,11 @@ for _idx, _slot in enumerate(model_slots, start=1):
         _published_ok = False
         if do_publish:
             try:
-                publish_model(model_obj, publish_destination, replace=overwrite_model)
+                _version_note = _publish(model_obj)
                 print(f"Published '{this_prefix}' to destination "
-                      f"'{publish_destination}'.")
-                _log("Publish", "success", f"{this_prefix} -> {publish_destination}")
+                      f"'{publish_destination}' ({_version_note}).")
+                _log("Publish", "success",
+                     f"{this_prefix} -> {publish_destination} ({_version_note})")
                 _published_ok = True
             except Exception as _e:
                 print(f"Publish FAILED for '{this_prefix}' to '{publish_destination}': {_e}")
@@ -923,21 +1113,26 @@ for _idx, _slot in enumerate(model_slots, start=1):
         # SAS Model Manager's monitoring also only supports binary
         # classification / regression - multiclass is skipped, same as the
         # model card.
+        _info = {
+            "slot": _slot["slot"],
+            "model_obj": model_obj,
+            "prefix": this_prefix,
+            "model": model,
+            "predictor_columns": predictor_columns,
+            "is_classification": is_classification,
+            "is_multiclass": is_multiclass,
+            "class_labels": class_labels,
+            "event_index": event_index,
+            "event_value_typed": event_value_typed,
+            "ordered_values": ordered_values,
+            "output_dir": output_dir,
+            "card_generated": _card_generated,
+            "card_train_table": _card_train_table,
+        }
+        imported_info.append(_info)
         if do_performance and not is_multiclass:
             if _published_ok:
-                monitor_candidates.append({
-                    "model_obj": model_obj,
-                    "prefix": this_prefix,
-                    "model": model,
-                    "predictor_columns": predictor_columns,
-                    "is_classification": is_classification,
-                    "event_index": event_index,
-                    "event_value_typed": event_value_typed,
-                    "ordered_values": ordered_values,
-                    "output_dir": output_dir,
-                    "card_generated": _card_generated,
-                    "card_train_table": _card_train_table,
-                })
+                monitor_candidates.append(_info)
             else:
                 print(f"'{this_prefix}' not added to performance monitoring - it "
                       f"wasn't successfully published.")
@@ -954,6 +1149,90 @@ for _idx, _slot in enumerate(model_slots, start=1):
 if not imported_models:
     raise RuntimeError("No models were successfully imported.")
 
+
+# --- Project configuration from one model: function, target, event, Training
+# table and input/output variables. Shared by the champion step and
+# performance monitoring - before 1.27 it only ran inside monitoring, so a
+# project without monitoring was never configured at all. -------------------
+def _configure_project(info, train_table=None):
+    with open(info["output_dir"] / "inputVar.json") as f:
+        _in_vars = json.load(f)
+    with open(info["output_dir"] / "outputVar.json") as f:
+        _out_vars = json.load(f)
+    for _v in _in_vars:
+        _v["role"] = "input"
+    for _v in _out_vars:
+        _v["role"] = "output"
+    _var_keys = ("name", "role", "type", "level", "length")
+    _proj_variables = [{k: v.get(k) for k in _var_keys} for v in _in_vars + _out_vars]
+
+    _proj = mr.get_project(project_name)
+    _proj["function"] = "classification" if is_classification else "prediction"
+    _proj["targetVariable"] = target_variable
+    if info["is_multiclass"]:
+        # Not yet verified live against Model Manager.
+        _proj["targetLevel"] = "nominal"
+        _proj["classTargetValues"] = list(info["class_labels"])
+    elif is_classification:
+        _proj["targetLevel"] = "binary"
+        _proj["eventProbabilityVariable"] = prob_var
+        # Without these two, Model Manager has no way to know which class
+        # is "the event" - misclassification/ROC/Gini/KS/Lift come out
+        # degenerate (a coin-flip-looking ~50%) with no error of its own.
+        # 2_pzmm_import.ipynb's ensure_project() always set both; this
+        # step never did, which is the likely cause of every persistent
+        # near-50%-misclassification report seen against it so far.
+        _proj["targetEventValue"] = str(info["event_value_typed"])
+        _proj["classTargetValues"] = [str(v) for v in info["ordered_values"]]
+    else:
+        _proj["targetLevel"] = "interval"
+        _proj["predictionVariable"] = prob_var
+    if train_table:
+        _proj["trainTable"] = train_table
+    _proj = mr.update_project(_proj)
+
+    _existing_vars = []
+    try:
+        for _v in _proj.variables:
+            _existing_vars.append({k: _v.get(k) for k in _var_keys})
+    except AttributeError:
+        pass
+    _new_vars = [v for v in _proj_variables if v not in _existing_vars]
+    if _new_vars:
+        mr.post(
+            f"projects/{_proj.id}/variables",
+            json=_new_vars,
+            headers={"Content-Type": "application/vnd.sas.collection+json"},
+        )
+    print(f"Project '{project_name}' configured from '{info['prefix']}' (target="
+          f"{target_variable}, level={_proj['targetLevel']}, "
+          f"{len(_in_vars)} input / {len(_out_vars)} output variables).")
+    return _proj
+
+
+# --- Champion (optional). Per Sophia (03NOV2026), Model Manager only fills
+# in a project's variables once a model is champion. The project is
+# configured from that model first, since Model Manager rejects a champion
+# whose outputs don't cover the project's (error 21208). Endpoint per
+# developer.sas.com setProjectChampion: POST .../champion?modelId=, no body. --
+if do_champion:
+    _champ = next((i for i in imported_info if i["slot"] == champion_slot), None)
+    if _champ is None:
+        print(f"Champion not set: Model {champion_slot} wasn't imported (see above).")
+        _log("Champion", "skipped", f"Model {champion_slot} not imported")
+    else:
+        try:
+            _proj = _configure_project(_champ, train_table=_champ["card_train_table"])
+            mr.post(
+                f"projects/{_proj.id}/champion",
+                params={"modelId": _champ["model_obj"].id},
+            )
+            print(f"Set '{_champ['prefix']}' as champion of project '{project_name}'.")
+            _log("Champion", "success", f"{_champ['prefix']} -> {project_name}")
+        except Exception as _e:
+            print(f"Could not set '{_champ['prefix']}' as champion: {_e}")
+            _log("Champion", "failed", f"{_champ['prefix']}: {_e}")
+
 # --- Performance monitoring: configure the project once (shared by every
 # eligible model in the batch, since they share one target_variable/prob_var),
 # upload ONE shared monitoring table directly via CAS, then run the definition.
@@ -962,33 +1241,6 @@ if not imported_models:
 if do_performance and monitor_candidates:
     try:
         _first = monitor_candidates[0]
-        with open(_first["output_dir"] / "inputVar.json") as f:
-            _in_vars = json.load(f)
-        with open(_first["output_dir"] / "outputVar.json") as f:
-            _out_vars = json.load(f)
-        for _v in _in_vars:
-            _v["role"] = "input"
-        for _v in _out_vars:
-            _v["role"] = "output"
-        _var_keys = ("name", "role", "type", "level", "length")
-        _proj_variables = [{k: v.get(k) for k in _var_keys} for v in _in_vars + _out_vars]
-
-        _proj = mr.get_project(project_name)
-        _proj["function"] = "classification" if is_classification else "prediction"
-        _proj["targetVariable"] = target_variable
-        _proj["targetLevel"] = "binary" if is_classification else "interval"
-        if is_classification:
-            _proj["eventProbabilityVariable"] = prob_var
-            # Without these two, Model Manager has no way to know which class
-            # is "the event" - misclassification/ROC/Gini/KS/Lift come out
-            # degenerate (a coin-flip-looking ~50%) with no error of its own.
-            # 2_pzmm_import.ipynb's ensure_project() always set both; this
-            # step never did, which is the likely cause of every persistent
-            # near-50%-misclassification report seen against it so far.
-            _proj["targetEventValue"] = str(_first["event_value_typed"])
-            _proj["classTargetValues"] = [str(v) for v in _first["ordered_values"]]
-        else:
-            _proj["predictionVariable"] = prob_var
 
         # Project-level Training table: generate_model_card() (above, per-model)
         # already uploaded a uniquely-named training-data table to CAS and
@@ -1002,31 +1254,15 @@ if do_performance and monitor_candidates:
             (c for c in monitor_candidates if c.get("card_generated") and c.get("card_train_table")),
             None,
         )
-        if _card_candidate is not None:
-            _proj["trainTable"] = _card_candidate["card_train_table"]
-        else:
+        if _card_candidate is None:
             print("NOTE: no model card was generated for any monitored model, so "
                   "the project's Training table property could not be set - the "
                   "performance job may fail without a training-data baseline. "
                   "Enable 'Generate a model card' for at least one model to fix this.")
-        _proj = mr.update_project(_proj)
-
-        _existing_vars = []
-        try:
-            for _v in _proj.variables:
-                _existing_vars.append({k: _v.get(k) for k in _var_keys})
-        except AttributeError:
-            pass
-        _new_vars = [v for v in _proj_variables if v not in _existing_vars]
-        if _new_vars:
-            mr.post(
-                f"projects/{_proj.id}/variables",
-                json=_new_vars,
-                headers={"Content-Type": "application/vnd.sas.collection+json"},
-            )
-        print(f"Project '{project_name}' configured for performance monitoring "
-              f"(target={target_variable}, level="
-              f"{'binary' if is_classification else 'interval'}).")
+        _configure_project(
+            _first,
+            train_table=_card_candidate["card_train_table"] if _card_candidate else None,
+        )
 
         # --- Upload ONE shared monitoring table directly via CAS - the same
         # mechanism PZMM.ipynb uses (conn.upload(..., promote=True)), instead of
@@ -1111,14 +1347,20 @@ if do_performance and monitor_candidates:
             # user writing SAS's alert syntax themselves - no UI for this,
             # just SAS's own documented mild/significant drift guidance.
             # sasctl's create_performance_definition() doesn't expose these
-            # two fields, so they're set with a follow-up PUT instead.
+            # two fields, so they're set with a follow-up PUT instead. The PUT
+            # needs the definition's ETag (HTTP 428 without it), which the
+            # create call's response doesn't carry, so re-fetch it first.
             try:
+                perf_def = mm.get(f"performanceTasks/{perf_def['id']}")
                 perf_def["characteristicWarn"] = "char_p1>2"
                 perf_def["characteristicAlert"] = "char_p1>5 or char_p25>0"
                 mm.put(
                     f"performanceTasks/{perf_def['id']}",
                     json=perf_def,
-                    headers={"Content-Type": "application/vnd.sas.models.performance.task+json"},
+                    headers={
+                        "Content-Type": "application/vnd.sas.models.performance.task+json",
+                        "If-Match": perf_def._headers.get("etag"),
+                    },
                 )
                 print(f"Alert thresholds set - warning: '{perf_def['characteristicWarn']}', "
                       f"critical: '{perf_def['characteristicAlert']}'.")
@@ -1155,7 +1397,8 @@ elif do_performance:
 print("=" * 64)
 print("RUN SUMMARY")
 for _step, _status, _detail in STEP_LOG:
-    _mark = "OK " if _status == "success" else "ERR"
+    # SKIP kept apart from ERR: a skipped model card read as an error to reviewers.
+    _mark = {"success": "OK  ", "skipped": "SKIP"}.get(_status, "ERR ")
     print(f"  [{_mark}] {_step}" + (f" - {_detail}" if _detail else ""))
 print("=" * 64)
 
