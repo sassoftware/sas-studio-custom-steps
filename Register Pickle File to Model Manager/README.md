@@ -67,7 +67,7 @@ The step runs its Python code in the SAS Studio compute session's `proc python` 
 
 3. ### Project ###
 
-   Whether to require an existing project or create one if it's missing, the project name, and whether re-running should overwrite an existing model version.
+   Whether to require an existing project or create one if it's missing, the project name, and whether re-running should replace a model with the same name.
 
    Optionally, set one of the models as the project champion. The step first sets the project's target, event, training table and input/output variables from that model, then makes it champion. This replaces the project's current champion, if it has one.
 
