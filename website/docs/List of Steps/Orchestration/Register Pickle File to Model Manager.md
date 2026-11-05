@@ -151,4 +151,4 @@ The log ends with a summary showing whether each part succeeded (`OK`), was skip
 * Version 1.27 (04NOV2026)
     * Step first made available on GitHub.
 
-The detailed development history is in [extras/CHANGELOG.md](extras/CHANGELOG.md).
+The detailed development history is in [extras/CHANGELOG.md](https://github.com/sassoftware/sas-studio-custom-steps/blob/main/Register%20Pickle%20File%20to%20Model%20Manager/extras/CHANGELOG.md).
