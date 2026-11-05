@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Extract Entities
+# Natural Language Processing - Extract Entities
 
 ## Description
 

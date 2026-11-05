@@ -1,4 +1,4 @@
-# LLM - Azure OpenAI-based Retrieval Augmented Generation (RAG)
+# LLM - Azure OpenAI-based Retrieval Augmented Generation
 
 This custom step uses a Retrieval Augmented Generation (RAG) approach to provide right context to an Azure OpenAI Large Language Model (LLM) for answering a question.  
 

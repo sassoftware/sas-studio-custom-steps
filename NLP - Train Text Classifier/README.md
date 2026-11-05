@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Train Text Classifier
+# Natural Language Processing - Train Text Classifier
 
 This custom step enables you to train a text classifier model based on deep learning (BERT-based transformer) architecture.
 

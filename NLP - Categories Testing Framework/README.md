@@ -1,4 +1,4 @@
-# Natural Language Processing(NLP) - Categories Testing Framework
+# Natural Language Processing - Categories Testing Framework
 
 This custom step facilitates testing, assessment and continuous improvement of a SAS Visual Text Analytics (VTA) categorization model. 
 

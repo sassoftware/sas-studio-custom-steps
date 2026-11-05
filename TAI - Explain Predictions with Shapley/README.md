@@ -1,4 +1,4 @@
-# Trustworthy AI (TAI) - Explain Predictions with Shapley
+# Trustworthy AI - Explain Predictions with Shapley
 
 ## Description
 This custom step executes the Trustworthy AI procedure `PROC SHAPLEY` in SAS Viya to compute Shapley values, providing local explainability for machine learning model predictions. Shapley values help you understand how much each input variable contributes to an individual model prediction, helping build confidence, address auditing requirements, and explain model decisions to business stakeholders.

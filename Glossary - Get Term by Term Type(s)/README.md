@@ -1,4 +1,4 @@
-# Glossary - Get Terms by Term Type(s)
+# Glossary - Get Terms by Term Type
 
 ## Description
 This custom step extracts for one or more term types the terms.

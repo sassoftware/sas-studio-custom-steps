@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Score Text Classifier
+# Natural Language Processing - Score Text Classifier
 
 This custom step enables you to score a text corpus with a text classifier model trained using the deep learning (BERT-based) textClassifier.trainTextClassifier action. 
 

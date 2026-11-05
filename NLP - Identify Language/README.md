@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Identify Language
+# Natural Language Processing - Identify Language
 
 This custom step identifies the language for text data in an input table and creates a new column containing the language's ISO 639-1 code.  It makes use of the textManagement.identifyLanguage CAS action (link provided in documentation below).
 
