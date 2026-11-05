@@ -48,19 +48,19 @@ There are **three tasks** you can carry out with this custom step, as offered in
 
 #### Input parameters:
 
-1. **Extract tables from a specified list of rule configurations ([reference screenshot here](./img/extract_rule_configuration.png)):** for this purpose, attach a table containing a list of desired rule configurations to the input data port (an optional port) of this step. At a minimum, the table should contain
+1. **Extract tables from a specified list of rule configurations ([reference screenshot here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/NLP%20-%20Extract%20Rule%20Configuration/img/extract_rule_configuration.png)):** for this purpose, attach a table containing a list of desired rule configurations to the input data port (an optional port) of this step. At a minimum, the table should contain
 
    1. **Name :** name of the rule configuration table.
    2. **Project_Caslib :** name of the system caslib attached to the Model Studio project.
    3. **Type :** either CATEGORY or CONCEPT based on the project
    4. **Astore_Name :** name of the astore created after compiling this rule configuration.  Note this is an optional field carried through for informational purposes.
 
-2. **Extract a single rule configuration table ([reference screenshot here](./img/extract_single_rule_configuration.png)) :**  this operates on the same principle, with the difference that instead of a list, you can provide a single table name and caslib through the UI. Provide the following:
+2. **Extract a single rule configuration table ([reference screenshot here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/NLP%20-%20Extract%20Rule%20Configuration/img/extract_single_rule_configuration.png)) :**  this operates on the same principle, with the difference that instead of a list, you can provide a single table name and caslib through the UI. Provide the following:
 
    1. **Project caslib (text field) :** system-generated project caslib  for a Model Studio project.
    2. **Name of rule configuration table (text field) :** system-generated rule configuration table name
 
-3. **Generate a list of rule configurations ([reference screenshot here](./img/generate_list_of_rule_configurations.png)) :** in case you don't yet know the names of the tables you wish to extract,  choose this option to generate a list of all rule configuration tables  located within the system caslib.  Provide the following.
+3. **Generate a list of rule configurations ([reference screenshot here](https://github.com/sassoftware/sas-studio-custom-steps/tree/main/NLP%20-%20Extract%20Rule%20Configuration/img/generate_list_of_rule_configurations.png)) :** in case you don't yet know the names of the tables you wish to extract,  choose this option to generate a list of all rule configuration tables  located within the system caslib.  Provide the following.
 
    - **System caslib name** for the Model Studio project (text field) : following same instruction as mentioned [above](#user-interface). 
 
