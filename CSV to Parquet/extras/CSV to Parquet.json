@@ -1,0 +1,193 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "CSV to Parquet (powered by DuckDB)",
+			"children": [
+				{
+					"id": "csv_file_path",
+					"type": "path",
+					"label": "Source CSV file path (please select file on SAS Server and not SAS Content):",
+					"pathtype": "file",
+					"required": true,
+					"placeholder": "/path/to/source.csv"
+				},
+				{
+					"id": "has_headers",
+					"type": "checkbox",
+					"label": "CSV first line has headers",
+					"visible": ""
+				},
+				{
+					"id": "section_output",
+					"type": "section",
+					"label": "Output Specification",
+					"open": true,
+					"children": [
+						{
+							"id": "parquet_output_path",
+							"type": "path",
+							"label": "Output folder path (please select file on SAS Server and not SAS Content):",
+							"pathtype": "folder",
+							"required": true,
+							"placeholder": "/path/to/output/directory/"
+						},
+						{
+							"id": "parquet_file_name",
+							"type": "textfield",
+							"label": "Output Parquet file name (No need to provide the .parquet extension):",
+							"required": true,
+							"placeholder": "output_data"
+						},
+						{
+							"id": "section_rejects",
+							"type": "section",
+							"label": "Rejects",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "save_rejects",
+									"type": "checkbox",
+									"label": "Save rejects (rejects are saved to Parquet files in the same output directory)",
+									"visible": ""
+								},
+								{
+									"id": "rejects_data_table",
+									"type": "textfield",
+									"label": "Specify rejects data file name:",
+									"placeholder": "_rejects",
+									"required": false,
+									"visible": "$save_rejects",
+									"enabled": "$save_rejects"
+								},
+								{
+									"id": "rejects_scan_table",
+									"type": "textfield",
+									"label": "Specify rejects scan file name:",
+									"placeholder": "_rejects_scan",
+									"required": false,
+									"visible": "$save_rejects",
+									"enabled": "$save_rejects"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "section_about_intro",
+					"type": "section",
+					"label": "CSV to Parquet",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "section_about_intro_text",
+							"type": "text",
+							"text": "“CSV to Parquet” is one of the most common conversion paths in modern data engineering pipelines.\n\nThis custom step uses SAS/ACCESS Interface to DuckDB to ingest a source CSV file and convert it into an optimized Parquet file. \n\nOpen file formats such as Parquet offer benefits of reduced data footprint and columnar structure. DuckDB is a popular and performant query processing engine that efficiently handles data ingestion and format conversion.",
+							"visible": ""
+						},
+						{
+							"id": "section_features",
+							"type": "section",
+							"label": "Features",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "text_features",
+									"type": "text",
+									"text": "1. Ingest CSV with or without headers.\n2. Save to Parquet on file system.\n3. Save rejected records for downstream exception code if needed.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "section_about_parameters",
+							"type": "section",
+							"label": "Parameters",
+							"open": false,
+							"visible": "",
+							"children": [
+								{
+									"id": "section_about_parameters_input",
+									"type": "section",
+									"label": "Input Parameters",
+									"open": true,
+									"children": [
+										{
+											"id": "section_about_parameters_input_text",
+											"type": "text",
+											"text": "1. Source CSV file path (file selector, required): select the source CSV file located on the SAS server (filesystem). Note: please select files on the SAS Server and not SAS Content.\n\n2. CSV first line has headers (checkbox, optional): indicate whether the first row of the CSV file contains column headers. Enabled by default.\n",
+											"visible": ""
+										}
+									]
+								},
+								{
+									"id": "section_about_parameters_output",
+									"type": "section",
+									"label": "Output specification",
+									"open": true,
+									"visible": "",
+									"children": [
+										{
+											"id": "section_about_parameters_output_text",
+											"type": "text",
+											"text": "1. Output folder path (folder selector, required): select the destination folder location on the SAS server (filesystem) where the output Parquet file will be stored. Note: please select folders on the SAS Server and not SAS Content.\n\n2. Output Parquet file name (text field, required): specify the name or prefix for the output Parquet file (no need to provide the .parquet extension).\n\n3. Save Rejects (checkbox, default checked): Whether to save rejected records to a Parquet file in the same output directory or not.\n\n4. Rejects table name (visible if Save Rejects selected): Specify name for the reject records table.\n\n5. Rejects scan table name (visible if Save Rejects selected): Specify name for reject scan table holding metadata about rejects.",
+											"visible": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"id": "section_references",
+							"type": "section",
+							"label": "References",
+							"open": false,
+							"children": [
+								{
+									"id": "references_text",
+									"type": "text",
+									"text": "1. Writing Parquet files using DuckDB: https://duckdb.org/docs/2.0/data/parquet/overview\n\n2. Reading CSV using DuckDB: https://duckdb.org/docs/2.0/guides/file_formats/csv_import\n\n3. SAS/Access Interface to DuckDB: https://go.documentation.sas.com/doc/en/pgmsascdc/v_080/acreldb/p1fekl0cwbnzcmn1026kzjequme4.htm\n"
+								}
+							]
+						},
+						{
+							"id": "section_about_version",
+							"type": "section",
+							"label": "About this step",
+							"open": true,
+							"children": [
+								{
+									"id": "version_text",
+									"type": "text",
+									"text": "Version: 0.2.0 (02NOV2026)\nContact: Sundaresh Sankaran (Sundaresh.Sankaran@sas.com)"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"csv_file_path": "",
+		"has_headers": true,
+		"parquet_output_path": "",
+		"parquet_file_name": "",
+		"save_rejects": true,
+		"rejects_data_table": "_rejects",
+		"rejects_scan_table": "_rejects_scan"
+	}
+}
