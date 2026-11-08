@@ -1,0 +1,172 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "pageOptions",
+			"type": "page",
+			"label": "Options",
+			"children": [
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "Dummy entry, named _template, used in sample readme file",
+					"visible": ""
+				},
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Input table label 1",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "algorithmToUse",
+					"type": "radiogroup",
+					"label": "Type of algorithm to use:",
+					"items": [
+						{
+							"value": "Basic"
+						},
+						{
+							"value": "Intermediate"
+						},
+						{
+							"value": "Advanced"
+						}
+					],
+					"visible": ""
+				},
+				{
+					"id": "metricsToCalculate",
+					"type": "list",
+					"label": "Metrics to calculate:",
+					"items": [
+						{
+							"value": "Minimum"
+						},
+						{
+							"value": "Maximum"
+						},
+						{
+							"value": "Standard Deviation"
+						},
+						{
+							"value": "Average"
+						}
+					],
+					"max": null,
+					"min": 1,
+					"visible": ""
+				},
+				{
+					"id": "outputtable1",
+					"type": "outputtable",
+					"label": "Output table label 1",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "pageAdvanced",
+			"type": "page",
+			"label": "Advanced",
+			"children": [
+				{
+					"id": "text2",
+					"type": "text",
+					"text": "Dummy entry, named _template, used in sample readme file",
+					"visible": ""
+				},
+				{
+					"id": "tableOptions",
+					"type": "textarea",
+					"label": "Specify advanced table options here:",
+					"placeholder": "",
+					"required": false,
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "pageAbout",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "textAbout",
+					"type": "text",
+					"text": "_template step\n==========\n\nThe \" _template\" custom steps performs the following calculations and/or data transformations: ...\n\nThe following algorithms are supported: \n  * Basic\n  * Medium\n  * Advanced\n\nOutput table options can be specified to ...\n",
+					"visible": ""
+				},
+				{
+					"id": "sectionPrereqs",
+					"type": "section",
+					"label": "Pre-requisites",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textPrereqs",
+							"type": "text",
+							"text": "Pre-requisites:  Tested on Viya version Stable yyyy.mm (e.g. 2022.09)",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionDocumentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "textDocumentation",
+							"type": "text",
+							"text": "* MEANS procedure in SAS Viya Platform Programming documentation (https://go.documentation.sas.com/doc/en/pgmsascdc/default/proc/n1qnc9bddfvhzqn105kqitnf29cp.htm) \n* ...",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "sectionChangelog",
+					"type": "section",
+					"label": "Changelog",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "textChangelog",
+							"type": "text",
+							"text": "* Version 1.4 (09OCT2024)\n   - Using NOWARN option on %symdel and %sysmacdelete to simplify coding for deletion of SAS macros and macro variables.\n\n* Version 1.3 (22DEC2023)\n   - Added sample code snippets to remove intermediate tables, macros and macro variables that are created by the step.\n\n* Version 1.2 (04SEP2023)\n     - About tab: Moved text for Prereqs/Documentation/Changelog into expandable sections for readability\n     - Added extras sub-folder to store older version of step in zip file when latest update of step requires very recent version of SAS Studio\n\n* Version 1.1 (23OCT2022)\n     - Added pre-reqs area in About tab\n\n* Version: 1.0 (13SEP2022)\n      - Initial version",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"algorithmToUse": {
+			"value": "Basic"
+		},
+		"metricsToCalculate": [
+			{
+				"value": "Average"
+			}
+		],
+		"outputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"tableOptions": ""
+	}
+}

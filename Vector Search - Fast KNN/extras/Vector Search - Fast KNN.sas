@@ -2,36 +2,38 @@
 /* -----------------------------------------------------------------------------------------* 
    Vector Search - Fast KNN
 
-   Version: 1.1 (09FEB2024)
+   Version: 1.2 (08NOV2026)
    Created: Sundaresh Sankaran(sundaresh.sankaran@sas.com)
     
 *------------------------------------------------------------------------------------------ */
 
 
-cas ss;
-caslib _ALL_ assign;
-
-
 /*-----------------------------------------------------------------------------------------*
-   Values provided are for illustrative purposes only.
-   Provide your own values in the section below.  
-*------------------------------------------------------------------------------------------*/
-%let baseTable_lib             =PUBLIC;
-%let baseTable_name_base       =BASETABLE;
-%let queryTable_lib            =PUBLIC;
-%let queryTable_name_base      =QUERYTABLE;
-%let outputTable_lib           =PUBLIC;
-%let outputTable_name_base     =OUTPUTTABLE;
-%let outputDistTable_lib       =PUBLIC;
-%let outputDistTable_name_base =OUTPUTDIST;
+   Assign values for the given macro variables in pre-code / upstream.
+   When run as part of a custom step, the UI populates these values.
+   For example, an upstream code could have the following values:
+   %let baseTable_lib             = casuser;
+   %let baseTable_name_base       = base_table;
+   and so on.
 
-%let idCol                     =Doc_ID;
-%let parallelMethod            =QUERY;
-%let numMatches                =10;
-%let thresholdDistance         =100;
-%let searchMethod              =APPROXIMATE;
-%let mTrees                    =10;
-%let maxPoints                 =100;
+   Any absolute values provided are for illustrative purposes only.
+*------------------------------------------------------------------------------------------*/
+%let baseTable_lib             =&baseTable_lib.;
+%let baseTable_name_base       =&baseTable_name_base.;
+%let queryTable_lib            =&queryTable_lib.;
+%let queryTable_name_base      =&queryTable_name_base.;
+%let outputTable_lib           =&outputTable_lib.;
+%let outputTable_name_base     =&outputTable_name_base.;
+%let outputDistTable_lib       =&outputDistTable_lib.;
+%let outputDistTable_name_base = &outputDistTable_name_base.;
+
+%let idCol                     = &idCol.;
+%let parallelMethod            =&parallelMethod.;
+%let numMatches                = &numMatches.;
+%let thresholdDistance         =&thresholdDistance.;
+%let searchMethod              =&searchMethod.;
+%let mTrees                    =&mTrees.;
+%let maxPoints                 = &maxPoints.;
 
 
 
@@ -371,6 +373,10 @@ caslib _ALL_ assign;
    trigger variable is in an "enabled" (value of 1) state by default, but in some cases, as 
    dictated by logic, could be set to a "disabled" (value of 0) state.
 *------------------------------------------------------------------------------------------*/
+
+cas ss;
+caslib _ALL_ assign;
+
 
 %if &_fnn_run_trigger. = 1 %then %do;
    %_fnn_main_execution_code;

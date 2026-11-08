@@ -1,0 +1,143 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "inPage",
+			"type": "page",
+			"label": "Message Definition",
+			"children": [
+				{
+					"id": "linkInFlow",
+					"type": "checkbox",
+					"label": "Connect to a table",
+					"visible": ""
+				},
+				{
+					"id": "text3",
+					"type": "text",
+					"text": "Visually link this step to a table by right clicking it, Add input port and connecting the table.\n\nThis serves as an indication that a logical dependency exists or that a macro variable is passed to this step. The table itself does not serve as an input for this step.",
+					"visible": "$linkInFlow"
+				},
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Used to visually link in a flow",
+					"required": false,
+					"placeholder": "Used to visually link in a flow",
+					"visible": "$linkInFlow"
+				},
+				{
+					"id": "teams_endpoint",
+					"type": "textfield",
+					"label": "Webhook of Teams channel:",
+					"placeholder": "Please enter the endpoint of your Teams Channel",
+					"required": true
+				},
+				{
+					"id": "messageType",
+					"type": "dropdown",
+					"label": "Select the message type:",
+					"items": [
+						{
+							"value": "simple",
+							"label": "Simple Text Message"
+						},
+						{
+							"value": "info",
+							"label": "Information Message"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "text2",
+					"type": "text",
+					"text": "You can make your text better looking by formatting it in markdown style:\nBold: **This will be bold**\nItalic: *This will be italic*\nLink: [Display Text](actual link)\n\nFor more possibilities to customize your messages search for markdown styling.\n\nYour text can also include macro variables and their values will be displayed in the message.",
+					"visible": ""
+				},
+				{
+					"id": "message",
+					"type": "textfield",
+					"label": "Message text to be send to the channel:",
+					"placeholder": "Please enter the message you want to sent",
+					"required": false,
+					"visible": [
+						"$messageType",
+						"=",
+						"simple"
+					]
+				},
+				{
+					"id": "msgTitle",
+					"type": "textfield",
+					"label": "Message title:",
+					"placeholder": "",
+					"required": false,
+					"visible": [
+						"$messageType",
+						"=",
+						"info"
+					]
+				},
+				{
+					"id": "msgBody",
+					"type": "textarea",
+					"label": "Message content:",
+					"placeholder": "",
+					"required": false,
+					"visible": [
+						"$messageType",
+						"=",
+						"info"
+					]
+				},
+				{
+					"id": "msgThemeColor",
+					"type": "colorpicker",
+					"label": "Message theme color:",
+					"visible": [
+						"$messageType",
+						"=",
+						"info"
+					]
+				}
+			]
+		},
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "how_to_webhook",
+					"type": "text",
+					"text": "To get the webhook of a Teams Channel:\n- go to Teams\n- right click on the target channel\n- Connectors\n- Search for Incoming Webhook\n- Click Add\n- Go to Manage and Configure the Webhook\n- It needs a name and nice logo (which is optional)\n- Click create and copy the Webhook URL\n\nIf you have already created a Webhook before:\n- go to Teams\n- right click on the target channel\n- Connectors\n- under Manage select Configured\n- Open the dropdown Configured (x)\n- click on Manage for the desired Webhook and copy the Webhook URL"
+				},
+				{
+					"id": "text1",
+					"type": "text",
+					"text": "This step was created by:\nTamara.Fischer@sas.com\nDavid.Weik@sas.com\n\nVersion 1.0 (12DEC2022)\nVersion 1.1 (14JUN2023)",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"linkInFlow": false,
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"teams_endpoint": "",
+		"messageType": {
+			"value": "simple",
+			"label": "Simple Text Message"
+		},
+		"msgTitle": "SAS Studio Notification",
+		"msgBody": "",
+		"msgThemeColor": "0075FF"
+	}
+}

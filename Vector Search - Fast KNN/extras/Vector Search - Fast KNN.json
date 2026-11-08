@@ -1,0 +1,345 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "params",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "inputSelectionSection",
+					"type": "section",
+					"label": "Input Selection",
+					"open": true,
+					"children": [
+						{
+							"id": "baseTable",
+							"type": "inputtable",
+							"label": "Provide base table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "queryTable",
+							"type": "inputtable",
+							"label": "Provide query table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "idCol",
+							"type": "columnselector",
+							"label": "Select ID column:",
+							"order": false,
+							"columntype": "n",
+							"max": 1,
+							"min": 1,
+							"visible": "",
+							"table": "queryTable"
+						},
+						{
+							"id": "inputColumns",
+							"type": "columnselector",
+							"label": "Select input columns:",
+							"order": false,
+							"columntype": "n",
+							"max": null,
+							"min": 1,
+							"visible": "",
+							"table": "queryTable"
+						}
+					]
+				},
+				{
+					"id": "settingsSection",
+					"type": "section",
+					"label": "Settings",
+					"open": false,
+					"children": [
+						{
+							"id": "searchMethod",
+							"type": "dropdown",
+							"label": "Select search method:",
+							"items": [
+								{
+									"value": "APPROXIMATE",
+									"label": "Approximate"
+								},
+								{
+									"value": "EXACT",
+									"label": "Exact"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "maxPoints",
+							"type": "numstepper",
+							"label": "Number of observations to search in each leaf node:",
+							"required": false,
+							"integer": false,
+							"min": 0,
+							"max": null,
+							"stepsize": 1,
+							"enabled": [
+								"$searchMethod",
+								"=",
+								"APPROXIMATE"
+							],
+							"visible": [
+								"$searchMethod",
+								"=",
+								"APPROXIMATE"
+							]
+						},
+						{
+							"id": "mTrees",
+							"type": "numstepper",
+							"label": "Number of binary trees:",
+							"required": false,
+							"integer": false,
+							"min": 0,
+							"max": null,
+							"stepsize": 1,
+							"enabled": [
+								"$searchMethod",
+								"=",
+								"APPROXIMATE"
+							],
+							"visible": [
+								"$searchMethod",
+								"=",
+								"APPROXIMATE"
+							]
+						},
+						{
+							"id": "thresholdDistance",
+							"type": "numstepper",
+							"label": "Specify threshold for distance computation:",
+							"required": false,
+							"integer": true,
+							"min": null,
+							"max": null,
+							"stepsize": 1
+						},
+						{
+							"id": "parallelTable",
+							"type": "dropdown",
+							"label": "Select table to be parallelized:",
+							"items": [
+								{
+									"value": "INPUT",
+									"label": "Input"
+								},
+								{
+									"value": "QUERY",
+									"label": "Query"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": "",
+							"enabled": [
+								"true",
+								"=",
+								"true"
+							]
+						}
+					]
+				},
+				{
+					"id": "outputSpecificationSection",
+					"type": "section",
+					"label": "Output Specifications",
+					"open": false,
+					"children": [
+						{
+							"id": "numMatches",
+							"type": "numstepper",
+							"label": "Provide number of matches to return:",
+							"required": false,
+							"integer": false,
+							"min": null,
+							"max": null,
+							"stepsize": 1
+						},
+						{
+							"id": "outputTable",
+							"type": "outputtable",
+							"label": "Provide output table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "outputDistTable",
+							"type": "outputtable",
+							"label": "Provide output distance table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "about_description",
+					"type": "text",
+					"text": "Find Nearest Neighbors\n==================\nThe Vector Search - Fast KNN (K-Nearest Neighbors) Custom Step searches a base table to identify nearest neighbors to observations in an input query table, based on a distance formula. It uses an implementation of the Fast KNN algorithm inside SAS Cloud Analytics Services (CAS), surfaced through the fastknn.fastknn.\n\nVector Search enhances and augments accuracy and performance of Generative AI applications.  They help identify and corral accurate contextual information prior to interacting downstream applications, such as a Large Language Model (LLM). This step also facilitates  applications in recommendation engines, similarity analysis, search and others.\n",
+					"visible": ""
+				},
+				{
+					"id": "about_parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "parameters_text",
+							"type": "text",
+							"text": "This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib). Ensure you are connected to CAS before running this step. \n\nThis custom step requires a license for SAS Viya or higher to be able to run the fastknn.fastknn action.",
+							"visible": ""
+						},
+						{
+							"id": "parameters_input",
+							"type": "section",
+							"label": "Input Parameters",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text",
+									"type": "text",
+									"text": "1.Base table (input port, required): attach a CAS table to this port containing data to be searched against.\n\n2. Query table (input port, required): attach a CAS table to this port containing data for which you would like to search nearest neighbors.\n\n3. ID column (column selector, required): select a numeric column to serve as the unique identifier for each observation.\n\n4. Input columns (column selector, required): select one or more numeric columns which will be used to calculate the distance measure which serves as the basis for selecting nearest neighbors.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_settings",
+							"type": "section",
+							"label": "Settings",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "settings_text",
+									"type": "text",
+									"text": "1. Distance threshold (stepper, default 100): select a threshold which will act as the maximum limit to calculate distance.\n\n2. Search Method (drop-down list,  default is Approximate): select whether to use the Exact or Approximate search method.  Refer documentation for details.\n\n3. Number of binary trees (stepper, upon selection of Approximate search method, default 10):  select the number of adjacent binary trees to which the search method will confine its search to.\n\n4. Number of points (stepper, upon selection of Approximate search method, default 100):  select maximum number of points to evaluate in a lead node.\n\n5. Parallelization method (default of Query):  this setting specifies whether the query table or the base (input) table will be parallelized while conducting the search.  ",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_output_specs",
+							"type": "section",
+							"label": "Output specifications",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text",
+									"type": "text",
+									"text": "1. Number of matches (stepper, default of 4): select maximum number of neighbors (similar observations) you would like for each observation. Note that selecting a higher number leads to longer computation time, wider set of columns for the output tables, and a larger distance table.\n\n2. Output table (output port, required): attach a CAS table to this port.  This will hold the output data containing each ID column of the query table along with additional columns containing IDs of the neighbors identified.\n\n3. Output Distance table (output port, required): attach a CAS table to this port.  This will hold a long dataset containing the ID from the query table, the neighbor ID from the base table and the Euclidean distance measure.",
+									"visible": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "about_runtimecontrol",
+					"type": "section",
+					"label": "Run-time Control",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "runtimecontrol_text",
+							"type": "text",
+							"text": "Note: Run-time control is optional.  You may choose whether to execute the main code of this step or not, based on upstream conditions set by earlier SAS programs.  This includes nodes run prior to this custom step earlier in a SAS Studio Flow, or a previous program in the same session.\n\nRefer this blog (https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.\n\nThe _fnn prefix used here refers to the operation that the step performs, viz. finding nearest neighbors.\n\nThe following macro variable,\n\n_fnn_run_trigger\n\nwill initialize with a value of 1 by default, indicating an \"enabled\" status and allowing the custom step to run.\n\nIf you wish to control execution of this custom step, include code in an upstream SAS program to set this variable to 0.  This \"disables\" execution of the custom step.\n\nTo \"disable\" this step, run the following code upstream:\n\n%global _fnn_run_trigger;\n%let _fnn_run_trigger =0;\n\nTo \"enable\" this step again, run the following (it's assumed that this has already been set as a global variable):\n\n%let _fnn_run_trigger =1;\n\nIMPORTANT: Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_documentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "documentation_text",
+							"type": "text",
+							"text": "1. The fastknn.fastknn Cloud Analytics Service (CAS) action: https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/cas-fastknn-fastknn.htm\n\n2. Useful SAS Communities article on the K-Nearest Neighbors algorithm: http://communities.sas.com/t5/SAS-Communities-Library/A-Simple-Introduction-to-K-Nearest-Neighbors-Algorithm/ta-p/565402\n\n3. Details on the optional run-time trigger control: http://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526)\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "version_text",
+					"type": "text",
+					"text": "Version: 1.1 (09FEB2024)",
+					"visible": ""
+				},
+				{
+					"id": "contact_text",
+					"type": "text",
+					"text": "Created/contact: \n\n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)\n",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"baseTable": {
+			"library": "",
+			"table": ""
+		},
+		"queryTable": {
+			"library": "",
+			"table": ""
+		},
+		"idCol": [],
+		"inputColumns": [],
+		"searchMethod": {
+			"value": "APPROXIMATE",
+			"label": "Approximate"
+		},
+		"maxPoints": 100,
+		"mTrees": 10,
+		"thresholdDistance": 100,
+		"parallelTable": {
+			"value": "QUERY",
+			"label": "Query"
+		},
+		"numMatches": 4,
+		"outputTable": {
+			"library": "",
+			"table": ""
+		},
+		"outputDistTable": {
+			"library": "",
+			"table": ""
+		}
+	},
+	"columnExclusions": [
+		[
+			"inputColumns",
+			"idCol"
+		]
+	]
+}

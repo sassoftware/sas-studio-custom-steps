@@ -1,0 +1,64 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Train Data",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "inputtable2",
+					"type": "inputtable",
+					"label": "Synthetic Data",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "columnselector1",
+					"type": "columnselector",
+					"label": "Select the columns which you would like to compare",
+					"order": false,
+					"columntype": "n",
+					"max": null,
+					"min": null,
+					"visible": "",
+					"table": "inputtable2"
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "text_description",
+					"type": "text",
+					"text": "Generate Distribution Comparison\n\nThe \"Generate Distribution Comparison\" custom step generates a histogram comparing the distribution of original and synthetic data so that users can understand if their synthetic data is an adequately similar representation of the original. This step results in a chart printed in the Results Tab, accessible from the Submission window.  It also creates and loads an in-memory table which is available for reporting in Visual Analytics.  \n\nWhile the purpose of this custom step is to assist in synthetic data generation, users may choose to repurpose the same to compare the distribution of any two tables with the same variables.  Just ensure that the dataset provided to the Synthetic Data input port has a TRAINFLAG set to 1. \n\nInput parameters for this custom step are : \n\n1. Attach a table containing the original training data to the Training Data input port.\n2. Attach a table containing the synthetic data to the Synthetic Data input port\n3. Select the columns you wish to generate distributions for.\n\nThere are no explicit output datasets created which are intended to be used further in the flow.  However,  you'll notice that your CASUSER caslib will now contain a table (syn_compare_merged_data)  which is also loaded to memory.  You may choose to visualize this using SAS Visual Analytics.\n\nCreated / contact : Brett Wujek (brett.wujek@sas.com),  Reza Nazari (reza.nazari@sas.com) , Ruiwen Zhang (ruiwen.zhang@sas.com) and Sundaresh Sankaran (sundaresh.sankaran@sas.com) \n\nVersion : 1.0.   (06OCT2022)",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"inputtable2": {
+			"library": "",
+			"table": ""
+		},
+		"columnselector1": []
+	}
+}

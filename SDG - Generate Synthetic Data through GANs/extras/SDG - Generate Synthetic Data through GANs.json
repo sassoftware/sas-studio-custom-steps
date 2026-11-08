@@ -1,0 +1,224 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "Score",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "inputParameters",
+					"type": "section",
+					"label": "Input parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "text2",
+							"type": "text",
+							"text": "Connect a model binary (astore) table containing the GAN model to the input port of this step.",
+							"visible": ""
+						},
+						{
+							"id": "inputtable1",
+							"type": "inputtable",
+							"label": "Specify astore table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "outputSpecification",
+					"type": "section",
+					"label": "Output specification",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "text1",
+							"type": "text",
+							"text": "Add a CAS table to the output port of this step.",
+							"visible": ""
+						},
+						{
+							"id": "numobs",
+							"type": "numberfield",
+							"label": "Number of observations:",
+							"placeholder": "",
+							"required": true,
+							"max": null,
+							"min": null,
+							"visible": ""
+						},
+						{
+							"id": "outputtable1",
+							"type": "outputtable",
+							"label": "Specify generated data output table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "enableGPU",
+					"type": "checkbox",
+					"label": "Enable GPU",
+					"visible": ""
+				},
+				{
+					"id": "provenance_flag",
+					"type": "textfield",
+					"label": "Provide name for Provenance variable:",
+					"placeholder": "SYNTHETIC_DATA_FLAG",
+					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "text3",
+					"type": "text",
+					"text": "A column of this name will be added to the output table with a value of 1, indicating this data has been synthetically generated.",
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "text_description",
+					"type": "text",
+					"text": "Generate Synthetic Data\n=================\n\nThe \"Generate Synthetic Data\" custom step generates synthetic data on the basis of a pre-trained model. This step results in a new dataset which contains synthetically generated data. \n\nOnce you have generated synthetic data, you can carry out further downstream activities such as comparing distributions to see how close your synthetic data resembles the original.",
+					"visible": ""
+				},
+				{
+					"id": "about_parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "parameters_text",
+							"type": "text",
+							"text": "This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib). Ensure you have access to a CAS engine before running this step.",
+							"visible": ""
+						},
+						{
+							"id": "parameters_input",
+							"type": "section",
+							"label": "Input parameters",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text",
+									"type": "text",
+									"text": "- An input table containing the model binary (known as an astore) which has been trained earlier - attach this to the input port of this step.\n\n",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_config",
+							"type": "section",
+							"label": "Configuration",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text_1",
+									"type": "text",
+									"text": "1. Enable GPU (check box; default is disabled): check this box in case you wish to enables Graphical Processing Units (GPUs) for scoring.\n\n  Note that currently the tabularGan procedure (which outputs the GAN model for synthetic data) is designed to take advantage of a maximum of 1 GPU device only, and the scoring procedure does the same.\n\n2. Provenance variable (text field; default value of  SYNTHETIC_DATA_FLAG): modify this field if you want to create a column of a different name, which indicates that the data is synthetic (value of 1).",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_output_specs",
+							"type": "section",
+							"label": "Output Specifications",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text",
+									"type": "text",
+									"text": "1. Number of synthetic observations you wish to generate.\n\n2. Set up the output for this process by attaching a table to the output port (called Generated Data) \n",
+									"visible": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "about_runtimecontrol",
+					"type": "section",
+					"label": "Run-time Control",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "runtimecontrol_text",
+							"type": "text",
+							"text": "Note: Run-time control is optional.  You may choose whether to execute the main code of this step or not, based on upstream conditions set by earlier SAS programs.  This includes nodes run prior to this custom step earlier in a SAS Studio Flow, or a previous program in the same session.\n\nRefer this blog (https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.\n\nThe following macro variable,\n\n_gsd_run_trigger\n\nwill initialize with a value of 1 by default, indicating an \"enabled\" status and allowing the custom step to run.\n\nIf you wish to control execution of this custom step, include code in an upstream SAS program to set this variable to 0.  This \"disables\" execution of the custom step.\n\nTo \"disable\" this step, run the following code upstream:\n\n%global _gsd_run_trigger;\n%let _gsd_run_trigger =0;\n\nTo \"enable\" this step again, run the following (it's assumed that this has already been set as a global variable):\n\n%let _gsd_run_trigger =1;\n\nIMPORTANT: Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_documentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "documentation_text",
+							"type": "text",
+							"text": "1. The ASTORE procedure is documented here: https://go.documentation.sas.com/doc/en/pgmsascdc/default/casml/casml_astore_overview.htm\n\n2. The score action for astores is documented here : https://documentation.sas.com/?cdcId=pgmsascdc&cdcVersion=default&docsetId=casactml&docsetTarget=cas-astore-score.htm\n\n3. This SAS Communities article: https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526 referred to earlier suggests an approach through which execution of this custom step is controlled during run time.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "change_log_text",
+					"type": "text",
+					"text": "Version: 2.0  (04NOV2024)\n\nNote that this custom step now resides in its own folder, compared to earlier version (which was clubbed under Synthetic Data Generation)",
+					"visible": ""
+				},
+				{
+					"id": "contact_text",
+					"type": "text",
+					"text": "Created/contact: \n\n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)\n- Brett Wujek (brett.wujek@sas.com)\n- Reza Nazari (reza.nazari@sas.com) \n- Ruiwen Zhang (ruiwen.zhang@sas.com) \n- Lorne Rothman (lorne.rothman@sas.com)",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"numobs": 10000,
+		"outputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"enableGPU": false,
+		"provenance_flag": "SYNTHETIC_DATA_FLAG"
+	}
+}
