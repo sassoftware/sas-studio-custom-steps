@@ -29,10 +29,9 @@ The step supports two modes:
 
 ## User Interface
 
-> Screenshots of each tab are not yet included.
-> Add them to the **img** folder, as in the **_template** folder.
-
 ### Data tab
+
+![Data tab](img/qrc-data.png)
 
 | Control | Description |
 | :--- | :--- |
@@ -51,6 +50,8 @@ Missing numeric target values are set to 0.
 
 ### QRC Options tab
 
+![QRC Options tab in Hypertune mode](img/qrc-options.png)
+
 | Control | Mode | Description |
 | :--- | :--- | :--- |
 | Circuit type | Both | Linear, Entangled, Nonlinear, Recurrent feedback, Parametric, or Sparse connectivity. |
@@ -67,6 +68,8 @@ See **Limitations** for which of these affect the results.
 
 ### Advanced Simulation tab
 
+![Advanced Simulation tab](img/qrc-advanced.png)
+
 | Control | Description |
 | :--- | :--- |
 | Number of PROC HYPERTUNE optimization trials | Hypertune only. Default 5. |
@@ -79,7 +82,11 @@ See **Limitations** for which of these affect the results.
 
 ### About tab
 
-Summary of the modes, outputs, and algorithms.
+![About tab](img/qrc-about.png)
+
+Summary of the modes, outputs, and algorithms,
+with collapsible Pre-requisites and Documentation sections
+and the version history.
 
 ## Output
 
@@ -100,6 +107,11 @@ Summary of the modes, outputs, and algorithms.
   * `agent_context_*.json`, which records the run settings and file
     names
 
+When it finishes, the step deletes its temporary `_qrc_` tables from
+WORK and from the `qrun` library, its global macro variables, and its
+macros, and it restores the `MLOGIC`, `MPRINT`, and `SYMBOLGEN` options.
+With **Use cache** selected, the `PROC HYPERTUNE` cache table is kept.
+
 ## Requirements
 
 * SAS Viya with SAS Studio Flows.
@@ -109,7 +121,6 @@ Summary of the modes, outputs, and algorithms.
   needed, to hold intermediate tables for `PROC QRUN`.
 * Numeric predictor columns and a `y` or `target` column.
 * A Python environment configured for `PROC HYPERTUNE`.
-  See **Limitations**.
 
 The tested Viya version has not been recorded for this step.
 
@@ -169,10 +180,6 @@ and connect the output port.
   circuit type.
   The multi-select circuit and noise lists shown for Hypertune are not
   used.
-* **Hypertune Python path:** The step sets the `HYPERTUNE_PYTHON` option to
-  a fixed path under `/bigdisk/lax/SpeedDoctor/`.
-  Change this to a Python environment available in your deployment before
-  using Hypertune mode elsewhere.
 * **Binary label noise:** Applies only when `y` is binary 0/1.
 * **Qubit count:** The number of projected predictors is the smaller of
   the qubit count and the number of numeric predictors.
