@@ -2,15 +2,21 @@
 
 ## Description
 
->Explain here what capabilities are provided by your custom step - ***Remove this line***
+> [!TIP]
+> Explain here what capabilities are provided by your custom step - ***Remove this line***
 
-The **_template** custom step enables SAS Studio users to ...
+*The **_template** custom step enables users to ...*
 
 ## User Interface
 
->Create a screenshot for each of the tabs shown in your Custom Step UI, preferably with a 1-pixel black border, and put them in the **img** folder and show them below.  - ***Remove this line***
+> [!TIP]
+> Create a screenshot for each of the tabs shown in your Custom Step UI, preferably with a 1-pixel black border, and put them in the **img** folder and show them below.  - ***Remove this line***
 
->Consider adding a screenshot when using your custom step in standalone-mode and one in flow-mode for each tab that contains input table and output table controls, as these controls are hidden when used in flow mode.  - ***Remove this line***
+> Consider adding a screenshot when using your custom step in standalone-mode and one in flow-mode for each tab that contains input table and output table controls, as these controls are hidden when used in flow mode. - ***Remove this line***
+
+> Videos are welcome.  However, please do not embed videos directory from a repository file.  Consider uploading a video to a video sharing service such as YouTube, Brightcove or similar and insert a link here instead.***Remove this line***
+
+
 
 * ### Options tab ###
 
@@ -29,6 +35,7 @@ The **_template** custom step enables SAS Studio users to ...
 ## Requirements
 
 Tested on Viya version Stable 2022.09
+> [!TIP]
 > Does your custom step use specific UI controls that have only been released recently, and therefore perhaps require a more recent Viya version? - ***Remove this line***
 
 > Does you custom step require specific products to be installed, or has other dependencies the user should know about, then mention them here. - ***Remove this line*** 
@@ -48,17 +55,12 @@ Tested on Viya version Stable 2022.09
 
 ## Change Log
 
-* Version 1.4 (09OCT2024)
-    * Using NOWARN option on %symdel and %sysmacdelete to simplify coding for deletion of SAS macros and macro variables.
-* Version 1.3 (22DEC2023) 
-    * Added sample code snippets to remove intermediate tables, macros and macro variables that are created by the step
-* Version 1.2 (04SEP2023) 
-    * About tab: Moved text for Prereqs/Documentation/Changelog into expandable sections for readability
-    * Added **extras** sub-folder to store older version of step in zip file when latest update of step requires very recent version of SAS Studio
-* Version 1.1 (23OCT2022) 
-    * Added pre-reqs area in About tab
-* Version 1.0 (13SEP2022) 
-    * Initial version
+> [!TIP]
+> Keep your Change Logs limited to the most recent (or the most recent major and most recent patch).  
+> For more detailed Change Logs, edit `CHANGELOG.md` under the `extras` folder of this folder.
+
+* Version 1.5 (10NOV2026)
+    * Refers SAS Data and AI Studio as the new name for SAS Studio.
 
 > Note: Please list versions in descending date order, so the most recent version at the top of the change log.  - ***Remove this line***
 
