@@ -2,17 +2,34 @@
 	"showPageContentOnly": true,
 	"pages": [
 		{
-			"id": "page1",
+			"id": "params",
 			"type": "page",
 			"label": "CSV to Parquet (powered by DuckDB)",
 			"children": [
 				{
-					"id": "csv_file_path",
-					"type": "path",
-					"label": "Source CSV file path (please select file on SAS Server and not SAS Content):",
-					"pathtype": "file",
-					"required": true,
-					"placeholder": "/path/to/source.csv"
+					"id": "section_input",
+					"type": "section",
+					"label": "Input Parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "csv_folder_path",
+							"type": "path",
+							"label": "Source folder containing CSVs (please select folder on SAS Server and not SAS Content):",
+							"pathtype": "folder",
+							"required": true,
+							"placeholder": "/path/to/source.csv"
+						},
+						{
+							"id": "csv_file_pattern",
+							"type": "textfield",
+							"label": "Input csv pattern (use wildcards if needed)",
+							"placeholder": "*.csv",
+							"required": false,
+							"visible": ""
+						}
+					]
 				},
 				{
 					"id": "has_headers",
@@ -42,17 +59,31 @@
 							"placeholder": "output_data"
 						},
 						{
+							"id": "ignore_errors",
+							"type": "checkbox",
+							"label": "Ignore errors",
+							"visible": ""
+						},
+						{
+							"id": "union_by_name",
+							"type": "checkbox",
+							"label": "Combine multiple schemas by column name (union_by_name)",
+							"visible": ""
+						},
+						{
 							"id": "section_rejects",
 							"type": "section",
 							"label": "Rejects",
 							"open": true,
-							"visible": "",
+							"visible": "!$union_by_name",
+							"enabled": "!$union_by_name",
 							"children": [
 								{
 									"id": "save_rejects",
 									"type": "checkbox",
 									"label": "Save rejects (rejects are saved to Parquet files in the same output directory)",
-									"visible": ""
+									"visible": "!$union_by_name",
+									"enabled": "!$union_by_name"
 								},
 								{
 									"id": "rejects_data_table",
@@ -93,7 +124,7 @@
 						{
 							"id": "section_about_intro_text",
 							"type": "text",
-							"text": "“CSV to Parquet” is one of the most common conversion paths in modern data engineering pipelines.\n\nThis custom step uses SAS/ACCESS Interface to DuckDB to ingest a source CSV file and convert it into an optimized Parquet file. \n\nOpen file formats such as Parquet offer benefits of reduced data footprint and columnar structure. DuckDB is a popular and performant query processing engine that efficiently handles data ingestion and format conversion.",
+							"text": "“CSV to Parquet” is one of the most common conversion paths in modern data engineering pipelines.\n\nThis custom step utilizes SAS/ACCESS Interface to DuckDB to ingest a source CSV file and convert it into an optimized Parquet file. \n\nOpen file formats such as Parquet offer benefits of reduced data footprint and columnar structure. DuckDB is a popular and performant query processing engine that efficiently handles data ingestion and format conversion.",
 							"visible": ""
 						},
 						{
@@ -127,7 +158,7 @@
 										{
 											"id": "section_about_parameters_input_text",
 											"type": "text",
-											"text": "1. Source CSV file path (file selector, required): select the source CSV file located on the SAS server (filesystem). Note: please select files on the SAS Server and not SAS Content.\n\n2. CSV first line has headers (checkbox, optional): indicate whether the first row of the CSV file contains column headers. Enabled by default.\n",
+											"text": "1. Source CSV file path (folder selector, required): select the folder containing source CSV files located on the SAS server (filesystem). Note: please select a folder on the SAS Server and not SAS Content.\n\n2. File pattern (text field, default *.csv): A glob pattern which may include wildcards describing source CSV files\n\n3. CSV first line has headers (checkbox, optional): indicate whether the first row of the CSV file contains column headers. Enabled by default.\n",
 											"visible": ""
 										}
 									]
@@ -142,7 +173,7 @@
 										{
 											"id": "section_about_parameters_output_text",
 											"type": "text",
-											"text": "1. Output folder path (folder selector, required): select the destination folder location on the SAS server (filesystem) where the output Parquet file will be stored. Note: please select folders on the SAS Server and not SAS Content.\n\n2. Output Parquet file name (text field, required): specify the name or prefix for the output Parquet file (no need to provide the .parquet extension).\n\n3. Save Rejects (checkbox, default checked): Whether to save rejected records to a Parquet file in the same output directory or not.\n\n4. Rejects table name (visible if Save Rejects selected): Specify name for the reject records table.\n\n5. Rejects scan table name (visible if Save Rejects selected): Specify name for reject scan table holding metadata about rejects.",
+											"text": "1. Output folder path (folder selector, required): select the destination folder location on the SAS server (filesystem) where the output Parquet file will be stored. Note: please select folders on the SAS Server and not SAS Content.\n\n2. Output Parquet file name (text field, required): specify the name or prefix for the output Parquet file (no need to provide the .parquet extension).\n\n3. Save Rejects (checkbox, default checked): Whether to save rejected records to a Parquet file in the same output directory or not.\n\n4. Rejects table name (visible if Save Rejects selected): Specify name for the reject records table.\n\n5. Rejects scan table name (visible if Save Rejects selected): Specify name for reject scan table holding metadata about rejects.\n\n6. Ignore Errors (checkbox, default false): skip rows that cause parsing or casting errors\n\n7. Combine multiple file schemas (checkbox, default false): whether to combine multiple schemas based on column names - this corresponds to union_by_name in the DuckDB read_csv() function.",
 											"visible": ""
 										}
 									]
@@ -171,7 +202,7 @@
 								{
 									"id": "version_text",
 									"type": "text",
-									"text": "Version: 0.2.0 (02NOV2026)\nContact: Sundaresh Sankaran (Sundaresh.Sankaran@sas.com)"
+									"text": "Version: 0.4.0 (14NOV2026)\nContact: Sundaresh Sankaran (Sundaresh.Sankaran@sas.com)"
 								}
 							]
 						}
@@ -182,10 +213,13 @@
 	],
 	"syntaxversion": "1.3.0",
 	"values": {
-		"csv_file_path": "",
+		"csv_folder_path": "",
+		"csv_file_pattern": "*.csv",
 		"has_headers": true,
 		"parquet_output_path": "",
 		"parquet_file_name": "",
+		"ignore_errors": false,
+		"union_by_name": false,
 		"save_rejects": true,
 		"rejects_data_table": "_rejects",
 		"rejects_scan_table": "_rejects_scan"

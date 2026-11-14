@@ -1,35 +1,50 @@
 /************************************************************************
 DuckDB - CSV to Parquet Conversion
 
-Purpose: This SAS program uses SAS/ACCESS to DuckDB to ingest a CSV file 
+Purpose: This SAS program utilizes SAS/ACCESS Interface to DuckDB to ingest a CSV file 
          and convert it into a Parquet file.
 Input Parameters:
-- csv_file_path: Full path to the source CSV file (macro variable)
+- csv_folder_path: Full path to the folder containing source CSV files (macro variable)
+- csv_file_pattern: A glob pattern which may include wildcards describing source CSV files (macro variable)
 - has_headers: Boolean (TRUE/FALSE) indicating if the CSV has a header row (macro variable)
+
+Output specification:
 - parquet_output_path: Folder location for the output Parquet file (macro variable)
 - parquet_file_name: Name/prefix for the output Parquet file (macro variable)
 - save_rejects: Whether to save rejects or not (macro variable)
+- ignore_errors: Whether to skip rows that cause parsing or casting errors (macro variable)
+- union_by_name: Whether to combine multiple schemas based on column names (default false) (macro variable)
 If you do choose to save rejects,
 - rejects_data_table: Table containing rejected record details at a line and scan level
 - rejects_scan_table: Table containing metadata about the rejected records.
 
 Created: Sundaresh Sankaran
-Version: 0.2.0 (02NOV2026)
+Version: 0.4.0 (14NOV2026)
 ************************************************************************/;
 
 /* Define macro variables for input parameters */
-%let csv_file_path = &csv_file_path.;                /* e.g., '/data/input.csv' */
+%let csv_folder_path = &csv_folder_path.;                /* e.g., '/data/' */
+%let csv_file_pattern = &csv_file_pattern.;              /* e.g., 'input.csv' / '*.csv' */
 %let has_headers = &has_headers.;                    /* TRUE or FALSE */
 %let parquet_output_path = &parquet_output_path.;    /* e.g., '/data/output/' */
 %let parquet_file_name = &parquet_file_name. ;       /* e.g., 'output_data WITHOUT the .parquet' */
-%let save_rejects = &save_rejects.;                  /* TRUE or FALSE */;
+%let ignore_errors = &ignore_errors.;                  /* TRUE or FALSE */;
+%let union_by_name = &union_by_name.;                  /* TRUE or FALSE */;
 
-%if "&save_rejects."="1" %then %do;
-    %let rejects_data_table=&rejects_data_table.;
-    %let rejects_scan_table=&rejects_scan_table.;
-    %put NOTE: The Rejects table is &rejects_data_table.;
-    %put NOTE: The Rejects table is &rejects_scan_table.;
-%end;
+%macro set_union_rejects_relationship;
+    %if "&union_by_name."="0" %then %do;
+        %let save_rejects = &save_rejects.;                  /* TRUE or FALSE */;
+        %if "&save_rejects."="1" %then %do;
+            %let rejects_data_table=&rejects_data_table.;
+            %let rejects_scan_table=&rejects_scan_table.;
+            %put NOTE: The Rejects table is &rejects_data_table.;
+            %put NOTE: The Rejects table is &rejects_scan_table.;
+        %end;
+    %end;
+%mend set_union_rejects_relationship;
+
+%set_union_rejects_relationship;
+
 
 
 /* -----------------------------------------------------------------------------------------*
@@ -159,10 +174,10 @@ Version: 0.2.0 (02NOV2026)
       libname dukonce duckdb database=":memory::mydb";;
    %end;
    
-   %put NOTE: Step 2 - Identify if input file reference is on Server or Content.;
+   %put NOTE: Step 2 - Identify if input folder reference is on Server or Content.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
-      %_identify_content_or_server("&csv_file_path.");
+      %_identify_content_or_server("&csv_folder_path.");
 
       %if "&_path_identifier."="sasserver" %then %do;
          %put NOTE: Folder location prefixed with &_path_identifier. is on the SAS Server.;
@@ -171,7 +186,7 @@ Version: 0.2.0 (02NOV2026)
       %else %do;
 
          %let _duckdb_error_flag=1;
-         %put ERROR: Please select a valid file on the SAS Server (filesystem). ;
+         %put ERROR: Please select a valid folder on the SAS Server (filesystem). ;
          data _null_;
             call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid file on the SAS Server (filesystem).");
          run;
@@ -180,11 +195,11 @@ Version: 0.2.0 (02NOV2026)
 
    %end;
 
-   %put NOTE: Step 3 - Extract the path from the csv_file_path macro variable.;
+   %put NOTE: Step 3 - Extract the path from the csv_folder_path macro variable.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
 
-      %_extract_sas_folder_path("&csv_file_path.");
+      %_extract_sas_folder_path("&csv_folder_path.");
 
       %if "&_sas_folder_path." = "" %then %do;
 
@@ -253,17 +268,24 @@ Version: 0.2.0 (02NOV2026)
                 header=&has_headers handles the column detection.
                 */
                 COPY (
-                    SELECT * FROM read_csv_auto("&file_path.", 
+                    SELECT * FROM read_csv_auto("&file_path./&csv_file_pattern.", 
+                                                %if "&ignore_errors."="1" %then %do;
+                                                    ignore_errors=&ignore_errors.::BOOLEAN,
+                                                %end;
                                                 header=&has_headers.::BOOLEAN, 
-                                                union_by_name=false, 
-                                                store_rejects=&save_rejects.::BOOLEAN
+                                                union_by_name=&union_by_name.::BOOLEAN
+                                                %if "&union_by_name."="0" %then %do;
+                                                    , store_rejects=&save_rejects.::BOOLEAN 
+                                                %end;
                                                 )
                 ) TO "&parquet_file_path./&parquet_file_name..parquet" 
                 (FORMAT PARQUET, OVERWRITE TRUE);
 
-                %if "&save_rejects."="1" %then %do;
-                    COPY reject_errors TO "&parquet_file_path./&rejects_data_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
-                    COPY reject_scans TO "&parquet_file_path./&rejects_scan_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
+                %if "&union_by_name."="0" %then %do;    
+                    %if "&save_rejects."="1" %then %do;
+                        COPY reject_errors TO "&parquet_file_path./&rejects_data_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
+                        COPY reject_scans TO "&parquet_file_path./&rejects_scan_table..parquet"  (FORMAT PARQUET, OVERWRITE TRUE);
+                    %end;
                 %end;
 
             ) by dukonce;
