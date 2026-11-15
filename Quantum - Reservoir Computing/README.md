@@ -149,7 +149,7 @@ run;
 2. Select `WORK.QRC_DEMO` as the input data.
 3. Keep Manual mode.
 4. On the **QRC Options** tab, set **Machine learning algorithm** to
-   **Support vector machine (SVM)**.
+   **Support Vector Machine (SVM)**.
 5. Run the step.
 
 The comparison table shows accuracy for Classical, Quantum, and
