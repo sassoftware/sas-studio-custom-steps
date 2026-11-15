@@ -1,17 +1,43 @@
-/*
-    Information sources used:
+/************************************************************************
+Glossary - Import Terms
+
+Purpose: This SAS Program is used in the eponymous custom step to import terms 
+in bulk into the Glossary in SAS Data Governance.
+
+It monitors the loading process and provides the option to download the 
+log file generated during the process.
+
+Input Parameters:
+	_csvFile: The CSV file containing the terms to be imported.
+	_targetlocation: The target location where the log file will be saved.
+	_termExists: Determines how to handle existing terms. Options are:
+		- _skip: Skip existing terms.
+		- _update: Update existing terms.
+	_downloadLog: Flag to indicate whether to download the job execution log (1 for yes, 0 for no).
+	_output01: Output dataset for job execution status.
+	_output02: Output dataset for job execution log download status.
+    
+Information sources used:
         - https://go.documentation.sas.com/doc/en/infocatcdc/v_060/infocatgl/n13cxuzpgjzdpgn1p74ma6jmaumg.htm
         - https://developer.sas.com/rest-apis/glossary/importTerms
-*/
+
+Tested in SAS Viya 2026.09
+Version 1.0 (12NOV2026)
+************************************************************************/;
+
+/* Scans name of target directory and stores in macro variable. */
 
 data _null_;
 	call symputx("_targetdirectory", strip(scan("&_targetlocation", 2, ':')));
 run;
 
+/* Scans name of CSV file and stores in macro variable. */ 
+
 data _null_;
 	call symputx("_csv", strip(scan("&_csvFile", 2, ':')));
 run;
 
+/* Creates a macro variable to store the URL of the SAS Viya environment, drawing from the _BASEURL global macro variable. */
 data _null_; 
 	call symputx('viyaHost', kreverse(ksubstr(ksubstr(kreverse("&_BASEURL."), 2), kfind(ksubstr(kreverse("&_BASEURL."), 2), '/') + 1)));
 run;
@@ -20,6 +46,7 @@ run;
     Only physical directories are supported at the moment.
     The following macro variables are used to verify that.
 */
+
 data _null_;
 	call symputx("_csvDirType", strip(scan("&_csvFile", 1, ':')));
 run;
@@ -27,11 +54,19 @@ data _null_;
 	call symputx("_targetdirType", strip(scan("&_targetlocation", 1, ':')));
 run;
 
+
+/*********************************************************
+MACRO DEFINITION
+**********************************************************/;
+
+/* This macro loads the CSV calling the REST API for importing terms. */
+
 %macro loadCSV;
 
 /*
     Define the REST API request status table.
 */
+
 data &_output01;
     attrib id length=$36.;
    	attrib job_name length=$128.;
@@ -44,12 +79,14 @@ run;
 /*
     Define the job execution log download status table.
 */
+
 data &_output02;
 	attrib id length=$36.;
 	attrib logFile length=$256.;
 	attrib message length=$256.;
 	stop;
 run;
+
 
 %if &_csvDirType EQ sasserver %then %do;
 
@@ -570,6 +607,12 @@ run;
 %end;
 %mend;
 %downloadLOG;
+
+/*********************************************************
+EXECUTION (Suggested code block - contributor to consider 
+moving macro calls to this block, keeping definition above)
+**********************************************************/;
+
 
 /*
 	Remove all macro variables from memory.
