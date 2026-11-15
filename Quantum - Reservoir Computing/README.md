@@ -2,7 +2,7 @@
 
 ## Description
 
-The **Quantum - Reservoir Computing** custom step enables SAS Studio users
+The **Quantum - Reservoir Computing** custom step enables SAS Data and AI Studio users
 to transform tabular data into quantum reservoir features.
 It then compares how well classical, quantum, and combined features
 predict a target.
@@ -114,7 +114,7 @@ With **Use cache** selected, the `PROC HYPERTUNE` cache table is kept.
 
 ## Requirements
 
-* SAS Viya with SAS Studio Flows.
+* SAS Viya with SAS Data and AI Studio Flows.
 * A release that includes `PROC QRUN` (SAS Quantum Lab) and `PROC HYPERTUNE`.
 * An active CAS session.
   The step assigns a `qrun` CAS library, starting a `qrun_session` if
