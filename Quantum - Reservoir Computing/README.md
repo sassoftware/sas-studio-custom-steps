@@ -31,7 +31,7 @@ The step supports two modes:
 
 ### Data tab
 
-![Data tab](img/qrc-data.png)
+![Data tab](img/qrc-data.webp)
 
 | Control | Description |
 | :--- | :--- |
@@ -50,7 +50,7 @@ Missing numeric target values are set to 0.
 
 ### QRC Options tab
 
-![QRC Options tab in Hypertune mode](img/qrc-options.png)
+![QRC Options tab in Hypertune mode](img/qrc-options.webp)
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
@@ -68,7 +68,7 @@ See **Limitations** for which of these affect the results.
 
 ### Advanced Simulation tab
 
-![Advanced Simulation tab](img/qrc-advanced.png)
+![Advanced Simulation tab](img/qrc-advanced.webp)
 
 | Control | Description |
 | :--- | :--- |
@@ -82,7 +82,7 @@ See **Limitations** for which of these affect the results.
 
 ### About tab
 
-![About tab](img/qrc-about.png)
+![About tab](img/qrc-about.webp)
 
 Summary of the modes, outputs, and algorithms,
 with collapsible Pre-requisites and Documentation sections
