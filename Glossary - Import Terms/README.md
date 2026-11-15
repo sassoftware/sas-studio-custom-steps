@@ -6,7 +6,7 @@ This custom step allows you to import terms in bulk into the Glossary in [SAS Da
 ## Documentation used
 The following documentation is used while creating the custom step:
 
-- [Import Terms into the Glossary](https://go.documentation.sas.com/doc/en/infocatcdc/v_060/infocatgl/n13cxuzpgjzdpgn1p74ma6jmaumg.htm)
+- [Import Terms into the Glossary](https://go.documentation.sas.com/doc/en/infocatcdc/default/infocatgl/n13cxuzpgjzdpgn1p74ma6jmaumg.htm)
 - [Import terms via CSV REST API](https://developer.sas.com/rest-apis/glossary/importTerms)
 
 ## SAS Viya version support
