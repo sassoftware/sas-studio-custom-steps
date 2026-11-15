@@ -122,7 +122,7 @@ With **Use cache** selected, the `PROC HYPERTUNE` cache table is kept.
 * Numeric predictor columns and a `y` or `target` column.
 * A Python environment configured for `PROC HYPERTUNE`.
 
-The tested Viya version has not been recorded for this step.
+Tested on Viya version 2026.11.
 
 ## Usage
 
