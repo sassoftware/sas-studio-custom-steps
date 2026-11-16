@@ -12,6 +12,10 @@ The following documentation is used while creating the custom step:
 ## SAS Viya version support
 This custom step is created and tested using Viya 4, Stable 2026.09
 
+## Important 
+
+A user of this custom step needs to be a member of either SASAdministrators or Glossary Administrators Custom Groups.
+
 ## User Interface
 
 ### Tab: Options
