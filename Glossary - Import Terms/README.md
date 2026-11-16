@@ -66,5 +66,7 @@ Download the .step file, upload it into your environment and start using it, for
 
 ## Change Log
 
+* Version 1.1 (16NOV2026)
+    * Small changes after review
 * Version 1.0 (12NOV2026)
     * Initial version
