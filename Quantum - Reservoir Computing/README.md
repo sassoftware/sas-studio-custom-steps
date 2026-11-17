@@ -24,8 +24,16 @@ The step supports two modes:
 
 | Mode | What it does |
 | :--- | :--- |
-| Manual | Runs one reservoir with the circuit type, qubit count, simulation method, and noise model you choose. |
-| Hypertune | Uses `PROC HYPERTUNE` to search the qubit count and the SVM parameters C and gamma, then regenerates the reservoir for the best result. |
+| Manual | Runs one reservoir with the circuit type, qubit count, and simulation method you choose. |
+| Hypertune | Uses `PROC HYPERTUNE` to search the circuit type, the qubit count, and the SVM parameters C and gamma, then regenerates the reservoir for the best result. |
+
+Hypertune uses SAS SUBMIT objectives with `CACHEIN`, `CACHEOUT`, and
+`PRIMALOUT` datasets.
+It searches C and gamma on a log10 scale and uses **Number of parallel
+cores** (`NumParallel`) for parallel evaluations.
+The final circuit display, accuracy comparison, output data, and context
+JSON are regenerated from the winning reservoir.
+It does not use the original Python AutoQX optimizer or external Python cache.
 
 ## User Interface
 
@@ -54,17 +62,22 @@ Missing numeric target values are set to 0.
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
-| Circuit type | Both | Linear, Entangled, Nonlinear, Recurrent feedback, Parametric, or Sparse connectivity. |
+| Circuit type | Manual | Linear, Entangled, Nonlinear, Recurrent feedback, Parametric, or Sparse connectivity. |
+| Circuit types | Hypertune | Multi-select list of the same circuits. Hypertune searches the selected circuits. |
 | Number of qubits | Manual | Default 4. |
 | Minimum qubits, Maximum qubits | Hypertune | Qubit search range. Defaults 4 to 4. |
-| Machine learning algorithm | Both | None, SVM, Logistic regression, Log select, Gradient boosting, or Random forest. |
+| Machine learning algorithm | Both | Manual: None, SVM, Logistic regression, Log select, Gradient boosting, or Random forest. Hypertune: fixed to SVM (selection disabled). |
 | C, Gamma | Manual | SVM regularization and RBF kernel bandwidth. |
 | C minimum and maximum, Gamma minimum and maximum | Hypertune | SVM search bounds, searched on a log10 scale. |
 | Classification threshold | Manual | Used by Logistic regression and Log select. |
 
-The tab also contains gradient boosting and random forest settings,
-a logistic variable selection method, and Hypertune bounds for them.
-See **Limitations** for which of these affect the results.
+The tab also contains gradient boosting and random forest settings
+and a logistic variable selection method.
+The step marks these as not applied.
+See **Limitations** for which settings affect the results.
+
+**Classification threshold** appears for both Logistic regression and
+Log select.
 
 ### Advanced Simulation tab
 
@@ -72,11 +85,10 @@ See **Limitations** for which of these affect the results.
 
 | Control | Description |
 | :--- | :--- |
-| Number of PROC HYPERTUNE optimization trials | Hypertune only. Default 5. |
+| Number of PROC HYPERTUNE trials | Hypertune only. Default 5. |
 | Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. Default off. |
 | Number of parallel cores | Threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
-| Simulation method | Automatic, Statevector, MPS, or QASM. |
-| Noise model | Ideal, Depolarising 1%, Depolarising 5%, or Thermal relaxation. |
+| Simulation method | Automatic, Statevector, or MPS. |
 | Binary label noise rate | Randomly flips binary 0/1 labels at this rate to stress test. Default 0. |
 | Show correlation heatmaps | Classical, QRC, and Combined feature-correlation heatmaps. Default on. |
 
@@ -163,8 +175,9 @@ and connect the output port.
 * Reported accuracy is training accuracy, not held-out accuracy.
   For a binary target, the SVM result is the better of the SVM and a
   nearest-centroid classifier.
-* **Simulation method:** Only **Statevector** changes the `PROC QRUN` call.
-  Automatic, MPS, and QASM all run with the default method.
+* **Simulation method:** **Statevector** and **MPS** set `SIMMETHOD=` on
+  the `PROC QRUN` call.
+  Automatic runs with the default method.
 * **Hypertune:** Only SVM is tuned.
   For any other algorithm, the step runs a Manual-style reservoir and
   writes a warning.
@@ -176,16 +189,23 @@ and connect the output port.
   **QRC Options** tab are not applied.
   Logistic regression and Log select run the same model;
   only the threshold applies.
-* **Hypertune circuits and noise:** Hypertune uses the single selected
-  circuit type.
-  The multi-select circuit and noise lists shown for Hypertune are not
-  used.
-* **Binary label noise:** Applies only when `y` is binary 0/1.
+* **Hypertune circuits:** Hypertune searches the circuits selected in the
+  **Circuit types** list.
+  If none is selected, it uses Entangled.
+* **Noiseless simulation:** Quantum simulation has no simulated gate or
+  hardware noise.
+  Optional binary label noise affects only classification targets,
+  not the quantum circuit.
+* **Binary label noise:** Applies only when `y` contains both 0 and 1.
+  Each label is flipped with the specified probability, using seed 42.
+  Default 0 leaves labels unchanged.
+  The modified labels are used by all three feature sets and Hypertune.
+  The SAS log reports whether label noise was applied or skipped.
 * **Qubit count:** The number of projected predictors is the smaller of
   the qubit count and the number of numeric predictors.
   Extra qubits receive an angle of 0.
 
 ## Change Log
 
-* Version 1.0 (09NOV2026)
-  * Initial version in this repository.
+* Version 1.0 (17NOV2026)
+  * Initial version.
