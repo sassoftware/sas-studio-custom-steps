@@ -31,6 +31,8 @@ Hypertune uses SAS SUBMIT objectives with `CACHEIN`, `CACHEOUT`, and
 `PRIMALOUT` datasets.
 It searches C and gamma on a log10 scale and uses **Number of parallel
 cores** (`NumParallel`) for parallel evaluations.
+The default search bounds are 0.0001 to 2 for C and 0.1 to 0.3 for gamma.
+By default, Hypertune uses exactly 6 qubits and 8 trials.
 The final circuit display, accuracy comparison, output data, and context
 JSON are regenerated from the winning reservoir.
 It does not use the original Python AutoQX optimizer or external Python cache.
@@ -70,8 +72,8 @@ Missing numeric target values are set to 0.
 | :--- | :--- | :--- |
 | Circuit type | Manual | Linear, Entangled, Nonlinear, Recurrent feedback, Parametric, or Sparse connectivity. |
 | Circuit types | Hypertune | Multi-select list of the same circuits. Hypertune searches the selected circuits. |
-| Number of qubits | Manual | Default 4. |
-| Minimum qubits, Maximum qubits | Hypertune | Qubit search range. Defaults 4 to 4. |
+| Number of qubits | Manual | Default 6. |
+| Minimum qubits, Maximum qubits | Hypertune | Qubit search range. Defaults 6 to 6. |
 | Machine learning algorithm | Both | Manual: None, SVM, Logistic regression, Log select, Gradient boosting, or Random forest. Hypertune: fixed to SVM (selection disabled). |
 | C, Gamma | Manual | SVM regularization and RBF kernel bandwidth. |
 | C minimum and maximum, Gamma minimum and maximum | Hypertune | SVM search bounds, searched on a log10 scale. |
@@ -91,7 +93,7 @@ Log select.
 
 | Control | Description |
 | :--- | :--- |
-| Number of PROC HYPERTUNE trials | Hypertune only. Default 5. |
+| Number of PROC HYPERTUNE trials | Hypertune only. Default 8. |
 | Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. The cache resets automatically when the circuit list, input table, Downsample, label noise, or simulation method changes. Default off. |
 | Number of parallel cores | Threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
 | Simulation method | Automatic, Statevector, or MPS. |
@@ -203,8 +205,8 @@ and connect the output port.
   count.
 * **Noiseless simulation:** Quantum simulation has no simulated gate or
   hardware noise.
-  Expectation values are estimated from 8,192 simulated measurement shots,
-  which is statistical sampling, not a noise model.
+  `OBSERVE` uses `shots=8192` to estimate expectation values from
+  measurement sampling.
   Optional binary label noise affects only classification targets,
   not the quantum circuit.
 * **Binary label noise:** Applies only when `y` contains both 0 and 1.
