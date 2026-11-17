@@ -47,8 +47,8 @@ It does not use the original Python AutoQX optimizer or external Python cache.
 | Downsample (percent of rows to use) | Simple random sample of the input, 1 to 100. Default 100. |
 | Mode | Manual or Hypertune. |
 | Save output data | Writes the Combined feature table to the output port. |
-| Output table | Name of the output table. Shown when **Save output data** is selected. |
-| Replace existing output table | Shown when **Save output data** is selected. |
+| Output table | Name of the output table. Shown when **Save output data** is selected. Required in that case. |
+| Replace existing output table | Shown when **Save output data** is selected. When cleared, the step stops with an error before running if the table already exists. |
 
 The target column must be named `y` or `target` (case-insensitive).
 If both exist, `y` is used.
@@ -86,7 +86,7 @@ Log select.
 | Control | Description |
 | :--- | :--- |
 | Number of PROC HYPERTUNE trials | Hypertune only. Default 5. |
-| Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. Default off. |
+| Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. The cache resets automatically when the circuit list, input table, Downsample, label noise, or simulation method changes. Default off. |
 | Number of parallel cores | Threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
 | Simulation method | Automatic, Statevector, or MPS. |
 | Binary label noise rate | Randomly flips binary 0/1 labels at this rate to stress test. Default 0. |
@@ -178,9 +178,7 @@ and connect the output port.
 * **Simulation method:** **Statevector** and **MPS** set `SIMMETHOD=` on
   the `PROC QRUN` call.
   Automatic runs with the default method.
-* **Hypertune:** Only SVM is tuned.
-  For any other algorithm, the step runs a Manual-style reservoir and
-  writes a warning.
+* **Hypertune:** Hypertune always tunes SVM.
   The classification threshold, gradient boosting, and random forest
   bounds are not searched.
 * **Gradient boosting, random forest, and logistic selection:**
@@ -192,8 +190,15 @@ and connect the output port.
 * **Hypertune circuits:** Hypertune searches the circuits selected in the
   **Circuit types** list.
   If none is selected, it uses Entangled.
+* **Hypertune cache:** With **Use cache** selected, the cache resets when
+  the circuit list, input table name or row count, Downsample, label
+  noise, or simulation method changes.
+  It cannot detect changed values in a table with the same name and row
+  count.
 * **Noiseless simulation:** Quantum simulation has no simulated gate or
   hardware noise.
+  Expectation values are estimated from 8,192 simulated measurement shots,
+  which is statistical sampling, not a noise model.
   Optional binary label noise affects only classification targets,
   not the quantum circuit.
 * **Binary label noise:** Applies only when `y` contains both 0 and 1.
@@ -204,6 +209,11 @@ and connect the output port.
 * **Qubit count:** The number of projected predictors is the smaller of
   the qubit count and the number of numeric predictors.
   Extra qubits receive an angle of 0.
+* **Large settings:** The step does not limit the qubit count.
+  It writes a warning to the log for more than 20 qubits without MPS,
+  more than 500 quantum features per row,
+  or more than 12 Hypertune candidate reservoirs.
+  The feature count grows quadratically with the qubit count.
 
 ## Change Log
 
