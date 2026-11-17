@@ -58,7 +58,13 @@ Missing numeric target values are set to 0.
 
 ### QRC Options tab
 
-![QRC Options tab in Hypertune mode](img/qrc-options.webp)
+**Manual mode**
+
+![QRC Options tab in Manual mode](img/qrc-options-manual.webp)
+
+**Hypertune mode**
+
+![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.webp)
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
