@@ -41,7 +41,7 @@ It does not use the original Python AutoQX optimizer or external Python cache.
 
 ### Data tab
 
-<img src="img/qrc-data.webp" alt="Data tab" width="650">
+![Data tab](img/qrc-data.webp)
 
 | Control | Description |
 | :--- | :--- |
@@ -62,13 +62,11 @@ Missing numeric target values are set to 0.
 
 **Manual mode**
 
-<img src="img/qrc-options-manual.webp"
-     alt="QRC Options tab in Manual mode" width="650">
+![QRC Options tab in Manual mode](img/qrc-options-manual.webp)
 
 **Hypertune mode**
 
-<img src="img/qrc-options-hypertune.webp"
-     alt="QRC Options tab in Hypertune mode" width="650">
+![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.webp)
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
@@ -93,13 +91,11 @@ Log select.
 
 **Manual mode**
 
-<img src="img/qrc-advanced-manual.webp"
-     alt="Advanced Simulation tab in Manual mode" width="650">
+![Advanced Simulation tab in Manual mode](img/qrc-advanced-manual.webp)
 
 **Hypertune mode**
 
-<img src="img/qrc-advanced-hypertune.webp"
-     alt="Advanced Simulation tab in Hypertune mode" width="650">
+![Advanced Simulation tab in Hypertune mode](img/qrc-advanced-hypertune.webp)
 
 | Control | Description |
 | :--- | :--- |
@@ -112,7 +108,7 @@ Log select.
 
 ### About tab
 
-<img src="img/qrc-about.webp" alt="About tab" width="650">
+![About tab](img/qrc-about.webp)
 
 Summary of the modes, outputs, and algorithms,
 with collapsible Pre-requisites and Documentation sections
