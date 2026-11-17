@@ -32,7 +32,7 @@ Hypertune uses SAS SUBMIT objectives with `CACHEIN`, `CACHEOUT`, and
 It searches C and gamma on a log10 scale and uses **Number of parallel
 cores** (`NumParallel`) for parallel evaluations.
 The default search bounds are 0.0001 to 2 for C and 0.1 to 0.3 for gamma.
-By default, Hypertune uses exactly 6 qubits and 8 trials.
+By default, Hypertune uses exactly 6 qubits and 5 trials.
 The final circuit display, accuracy comparison, output data, and context
 JSON are regenerated from the winning reservoir.
 It does not use the original Python AutoQX optimizer or external Python cache.
@@ -41,7 +41,7 @@ It does not use the original Python AutoQX optimizer or external Python cache.
 
 ### Data tab
 
-![Data tab](img/qrc-data.webp)
+<img src="img/qrc-data.webp" alt="Data tab" width="650">
 
 | Control | Description |
 | :--- | :--- |
@@ -62,11 +62,13 @@ Missing numeric target values are set to 0.
 
 **Manual mode**
 
-![QRC Options tab in Manual mode](img/qrc-options-manual.webp)
+<img src="img/qrc-options-manual.webp"
+     alt="QRC Options tab in Manual mode" width="650">
 
 **Hypertune mode**
 
-![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.webp)
+<img src="img/qrc-options-hypertune.webp"
+     alt="QRC Options tab in Hypertune mode" width="650">
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
@@ -89,11 +91,19 @@ Log select.
 
 ### Advanced Simulation tab
 
-![Advanced Simulation tab](img/qrc-advanced.webp)
+**Manual mode**
+
+<img src="img/qrc-advanced-manual.webp"
+     alt="Advanced Simulation tab in Manual mode" width="650">
+
+**Hypertune mode**
+
+<img src="img/qrc-advanced-hypertune.webp"
+     alt="Advanced Simulation tab in Hypertune mode" width="650">
 
 | Control | Description |
 | :--- | :--- |
-| Number of PROC HYPERTUNE trials | Hypertune only. Default 8. |
+| Number of PROC HYPERTUNE trials | Hypertune only. Default 5. |
 | Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. The cache resets automatically when the circuit list, input table, Downsample, label noise, or simulation method changes. Default off. |
 | Number of parallel cores | Threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
 | Simulation method | Automatic, Statevector, or MPS. |
@@ -102,7 +112,7 @@ Log select.
 
 ### About tab
 
-![About tab](img/qrc-about.webp)
+<img src="img/qrc-about.webp" alt="About tab" width="650">
 
 Summary of the modes, outputs, and algorithms,
 with collapsible Pre-requisites and Documentation sections
@@ -131,6 +141,16 @@ When it finishes, the step deletes its temporary `_qrc_` tables from
 WORK and from the `qrun` library, its global macro variables, and its
 macros, and it restores the `MLOGIC`, `MPRINT`, and `SYMBOLGEN` options.
 With **Use cache** selected, the `PROC HYPERTUNE` cache table is kept.
+
+### Example output
+
+This example uses `WORK.EXAMPLE_DATA`, with 500 rows, 40 numeric predictors,
+and a binary target.
+The step ran in Hypertune mode with an Entangled six-qubit reservoir and
+five trials.
+The displayed accuracies are training scores, not held-out performance.
+
+![Example training accuracy comparison](img/qrc-results.webp)
 
 ## Requirements
 
@@ -205,8 +225,8 @@ and connect the output port.
   count.
 * **Noiseless simulation:** Quantum simulation has no simulated gate or
   hardware noise.
-  `OBSERVE` uses `shots=8192` to estimate expectation values from
-  measurement sampling.
+  `OBSERVE` omits `shots=`, so expectation values are computed from the
+  simulated state without measurement-shot sampling.
   Optional binary label noise affects only classification targets,
   not the quantum circuit.
 * **Binary label noise:** Applies only when `y` contains both 0 and 1.
