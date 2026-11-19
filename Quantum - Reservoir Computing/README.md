@@ -38,6 +38,8 @@ Tested on SAS Viya 4, release 2026.11.
 
 * [Quantum reservoir computing](https://en.wikipedia.org/wiki/Reservoir_computing#Quantum_reservoir_computing)
 * [SAS Quantum Lab: User's Guide](https://go.documentation.sas.com/doc/en/pgmsascdc/v_081/quantug/titlepage.htm)
+* [PROC QRUN](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/quantug/p0pjqw4abqy460n1txt0zuo4688z.htm?requestorId=048ea242-2df3-4a17-9c10-14246a25d37b)
+* [PROC HYPERTUNE](https://helpcenter.unx.sas.com/test/doc/en/sasstudiocdc/default/pgmsascdc/quantug/p0i7h93aeue5wkn1bf8m58yvaky0.htm?requestorId=048ea242-2df3-4a17-9c10-14246a25d37b)
 
 ## User Interface
 
@@ -133,9 +135,12 @@ and the version history.
   * `agent_context_*.json`, which records the run settings and file
     names
 
-When it finishes, the step deletes its temporary `_qrc_` tables from
-WORK and from the `qrun` library, its global macro variables, and its
-macros, and it restores the `MLOGIC`, `MPRINT`, and `SYMBOLGEN` options.
+When it finishes, the step deletes its temporary input CSV, working circuit
+file, and Hypertune submit file, and clears its file references. It removes its
+intermediate WORK and CAS tables, macro variables, and macros, and restores the
+`MLOGIC`, `MPRINT`, `SYMBOLGEN`, and `SYNTAXCHECK` options. It releases the
+`qrun` library and CAS session only if it opened them. The output table and
+exported results are kept.
 Manual runs leave any existing `PROC HYPERTUNE` cache untouched.
 Hypertune runs keep the cache only when **Use cache** is selected.
 
