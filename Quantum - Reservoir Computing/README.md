@@ -20,7 +20,27 @@ The step runs the following pipeline:
 7. Optionally trains a classical model on each feature set and reports
    accuracy.
 
-The step supports two modes:
+## Requirements
+
+* SAS Viya 4 2026.11 or later with SAS Data and AI Studio Flows.
+  SAS Viya 4 2026.11 is the first release that includes SAS Quantum and
+  `PROC QRUN`; it also includes `PROC HYPERTUNE`.
+* An active CAS session.
+  The step assigns a `qrun` CAS library, starting a `qrun_session` if
+  needed, to hold intermediate tables for `PROC QRUN`.
+* Numeric predictor columns and a `y` or `target` column.
+* A Python environment configured for `PROC HYPERTUNE`.
+
+Tested on SAS Viya 4, release 2026.11.
+
+## References
+
+* [Quantum reservoir computing](https://en.wikipedia.org/wiki/Reservoir_computing#Quantum_reservoir_computing)
+* [SAS Quantum Lab: User's Guide](https://go.documentation.sas.com/doc/en/pgmsascdc/v_081/quantug/titlepage.htm)
+
+## User Interface
+
+### Modes
 
 | Mode | What it does |
 | :--- | :--- |
@@ -37,36 +57,32 @@ The final circuit display, accuracy comparison, output data, and context
 JSON are regenerated from the winning reservoir.
 It does not use the original Python AutoQX optimizer or external Python cache.
 
-## User Interface
-
 ### Data tab
 
-![Data tab](img/qrc-data.webp)
+![Data tab](img/qrc-data.png)
 
 | Control | Description |
 | :--- | :--- |
 | Input data | Required. Numeric columns are used as predictors. |
 | Downsample (percent of rows to use) | Simple random sample of the input, 1 to 100. Default 100. |
-| Mode | Manual or Hypertune. |
+| Mode | Manual or Hypertune. See [Modes](#modes). |
 | Save output data | Writes the Combined feature table to the output port. |
 | Output table | Name of the output table. Shown when **Save output data** is selected. Required in that case. |
 | Replace existing output table | Shown when **Save output data** is selected. When cleared, the step stops with an error before running if the table already exists. |
 
 The target column must be named `y` or `target` (case-insensitive).
-If both exist, `y` is used.
-If neither exists, a placeholder `y` of 0 is created,
-so the ML comparison is not meaningful.
+If both exist, `y` is used. If neither exists, a placeholder `y` of 0 is created, so the ML comparison is not meaningful.
 Missing numeric target values are set to 0.
 
 ### QRC Options tab
 
 **Manual mode**
 
-![QRC Options tab in Manual mode](img/qrc-options-manual.webp)
+![QRC Options tab in Manual mode](img/qrc-options-manual.png)
 
 **Hypertune mode**
 
-![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.webp)
+![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.png)
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
@@ -79,8 +95,7 @@ Missing numeric target values are set to 0.
 | C minimum and maximum, Gamma minimum and maximum | Hypertune | SVM search bounds, searched on a log10 scale. |
 | Classification threshold | Manual | Used by Logistic regression and Log select. |
 
-The tab also contains gradient boosting and random forest settings
-and a logistic variable selection method.
+The tab also contains gradient boosting and random forest settings and a logistic variable selection method.
 The step marks these as not applied.
 See **Limitations** for which settings affect the results.
 
@@ -91,11 +106,11 @@ Log select.
 
 **Manual mode**
 
-![Advanced Simulation tab in Manual mode](img/qrc-advanced-manual.webp)
+![Advanced Simulation tab in Manual mode](img/qrc-advanced-manual.png)
 
 **Hypertune mode**
 
-![Advanced Simulation tab in Hypertune mode](img/qrc-advanced-hypertune.webp)
+![Advanced Simulation tab in Hypertune mode](img/qrc-advanced-hypertune.png)
 
 | Control | Description |
 | :--- | :--- |
@@ -108,7 +123,7 @@ Log select.
 
 ### About tab
 
-![About tab](img/qrc-about.webp)
+![About tab](img/qrc-about.png)
 
 Summary of the modes, outputs, and algorithms,
 with collapsible Pre-requisites and Documentation sections
@@ -146,19 +161,7 @@ The step ran in Hypertune mode with an Entangled six-qubit reservoir and
 five trials.
 The displayed accuracies are training scores, not held-out performance.
 
-![Example training accuracy comparison](img/qrc-results.webp)
-
-## Requirements
-
-* SAS Viya with SAS Data and AI Studio Flows.
-* A release that includes `PROC QRUN` (SAS Quantum Lab) and `PROC HYPERTUNE`.
-* An active CAS session.
-  The step assigns a `qrun` CAS library, starting a `qrun_session` if
-  needed, to hold intermediate tables for `PROC QRUN`.
-* Numeric predictor columns and a `y` or `target` column.
-* A Python environment configured for `PROC HYPERTUNE`.
-
-Tested on Viya version 2026.11.
+![Example training accuracy comparison](img/qrc-results.png)
 
 ## Usage
 
@@ -241,5 +244,5 @@ and connect the output port.
 
 ## Change Log
 
-* Version 1.0 (17NOV2026)
+* Version 1.0 (19NOV2026)
   * Initial version.
