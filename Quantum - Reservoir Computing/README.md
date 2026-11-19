@@ -22,14 +22,15 @@ The step runs the following pipeline:
 
 ## Requirements
 
-* SAS Viya 4 2026.11 or later with SAS Data and AI Studio Flows.
+* SAS Viya 4 2026.11 or later with SAS Data and AI Studio.
   SAS Viya 4 2026.11 is the first release that includes SAS Quantum and
   `PROC QRUN`; it also includes `PROC HYPERTUNE`.
 * An active CAS session.
   The step assigns a `qrun` CAS library, starting a `qrun_session` if
   needed, to hold intermediate tables for `PROC QRUN`.
-* Numeric predictor columns and a `y` or `target` column.
-* A Python environment configured for `PROC HYPERTUNE`.
+* Numeric predictor columns. For a meaningful model comparison, include a
+  numeric `y` or `target` column.
+* For Hypertune mode, a Python environment configured for `PROC HYPERTUNE`.
 
 Tested on SAS Viya 4, release 2026.11.
 
@@ -44,15 +45,16 @@ Tested on SAS Viya 4, release 2026.11.
 
 | Mode | What it does |
 | :--- | :--- |
-| Manual | Runs one reservoir with the circuit type, qubit count, and simulation method you choose. |
+| Manual (default) | Runs one reservoir with the circuit type, qubit count, and simulation method you choose. |
 | Hypertune | Uses `PROC HYPERTUNE` to search the circuit type, the qubit count, and the SVM parameters C and gamma, then regenerates the reservoir for the best result. |
 
 Hypertune uses SAS SUBMIT objectives with `CACHEIN`, `CACHEOUT`, and
 `PRIMALOUT` datasets.
-It searches C and gamma on a log10 scale and uses **Number of parallel
-cores** (`NumParallel`) for parallel evaluations.
+It searches C and gamma on a log10 scale and uses **Parallel cores** for
+parallel evaluations.
 The default search bounds are 0.0001 to 2 for C and 0.1 to 0.3 for gamma.
-By default, Hypertune uses exactly 6 qubits and 5 trials.
+By default, both modes use the Entangled circuit and 6 qubits. Hypertune
+defaults to 5 trials.
 The final circuit display, accuracy comparison, output data, and context
 JSON are regenerated from the winning reservoir.
 It does not use the original Python AutoQX optimizer or external Python cache.
@@ -70,88 +72,72 @@ It does not use the original Python AutoQX optimizer or external Python cache.
 | Output table | Name of the output table. Shown when **Save output data** is selected. Required in that case. |
 | Replace existing output table | Shown when **Save output data** is selected. When cleared, the step stops with an error before running if the table already exists. |
 
-The target column must be named `y` or `target` (case-insensitive).
+Name the target column `y` or `target` (case-insensitive).
 If both exist, `y` is used. If neither exists, a placeholder `y` of 0 is created, so the ML comparison is not meaningful.
 Missing numeric target values are set to 0.
 
 ### QRC Options tab
 
-**Manual mode**
-
-![QRC Options tab in Manual mode](img/qrc-options-manual.png)
-
-**Hypertune mode**
-
-![QRC Options tab in Hypertune mode](img/qrc-options-hypertune.png)
+Both modes use **Reservoir settings** and **Model settings**. In Manual mode,
+choose one circuit and a qubit count, then choose a model or select **None** to
+generate features without training. In Hypertune mode, choose one or more
+circuits and a qubit range, then set the search bounds for C and gamma. Hypertune
+uses SVM only.
 
 | Control | Mode | Description |
 | :--- | :--- | :--- |
 | Circuit type | Manual | Linear, Entangled, Nonlinear, Recurrent feedback, Parametric, or Sparse connectivity. |
-| Circuit types | Hypertune | Multi-select list of the same circuits. Hypertune searches the selected circuits. |
-| Number of qubits | Manual | Default 6. |
-| Minimum qubits, Maximum qubits | Hypertune | Qubit search range. Defaults 6 to 6. |
-| Machine learning algorithm | Both | Manual: None, SVM, Logistic regression, Log select, Gradient boosting, or Random forest. Hypertune: fixed to SVM (selection disabled). |
-| C, Gamma | Manual | SVM regularization and RBF kernel bandwidth. |
+| Circuit types | Hypertune | Select one or more circuits to search. |
+| Number of qubits | Manual | 4 to 30. Default 6. |
+| Minimum number of qubits, Maximum number of qubits | Hypertune | Inclusive search range, within 4 to 30. Set both limits to the same value to search a fixed count. Both default to 6. |
+| Machine learning algorithm | Manual | None (default), SVM, Logistic regression, Log select, Gradient boosting, or Random forest. Only the selected model's settings are shown. |
+| C, Gamma | Manual | SVM regularization strength and RBF kernel coefficient. |
 | C minimum and maximum, Gamma minimum and maximum | Hypertune | SVM search bounds, searched on a log10 scale. |
-| Classification threshold | Manual | Used by Logistic regression and Log select. |
-
-The tab also contains gradient boosting and random forest settings and a logistic variable selection method.
-The step marks these as not applied.
-See **Limitations** for which settings affect the results.
-
-**Classification threshold** appears for both Logistic regression and
-Log select.
+| Classification threshold | Manual | Converts predicted probabilities to class labels for Logistic regression and Log select. It does not change the fitted model. |
+| Variable selection method | Manual | Log select only: Forward, Backward, or Stepwise (default). Logistic regression fits all predictors without selection. |
+| Gradient boosting parameters | Manual | Number of trees, learning rate, maximum depth, and minimum leaf size. |
+| Random forest parameters | Manual | Number of trees, interval bins, and minimum leaf size. |
 
 ### Advanced Simulation tab
 
-**Manual mode**
-
-![Advanced Simulation tab in Manual mode](img/qrc-advanced-manual.png)
-
-**Hypertune mode**
-
-![Advanced Simulation tab in Hypertune mode](img/qrc-advanced-hypertune.png)
-
-| Control | Description |
+| Section | Settings |
 | :--- | :--- |
-| Number of PROC HYPERTUNE trials | Hypertune only. Default 5. |
-| Use cache | Reuses the `PROC HYPERTUNE` cache from the current session. The cache resets automatically when the circuit list, input table, Downsample, label noise, or simulation method changes. Default off. |
-| Number of parallel cores | Threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
-| Simulation method | Automatic, Statevector, or MPS. |
-| Binary label noise rate | Randomly flips binary 0/1 labels at this rate to stress test. Default 0. |
-| Show correlation heatmaps | Classical, QRC, and Combined feature-correlation heatmaps. Default on. |
+| Simulation | **Simulation method** defaults to Automatic. Choose Statevector for exact simulation or Matrix product state (MPS) for a method that can handle larger circuits approximately. **Parallel cores** controls the threads for `PROC QRUN` and parallel Hypertune evaluations. Default 4. |
+| Hypertune search | Visible only in Hypertune mode. **Number of trials** defaults to 5. **Use cache** reuses eligible `PROC HYPERTUNE` trial results from the current SAS session. Default off. See [Limitations](#limitations) for when the cache resets. |
+| Results | **Show correlation heatmaps** shows a preview of the first 10 rows of QRC features and writes Pearson correlation heatmaps for the Classical, QRC, and Combined feature sets to an HTML file. Default on. |
+| Stress testing | Collapsed by default. **Binary label noise rate** sets the probability of flipping each label when the target contains both 0 and 1. Leave it at 0 to keep labels unchanged. |
 
 ### About tab
 
-![About tab](img/qrc-about.png)
-
-Summary of the modes, outputs, and algorithms,
+Summary of the modes, tab settings, outputs, and algorithms,
 with collapsible Pre-requisites and Documentation sections
 and the version history.
 
 ## Output
 
-* **Results window:** The champion circuit display, a runtime summary,
+* **Results window:** The selected circuit (the winning circuit in Hypertune),
+  a runtime summary,
   and an accuracy comparison table and bar chart for Classical, Quantum,
   and Quantum+Classical features.
   The accuracy comparison appears when a machine learning algorithm is
   selected.
-  Heatmaps appear when selected.
 * **Output port (optional):** The Combined feature table.
   It has columns `x0`, `x1`, and so on
   (classical projections followed by quantum features), plus `y`.
 * **Files in the SAS session working directory:**
-  Each run writes files whose names include a unique run identifier.
+  Output filenames include a unique identifier.
   * `classical_*.csv`, `qrc_*.csv`, and `combined_*.csv`
-  * `accuracy_*.csv`
-  * `circuit_*.qasm3`
+  * `accuracy_*.csv` when a model accuracy table is available
+  * `circuit_*.qasm3` when a circuit file is available
+  * `qrc_heatmaps_*.html` when **Show correlation heatmaps** is selected
   * `agent_context_*.json`, which records the run settings and file
     names
 
 When it finishes, the step deletes its temporary `_qrc_` tables from
 WORK and from the `qrun` library, its global macro variables, and its
 macros, and it restores the `MLOGIC`, `MPRINT`, and `SYMBOLGEN` options.
-With **Use cache** selected, the `PROC HYPERTUNE` cache table is kept.
+Manual runs leave any existing `PROC HYPERTUNE` cache untouched.
+Hypertune runs keep the cache only when **Use cache** is selected.
 
 ### Example output
 
@@ -197,6 +183,28 @@ The comparison is on training data, not held-out data.
 To pass the Combined features downstream, select **Save output data**
 and connect the output port.
 
+### Verify Manual model settings
+
+With the example data selected in Manual mode, check the following:
+
+1. Select **Gradient boosting**. Set 7 trees, a learning rate of 0.15,
+   maximum depth 2, and minimum leaf size 6. Run the step and verify that
+   the SAS log shows those settings in the `PROC GRADBOOST` calls and that
+   Results contains all three accuracy rows.
+2. Select **Random forest**. Set 9 trees, 12 interval bins, and minimum
+   leaf size 6. Verify the corresponding `PROC FOREST` settings and the
+   three accuracy rows.
+3. Select **Log select**, choose **Backward**, and verify that the
+   `PROC LOGISTIC` model uses `SELECTION=BACKWARD`. Switch to
+   **Logistic regression** and verify that the method control disappears
+   and the model uses `SELECTION=NONE`. The classification threshold
+   remains available in both cases.
+4. Switch to Hypertune and verify that only the SVM settings are offered.
+   On **Advanced Simulation**, select **Hypertune search > Use cache** and run
+   Hypertune. In the same session, switch to Manual, verify that **Hypertune
+   search** is hidden, and run the step. Verify that `WORK._QRC_HYPERTUNE_CACHE` and
+   `WORK._QRC_HYPERTUNE_SIG` are still present.
+
 ## Limitations
 
 * Reported accuracy is training accuracy, not held-out accuracy.
@@ -205,15 +213,8 @@ and connect the output port.
 * **Simulation method:** **Statevector** and **MPS** set `SIMMETHOD=` on
   the `PROC QRUN` call.
   Automatic runs with the default method.
-* **Hypertune:** Hypertune always tunes SVM.
-  The classification threshold, gradient boosting, and random forest
-  bounds are not searched.
-* **Gradient boosting, random forest, and logistic selection:**
-  These models run with procedure defaults.
-  The tree and forest parameters and the variable selection method on the
-  **QRC Options** tab are not applied.
-  Logistic regression and Log select run the same model;
-  only the threshold applies.
+* **Hypertune:** Hypertune tunes SVM only. Logistic and tree model settings
+  are available in Manual mode.
 * **Hypertune circuits:** Hypertune searches the circuits selected in the
   **Circuit types** list.
   If none is selected, it uses Entangled.
@@ -236,9 +237,9 @@ and connect the output port.
 * **Qubit count:** The number of projected predictors is the smaller of
   the qubit count and the number of numeric predictors.
   Extra qubits receive an angle of 0.
-* **Large settings:** The step does not limit the qubit count.
-  It writes a warning to the log for more than 20 qubits without MPS,
-  more than 500 quantum features per row,
+* **Large settings:** The qubit controls accept 4 to 30 qubits. Within that
+  range, the step warns in the log for more than 20 qubits without MPS,
+  more than 500 estimated quantum features per row,
   or more than 12 Hypertune candidate reservoirs.
   The feature count grows quadratically with the qubit count.
 
