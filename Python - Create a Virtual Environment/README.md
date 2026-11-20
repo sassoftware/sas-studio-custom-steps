@@ -21,6 +21,8 @@ This step helps you create a virtual environment. Input arguments required :
 1. Path to your virtual environment (optional) : specify a full path to a persistent location on the filesystem, for future reuse
 2. Requirements (optional) : either specify a path to a requirements.txt or enter them in space-delimited format.
 3. Install system-site packages (checkbox): Keep this checked to ensure system-site packages from the base environment are also made available in the virtual environment. 
+4. Install local Python packages (checkbox): Check this if you want to install local `.whl` files available in the folder system.
+5. Local Python Packages folder (optional): If you've checked "I have local packages", then select a folder on the SAS Server filesystem (not SAS Content) which contains those `.whl` files. 
 
 ![Python - Create a virtual environment](./img/create-a-virtual-environment.png)
 
@@ -44,28 +46,15 @@ Watch this example!
 
 [Creating virtual Python environments within SAS Studio.](https://youtu.be/UIYZf2bKcWw)
 
-This repository contains 5 custom steps which are offered as examples of how you could create, activate, switch between, and package virtual Python environments from within SAS Viya applications and tools, such as SAS Studio.  It makes use of [Custom Steps](https://go.documentation.sas.com/doc/en/webeditorcdc/v_006/webeditorug/n0b7ljqhka8lh5n12judc27x5gph.htm), a component within SAS Studio which help users package repeatable steps in an user-friendly manner.
+This repository contains 5 custom steps which are offered as examples of how you could create, activate, switch between, and package virtual Python environments from within SAS Viya applications and tools, such as SAS Studio.  It makes use of [Custom Steps](https://go.documentation.sas.com/doc/en/webeditorcdc/default/webeditorug/n0b7ljqhka8lh5n12judc27x5gph.htm), a component within SAS Studio which help users package repeatable steps in an user-friendly manner.
 
 
 ## Change Log
 
-* Version 2.2.0 (02JUL2026)
-  - Additional documentation and refinement
-* Version 2.1.0 (01SEP2025)
-  - Converted ORIGINAL_PYPATH to global macro variable to avoid breaking downstream steps
-* Version 2.0.0 (26AUG2025)
-  - **Refactored code to leverage venv (*Goodbye, virtualenv!*)**
-  - Separate folder in repository
-  - Additional parameters
-  - Accepts folder selector as input
-  - Handles errors in requirements and folder input
-  
-* Version 1.1 (12JUL2022)
-  - Added new Custom Step - "Python - Obtain requirements from project directory"
-  
-* Version 1.0 (20MAY2022)
-  - Renamed to "Python - " as per Wilbram's advice; shuffled order of About tab on "Freeze"
+* Version 3.0.0 (20NOV2026)
+  - Added option to install local wheel files
 
+Refer the `CHANGELOG.md` in the `extras` subfolder for earlier versions.
 
 
 
