@@ -37,7 +37,7 @@ Tested on SAS Viya 4, release 2026.11.
 ## References
 
 * [Quantum reservoir computing](https://en.wikipedia.org/wiki/Reservoir_computing#Quantum_reservoir_computing)
-* [SAS Quantum Lab: User's Guide](https://go.documentation.sas.com/doc/en/pgmsascdc/v_081/quantug/titlepage.htm)
+* [SAS Quantum Lab: User's Guide](https://go.documentation.sas.com/doc/en/pgmsascdc/default/quantug/titlepage.htm)
 * [PROC QRUN](https://go.documentation.sas.com/doc/en/sasstudiocdc/default/pgmsascdc/quantug/p0pjqw4abqy460n1txt0zuo4688z.htm?requestorId=048ea242-2df3-4a17-9c10-14246a25d37b)
 * [PROC HYPERTUNE](https://helpcenter.unx.sas.com/test/doc/en/sasstudiocdc/default/pgmsascdc/quantug/p0i7h93aeue5wkn1bf8m58yvaky0.htm?requestorId=048ea242-2df3-4a17-9c10-14246a25d37b)
 
