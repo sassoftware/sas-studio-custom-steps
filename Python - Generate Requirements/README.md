@@ -10,7 +10,7 @@ This enables reproducible, portable analytics workflows and helps ensure your Py
 
 A general idea of how to use steps related to virtual environments:
 
-![General idea](./img/Python_Generate_Requirements.gif)
+![General idea](../website/static/img/Python%20-%20Generate%20Requirements/img/Python_Generate_Requirements.gif)
 
 ## User Interface
 
