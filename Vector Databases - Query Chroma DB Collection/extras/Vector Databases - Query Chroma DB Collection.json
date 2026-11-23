@@ -1,0 +1,365 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "Parameters",
+			"children": [
+				{
+					"id": "input_parameters",
+					"type": "section",
+					"label": "Input parameters",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "collectionName",
+							"type": "textfield",
+							"label": "Provide Chroma DB collection name:",
+							"placeholder": "",
+							"required": true,
+							"visible": ""
+						},
+						{
+							"id": "queryMode",
+							"type": "dropdown",
+							"label": "Select your query source:",
+							"items": [
+								{
+									"value": "table",
+									"label": "Input table"
+								},
+								{
+									"value": "inline",
+									"label": "Inline query"
+								}
+							],
+							"required": false,
+							"placeholder": "",
+							"visible": "",
+							"enabled": [
+								"false",
+								"=",
+								"true"
+							]
+						},
+						{
+							"id": "text3",
+							"type": "text",
+							"text": "Currently, we support an input CAS table with the query text in a column. Future versions will allow for the query to be directly entered.",
+							"visible": ""
+						},
+						{
+							"id": "inputTable",
+							"type": "inputtable",
+							"label": "Select input table:",
+							"required": false,
+							"placeholder": "",
+							"visible": [
+								"$queryMode",
+								"=",
+								"table"
+							],
+							"enabled": [
+								"$queryMode",
+								"=",
+								"table"
+							]
+						},
+						{
+							"id": "queryColumn",
+							"type": "columnselector",
+							"label": "Select query column:",
+							"order": false,
+							"columntype": "a",
+							"max": 1,
+							"min": 1,
+							"visible": [
+								"$queryMode",
+								"=",
+								"table"
+							],
+							"table": "inputTable",
+							"enabled": [
+								"$queryMode",
+								"=",
+								"table"
+							]
+						}
+					]
+				},
+				{
+					"id": "output_specifications",
+					"type": "section",
+					"label": "Output specifications",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "numberOfResults",
+							"type": "numstepper",
+							"label": "Number of results to return per query:",
+							"required": false,
+							"integer": false,
+							"min": null,
+							"max": null,
+							"stepsize": 1
+						},
+						{
+							"id": "text2",
+							"type": "text",
+							"text": "To specify output, attach a table to the output port of this step.",
+							"visible": ""
+						},
+						{
+							"id": "outputTable",
+							"type": "outputtable",
+							"label": "Specify output table:",
+							"required": true,
+							"placeholder": "",
+							"visible": ""
+						},
+						{
+							"id": "promoteTable",
+							"type": "checkbox",
+							"label": "Promote output table",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "Configuration",
+			"children": [
+				{
+					"id": "section3",
+					"type": "section",
+					"label": "Embedding Model",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "astoreTable_lib",
+							"type": "textfield",
+							"label": "Provide a caslib for the embedding model's astore table:",
+							"placeholder": "e.g. Analytics-Project-1really-l0ng-alphanumer1c",
+							"required": true,
+							"visible": ""
+						},
+						{
+							"id": "astoreTable_name",
+							"type": "textfield",
+							"label": "Provide astore table name:",
+							"placeholder": "",
+							"required": true,
+							"visible": ""
+						},
+						{
+							"id": "embeddingPattern",
+							"type": "textfield",
+							"label": "Provide a pattern representing the embedding columns:",
+							"placeholder": "",
+							"required": false,
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "persistentPathName",
+					"type": "path",
+					"label": "Select location for chroma database (defaults to /tmp):",
+					"pathtype": "folder",
+					"placeholder": "sasserver:/tmp",
+					"required": true,
+					"visible": ""
+				},
+				{
+					"id": "casHostPath",
+					"type": "textfield",
+					"label": "Default CAS server hostname:",
+					"placeholder": "",
+					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "casHostPort",
+					"type": "numberfield",
+					"label": "Default CAS server port:",
+					"placeholder": "",
+					"required": false,
+					"max": null,
+					"min": null,
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "about_description",
+					"type": "text",
+					"text": "Vector Databases - Query Chroma DB Collection\n==================================\n\nThis custom step queries a Chroma vector database collection and writes results to a SAS Cloud Analytics Services (CAS) table.\n\nVector databases facilitate Generative AI and other applications, notably providing context to a Large Language Model (LLM).  Examples of other applications include recommendation engines, similarity search and time series forecasting. \n\nChroma is an open-source vector database used in Generative AI pipelines.  It shares similar constructs and concepts with other vector store offerings. ",
+					"visible": ""
+				},
+				{
+					"id": "about_parameters",
+					"type": "section",
+					"label": "Parameters",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "section1",
+							"type": "section",
+							"label": "Assumptions ",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "parameters_text",
+									"type": "text",
+									"text": "1.  Chroma DB follows client / server architecture.  This step implicitly considers the client and server to be on the same machine (see comments in code).  Users are free to modify the step for persistent, remote/external, or alternatively orchestrated (e.g. Docker container) servers based on their requirement.  Chroma DB documentation provides some examples (refer Documentation).\n\n2. Embeddings are assumed to be created with SAS Visual Text Analytics (VTA) for this version of the step.  This step requires a SAS Visual Text Analytics (VTA) license.    \n\n3.  This custom step runs on data loaded to a SAS Cloud Analytics Services (CAS) library (known as a caslib). Ensure you are connected to CAS before running this step.  Also, ensure that your output caslib destination is writeable.\n\n4.  Proc Python is required.  Required Python packages are listed in prerequisites section.  Also, consider build and install of  Python and required packages through the SAS Configurator for Open Source.\n\n5.  This custom step provides embeddings to Chroma at the time of query and does not use Chroma's embedding function.  Embedding function support will be considered in future. ",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "section2",
+							"type": "section",
+							"label": "Prerequisites",
+							"open": true,
+							"visible": "",
+							"children": [
+								{
+									"id": "text1",
+									"type": "text",
+									"text": "1. A SAS Viya 4 environment version 2023.12 or later.\n\n2. Python packages to be installed:\n\n   i.   chromadb\n   ii.  pysqlite-binary\n   iii. pandas\n   iv. swat\n\n3. Suggested Python version is 3.10.x due to dependency on sqlite version >= 3.35.0 (refer documentation).  However, a workaround suggested by Chroma has been followed in the code.\n\n4. Optional components, based on site-specific architecture, are to have a separate Chroma DB server for persistence and scale.  Refer Chroma documentation for details.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_input",
+							"type": "section",
+							"label": "Input parameters",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "input_parameters_text",
+									"type": "text",
+									"text": "1. Name of Chroma DB collection(text field, required): provide the name of the Chroma DB collection you might have populated earlier.  You can't query a collection if you don't know the name for the same.\n\n2. Query source (drop-down list, frozen): currently set at \"Input table\" for this version.  Other options will be examined in future releases.\n\n3  Input table containing a text column (input port, required): attach a CAS table to this port. \n\n4. Query column (column selector, required, maximum 1): select a text column which contains the query you wish to pass to the database.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_output_specs",
+							"type": "section",
+							"label": "Output specifications",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text",
+									"type": "text",
+									"text": "1. Number of results (numeric stepper): provide the number of results you wish to have returned for each observation of the query column. \n\n2. Output table (output port, required): attach a CAS table to the output port of this node to hold results.\n\n3. Promote (check box): check this box if you wish to have the output table promoted to global scope (and be available beyond the SAS Studio session)\n\nUpon successful completion, the output table will contain the query, the id of the result documents, distance measure and the document content.",
+									"visible": ""
+								}
+							]
+						},
+						{
+							"id": "parameters_config_1",
+							"type": "section",
+							"label": "Configuration ",
+							"open": 1,
+							"visible": "",
+							"children": [
+								{
+									"id": "output_parameters_text_1",
+									"type": "text",
+									"text": "1. Embedding model caslib (text field, required):  provide the caslib containing a VTA embedding model which will be applied to the query in order to generate embeddings.\n\n2. Embedding model astore name (text field, required): provide the name of a VTA astore model to generate embeddings on the query text. \n\n------------------------------------------------------------------\nFollow this process to obtain the above values:\n\n(i) In Model Studio, right click on the topics node you used to create an embeddings model.  Select Results\n(ii) In the score code portion of the results, locate and copy the values of the following macro variables: input_astore_caslib_name & input_astore_name.  Use in the above two fields.\n(iii) Some users may choose to develop embedding models programmatically.  They would have specified an astore name and caslib while doing so, which can be used for above fields.\n------------------------------------------------------------------\n\n3. Embedding pattern (text column, required, default of _Col):  document embeddings tend to be long series involving 100s or sometimes 1000s of columns.  Provide a text pattern which applies to all embedding column names. For example,  _Col represents _Col_1, _Col_2..... _Col_n.  A default of _Col is provided since this happens to be the default value for Visual Text Analytics-generated embeddings.\n\n4. Location for Chroma database (folder selector, required): select a location where the Chroma database is persisted.  Note this needs to be on the filesystem (SAS Server) and not SAS Content.  \n\n5. CAS server (text field, default entered): change this only if you need a CAS server name different from a typical Viya 4 installation.\n\n6. CAS port (numeric field, default entered): change this only if you know that the CAS server runs on a different port than the default.",
+									"visible": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "about_runtimecontrol",
+					"type": "section",
+					"label": "Run-time Control",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "runtimecontrol_text",
+							"type": "text",
+							"text": "Note: Run-time control is optional.  You may choose whether to execute the main code of this step or not, based on upstream conditions set by earlier SAS programs.  This includes nodes run prior to this custom step earlier in a SAS Studio Flow, or a previous program in the same session.\n\nRefer this blog (https://communities.sas.com/t5/SAS-Communities-Library/Switch-on-switch-off-run-time-control-of-SAS-Studio-Custom-Steps/ta-p/885526) for more details on the concept.\n\nThe following macro variable,\n\n_qcd_run_trigger\n\nwill initialize with a value of 1 by default, indicating an \"enabled\" status and allowing the custom step to run.\n\nIf you wish to control execution of this custom step, include code in an upstream SAS program to set this variable to 0.  This \"disables\" execution of the custom step.\n\nTo \"disable\" this step, run the following code upstream:\n\n%global _qcd_run_trigger;\n%let _qcd_run_trigger =0;\n\nTo \"enable\" this step again, run the following (it's assumed that this has already been set as a global variable):\n\n%let _qcd_run_trigger =1;\n\nIMPORTANT: Be aware that disabling this step means that none of its main execution code will run, and any  downstream code which was dependent on this code may fail.  Change this setting only if it aligns with the objective of your SAS Studio program.",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "about_documentation",
+					"type": "section",
+					"label": "Documentation",
+					"open": 0,
+					"visible": "",
+					"children": [
+						{
+							"id": "documentation_text",
+							"type": "text",
+							"text": "1. Documentation for the chromadb Python package: https://docs.trychroma.com\n\n2. An important note regarding sqlite: https://docs.trychroma.com/troubleshooting#sqlite\n\n3. SAS Communities article on configuring Viya for Python integration: https://communities.sas.com/t5/SAS-Communities-Library/Configuring-SAS-Viya-for-Python-Integration/ta-p/847459\n\n4. The SAS Viya Platform Deployment Guide (refer to SAS Configurator for Open Source within): https://go.documentation.sas.com/doc/en/itopscdc/default/itopssr/p1n66p7u2cm8fjn13yeggzbxcqqg.htm?fromDefault=#p19cpvrrjw3lurn135ih46tjm7oi \n\n5.  Options for persistent clients and client connections in Chroma: https://docs.trychroma.com/usage-guide\n\n6.  Every custom step is a learning opportunity for SAS programming!  I revisited the venerable but still powerful DATALINES (DATALINES4) statement and it proved helpful in negotiating a design challenge in the SAS program.  Documentation: https://go.documentation.sas.com/doc/en/pgmsascdc/default/lestmtsref/p1mm9b070wj962n16q0v1d9uku5q.htm\n\n7. Documentation for the Analytic Store Scoring action set: https://go.documentation.sas.com/doc/en/pgmsascdc/default/casactml/casactml_astore_toc.htm \n\n8. SAS Communities article on connecting to CAS using the SWAT package in SAS Studio: https://communities.sas.com/t5/SAS-Communities-Library/Hotwire-your-SWAT-inside-SAS-Studio/ta-p/835956\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "version_text",
+					"type": "text",
+					"text": "Version: 1.0  (30JAN2024)",
+					"visible": ""
+				},
+				{
+					"id": "contact_text",
+					"type": "text",
+					"text": "Created/contact: \n\n- Sundaresh Sankaran (sundaresh.sankaran@sas.com)\n",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"collectionName": "new_collection",
+		"queryMode": {
+			"value": "table",
+			"label": "Input table"
+		},
+		"inputTable": {
+			"library": "",
+			"table": ""
+		},
+		"queryColumn": [],
+		"numberOfResults": 5,
+		"outputTable": {
+			"library": "",
+			"table": ""
+		},
+		"promoteTable": false,
+		"astoreTable_lib": "",
+		"astoreTable_name": "",
+		"embeddingPattern": "_Col",
+		"persistentPathName": "",
+		"casHostPath": "sas-cas-server-default-client",
+		"casHostPort": 5570
+	}
+}

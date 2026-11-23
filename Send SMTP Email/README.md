@@ -50,7 +50,7 @@ Refer to the SAS Viya documentation for more details about configuring an SMTP E
 
 ## Usage
 
-![Send SMTP Email Custom Step Usage](./img/Send_SMTP_Email.gif)
+![Send SMTP Email Custom Step Usage](../website/static/img/Send%20SMTP%20Email/img/Send_SMTP_Email.gif)
 
 <br>
 ----

@@ -1,4 +1,4 @@
-# Using Custom Step from this GitHub repository in SAS Studio
+# Using Custom Step from this GitHub repository in SAS Data and AI Studio
 
 There are multiple approaches possible to downloading steps from this GitHub repository. Two very straightforward point-and-click approaches that use standard functionality in the GitHub webUI are desribed below. 
 
@@ -13,7 +13,7 @@ When wanting to automate things, you could use a SAS script that calls the SAS G
         *  Select the **.step** file in the your web browser
         *  Click on  the **Download raw file** button to show the content of the **.step** file ![](img/GitHub-File-selected-Download-raw-file-button.png)
         *  The **.step** file will now be downloaded to a directory on your local machine. The location of that file might depend on your browser.
-3. In the **SAS Studio Explorer** pane, highlight the folder in **SAS Content** you want to import the **.step** file(s) to, right-click on the folder and select ***Upload files***.
+3. In the **SAS Data and AI Studio Explorer** pane, highlight the folder in **SAS Content** you want to import the **.step** file(s) to, right-click on the folder and select ***Upload files***.
 4. Add the downloaded **.step** file(s) to the **Upload Files** dialog and click ***Upload***.
-    * Note: Drag-and-drop is supported. So for, example when using Google Chrome, you can drag-and-drop the downloaded file that is shown at the bottom of your browser, directly into the SAS Studio Upload Files dialog.
+    * Note: Drag-and-drop is supported. So for, example when using Google Chrome, you can drag-and-drop the downloaded file that is shown at the bottom of your browser, directly into the Upload Files dialog.
 5. The step is now visible in the Steps panel, see tab: Shared, and ready for use. You can now run it in standalone mode, add it as a node in a flow, or modify the definition of the step itself. 

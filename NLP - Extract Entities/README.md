@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Extract Entities
+# Natural Language Processing - Extract Entities
 
 ## Description
 
@@ -20,7 +20,7 @@ The step also allows you to optionally pull out the "nlpNounGroup"s found.
    
 
 
-   ![](img/nlpEntityExtract.png)
+   ![](img/nlpExtractEntities.gif)
 
 **About** tab
 

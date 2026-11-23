@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Sentence Splitter
+# Natural Language Processing - Sentence Splitter
 
 The "Sentence Splitter" custom step, as its name implies, splits a text column into multiple observations with constituent sentences, to enable further desired operations downstream.
 

@@ -38,11 +38,11 @@ options sasautos=(sasautos, mymacr) mautosource mcompilenote=all mrecall;
 
 A SAS administrator wculd then use SAS Environment Manager to add these statements to the **autoexec** of the **SAS Studio Compute context**, which makes these SAS macros available to **all users** of that context. The autoexec option is found in the Advanced tab of the Compute context. 
 
-An individual user could add these statements to **their autoexec** in **SAS Studio**, using **Options -> Autoexec file** from the pulldown menu, so they run each time that user starts SAS Studio.
+An individual user could add these statements to **their autoexec** in **SAS Data and AI Studio**, using **Options -> Autoexec file** from the pulldown menu, so they run each time that user starts SAS Data and AI Studio.
 
 For more details on defining **autoexec** see the following entries in SAS documentation:
 * [Context page in SAS Environment Manager](https://documentation.sas.com/?cdcId=sasadmincdc&cdcVersion=default&docsetId=evfun&docsetTarget=p1dkdadd9rkbmdn1fpv562l2p5vy.htm)
-* [Editing the Autoexec File in SAS Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorug&docsetTarget=n1rxiyysdwthokn1c9szd5175pmh.htm)
+* [Editing the Autoexec File in SAS Data and AI Studio](https://documentation.sas.com/?cdcId=webeditorcdc&cdcVersion=default&docsetId=webeditorug&docsetTarget=n1rxiyysdwthokn1c9szd5175pmh.htm)
 
 More details about **SAS Autocall libraries** can be found in
 **SAS Macro Language Reference Guide**, see [SASAUTOS= Macro System Option](https://documentation.sas.com/?cdcId=pgmsascdc&cdcVersion=default&docsetId=mcrolref&docsetTarget=p12b2qq72dkxpsn1e19y57emerr6.htm)
@@ -57,15 +57,15 @@ In the target deployment you would use that same **CLI** or use **SAS Environmen
 
 More details can be found in [Migration within SAS Viya: Tasks](https://documentation.sas.com/?cdcId=sasadmincdc&cdcVersion=default&docsetId=calpromotion&docsetTarget=n0ucexhkgs4rfgn12219vojr14nf.htm)
 
-## What sample data is available for use in SAS Studio in a SAS Viya deployment?
+## What sample data is available for use in SAS Data and AI Studio in a SAS Viya deployment?
 
-1. The sashelp library - available in each SAS Studio session 
+1. The sashelp library - available in each session 
 2. The sampsio library - a lesser known collection of SAS sample data that is available in every SAS Viya deployment
-     - This library is not visible by default in the Libraries panel in SAS Studio. Here is how to make this library available in SAS Studio:
+     - This library is not visible by default in the Libraries panel in SAS Data and AI Studio. Here is how to make this library available in SAS Data and AI Studio:
          * Open SAS Program using New -> SAS Program from the main menu
          * Run the following SAS code to get a listing of all the SAS datasets in the sampsio sample library that should be part of a default SAS deployment
            ```sas
            proc datasets library=sampsio; run;
            ```
-         * This will display a list of tables in the Results window and will make the library sampsio available in the Libraries panel for your current SAS Studio session
+         * This will display a list of tables in the Results window and will make the library sampsio available in the Libraries panel for your current compute session
          * TIP: Watch this [SAS Sample Data for Forecasting](https://www.youtube.com/watch?v=wX6mdBgYmXo&t=271s) recording on Youtube for more pointers to interesting sample data available from SAS

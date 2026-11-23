@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Predefined Sentiment Analysis
+# Natural Language Processing - Predefined Sentiment Analysis
 
 This custom step helps you analyse a text corpus for the sentiment expressed in the same.  It uses a SAS Cloud Analytics Services (CAS) action, sentimentAnalysis.applySentimentConcepts, along with a language-specific, predefined, document-level sentiment analysis model, following a symbolic AI (rules-based) approach.
 
