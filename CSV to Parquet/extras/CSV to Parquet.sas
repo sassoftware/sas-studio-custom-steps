@@ -4,9 +4,22 @@ DuckDB - CSV to Parquet Conversion
 Purpose: This SAS program utilizes SAS/ACCESS Interface to DuckDB to ingest a CSV file 
          and convert it into a Parquet file.
 Input Parameters:
-- csv_folder_path: Full path to the folder containing source CSV files (macro variable)
+- input_file_location: Option (folder,s3,web) indicating where the input CSV file(s) are located (macro variable)
+- csv_folder_path: if input_file_location is "folder", full path to the folder containing source CSV files (macro variable)
 - csv_file_pattern: A glob pattern which may include wildcards describing source CSV files (macro variable)
+- s3_path: If input_file_location is "s3", full path to the S3 bucket containing source CSV files (macro variable)
+- url_path: If input_file_location is "web", full URL path to the source CSV file (macro variable)
 - has_headers: Boolean (TRUE/FALSE) indicating if the CSV has a header row (macro variable)
+
+Prerequisites for S3 ingestion:
+- Ensure you have set the following environmental variables to hold S3 bucket credentials.  These are identified by 
+  the credential_chain provider in DuckDB automatically.  At a minimum,
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+  and if you're using short-term tokens for the session, 
+  - AWS_SESSION_TOKEN
+
+  (A standard way is to set options through option set=VAR=VALUE; SAS statements)
 
 Output specification:
 - parquet_output_path: Folder location for the output Parquet file (macro variable)
@@ -19,12 +32,47 @@ If you do choose to save rejects,
 - rejects_scan_table: Table containing metadata about the rejected records.
 
 Created: Sundaresh Sankaran
-Version: 0.4.0 (14NOV2026)
+Version: 1.0.0 (23NOV2026)
 ************************************************************************/;
 
-/* Define macro variables for input parameters */
-%let csv_folder_path = &csv_folder_path.;                /* e.g., '/data/' */
-%let csv_file_pattern = &csv_file_pattern.;              /* e.g., 'input.csv' / '*.csv' */
+/* -----------------------------------------------------------------------------------------*
+   Set parameter values (edit below block only if testing)
+
+   to test the program, edit the macro variables below to point to your specfied values.
+   For example, if you wish to specify a folder on the SAS Server, set input_file_location to folder
+   and provide the csv_folder_path and csv_file_pattern accordingly.
+
+   %let input_file_location = folder;  
+
+   and in the dependent_macrovars_setting macro, 
+   %let csv_folder_path=sasserver:/your_foldder_path 
+   %let csv_file_pattern=an_example.csv;
+*------------------------------------------------------------------------------------------*/
+
+
+/* Define macro variables (including nested in macros wherre necessary) for input parameters */
+
+%let input_file_location = &input_file_location.;  /* e.g., 'folder', 's3', 'web' */
+
+%macro dependent_macrovars_setting;
+    %if "&input_file_location."="folder" %then %do;
+        %let csv_folder_path = &csv_folder_path.;                /* e.g., '/data/' */
+        %let csv_file_pattern = &csv_file_pattern.;              /* e.g., 'input.csv' / '*.csv' */
+    %end;
+    %else %if "&input_file_location."="s3" %then %do;
+        %let s3_path = &s3_path.;      
+        %let csv_file_pattern = &csv_file_pattern.;               /* e.g., 's3://bucket-name/path/' */
+    %end;
+    %else %if "&input_file_location."="web" %then %do;
+        %let url_path = &url_path.;                              /* e.g., 'https://example.com/data/input.csv' */
+    %end;
+    %else %do;
+        %put ERROR: Invalid input_file_location specified. Please choose 'folder', 's3', or 'web'.;
+    %end;
+%mend dependent_macrovars_setting;
+
+%dependent_macrovars_setting;
+
 %let has_headers = &has_headers.;                    /* TRUE or FALSE */
 %let parquet_output_path = &parquet_output_path.;    /* e.g., '/data/output/' */
 %let parquet_file_name = &parquet_file_name. ;       /* e.g., 'output_data WITHOUT the .parquet' */
@@ -173,48 +221,105 @@ Version: 0.4.0 (14NOV2026)
    %if &_duckdb_error_flag. = 0 %then %do;
       libname dukonce duckdb database=":memory::mydb";;
    %end;
-   
-   %put NOTE: Step 2 - Identify if input folder reference is on Server or Content.;
+
+   %put NOTE: Step 2 - Additional settings based on input file location.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
-      %_identify_content_or_server("&csv_folder_path.");
+   
+      %if "&input_file_location."="folder" %then %do;
+         %put NOTE: Input file location is a folder on the SAS Server.;
+         %put NOTE: Step 2.1.1 - Identify if input folder reference is on Server or Content.;
+         %_identify_content_or_server("&csv_folder_path.");
 
-      %if "&_path_identifier."="sasserver" %then %do;
-         %put NOTE: Folder location prefixed with &_path_identifier. is on the SAS Server.;
+         %if "&_path_identifier."="sasserver" %then %do;
+            %put NOTE: Folder location prefixed with &_path_identifier. is on the SAS Server.;
+         %end;
+
+         %else %do;
+
+            %let _duckdb_error_flag=1;
+            %put ERROR: Please select a valid folder on the SAS Server (filesystem). ;
+            data _null_;
+               call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid file on the SAS Server (filesystem).");
+            run;
+         
+         %end;
+         
+         %put NOTE: Step 2.1.2 - Extract the path from the csv_folder_path macro variable.;
+         %if &_duckdb_error_flag. = 0 %then %do;
+
+            %_extract_sas_folder_path("&csv_folder_path.");
+
+            %if "&_sas_folder_path." = "" %then %do;
+
+               %let _duckdb_error_flag = 1;
+               %let _duckdb_error_desc = &_duckdb_error_desc. <-> The field is empty, please select a valid path  ;
+               %put ERROR: &_duckdb_error_desc. ;
+
+            %end;
+            %else %do;
+               %let file_path=&_sas_folder_path.;
+               %put NOTE: Extracted file path is &file_path.;
+            %end;
+
+         %end;
+      %end;
+
+      %else %if "&input_file_location."="s3" %then %do;
+         %put NOTE: Input file location is an S3 bucket.;
+         %put NOTE: Step 2.2.1 - Load credentials  FOR S3 environment.;
+         %put NOTE: AWS region is &s3_aws_region.;
+         proc sql;
+            connect using dukonce;
+            execute(
+               INSTALL httpfs;
+               LOAD httpfs;
+               INSTALL aws;
+               LOAD aws;
+
+
+               CREATE OR REPLACE SECRET s3_read (
+                  TYPE s3,
+                  PROVIDER credential_chain,
+                  CHAIN 'env;config',
+                  REGION "&s3_aws_region."
+               );
+
+            ) by dukonce;
+            disconnect from dukonce;
+         quit;
+         %let file_path=&s3_path.;
+         %put NOTE: Extracted file path is &file_path.;
+
+      %end;
+
+      %else %if "&input_file_location."="web" %then %do;
+         %put NOTE: Input file location is a web URL.;
+         %put NOTE: Step 2.3.1 - Load extensions to readd from http file systems.;
+         proc sql;
+            connect using dukonce;
+            execute(
+               INSTALL httpfs;
+               LOAD httpfs;
+            ) by dukonce;
+            disconnect from dukonce;
+         quit;
       %end;
 
       %else %do;
-
          %let _duckdb_error_flag=1;
-         %put ERROR: Please select a valid folder on the SAS Server (filesystem). ;
+         %put ERROR: Please select a valid input file location (folder, s3, or web). ;
          data _null_;
-            call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid file on the SAS Server (filesystem).");
+            call symputx("_duckdb_error_desc", "&_duckdb_error_desc. <-> Please select a valid input file location (folder, s3, or web).");
          run;
       
       %end;
-
    %end;
 
-   %put NOTE: Step 3 - Extract the path from the csv_folder_path macro variable.;
 
-   %if &_duckdb_error_flag. = 0 %then %do;
 
-      %_extract_sas_folder_path("&csv_folder_path.");
 
-      %if "&_sas_folder_path." = "" %then %do;
-
-         %let _duckdb_error_flag = 1;
-         %let _duckdb_error_desc = &_duckdb_error_desc. <-> The field is empty, please select a valid path  ;
-         %put ERROR: &_duckdb_error_desc. ;
-
-      %end;
-      %else %do;
-         %let file_path=&_sas_folder_path.;
-         %put NOTE: Extracted file path is &file_path.;
-      %end;
-   %end;
-
-   %put NOTE: Step 4 -  Check if parquet_output_path is on Server or Content;
+   %put NOTE: Step 3 -  Check if parquet_output_path is on Server or Content;
 
    %if &_duckdb_error_flag. = 0 %then %do;
       %_identify_content_or_server("&parquet_output_path.");
@@ -235,7 +340,7 @@ Version: 0.4.0 (14NOV2026)
 
    %end;
 
-   %put NOTE: Step 5 - Extract the path from the parquet_output_path macro variable.;
+   %put NOTE: Step 4 - Extract the path from the parquet_output_path macro variable.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
 
@@ -254,6 +359,51 @@ Version: 0.4.0 (14NOV2026)
       %end;
    %end;
 
+   %put NOTE: Step 5 - Construct input file path based on parameters provided;
+
+   %if &_duckdb_error_flag. = 0 %then %do;
+      %let slash=%str(/);
+      %if "&input_file_location."="folder" %then %do;
+         %if "&csv_file_pattern." = "" %then %do;
+            %let csv_file_pattern = %str(*.csv);
+         %end;
+      %end;
+      %if "&input_file_location."="s3" %then %do;
+         %if "&csv_file_pattern." = "" %then %do;
+            %let csv_file_pattern = %str(*.csv);
+         %end;
+         %let htap = %sysfunc(reverse(&s3_path.));
+         /* Adjust the S3 path to remove a trailing slash */;
+         %if "%substr(&htap.,1,1)"="/" %then %do;
+            %let s3_path=%substr(&s3_path.,1,%length(&s3_path.)-1);
+            %let htap=%sysfunc(reverse(&s3_path.));
+            %put NOTE: The trailing slash in the S3 path has been removed to facilitate proper path formation.;
+         %end;
+         %let possible_extension = %sysfunc(scan("&htap.",1,"."));
+         %put %length(&possible_extension.);
+         %put %length(&htap.);
+         %if %length(&possible_extension.) = %length(&htap.) %then %do;
+            /* kept blank for a do-nothing, but can change later*/;
+         %end;
+         %else %do;
+         /* This condition is a strong (but not comprehensive) indication of an extension used in the file path */;
+            %let slash=;
+            %let csv_file_pattern=;
+            %put NOTE: The CSV file pattern and artificial trailing forward slash have been removed due to a strong indication of an extension used in the file path.;
+         %end;
+
+         %let file_path=&s3_path.;
+      %end;
+      
+      %if "&input_file_location."="web" %then %do;
+         %let slash=;
+         %let csv_file_pattern=;
+         %let file_path=&url_path.;
+      %end;
+
+   %end;
+
+
    %put NOTE: Step 6 - Extract and Load.;
 
    %if &_duckdb_error_flag. = 0 %then %do;
@@ -268,7 +418,7 @@ Version: 0.4.0 (14NOV2026)
                 header=&has_headers handles the column detection.
                 */
                 COPY (
-                    SELECT * FROM read_csv_auto("&file_path./&csv_file_pattern.", 
+                    SELECT * FROM read_csv_auto("&file_path.&slash.&csv_file_pattern.", 
                                                 %if "&ignore_errors."="1" %then %do;
                                                     ignore_errors=&ignore_errors.::BOOLEAN,
                                                 %end;

@@ -2,3 +2,4 @@
 .env
 */*.ipynb_checkpoints
 */*chroma
+.DS_Store
