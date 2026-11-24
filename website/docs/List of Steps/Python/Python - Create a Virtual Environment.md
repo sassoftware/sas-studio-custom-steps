@@ -7,7 +7,7 @@
 :::
 
 :::tip[**LATEST**]
-Now you can also install from local whl (wheel) files available to your SAS Server file system.
+Now you can also install from local `.whl` (wheel) files available to your SAS Server file system.
 :::
 
 
