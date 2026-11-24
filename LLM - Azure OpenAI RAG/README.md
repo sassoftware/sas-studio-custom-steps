@@ -12,7 +12,7 @@ A RAG approach, explained in simple terms, retrieves relevant data from a knowle
 
 This animated gif provides a basic idea: 
 
-![LLM - Azure OpenAI RAG](./img/Azure_OpenAI.gif)
+![LLM - Azure OpenAI RAG](../website/static/img/LLM%20-%20Azure%20OpenAI%20RAG/img/Azure_OpenAI.gif)
 
 ----
 ## Table of Contents
