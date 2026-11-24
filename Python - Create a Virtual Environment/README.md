@@ -5,11 +5,11 @@ Package your Python-based analytics solutions in a portable, repeatable, and reu
 
 A general idea of how to use steps related to virtual environments:
 
-![General idea](./img/general-idea.png)
+![General idea](../website/static/img/Python%20-%20Create%20a%20Virtual%20Environment/img/general-idea.png)
 
 A quick video: Click on this picture to watch this YouTube video. 
 
-[![Python - Create a virtual environment](./img/create-a-virtual-environment.png)](https://www.youtube.com/watch?v=RaiPOU0M278)
+[![Python - Create a virtual environment](../website/static/img/Python%20-%20Create%20a%20Virtual%20Environment/img/create-a-virtual-environment.png)](https://www.youtube.com/watch?v=RaiPOU0M278)
 
 *Link: https://www.youtube.com/watch?v=RaiPOU0M278*
 
