@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------------------------* 
    Python - Create a Virtual Environment
 
-   v 2.2.0 (02JUL2026)
+   v 3.0.0 (20NOV2026)
 
    This program helps you create a Python virtual environment from within a SAS session.
    It captures the current Python executable path and creates a virtual environment in the
@@ -16,6 +16,8 @@
     - venv: path to persist virtual env
     - install_system_site_packages: 1 or 0
     - req: path to requirements.txt or list of requirements
+    - local_wheels: flag whether to install local wheel files (optional)
+    - local_wheels_folder: path to local wheel files (optional)
 
    Output:
    - Check log and status for success / failure
@@ -34,6 +36,8 @@
 %let venv=&venv.;
 %let install_system_site_packages=&install_system_site_packages.;
 %let req=&req.;
+%let local_wheels=&local_wheels.;
+%let local_wheels_folder=&local_wheels_folder.;
 
 /*-----------------------------------------------------------------------------------------*
    Python Block Definition
@@ -128,6 +132,7 @@ data _null_;
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 SAS.logMessage(f"Current Python Path: {sys.executable}")
 pyt=SAS.symget("TEMP_PYPATH")
@@ -166,6 +171,26 @@ else:
             SAS.logMessage("Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]),"error")
             SAS.symput("_cvirenv_error_flag",1)  # if error, retain original Python path ;
             SAS.symput("_cvirenv_error_desc","Error installing requirements. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]))
+
+# Installing local wheel files if provided
+local_wheels_folder=SAS.symget("local_whl_folder")
+if local_wheels_folder == "" or local_wheels_folder is None:
+   SAS.logMessage("No local wheels folder provided. Skipping local wheel installation.")
+else:
+   local_whl_path = Path(local_wheels_folder)
+   wheel_files = list(local_whl_path.glob("*.whl"))
+   if not wheel_files:
+      SAS.logMessage(f"No wheel files found in the specified folder '{local_wheels_folder}'. Skipping local wheel installation.")
+   else:
+      for whl_file in wheel_files:
+         command = f"{pyt} -m pip install {os.path.join(local_wheels_folder, whl_file)}"
+         ret = subprocess.run(command, capture_output=True, shell=True)
+         if ret.__dict__["returncode"]==0: 
+            SAS.logMessage(f"Wheel file '{whl_file}' installed successfully.")
+         else:
+            SAS.logMessage(f"Error installing wheel file '{whl_file}'. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]),"error")
+            SAS.symput("_cvirenv_error_flag",1)  # if error, retain original Python path ;
+            SAS.symput("_cvirenv_error_desc","Error installing wheel file '" + str(whl_file) + "'. Return code: " + str(ret.__dict__["returncode"]) + ". Error message: " + str(ret.__dict__["stderr"]))
 
 
 ;;;;
@@ -276,6 +301,16 @@ run;
    %if &_cvirenv_error_flag. = 0 %then %do;
       %_extract_sas_folder_path(&venv.);
       %let venv_input=&_sas_folder_path.;
+   %end;   
+
+/*-----------------------------------------------------------------------------------------*
+    Extract value from local wheels folder selector (if provided)
+*------------------------------------------------------------------------------------------*/
+   %if &_cvirenv_error_flag. = 0 %then %do;
+      %if "&local_wheels." = "1" %then %do;
+         %_extract_sas_folder_path(&local_wheels_folder.);
+         %let local_whl_folder=&_sas_folder_path.;
+      %end;
    %end;   
 
 /*-----------------------------------------------------------------------------------------*
