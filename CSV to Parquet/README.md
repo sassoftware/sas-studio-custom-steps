@@ -62,7 +62,7 @@ Important - check the following prerequisites for S3
   and if you're using short-term tokens for the session, 
   - AWS_SESSION_TOKEN
 
-  (A standard way is to set options through option set=VAR=VALUE; SAS statements)
+  A standard way is to set options through option set=VAR=VALUE; SAS statements. Refer this [page](./extras/AWS_Credentials.md) for more details.
 
 #### URL (file hosted on the web) options:
 ============================
