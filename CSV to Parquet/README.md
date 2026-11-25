@@ -21,7 +21,7 @@ Open file formats such as [Parquet](https://parquet.apache.org) offer benefits o
 
 Watch a quick demo 
 
-[![Feast Your Eyes](./img/duckdb-csv-to-parquet-holding-screenshot_1.png)](https://www.youtube.com/watch?v=5ZlCy239wfE)
+[![Feast Your Eyes](../website/static/img/CSV%20to%20Parquet/img/duckdb-csv-to-parquet-holding-screenshot_1.png)](https://www.youtube.com/watch?v=5ZlCy239wfE)
 
 https://www.youtube.com/watch?v=5ZlCy239wfE
 
