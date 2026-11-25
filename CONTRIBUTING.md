@@ -27,7 +27,7 @@ When adding your contribution using a Pull Request, you will be asked the follow
 
 1. Make sure your custom step contribution is provided as a **.step** file and embeds all the macro definitions it relies on.
     * This to make it very easy to install in a user's environment: Simply download the **.step** file from this repository 
-      and then upload it to a SAS Content folder to have it show up in the Steps panel in SAS Studio. 
+      and then upload it to a SAS Content folder to have it show up in the Steps panel in SAS Data and AI Studio. 
       No further steps/configuration required.
     * Once you have added a custom step from this repository to your SAS Viya environment, see 
       [(FAQ) How to share macro definitions across multiple Custom Steps](./docs/FAQ.md#how-to-share-sas-macro-definitions-across-multiple-custom-steps)

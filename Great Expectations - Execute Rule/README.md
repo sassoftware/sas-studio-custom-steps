@@ -1,4 +1,4 @@
-# Great Expectations (GE) - Execute Business Rules
+# Great Expectations - Execute Business Rules
 
 ## Description
 

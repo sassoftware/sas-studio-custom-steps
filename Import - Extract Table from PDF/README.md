@@ -1,4 +1,4 @@
-# Import - Extract Table from PDF (requires Python package)
+# Import - Extract Table from PDF
 
 This custom step enables you to extract tabular data from within a PDF document and load the same to a SAS dataset.
 

@@ -1,6 +1,6 @@
 # UI Guidelines
 
-All SAS Studio provided steps follow certain UI guidelines. To provide consistency across steps, including custom steps, it is highly recommended 
+All SAS Data and AI Studio-provided steps follow certain UI guidelines. To provide consistency across steps, including custom steps, it is highly recommended 
 that custom step contributions follow these guidelines.
 
 A good example of a custom step that follows these guidelines is the **Sample controls** custom step. You can view it in the Custom Step Designer by going to the **Steps** panel, clicking the 
@@ -26,7 +26,7 @@ This opens the Custom Step Designer
      * Only first word is capitalized
 ---
 ## Considerations for About tab
-As custom steps are delivered independent of SAS Studio releases, it is strongly recommend to add an About tab with at least the following information:
+As custom steps are delivered independent of SAS Data and AI Studio releases, it is strongly recommend to add an About tab with at least the following information:
   * A General description section at the top that summarizes the functionality of the step
   * A Pre-requisites section that lists any specific pre-reqs. This section should be collapsed by default (uncheck "Open by default" in the Section control)
   * A Documentation section that points to relevant SAS documentation and/or points to other information that is relevant. This section should be collapsed by default.

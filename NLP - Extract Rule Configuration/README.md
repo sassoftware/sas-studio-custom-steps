@@ -1,4 +1,4 @@
-# Natural Language Processing (NLP) - Extract Rule Configuration
+# Natural Language Processing - Extract Rule Configuration
 
 This custom step extracts the rule configuration within rules-based Visual Text Analytics Concepts or Categories model definitions for use in downstream applications.
 

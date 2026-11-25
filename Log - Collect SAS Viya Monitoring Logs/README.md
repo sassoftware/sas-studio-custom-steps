@@ -125,7 +125,15 @@ Rake is designed for interactive and exploratory log analysis. It is not optimiz
 
 ## Change Log
 
-## Version 1.3 (06JUL2026)
+### Version 1.4 (14AUG2026)
+
+- Added JSON output support.
+- Added multiple new error detection patterns.
+- Added support for reading credentials from an environment variable.
+- Added an equivalent macro call to the SAS log.
+- Fixed an issue with extracting Custom Step code.
+
+### Version 1.3 (06JUL2026)
 
 - Added a **Default** option to the time zone selection and changed the default value from `UTC` to `default`.
 - Fixed incorrect handling of the `to=` parameter passed from the Custom Step UI.
@@ -135,17 +143,17 @@ Rake is designed for interactive and exploratory log analysis. It is not optimiz
 - Updated the public README and cleaned up auxiliary files under the `extras/` directory.
 - Removed the feature to save encrypted credentials.
 
-## Version 1.2.1 (19NOV2025)
+### Version 1.2.1 (19NOV2025)
 
 - Changed the default setting of the log check option to *off*.
 
-## Version 1.2 (15NOV2025)
+### Version 1.2 (15NOV2025)
 
 - Added a time zone dropdown list to the Custom Step UI.
 - Added time zone support (`tz=`) as a macro argument.
 - Fixed an issue with absolute date/time specification for the `to=` parameter.
 
-## Version 1.1 (27DEC2024)
+### Version 1.1 (27DEC2024)
 
 - Added OpenSearch URL support to `RakeConfig.txt`.
 - Added macro functions to save user credentials and the OpenSearch URL.
@@ -154,16 +162,16 @@ Rake is designed for interactive and exploratory log analysis. It is not optimiz
 - Updated SAS system options to suppress source code logging in error messages.
 - Removed temporary data sets `_SGSORT` and `CHECK`.
 
-## Version 1.0 (24JUL2024)
+### Version 1.0 (24JUL2024)
 
 - Added a Custom Step wrapper.
 - Added TSV output functionality.
 - Added the Custom Step for SAS Studio.
 
-## Version 0.9 (25JUN2024)
+### Version 0.9 (25JUN2024)
 
 - Added the `check` function for log inspection.
 
-## Version 0.8 (19JUN2024)
+### Version 0.8 (19JUN2024)
 
 - Initial release.

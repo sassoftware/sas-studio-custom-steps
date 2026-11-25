@@ -1,0 +1,228 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "options",
+			"type": "page",
+			"label": "Options",
+			"children": [
+				{
+					"id": "optionsSourceData",
+					"type": "section",
+					"label": "Source data",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "dirSource",
+							"type": "path",
+							"label": "Source directory:",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": true,
+							"visible": ""
+						},
+						{
+							"id": "pattern",
+							"type": "textfield",
+							"label": "Source filename pattern e.g. *.sas7bdat",
+							"placeholder": "",
+							"required": true,
+							"visible": "",
+							"indent": 0
+						}
+					]
+				},
+				{
+					"id": "optionsTargetData",
+					"type": "section",
+					"label": "Target data",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "dirTarget",
+							"type": "path",
+							"label": "Target directory:",
+							"pathtype": "folder",
+							"placeholder": "",
+							"required": true,
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "optionsArchivePeriod",
+					"type": "section",
+					"label": "Archive period",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "periodText",
+							"type": "text",
+							"text": "Archive files with last modified date-times older than:",
+							"visible": ""
+						},
+						{
+							"id": "periodCount",
+							"type": "numstepper",
+							"label": "Number:",
+							"required": true,
+							"integer": true,
+							"min": 1,
+							"max": 100,
+							"stepsize": 1,
+							"indent": 0
+						},
+						{
+							"id": "periodUnit",
+							"type": "dropdown",
+							"label": "Units:",
+							"items": [
+								{
+									"value": "minutes"
+								},
+								{
+									"value": "hours"
+								},
+								{
+									"value": "days"
+								},
+								{
+									"value": "weeks"
+								},
+								{
+									"value": "months"
+								},
+								{
+									"value": "years"
+								}
+							],
+							"required": true,
+							"placeholder": "",
+							"visible": "",
+							"indent": 0
+						}
+					]
+				},
+				{
+					"id": "optionsAction",
+					"type": "section",
+					"label": "Action",
+					"open": true,
+					"visible": "",
+					"children": [
+						{
+							"id": "action",
+							"type": "radiogroup",
+							"label": "Action:",
+							"items": [
+								{
+									"value": "Move"
+								},
+								{
+									"value": "Copy"
+								}
+							],
+							"visible": ""
+						},
+						{
+							"id": "dryRun",
+							"type": "checkbox",
+							"label": "Dry run (do not archive files)",
+							"visible": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "about",
+			"type": "page",
+			"label": "About",
+			"children": [
+				{
+					"id": "aboutDescription",
+					"type": "text",
+					"text": "Zip data\n\nThe zip data custom step allows SAS Studio users to move or copy data to ZIP files.\n\nThe custom step includes options to specify:\n- the source directory\n- the source file pattern e.g. *.sas7bdat\n- the target directory\n- the period before which files should be archived\n- whether to move or copy files to the ZIP file\n- whether to do a \"dry-run\"",
+					"visible": ""
+				},
+				{
+					"id": "aboutRequirements",
+					"type": "section",
+					"label": "Requirements",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "aboutRequirementsText",
+							"type": "text",
+							"text": "Tested on SAS Viya Stable 2024.05, with Python 3.9.16 and dateutil 2.9.0.post0.\n\nPython must be configured on the SAS Viya platform.\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "aboutUsage",
+					"type": "section",
+					"label": "Usage",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "aboutUsageText",
+							"type": "text",
+							"text": "Custom step options\n\n> Source data\n\nSource directory\nDefault: None\nDescription: Source directory on the file system. Directories in SAS Content are not supported\n\nSource filename pattern\nDefault: *\nDescription: Filename pattern used to match files in the source directory e.g. *.sas7bdat. See the glob module https://docs.python.org/3/library/glob.html for details\n\n> Target data\n\nTarget directory\nDefault: None\nDescription: Target directory on the file system. Directories in SAS Content are not supported\n\n> Archive period\n\nArchive files with a last modified date-time before a given period. The period is specified as a number and a unit e.g. 1 month. The cutoff is calculated with dateutil.relativedelta https://dateutil.readthedocs.io/en/stable/relativedelta.html\n\nNumber\nDefault: 1\nDescription: Number of periods\n\nUnits\nDefault: months\nDescription: Period unit. Select from minutes, hours, days, weeks, months, years\n\n> Action\n\nAction\nDefault: Move\nDescription: Move or copy files to a ZIP file\n\nDry run\nDefault: False\nDescription: If True, the step will run but not execute the archive step\n",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "aboutOutput",
+					"type": "section",
+					"label": "Output",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "aboutOutputText",
+							"type": "text",
+							"text": "For each file in the source directory that matches the file name pattern and modified date-time constraints, a ZIP file will be created in the archive directory.\n\nFor example, if the following source files match:\n[source dir]/class.sas7bdat\n[source dir]/classfit.sas7bdat\n\nThen the step will create:\n[target dir]/class.sas7bdat.zip\n[target dir]/classfit.sas7bdat.zip",
+							"visible": ""
+						}
+					]
+				},
+				{
+					"id": "aboutChangelog",
+					"type": "section",
+					"label": "Change Log",
+					"open": false,
+					"visible": "",
+					"children": [
+						{
+							"id": "aboutChangelogText",
+							"type": "text",
+							"text": "Version: 1.0 (25JUN2024)\n- Initial version\n\nCreated/contact: \n- Neil Griffin (neil.griffin@sas.com)\n",
+							"visible": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"syntaxversion": "1.3.0",
+	"values": {
+		"dirSource": "",
+		"pattern": "*",
+		"dirTarget": "",
+		"periodCount": 1,
+		"periodUnit": {
+			"value": "months"
+		},
+		"action": {
+			"value": "Move"
+		},
+		"dryRun": false
+	}
+}
